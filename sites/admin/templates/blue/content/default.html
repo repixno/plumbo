@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Template</title>
+<tal:block metal:use-macro="../common.html/css" />
+<script type="text/javascript" src="/js/admin.js"></script>
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+
+		<tal:block metal:use-macro="../common.html/languages" />
+			
+		<div id="" class="span-18">
+			
+				<div class="span-9">
+				<h3>
+					<tal:block i18n:translate="">Last 10 products</tal:block>
+					<a href="/content/products/" class="small" i18n:translate="">Edit all products</a>
+				</h3>
+				<ol>
+					<li tal:repeat="entity product">
+						<h4>
+							<tal:block tal:content="entity/title"></tal:block>
+							<span class="small">
+								<a href="/content/products/${entity/id}/">Edit</a>
+								<a href="/content/products/${entity/id}/">Delete</a>
+							</span>
+						</h4>
+					</li>
+				</ol>
+				<a class="button large" href="/content/products/0">+ New product</a>
+			</div>
+			<div class="span-9 last">
+				<h3>
+					<tal:block i18n:translate="">Last 10 articles</tal:block>
+					<a href="/content/articles/" class="small" i18n:translate="">Edit all articles</a>
+				</h3>
+				<ol>
+					<li tal:repeat="entity article">
+						<h4>
+							<tal:block tal:content="entity/title" />
+							<span class="small">
+								<a href="/content/articles/${entity/id}/">Edit</a>
+								<a href="/content/articles/${entity/id}/">Delete</a>
+							</span>
+						</h4>
+					</li> 
+				</ol>
+				
+				<a class="button large" href="/content/articles/0">+ New article</a>
+			
+			</div>
+		</div>
+		
+		<div class="span-6 last">
+			<tal:block metal:use-macro="common.html/content-menu-inside" />
+		</div>
+		<div id="footer" />
+	</div>
+</body>
+</html>

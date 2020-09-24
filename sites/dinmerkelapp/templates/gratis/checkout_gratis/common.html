@@ -1,0 +1,22 @@
+<tal:block metal:define-macro="order-summary">
+ <div id="order-summary" class="span-26 last">
+	<div class="round-corners-heading span-26 gradientdiv" style="margin-top: 30px;"><h4 style="padding-top:7px; padding-left:3px;" i18n:translate="">Din bestilling</h4></div>
+	<table style="width:100%;">
+		<tr>
+			<td i18n:translate="">Products</td>
+			<td> <span class="price" id="productcost" tal:content="formatprice:cart/cartprice"></span></td>
+		</tr>
+		<tr class="delivery-method">
+			<td class="title">Frakt</td>
+			<td><span class="price" id="deliverycost"><tal:block tal:condition="exists:presetdeliverycost" tal:content="formatprice:presetdeliverycost" /><tal:block tal:condition="not:exists:presetdeliverycost" tal:content="string:0,00" /></span>:-</td>
+		</tr>
+		<tr class="payment-method hidden">
+			<td class="title" i18n:translate="">Payment</td>
+			<td><span class="price" id="paymentcost"><tal:block tal:condition="exists:presetpaymentcost" tal:content="formatprice:presetpaymentcost" /></span></td>
+		</tr>
+	</table>
+	<div class="right">
+		<h3><tal:block  i18n:translate="">Total</tal:block>: <span class="total-price" tal:content="formatprice:cart/totalprice"></span>:-</h3>
+	</div>
+ </div>
+</tal:block>

@@ -1,0 +1,7 @@
+<tal:block>
+<tal:block tal:condition="gt:count,1" i18n:translate=""><tal:block i18n:name="count" tal:replace="count" /> pictures was uploaded to the album "<tal:block i18n:name="albumname" tal:replace="album/title" />"</tal:block>
+<tal:block tal:condition="not:gt:count,1" i18n:translate=""><tal:block i18n:name="count" tal:replace="count" /> picture was uploaded to the album "<tal:block i18n:name="albumname" tal:replace="album/title" />"</tal:block>
+
+
+<tal:block tal:replace="rooturl" /><tal:block tal:replace="album/albumurl" />
+</tal:block>

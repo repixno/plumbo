@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<tal:block tal:define="global dontShowCart" />
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Something else for your product?</tal:block>
+	
+	<style type="text/css">
+		label { font-weight: bold !important}
+		input.quantity { width: 3em }
+		img.image { margin-right: 10px}
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+		<div class="span-16">
+		<h1>Something else?</h1>
+		
+		
+		<img class="image" src="http://b.static.repix.no/cms/images/red-eye-removal.jpg" alt="Example of red eye removal" align="left" />
+		<h3 class="bottom">Remove red eye</h3>
+		
+		<p class="quiet">Remove the red eye from photos on this product</p>
+		
+		<p>
+			
+			<input type="checkbox" id="red-eye-removal"/> <label for="red-eye-removal" class="strong">Yes, remove red eyes for me (kr 20,-)</label>
+		</p>
+		<hr class="space"/>
+		
+	<tal:block tal:condition="exists: associatedproducts">
+		<h3>Accessories and products you maybe want</h3>
+		<div metal:use-macro="../../${templates}/common.html/associatedproducts"></div>
+	</tal:block>
+		
+		
+		</div>
+		<div class="span-8 last append-bottom">
+			<div class="box">
+				<h3>Share your project</h3>
+				<p>You can easily share your photobook to your friends. Just type in their emails or copy this url</p>
+				<label for="">E-mail</label><br/>
+				<input type="text" class="text span-3" /> <button class="">Add</button>
+			</div>
+			
+			<h3>Quantity</h3>
+			<p>Do you want to buy this product to somone else? Come on! Buy some more!</p>
+			<div class="center">
+				<label class="large hide" for="product_quantity">Quantity</label> <input type="text" value="1" class="quantity large" id="product_quantity"/>
+			</div>
+			
+
+		</div>
+		
+		<div class="span-24 last right prepend-top">
+		
+			<a href="" class="continue extra-large button call-to-action">Continue to cart</a>
+		</div>
+		
+	</div>
+</body>
+</html>

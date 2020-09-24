@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Manual orders</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Fovea Orders Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+                <div>
+                    
+                    <div>
+                        <div class="span-5">
+                            <SELECT id="selectportal">
+                                <option value="EF">Eurofoto Alle</option>
+                                <option value="UKEPLAN">UKEPLAN</option>
+                                <option value="FOVEA">FOVEA</option>
+                                <option value="UTESTEMME">UTESTEMME</option>
+                                <option value="MERKELAPP">DIN MERKELAPP</option>
+								    <option value="STABBURET">STABBURET</option>
+                                <option value="FOTOCLICK">FOTOCLICK</option>
+                                <option value="TAKKEKORT">TAKKEKORT</option>
+                                <option value="REEDFOTO">REEDFOTO</option>
+                                <option value="SPARKJOP">SPARKJØP/SPARELAPP</option>
+                                <option>VG osv.</option>
+                            </SELECT>
+                        </div>
+                        <div class="span-5">
+                            fra:<input id="fromdate" type="text" value="${fromdate}"/>
+                        </div>
+                        <div class="span-5">
+                            til:<input id="todate" type="text" value="${todate}"/>
+                        </div>
+						
+						<div class="span-5">
+							<input tal:condition="bet" type="checkbox" checked="checked" name="bet" id="bet"/>
+							<input tal:condition="not: bet" type="checkbox" name="bet" id="bet"/>
+							
+							
+							Betalt lagring
+						</div>
+						
+						
+                    </div>
+                    
+                     <tal:block tal:condition="exists:orders">
+                        <table>
+                        <tr>
+							<td>Antall </td>
+                            <td>Orderid</td>
+							<td>Bestillt</td>
+                            <td>Produsert</td>
+                            <td>Notat</td>
+                            <td>Ordreskjema</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr tal:repeat="order orders">
+							 <td tal:content="repeat/order/key">
+							  </td>
+                            <td tal:content="order/ordrenr">
+                                ....
+                            </td>
+							 <td tal:content="order/bestillt">
+                                ....
+                            </td>
+                            <td tal:content="order/produsert">
+                                
+                            </td>
+                            <td>
+                                <a tal:condition="exists:order/notice/0/text" class="shownotice" href="${order/ordrenr}">Vis notat</a>
+                                <div class="hide" id="notice-${order/ordrenr}">
+                                    <div tal:repeat="notice order/notice">
+                                        <div>
+                                            <table>
+                                                <tr>
+                                                    <td>${notice/tidspunkt}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>${notice/text}</td>
+                                                </tr>
+                                            </table>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </td>
+                            <td>
+                                <a href="javascript:window.open('http://susanne.eurofoto.no/adm_view_orderform_new.php?ordrenr=${order/ordrenr}','_blank', 'scrollbars=1,resizable=1,height=800,width=700');">Vis ordrekjema</a>
+                            </td>
+                            <td>
+                                <tal:block tal:condition="order/produsert">
+                                    <a class="button sendorder" title="${order/ordrenr}" href="#">SEND</a>
+                                </tal:block>
+                               
+                            </td>
+							<td>
+                               <a class="button deleteorder" title="${order/ordrenr}" href="#">SLETT</a>
+							</td>
+                        </tr>
+                        </table>
+                    </tal:block>
+                </div>
+		
+
+        
+    
+    </div>
+    
+    
+    <div class="hide confirm">Er du sikker på at ordren skal makeres som sendt?</div>
+    <div class="hide confirmdelete">Er du sikker på at ordren skal slettast?</div>
+    
+    
+    <script>
+        
+        var portal = "${selectedportal}";
+        
+        $( function(){
+			
+            $('.shownotice').on( 'click', function(){
+                $( '#notice-' + $(this).attr( 'href' )).dialog({ 
+                        close: function (event, ui) {
+                            $(this).dialog("destroy");
+                        }
+                    });
+                
+                return false;
+            
+                });
+            
+            
+            
+            $( '#selectportal, input' ).on( 'change', function(){
+
+				
+				if( $('#selectportal').val() == 'FOVEA' ){
+                    document.location.href="/order/fovea/";
+                }
+                else if( $('#selectportal').val() == 'UTESTEMME' ){
+                    document.location.href="/order/utestemme/";
+                }
+				else if( $('#bet').attr('checked') ){
+					document.location.href="/order/stats/" + $('#selectportal').val() + "/" + $('#fromdate').val() + "/" + $('#todate').val() + '/1'; 
+				}
+                else{
+                    document.location.href="/order/stats/" + $('#selectportal').val() + "/" + $('#fromdate').val() + "/" + $('#todate').val(); 
+                }
+                return false;
+                })
+            })
+        
+        
+            $( '#selectportal option' ).each( function(){
+                
+                if( portal == $(this).val() ){
+                    $(this).attr( 'selected', "selected" );
+                }
+                
+                
+                });
+            
+            
+            $(".sendorder").on( 'click', function(){
+                    var orderid = $(this).attr('title');
+                    
+                    $('.confirm').dialog({
+                        resizable: false,
+                        height: 140,
+                        title: "Skal ordren sendes",
+                        buttons: {
+                            'JA' : function(){
+                                $( this ).dialog( "close" );
+                                document.location.href="/order/stats/sendorder/" +   orderid  + "/" + $('#selectportal').val() + "/" + $('#fromdate').val() + "/" + $('#todate').val();
+                            },
+                            'NEI' : function(){
+                                $(this).dialog("destroy");
+                            }
+                            
+                        },
+                        close: function (event, ui) {
+                            $(this).dialog("destroy");
+                        }
+                    })
+                    
+                    return false;
+                });
+            
+             $(".deleteorder").on( 'click', function(){
+                    var orderid = $(this).attr('title');
+                    
+                    $('.confirmdelete').dialog({
+                        resizable: false,
+                        height: 140,
+                        title: "Skal ordren sendes",
+                        buttons: {
+                            'JA' : function(){
+                                $( this ).dialog( "close" );
+                                document.location.href="/order/stats/deleteorder/" +   orderid  + "/" + $('#selectportal').val() + "/" + $('#fromdate').val() + "/" + $('#todate').val();
+                            },
+                            'NEI' : function(){
+                                $(this).dialog("destroy");
+                            }
+                            
+                        },
+                        close: function (event, ui) {
+                            $(this).dialog("destroy");
+                        }
+                    })
+                    
+                    return false;
+                });
+            
+            $( "#fromdate" ).datepicker();
+            $( "#todate" ).datepicker();
+        
+        
+    </script>
+</body>
+</html>

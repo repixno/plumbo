@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">SMS - Eurofoto Admin</title>
+<tal:block metal:use-macro="../common.html/css" />
+<script type="text/javascript" src="/js/admin.js"></script>
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+
+		<tal:block metal:use-macro="../common.html/languages" />
+			
+		<div id="content" class="span-20">
+			
+				<div class="span-10">
+				<h3>
+					<tal:block i18n:translate="">SMS</tal:block>
+				</h3>
+				<b i18n:translate="" style="color:red; font-size:16px;">Do NOT edit if you do not know what you are doing!!!</b>
+				<br />
+				<br />
+				<ol>
+					<li tal:repeat="singlesms sms">
+						<h4>
+							<tal:block tal:content="singlesms/message" i18n:translate=""></tal:block>
+							<span class="small">
+								<a href="/sms/view/${singlesms/id}/">Edit</a>
+								<a href="/sms/delete/${singlesms/id}/">Delete</a>
+								<a href="/sms/test/${singlesms/id}/">Test</a>
+							</span>
+						</h4>
+					</li>
+				</ol>
+				<a class="button large" href="/sms/view/0">+ New SMS</a>
+			</div>
+			<!--<div class="span-10 last">
+				<h3>
+					<tal:block i18n:translate="">Last 10 articles</tal:block>
+					<a href="/content/articles/" class="small" i18n:translate="">Edit all articles</a>
+				</h3>
+				<ol>
+					<li tal:repeat="entity article">
+						<h4>
+							<tal:block tal:content="entity/title" />
+							<span class="small">
+								<a href="/content/articles/${entity/id}/">Delete</a>
+								<a href="/content/articles/${entity/id}/">Edit</a>
+							</span>
+						</h4>
+					</li> 
+				</ol>
+				
+				<a class="button large" href="/content/articles/0">+ New article</a>
+			
+			</div>-->
+		</div>
+		
+		<div id="footer" />
+	</div>
+</body>
+</html>

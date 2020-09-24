@@ -1,0 +1,547 @@
+<!-- menu for cms -->
+<tal:block metal:define-macro="menu-standard">
+<ul class="menu">
+   <li tal:repeat="item menuitems">	
+      <h3>
+         <a href="${item/url}" title="" tal:content="item/title" tal:attributes="class conditionalmatch:item/active,active">Fotogaver</a>
+      </h3>
+
+      <ul tal:condition="exists:item/children" tal:repeat="subitem1 item/children">
+         <li>
+            <a href="${subitem1/url}" title="" tal:content="subitem1/title" tal:attributes="class conditionalmatch:subitem1/active,active">Fotogaver</a>
+            
+            <ul tal:condition="exists:subitem1/children">
+               <li  tal:repeat="subitem2 subitem1/children">
+                  <a href="${subitem2/url}" title="" tal:content="subitem2/title" tal:attributes="class conditionalmatch:subitem2/active,active">Fotogaver</a>
+               </li>
+            </ul>   
+         </li>
+      </ul>
+   </li>
+</ul>
+</tal:block>
+
+<ul metal:define-macro="products">
+	<ul>
+		<li><a href="" title="">Fotogaver</a></li>
+	</ul>
+</ul>
+
+<tal:block metal:define-macro="top-navigation">
+	<div class="span-24 last top-navigation">
+		<div class="span-12">
+			<div metal:use-macro="breadcrumbs" />
+		</div>
+		<div class="span-12 last right" id="topmenu">
+		<ul>
+   		<li>
+   		<a href="${url:/weekly-offers/}" class="weekly-offer">${menutitle:/weekly-offers/}</a> 
+   		</li>
+   		<li>
+   		<a href="${url:/occasions/}">${menutitle:/occasions/}</a> 
+   		</li>
+   		<li>
+   		<a href="${url:/tips-and-tricks/gift-ideas/}">${menutitle:/tips-and-tricks/gift-ideas/}</a> 
+   		</li>
+   		<li>
+   		<a href="${url:/inspiration/}">${menutitle:/inspiration/}</a> 
+   		</li>
+		
+      </ul>
+		<!--	<a href="${url:/weekly-offers/}" class="weekly-offer">${menutitle:/weekly-offers/}</a> 
+			<a href="${url:/occasions/}">${menutitle:/occasions/}</a> 
+			<a href="${url:/tips-and-tricks/gift-ideas/}">${menutitle:/tips-and-tricks/gift-ideas/}</a> 
+			<a href="${url:/inspiration/}">${menutitle:/inspiration/}</a> -->
+		</div>
+	</div>
+
+</tal:block>
+
+<!-- menu that show the childs of current item and the siblings of the current -->
+<tal:block metal:define-macro="menu-current">
+	<div id="myaccount-menu">
+		<ul class="menu">
+			<tal:block tal:repeat="item menuitems">	
+				<tal:block tal:condition="item/expanded">
+					<tal:block tal:condition="exists:item/children" tal:repeat="subitem1 item/children">
+						<li tal:attributes="class conditionalmatch:subitem1/expanded,1,current,not-current">
+							<!-- subitem-1 -->
+							<a href="${subitem1/url}" title="" tal:content="subitem1/title"></a>
+							<tal:block tal:condition="subitem1/expanded">
+								<!-- subitem1/expanded -->
+								<ul tal:condition="exists:subitem1/children">
+									<li  tal:repeat="subitem2 subitem1/children" tal:attributes="class conditionalmatch:subitem2/expanded,1,current,not-current">
+										<!-- subitem-2 -->
+										<a href="${subitem2/url}" title="" 
+											tal:content="subitem2/title" tal:attributes="class conditionalmatch:subitem2/expanded,1,current">
+										</a>
+										<tal:block tal:condition="subitem2/expanded"><!--subitem2 expanded-->
+											<ul tal:condition="exists:subitem2/children">
+												<li  tal:repeat="subitem3 subitem2/children" tal:attributes="class conditionalmatch:subitem3/expanded,1,current,not-current">
+													<a href="${subitem3/url}" title="" 
+														tal:content="subitem3/title" 
+														tal:attributes="class conditionalmatch:subitem3/expanded,1,current">
+													</a>
+												</li>
+											</ul>   
+										</tal:block>
+									</li>
+								</ul>   
+							</tal:block>
+						</li>
+					</tal:block>
+				</tal:block>
+			</tal:block>
+		</ul>
+	</div>
+	
+	<div tal:condition="not:equal:portal,SK-001">
+	<p></p>
+	<a href="http://www.dinkikkert.no" title="www.dinkikkert.no" target="_blank">
+	  <img src="${static:}cms/images/din-kikkert_11111.jpg" />
+	</a>
+	<a href="http://www.spillsjappa.no" title="www.spillsjappa.no" target="_blank">
+	  <img src="${static:}cms/images/spillsjappa_11111.jpg"/>
+	</a>
+	<a href="http://www.minnekort.no" title="www.minnekort.no" target="_blank">
+	  <img src="${static:}cms/images/minnekort_1111.jpg" />
+	</a>
+	</div>
+</tal:block>
+
+<!-- menu that show the childs of current item and the siblings of the current -->
+<tal:block metal:define-macro="menu-current-subcategory">
+	<div id="myaccount-menu">
+		<ul class="menu">
+			<tal:block tal:repeat="item menuitems">	
+				<tal:block tal:condition="item/expanded">
+					<tal:block tal:condition="exists:item/children" tal:repeat="subitem1 item/children">
+						<li tal:attributes="class conditionalmatch:subitem1/expanded,current">
+							<tal:block tal:condition="subitem1/expanded">
+								<!-- subitem1/expanded -->
+								<ul tal:condition="exists:subitem1/children">
+									<li  tal:repeat="subitem2 subitem1/children">
+										<!-- subitem-2 -->
+										<a href="${subitem2/url}" title="" 
+											tal:content="subitem2/title" tal:attributes="class conditionalmatch:subitem2/active,active">
+										</a>
+										<tal:block tal:condition="subitem2/expanded"><!--subitem2 expanded-->
+											<ul tal:condition="exists:subitem2/children">
+												<li  tal:repeat="subitem3 subitem2/children">
+													<a href="${subitem3/url}" title="" 
+														tal:content="subitem3/title" 
+														tal:attributes="class conditionalmatch:subitem3/active,active">
+													</a>
+												</li>
+											</ul>   
+										</tal:block>
+									</li>
+								</ul>   
+							</tal:block>
+						</li>
+					</tal:block>
+				</tal:block>
+			</tal:block>
+		</ul>
+	</div>
+</tal:block>
+
+
+<!-- breadcrumbs -->
+<div metal:define-macro="breadcrumbs" id="breadcrumbs">
+	<ul>
+		<tal:block tal:repeat="menuitem menuitems">
+			<li tal:condition="menuitem/expanded">
+				<a href="${menuitem/url}" title="" tal:content="menuitem/title" />
+			</li>
+			<tal:block metal:define-macro="breadcrumbsloop">
+				<tal:block tal:condition="exists:loopitem/children" tal:repeat="subitem loopitem/children">
+					<li tal:condition="subitem/expanded" tal:attributes="class conditionalmatch:subitem/active,active,notactive">
+						<tal:block tal:condition="not:subitem/active">
+							<a tal:content="subitem/title" href="${subitem/url}" title="${subitem/title}" />
+						</tal:block>
+						<tal:block tal:condition="subitem/active">
+							<tal:block tal:condition="exists:item">
+								<a tal:content="subitem/title" href="${subitem/url}" title="${subitem/title}" />
+								<tal:block tal:replace="structure string:</li><li><strong>${item/title}</strong>" />
+							</tal:block>
+							<tal:block tal:condition="not:exists:item"><span>${subitem/title}</span></tal:block>
+						</tal:block>
+					</li>
+					<tal:block tal:define="global loopitem subitem" metal:use-macro="breadcrumbsloop" />
+				</tal:block>
+			</tal:block>
+			<tal:block tal:define="global loopitem menuitem" metal:use-macro="breadcrumbsloop" />
+		</tal:block>
+	</ul>
+</div>
+
+<div class="breadcrumbs"></div>
+
+<tal:block metal:define-macro="more-info-link">
+	<tal:block tal:condition="exists:item">
+		<a href="${item/url}" i18n:translate="" class="more-info">more info</a>
+	</tal:block>
+</tal:block>
+
+<tal:block metal:define-macro="info-link">
+	<tal:block tal:condition="exists:item">
+		<a href="${item/url}" i18n:translate="" class="more-info">info</a>
+	</tal:block>
+</tal:block>
+
+<tal:block metal:define-macro="buy-product-link">
+	<tal:block tal:condition="exists:item">
+		<tal:block tal:condition="gt:item/options/length,1">
+			<div class="hide options" title="Choose option" id="show_options_${item/id}" i18n:attributes="title">
+            <ul>
+               <tal:block tal:repeat="option item/options">
+                  <tal:block tal:condition="equal:option/type,gift">
+                     <tal:block tal:condition="item/option/purchaseurl">
+                        <li>
+                           <a href="${item/option/purchaseurl}" id="open_option_${item/id}">${option/title}</a>
+                        </li>
+                     </tal:block>
+                     <tal:block tal:condition="not:item/option/purchaseurl">
+                        <li>
+                           <a href="/create/quickgift/${item/id}/${option/id}" id="open_option_${item/id}">${option/title}</a>
+                        </li>
+                     </tal:block>
+                  </tal:block>
+                  <tal:block tal:condition="equal:option/type,mediaclip">
+                     <li>
+                        <a href="${option/purchaseurl}">${option/title}</a>
+                     </li>
+                  </tal:block>
+                  <tal:block tal:condition="equal:option/type,ukeplan">
+                     <li>
+                        <a href="${option/purchaseurl}">${option/title}</a>
+                     </li>
+                  </tal:block>
+                  <tal:block tal:condition="equal:option/type,goods">
+                     <li>
+                        <a href="/cart/additembyproductoptionid/${option/id}/1">${option/title}</a>
+                     </li>
+                  </tal:block>
+               </tal:block>
+            </ul>
+         </div>
+
+         <tal:block tal:condition="equal:item/option/type,gift">
+               <tal:block tal:condition="item/option/purchaseurl">
+                  <a href="${item/option/purchaseurl}" id="open_option_${item/id}" class="btn btn-primary open_option_${item/id}" i18n:translate="">Buy now</a>
+               </tal:block>
+               <tal:block tal:condition="not:item/option/purchaseurl">
+                  <a href="/create/quickgift/${item/id}/${item/option/id}" id="open_option_${item/id}" class="btn btn-primary open_option_${item/id}" i18n:translate=""></a>
+               </tal:block>
+         </tal:block>
+         <tal:block tal:condition="equal:item/option/type,mediaclip">
+            <a href="${item/option/purchaseurl}" class="btn btn-primary open_option_${item/id}" id="open_option_${item/id}" i18n:translate="">Buy now</a>
+         </tal:block>
+         <tal:block tal:condition="equal:item/option/type,goods">
+            <a href="/cart/additembyproductoptionid/${item/option/id}/1" id="open_option_${item/id}" data-prodno="${item/prodno}" class="btn btn-primary open_option_${item/id}" >Lägg i varukorg</a>
+         </tal:block>
+         
+         <script type="text/javascript">
+            $(document).ready( function() {
+               
+               $('.open_option_${item/id}').click(function() {
+                  $('#show_options_${item/id}').dialog({
+                     'modal'  :  true,
+                     'resizable': false
+                  });
+
+                  $('#show_options_${item/id}').dialog("open");
+                  return false;
+               });
+            });
+         </script>
+      </tal:block>
+
+      <tal:block tal:condition="equal:item/options/length,1">
+         <tal:block tal:condition="equal:item/option/type,gift">
+               <tal:block tal:condition="item/option/purchaseurl">
+                  <a href="${item/option/purchaseurl}" id="open_option_${item/id}" class="btn btn-primary" i18n:translate="">Buy now</a>
+               </tal:block>
+               <tal:block tal:condition="not:item/option/purchaseurl">
+                  <a href="/create/quickgift/${item/id}/${item/option/id}" id="open_option_${item/id}" class="btn btn-primary" i18n:translate="">Buy now</a>
+               </tal:block>
+         </tal:block>
+         <tal:block tal:condition="equal:item/option/type,mediaclip">
+            <a href="${item/option/purchaseurl}" class="btn btn-primary" i18n:translate="">Buy now</a>
+         </tal:block>
+         <tal:block tal:condition="equal:item/option/type,ukeplan">
+            <a href="${item/option/purchaseurl}" class="btn btn-primary" i18n:translate="">Buy now</a>
+         </tal:block>
+         <tal:block tal:condition="equal:item/option/type,goods">
+            <a href="/cart/additembyproductoptionid/${item/option/id}/1" class="btn btn-primary" data-prodno="${item/option/prodno}" data-price="${item/option/price}">Lägg i varukorg</a>
+         </tal:block>
+      </tal:block>
+   </tal:block>
+</tal:block>
+
+
+<tal:block metal:define-macro="buy-product-link-studentskylt">
+	<tal:block tal:condition="exists:item">
+		<tal:block tal:condition="gt:item/options/length,1">
+			<div class="hide options" title="Choose option" id="show_options_${item/id}" i18n:attributes="title">
+            <ul>
+               <tal:block tal:repeat="option item/options">
+                  <tal:block tal:condition="equal:option/type,gift">
+                     <tal:block tal:condition="item/option/purchaseurl">
+                        <li>
+                           <a href="${item/option/purchaseurl}" id="open_option_${item/id}">${option/title}</a>
+                        </li>
+                     </tal:block>
+                     <tal:block tal:condition="not:item/option/purchaseurl">
+                        <li>
+                           <a href="/create/quickgift/${item/id}/${option/id}" id="open_option_${item/id}">${option/title}</a>
+                        </li>
+                     </tal:block>
+                  </tal:block>
+                  <tal:block tal:condition="equal:option/type,mediaclip">
+                     <li>
+                        <a href="${option/purchaseurl}">${option/title}</a>
+                     </li>
+                  </tal:block>
+                  <tal:block tal:condition="equal:option/type,ukeplan">
+                     <li>
+                        <a href="${option/purchaseurl}">${option/title}</a>
+                     </li>
+                  </tal:block>
+                  <tal:block tal:condition="equal:option/type,goods">
+                     <li>
+                        <a href="/cart/additembyproductoptionid/${option/id}/1">${option/title}</a>
+                     </li>
+                  </tal:block>
+               </tal:block>
+            </ul>
+         </div>
+
+         <tal:block tal:condition="equal:item/option/type,gift">
+               <tal:block tal:condition="item/option/purchaseurl">
+                  <a href="${item/option/purchaseurl}" id="open_option_${item/id}" class="btn btn-primary   open_option_${item/id} " i18n:translate="">Beställ
+från digitalbild</a>
+               </tal:block>
+               <tal:block tal:condition="not:item/option/purchaseurl">
+                  <a href="/create/quickgift/${item/id}/${item/option/id}" id="open_option_${item/id}" class="btn btn-primary open_option_${item/id}" i18n:translate="">Buy now</a>
+               </tal:block>
+         </tal:block>
+         <tal:block tal:condition="equal:item/option/type,mediaclip">
+            <a href="${item/option/purchaseurl}" class="btn btn-primary open_option_${item/id}" id="open_option_${item/id}" i18n:translate="">Buy now</a>
+         </tal:block>
+         <tal:block tal:condition="equal:item/option/type,goods">
+            <a href="/cart/additembyproductoptionid/${item/option/id}/1" id="open_option_${item/id}" data-prodno="${item/prodno}" class="btn btn-primary open_option_${item/id}" >Lägg i varukorg</a>
+         </tal:block>
+         
+         <script type="text/javascript">
+            $(document).ready( function() {
+               
+               $('.open_option_${item/id}').click(function() {
+                  $('#show_options_${item/id}').dialog({
+                     'modal'  :  true,
+                     'resizable': false
+                  });
+
+                  $('#show_options_${item/id}').dialog("open");
+                  return false;
+               });
+            });
+         </script>
+      </tal:block>
+
+      <tal:block tal:condition="equal:item/options/length,1">
+         <tal:block tal:condition="equal:item/option/type,gift">
+               <tal:block tal:condition="item/option/purchaseurl">
+                  <a href="${item/option/purchaseurl}" id="open_option_${item/id}" class="btn btn-primary" i18n:translate="">Beställ
+från digitalbild</a>
+               </tal:block>
+               <tal:block tal:condition="not:item/option/purchaseurl">
+                  <a href="/create/quickgift/${item/id}/${item/option/id}" id="open_option_${item/id}" class="btn btn-primary" i18n:translate="">Buy now</a>
+               </tal:block>
+         </tal:block>
+         <tal:block tal:condition="equal:item/option/type,mediaclip">
+            <a href="${item/option/purchaseurl}" class="btn btn-primary" i18n:translate="">Buy now</a>
+         </tal:block>
+         <tal:block tal:condition="equal:item/option/type,ukeplan">
+            <a href="${item/option/purchaseurl}" class="btn btn-primary" i18n:translate="">Buy now</a>
+         </tal:block>
+         <tal:block tal:condition="equal:item/option/type,goods">
+            <a href="/cart/additembyproductoptionid/${item/option/id}/1" class="btn btn-primary" data-prodno="${item/option/prodno}" data-price="${item/option/price}">Lägg i varukorg</a>
+         </tal:block>
+      </tal:block>
+   </tal:block>
+</tal:block>
+
+<span class="price">fra kr <span tal:content="formatprice:option/price"></span>  </span>
+
+
+<tal:block metal:define-macro="product-as-list-item">
+   <li>
+      <a href="${item/url}" class="hide-link product-title">${item/title}</a> 
+      <span class="info">
+         <tal:block metal:use-macro="show-price" />
+         <span class="more-info-and-button">
+            <tal:block metal:use-macro="more-info-link" />
+            <tal:block metal:use-macro="buy-product-link" />
+         </span>
+      </span>
+   </li>
+</tal:block>
+
+<tal:block metal:define-macro="wide-clean-product-list-as-item">
+   <li>
+      <a href="${item/url}" class="hide-link product-title">${item/title}</a> 
+      <span class="info">
+         <tal:block metal:use-macro="info-link" />
+         <tal:block metal:use-macro="show-price" />
+         <tal:block metal:use-macro="buy-product-link" />
+      </span>
+   </li>
+</tal:block>
+
+<tal:block metal:define-macro="product-as-list-item-with-image">
+   <li style="clear:both">
+      <!--<tal:block tal:define="global productphotosize,60px" />-->
+      <div style="float: left">
+         <tal:block metal:use-macro="one-product-photo" />
+      </div>
+      <h4 class="bottom"><a href="${item/url}" class="hide-link">${item/title}</a></h4>
+      <div>
+      <tal:block metal:use-macro="show-price" />
+      <tal:block metal:use-macro="more-info-link" />
+      <tal:block metal:use-macro="buy-product-link" />
+      </div>
+   </li>
+</tal:block>
+
+<tal:block metal:define-macro="one-product-photo">
+   <tal:block tal:condition="exists:item/images" tal:repeat="image item/images">
+      <img src="${static:}images/products/thumbs/square/60/${image/url}" title="${item/title}" height="60" width="60" tal:condition="equal:repeat/image/number,1" class="round-image-60px"/>
+   </tal:block>
+</tal:block>
+
+<tal:block metal:define-macro="one-product-photo-span-4">
+   <tal:block tal:condition="exists:item/images" tal:repeat="image item/images">
+      <img src="${static:}images/products/thumbs/width/190/${image/url}" title="${item/title}" height="60" width="60" tal:condition="equal:repeat/image/number,1" class="round-image-60px"/>
+   </tal:block>
+</tal:block>
+
+<tal:block metal:define-macro="one-product-photo-custom-size" tal:condition="customsize">
+   <tal:block tal:condition="exists:item/images" tal:repeat="image item/images">
+      <img src="${static:}images/products/thumbs/width/${customsize}/${image/url}" title="${item/title}" tal:condition="equal:repeat/image/number,1" class="round-image-60px img-responsive"/>
+   </tal:block>
+</tal:block>
+
+
+
+
+
+
+<tal:block metal:define-macro="show-price">
+   <span class="price" tal:condition="exists:item/option/price">
+      <tal:block tal:condition="item/option/historical/showhistorical">
+         <tal:block metal:use-macro="old-price" /> <br />
+         <tal:block metal:use-macro="new-price" />
+      </tal:block>
+      <tal:block tal:condition="not:item/option/historical/showhistorical">
+         <span class="normal-price">Endast ${formatprice:item/option/price} </span>
+			
+      </tal:block>
+   </span>
+</tal:block>
+<tal:block metal:define-macro="show-price-oneline">
+   <span class="price" tal:condition="exists:item/option/price">
+      <tal:block tal:condition="item/option/historical/showhistorical">
+         <tal:block metal:use-macro="old-price" />
+         <tal:block metal:use-macro="new-price" />
+      </tal:block>
+      <tal:block tal:condition="not:item/option/historical/showhistorical">
+         <span class="price"><tal:block i18n:translate="">from</tal:block> ${formatprice:item/option/price} kr</span>
+      </tal:block>
+   </span>
+</tal:block>
+
+<tal:block metal:define-macro="output-article-body">
+   <tal:block tal:content="structure item/body" tal:condition="exists:item/body"/>
+   <h3 tal:condition="not:exists:item/title">Missing ${item/title} article</h3>
+</tal:block>
+
+<tal:block metal:define-macro="old-price">
+   <span class="price oldprice"><tal:block i18n:translate="">Before:</tal:block> <tal:block i18n:translate="">from</tal:block> kr ${formatprice:item/option/historical/price}</span> 
+</tal:block>
+
+<tal:block metal:define-macro="new-price">
+   <span class="price newprice"><tal:block i18n:translate="">Now:</tal:block> <tal:block i18n:translate="">from</tal:block> kr ${formatprice:item/option/price}</span>
+</tal:block>
+
+<tal:block metal:define-macro="starOfferPercent">
+	<tal:block tal:condition="exists:item">
+		<div tal:condition="item/option/historical/showrebate" class="starOfferPercentContainer">
+			<div class="starOfferPercent left percent${item/option/historical/rebate}">${item/option/historical/rabate}</div>
+		</div>
+	</tal:block>
+</tal:block>
+		
+<tal:block metal:define-macro="newProductStar">
+	<tal:block tal:condition="exists:item">
+		<div tal:condition="item/option/historical/newproduct" class="newProductStarContainer">
+			<div class="newProductStar ${i18n/language}" i18n:translate="">New product!</div>
+			</div>
+		</tal:block>
+</tal:block>
+
+<tal:block metal:define-macro="starOfferPercentFloatRight">
+	<tal:block tal:condition="exists:item">
+		<div tal:condition="item/option/historical/showrebate" class="starOfferPercentContainer" style="float:right">
+			<div class="starOfferPercent percent${item/option/historical/rebate}">${item/option/historical/rabate}</div>
+		</div>
+	</tal:block>
+</tal:block>
+		
+<tal:block metal:define-macro="newProductStarFloatRight">
+	<tal:block tal:condition="exists:item">
+		<div tal:condition="item/option/historical/newproduct" class="newProductStarContainer"  style="float:right">
+			<div class="newProductStar ${i18n/language}" i18n:translate="">New product!</div>
+		</div>
+	</tal:block>
+</tal:block>
+
+
+<tal:block metal:define-macro="forceNewProductStar">		  
+   <div class="newProductStar ${i18n/language}" i18n:translate="">New product!</div>
+</tal:block>
+
+
+
+<tal:block metal:define-macro="productbox">
+	<div class="col-md-12">
+		<div class="">
+			<div class="col-md-6">
+				<a href="${item/url}" class="hide-link">
+					<tal:block tal:condition="exists:item/images" tal:repeat="image item/images">
+						<img src="http://static.repix.no/images/products/thumbs/squareaspect/250/${image/url}" title="${item/title}" tal:condition="equal:repeat/image/number,1" class="img-responsive"/>
+					   </tal:block>
+				</a> 
+			</div>
+			<div class="col-md-6">
+				<div class="row">
+					<h4 class="">${item/title}</h4>
+					<p><span tal:content="item/ingress"></span>
+						<tal:block metal:use-macro="more-info-link" />
+					</p>
+					
+					<div class="margin-bottom">
+						<div class="col-md-6">
+							<tal:block metal:use-macro="show-price" />
+						</div>
+						<div class="col-md-6">
+							<tal:block metal:use-macro="buy-product-link" />
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</tal:block>

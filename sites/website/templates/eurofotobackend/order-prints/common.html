@@ -1,0 +1,250 @@
+<tal:block metal:define-macro="price-matrix">
+	<table id="prices" class="pricelist">
+		<thead>
+			<tr>
+				<th i18n:translate="">Quantity</th>
+				<th>1 - 4</th>
+				<th>5 - 9</th>
+				<th>10 - 23</th>
+				<th>24 - 99</th>
+				<th>100 - 249</th>
+				<th>250 +</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="category">
+				<th i18n:translate="" colspan="7">Standard prints</th>
+			</tr>
+				<tr class="prodno_${prints/1/prodno}">
+					<th>10x13/15cm</th>
+					<tal:block repeat="price prints/1/prices">
+						<td class="prodno_${prints/1/prodno}">
+							<span class="price" tal:content="formatprice:price/price"></span>
+							<span class="hide min" tal:content="formatprice:price/min"></span>
+							<span class="hide max" tal:content="formatprice:price/max" tal:condition="exists:price/max"></span>
+						</td>
+					</tal:block>
+				</tr>
+			
+			<tr class="category">
+				<th colspan="7" i18n:translate="">Enlargements</th>
+			</tr>
+			<tal:block tal:repeat="enlargement enlargements">
+				<tr>
+					<th tal:content="enlargement/title"></th>
+					<tal:block repeat="price enlargement/prices">
+						<td class="prodno_${enlargement/prodno}">
+							<span class="price" tal:content="formatprice:price/price"></span>
+							<span class="hide min" tal:content="formatprice:price/min"></span>
+							<span class="hide max" tal:content="formatprice:price/max" tal:condition="exists:price/max"></span>
+						</td>
+					</tal:block>
+				</tr>
+			</tal:block>
+		</tbody>
+	</table>
+</tal:block>
+
+<!-- sorting albums -->
+<tal:block metal:define-macro="albums-sorting">
+	<tal:block tal:condition="exists:albumsorting">
+		<strong i18n:translate="">Sort:</strong>
+
+		<tal:block tal:condition="equal:albumsorting,manual">
+			<tal:block i18n:translate="">Manual</tal:block>
+		</tal:block>
+		<tal:block tal:condition="not:equal:albumsorting,manual">
+			<a href="/order-prints/choose-photos/sort/manual" id="sort-manual" i18n:translate="">Manual</a>
+		</tal:block>
+		 |
+		<tal:block tal:condition="not:equal:albumsorting,created">
+			<a href="/order-prints/choose-photos/sort/created/desc" id="sort-by-date"  i18n:translate="">Date</a>
+		</tal:block>
+		<tal:block tal:condition="equal:albumsorting,created">
+			<tal:block i18n:translate="">Date</tal:block>
+		</tal:block>
+		 |
+		<tal:block tal:condition="not:equal:albumsorting,title">
+			<a href="/order-prints/choose-photos/sort/title/asc" id="sort-alphabetic"  i18n:translate="">Name</a>
+		</tal:block>
+
+		<tal:block tal:condition="equal:albumsorting,title">
+			<tal:block i18n:translate="">Name</tal:block>
+		</tal:block>
+		 |
+
+		<span class="small">
+			(
+			<tal:block tal:condition="not:equal:albumsortingorder,asc">
+				<a href="/order-prints/choose-photos/sort/${albumsorting}/asc" id="sort-alphabetic" i18n:translate="">Ascending</a>
+			</tal:block>
+
+			<tal:block tal:condition="equal:albumsortingorder,asc">
+				<tal:block i18n:translate="">Ascending</tal:block>
+			</tal:block>
+			 |
+ 			<tal:block tal:condition="not:equal:albumsortingorder,desc">
+				<a href="/order-prints/choose-photos/sort/${albumsorting}/desc" id="sort-alphabetic" i18n:translate="">Descending</a>
+			</tal:block>
+
+			<tal:block tal:condition="equal:albumsortingorder,desc">
+				<tal:block i18n:translate="">Descending</tal:block>
+			</tal:block>
+			 )
+		</span>
+
+	</tal:block>
+</tal:block>
+
+<!-- sorting albums -->
+<tal:block metal:define-macro="albums-sorting-combo">
+	<tal:block tal:condition="exists:albumsorting">
+		
+		<strong i18n:translate="">Sort:</strong>
+		
+		<select id="albumsorting">
+	
+	
+				<tal:block tal:condition="equal:albumsorting,title">
+					<option selected="selected" tal:condition="equal:albumsortingorder,asc" value="/order-prints/choose-photos/sort/title/asc">
+						Alfabetisk (stigende)
+					</option>
+					<option tal:condition="not:equal:albumsortingorder,asc" value="/order-prints/choose-photos/sort/title/asc">
+						Alfabetisk (stigende)
+					</option>
+					
+				</tal:block>
+				
+				<tal:block tal:condition="not:equal:albumsorting,title">
+					<option tal:condition="not:equal:albumsortingorder,asc" value="/order-prints/choose-photos/sort/title/asc">
+						Alfabetisk (stigende)
+					</option>
+					<option tal:condition="equal:albumsortingorder,asc" value="/order-prints/choose-photos/sort/title/asc">
+						Alfabetisk (stigende)
+					</option>
+
+					
+				</tal:block>
+
+				<tal:block tal:condition="equal:albumsorting,title">
+					<option selected="selected" tal:condition="equal:albumsortingorder,desc" value="/order-prints/choose-photos/sort/title/desc">
+						Alfabetisk (synkende)
+					</option>
+					<option tal:condition="not:equal:albumsortingorder,desc" value="/order-prints/choose-photos/sort/title/desc">
+						Alfabetisk (synkende)
+					</option>
+
+				</tal:block>
+				
+				<tal:block tal:condition="not:equal:albumsorting,title">
+					<option tal:condition="not:equal:albumsortingorder,desc" value="/order-prints/choose-photos/sort/title/desc">
+						Alfabetisk (synkende)
+					</option>
+					<option tal:condition="equal:albumsortingorder,desc" value="/order-prints/choose-photos/sort/title/desc">
+						Alfabetisk (synkende)
+					</option>
+				</tal:block>
+
+				<tal:block tal:condition="equal:albumsorting,created">
+					<option tal:condition="equal:albumsortingorder,asc" selected="selected" value="/order-prints/choose-photos/sort/created/asc">
+						Dato (stigende)
+					</option>
+					<option tal:condition="not:equal:albumsortingorder,asc" value="/order-prints/choose-photos/sort/created/asc">
+						Dato (stigende)
+					</option>
+				</tal:block>
+				<tal:block tal:condition="not:equal:albumsorting,created">
+					<option tal:condition="not:equal:albumsortingorder,asc" value="/order-prints/choose-photos/sort/created/asc">
+						Dato (stigende)
+					</option>
+					<option tal:condition="equal:albumsortingorder,asc" value="/order-prints/choose-photos/sort/created/asc">
+						Dato (stigende)
+					</option>
+
+				</tal:block>
+
+				<tal:block tal:condition="equal:albumsorting,created">
+					<option selected="selected" tal:condition="equal:albumsortingorder,desc" value="/order-prints/choose-photos/sort/created/desc">
+						Dato (synkende)
+					</option>
+					<option tal:condition="not:equal:albumsortingorder,desc" value="/order-prints/choose-photos/sort/created/desc">
+						Dato (synkende)
+					</option>
+
+				</tal:block>
+				<tal:block tal:condition="not:equal:albumsorting,created">
+					<option tal:condition="not:equal:albumsortingorder,desc" value="/order-prints/choose-photos/sort/created/desc">
+						Dato (synkende)
+					</option>
+					<option tal:condition="equal:albumsortingorder,desc" value="/order-prints/choose-photos/sort/created/desc">
+						Dato (synkende)
+					</option>
+				</tal:block>
+
+					<option selected="selected" tal:condition="equal:albumsorting,manual" value="/order-prints/choose-photos/sort/manual">
+						Egendefinert
+					</option>
+					<option tal:condition="not:equal:albumsorting,manual" value="/order-prints/choose-photos/sort/manual">
+						Egendefinert
+					</option>
+		</select>
+		
+		
+		<script type="text/javascript">
+			$(document).ready( function() {
+				// changes the sorting
+				$('select#albumsorting').bind('change', function(event) {
+					$(this).after( '<img src="${static:gfx/gui/ajax-loader.gif}" />' );
+					if($.browser.msie) {
+						window.location = $(this).val();
+					} else {
+						window.location = $(this).val();
+					}
+				});
+			});
+		</script>
+		
+		<!--
+		<tal:block tal:condition="equal:albumsorting,manual">
+			<tal:block i18n:translate="">Manual</tal:block>
+		</tal:block>
+		<tal:block tal:condition="not:equal:albumsorting,manual">
+			<a href="/order-prints/choose-photos/sort/manual" id="sort-manual" i18n:translate="">Manual</a>
+		</tal:block>
+		 |
+		 
+		<tal:block tal:condition="not:equal:albumsorting,created">
+			<a href="/order-prints/choose-photos/sort/created/desc" id="sort-by-date"  i18n:translate="">Date</a>
+		</tal:block>
+		
+		<tal:block tal:condition="not:equal:albumsorting,title">
+			<a href="/order-prints/choose-photos/sort/title/asc" id="sort-alphabetic"  i18n:translate="">Name</a>
+		</tal:block>
+
+		<tal:block tal:condition="equal:albumsorting,title">
+			<tal:block i18n:translate="">Name</tal:block>
+		</tal:block>
+		 |
+
+		<span class="small">
+			(
+			<tal:block tal:condition="not:equal:albumsortingorder,asc">
+				<a href="/order-prints/choose-photos/sort/${albumsorting}/asc" id="sort-alphabetic" i18n:translate="">Ascending</a>
+			</tal:block>
+
+			<tal:block tal:condition="equal:albumsortingorder,asc">
+				<tal:block i18n:translate="">Ascending</tal:block>
+			</tal:block>
+			 |
+ 			<tal:block tal:condition="not:equal:albumsortingorder,desc">
+				<a href="/order-prints/choose-photos/sort/${albumsorting}/desc" id="sort-alphabetic" i18n:translate="">Descending</a>
+			</tal:block>
+
+			<tal:block tal:condition="equal:albumsortingorder,desc">
+				<tal:block i18n:translate="">Descending</tal:block>
+			</tal:block>
+			 )
+		</span>
+-->
+	</tal:block>
+</tal:block>

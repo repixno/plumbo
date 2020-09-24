@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+
+<head>
+	<meta name="description" tal:attributes="content cms:ingress:8dff9664-717e-4d83-a907-5a1cc2118951" />
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+   <SCRIPT type="text/javascript" src="${static:}js/jquery.zrssfeed.min.js"></SCRIPT>
+   <link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css' />
+	<style type="text/css">
+		.campaign {
+			height: 320px;
+			width: 270px;
+			position: relative;
+		}
+		.campaign a.button {
+			position: absolute;
+			bottom: 5px;
+			right: 5px;
+		}
+		
+		#campaign h3.ui-accordion-header a {
+			font-weight: normal;
+			font-size: 1.3em;
+		}	
+		
+      #presentation {
+         position: relative;
+         height: 305px;
+         background-color: #fefefe;
+         -webkit-border-radius: 9px;
+         -moz-border-radius: 9px;
+         border-radius: 9px;
+         border: 1px solid #ccc;
+         overflow: hidden;
+      }
+				
+      #articles  div{
+		 padding: 20px 20px 20px 200px;
+      }
+
+      #articles h2 {
+		font-family: Yanone Kaffeesatz;
+		font-style: normal;
+		font-weight: 700;
+         font-size: 4em;
+		 color: #882f42;
+		 margin: 0;
+		     letter-spacing: 3px;
+      }
+	  #articles h3{
+		position: relative;
+		bottom: 10px;
+		font-stretch: expanded;
+		font-family: Yanone Kaffeesatz;
+		font-style: normal;
+		font-weight: 300;
+		padding: 0 0 0 25px;
+		font-size: 2.7em;
+		color: #47a8b0;
+		margin: 0;
+		letter-spacing: 2px;
+
+	  }
+	  #articles hr{
+		margin: 0;
+		position: relative;
+		left: 47px;
+		bottom: 5px;
+		width: 505px;
+	  }
+	  #articles p{
+		font-family: Yanone Kaffeesatz;
+		font-style: normal;
+		font-weight: 300;
+		padding: 0 0 0 55px;
+		font-size: 1.5em;
+		color: #7e8a8b;
+		margin: 0;
+		width: 337px;
+		letter-spacing: 2px;
+		line-height: 1.2em
+
+	  }
+
+      .wirebox { margin-bottom: 1em }
+
+      .rssHeader{
+         display: none;
+       }
+      .rssBody ul {
+         margin: 0px;
+         padding: 0px;         
+      }
+      .rssBody ul li {
+      	list-style: none;
+      }
+      .rssBody ul li div{
+         font-size: 9px;
+         font-weight: bold;
+      }
+      .rssBody ul li h4{
+         margin-bottom: 3px;
+      }
+      .rssBody ul li h4 a{
+         font-size: 12px;
+      }
+	</style>
+	
+   <!--[if lte IE 8]>
+	<style type="text/css">
+		#presentation ul {
+         display: block;
+         border: 1px solid #ccc;
+         z-index: 6000;
+
+      }
+      #presentation div#presentation-menu {
+         border: none;
+         z-index: 5000;
+         width: 220px;
+      }
+	</style>
+	<![endif]-->
+	
+</head>
+
+
+<body>
+
+	<div class="container">
+
+		<div metal:use-macro="../../${templates}/common.html/top" />
+		
+		<div id="alert" class="span-24 last center hide">
+		   <div id="alert-enable" class="hide"><div tal:content="structure cms:ingress:802fd27b-b94f-4ab7-882b-c792bc9b4421" /></div> 
+   		<div  style="background-color: #FBE3E4; padding: 10px; margin: 4px; border: dotted 3px red;">
+   		 <div tal:content="structure cms:body:802fd27b-b94f-4ab7-882b-c792bc9b4421" />
+   		</div>
+		</div>
+		<div class="span-24 last">
+		    
+         <div class="span-19">
+            <div id="presentation">
+               <div id="articles">
+					<tal:block tal:content="structure cms:body:c957d009-4708-495e-a861-62356e5a3aa4"></tal:block>
+               </div> 
+		    </div>
+		 </div>
+		    
+		    <div class="span-5 last">
+		       <div style="height: 305px">
+		       <!-- ID 3275  -->
+		          
+				  <div class="roundedBox" style="background: url('//d.static.repix.no/cms/images/fotobeta_reedfoto.jpg') no-repeat scroll left bottom white; height: 305px;">
+						<div style="position: absolute; bottom: 36px; padding: 15px;">
+							<div>
+								Skriv <strong>bilde-id</strong> for å finne dine bilder.
+							</div>
+							<form action="/fetchalbum/barcode/" method="post">
+								<input name="identifier" style="font-size: 1.5em; width: 158px;" type="text" value="" /><br />
+								<button type="submit">Hent bilder</button>
+							</form>
+						</div>
+				  </div>
+		       </div>
+		    </div>
+		</div>
+		
+      <div class="span-10 prepend-top">
+         <!-- id: 1884 -->
+         <div tal:content="structure cms:body:b81166c8-b4bd-41ee-9399-2a72ce872259" />
+      </div>
+      <div class="span-9 prepend-top">
+         <!-- id: 1883 -->
+         <div tal:content="structure cms:body:a6c60a21-4233-4940-badb-3ebcfbe2108f" />
+      </div>
+      <div class="span-5 last prepend-top">
+         <!-- id: 1885 -->
+         <div tal:content="structure cms:body:07c70f67-ff1e-4cbd-8fdd-305dc5200fd7"/>
+      </div>
+      
+	<div class="span-10 prepend-top">
+         <!-- id: 1884 -->
+         <div tal:content="structure cms:body:e35ff083-f869-4ef6-bfce-8ce80d357a43" />
+      </div>
+      <div class="span-9 prepend-top">
+         <div tal:content="structure cms:body:10fa64e1-51ef-4ab0-b3d4-c7b8c63f9b95" /> 
+
+      </div>
+      <div class="span-5 last prepend-top">
+          <div tal:content="structure cms:body:0a3a9f7e-44e6-4018-b79b-24688c5d16aa"/>
+      </div>
+      
+      
+   </div>	
+
+	
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>	
+
+<SCRIPT type="text/javascript">
+$(function(){
+   
+   if( $("#alert-enable").text() == 'enable' ){
+      $("#alert").show();  
+   }
+   
+   $('.blogSide').rssfeed("http://blogg.eurofoto.no/feeds/posts/default?alt=rss",{
+      limit:3
+   }
+   );
+   
+   
+});
+
+
+
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,62 @@
+/* Typography & Colors -----------------------------------------------*/
+body {
+   background-color: #fff; /* white */
+   color: #333; /* dark grey */
+   font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+   font-size: 0.8em;
+}
+
+code, pre {
+   font: 1em 'Courier New', Courier, Fixed;
+}
+
+a {
+   color: #f24398;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: Arial, sans-serif;
+	font-weight: normal;
+	color: #5a5a5a;
+}
+
+h1 {
+	font-weight: bold;
+	letter-spacing: -2px;
+   line-height: 22px;
+	font-size: 2.2em;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	padding-top: 5px;
+}
+
+h2 {
+	font-size: 1.5em;
+	margin-top: 0px;
+	padding-bottom: 2px;
+	clear: both;
+}
+
+h3 {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+h4 {
+	font-size: 1.1em;
+	margin-top: 2px;
+	padding-bottom: 0px;
+}
+
+h4 a, small a {
+	color: #5a5a5a;
+}
+
+h5 {
+	font-size: 1.0em;
+}
+
+h6 {
+	font-size: 0.8em;
+}
+

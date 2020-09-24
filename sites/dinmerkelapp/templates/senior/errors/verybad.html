@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" />
+<html>
+<head>
+	<title>Beklager, men noe veldig galt har hendt</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="https://static.repix.no/css/portals/eurofoto/screen.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="https://static.repix.no/css/portals/eurofoto/print.css" type="text/css" media="print" /> 
+	<link rel="stylesheet" href="https://static.repix.no/css/portals/eurofoto/custom.css" type="text/css" media="screen, projection" />
+	<!--[if lt IE 8]>
+	<link rel="stylesheet" href="https://static.repix.no/css/portals/eurofoto/ie.css" type="text/css" media="screen, projection" />
+	<![endif]-->
+</head>
+<body>
+		<div id="seniorpage-main">
+			<aside id="seniorpage-hero" class="js-fullheight">
+	<div class="span-3 append-21 last">
+		<h1 class="site-logo"><a href="/">Eurofoto.no - Minner for livet</a></h1>
+	</div>
+	
+	
+	
+	<div class="span-9 prepend-1">
+	
+		<img src="${static:gfx/404/dog.jpg}" alt="We are sorry" i18n:attributes="alt" />
+	
+	</div>
+	
+	
+	<div class="span-12 append-2 last">
+		<h2>Beklager, noe veldig galt har hendt</h2>
+		<h4 class="top quiet">Det oppstod dessverre en feil i applikasjonen. Om du forklarer kort hva du forsøkte å gjøre, så hjelper du oss med å rette feilen. Takk for hjelpen!</h4>
+		
+		<div>
+			<p>Om du opplever flere problem med våre nye nettsider, kan du 
+				<a href="/beta/revert" id="old-site-link-from-verybad-error">gå tilbake til våre gamle nettside</a> og prøve der.
+			</p>
+			<script type="text/javascript">
+				$('#old-site-link-from-verybad-error').click( function() {
+				try{
+					pageTracker._trackEvent('Old page', 'Clicked from very bad error');
+					pageTracker._trackPageview();
+				} catch(err) {}
+				document.location.href = $(this).attr('href');
+				return false;
+				});
+			</script>
+
+			<p><!-- content /--></p>
+		</div>
+		
+		<form action="/contact/feedback/" method="post">
+			<label>Melding om feil:</label><br/>
+			<input type="hidden" name="reason" value="error" />
+			<textarea name="usercomment"></textarea>
+			<textarea class="hide" name="content"><!-- content /--></textarea>
+			<textarea class="hide" name="trace"><!-- trace /--></textarea>
+			<textarea class="hide" name="code"><!-- code /--></textarea>
+			<input type="hidden" value="verybad" name="errortype" />
+			<div class="span-6">
+				<a href="javascript:history.back(-1);">Go back</a>
+			</div>
+			<div class="span-6 last">
+				<button class="blue">Send tilbakemelding</button>
+			</div>
+		</form>
+	</div>
+	<hr class="space"/>
+	<div class="span-24 last quiet">
+		<div>
+			<p>The error occured on line <strong><!-- line /--></strong> in <strong><!-- file /--></strong>.</p>
+		</div>
+		
+		<div class="span-12">
+			<h3>Trace</h3>
+			<pre><!-- trace /--></pre>
+		</div>
+		
+		<div class="span-12 last">
+			<h3>Code</h3>
+			<pre><!-- code /--></pre>
+		</div>
+	</div>
+</aside>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+//]]>
+</script>
+<script type="text/javascript">
+	try{
+	var pageTracker = _gat._getTracker("UA-390524-10");
+		pageTracker._trackEvent('Error', 'Very bad');
+		pageTracker._trackPageview();
+	} catch(err) {}
+</script>
+</body>
+</html>

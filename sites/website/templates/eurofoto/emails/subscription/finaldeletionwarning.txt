@@ -1,0 +1,74 @@
+<tal:block>
+<tal:block tal:define="global baseurl string:http://www.eurofoto.no" />
+<tal:block tal:define="global topimage string:ef_topp.jpg" />
+<tal:block tal:define="global color string:#3E9DD9" />
+<tal:block tal:condition="equal:portal,EF-997" tal:define="global baseurl string:http://www.eurofoto.no" />
+<tal:block tal:condition="equal:portal,EF-997" tal:define="global topimage string:ef_topp.jpg" />
+<tal:block tal:condition="equal:portal,EF-997" tal:define="global color string:#3E9DD9" />
+<tal:block tal:condition="equal:portal,VG-997" tal:define="global baseurl string:http://foto.vg.no" />
+<tal:block tal:condition="equal:portal,VG-997" tal:define="global topimage string:vg_topp.jpg" />
+<tal:block tal:condition="equal:portal,VG-997" tal:define="global color string:#E11325" />
+<tal:block tal:condition="equal:portal,EF-VG" tal:define="global baseurl string:http://foto.vg.no" />
+<tal:block tal:condition="equal:portal,EF-VG" tal:define="global topimage string:vg_topp.jpg" />
+<tal:block tal:condition="equal:portal,EF-VG" tal:define="global color string:#E11325" />
+<tal:block tal:condition="equal:portal,SN-997" tal:define="global baseurl string:http://photobook.sol.no" />
+<tal:block tal:condition="equal:portal,SN-997" tal:define="global topimage string:sol_topp.jpg" />
+<tal:block tal:condition="equal:portal,SN-997" tal:define="global color string:#C6D6DE" />
+<tal:block tal:condition="equal:portal,NSK-001" tal:define="global baseurl string:http://foto.norskstudentkort.no" />
+<tal:block tal:condition="equal:portal,NSK-001" tal:define="global topimage string:studentkort_topp.jpg" />
+<tal:block tal:condition="equal:portal,NSK-001" tal:define="global color string:#FF7800" />
+<tal:block tal:condition="equal:portal,AM-997" tal:define="global baseurl string:http://foto.aftenposten.no" />
+<tal:block tal:condition="equal:portal,AM-997" tal:define="global topimage string:aftenposten_topp.jpg" />
+<tal:block tal:condition="equal:portal,AM-997" tal:define="global color string:#347ECF" />
+<tal:block tal:define="global utmsource string:subscription_final_deletion_warning_${portal}_${utmdate}" />
+
+Hei <tal:block tal:replace="name" />
+
+
+Sletting av karantenesatte bilder starter <tal:block tal:replace="expiredate" />
+
+
+Vi viser til våre brukervilkår gjeldende fra 1.1.2009 og tidligere sendte varsel om utilgjengeligjøring av bilder.
+
+Du mottar denne eposten fordi du har <tal:block tal:replace="numpics" /> bilder i karantene hos Eurofoto eller en av våre partnere.
+Karanteneperioden er nå straks utløpt og bildene vil bli permanent slettet. Varselet gjelder konto med brukernavn: <tal:block tal:replace="email" /> 
+
+Dersom du vill unngå at bildene blir permanent slettet må du innen <tal:block tal:replace="expiredate" /> følge oppskriften nedenfor og skaffe deg sikker on-line lagring. 
+
+Slik får du sikker lagring hos Eurofoto:
+
+Alle bilder som lastes opp til Eurofoto blir lagret gratis i 90 dager. For å ha bildene lagret hos Eurofoto Datasafe lenger enn dette kan du enten:
+
+    * Gjøre en handel via våre nettsider.
+      <tal:block tal:replace="promotiontext" />
+    * Gå inn på "Mine Innstillinger" og betale lagringsavgiften på kr 15,- per mnd.
+      Du kan betale med kredittkort for henholdsvis 6 eller 12 måneder.
+
+Om sikker lagring hos Eurofoto Datasafe:
+
+Eurofoto tilbyr i samarbeid med Datasafe sikker lagring av dine digitale bilder. Med sikker lagring vil du alltid ha tilgang til en ekstra backup av dine bilder, tilgjengelig 24 timer i døgnet over hele verden. Minnene er bevart til tross for brann, tyveri og datakrasj.
+
+Eurofoto først ute med ”Sikker lagring” – stempel fra Forbrukerrådet:
+
+Forbrukerrådet, Fotorådet og IKT-Norge har utarbeidet en norm for sikker lagring av bilder på nett. Eurofoto har deltatt aktivt i dette arbeidet som pilotbedrift, og er først ute med å tilfredsstille de strenge kravene som normen stiller.
+
+Du kan lese mer om normen på IKT-Norge sine sider: www.ikt-norge.no
+
+Du som kunde skal føle deg trygg på at Eurofoto fortsatt vil gi deg markedets beste bildetjeneste.
+
+Se våre oppdaterte brukervilkår, gjeldende fra 1. januar 2009.
+
+${baseurl}content.php?page=eula_2009&utm_campaign=viktiginfo&utm_source=${utmsource}&utm_medium=email
+
+
+Vennlig hilsen Eurofoto AS
+
+Rolf Kjetil Egge, Daglig leder
+ 
+Sendt <tal:block tal:replace="senddate" />
+
+Du mottar denne informasjonen fordi du har registrert deg hos eurofoto.no, eller en av våre partnere.
+
+Eurofoto er del av Japan Photo Holding Norge AS. 
+
+</tal:block>

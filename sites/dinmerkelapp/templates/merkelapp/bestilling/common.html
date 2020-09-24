@@ -1,0 +1,293 @@
+<head metal:define-macro="head" tal:omit-tag="">
+
+<link type="text/css" rel="stylesheet" href="${static:css/jquery/imageareaselect/imgareaselect-animated.css}" />
+
+<script src="${static:js/jquery.colourPicker.js}"/>
+
+<style type="text/css">
+   th, td, caption {
+      padding: 1px 1px 1px 1px;
+   }
+   .radio {
+      width: 25px;
+      height: 25px;
+      background: url(${static:gfx/merkelapp/text-align.png}) no-repeat;
+      display: block;
+      float: left;
+   }
+   .left{
+      
+   }
+   .ui-slider, .ui-slider-handle{
+      border: 1px solid #333;
+   }
+
+   #loader-overlay {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		opacity: 0.9;
+		background-color: #333;
+		padding: auto auto;
+		margin: 0;
+		z-index: 10000;
+	}
+		
+	.loadingInfo {
+	    text-align: center;
+	    margin-top: 300px;
+	}
+		
+	.loadingInfo * {
+		display: inline;
+		color: #fff;		
+	}
+	
+	
+   #imageloader{
+      position: absolute;
+      top: 0px;
+      padding: auto auto;
+      margin: 0;
+      z-index: 10000;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+   }
+   #imageloader img{
+      margin: 23px auto;
+      display:block;
+   }
+   
+   #sticker, #iron{
+      position: relative;
+   }
+
+   .facebook-box{
+      background-color: #FFF;
+      border: 1px solid #CCC;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      padding: 8px 8px 0px 7px;
+      margin: 0em 0em 1em 0.4em;
+   }
+	div.editor-header{
+	 position:relative;
+	 color: #ca0000;
+	 width: 170px;
+	 padding: 0.1em 0.0em 0.1em 0.3em;
+	 text-shadow: 0 1px 0 black;
+	 font-size: 1.4em;
+	 float: left;
+	}
+	div.active{
+	  background: url("${static:css/portals/merkelapp/gfx/active2.png}") scroll left top repeat-x;
+	  top: 1px;
+	}
+	div.inactiv{
+	  background: url("${static:gfx/merkelapp/icons/menyknapper.png}") scroll left top no-repeat;
+	}
+	div.editor-header img{
+	   position: absolute;
+	   left: 110px;
+	}
+	.inactiv a{
+	   color: #cc6666;
+      text-decoration: none;
+	}
+   .inactiv a:hover{
+      text-decoration: underline;
+      color:#CA0000;
+	}
+   div.editor-header-cart{
+	 color: grey;
+	 padding: 0.1em 0.0em 0.0em 0.3em;
+	 text-shadow: 0 1px 0 black;
+	 font-size: 1.5em;
+	}
+	.ui-widget-header {
+      border: 1px solid #CCC;
+      background: #FFF;
+      color: white;
+      font-weight: bold;
+   }
+   div#clipart{
+      cursor:pointer;
+      cursor:hand 
+   }
+   .selectedclip, .selectedbackground{
+       background-color: #ff6666;
+       border: 1px solid #ca0000;
+   }
+   
+   .editorbox{
+      border: 1px solid #ca0000;
+      background: #FFF;
+      padding: 6px 0px 0px 6px;
+   }
+   div#tabs{
+      height:340px;
+   }
+   
+   .ui-widget-content { border: 0px solid #eeeeee; background: #ffffff url(images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x; color: #333333; }   
+	
+	
+	
+	 #jquery-colour-picker {
+	      background: #fafafa;
+	      background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
+      
+	      width: 180px;
+	      padding: 10px 5px 5px 10px;
+      
+	      border: 1px solid #666;
+      
+	      -moz-border-radius: 10px;
+	      -webkit-border-radius: 10px;
+	      border-radius: 10px;
+      
+	      -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+	      -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+	      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+      
+	      z-index: 99;
+	 }
+
+	 #jquery-colour-picker h2 {
+		 margin: 0 0 5px 0;
+		 font-size: 14px;
+	 }
+
+	 #jquery-colour-picker ul {
+		 margin: 0;
+		 padding: 0;
+		 list-style-type: none;
+ 
+		 +zoom: 1;
+	 }
+
+	 #jquery-colour-picker ul:after {
+		 content: ".";
+		 display: block;
+		 height: 0;
+		 visibility: hidden;
+		 clear: both;
+	 }
+
+	 #jquery-colour-picker ul li {
+		 float: left;
+		 margin: 0 5px 5px 0;
+	 }
+
+	 #jquery-colour-picker ul li a {
+		 display: block;
+   
+		 width: 13px;
+		 height: 13px;
+   
+		 text-decoration: none;
+		 text-indent: -100000px;
+		 outline: 0;
+   
+		 border: 1px solid #aaa;
+	 }
+   
+	 #jquery-colour-picker ul li a:hover {
+		 border-color: #000;
+	 }
+	 #jquery-colour-picker-text img{
+	    top: 5px;
+	    position: relative;
+	 }
+	      
+			
+			
+			
+   </style>
+
+</head>
+
+<tal:block metal:define-macro="shoppingcart">
+
+         <div class="span-8 last">
+            <div class="editor-header-cart" i18n:translate="">Shoppingcart:</div>
+            <div class="box" style="height:452px; padding: 0em;">
+            
+            <div style="padding: 0em 1.5em 1.5em 1.5em;">
+            
+               <div id="shopping-cart" tal:condition="exists: cart/items/merkelapp" style="height:221px;">
+                    <table style="width:262px; margin-top:20px; border-bottom:1px solid #ddd;">
+                      <tbody>
+                      <tal:block tal:repeat="items cart/items/merkelapp">
+                      <tr tal:repeat="item items">
+                        
+                        <td><img style="border:1px solid black;"  src="/bestilling/thumb/${item/referenceid}"/> </td>
+                        <td tal:content="item/product/title">Content</td>
+                        <td> ${item/unitprice} </td>
+                        <td>
+                        <a href="/bestilling/remove/${item/prodno}/${item/referenceid}" title="Remove" name="${item/prodno}"><img src="${static:gfx/merkelapp/delete_btn.png}"/></a></td>
+                      </tr>
+                      </tal:block>
+                    </tbody></table>
+                    <div style="padding: 4px;">
+                     <span class="span-4">Total Pris:</span><span class="span-1 right">kr:</span> <span class="span-1 last" id="cart-price"></span>
+                    </div>
+                    
+                    <div class="span-7 last right">
+                     <a href="/bestilling/accessories" class="button"><span>Gå Videre</span><span><img src="${static:gfx/merkelapp/icons/iconbuy.png}"/></span></a>
+                    </div>
+                    
+                  </div>
+                  <div id="shopping-cart" tal:condition="not:exists: cart/items/merkelapp" style="height:221px;">
+                     <div tal:content="structure cms:body:5f0f301c-ec45-4680-922a-23d9cc926121"/>
+                  </div>
+                  
+                </div>
+            </div>
+         </div>
+         
+</tal:block>
+
+<tal:block metal:define-macro="top-header">
+   <script type="text/javascript" src="${static:js/merkelappslider.js}" />
+   
+   <div class="span-16">
+	       <!-- articleid 2914 -->
+               <div tal:content="structure cms:body:898b9940-4e7a-4ba0-9326-3c7465118a23"/>
+         </div>
+         <div class="span-8 last">
+	       <!-- articleid 2913, 3088, 3089 -->
+	    <div>
+	       <ul class="merkelapp-rotator" style="margin: 0 1.5em 1.5em 0.5em;">
+               <tal:block tal:repeat="menuitem menu:b733735d-4293-4cef-8900-191fb4d5b19c,1,1">
+		  <tal:block tal:repeat="item menuitem/content" tal:condition="exists:menuitem/content">
+			<li tal:content="structure item/body|default"></li>
+		  </tal:block>
+	       </tal:block>
+	       </ul>
+            </div>
+         </div>
+   
+</tal:block>
+
+
+<tal:block metal:define-macro="bottom">
+   <div class="span-16">
+	    <!-- articleid 2915 -->
+            <div tal:content="structure cms:body:98267ca8-f3b4-4e7c-8426-e64995388504"/>
+         </div>
+         <div class="span-8 last">
+            <div class="facebook-box">
+            <div class="fb-like-box" data-href="http://www.facebook.com/Dinmerkelapp" data-width="292" data-height="250" data-show-faces="true" data-stream="false" data-header="false"></div>
+               <div id="fb-root"></div>
+               <script>(function(d, s, id) {
+                 var js, fjs = d.getElementsByTagName(s)[0];
+                 if (d.getElementById(id)) return;
+                 js = d.createElement(s); js.id = id;
+                 js.src = "//connect.facebook.net/nb_NO/all.js#xfbml=1";
+                 fjs.parentNode.insertBefore(js, fjs);
+               }(document, 'script', 'facebook-jssdk'));</script>
+            </div>
+         </div>
+   
+</tal:block>

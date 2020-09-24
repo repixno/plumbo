@@ -1,0 +1,128 @@
+.preload { 
+    width:100%;
+    height: 110%;
+    background: #fff;
+    position: absolute;
+    z-index: 99999;
+    top: -20px;
+    overflow: hidden;
+    opacity: 0.5;
+    filter:alpha(opacity=50);
+}
+.preload img{
+  position: fixed; /* or absolute */
+  top: 45%;
+  left: 45%;
+}
+.functions .row{
+  padding: 15px 15px 15px 35px;
+}
+
+.functions .row{
+    margin-bottom: 15px;
+}
+.clipart{
+    float: left;
+}
+.functionsbuttons .btn{
+  padding: 0px 0px;
+  font-size: 1.6em;
+  height: 35px;
+  width: 35px;
+  line-height: 1px;
+}
+
+.clipartimage{
+width: 69px;
+}
+
+.choosetemplate div{
+    float: left;
+    margin-left: 10px;
+}
+.choosetemplate img, .imagethumb{
+    cursor: pointer;
+}
+
+/*
+input[type=radio].with-font:focus ~ label:before,
+input[type=radio].with-font:focus ~ label
+{
+    color: white;
+}
+*/
+input[type=radio].yellow ~ label:before{
+  color: #ffdf00 !important;
+}
+input[type=radio].blue ~ label:before{
+  color: #123381 !important;
+}
+
+.clipart{
+    margin: 0px 5px 5px 0px;
+}
+.felixtext{
+    text-align: center;
+}
+.insps li{
+    float: left;
+    list-style-type: none;
+    margin: 15px;
+}
+/*
+.editor .col-md-5{
+    width: 38%;
+}*/
+.overlaycontols{
+    position: absolute;
+    background: #ccc;
+    opacity: 0.9;
+    width: 333px;
+    height: 335px;
+    top: 142px;
+    left: 183px;
+    z-index: 20;
+    display: none;
+}
+
+@media (min-width: 992px){
+.functions .col-md-7{
+ padding-left: 0px;
+ /*width: 300px;*/
+}
+.functions .col-md-5{
+padding: 0px;
+width: 210px;
+}
+.functions .col-md-push-5{
+left: 210px;
+}
+}
+
+.canvas-container{
+margin: auto;
+}
+#felixtext{
+height: 95px;
+width: 193px;
+margin-bottom: 15px;
+}
+/*.clipart button{
+font-size: 0.8em;
+padding: 2px;
+line-height: 1.1em;
+}*/
+
+.progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+.bar { background-color: #B4F5B4; width:0%; height:25px; border-radius: 3px; }
+.percent { position:absolute; display:inline-block; top:3px; left:48%; }
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <div metal:use-macro="../common.html/head" />
+        <div metal:use-macro="../common.html/stylesheet" />
+    </head>
+    
+    <body>
+        <div class="row text-center header">
+	    <img  src="${static:css/portals/stabburet/mobile/images/header.jpg}" alt="LAG LOKK MED DITT BILDE"/>
+        </div>
+        <div class="container center">
+            <!-- Main hero unit for a primary marketing message or call to action -->
+            <div>
+		<img src="${static:css/portals/stabburet/web/images/pretext.png}" alt="Kjøp 3 bokser Stabburet leverpostei"/>
+	    </div>
+	    <div>
+		<img src="${static:css/portals/stabburet/mobile/images/lokk.jpg}" />
+	    </div>
+            <div>
+		<img src="${static:css/portals/stabburet/mobile/images/nedtellinglabel.jpg}" />
+	    </div>
+            <div class="center" style="margin-left: 135px; margin-top: 10px;">
+		<div id="counter"></div>
+		<div class="desc">
+		    <div>Dager</div>
+		    <div>Timer</div>
+		    <div>Minutter</div>
+		    <div>Sekunder</div>
+		</div>
+            </div>
+
+
+        </div>
+	<div metal:use-macro="../common.html/javascript" />
+        <div metal:use-macro="../common.html/footer" />
+        
+        <script  src="http://jquery-countdown.googlecode.com/svn/trunk/js/jquery.countdown.js"></script>
+        
+        
+        <script>
+              
+            $( function(){
+		var totalleft = "${totalleft}";  
+                $('#counter').countdown({
+                    image: '${static:css/portals/stabburet/web/images/digits.png}',
+                    startTime: totalleft,
+                    digitWidth: 45,
+                    digitHeight: 65
+                });
+                
+                
+            });
+            
+          /*<![CDATA[*/  
+        /*]]>*/</script>
+
+</body>
+</html>

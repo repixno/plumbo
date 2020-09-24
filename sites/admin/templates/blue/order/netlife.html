@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin statistikk</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Netlife Orders Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		
+		<div class="span-24 last">
+                    <form method="GET" style="margin: 5px; padding: 5px; background-color: lightgrey;">
+                        <label for="user">Konto:</label>
+                                       <select name="user">
+                                 <option value="983136" tal:attributes="selected php:uid == 983136">Fovea</option>
+				 <option value="1090600" tal:attributes="selected php:uid == 1090600">Fovea Netlife </option>
+				  <option value="1105325" tal:attributes="selected php:uid == 1105325">Fovea AB </option> 
+                                <option value="969748" tal:attributes="selected php:uid == 969748">Utestemme</option>
+                                <option value="941275" tal:attributes="selected php:uid == 941275">Reed Foto</option>
+                                <option value="1030157" tal:attributes="selected php:uid == 1030157">Smilfoto</option>
+				<option value="1049750" tal:attributes="selected php:uid == 1049750">SnurreSprett</option>
+                                <option value="1030136" tal:attributes="selected php:uid == 1030136">Art Foto</option>
+                                <option value="1030138" tal:attributes="selected php:uid == 1030138">Haugen</option>
+                                <option value="1030146" tal:attributes="selected php:uid == 1030146">Skredegaard</option>
+                                <option value="1030148" tal:attributes="selected php:uid == 1030148">Kvina</option>
+                                <option value="1030149" tal:attributes="selected php:uid == 1030149">Stathelle Foto</option>
+                                <option value="1030150" tal:attributes="selected php:uid == 1030150">Fotolaben Moss</option>
+                                <option value="1030151" tal:attributes="selected php:uid == 1030151">Preus Majorstuen  / Preus Online</option>
+                                <option value="1030152" tal:attributes="selected php:uid == 1030152">Reimers skolefoto</option>
+                                <option value="1030154" tal:attributes="selected php:uid == 1030154">Stjordal Foto</option>
+                                <option value="1030155" tal:attributes="selected php:uid == 1030155">Studio Westjordet</option>
+                                <option value="1030156" tal:attributes="selected php:uid == 1030156">Aker Foto</option>
+                                <option value="1030159" tal:attributes="selected php:uid == 1030159">Kallekleiv Foto</option>
+                                <option value="1030160" tal:attributes="selected php:uid == 1030160">Fotograf Jp Lyshol</option>
+                                <option value="1033715" tal:attributes="selected php:uid == 1033715">Dokka Foto</option>
+                                <option value="1033716" tal:attributes="selected php:uid == 1033716">Express Foto Digital AS</option>
+                                <option value="1033724" tal:attributes="selected php:uid == 1033724">Aril foto</option>
+                                <option value="1039217" tal:attributes="selected php:uid == 1039217">Hovsmarked</option>
+                                <option value="1034717" tal:attributes="selected php:uid == 1034717">Fotograf Eidsmo Melhus</option>
+                                <option value="1034719" tal:attributes="selected php:uid == 1034719">Akersgata Foto</option>
+                                <option value="1034721" tal:attributes="selected php:uid == 1034721">Fotohjornet</option>
+                                <option value="1034722" tal:attributes="selected php:uid == 1034722">Foto Schroder</option>
+                                <option value="1034725" tal:attributes="selected php:uid == 1034725">Fotograf Birkeland</option>
+                                <option value="1034921" tal:attributes="selected php:uid == 1034921">Fotograf Holst</option>
+                                <option value="1034920" tal:attributes="selected php:uid == 1034920">Fotograf Hagen</option>
+                                <option value="1034922" tal:attributes="selected php:uid == 1034922">Fotograg Sturlason</option>
+                                <option value="1034957" tal:attributes="selected php:uid == 1034957">Fujifoto</option>
+                                <option value="1043366" tal:attributes="selected php:uid == 1043366">StudioWest</option>
+                                <option value="1035956" tal:attributes="selected php:uid == 1035956">Stokmarknes Aktietrykkeri </option>
+                                <option value="1034929" tal:attributes="selected php:uid == 1034929">Glass og Rammesenteret</option>
+                                <option value="1034954" tal:attributes="selected php:uid == 1034954">Indergaard & Svenil</option>
+                                <option value="1034743" tal:attributes="selected php:uid == 1034743">Joar Foto</option>
+                                <option value="1043368" tal:attributes="selected php:uid == 1043368"> Kvaerne Foto</option>
+                                <option value="1034911" tal:attributes="selected php:uid == 1034911"> MediaFoto</option>
+                                <option value="1034952" tal:attributes="selected php:uid == 1034952"> Stavanger Foto</option>
+                                <option value="1041409" tal:attributes="selected php:uid == 1041409"> Fotograf Engevig</option>
+                                <option value="1034917" tal:attributes="selected php:uid == 1034917"> Knips AS</option>
+                                <option value="1037991" tal:attributes="selected php:uid == 1037991"> Studio G Orkander</option>
+                                <option value="1037998" tal:attributes="selected php:uid == 1037998"> Fotograf Storebo</option>
+                                <option value="1034724" tal:attributes="selected php:uid == 1034724"> Fotophono</option>
+                                <option value="1034715" tal:attributes="selected php:uid == 1034715"> CTRL Media</option>
+                                                        
+			
+			</select>
+                        <label for="from">FRA:</label>
+                        <input type="text" name="from" value="${from}"/>
+                        <label for="to">TIL:</label>
+                        <input type="text" name="to" value="${to}"/>
+                        <input type="submit" value="Enter"/>
+                    </form>
+                </div>
+                
+		<div class="span-24 last"><h3>Statistikk</h3>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    Artikkelnr
+                                </th>
+                                <th>
+                                    Tekst
+                                </th>
+                                <th>
+                                    Antall
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody tal:condition="exists:stats">
+                            <tr tal:repeat="order stats">
+                                <td tal:content="order/artikkelnr" />
+                                <td tal:content="order/tekst" />
+                                <td tal:content="order/sum" />
+                            </tr>
+                        </tbody>
+                        
+                        
+                        
+                    </table>
+                    
+                    
+		 
+		
+		</div>
+        </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Manual orders</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Productedtor Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		
+		<div class="span-24 last"><h3>Producteditor</h3></div>
+        
+        <h3>Backgrounds</h3>
+		
+		<tal:block tal:repeat="category categories">
+					<a tal:attributes="href category/id" tal:content="category/title"></a>
+		</tal:block>
+		
+        <form method="post" enctype="multipart/form-data">
+            <label for="image">Velg bilde: </label><input type="file" name="image"/>
+			<label for="category">Kategori: </label><select name="category">
+				<tal:block tal:repeat="category categories">
+					<option tal:attributes="value category/id" tal:content="category/title"></option>
+				</tal:block>
+			</select>
+            <label for="title">Tittel: </label><input type="text" name="title"/><br/>
+			<textarea style="width: 200px; height: 50px;padding: 1px;" name="description">
+				
+			</textarea>
+            <input type="submit"/>
+        </form>
+        
+		
+		<table>
+			<thead>
+				<tr>
+					<td>ID</td>
+					<td>Title</td>
+					<td>Description</td>
+					<td>filename</td>
+					<td>thumb</td>
+				</tr>
+			</thead>
+			
+			<tr tal:repeat="asset assets">
+					<td tal:content="asset/id">ID</td>
+					<td tal:content="asset/title">Title</td>
+					<td tal:content="asset/description">Description</td>
+					<td tal:content="asset/filename">filename</td>
+					<td><img style="width: 75px" src="/assets/producteditor/backgrounds/thumb/${asset/filename}"/></td>
+			</tr>
+			
+		</table>
+        
+		
+		
+   </div>
+</body>
+</html>

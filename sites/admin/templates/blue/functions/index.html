@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Functions</title>
+<tal:block metal:use-macro="../common.html/css" />
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>SVN server update</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		<tal:block metal:use-macro="../common.html/languages" />
+		<div id="content">
+				<h3 i18n:translate="">Functions</h3>
+				<p style="color:red" i18n:translate="">Don't use this if you don't know what you are doing!</p>
+				
+				<h4 i18n:translate="">Newsletter</h4>
+				<ul>
+					<li><a href="/export/newsletter/members" i18n:translate="">Export list</a></li>
+					<li><a href="/import/newsletter/campaignmonitor/" i18n:translate="">Import from Campaign Monitor</a></li>
+				</ul>
+				
+				<h4 i18n:translate="">Forms</h4>
+				<ul>
+					<li><a href="/forms/" i18n:translate="">View forms</a></li>
+				</ul>
+				
+				<h4 i18n:translate="">Database</h4>
+				<ul>
+					<li><a href="/database/export" i18n:translate="">Export</a></li>
+					<li><a href="/database/import" i18n:translate="">Import</a></li>
+					<li><a href="/database/queries" i18n:translate="">View queries</a></li>
+				</ul>
+				
+				<h4 i18n:translate="">Feedback</h4>
+				<ul>
+					<li><a href="/feedback" i18n:translate="">View feedback</a></li>
+				</ul>
+				
+				<h4 i18n:translate="">Finance</h4>
+				<ul>
+					<li><a href="/system/visma/" i18n:translate="">Visma transaction matching (xml)</a></li>
+				</ul>
+				
+				<h4 i18n:translate="">System</h4>
+				<ul>
+					<li><a href="/system/phpinfo/" i18n:translate="">System info</a></li>	
+					<li><a href="/system/clearcache/"  i18n:translate="">Cache</a></li>
+					<li><a href="/system/svn/">Subversion update on all servers</a></li>
+				</ul>
+
+		</div>
+	</div>
+	<div id="footer"></div>
+</body>
+</html>

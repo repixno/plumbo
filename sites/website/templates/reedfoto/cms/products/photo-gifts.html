@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+</head>
+
+<style type="text/css">
+
+	.categories h3 { margin-bottom: 0.3em; margin-top: 1em;}
+	
+	.borderbox {
+		border: 1px solid #ccc; padding: 5px;
+	}
+	
+	.borderbox img { margin-bottom: 10px; display: inline-block }
+	
+	.borderbox div.ribbonsContainer .ribbon {
+		top: -15px; left: -13px;
+	}
+	
+   .photo-gifts-top {
+      height: 208px;
+      
+      <tal:block tal:condition="exists:menuitem/article/attachments/background">
+      background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+      </tal:block>
+      
+      background-repeat:no-repeat;
+   }
+   .photo-gifts-top p{ font-size: 14px }
+	
+	 
+</style>
+
+<!-- define sections -->
+<tal:block define:section="inspiration, Inspiration (span-15)" />
+<tal:block define:section="offer, Offer (span-5)" />
+<tal:block define:section="bestproduct, Best product (span-15) 1 product" />
+<tal:block define:section="bestsellers, Best sellers (span-5)" />
+<!-- + categories -->
+
+<body>
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/top" />
+		<div metal:use-macro="${templateroot}/reedfoto/cms/cms.html/top-navigation" />
+		<div class="span-4">
+			<div metal:use-macro="${templateroot}/reedfoto/cms/cms.html/menu-current" />
+		</div>
+		<div class="span-20 last product-category">
+			<div class="span-20">
+				<div class="span-20 last top photo-gifts-top">
+					<div class="content">
+						<h1>${menuitem/article/title}</h1>
+						<p tal:content="structure menuitem/article/body|default"></p>
+					</div>
+				</div>
+			</div>
+			<div class="span-20 last prepend-top">
+				<hr />
+				<h3 class="hide" i18n:translate="">Categories</h3>
+				<div class="span-14 colborder categories">
+					<tal:block tal:repeat="item menuitems">
+						<tal:block tal:condition="item/expanded">
+							<div tal:condition="exists:item/children" tal:repeat="subitem1 item/children">
+								<tal:block tal:condition="subitem1/expanded">
+									<div tal:condition="exists:subitem1/children">
+										<tal:block tal:repeat="subitem2 subitem1/children">
+											<tal:block tal:condition="mod:repeat/subitem2/number,2">
+												<div class="span-7 last">
+													<div class="span-3">
+														<a href="${subitem2/url}" title="${subitem2/article/ingress}">
+															<img src="${static:}images/menu/${subitem2/image}" alt="${subitem2/title}" width="110" height="108"/>
+														</a>
+													</div>
+													<div class="span-4 last">
+														<h3 class="bottom"><a href="${subitem2/url}" tal:content="subitem2/title" class="hide-link"> </a></h3>
+														<tal:block tal:condition="exists: subitem2/article">
+															<p class="quiet ingress">
+																<tal:block tal:content="subitem2/article/ingress">ingress</tal:block>
+															</p>
+														</tal:block>
+														<div class="right">
+															<a href="${subitem2/url}" title="" class="button" i18n:translate="">Show products</a>
+														</div>
+													</div>
+												</div>
+											</tal:block>
+											<tal:block tal:condition="not: mod:repeat/subitem2/number,2">
+												<div class="span-7">
+													<div class="span-3">
+														<a href="${subitem2/url}" title="${subitem2/article/ingress}">
+															<img src="${static:}images/menu/${subitem2/image}" alt="${subitem2/title}" width="110" height="108"/>
+														</a>
+													</div>
+													<div class="span-4 last">
+														<h3 class="bottom"><a href="${subitem2/url}" tal:content="subitem2/title" class="hide-link"> </a></h3>
+														<tal:block tal:condition="exists: subitem2/article">
+															<p class="quiet ingress">
+																<tal:block tal:content="subitem2/article/ingress">ingress</tal:block>
+															</p>
+														</tal:block>
+														<div class="right">
+															<a href="${subitem2/url}" title="" class="button" i18n:translate="">Show products</a>
+														</div>
+													</div>
+												</div>
+											</tal:block>
+										</tal:block>
+									</div>
+								</tal:block>
+							</div>
+						</tal:block>
+					</tal:block>
+				</div>
+				<div class="span-5 last">
+					<h2 i18n:translate="">Best sellers</h2>
+					<div class="boxlist medium">
+						<ul tal:condition="exists:sections/bestsellers">
+							<tal:block tal:repeat="item sections/bestsellers">
+								<tal:block metal:use-macro="${templateroot}/reedfoto/cms/cms.html/product-as-list-item" />
+							</tal:block>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> <!-- end container -->
+	<div class="footer">
+		<div class="container">
+			<div metal:use-macro="../../../${templates}/common.html/footer" />
+		</div>
+	</div>
+</body>
+</html>

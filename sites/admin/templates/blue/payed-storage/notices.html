@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Payed Storage</title>
+<tal:block metal:use-macro="../common.html/css" />
+<script type="text/javascript" src="/js/admin.js"></script>
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+
+		<tal:block metal:use-macro="../common.html/languages" />
+			
+		<div id="content" class="span-20">
+			
+				<div class="span-10">
+				<h3>
+					<tal:block i18n:translate="">Notices</tal:block>
+				</h3>
+				<table style="width:800px;">
+				  <tr>
+				     <th>
+				        #Id
+				     </th>
+				     <th>
+				        #Mail_Id
+				     </th>
+				     <th>
+				        <nobr>Send date</nobr>
+				     </th>
+				     <th>
+				        <nobr>Expire date</nobr>
+				     </th>
+				     <th>
+				        <nobr>Type of notice</nobr>
+				     </th>
+				     <th>
+				        Period
+				     </th>
+				     <th>
+				        <nobr>Number of recipients</nobr>
+				     </th>
+				     <th>
+				        <nobr>Enforce started</nobr>
+				     </th>
+				     <th>
+				        <nobr>Enforce finished</nobr>
+				     </th>
+				     <th>
+				        <nobr>Num enforced users</nobr>
+				     </th>
+				     <th></th>
+				     <th></th>
+				     <th></th>
+				  </tr>
+				  <tr tal:repeat="batch batchjobs">
+			        <td>
+			           <tal:block tal:content="batch/id"></tal:block>
+			        </td>
+			        <td>
+			           <tal:block tal:content="batch/mail_id"></tal:block>
+			        </td>
+			        <td>
+			           <nobr><tal:block tal:content="batch/send_date"></tal:block></nobr>
+			        </td>
+			        <td>
+			           <nobr><tal:block tal:content="batch/expire_date"></tal:block></nobr>
+			        </td>
+			        <td>
+			           <tal:block tal:content="batch/type_of_notice"></tal:block>
+			        </td>
+      	        <td>
+				        <tal:block tal:content="batch/period"></tal:block>
+				     </td>
+				     <td style="text-align:center;">
+			           <tal:block tal:content="batch/num_recipients"></tal:block>
+			        </td>
+			        <td>
+			           <nobr><tal:block tal:content="batch/enforce_started | default"></tal:block></nobr>
+			        </td>
+			        <td>
+			           <nobr><tal:block tal:content="batch/enforce_finished | default"></tal:block></nobr>
+			        </td>
+			        <td style="text-align:center;">
+			           <tal:block tal:content="batch/num_enforced_users | default"></tal:block>
+			        </td>
+				     <td>
+				        <a href="/payed-storage/notice/${batch/id}/">Edit</a>
+				     </td>
+				     <td>
+				        <tal:block tal:condition="batch/deletable">
+				           <a id="notice-delete" href="/payed-storage/notice/delete/${batch/id}/">Delete</a>
+				        </tal:block>
+				     </td>
+				     <td>
+				        <a href="/payed-storage/notice/test/${batch/id}">Test</a>
+				     </td>
+				  </tr>
+				</table>
+				
+				<a class="button large" href="/payed-storage/notice/0">+ New notice</a>
+				<br />
+				<a href="/payed-storage">Back</a>
+			</div>
+			
+		</div>
+		
+		<!--<tal:block metal:use-macro="../common.html/content-menu" />-->
+		<div id="footer" />
+	</div>
+	<script type="text/javascript" language="javascript">
+	  $(document).ready( function() {
+		$('#notice-delete').click(function(){
+		   if( confirm( 'Are you sure?' ) ) return true;
+		   return false;
+		});
+   } );
+	</script>
+</body>
+</html>

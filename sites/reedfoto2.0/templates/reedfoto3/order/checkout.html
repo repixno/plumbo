@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <tal metal:use-macro="../../${templates}/common.html/head" />
+    <style media="all" type="text/css">
+				h6{
+						width: 100%
+				}
+				.thumbbox{
+					    height: 60px;
+							width: 60px;
+							overflow: hidden;
+				}
+        .centerthumb{
+					height: 100%; margin-left: 50%;transform: translateX(-50%);
+				}
+				.lh-condensed { line-height: 1.25; }
+
+    </style>
+		
+  </head>
+  <body>
+    <tal metal:use-macro="../../${templates}/common.html/header" />
+    <div class="container">
+    
+    <div class="py-5 text-center">
+        <h2>Bekreft bestilling</h2>
+        <p class="lead">Bilda er straks klare til utsending.<br />
+					Alle våre produkt har full returrett, og vi betalar eventuell returporto.*<br/>
+					<i class="text-muted">*Gjelder ikkje digitale bilder</i></p>
+    </div>    
+    
+    <div class="row">
+    <div class="col-md-5 order-md-2 mb-5">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Handlekorg</span>
+        <span class="badge badge-secondary badge-pill cartcount">0</span>
+      </h4>
+      <ul class="list-group mb-3 cart">
+
+      </ul>
+    </div>
+    <div class="col-md-7 order-md-1">
+      <h4 class="mb-3">Leveringsadresse</h4>
+      <form class="needs-validation" novalidate="true" action="/order/confirm" method="POST">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">Fornavn</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" value="" name="cfirstname" required="required" />
+            <div class="invalid-feedback">              
+							Gyldig fornavn kreves.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName">Etternavn</label>
+            <input type="text" class="form-control" id="lastName" placeholder="" value="" name="clastname" required="required" />
+            <div class="invalid-feedback">              
+							Gyldig etternavn kreves.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email">Epost</label>
+          <input type="email" class="form-control" id="email" name="cemail" required="required"/>
+          <div class="invalid-feedback">
+						Vennligst oppgi en gyldig e-postadresse.
+          </div>
+        </div>
+    
+        <div class="mb-3">
+          <label for="mobile">Mobilnummer</label>
+          <input type="phone" class="form-control" id="mobile" name="phone" required="required" />
+          <div class="invalid-feedback">
+						Vennligst oppgi et gyldig mobilnummer.
+          </div>
+        </div>
+        
+        <div class="mb-3">
+          <label for="address">Addresse</label>
+          <input name="caddress" type="text" class="form-control" id="address" placeholder="" required="required" />
+          <div class="invalid-feedback">
+            Vennligst skriv inn leveringsadressen din.
+          </div>
+        </div>
+
+        <div class="row">
+        <div class="col-md-3 mb-3">
+            <label for="zip">Postnummer</label>
+            <input name="czipcode" type="text" class="form-control" id="zip" placeholder="" required="required" />
+            <div class="invalid-feedback">
+              Postnummer kreves
+            </div>
+          </div>
+          <div class="col-md-5 mb-3">
+            <label for="city">Poststad</label>
+            <input name="ccity" type="text" class="form-control" id="city" placeholder="" required="required" />
+            <div class="invalid-feedback">              
+							Vennligst velg en gyldig poststad.
+            </div>
+          </div>
+        </div>
+        <hr class="mb-4" />
+        <button class="btn btn-success btn-lg btn-block" type="submit" onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();">Bekreft bestilling</button>
+				<hr class="mb-4" />
+      </form>
+    </div>
+  </div>
+    
+    </div>
+    
+    <tal metal:use-macro="../../${templates}/common.html/scripts" />
+    <tal metal:use-macro="../../${templates}/common.html/footer" />
+		
+		<script  src="/js/form-validation.js"></script>
+
+<script>
+    
+    $(function(){
+
+        $.get( '/api/1.0/cart/enum', function(cartdata){
+						
+							//console.log(cartdata);
+							
+							var portoprice = new Intl.NumberFormat('nb-NO', { style: 'currency', currency: 'NOK' }).format(cartdata.delivery.price);
+							
+							var items = cartdata.items;
+							var cartitems = [];
+                            
+											for (var key in items) {
+													for (var ik in items[key] ) {
+															for (var ip in items[key][ik] ) {
+																cartitems.push(items[key][ik][ip]);
+														}
+													}
+											}
+											
+											for( c in cartitems ){
+												
+												var price = new Intl.NumberFormat('nb-NO', { style: 'currency', currency: 'NOK' }).format( cartitems[c].price );
+												
+												$('.cart').append('<li class="list-group-item d-flex justify-content-between lh-condensed">' +
+															'<div class="thumbbox col-2">' +
+																'<img class="centerthumb" src="/order/thumbnail/'+ cartitems[c].attributes.bid + '/' + '${identifiervalue}" />' +
+															'</div>' +
+															'<div class="col-8">' +
+																'<h6>' + cartitems[c].product.title + '<span class="text-muted float-right">' + price + '</span></h6>' +
+																'<small class="text-muted">' + cartitems[c].product.ingress + '</small>' + 
+															'</div>' +
+															'<div class="col-2">' +
+																'<button data-prodno="' + cartitems[c].prodno +'" data-referenceid="'+ cartitems[c].referenceid +'"  class="btn delete-item" style="margin: 15px 0px 15px 10px; padding: 5px; background-color: transparent" ><i class="far fa-trash-alt"></i></button>' +
+															'</div>' +
+														'</li>');
+											}
+															
+										
+									$('.cart').append('<li class="list-group-item d-flex justify-content-between">' +
+																			'<span>Porto</span>' +
+																			'<strong>' + portoprice + '</strong>' +
+																		'</li>');	
+										
+										var totalprice = new Intl.NumberFormat('nb-NO', { style: 'currency', currency: 'NOK' }).format( cartdata.totalprice );
+										
+									$('.cart').append('<li class="list-group-item d-flex justify-content-between">' +
+																			'<span>Total (NOK)</span>' +
+																			'<strong>' + totalprice + '</strong>' +
+																		'</li>');
+									
+									$('.cartcount').text(cartdata.totalitems);
+
+						}, 'JSON');
+				
+				$(document).on( 'click', '.delete-item', function(){
+
+						var prodno = $(this).data('prodno');
+						var referenceid = $(this).data('referenceid');
+						
+						$.post( "/api/1.0/cart/remove", { prodno: prodno, referenceid: referenceid })
+							.done(function( data ) {
+								location.reload();
+								//alert( "Data Loaded: " + data );
+							});
+					})
+				
+				
+    });
+    
+</script>
+  </body>
+</html>

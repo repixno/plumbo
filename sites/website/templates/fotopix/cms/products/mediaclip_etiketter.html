@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+<link href="${static:}gfx/portals/mediaclip/scripts/jquery.bxslider/jquery.bxslider.css?${version}" rel="stylesheet"/>
+	<style media="all" type="text/css">
+		div.productinfo p {
+			margin-bottom: 0;
+		}
+		
+		span.price {
+			font-size: 21px !important;
+			font-family: yanoneregular;
+		}
+		
+		body .container span.price.oldprice {
+			margin: 0;
+			padding: 0;
+			font-size: 21px !important;
+		}
+		
+		span.price.newprice {
+			margin: 0;
+			padding: 0;
+			font-size: 21px !important;
+		}
+		
+		.functions {
+			position: relative;
+			text-align: left !important;
+		}
+		
+		.functions .links {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			text-align: right;
+		}
+		
+		div.starOfferPercentContainer {
+			height: 70px;
+			width: 70px;
+			float: right;
+		}
+		
+		.product-top p {
+			font-size: 14px
+		}
+		
+		.standardstempel {
+			padding-left: 23px
+		}
+		
+		.artikkler {
+			border-style: double;
+			border-color: #ffffff;
+			border-radius: 10px;
+			padding-bottom: 17px;
+			background-color: #f5f5f3;
+			list-style-type: none;
+			padding-top: 20px;
+		}
+		
+		
+		
+.product-top {
+height: 211px;
+width: 935px;
+/*background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+*/
+background-repeat:no-repeat;
+}
+      
+	  
+	  
+	  h3{
+		
+		font-family: yanoneregular;
+	  }
+	</style>
+</head>
+
+<tal:block define:section="topbanner, Top banner" />
+<!-- article -->
+
+<!-- article -->
+<tal:block define:section="flaske, flaske " />
+<tal:block define:section="glass, glass " />
+<tal:block define:section="bear, bear " />
+
+<!-- article -->
+
+
+<tal:block metal:define-macro="show-product">
+	<div class="span-2 productimage">
+		<tal:block metaltal:use-macro="${templateroot}/eurofoto/cms/cms.html/starOfferPercent" />
+		<tal:block metaltal:use-macro="${templateroot}/eurofoto/cms/cms.html/newProductStar" />
+		<tal:block tal:define="global customsize string:70" />
+		<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/one-product-photo-custom-size" />
+	</div>
+	<div class="span-8 last productinfo">
+		<h3 tal:content="item/title"></h3>
+	</div>
+
+</tal:block>
+
+
+
+
+<body>
+	
+<div metal:use-macro="../../../${templates}/common.html/top" />
+
+	<div class="container">
+		<div class="row">
+
+			
+			<!-- if no menu is used use id="widecontent" -->
+			<div id="" class="col-md-12">
+
+				<div class="col-md-12 append-bottom" tal:condition="exists:sections/topbanner">
+					<tal:block tal:repeat="item sections/topbanner">
+						<tal:block tal:condition="equal:repeat/item/number,1" tal:content="structure item/body" />
+					</tal:block>
+				</div>
+
+
+
+			<!--	<div class="col-md-10 product-category "  tal:condition="not:exists:sections/topbanner" >
+					<div class="col-md-10 product-top top" tal:condition="exists:menuitem/article/attachments/background">
+						<div class="content" tal:condition="exists:menuitem/article/attachments/background">
+							<!--<h1>${menuitem/article/title}</h1>-->
+						<!--	<p tal:content="structure menuitem/article/body|default"></p>
+						</div>
+					</div>
+				</div>-->
+			
+<hr/>
+
+
+<div id="" class="col-md-12">
+		<ul class="bxslider">
+                            
+                          <!--  <tal:block tal:repeat="menuitem menu:7bcb70a2-2f8d-4f62-8060-fe84ff08ac0a,1"> 
+                               <li tal:condition="lte:repeat/menuitem/number,7"> 
+                                   <img class="img-responsive" src="${static:}images/menu/${menuitem/image}" />
+                               </li>
+                            </tal:block> -->
+                            
+                           <li class="video">
+                                <iframe width="740" height="417" src="//www.youtube.com/embed/PCThv6K-Wpo?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen="true" id="video"></iframe>
+                            </li>
+                            
+                        </ul>
+	</div>
+
+
+<div class="">
+	<div class="row">
+		<div id="" class="col-md-12 text-center">
+			<h3 class="product-category"></h3>
+			<div class="col-md-12">
+
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+<div id="" class="col-md-12">
+	<div class="col-md-12 text-center">
+
+		<h3 class="product-category">Etiketter til store flasker</h3>
+
+		<tal:block tal:repeat="item sections/flaske">
+			<div class="col-md-4 artikkler text-center col-md-offset-1  ">
+				<div metal:use-macro="../cms.html/product-as-list-item-with-image_mediaclip" />
+			</div>
+		</tal:block>
+	</div>
+</div>
+<div class="col-md-12 text-center">
+
+	<h3 class="product-category">Etiketter til ølflasker</h3>
+
+	<tal:block tal:repeat="item sections/bear">
+		<div class="col-md-4 artikkler text-center col-md-offset-1 ">
+			<div metal:use-macro="../cms.html/product-as-list-item-with-image_mediaclip" />
+		</div>
+	</tal:block>
+</div>
+
+
+
+
+
+<div class="col-md-12 text-center">
+
+	<h3 class="product-category">Etiketter til glass</h3>
+
+	<tal:block tal:repeat="item sections/glass">
+		<div class="col-md-4 artikkler text-center col-md-offset-1 ">
+			<div metal:use-macro="../cms.html/product-as-list-item-with-image_mediaclip" />
+		</div>
+	</tal:block>
+</div>
+
+
+
+
+</div>
+</div>
+</div>
+
+						
+						
+
+
+
+	<div class="footer">
+		<div class="container">
+			<div metal:use-macro="../../../${templates}/common.html/footer" />
+		</div>
+	</div>
+
+
+
+ <script src="${static:}js/sitatslider.js"></script>
+       <script src="${static:}gfx/portals/ukeplan/scripts/jquery.bxslider/plugins/jquery.fitvids.js"></script>
+       <script src="${static:}gfx/portals/ukeplan/scripts/jquery.bxslider/jquery.bxslider.js"></script>
+       
+        <script type="text/javascript">
+
+        
+            // Inject YouTube API script
+            /*var tag = document.createElement('script');
+            tag.src = "//www.youtube.com/player_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            
+            
+            var player;
+            function onYouTubePlayerAPIReady() {
+                // create the global player from the specific iframe (#video)
+                player = new YT.Player('video', {
+                  events: {
+                    // call this function when player is ready to use
+                    'onStateChange' : onStateChange
+                  }
+                });
+            }
+             
+             
+            function onStateChange(event) {
+                console.log("asdasW")
+                if( event.data == 0 ){
+                    
+                }
+                if( event.data == 3  || event.data == 1 ){
+                    console.log("asdasW")
+                   slider.stopAuto();  
+                }
+            }   
+            */
+            
+            
+            $('.rotating').sitatslider();
+            var slider =  $('.bxslider').bxSlider({
+                auto:true,
+                pause: 7000,
+                video: true,
+                useCSS: false,
+                pager: false,
+                onSlideNext: next
+              });
+            
+            function next( event ){
+                if( $( event ).hasClass('video') ){
+                    slider.stopAuto(); 
+                }
+            }
+            
+            
+            
+            $('.frontpage-box .col-md-3').on( 'click', function(){
+                
+                var boxlink = $(this).find('a').attr("href");
+                
+                window.location.href = boxlink;
+                
+                });
+            
+            $( ".bx-wrapper" ).hover(
+                function() {
+                  $( '.bx-controls' ).css("opacity", "1");
+                }, function() {
+                  $( '.bx-controls' ).css("opacity", "0")
+                }
+              );
+           
+            
+            
+        </script>
+		
+		
+</body>
+
+</html>

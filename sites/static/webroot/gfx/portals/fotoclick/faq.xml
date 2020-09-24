@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+	Credits:
+	Created by Runar Sandnes on 2011-03-14.
+	Last version: 2011-05-26 by Runar Sandnes
+	Copyright (c) 2011 __Japan Photo Holding Norge AS, avd Eurofoto__. All rights reserved.
+-->
+
+<xml>
+	<category name="Innlogging og konto">
+		<title name="Om tjenesten">
+			<question>Hvem produserer for Fotoclick?</question>
+			<answer>Fototjenesten via internett er levert av Eurofoto.no, en avdeling under Japan Photo Holding Norge AS.</answer>
+		</title>
+		<title name="Registrering">
+			<question>Hvordan får jeg registrert meg som bruker hos Fotoclick?</question>
+			<answer>Trykk på linken "Registrer deg" øverst til høyre på siden, og fyll inn den påkrevde informasjonen. Velg helst et passord bestående av minst 6 bokstaver, gjerne med både tall og bokstaver. Dette er for din egen sikkerhet.</answer>
+		</title>
+		<title name="Pålogging">
+			<question>Hvordan logger jeg meg på min brukerkonto?</question>
+			<answer>Trykk på linken øverst i høyre hjørne, og skriv inn brukernavn (e-post) og passord. Passordet er case-sensitivt, så pass på store og små bokstaver!</answer>
+		</title>
+		<title name="Glemt passord">
+			<question>Hjelp, jeg har glemt passordet mitt...</question>
+			<answer>Du kan få nytt passord ved å trykke på "Glemt passord?" på innloggingssiden. Da sender vi deg en e-post med en hemmelig link, slik at du kan sette et nytt passord.</answer>
+		</title>
+		<title name="Personvern">
+			<question>Hvordan håndterer Fotoclick personvern?</question>
+			<answer>Vi håndterer personlige opplysninger med største forsiktighet, og oppgir aldri disse under noen omstendigheter til andre. Det er derfor viktig at du velger et sikkert passord på brukerkontoen din, slik at du ikke gir uvedkommende tilgang til bildene dine.</answer>
+		</title>
+		<title name="Oppdatering av konto">
+			<question>Jeg har endret navn eller adresse. Hvordan oppdaterer jeg kontoen min?</question>
+			<answer>For å oppdatere informasjonen på kontoen, trykk på "Min fotokonto" og "Mine innstillinger". Sørg for å ha mest mulig oppdatert profil til enhver tid, slik at informasjon og ordrer blir sendt til riktig adresse.</answer>
+		</title>
+		<title name="Sammenslåing av kontoer">
+			<question>Jeg har flere kontoer hos Fotoclick. Er det mulig å få slått sammen kontoene?</question>
+			<answer>Du kan dessverre ikke slå sammen kontoer selv. Send oss en e-post på dette, så skal vi gjøre dette for deg. I slike tilfeller må vi ha dokumentasjon for at du virkelig står som disponent av kontoene.</answer>
+		</title>
+		<title name="Sletting av konto">
+			<question>Jeg ønsker å slette alle bildene mine og avslutte kontoen. Kan jeg gjøre dette selv?</question>
+			<answer>Du kan slette alle bildene dine selv, men vi må avslutte kontoen din for deg. Send oss en e-post, så fikser vi dette for deg. Husk at denne prosessen ikke kan angres.</answer>
+		</title>
+	</category>
+	<category name="Bestilling og levering">
+		<title name="Ordrebekreftelse">
+		<question>Hvordan vet jeg at ordren min er mottatt hos Fotoclick?</question>
+		<answer>Du mottar en e-post med ordrebekreftelse og et ordrenummer når ordren er bekreftet. Vis til dette ordrenummeret dersom du ønsker å henvende deg til oss vedrørende ordren din. Husk å holde profilen din oppdatert med korrekt e-postadresse. Dersom du ikke finner ordrebekreftelsen din, sjekk spamfilteret ditt eller se ordrestatusen på din Fotoclick-profil.</answer>
+		</title>
+		<title name="Kampanjekoder">
+		<question>Jeg har fått en kampanjekode. Hvordan får jeg den til å fungere?</question>
+		<answer>Du må skrive inn kampanjekoden akkurat slik du har fått den opplyst, husk store/små bokstaver. Det er kun mulighet til å legge inn en kampanjekode pr. ordre. Dersom du har gjort alt riktig, vil fratrekket vise på ordreoversikten.</answer>
+		</title>
+		<title name="Pristilbud/spesialpris">
+		<question>Kan jeg få spesialpris på ordren min? Jeg synest jeg fortjener det!</question>
+		<answer>Vi gir som regel ikke spesialpris ut over det som finnes på våre sider. Det gjøres kun i helt spesielle tilfeller ved ekstra stort kvantum. Vi må drive effektivt, og kan derfor ikke skreddersy egne tilbud til enkeltkunder.</answer>
+		</title>
+		<title name="Leveringstid">
+		<question>Når får jeg egentlig ordren min?</question>
+		<answer>Normalt tar bildebestillinger 2-3 dager. Noen produkter, som fotobøker, lerret og gaveartikler, kan ta noe lengre tid. Ordren kan også ta lengre tid dersom du bestiller produkter fra ulike kategorier (bilde/gave/lerret) på samme ordren.</answer>
+		</title>
+		<title name="Sjekk av ordrestatus">
+		<question>Kan jeg se hvordan det står til med ordren min?</question>
+		<answer>Ja, du kan sjekke ordrestatus ved å logge deg inn på "Min fotokonto" og "Mine ordrer". Du kan også sjekke innholdet i ordren ved å trykke på "Se din bestilling".</answer>
+		</title>
+		<title name="Endring/kansellering av ordre">
+			<question>Kan jeg få endret/kansellert ordren min?</question>
+			<answer>Nei. Når du har bekreftet ordren din, starter serverene våre på ordren din med en gang. Denne prosessen kan ikke stanses.</answer>
+		</title>
+		<title name="Slå sammen ordre">
+			<question>Jeg har lagt inn to ordrer. Kan jeg få slått sammen disse til en ordre?</question>
+			<answer>Nei. Når du har bekreftet ordren din, starter produksjonen fortløpende. Da er det ikke mulig å slå sammen ordrene. Det er derfor viktig at du planlegger ordren din, og bruker handlekurven til å samle opp den endelige bestillingen.</answer>
+		</title>
+		<title name="Pakkesporing">
+			<question>Får jeg sporingsnummer på pakken min?</question>
+			<answer>Ja. Når ordren blir sendt som servicepakke, får du automatisk tilsendt en leveringsbekreftelse med sporingsnummeret på sendingen. Dette kan du bruke til å følge pakken på veg til deg. Ordrer sendt som A-post kan ikke spores.</answer>
+		</title>
+		<title name="Betalingsmetoder">
+			<question>Hvordan skal jeg betale ordren?</question>
+			<answer>Du må betale ordren med debit/kreditkort (Visa/Mastercard).</answer>
+		</title>
+		<title name="Forbrukervilkår">
+			<question>Hvilke vilkår gjelder for bestilling av produkter via Fotoclick?</question>
+			<answer>Vi følger Forbrukerkjøpsloven og Angrerettloven ved handel over nettet. Se ellers våre sluttbrukervilkår.</answer>
+		</title>
+		<title name="Leveringskostnader (porto)">
+			<question>Hvor mye må jeg betale i porto?</question>
+			<answer>For å se oversikt over porto/ekspedisjonssatser, sjekk prislisten vår. Porto varierer alt etter vekt og forsendelsesmåte.</answer>
+		</title>	
+	</category>
+	<category name="Retur og reklamasjon">
+		<title name="Support">
+			<question>Jeg lurer på noe. Hvordan får jeg hjelp?</question>
+			<answer>Først, les på denne supportsiden, og se om du finner svar på spørsmålet ditt her. Dersom ikke, ta kontakt med vår supportavdeling enten via e-post eller på telefon. Sørg for å ha tilgjengelig all relevant informasjon som kan hjelpe oss med å hjelpe deg!</answer>
+		</title>
+		<title name="Angrerett">
+			<question>Jeg ønsker å angre kjøpet. Kan jeg det?</question>
+			<answer>Som privatperson har du 14 dager på deg til å angre ditt kjøp fra den dag du har mottatt varen. Varen skal da være i salgbar stand, dvs være ubrukt, og returneres i og med original emballasje. Bruk vedlagt angrerettskjema. Brutt forsegling på programvare, minnekort og lignende opphever angreretten. Det er ikke angrerett på spesialtilvirkede bildeprodukter. Dette skyldes at vi har laget produktet spesifikt for deg, og kan ikke selge dette videre til andre.</answer>
+		</title>
+		<title name="Reklamasjon">
+			<question>Jeg ønsker å reklamere på en bestilling. Hvordan går jeg frem?</question>
+			<answer>For å reklamere, ta kontakt med vår supportavdeling og sørg for å fremskaffe mest mulig informasjon. Da blir det enklere for oss å behandle reklamasjonen din.</answer>
+		</title>
+		<title name="Retur">
+			<question>Hva gjør jeg dersom jeg ønsker å returnere noe?</question>
+			<answer>Ta først kontakt med vår kundeservice for å få avtalt returen. Der får du videre instruksjoner.</answer>
+		</title>
+		<title name="Feil på levering">
+			<question>Jeg har fått feil levering, eller feil på produktet mitt. Hva gjør jeg?</question>
+			<answer>Ta først kontakt med vår kundeservice, slik at vi får mest mulig opplysninger om hva det gjelder. Dersom feilen skyldes feilproduksjon eller feillevering fra vår side, skal vi selvsagt gjøre vårt for å rette opp i feilen.</answer>
+		</title>
+		<title name="Skade på forsendelse">
+			<question>Jeg har fått pakken min, men den var skadet. Hva gjør jeg?</question>
+			<answer>Hvis det skulle være noen feil, mangler eller skader på din levering, ber vi deg kontakte oss omgående. Synlige transportskader på godset skal det meldes fra om til postpersonalet ved utleveringsstedet.</answer>
+		</title>
+	</category>
+	<category name="Bilder, filformater og profiler">
+		<title name="Filformater">
+			<question>Hvilke filtyper kan jeg laste opp?</question>
+			<answer>Det beste er om du laster opp bildene i jpg-format, helst med lav komprimering og høy bildestørrelse. Lagringstjenesten vår støtter ikke råfiler.</answer>
+		</title>
+		<title name="Svart/hvitt">
+			<question>Kan jeg laste opp/få bilder i svart/hvitt?</question>
+			<answer>Du kan laste opp bilder i svart/hvitt så lenge filene er i RGB-fargerom (grayscale er dermed ikke anbefalt). Du kan også gjøre bildene dine om til svart/hvitt via produktgeneratoren vår (gjelder ikke småbilder).</answer>
+		</title>
+		<title name="CMYK">
+			<question>Kan jeg laste opp bilder i CMYK?</question>
+			<answer>CMYK er et fargesystem beregnet på trykk og reproduksjon, og brukes i 4-fargetrykk. CMYK kan ikke gjengi like mange farger som RGB (selv om noen farger kan gjengis bedre i CMYK). Våre systemer bruker RGB-fargesystem, og alle filene bør være i dette systemet. Dette gjelder også filer som skal på digitaltrykk. Dersom du får ut bildefiler i CMYK fra bildebehandlingsprogrammet ditt, bør du sjekke innstillingene dine. Vi anbefaler ikke at bildene blir konvertert og lagret i CMYK.</answer>
+		</title>
+		<title name="Røde øyne">
+			<question>Hvorfor får jeg røde øyne på bildene, og hvordan kan jeg bli kvitt dem?</question>
+			<answer>Røde øyne oppstår når avstanden mellom kameraobjektivet og blitzen blir så liten at blitzlyset blir reflektert i øynene. Den røde fargen skyldes blodkarene i netthinnen. Effekten blir forsterket dersom det er veldig mørkt i rommet, slik at pupillene blir store. (Katter og hunder har spesielle netthinner tilpasset dårlige lysforhold, og har dermed annen farge på netthinnen.) For å få bort røde øyne, kan du bruke røde-øynefunksjonen på kameraet ditt. Den sender ut et lys eller blitzglimt som får pupillen til å trekke seg sammen like før bildet blir tatt. Dersom du har en ekstern blitz, minsker du dette problemet. Dersom uhellet likevel skulle være ute, kan du fjerne røde øyne via produktgeneratoren vår (gjelder ikke småbilder).</answer>
+		</title>
+		<title name="Fargerom og ICC-profilering">
+			<question>Hvilket fargerom skal jeg benytte på bildene mine? Støtter dere fargeprofiler?</question>
+			<answer>Fotolabbene bruker et fargerom tilsvarende sRGB, men du kan godt bruke det beste fargerommet som kameraet ditt leverer. De fleste digitalkameraer har sRGB som standard fargerom. Adobe RGB er et fargerom som blir brukt mye på digitale speilreflekser og mer avanserte kompaktkameraer. Bildefiler med dette fargerommet blir automatisk konvertert til riktig produksjonsfargerom via vårt system ved bestilling. Dette er transparent for brukeren. Vi bruker en fargestyrt produksjonsprosess hos oss, så du trenger ikke tenke noe på dette. Vær oppmerksom på at dersom du skal justere dine egne bilder selv, er det en stor fordel å sitte bak en fargekalibrert skjerm. Uten en slik skjerm vil du ta en risiko under justeringen, da du kan komme i skade til å feiljustere et bilde som i utgangspunktet er bra nok. Ta gjerne kontakt med oss dersom du lurer på noe mer vedrørende justering og kalibrering.</answer>
+		</title>
+		<title name="Bildestørrelse">
+			<question>Hvor store bilder må jeg laste opp?</question>
+			<answer>Det er fint om du laster opp bildene i stor størrelse, gjerne den maksimale størrelsen som kameraet ditt kan levere. Da har du det beste utgangspunktet for å kunne bestille bildene på alle våre produkter, også store lerret og plakater.</answer>
+		</title>
+		<title name="DPI/PPI">
+			<question>Kvor mange dpi må bildene være i?</question>
+			<answer>DPI (dots per inch) er en betegnelse på oppløsningen på det ferdige mediumet. En pixel er oppbygd av flere dråper/punkt (ref. blekkskriver). Derfor blir det rettere å bruke uttrykket PPI (pixel per inch) så lenge vi snakker om oppløsning i digitale filer. PPI forteller ikke noe om den faktiske bildestørrelsen, kun hvor tett pixlene skal plasseres under utskrift. Du som kunde trenger ikke bry deg om dette, da korrekt skalering skjer automatisk i vårt produksjonssystem. Våre systemer baserer seg i hovedsak på bildestørrelse (høyde og bredde i pixler), da vi kjører fast PPI i våre spesifikke produksjonsystem. Dermed er det pixelstørrelsen på filen som angir hvor store bilder som kan produseres med filene dine. Du trenger kun å sende inn bildefilene dine, og så fikser vi resten.</answer>
+		</title>
+		<title name="Ulike farger på ulike produkter">
+			<question>Hvorfor blir ikke fargene helt like på forstørrelsen og koppen min?</question>
+			<answer>Fotopapir og kopp er to vidt forskjellige medium. For å få mest mulig like farger på de ulike produktene, bruker vi fargeprofiler. Dette er en måte å rekne om fargeverdiene frå originalbildet, slik at fargene blir riktige når vi trykker de på f.eks en kopp. Selv om vi stort sett klarer å matche fargene riktig bra, kan forskjellene i mediet (hvithetsgrad, produksjonsmetode etc) bli synlige. Et bilde på en t-skjorte kan aldri bli like bra som på fotolab, men vi kommer ganske nært. Vi lager alle våre profiler selv for å forsikre oss om at vi hele tiden produserer produktene med mest mulig korrekte farger. Dersom vi forandrer produksjonsprosessen vår litt, lager vi nye oppdaterte profiler.</answer>
+		</title>
+	</category>
+	<category name="Bildeoverføring, deling og lagring">
+		<title name="Opplasting">
+			<question>Hvordan får jeg lastet opp bilder?</question>
+			<answer>Gå inn på "Min fotokonto", og deretter på "Overfør bilder". Da blir det startet opp en javaapplikasjon. Om du får spørsmål om å installere denne, må du bekrefte dette. Noen nettlesere bruker ActiveX-kontroller, og da må du godkjenne nedlastingen av denne (en egen menylinje som popper opp øverst i nettleseren din). Dersom du får problemer med disse opplasterene, prøv vår alternative opplaster. Du kan også få lastet opp bilder ved å sende oss en DVD.</answer>
+		</title>
+		<title name="Opplastingstid">
+			<question>Hvorfor tar det så lang tid å laste opp bildene?</question>
+			<answer>Digitale bildefiler er store. Dersom du sitter på en ADSL-linje med begrenset opplastingshastighet, kan dette ta litt tid. Mange bredbåndsabonnement har rask nedlasting, men ikke like rask opplasting. Vi har god kapasitet opp til våre servere, men opplastingskapasiteten din kan ofte være flaskehalsen.</answer>
+		</title>
+		<title name="Lagringsmengde">
+			<question>Er det noe grense for hvor mange bilder jeg kan lagre hos Eurofoto?</question>
+			<answer>Nei, vi har ikke satt noe tak på lagringsmengden. Filene blir lagret i sin originale form, og du kan således laste ned originalfilene til din egen datamaskin igjen, uten kvalitetstap. Dette er et eget krav i lagringsnormen vi har forpliktet oss til.</answer>
+		</title>
+		<title name="Lagringstid">
+			<question>Hvor lenge kan jeg lagre bildene hos dere?</question>
+			<answer>Vi kjører en løsning der du må gjennomføre et kjøp i året for å få sikker lagring på bildene dine. Alternativt kan du bestille kun lagring separat (6 eller 12 måneder), dersom du ikke ønsker å bestille noen fysiske produkter. Grunnen til at vi gjør dette, er at vi ikke ønsker at kundene KUN lagrer bilder hos oss. Sikker lagring og intern/ekstern backup koster. Om du ikke bestiller noe, vil vi sende ut flere e-poster med varsling om sletting. Først blir bildene satt i karantene i 90 dager, og deretter blir de slettet fra våre servere. Det er derfor viktig at du oppdaterer e-posten din, slik at vi har mulighet til å varsle deg. Ved å logge deg inn på profilen din, kan du se hvor lenge din nåværende lagring er gyldig.</answer>
+		</title>
+		<title name="Hente tilbake bilder">
+			<question>Jeg har ikke brukt kontoen min på noen år, og alle bildene er slettet. Kan dere hente tilbake bildene?</question>
+			<answer>Nei.</answer>
+		</title>
+		<title name="Egen backup">
+			<question>Kan jeg endelig glemme egen backup av bildene mine?</question>
+			<answer>Nei, vi ønsker ikke at kundene våre bruker lagringen vår som eneste sikkerhetskopi. Vi anbefaler at du i tillegg lagrer bildene dine på en ekstern harddisk eller på dvd. Husk at denne backupen må ut av huset for å vere noenlunde sikker. Les mer om lagringsvilkårene til Eurofoto under sluttbrukervilkårene.</answer>
+		<link href="/hjelp/sluttbrukervilkar/">Sluttbrukervilkår</link>
+		</title>
+		<title name="Deling av bilder">
+			<question>Kan jeg dele bildene mine med venner og familie?</question>
+			<answer>Ja, du kan gi venner og familie tilgang til enkeltalbum. Du bestemmer selv om du ønsker at de med tilgang skal kunne laste ned eller bestille bilder, og du kan sette et passord på albumet. Dersom dine venner har konto hos Eurofoto, kan du dele albumet slik at vennene får opp albumet i sin albumoversikt under "Siste album del med deg". For å dele album, trykk på "Del og publisér". Da får du opp de ulike delingsalternativene.</answer>
+		</title>
+		<title name="Brukergalleri">
+			<question>Jeg har tatt noen bilder som er så bra at andre bør få se dem. Har dere et offentlig tilgjengelig galleri?</question>
+			<answer>Ja, vi har et brukergalleri der du kan legge ut album du ønsker å dele med alle. Merk at du må ha godkjennelse fra alle på bildene for å legge ut albumet, samt ha rettighetene til å publisere bildene. Husk at alle kan se albumet. Dette er kanskje ikke stedet å legge ut familiebildene dine! Du kan publisere album på brukergalleriet under "del og publisér".</answer>
+		</title>
+		<title name="Arkiv-DVD">
+			<question>Kan dere brenne alle bildene mine på DVD-er?</question>
+			<answer>Ja, du kan bestille arkivDVD på siden vår. Merk at vi kun brenner komplette arkiv, ikke enkeltmapper. Du får bildene levert på flere dvd-er ved behov, og prisen er pr. sett.</answer>
+			<link href="/order-prints/backup/dvd">ArkivDVD.</link>
+		</title>
+		<title name="Sikker lagring">
+			<question>Hvor sikker er egentlig denne lagringen?</question>
+			<answer>Forbrukerrådet, Fotorådet og IKT-Norge har utarbeidet en norm for sikker lagring av bilder på nett. Fotoaktører tilknyttet normen plikter å oppbevare kundens bilder på en sikker og trygg måte. Eurofoto var en av de to første aktørene som ble tilknyttet denne normen, og ble i tillegg brukt som testbruker under arbeidet med utarbeidelsen. Du kan lese mer om vilkårene i normen her.</answer>
+			<link href="http://ikt-norge.no/prosjekter/obs-lagring" target="_blank">Lagringsnorm IKT-Norge.</link>
+		</title>
+	</category>
+	<category name="Informasjon om produkter">
+		<title name="Bilder på gaveartikler">
+			<question>Hvordan lager dere egentlig bilder på gaveartikler?</question>
+			<answer>Vi bruker mange ulike teknikker for produksjon av gaveartikler. Noen bruker velkjente og tradisjonelle sublimeringsteknikker, mens andre blir produsert med teknikker like hemmelige som produksjonen av osten Jarlsberg.</answer>
+		</title>
+		<title name="Bilder på lerret">
+			<question>Hvordan printer dere egentlig bilder på lerret og plakater?</question>
+			<answer>Lerret er et nokså grovt medium, og fiberstrukturen vil begrense oppløsningsevnen på motivet. Samtidig er bilder på lerret i slaget som aldri før, og spesielt i kombinasjon med 2- eller 4cm blindramme. Vi bruker Epson Stylus Pro storformatskrivere, med kun originalt blekk for å sikre god kvalitet. Printprosessen er fargestyrt, og utstyret blir jevnlig kalibrert og justert opp mot referanseverdiene. Lerret blir montert på blindramme for hånd, og kan strammes opp med inkluderte trekiler. Det ferdige produktet blir kvalitetssikret før pakking og sending.</answer>
+		</title>
+		<title name="Fotobok på digitaltrykk">
+			<question>Hvordan lager dere egentlig fotobok?</question>
+			<answer>Vi bruker Canon imagePRESS C7000VP digitaltrykkmaskin. Digitaltrykkmaskinen er på mange måter en avansert fargelaserskriver med høy produksjonskapasitet og kvalitet på print. Vanlig fargelaser kan ikke måle seg i kvalitet. Et digitaltrykkeri gjør oss i stand til å lage fotobøker og andre produkter med 1:1 eller begrenset opplag.</answer>
+		</title>
+		<title name="Pakking">
+			<question>Hvordan pakker dere ordrene?</question>
+			<answer>Vi bruker ulike og fleksible metoder for pakking, alt etter innholdet i ordren. Emballasjen er optimalisert til de ulike produktene, og vi er nøye med pakkingen slik at innholdet ikke blir skadet. Standard bildebestillinger blir pakket med pakkemaskin, mens andre produkter blir pakket for hånd.</answer>
+		</title>
+	</category>
+	<category name="EUROFOTObok">
+		<title name="Om fotoboken">
+			<question>Hva er EUROFOTObok?</question>
+			<answer>EUROFOTObok er Eurofotos egen fotobok. Du lager den via Fotoclick sine nettsider, og boken blir produserert på digitaltrykkmaskin.</answer>
+		</title>
+		<title name="Programvare">
+			<question>Hvordan fungerer dette? Må jeg laste ned en programvare?</question>
+			<answer>Nei. EUROFOTObok blir laget på websiden, og krever derfor tilgang til internett for å fungere. Fordelen med dette er at du kan jobbe med boken fra hvorsomhelst og kan bruke bilder du allerede har i albumet ditt. Når du er ferdig, trenger du ikke å laste opp boken for bestilling. Boken ligger lagret under "mine prosjekter" slik at du kan bestille flere bøker ved en senere anledning. Du kan også dele prosjektet ditt med andre, slik at de kan jobbe videre med den og bestille sitt eget eksemplar. </answer>
+		</title>
+		<title name="Spesialtilpassing">
+			<question>Jeg ønsker å tilpasse boken min, f.eks endre bakgrunnen, endre størrelse på bildene, beskjære og flytte. Hvordan gjør jeg det?</question>
+			<answer>Trykk på knappen "Skreddersy". Da vil du få opp mange flere valg for spesialtilpassinger i fotoboken/produktdesigneren. Du kan i prinsippet endre nesten ALLE elementer i boken.</answer>
+		</title>
+		<title name="Ekstra sider i fotobok">
+			<question>Jeg har laget en feriebok, ferdig med 29 sider. Ønsker å utvide boken (inntil 60 sider). Hvordan gjør jeg det?</question>
+			<answer>Når du er på "steg 4" i fotoboken, må du trykke på knappen som heter "Skreddersy". Da får du opp mange flere redigeringmuligheter. Gå deretter til side 28-29 i fotoboken. Det er et blått +tegn nede til høyre under fotoboken. Trykk på knappen for å legge inn et ekstra ark (2 sider).</answer>
+		</title>
+		<title name="Arbeidsbord">
+			<question>Jeg er usikker på hvilke bilder jeg skal bruke i boken min. Hvor plasserer jeg bilder som jeg vurderer å bruke, slik at jeg slipper å rote frem og tilbake i forskjellige album?</question>
+			<answer>Dra bildene enten fra album eller fra fotoboken, og plasser de på arbeidsbordet (ligger på hver side av fotoboken). Dersom du erstatter et bilde i boken med et nytt, vil det gamle bli lagt på arbeidsbordet.</answer>
+		</title>
+		<title name="Leveringstid">
+			<question>Når kan jeg forvente levering?</question>
+			<answer>Estimert leveringstid for EUROFOTObok er 1-2 dager (+ postgang). Boken blir produsert hos Eurofoto.</answer>
+		</title>
+	</category>
+	<category name="Tekniske problemstillinger">
+		<title name="Pålogging">
+			<question>Jeg får ikke logget på. Får bare feilmeldingen "Pålogging feilet". Hva skjer?</question>
+			<answer>Er e-posten din stavet riktig? Har du husket små/store bokstaver i passordet ditt?</answer>
+		</title>
+		<title name="Opplasting">
+			<question>Opplastingen feilet/stanset midt i jobben. Må jeg begynne på nytt? Hvorfor skjedde dette?</question>
+			<answer>Dersom du sitter i et trådløst nettverk, har du kanskje mistet forbindelsen en kort stund. Logg deg inn på kontoen og se hvor mange bilder som er lastet opp. Sett deretter i gang en ny opplasting fra der du sluttet.</answer>
+		</title>
+		<title name="Java/ActiveX">
+			<question>Jeg får opp spørsmål om å godkjenne nedlasting/installering av Java-applikasjon eller ActiveX-controller. Er dette skadelig? Jeg vil bare laste opp bilder...</question>
+			<answer>Nei, dette er ikke skadelig. Disse applikasjonene er påkrevde tilleggsprogrammer for å få laste opp bilder til oss. Du trenger bare installere første gangen du skal laste opp bilder.</answer>
+		</title>
+	</category>
+</xml>

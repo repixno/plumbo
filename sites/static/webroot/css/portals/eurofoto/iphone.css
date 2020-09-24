@@ -1,0 +1,97 @@
+/* --------------------------------------
+
+	eurofoto.css
+	* by Kristoffer Sivertsen for Eurofoto AS
+	* Used to style the eurofoto with the design-guidelines
+	
+	* Colors:
+	* Eurofoto-blue: #0098DB
+	* Eurofoto-blå for brødtekst: #0068b4  Grunnet lite lesbarehet på den lysere blå
+	* Grønn: #34B233
+	* Oransje: #E37222
+	* Gul: #FED100   -> #fc0
+	* Rød: #C4262E
+ 
+	
+----------------------------------------*/
+
+#main-navigation ul li a.frontpage { color: #0068b4; }
+#main-navigation ul li a.products { color: #c90; }
+#main-navigation ul li a.my-account { color: #C4262E; }
+#main-navigation ul li a.order-prints { color: #34B233; }
+
+
+
+/* styling for the eurofoto-header witht the images in the top */
+body { 
+	background: #fff url('http://static.repix.no/gfx/backgrounds/eurofoto-top.jpg') scroll repeat-x top ;
+	font-family: Helvetica;
+}
+
+#header { margin-top: 30px; }
+h1.site-logo {
+	float: left;
+	display: block;
+	width: 70px;
+	height: 70px;
+	text-indent: -9999px;
+	background: transparent url('http://static.repix.no/gfx/logos/eurofoto-68px.gif') no-repeat 0 0;
+	margin-top: -10px;
+}
+
+#topsmallnavigation { float: right; font-size: .8em; }
+#topsmallnavigation ul { text-align: right; margin: 0; padding: 0}
+#topsmallnavigation ul li { display: inline; list-style: none;}
+#topsmallnavigation ul li a { margin: 5px; padding-right: 10px; border-right: 1px solid #ccc }
+#topsmallnavigation .last { border: none; }
+
+#main-navigation { 	
+	background: #dcdcdc url('http://static.repix.no/gfx/backgrounds/gradient_lightgray.gif') scroll repeat-x top; 
+	clear: both;
+	margin-bottom: 10px;
+}
+#main-navigation ul { 
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+#main-navigation ul li {
+float: left; list-style: none;}
+
+#main-navigation ul li a { 
+	float: left;
+	display: block; 
+	text-decoration: none; 
+	font-size: 100%; 
+	font-weight: bold;
+	padding: 8px 5px 6px 5px;
+	border-right: 1px solid #ccc;
+}
+	#main-navigation ul li a.last { border: none; }
+
+#main-navigation ul li a div, #main-navigation ul li a span { 
+	color: #000; display: block; font-size: .6em; font-weight: normal 
+}
+#main-navigation ul li a:hover { 
+	color: #000; 
+	background: #949494 url('http://static.repix.no/gfx/backgrounds/gradient_gray.gif') scroll repeat-x top; 
+}
+#main-navigation ul li a.active, #main-navigation ul li a:focus  { 
+	background: #eee url('http://static.repix.no/gfx/backgrounds/gradient_gray_dark_reverse.gif') scroll repeat-x center top; 
+	color: #fff;
+	outline: none; 
+}
+
+#topsearch { clear: both; }
+#topsearch input { 
+
+}
+#topsearch input:focus { border-color: #666; }
+
+/* mods, should be merged with typography.css */
+p.center { text-align: center; }
+h2 { border-bottom: 1px solid #ccc;}
+
+a { color: #0068b4; }
+

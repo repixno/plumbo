@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Template</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+<style>
+    #catmenu ul {
+        list-style: none;
+        line-height: 25px;
+        color:#0068b4;
+        border-bottom: 2px solid #FFF;
+        margin: 0;
+    }
+    #catmenu li {
+        display: inline;
+    }
+
+    #catmenu a, #topmenu a:visited {padding:5px 12px 5px 12px;text-decoration:none;}
+    #catmenu .current a, #topmenu .current a:hover, #topmenu .current a:visited {padding:5px 12px 5px 12px;font-weight:bold;}
+
+    
+</style>
+<script type="text/javascript" src="/js/admin.js"></script>
+</head>
+
+<body>
+    
+    	<div id="container" class="container">
+           <div id="header" class="span-24 last">
+                <h2>Eurofoto Admin</h2>
+                <tal:block metal:use-macro="../common.html/topmenu" />
+            </div>
+           
+           
+           <h3>Edit template</h3>
+           
+           <p><a href="/content/cardtemplatecewe/${edittemplate/catid}">Tilbake</a></p>
+           <form method="post" enctype="multipart/form-data">
+                <table>
+                    <tr>
+                        <td>
+                            Articleid
+                        </td>
+                        <td>
+                            <select name="articleidselect">
+                                <option disabled="disabled" selected="selected">Velg Produktid</option>
+                                <option value="8311">Foldekort 13x18 cm</option>
+                                <option value="8584">Foldekort 14x14 cm</option>
+                                <option value="6051">Foldekort klassisk - ensidig</option>
+                                <option value="8569">Foldekort klassisk på høyglanspapir, ensidig</option>
+                                <option value="8573">Foldekort XL med kort fals på høyglanspapir, ensidig</option>
+                                <option value="8563">Foldekort XL med lang fals på høyglanspapir, ensidig</option>
+                                <option value="6050">Postkort klassisk</option>
+                                <option value="6424">Postkort XL</option>
+                                <option value="6426">Kort</option>
+                                <option value="8161">Menykort, ensidig</option>
+                                <option value="8110">Bordkort</option>  
+                            </select>
+                            <input type="text" name="articleid" readonly="readonly" size="3"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Thumbnail</td>
+                        <td> <img src="${static:cms/takkkort/cewethumbs/}${edittemplate/thumbnail}"/><input type="file" name="thumbnail" value="${edittemplate/thumbnail}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Title</td>
+                        <td><input type="text" name="title" value="${edittemplate/title}"/></td>
+                    </tr>
+					<tr>
+                        <td>Title SV</td>
+                        <td><input type="text" name="title_sv" value="${edittemplate/title_sv}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Link</td>
+                        <td><input type="text" name="link" value="${edittemplate/link}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Grouping</td>
+                        <td><select name="grouping">
+                                <option value="takkekort">Takkekort</option>
+								<option value="foldekort">Foldekort</option>
+                                <option value="foldekort_13x18_cm">Foldekort 13x18 cm</option>
+                                <option value="foldekort_14x14_cm">Foldekort 14x14 cm</option>
+                                <option value="foldekort_xl_kort_fals">Foldekort XL Kort fals</option>
+                                <option value="foldekort_xl_lang_fals">Foldekort XL Lang fals</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right" colspan="2"><input id="submitbutton" type="submit" value="Oppdater"/></td>
+                    </tr>
+                    
+                </table>
+            
+            
+           </form>
+        </div>
+		<div id="footer" />
+        
+        
+        <script>
+            var grouping = "${edittemplate/grouping}";
+            var articleid = "${edittemplate/articleid}";
+            $( function(){
+                
+                $(':input[name="grouping"] option').each( function(){
+                        if( $(this).val() == grouping ){
+                            $(this).attr( "selected", "selected" );
+                        }
+                    });
+                
+                $(':input[name="articleidselect"] option').each( function(){
+                    
+                        if( $(this).val() == articleid ){
+                            $(this).attr( "selected", "selected" );
+                            $(':input[name=articleid]').val( $(this).val() );
+                        }
+                    
+                    });
+                
+                $(':input[name="articleidselect"]').on('change', function(){
+                    
+                        $(':input[name=articleid]').val( $(this).val() );
+                    
+                    });
+            
+            
+            })
+        </script>
+        
+</body>
+</html>

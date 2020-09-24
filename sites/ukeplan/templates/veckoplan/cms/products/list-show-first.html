@@ -1,0 +1,181 @@
+<tal:block tal:repeat="item items">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="item/title" />
+	<meta name="description" content="${item/ingress}" />
+
+	<style type="text/css">
+		.info-box {
+			overflow: scroll;
+			height: 350px;
+			overflow-x: hidden;
+		}
+				
+		.small-product-photos {
+			display: block;
+			width:118px;
+			float: left;
+		}
+		
+		.small-product-photos a {
+			display:block;
+			float: right;
+			margin: 0 5px 5px 0;
+		}
+		.main-product-photo {
+			display: block;
+			float: right;
+		}
+		
+		#fancybox-inner #about-from-prices {
+         display: block;
+		}
+		
+
+		
+	</style>
+	<tal:block tal:condition="session/isadmin">
+		<!-- admin css -->
+		<style type="text/css">
+		.cms-product-title:hover, .cms-product-ingress:hover, .cms-product-body:hover {
+			background-color: #eee !important;
+		}
+		
+		</style>
+	</tal:block>
+	
+	<tal:block tal:condition="exists:item/customjs">
+	  <tal:block tal:content="structure item/customjs" />
+	</tal:block>
+	
+	<tal:block tal:condition="exists:item/customcss">
+	  <tal:block tal:content="structure item/customcss" />
+	</tal:block>
+	
+</head>
+
+
+<body>
+
+<div class="container showproduct">
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	
+	<div class="frontpagemain row">
+		<div class="visible-xs col-md-12">
+			<h3 tal:content="menuitem/article/title"></h3>
+		</div>
+		<div class="col-md-8 col-md-push-4">
+			<tal:block condition="exists:menuitem/article/attachments/sidebartop">
+				<img style="width:100%" src="//eurofoto.no/images/attachments/thumbs/height/500/${menuitem/article/id}/${menuitem/article/attachments/sidebartop}"/>
+			</tal:block>
+			<tal:block condition="not:exists:menuitem/article/attachments/sidebartop">
+				<img class="img-responsive" src="${static:}gfx/ukeplan/new/frontpage.jpg" />
+			</tal:block>
+		</div>
+		<div class="col-md-4 frontpage-top-left col-md-pull-8" >
+				<h3 class="hidden-xs"  tal:content="menuitem/article/title"></h3>
+				<div tal:content="structure menuitem/article/body|default"></div>
+			</div>
+    </div>
+			
+	<div class="row show-one-product">
+		<div class="col-md-6">			
+			<div class="cms-product-body" tal:content="structure item/body|default">
+				?
+			</div>
+		</div>
+		<div class="col-md-6">
+			<h3 i18n:translate="">Ta kontakt her:</h3>
+			<div class="messagebox">
+				<form action="/contact" method="post">
+					<div>
+						<label for="name" i18n:translate="">Name</label>
+						<input type="text" class="title" name="name" id="name" placeholder="Email" i18n:attributes="placeholder Name"/>
+					</div>
+					<div>
+						<label for="address" i18n:translate="">Address</label>
+						<input type="text" class="title" name="address" id="address" placeholder="Adress" i18n:attributes="placeholder Address"/>
+					</div>
+                    <div>
+						<label for="zip" i18n:translate="">Zip</label>
+						<input type="text" class="title" name="zip" id="zip" placeholder="Zip" i18n:attributes="placeholder Zip"/>
+					</div>
+                    <div>
+						<label for="city" i18n:translate="">City</label>
+						<input type="text" class="title" name="city" id="city" placeholder="City" i18n:attributes="placeholder City"/>
+					</div>
+                    <div>
+						<label for="phone" i18n:translate="">Phone</label>
+						<input type="text" class="title" name="phone" id="phone"  placeholder="Phone" i18n:attributes="placeholder Phone"/>
+					</div>
+					<div>
+						<label for="email" i18n:translate="">E-mail</label>
+						<input type="text" class="title" name="email" id="email" tal:attributes="value session/username|default"  placeholder="Email" i18n:attributes="placeholder Email"/>
+					</div>
+					<div>
+						<label for="subject" i18n:translate="">Subject</label>
+						<input type="text" class="title" name="subject" id="subject" placeholder="Email" i18n:attributes="placeholder Subject"/>
+					</div>
+					<div>
+						<label for="message" i18n:translate="">Message</label>
+						<textarea style="height: 150px" name="usercomment" id="usercomment"></textarea>
+					</div>
+				
+					<input type="hidden" name="type" value="Designservice" />
+					<div style="text-align: right"> 
+						<input type="hidden" name="my_url" />
+						<button class="btn btn-default right" type="submit" i18n:translate="">Submit</button>
+					</div>
+					
+				</form>
+
+			
+			</div>
+		</div>
+	</div>
+	<tal:block metal:use-macro="../../../${templates}/common.html/newsletter" />
+</div> <!-- end container -->
+
+
+<div metal:use-macro="../../../${templates}/common.html/footer" />
+<tal:block tal:condition="session/isadmin">
+	<script type="text/javascript">
+	$('.cms-product-title, .cms-product-ingress, .cms-product-body').dblclick( function() {
+		window.open('${request/adminroot}content/products/${item/id}');
+	});
+	</script>
+</tal:block>
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+		$("a.info").fancybox({
+			'autoDimensions': false,
+			'hideOnContentClick': false,
+			'transitionIn'		: 'elastic',
+			'transitionOut'		: 'elastic'
+		});
+		
+		$("a.productphoto").fancybox({
+			'autoDimensions': false,
+			'titleShow': false,
+			'transitionIn'		: 'elastic',
+			'transitionOut'		: 'elastic'
+		});
+		
+		$("a.video").fancybox({
+			'frameWidth':	742,
+			'frameHeight':	510,
+			'hideOnContentClick': false,
+			'callbackOnStart': function() { 
+				$f("player", "http://static.repix.no/flash/flowplayer-3.1.1.swf");
+			}
+		});
+	});
+	
+</script>
+</body>
+</html>
+</tal:block>

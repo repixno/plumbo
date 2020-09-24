@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head metal:use-macro="../../${templates}/common.html/head">
+</head>
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+	<!-- use if menu is needed -->
+	<div tal:define="global menuitem string:reedfoto" metal:use-macro="common.html/menu" />
+
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div id="content">
+
+		<h2>Reedfoto fotografbilder</h2>
+
+		<form action="/order-prints/choose-quantity/" id="albums-form" method="post">
+			<ul id="albums">
+				<tal:block tal:repeat="album albums">
+				<li class="albumPreview" tal:condition="album">
+					<!--<input type="checkbox" tal:attributes="name album/id" />-->
+
+					<div class="skimmer">
+						<a tal:attributes="href album/albumurl; title album/title">
+							<img tal:attributes="src album/thumbnailurl; alt album/title" class="thumb" src="" tal:condition="album/thumbnailurl"/>
+							<img src="http://static.eurofoto.no/gfx/404/not_found_70px.jpg"class="thumb" tal:condition="not:album/thumbnailurl" alt="not found"/>
+						</a>
+						<ul class="hide" tal:condition="album/defaultthumbnails">
+							<tal:block tal:repeat="thumb album/defaultthumbnails">
+								<li>
+									<img src="" alt="${thumb/title}" tal:attributes="src thumb/thumbnail"/>
+								</li>
+							</tal:block>
+						</ul>
+					</div>
+					<div class="center">
+						<input tal:condition="album/access/purchase"
+							type="checkbox" class="select" id="album_${album/id}" value="${album/id}" name="albums[]"/>
+						<label for="album_${album/id}" tal:content="shorten:album/title;15"></label>
+					</div>				
+				</li>
+				</tal:block>
+			</ul>
+		</form>
+
+	</div>
+	<!-- use if menu is needed -->
+	<div metal:use-macro="common.html/right-albumlist-menu" />
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+<script type="text/javascript">
+	$('.albums').skimmer();
+</script>
+</body>
+</html>

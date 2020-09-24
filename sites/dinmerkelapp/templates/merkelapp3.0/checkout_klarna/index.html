@@ -1,0 +1,396 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<tal:block tal:define="global dontShowCart" />
+
+<head>
+	
+	 <div metal:use-macro="common_checkout.html/head" />
+
+	<style type="text/css">
+		label{
+			min-width: 100px;
+		
+		}
+		.form-group{
+			margin-top: 15px;
+		}
+		
+		.error{
+			color: red;
+		}
+			
+		.content{
+			
+	margin-top: 37px;
+    margin-left: 37px;
+		}
+			
+	
+.red-star {
+    color: red;
+}
+.mx-auto {
+  margin:  60px 10px  10px 10px!important;
+}
+
+.mx-auto2 {
+  margin:  20px 10px  10px 10px!important;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #26aaeb;
+    border-color: #26aaeb;
+}
+
+
+
+		
+	</style>
+	<script src="/utelappen/js/jquery.validate.min.js"></script>
+</head>
+
+<body>
+ <div metal:use-macro="../../${templates}/common.html/top" />
+	<div class="container editorcontainer">
+	<div class="content">		
+	<div class="row">
+	<form method="post" class="form-inline" action="/checkout_klarna/confirm/" id="contact-and-delivery-info">
+		
+		
+		<div class="col-md-12">
+		<div class="col-md-5 text-right">
+			
+			<h2 i18n:translate="">Ordre Utsjekk</h2>
+			<div class="text-right">
+				<div class="round-corners-heading gradientdiv" style="margin-bottom: 10px;  ">
+					<!--<h4 >Kundeinnformasjon</h4>-->
+				</div>
+				
+				<div class="col-md-12 form-group">
+					<label for="contact-email" >E-post:</label>
+					<input id="contact-email" name="cemail" type="text" class="text required email form-control" value="${session/username}" />
+					<span class="red-star">★</span>
+				</div>
+
+					
+			</div>
+			
+
+				<div id="delivery-and-payment-methods " class="col-md-2 hide">
+				<tal:block tal:condition="not:exists:serviceproduct">
+				<tal:block tal:condition="exists:deliveryoptions">
+			      <div class="col-md-12 round-corners-heading last gradientdiv"><h4 i18n:translate="">Delivery method</h4></div>
+			      <div class="col-md-12" id="delivery-methods-wrapper" style="margin-bottom: 30px;">
+			         <tal:block tal:repeat="deliverymethod deliveryoptions">
+   				  <div class="col-md-12 " style="border-bottom: 1px groove #5bc0dd; padding: 3px;">
+					
+
+							<div class="col-md-12 hide">
+											<tal:block tal:condition="exists:storedeliveryrefid">
+											  <tal:block tal:condition="equal:deliverymethod/artnr,storedeliveryrefid,1">
+											   <input id="storeon" tal:condition="exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" checked="1" /> 
+											   <input id="storeon" tal:condition="not:exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" /> 
+											</tal:block>
+											<tal:block tal:condition="not:equal:deliverymethod/artnr,storedeliveryrefid,1">
+											   <input class="storeoff" tal:condition="exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" checked="1" /> 
+											   <input class="storeoff" tal:condition="not:exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" /> 
+											</tal:block>
+											</tal:block>
+									<tal:block tal:condition="not:exists:storedeliveryrefid">
+										 <input class="storeoff" tal:condition="exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" checked="1" /> 
+										 <input class="storeoff" tal:condition="not:exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" /> 
+									</tal:block>
+									
+												<label class="large">
+													<tal:block tal:content="deliverymethod/title"></tal:block> 
+													<tal:block tal:condition="conditionalmatch:deliverymethod/title,A-post,1">
+														 <span class="quiet small" tal:content="cms:ingress:c06236e7-c496-49a9-9324-b29ecf06c48a"></span>
+													</tal:block>
+													
+													<tal:block tal:condition="conditionalmatch:deliverymethod/title,Servicepakke,1">
+														 <span class="quiet small" tal:content="cms:ingress:3e6c5e80-dac2-4346-9039-bd20944ba366"></span>
+													</tal:block>
+													<tal:block tal:condition="conditionalmatch:deliverymethod/title,Dør til dør,1">
+														 <span class="quiet small" tal:content="cms:ingress:f515d742-143f-4556-8bcb-b4bbd8f30aa1"></span>
+													</tal:block>
+												</label>
+   
+						 </div>
+   					    
+														<div class="col-md-6 hide">
+														   <span class="large"> kr 
+																	  <span class="price hide" id="deliveryprice_${deliverymethod/refid}" tal:content="deliverymethod/price"></span>
+																	  <span tal:content="formatprice:deliverymethod/price"></span>
+																  </span>
+														</div>
+									
+											<div class="col-md-6" style="display: block; margin-top:8px;">
+												  <tal:block tal:condition="conditionalmatch:deliverymethod/title,A-post,1">
+													  <tal:block class="quiet" tal:content="structure cms:body:c06236e7-c496-49a9-9324-b29ecf06c48a"></tal:block>
+												  </tal:block>
+												  <tal:block tal:condition="conditionalmatch:deliverymethod/title,Servicepakke,1">
+													  <tal:block class="quiet" tal:content="structure cms:body:3e6c5e80-dac2-4346-9039-bd20944ba366"></tal:block>
+												  </tal:block>
+												  <tal:block tal:condition="conditionalmatch:deliverymethod/title,Dør til dør,1">
+													  <tal:block class="quiet" tal:content="structure cms:body:f515d742-143f-4556-8bcb-b4bbd8f30aa1"></tal:block>
+												  </tal:block>
+												<tal:block tal:condition="conditionalmatch:deliverymethod/title,Hente i butikk,1">
+													  <tal:block class="quiet" tal:content="structure cms:body:3e6c5e80-dac2-4346-9039-bd20944ba366"></tal:block>
+												  </tal:block>
+												<tal:block tal:condition="conditionalmatch:deliverymethod/title,Hente hos Japan Photo,1">
+													  <tal:block class="quiet" tal:content="structure cms:body:3e6c5e80-dac2-4346-9039-bd20944ba366"></tal:block>
+												  </tal:block>
+											</div>
+   				</div>
+   
+   					
+					</tal:block>
+				</div>
+			</tal:block>
+		</tal:block>
+											<!-- NEW payment methods -->
+									
+							<div class="col-md-12 hide"><h4 i18n:translate="">Payment method</h4></div>
+							   <div class="col-md-12" id="payment-methods-wrapper">
+								  <tal:block tal:repeat="paymentoption paymentoptions">
+									 <div class="col-md-12" style="border-bottom: 1px groove #5bc0dd; padding: 3px;">
+										
+										   <tal:block tal:condition="exists:paymentoption/isPreset">
+											  <input type="radio" name="payment-method" value="${paymentoption/refid}" id="${paymentoption/id}" checked="true" />
+											  <label class="large" for="payment_${paymentoption/id}">${paymentoption/title}<span class="quiet"> kr <span class="price hide" id="paymentprice_${paymentoption/refid}">${paymentoption/price}</span><span>${paymentoption/price}</span></span></label>
+										   </tal:block>
+										   <tal:block tal:condition="not:exists:paymentoption/isPreset">
+											  <tal:block tal:condition="not:conditionalmatch:paymentoption/refid,418,1">
+												 <input type="radio" name="payment-method" value="${paymentoption/refid}" id="${paymentoption/id}" />
+												 <label class="large" for="payment_${paymentoption/id}">${paymentoption/title}<span class="quiet"> kr <span class="price hide" id="paymentprice_${paymentoption/refid}">${paymentoption/price}</span><span>${paymentoption/price}</span></span></label>
+											  </tal:block>
+										   </tal:block>
+									</div>
+									 
+								  </tal:block>
+							   </div>
+			   
+			   
+			   
+			    
+				
+				
+   			</div>
+				
+			</div>
+		
+		
+	
+		
+		
+		 <div class="col-md-3 mx-auto">
+					<!--<tal:block metal:use-macro="common.html/order-summary" />-->
+						<div class="text-center">
+							<!--<button class="btn btn-sucsess" onclick="window.location.href='/kasse'">Continue</button>-->
+							<button class="btn btn-success mx-auto2 call-to-action" i18n:translate="" type="submit" style="margin-right:0;">
+								Next step
+							</button>
+						</div>
+				</div>
+		 
+		 
+		 <div class="col-md-2">
+					<!--<tal:block metal:use-macro="common.html/order-summary" />-->
+						
+				</div>
+		
+		</div>
+		<!--</form>-->
+		
+		
+		
+
+		 
+		  <div class="  text-center ">
+					<!--<tal:block metal:use-macro="common.html/order-summary" />-->
+						<img class="mx-auto"  src="https://cdn.klarna.com/1.0/shared/image/generic/badge/nb_no/checkout/long-blue.png" />
+				</div>
+				
+		  
+		
+		 
+		 
+		    </form>
+	
+
+
+</div>
+	</div>
+	 <!-- order summary -->
+   
+			   
+ 	<div metal:use-macro="../../${templates}/common.html/footer" />
+    
+	</div>
+
+<!--<script type="text/javascript" src="/static/js/checkout.js"></script>-->
+<script type="text/javascript" src="${static:gfx/portals/ukeplan/scripts/checkout.js}?${version}"></script>
+<script type="text/javascript" src="${static:gfx/portals/ukeplan/scripts/jquery.validate.min.js}?${version}"></script>
+<script type="text/javascript">
+	
+	
+
+
+
+
+
+
+
+	$(document).ready( function(){
+		
+		$('.open-terms-and-conditions').click( function(){
+				$('#terms-and-conditions').dialog({
+						width: 1024,
+						modal: true,
+						height: 600,
+						title: "Sluttbrukervilkår for Dinmerkelapp",
+						buttons: {
+								"LUKK": function() {
+										$( this ).dialog( "close" );
+								}
+						}
+						
+						});
+				
+				return false;
+				});
+		
+		/*<![CDATA[*/
+		if( $('#contact-name').val().length == 0 ){
+			$('#phonelookup').show();
+		}
+		
+		$('#phonelookup').click( function(){
+			
+			$.get("/api/1.0/user/phonelookup/", { phonenumber: $('#phone').val() },
+				function(data){
+				
+				     var result = jQuery.parseJSON( data.result  );
+				     
+				     var middlename = '';
+				     if( result[0].MiddleName && result[0].MiddleName != 'null' ){
+					     var middlename = ' ' + result[0].MiddleName;
+				     }
+				     $('#contact-name').val( result[0].FirstName + middlename + ' ' + result[0].LastName );
+				     //$('#lastname').val( result[0].LastName );
+				     $('#contact-address').val( result[0].Address );
+				     $('#contact-zipcode').val( result[0].ZipCode );
+				     $('#contact-city').val( result[0].City );
+				}, 'json');
+			
+			return false;
+		});
+		
+		
+		$('#delivery-methods-wrapper input:checked').eq(0).click();
+		
+		/*]]>*/
+		});
+   
+   
+	$('form#contact-and-delivery-info').validate({
+		 errorPlacement: function (error, element) {
+			error.appendTo( element.parent() );
+		  },
+		rules: {
+			cname: {
+				required: true,
+				fullname: true
+			},
+			cemail: {
+				required: true,
+				email: true
+			},
+			czipcode: {
+				required: true,
+				minlength: 4
+			},
+			ccity: {
+				required: true
+			},
+			caddress: {
+				required: true
+			},
+			caddress2: {
+				required: false
+			},
+			eula: {
+				required : true
+			},
+			'repeat-password': {
+				equalTo: '#password-new-user'
+			},
+				delivertostore:{
+				required: false
+			},
+				phone:{
+				required : true,
+				digits : true,
+				minlength : 8
+			}
+		},
+		messages: {
+			cname: {
+				required: "<tal:block i18n:translate="">Required</tal:block>",
+				fullname: "<tal:block i18n:translate="">Please enter your first name and surname.</tal:block>"
+			},
+			cemail: {
+				required: "<tal:block i18n:translate="">Required</tal:block>",
+				email: "<tal:block i18n:translate="">Your email address must be in the format of name@domain.com</tal:block>"
+			},
+			czipcode: {
+				required: "<tal:block i18n:translate="">Required</tal:block>",	
+				minlength: "<tal:block i18n:translate="">Please enter at least 4 digits</tal:block>"	
+			},
+			ccity: {
+				required: "<tal:block i18n:translate="">Required</tal:block>"	
+			},
+			caddress: {
+				required: "<tal:block i18n:translate="">Required</tal:block>"	
+			},
+			caddress2: {
+				required: "<tal:block i18n:translate="">Required</tal:block>"	
+			},
+			'repeat-password': {
+				equalTo: "<tal:block i18n:translate="">Oops, your passwords don't match. </tal:block>"
+			},
+			eula: {
+				required: "<tal:block i18n:translate="">Du må godkjenne vilkår</tal:block>"
+			},
+			
+			phone:{
+			   required: "Påkrevd",
+			   number: "Påkrevd"
+			}
+		}
+	});
+	
+</script>
+<!-- Google Code for Utsjekk påstartet Conversion Page -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1070265469;
+var google_conversion_language = "no";
+var google_conversion_format = "2";
+var google_conversion_color = "333333";
+var google_conversion_label = "JcKPCJ3CxAEQ_eir_gM";
+var google_conversion_value = 0;
+//-->
+</script>
+<script type="text/javascript" src="https://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="https://www.googleadservices.com/pagead/conversion/1070265469/?label=JcKPCJ3CxAEQ_eir_gM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+</body>
+</html>

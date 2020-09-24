@@ -1,0 +1,457 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">My friends and family</tal:block>
+	<style type="text/css">
+
+		.ui-draggable {
+			cursor: move;
+
+		}
+		.friend:hover {
+			background-color: #eee;
+		}
+
+		.ui-draggable-dragging {
+			background-color: #ddd !important;
+			border: 1px solid #666  !important;
+
+		}
+		
+		.functions {
+         float: right;
+		}
+		
+		.personlist {
+		    width:440px;
+		}
+		
+	</style>
+</head>
+
+<body>
+	
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<div class="container">
+
+	<div class="row">
+		<div class="col-md-2">
+			<!-- use if menu is needed -->
+			<div tal:define="global menuitem string:friends" metal:use-macro="common.html/menu" />
+
+		</div>
+	
+
+	
+	<!-- if no menu is used use id="widecontent" -->
+	<div class="col-md-10 last friends">
+
+		<h2 i18n:translate="">My friends and family</h2>
+
+		<div class="span-12">
+			<h3 tal:content="cms:title:34e7c281-a5b4-45a0-b95e-fd7c01e019c4">All your contacts</h3>
+			<p tal:content="cms:ingress:34e7c281-a5b4-45a0-b95e-fd7c01e019c4">These are all your available contacts. Click on them to get more information. You can also drag them to groups.</p>
+			<ul class="friendlist personlist">
+				<tal:block tal:condition="exists: friends">
+					<tal:block tal:repeat="friend friends">
+						<li class="friend" id="friendid_${friend/id}">
+							<span class="functions">
+								<a href="javascript:" class="edit" i18n:translate="">Edit</a>
+								<a href="/myaccount/friends/deletefriend/${friend/friendid}" class="delete negative" i18n:translate="">Delete</a>
+							</span>
+							<div class="friendname">
+								<span
+									tal:content="shorten:friend/namefirst;10" tal:condition="friend/namefirst"
+									title="${friend/namefirst}"
+									class="namefirst"
+								/>
+								<span
+									tal:content="shorten:friend/namelast;10" tal:condition="friend/namelast"
+									title="${friend/namelast}"
+									class="namelast"
+								/>
+								<span class="quiet small email" title="${friend/username}">(<span tal:content="shorten:friend/username;20" />)</span>
+							</div>
+						</li>
+					</tal:block>
+				</tal:block>
+			</ul>
+			<tal:block tal:condition="not:friends">
+				<h3 i18n:translate="">No friends</h3>
+				<p i18n:translate="">You can add friends by entering their e-mail and clicking "Add friend"</p>
+			</tal:block>
+
+			<div class="box">
+			<form action="/myaccount/friends/addfriend" method="post">
+
+				<div class="span-11 append-bottom">
+					<label for="newFriend_email" class="top" i18n:translate="">E-mail</label>
+					<input id="newFriend_email" type="text" name="friendemail" class="text span-6" />
+
+				</div>
+
+				<div class="prepend-top">
+					<div class="span-5">
+						<label for="newFriend_namefirst" class="top" i18n:translate="">First name</label>
+						<input id="newFriend_namefirst" type="text" name="friendnamefirst" class="text span-4" />
+					</div>
+
+					<div class="span-6 last">
+						<label for="newFriend_namelast" class="top" i18n:translate="">Surname</label>
+						<input id="newFriend_namelast" type="text" name="friendnamelast" class="text span-5" />
+					</div>
+				</div>
+
+				<div class="prepend-top">
+					<div class="right">
+						<button id="newfriendbutton" type="submit" i18n:translate="">Add friend</button>
+					</div>
+				</div>
+
+			</form>
+			</div>
+		</div>
+
+		<div class="span-8 last friendgroups">
+			<h3 i18n:translate="">Groups</h3>
+			<p i18n:translate="">Drag friends and family here to create groups</p>
+
+			<div id="grouplist">
+				<tal:block tal:repeat="group groups">
+					<h4 tal:content="group/name | default">Title</h4>
+					<ul class="groups" id="groupid_${group/id}">
+                  <li class="friends-drop-box" i18n:translate="">
+                  Drop friends here
+                  </li>
+						<li tal:repeat="member group/members" tal:attributes="id string:groupmember_${group/id}_${member/id}">
+							<span><tal:block tal:content="shorten:member/name;15" /></span>
+							<span class="quiet small">(<span tal:content="shorten:member/username;20" />)</span>
+							<span class="functions"><a tal:attributes="href string:/myaccount/friends/removefromgroup/${member/id}/${group/id}; id string:delfromgr_${member/id}_${group/id}" class="delete" i18n:translate="">Delete</a></span>
+					   </li>
+						<li class="prepend-top">
+							<a class="negative delete-group link" href="/myaccount/friends/removegroup/${group/id}" name="${group/id}" i18n:translate="">Delete group</a>
+						</li>
+					</ul>
+
+				</tal:block>
+			</div>
+			<div class="prepend-top">
+			<form action="/myaccount/friends/addgroup" method="post">
+				<label for="newGroupName" i18n:translate="">New group</label><br/>
+				<input type="text" name="groupname" id="newGroupName" class="text span-5"></input>
+				<button class="addGroup" i18n:translate="">
+					Add group
+				</button>
+			</form>
+			</div>
+		</div>
+	
+		</div>
+		
+
+		<script type="text/javascript">
+
+		var ajaxloader = '<img src="${static:}gfx/gui/ajax-loader.gif"/>';
+
+		var langvars = {
+         'strfirstname': '<tal:block i18n:translate="">First name</tal:block>',
+         'strlastname': '<tal:block i18n:translate="">Surname</tal:block>',
+         'stremail': '<tal:block i18n:translate="">E-mail</tal:block>',
+         'strdelete': '<tal:block i18n:translate="">Delete</tal:block>',
+         'strchange': '<tal:block i18n:translate="">Save</tal:block>',
+         'strepost': '<tal:block i18n:translate="">E-mail</tal:block>',
+         'editfriend': '<tal:block i18n:translate="">Edit friend</tal:block>'
+      }
+
+		//<![CDATA[
+
+		//$.ui.dialog.defaults.bgiframe = true;
+
+		$(function() {
+
+			$('.back').click( function() {
+				history.go(-1);
+			});
+			
+
+			$('#grouplist .delete-group').click( function() {
+			   var self = $(this);
+				$.post('/api/1.0/user/groups/remove',
+				   {
+				      id: $(this).attr('name')
+				   },
+				   function() {
+				      self.parent().parent().prev().hide('slow', function() { $(this).remove() } );
+				      self.parent().parent().hide('slow', function() { $(this).remove() } );
+				   }
+				);
+				return false;
+			});
+			
+			$('#newfriendbutton').click( function() {
+				$(this).after( ajaxloader );
+				$.post('/api/1.0/user/friends/create', 
+				  {
+					email: $('#newFriend_email').val(),
+					namefirst: $('#newFriend_namefirst').val(),
+					namelast: $('#newFriend_namelast').val()
+				  }, 
+				  function(response) {
+				     window.location.reload();
+				  } 
+				);
+				
+				return false;
+			});
+			
+
+			$('#grouplist').accordion();
+
+			$(".friendlist li").draggable({
+			   zIndex: 1000,
+			   revert: true,
+			   cursor: 'move',
+			   opacity: 0.8,
+			   helper: 'clone',
+			   revert: false,
+			   start: function(e,ui) {
+
+			      ui.helper.find('.functions').remove();
+
+			   }
+			});
+			
+			$('ul.groups').droppable({
+			   accept: '.friend',
+			   tolerance: 'pointer',
+			   drop: function(e,ui) {
+
+			      var itemid = ui.draggable.attr('id').split('_')[1];
+			      var groupid = $(this).attr('id').split('_')[1];
+			      var grel = $(this);
+               $.ajax({
+                  url: "/myaccount/friends/addtogroup",
+                  type: 'post',
+                  cache: 'false',
+                  data: {
+                     item: itemid,
+                     group: groupid
+                  },
+                  dataType: 'json',
+                  success: function( data, status ) {
+                     
+                     if (data.status != false) {
+                           
+                        var name = '' + data.result.name;
+                        var username = '' + data.result.username;
+   
+                        if (name.length > 15) name = name.substring(0,15) + '...';
+                        if (username.length > 20) username = username.substring(0,20) + '...';
+                        
+                        var newEl = $( document.createElement( 'li' ) )
+                           .attr( 'id', 'groupmember_' + groupid + '_' + data.result.id )
+                           .html( name )
+                           .append('&nbsp;')
+                           .append(
+                              $( document.createElement( 'span' ) )
+                              .addClass( 'quiet small' )
+                              .text( '(' + username + ')' )
+                           )
+                           .append('&nbsp;')
+                           .append(
+                              $( document.createElement( 'span' ) )
+                              .addClass( 'functions' )
+                              .append(
+                                 $( document.createElement( 'a' ) )
+                                 .addClass( 'delete' )
+                                 .attr( 'href', '/myaccount/friends/removefromgroup/' + data.result.id + '/' + groupid )
+                                 .attr( 'id', 'delfromgr_' + data.result.id + '_' + groupid )
+                                 .text( langvars.strdelete )
+                                 .click( groupAddEvent )
+                                 )
+                              );
+   
+                        $( '.friends-drop-box', grel ).after( newEl );
+                     }
+
+                  }
+               });
+			   }
+         });
+         
+		   var groupAddEvent = function() {
+
+		      var idParts = $(this).attr( 'id' ).split( '_' );
+
+			   $.ajax({
+               url: "/api/1.0/user/groups/removemember",
+               type: 'post',
+               cache: 'false',
+               data: {
+                  userid: idParts[1],
+                  groupid: idParts[2]
+               },
+               dataType: 'json',
+               success: function( data, status ) {
+
+                  $( '#delfromgr_' + data.ids.userid + '_' + data.ids.groupid ).parent().parent().hide("slow", function() { $(this).remove() });
+
+               }
+            });
+				return false;
+
+			}
+			
+
+			$( '.groups .delete' ).click( groupAddEvent );
+
+			$( '.friendlist .delete' ).click(function() {
+
+				var item = $(this).parent().parent();
+
+				$(item).prepend( ajaxloader )
+
+				$.post( '/api/1.0/user/friends/remove',
+					{
+						userid: $(this).parent().parent().attr('id').replace('friendid_','')
+					}, function(msg) {
+
+						if(msg.result) {
+
+						   $(item).hide("slow", function() { $(item).remove() });
+
+						   $('#grouplist li').each( function() {
+						      var parts = $(this).attr( 'id' ).split( '_' );
+
+						      if ( parts[0] == 'groupmember' && msg.userid == parts[2] ) {
+
+						         $(this).hide("slow", function() { $(this).remove() });
+
+						      }
+						   });
+
+						} else {
+							alert('error: ' + msg.message)
+						}
+
+					}, 'json'
+				);
+
+				return false;
+
+			});
+			
+			
+			$('.friendlist .edit' ).click(function() {
+			   
+			   var id = $(this).parent().parent().attr( 'id' ).split( '_' )[1];
+
+			   var namefirst = $(this).parent().parent().find('.namefirst').attr('title') || '';
+			   var namelast = $(this).parent().parent().find('.namelast').attr('title') || '';
+
+			   var email = $(this).parent().parent().find('.email').attr('title') || '';
+			   
+
+			   var editform = $( document.createElement( 'form' ) )
+		      .attr( 'id', 'itemedit' )
+		      .attr( 'action', '/myaccount/friends/editfriend' )
+		      .attr( 'method', 'post' )
+		      .append(
+		         $( document.createElement( 'input' ) )
+               .attr( 'type', 'hidden' )
+               .attr( 'id', 'id' )
+               .attr( 'name', 'id' )
+               .addClass('text')
+               .val( id )
+            )		   
+		      .append(
+		         $( document.createElement( 'div' ) )
+               .append(
+                  $( document.createElement( 'label' ) )
+                  .text( langvars.strfirstname ).addClass('top')
+               )
+               .append(
+                  $( document.createElement( 'input' ) )
+                  .attr( 'type', 'text' )
+                  .attr( 'id', 'namefirst' )
+                  .attr( 'name', 'namefirst' )
+                  .addClass('text')
+                  .val( namefirst )
+               )
+            )
+            .append(
+		         $( document.createElement( 'div' ) )
+               .append(
+                  $( document.createElement( 'label' ) )
+                  .text( langvars.strlastname )
+                  .addClass('top')
+               )
+               .append(
+                  $( document.createElement( 'input' ) )
+                  .attr( 'type', 'text' )
+                  .attr( 'id', 'namelast' )
+                  .attr( 'name', 'namelast' )
+                  .addClass('text')
+                  .val( namelast )
+               )
+            )
+            .append(
+		         $( document.createElement( 'div' ) )
+               .append(
+                  $( document.createElement( 'label' ) )
+                  .text( langvars.stremail ).addClass('top')
+               )
+               .append(
+                  $( document.createElement( 'input' ) )
+                  .attr( 'type', 'text' )
+                  .attr( 'id', 'email' )
+                  .attr( 'name', 'email' )
+                  .addClass('text')
+                  .val( email )
+               )
+		      )	
+ 			   .append(
+		         $( document.createElement( 'div' ) )
+		         .addClass('right')
+               .append(
+                  $( '<button type="submit">' )
+			         .text( langvars.strchange )  
+               )
+            );
+            
+		      var modwin = $( document.createElement( 'div' ) )
+		      .append( editform )
+		      .attr('title', langvars.editfriend)
+		      .dialog({
+		         modal: true,
+		         width: 400
+		      });  
+		   });
+		   
+			$('.personlist').disableSelection();
+
+			$('button.addGroup').click(function() {
+				$(this).parent().submit();
+				return false;
+			});
+			
+		});
+
+		//]]> 
+      
+		</script>
+
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

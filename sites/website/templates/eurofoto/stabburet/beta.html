@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	
+	<link rel="stylesheet" href="${static:css/portals/eurofoto/screen.css}?${version}" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="${static:css/portals/eurofoto/print.css}?${version}" type="text/css" media="print" /> 
+	<!--[if lt IE 8]>
+		<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/eurofoto/ie.css?3.05" type="text/css" media="screen, projection" />
+	<![endif]-->
+	<!--[if IE 8]>
+		<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/eurofoto/ie8.css?3.05" type="text/css" media="screen, projection" />
+	<![endif]-->
+
+	
+        <style type="text/css">
+
+                .add_text {
+                    height: 250px;
+                }
+                a {color:#000;text-decoration:underline;}
+                h4 {
+                    font-size: 1.2em;
+                    line-height: 1.25;
+                    margin-bottom: 0.25em;
+                }
+		body {
+                    font-family:Tahoma, Arial, Helvetica, sans-serif;
+                    background-image: none;
+                    padding-top: 300;
+                    margin: 0;
+                    line-height: 24px;
+                    font-size: 100%;
+                    background-color: #ffdd00;
+                    -webkit-background-size: 3000px 5px;
+                    background-image: url(${static:gfx/stabburet/background2.jpg});
+                    background-repeat: repeat;
+                    background-position: top;
+                    background-attachment: scroll;
+                }
+		
+                .header{
+                     margin-top: 1px;           
+                     }
+		     
+		     
+		.textfields, .imgefields{
+			width: 200px;
+		}
+		
+		@font-face {
+			font-family: 'FairplexWideOT-Med';
+			src: url('/teditor/fonts/FairplexWideOT-Med.otf');
+		}
+		@font-face {
+			font-family: 'FairplexWideOT-Black';
+			src: url('/teditor/fonts/FairplexWideOT-Black.otf');
+		}
+		
+		.button{
+			margin: 12px;
+		}
+		.imageval{
+			height: 300px;
+		}
+		
+                /*.header img{
+                     position: relative;
+                     left: -70px;
+                 }*/
+	  </style>
+        
+        <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script src="/fabric.js" />
+	<script src="http://b.static.eurofoto.no/js/jquery.upload-1.0.2.js?3.103"></script>
+	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+</head>
+
+<body>
+	<div class="container create-gift">
+		<div class="span-24 last">
+			<div style="height:350px;">
+				<img src="${static:gfx/stabburet/header.png}"/>
+			</div>
+		</div>
+		<div class="span-24 last">
+			<div class="box" style="background-color: #fff;width: 920px; height: 450px"> 
+				<div class="span-12">
+					<div style="position: relative;">
+						<canvas id="c" width="439" height="439" style="position: relative"></canvas>
+					</div>
+		    
+				</div>
+				<div class="span-11 last">
+					
+					
+					<div id="accordion">
+						<div class="group hide">
+							<h3>Size</h3>
+							<div>
+								<input name="size" type="radio" value="small" checked="checked"/> <label for="size">Small</label>
+								<input name="size" type="radio" value="large"/> <label for="size">Large</label>
+							</div>
+						</div>
+                                                
+                                                
+						<div class="imageval group box">
+							<div class="span-9 center">
+								<a href="#" class="button disabled">Images</a>
+								<a href="#" id="textval" class="button">Text</a>
+							</div>
+							<div>
+								<label for="imageupload">Choose image</label><br/>
+								<input type="file" name="imageupload" id="imageupload" />
+								<div id="imagelist"><img class="image"/></div>
+								<label for="zoom">Edit</label><br/>
+								<div class="span-10 center">
+									<div>Zoom</div>
+									<div id="zoom"></div>
+								</div>
+								<div class="span-10 center prepend-top">
+									<div>Rotate</div>
+									<div id="rotate"></div>
+								</div>
+							</div>
+						</div>
+						<div class="textval group box hide">
+							<div class="span-9 center">
+								<a href="#" id="imageval" class="button">Images</a>
+								<a href="#" class="button disabled">Text</a>
+							</div>
+							
+							<div>
+								<label for="name">Dittnavn</label>
+								<input type="text" id="name" size="12" maxlength="111" value="LEVERPOSTEI"/><br/>
+								<label for="name">Year</label>
+								<input type="text" id="year" size="7" maxlength="4" value="1949"/>
+							</div>
+						</div>
+						<div>
+                                                    <a class="button" id="download" href="#">Last ned lokk</a>
+                                                    <a id="share" class="button" href="#">Del lokk</a>
+                                                    <a id="order" class="button green" href="#">Bestill lokk</a>
+                                                </div>
+					</div>
+				</div>
+			</div>	
+		</div>
+		
+                
+                
+                
+                <div class="hide" id="sharewindow">
+                    
+                    <iframe style="width: 600px; height: 600px"  src="" scrolling="no"></iframe>
+                    
+                    
+                </div>
+
+
+
+   </div>
+
+<!--
+<div class="footer container">
+   <img style="position: relative; left: -20px;" src="http://static.eurofoto.no/gfx/stabburet/footer.jpg"/>
+</div>
+-->
+
+
+
+<script>/*<![CDATA[*/
+
+
+    
+/*]]>*/</script>
+
+
+<script src="/stabburet/web/js/editor.min.js" />
+
+</body>
+</html>

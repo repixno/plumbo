@@ -1,0 +1,161 @@
+<div metal:define-macro="associatedproducts" class="row">
+	<tal:block tal:repeat="product associatedproducts">
+		<div class="col-md-4 productbox" id="associatedproducts">
+			<div class="col-md-12 header">
+				<h4 class="bottom" tal:content="product/title|default"></h4>
+			</div>
+			<div class="col-md-12 productbody">
+				<div class="span-2 productimage">
+					<tal:block tal:condition="product/images">
+						<tal:block tal:repeat="image product/images">
+							<tal:block tal:condition="equal:repeat/image/number,1">
+								<tal:block tal:define="global staticurl" tal:content="static:" />
+								<a href="${staticurl}images/products/thumbs/square/500/${image/url}" title="${product/title}" class="fancybox">
+									<img src="${staticurl}images/products/thumbs/square/200/${image/url}" 
+									widht="200" class="left" alt="${product/title}" tal:condition="image/url" />
+								</a>
+								<img src="${static:gfx/404/not_found_50px.jpg}" 
+								class="left" alt="Product photo missing." tal:condition="not:image/url" 
+								style="border: 10px solid #fff; "
+								/> 
+							</tal:block>
+						</tal:block>
+					</tal:block>
+					<tal:block tal:condition="not:product/images"><span class="quiet small">No image</span></tal:block>
+				</div>
+				
+				<div class="col-md-12">
+					<p tal:content="product/ingress|default"></p>
+				</div>
+				
+				
+				<div class="col-6-md">
+					<div class="span-6 last right" tal:condition="product/option/price">
+						
+						<tal:block tal:condition="gt:product/options/length,1">
+						
+						<label for="options${product/id}" i18n:translate="">Alternatives:</label>
+						<select name="option" id="options${product/id}">
+							<tal:block tal:repeat="option product/options">
+								<option value="${option/id}" title="${option/prodno}">${option/title}</option>
+							</tal:block>
+						</select>
+						</tal:block>
+						Kr <span class="price" tal:content="formatprice:product/option/price" />
+					</div>
+					
+					<label for="quantity${product/id}" i18n:translate="">Quantity:</label> <input class="quantity" value="1" type="text" id="quantity${product/id}"/>
+					<a class="btn btn-default add-to-cart many-options" i18n:translate="" tal:condition="gt:product/options/length,1">Add to cart</a>
+					
+					<tal:block tal:condition="equal:product/options/length,1">
+						<input name="defaultoption-prodno" value="${product/option/prodno}" type="hidden" />
+						<a class="btn btn-default add-to-cart one-option" i18n:translate="" ref="${product/option/prodno}">Add to cart</a>
+					</tal:block>
+					
+				</div>
+			</div>
+
+		</div>
+	</tal:block>
+	<script type="text/javascript">
+		$(document).ready( function() {
+		
+			$('.fancybox').fancybox();
+		
+			$('#associatedproducts [name=option]').change( function() {
+
+				var price = $(this).parent().find('span.price');
+				var id = $(this).val();
+				var quantity = $(this).parent().find('input.quantity').val();
+				
+				$.ajax({
+					url: '/api/1.0/prices/get',
+					type: 'post',
+					dataType: 'json', 
+					data: {
+						productoptionid: id,
+						quantity: 25
+					},
+					success: function(data) {
+						$(price).text( data.price );
+						$(price).effect('highlight');
+					},
+					error: function(data) {
+						pageTracker._trackEvent('Error', 'Add to cart', 'Accessories', id);
+						pageTracker._trackPageview();
+						alert('<tal:block i18n:translate="">Sorry, somehting bad happend</tal:block>');
+					}
+					
+				});
+			});
+			
+			$(document).on('click', '#associatedproducts .btn.add-to-cart' ,function() {
+			
+				
+				var shoppingcart = $("#shopping-cart img");
+				var imgtodrag = $(this).parent().parent().find(".productimage img");
+				
+				//console.log( imgtodrag[0].src);
+				
+				var pos1 = $(imgtodrag).offset();
+				var pos2 = $(shoppingcart).offset();
+				
+				var imagecopy =  $('<img/>');
+				imagecopy.attr({'src' : imgtodrag[0].src });
+				
+				$('body').append(imagecopy);
+				imagecopy.css( {'position': 'absolute', 'top' : pos1.top, 'left': pos1.left  } );
+				
+				imagecopy.animate( {
+					'position': 'absolute',
+					'top': pos2.top,
+                    'left': pos2.left,
+					'width': 50,
+					'height': 50,
+					}, function () {
+							$(this).detach()
+					}
+					)
+				
+				
+			
+				$('#cart-total-price, #total-price').after('<img src="${static:gfx/gui/ajax-loader.gif}" class="ajax-loader"/>');
+				$(this).after('<img src="${static:gfx/gui/ajax-loader.gif}" class="ajax-loader"/>');
+			
+				var prodno = $(this).parent().find('input[name=defaultoption-prodno]').val();
+			
+				if( $(this).hasClass('many-options') ) {
+					prodno = $(this).parent().find('select option:selected').attr('title');
+				}
+
+				var quantity = $(this).parent().find('input.quantity').val();
+				
+				var item = this;
+			
+				$.ajax({
+					url: '/api/1.0/cart/add',
+					dataType: 'json',
+					type: 'post',
+					data: {
+						prodno: prodno,
+						quantity: quantity
+					},
+					success: function(data) {
+						$('#cart-total-price, #total-price').text( formatPrice(data.totalprice) );
+						$('#cart-total-items').text( data.totalitems );
+						//$('#shopping-cart').effect('highlight',{}, 'slow');
+						$('.ajax-loader').remove();
+						//$(item).parent().parent().css('opacity', 0.4);
+					}, 
+					error: function(data) {
+						pageTracker._trackEvent('Error', 'Add to cart', 'Accessories', prodno);
+						pageTracker._trackPageview();
+						alert('<tal:block i18n:translate="">Sorry, somehting bad happend</tal:block>');
+					}
+				});
+			
+				return false;
+			});
+		});
+	</script>
+</div>

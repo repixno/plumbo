@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Dashboard - Admin Template</title>
+	<tal:block metal:use-macro="../../common.html/css" />
+	<script type="text/javascript" src="/js/admin.js" charset="utf-8"></script>
+	<script type="text/javascript" src="http://static.eurofoto.no/js/jquery-1.3.2.min.js"></script>
+   
+	<style type="text/css">
+      
+      
+      
+	</style>
+
+</head>
+<body>
+   
+	<div id="container" class="container">
+    	<div id="header">
+			<h2>Eurofoto Admin <span class="quiet">database import</span></h2>
+			<tal:block metal:use-macro="../../common.html/topmenu" />
+		</div>
+		<tal:block metal:use-macro="../../common.html/languages" />
+		
+		<div class="span-20">
+			
+         <h3>Database import</h3>
+			
+         <div class="ui-widget">
+			   <div class="ui-state-default ui-corner-all" style="margin-bottom: 20px; padding: .5em .5em; font-weight: normal;"> 
+   				<span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+   				Filename: <strong>${filename}</strong>
+   			</div>
+   		</div>
+         
+         <div tal:condition="exists:error" class="ui-widget">
+			   <div class="ui-state-error ui-corner-all" style="margin-bottom: 20px; padding: .5em .5em; font-weight: normal;"> 
+   				<span class="ui-icon ui-icon-circle-close" style="float: left; margin-right: .3em;"></span>
+   				<span tal:replace="error">error message here</span>
+   			</div>
+   		</div>
+   		
+         <form tal:condition="not:exists:error" method="post" action="/database/import/complete">
+            
+            <h4>Select tables to import</h4>
+			   
+            <ul tal:condition="exists:tables" id="availabletables">
+               <li tal:repeat="table tables" style="list-style: none;">
+                  <input tal:condition="table/allowed" type="checkbox" value="1" checked="1" name="tables[${table/name}]" id="table_${table/name}" /> <label tal:condition="table/allowed" for="table_${table/name}">${table/name} (${table/records} records)</label>
+                  <input tal:condition="not:table/allowed" type="checkbox" disabled="1" id="table_${table/name}" /> <label tal:condition="not:table/allowed" for="table_${table/name}">${table/name} (${table/records} records - disabled in site config)</label>
+               </li>
+            </ul>
+            
+      		<button id="reset" type="reset">
+   				Reset
+   			</button>
+   			<button id="submit" type="submit" class="blue large">
+   				Import Now
+   			</button>
+            
+			</form>
+         
+		</div>
+		
+	</div>
+	<div id="footer">
+	</div>
+
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+	
+//]]>
+</script>
+</body>
+</html>

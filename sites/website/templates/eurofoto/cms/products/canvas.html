@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title"/>
+	<style type="text/css">
+	.canvas-top {
+	   height: 208px;
+      
+      <tal:block tal:condition="exists:menuitem/article/attachments/background">
+      background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+      </tal:block>
+      
+      background-repeat:no-repeat;
+	}
+	
+
+   .canvasinfo table{
+      width: 600px;
+	}
+	
+   .canvasinfo table td, table th {
+      border-left: 1px solid #EEE;
+      border-bottom: 1px solid #EEE;
+      padding: 0.5em;
+   }
+   
+   .ui-dialog{
+      height: 620px;
+   }
+	</style>
+</head>
+<!-- define sections -->
+
+<tal:block define:section="top, Top (background and article)" />
+
+<tal:block define:section="_2cm-frame, 2cm frame HUSK REKKEFØLGE!" />
+<tal:block define:section="_4cm-frame, 4cm frame HUSK REKKEFØLGE!" />
+<tal:block define:section="simple_2cm-frame, Simple 2cm frame HUSK REKKEFØLGE!" />
+<tal:block define:section="simple_4cm-frame, Simple 4cm frame HUSK REKKEFØLGE!" />
+<tal:block define:section="simple_gallery-1x3, Simple Gallery 1x3 HUSK REKKEFØLGE!" />
+<tal:block define:section="simple_gallery-2x2, Simple Gallery 2x2 HUSK REKKEFØLGE!" />
+<tal:block define:section="noframe, No frame (article + products)" />
+<tal:block define:section="popart, Popart (article + products)" />
+<tal:block define:section="info, Info about canvas" />
+
+
+<tal:block metal:define-macro="table-cell">
+	<div style="padding-left: 27px; padding-top: 18px">
+		<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" />
+		<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/info-link" />
+		<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/buy-product-link" />
+	</div>
+</tal:block>
+
+<body>
+	<div class="container canvas">
+
+	<tal:block metal:use-macro="../../../${templates}/common.html/top" />
+	<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/top-navigation" />
+
+	<div class="span-4">
+		<ul metal:use-macro="${templateroot}/eurofoto/cms/cms.html/menu-current" />
+	</div>
+
+	<div class="span-20 last product-category">
+		<div class="span-20 last top canvas-top append-bottom">
+
+		</div>
+		<div class="span-20 last">
+         <!-- id 2306 -->
+         <div tal:content="structure cms:body:0c901b92-656a-4125-82cc-288de5606cec"/>
+		</div>
+		
+			<div class="span-20 last prepend-top">
+				<div class="span-14 colborder append-bottom">
+					<div class="span-7"><!--  phptal:cache="3h" -->
+					<tal:block tal:define="global attachment cms:attachments:7615af6e-45c8-4b50-aa36-5b5377fee371"/>
+					<img src="${static:}images/attachments/${cms:id:7615af6e-45c8-4b50-aa36-5b5377fee371}/${attachment/background}"/>
+					</div>
+					<div class="span-7 last">
+					  <!-- id 2305 -->
+	              <div tal:content="structure cms:body:7615af6e-45c8-4b50-aa36-5b5377fee371"/>
+					</div>
+				</div>
+				<div class="span-5 last">
+					<h3>Priseksempel</h3>
+
+					<div class="boxlist small">
+						<ul>
+							<tal:block tal:repeat="item sections/simple_2cm-frame">
+						   <li tal:condition="php:repeat.item.key <= '1'">
+						     <span>${shorten:item/title;14} </span>
+							  <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" />
+						   </li>
+					       </tal:block>
+					       <tal:block tal:repeat="item sections/simple_gallery-1x3">
+						   <li tal:condition="php:repeat.item.key <= '1'">
+						     <span>${shorten:item/title;14} </span>
+							  <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" />
+						    </li>
+					       </tal:block>
+						</ul>
+					</div>
+					<a href="#" class="priceinfosimple">Se alle priser</a>
+				</div>
+			</div>
+			<hr/>
+			<div class="span-20 last prepend-top">
+				<div class="span-14 colborder append-bottom">
+					<div class="span-14 last">
+						<div class="span-7">
+                     <!-- id 2304 -->
+	              <div tal:content="structure cms:body:5c4a88b1-cd74-4d94-8034-d0bfdecd7da8"/>
+						</div>
+						<div class="span-7 last"><!-- phptal:cache="3h"-->
+						   <tal:block tal:define="global attachment cms:attachments:5c4a88b1-cd74-4d94-8034-d0bfdecd7da8"/>
+					      <img src="${static:}images/attachments/${cms:id:5c4a88b1-cd74-4d94-8034-d0bfdecd7da8}/${attachment/background}"/>
+						</div>
+					</div>
+				</div>
+				<div class="span-5 last">
+						<h3>Priseksempel</h3>
+
+					<div class="boxlist small">
+						<ul>
+					    <tal:block tal:repeat="item sections/_2cm-frame">
+						   <li tal:condition="php:repeat.item.key <= '3'">
+						     <span>${shorten:item/title;14} </span>
+							  <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" />
+						   </li>
+					    </tal:block>
+						</ul>
+					</div>
+					
+					<a href="#" class="priceinfostd">Se alle priser</a>
+				</div>
+			</div>
+			<hr/>
+		<div class="span-20 last"><!--popart--></div>
+		<div class="span-20 last">
+			<tal:block tal:repeat="item sections/info" tal:condition="exists:sections/info">
+				<h2 tal:content="item/title" tal:condition="exists:item/title"></h2>
+				<p tal:content="item/ingress" tal:condition="exists:item/ingress"></p>
+				<div>
+					<tal:block tal:content="structure item/body"  tal:condition="exists:item/body" />
+				</div>
+			</tal:block>
+		</div>
+	</div>
+</div>
+
+
+<div class=" hide span-20 last canvas_prices canvasinfo" style="overflow-x:hidden;">
+   <table>
+   <thead>
+      <tr>
+         <td>
+            Størrelse
+         </td>
+         <td>
+            1-4
+         </td>
+         <td>
+            5 stk. eller flere
+         </td>
+      </tr>
+      </thead>
+      <tbody>
+         <tal:block tal:repeat="item sections/_4cm-frame" tal:condition="exists:sections/_4cm-frame"> 
+            <tr>
+               <td>
+                  <span>${item/title}</span>
+               </td>	
+               <tal:block tal:repeat="price item/option/prices"> 
+                  <td>
+                     <span>kr. <span tal:content="formatprice:price/price"></span></span>
+                  </td>
+               </tal:block>
+            </tr>
+         </tal:block>
+         <tal:block tal:repeat="item sections/_2cm-frame" tal:condition="exists:sections/_2cm-frame"> 
+            <tr>
+               <td>
+                  <span>${item/title}</span>
+               </td>	
+               <tal:block tal:repeat="price item/option/prices"> 
+                  <td>
+                     <span>kr. <span tal:content="formatprice:price/price"></span></span>
+                  </td>
+               </tal:block>
+            </tr>
+         </tal:block>
+      </tbody>
+   </table>
+</div>
+
+<div class=" hide span-20 last canvas_prices_simple canvasinfo"  style="overflow-x:hidden;">
+   <table>
+   <thead>
+      <tr>
+         <td>
+            Størrelse
+         </td>
+         <td>
+            1-4
+         </td>
+         <td>
+            5 stk. eller flere
+         </td>
+      </tr>
+      </thead>
+      <tbody>
+         <tal:block tal:repeat="item sections/simple_2cm-frame" tal:condition="exists:sections/simple_2cm-frame"> 
+            <tr>
+               <td>
+                  <span>${item/title}</span>
+               </td>	
+               <tal:block tal:repeat="price item/option/prices"> 
+                  <td>
+                     <span>kr. <span tal:content="formatprice:price/price"></span></span>
+                  </td>
+               </tal:block>
+            </tr>
+         </tal:block>
+         <tal:block tal:repeat="item sections/simple_4cm-frame" tal:condition="exists:sections/simple_4cm-frame"> 
+            <tr>
+               <td>
+                  <span>${item/title}</span>
+               </td>	
+               <tal:block tal:repeat="price item/option/prices"> 
+                  <td>
+                     <span>kr. <span tal:content="formatprice:price/price"></span></span>
+                  </td>
+               </tal:block>
+            </tr>
+         </tal:block>
+         <tal:block tal:repeat="item sections/simple_gallery-1x3" tal:condition="exists:sections/simple_gallery-1x3"> 
+            <tr>
+               <td>
+                  <span>${item/title}</span>
+               </td>	
+               <tal:block tal:repeat="price item/option/prices"> 
+                  <td>
+                     <span>kr. <span tal:content="formatprice:price/price"></span></span>
+                  </td>
+               </tal:block>
+            </tr>
+         </tal:block>
+         <tal:block tal:repeat="item sections/simple_gallery-2x2" tal:condition="exists:sections/simple_gallery-2x2"> 
+            <tr>
+               <td>
+                  <span>${item/title}</span>
+               </td>	
+               <tal:block tal:repeat="price item/option/prices"> 
+                  <td>
+                     <span>kr. <span tal:content="formatprice:price/price"></span></span>
+                  </td>
+               </tal:block>
+            </tr>
+         </tal:block>
+      </tbody>
+   </table>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>	
+</div>
+<script type="text/javascript">
+
+   $(document).ready(function(){
+      $('a.fancybox').fancybox();
+      
+      
+   $('.priceinfostd').click( function(){
+      $('.canvas_prices').dialog({
+         height: 570,
+         width: 620,
+         modal: true,
+         position: 'center',
+         autoOpen:false,
+         title:'Priser lerret spesial.',
+         draggable: false ,
+         resizable: false,
+         overlay: { opacity: 0.5, background: 'black'}
+      });
+      $('.canvas_prices').dialog('open');   
+      return false;
+   });
+   
+   $('.priceinfosimple').click( function(){
+      $('.canvas_prices_simple').dialog({
+         height: 570,
+         width: 630,
+         modal: true,
+         position: 'center',
+         autoOpen:false,
+         title:'Priser lerret 123.',
+         draggable: false ,
+         resizable: false,
+         overlay: { opacity: 0.5, background: 'black'}
+      });
+      $('.canvas_prices_simple').dialog('open');   
+      return false;
+   });
+   
+   });
+   
+</script>
+</body>
+</html>

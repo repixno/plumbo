@@ -1,0 +1,198 @@
+#choose-template{
+  overflow-x: hidden;
+  height: 700px;
+  min-width: 200px;
+}
+
+@media ( max-width: 991px){
+  #choose-template{
+	  overflow-x: hidden;
+	  height: 200px;
+	}
+}
+
+.editorcontainer {
+  position: relative;
+  text-align: center;
+}
+.editorcontainer #template-wrapper {
+  position: relative;
+  background: #ccc url(http://static.repix.no/gfx/gui/show_transparent.gif) repeat top left;
+  overflow: hidden;
+  border: 1px solid #ccc;
+}
+.editorcontainer #image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 95;
+}
+.editorcontainer #template {
+  position: relative;
+  z-index: 100;
+}
+.editorcontainer .text {
+  position: absolute;
+  top: 20px;
+  left: 0px;
+  width: 100%;
+  z-index: 610;
+  white-space: nowrap;
+}
+.editorcontainer #image-wrapper {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 90;
+}
+.helper, #helper {
+    top: 0;
+    left: 0;
+    opacity: .1;
+    position: absolute;
+    z-index: 200;
+    /* cursor: move !important; */
+    background: transparent url(../gfx/pixblank.gif);
+}
+[contenteditable="true"] { padding: 5px 10px; }
+[contenteditable="true"]:hover { outline: 2px dashed #ccc; }
+[contenteditable="true"]:active,
+[contenteditable="true"]:focus{
+    border:none;
+    outline: 2px dashed #0090D2;
+  }
+  
+  
+  
+.fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 24px;
+    direction: ltr;
+    cursor: pointer;
+}
+
+.fontSelect {
+	position: relative;
+	padding: 3px;
+	height: 28px;
+	line-height: 28px;
+	cursor: pointer;
+	margin: 3px;
+	width: 200px;
+	background-image: -webkit-linear-gradient(top, #f9f9f9, #f0f0f0);
+	background-image: -moz-linear-gradient(top, #f9f9f9, #f0f0f0);
+	background-image: -o-linear-gradient(top, #f9f9f9, #f0f0f0);
+	background-image: -ms-linear-gradient(top, #f9f9f9, #f0f0f0);
+	background-image: linear-gradient(top, #f9f9f9, #f0f0f0);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='$from', EndColorStr='$to');
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	border: 1px solid #cecece;
+    
+        float: left;
+}
+
+.fontSelect span {
+	overflow: hidden;
+	margin-left: 5px;
+}
+
+.fontSelect .arrow-down {
+	position: absolute;
+	right: 10px;
+	top: 14px;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+
+	border-top: 6px solid #AAA;
+}
+
+.fontSelectUl {
+	list-style: none;
+	width: 200px;
+	background: #f9f9f9;
+	position: absolute;
+	left: 0;
+	top: 35px;
+}
+
+.fontSelectUl li {
+	height: 24px;
+	line-height: 24px;
+	overflow: hidden;
+	cursor: pointer;
+	padding: 0 10px;
+
+	font-size: 14px;
+
+	border-left: 1px solid #f0f0f0;
+	border-right: 1px solid #f0f0f0;
+}
+
+.fontSelectUl li:last-child {
+	-webkit-border-radius: 0 0 4px 4px;
+	-moz-border-radius: 0 0 4px 4px;
+	border-radius: 0 0 4px 4px;
+
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.fontSelectUl li:hover {
+	background: #DDD;
+}
+
+.template-thumb {
+   
+    margin: 5px 5px;
+    float: left;
+}
+.active-template{
+  border: 2px solid #eee;
+	border-color: #c0c4cc;
+	border-radius: 4px 4px 4px 4px;
+	border-width: 2px;
+}
+
+.mal{
+ /*utkommentert 2018
+ height: 111px;*/
+  widht: auto;
+}
+
+.maltitle{
+border: none;
+font-family: Myriad;
+letter-spacing: 1px;
+text-align: center;
+
+
+}
+
+
+
+      #malid_3188 , #malid_3189, #malid_3190
+      {
+      
+       border: 1px solid black !important;
+           background-color: #dedeea;
+    }
+    
+    
+
+    
+      #malid_3144, #malid_3183, #malid_3184 , #malid_3185, #malid_3186, #malid_3187 , #malid_3188
+      {
+      
+       border: 1px solid black !important;
+          
+    }
+    

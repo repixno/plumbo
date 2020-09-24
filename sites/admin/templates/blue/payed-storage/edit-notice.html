@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Payed Storage</title>
+<tal:block metal:use-macro="../common.html/css" />
+<script type="text/javascript" src="/js/admin.js"></script>
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+
+		<tal:block metal:use-macro="../common.html/languages" />
+			
+		<div id="content" class="span-20">
+				<div class="span-10">
+				<h3>
+					<tal:block i18n:translate="">Notice</tal:block>
+				</h3>
+				
+				  <tal:block tal:condition="exists:error">
+				     <p style="color:red;" tal:content="error">replace this...</p>
+				  </tal:block>
+				
+   				<form name="mailform" action="/payed-storage/notice/save" method="POST">
+   				   
+   				   <input type="hidden" name="id" value="${batch/id}"/>
+   				   <label i18n:translate="">#Mail_id</label><br/>
+   				   <label tal:content="batch/id">id here...</label><br/>
+   				   
+   				   <label i18n:translate="">Mail template to send</label><br/> 
+   				   <select type="text" name="mailid" class="short-text">
+   					<tal:block tal:repeat="mailitem mailitems">
+   					   <option tal:condition="mailitem/selected" selected="1" value="${mailitem/id}" tal:content="mailitem/template">test</option>
+   					   <option tal:condition="not:mailitem/selected" value="${mailitem/id}" tal:content="mailitem/template">test</option>
+   					  </tal:block>
+   					</select><br />
+   
+   					<label i18n:translate="">Send date</label><br/> 
+   				   <input type="text" class="datepicker short-text" name="send_date" value="${batch/send_date}"/><br/>
+   				   
+   				   <label i18n:translate="">Expire date ( date to display in mail ) </label><br/> 
+   				   <input type="text" class="datepicker short-text" name="expire_date" value="${batch/expire_date}"/><br/>
+   				   
+   				   <label i18n:translate="">Type_of_notice</label><br/> 
+   				   <select type="text" name="type_of_notice" class="short-text">
+   					<tal:block tal:repeat="noticetype types_of_notice">
+   					   <option tal:condition="noticetype/selected" selected="1" value="${noticetype/id}" tal:content="noticetype/name">test</option>
+   					   <option tal:condition="not:noticetype/selected" value="${noticetype/id}" tal:content="noticetype/name">test</option>
+   					  </tal:block>
+   					</select><br />
+   					
+   					<label i18n:translate="">Period</label><br/> 
+   				   <select type="text" name="period" class="short-text">
+   					<tal:block tal:repeat="period periods">
+   					   <option tal:condition="period/selected" selected="1" value="${period/id}" tal:content="period/name">test</option>
+   					   <option tal:condition="not:period/selected" value="${period/id}" tal:content="period/name">test</option>
+   					  </tal:block>
+   					</select><br /><br />
+   					
+   					<label i18n:translate="">Recipients_started_processing</label><br />
+   				   <label tal:content="batch/recipients_processing">id here...</label><br /><br />
+   
+   				   <label i18n:translate="">Recipients_processed</label><br/>
+   				   <label tal:content="batch/recipients_processed">id here...</label><br /><br />
+   				   
+   				   <label i18n:translate="">Recipients_started_sending</label><br />
+   				   <label tal:content="batch/started_sending">id here...</label><br /><br />
+   				   
+   				   <label i18n:translate="">Finished_sending</label><br/>
+   				   <label tal:content="batch/finished_sending">id here...</label><br /><br />
+   				   
+   				   <!--
+   				   <label i18n:translate="" valign="top">Notice type</label><br />
+   					<select type="text" name="notice_type" class="short-text">
+   					<tal:block tal:repeat="notice notice_types">
+   					   <option tal:condition="notice/selected" selected="1" value="${notice/id}" tal:content="notice/name">test</option>
+   					   <option tal:condition="not:notice/selected" value="${notice/id}" tal:content="notice/name">test</option>
+   					  </tal:block>
+   					</select><br />
+   					
+   					<label i18n:translate="" valign="top">Template</label><br />
+   					<select type="text" name="template" class="short-text">
+   					<tal:block tal:repeat="template templates">
+   					   <option tal:condition="template/selected" selected="1" value="${template/id}" tal:content="template/name">test</option>
+   					   <option tal:condition="not:template/selected" value="${template/id}" tal:content="template/name">test</option>
+   					  </tal:block>
+   					</select><br />
+   					-->
+   					<br />
+   					<tal:block tal:condition="editable">
+   					 <button type="submit" id="saveAll" class="call-to-action" i18n:translate="">Save all changes</button>
+   					</tal:block>
+   				</form>
+   				<br />
+   				<a href="/payed-storage/notices">Back</a>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" language="javascript">
+//<![CDATA[
+	
+		$(function() {
+			$(".datepicker").datepicker(
+				{
+					changeMonth: true,
+					changeYear: true,
+					regional: 'no'
+				}
+			);
+		});
+      
+//]]>
+</script>
+</body>
+</html>

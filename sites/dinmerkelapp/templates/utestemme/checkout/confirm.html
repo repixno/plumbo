@@ -1,0 +1,513 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<tal:block tal:define="global dontShowCart" />
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Confirm your order</tal:block>
+	<style type="text/css">
+		table tr td.price,
+		table tr td.unitprice,
+		table tr td.total-price,
+		table tr td:last-child { text-align:right; }
+		.container table td, .container table th { padding: 2px !important }
+		h2{margin-bottom: 0em;}
+		
+	</style>
+</head>
+
+
+<body>
+   <div id="loader-overlay" style="display: none;">
+		<div class="loadingInfo">
+			<img src="${static:gfx/gui/ajax-loader-gray.gif}" /><br/>
+			<br/>
+			<h3 i18n:translate="">Order is being completed, please wait.</h3>
+		</div>
+	</div>
+
+	<div class="container">
+
+	
+	
+	<div class="content">
+		<div metal:use-macro="../../${templates}/common.html/top" />
+	
+		<!--<form action="/checkout/complete/" method="post">-->
+		<form action="/checkout/execute/" method="post">
+			<div class="row">
+				<div class="col-12 mb-3 mt-3"> 
+				   
+					  <h2 i18n:translate="">Bekreft din bestilling</h2>
+					 
+				</div>
+			  
+			
+				
+				  <table class="col-10" tal:condition="cart/items">
+					  <thead>
+						  <tr>
+							  <th i18n:translate="">Product</th>
+							  <th></th>
+							  <th i18n:translate="">Quantity</th>
+							  <th i18n:translate="">Price</th>
+							  <th i18n:translate="">Sum</th>
+						  </tr>
+					  </thead>
+					  
+					  <tbody>
+						  <!-- prints -->
+						  <tal:block tal:condition="exists: cart/items/prints">
+							  <tal:block tal:repeat="print cart/items/prints">
+								  <tr>
+									  <td>
+										  <tal:block tal:content="print/product/title">Product</tal:block>
+									  </td>
+									  <td>
+		  
+									  </td>
+									  <td>
+										  <span class="quiet" tal:content="print/quantity"></span>
+										  <!--<a href="" i18n:translate="">Change</a>-->
+									  </td>
+									  <td class="unitprice" tal:content="formatprice:print/unitprice">Price</td>
+									  <td class="price" tal:content="formatprice:print/price">Sum</td>
+								  </tr>
+								  
+								  
+								  <tal:block tal:condition="exists:print/license">
+								  <tr tal:repeat="license print/license">
+									  <td>
+										  <tal:block tal:condition="exists:license/product/title" tal:content="license/product/title">License</tal:block>
+									  </td>
+									  <td>
+										  &nbsp;
+									  </td>
+									  <td>
+										  <span class="quiet">1</span>
+									  </td>
+									  <td class="unitprice" tal:content="formatprice:license/unitfee">Price</td>
+									  <td class="price" tal:content="formatprice:license/totalfee">Sum</td>
+									  <td class="removeItem">
+										  &nbsp;
+									  </td>
+								  </tr>
+								  </tal:block>
+								  
+							  </tal:block>
+						  </tal:block>
+						  
+						  <!-- production method -->
+						  <tal:block tal:condition="exists: cart/items/productionmethod">
+						  
+							  <tr tal:condition="not:equal:cart/items/productionmethod/prodno,348">
+								  <td>
+									  <tal:block tal:content="cart/items/productionmethod/title">Product</tal:block>
+								  </td>
+								  <td>
+		  
+								  </td>
+								  <td tal:content="cart/items/productionmethod/quantity">
+								  
+								  </td>
+								  <td tal:content="formatprice:cart/items/productionmethod/unitprice">Price</td>
+								  <td class="price" tal:content="formatprice:cart/items/productionmethod/price">Sum</td>
+							  </tr>
+						  </tal:block>
+						  
+						  <!-- correction method -->
+						  <tal:block tal:condition="exists: cart/items/correctionmethod">
+						  
+							  <tr tal:condition="not:equal:cart/items/correctionmethod/prodno,351">
+								  <td>
+									  <tal:block tal:content="cart/items/correctionmethod/title">Product</tal:block>
+								  </td>
+								  <td>
+		  
+								  </td>
+								  <td tal:content="cart/items/correctionmethod/quantity">
+								  
+								  </td>
+								  <td tal:content="formatprice:cart/items/correctionmethod/unitprice">Price</td>
+								  <td class="price" tal:content="formatprice:cart/items/correctionmethod/price">Sum</td>
+							  </tr>
+						  </tal:block>
+						  
+						  <!-- Paper quality -->
+						  <tal:block tal:condition="exists: cart/items/paperquality">
+						  
+							  <tr tal:condition="not:equal:cart/items/paperquality/prodno,10">
+								  <td>
+									  <tal:block tal:content="cart/items/paperquality/title">Product</tal:block>
+								  </td>
+								  <td>
+		  
+								  </td>
+								  <td tal:content="cart/items/paperquality/quantity">
+								  
+								  </td>
+								  <td tal:content="formatprice:cart/items/paperquality/unitprice">Price</td>
+								  <td class="price" tal:content="formatprice:cart/items/paperquality/price">Sum</td>
+							  </tr>
+						  </tal:block>
+						  
+						  <!-- enlargements -->
+						  <tal:block tal:condition="exists: cart/items/enlargements">
+							  <tal:block tal:repeat="enlargement cart/items/enlargements">
+								  <tr>
+									  <td>
+										  <tal:block tal:content="enlargement/product/title">Product</tal:block>
+									  </td>
+									  <td>
+										  
+									  </td>
+									  <td>
+										  (<span class="quiet" tal:content="enlargement/quantity"></span>) 
+										  <!--<a href="" i18n:translate="">Change</a>-->
+									  </td>
+									  <td tal:content="formatprice:enlargement/unitprice">Price</td>
+									  <td class="price" tal:content="formatprice:enlargement/price">Sum</td>
+								  </tr>
+								  
+								  <tal:block tal:condition="exists:enlargement/license">
+								  <tr tal:repeat="license enlargement/license">
+									  <td>
+										  <tal:block tal:condition="exists:license/product/title" tal:content="license/product/title">License</tal:block>
+									  </td>
+									  <td>
+										  &nbsp;
+									  </td>
+									  <td>
+										  <span class="quiet">1</span>
+									  </td>
+									  <td class="unitprice" tal:content="formatprice:license/unitfee">Price</td>
+									  <td class="price" tal:content="formatprice:license/totalfee">Sum</td>
+									  <td class="removeItem">
+										  &nbsp;
+									  </td>
+								  </tr>
+								  </tal:block>
+								  
+							  </tal:block>
+						  </tal:block>
+						  
+						  <!-- Gifts -->
+						  <tal:block tal:condition="exists: cart/items/gifts">
+							  <tal:block tal:repeat="products cart/items/gifts">
+								  <tal:block tal:repeat="gift products">
+								  <tr>
+									  <td>
+										  <tal:block tal:content="gift/product/title">Product</tal:block>
+									  </td>
+									  <td>
+										  
+									  </td>
+									  <td>
+										  <span tal:content="gift/quantity"/> 
+									  </td>
+									  <td class="unitprice" tal:content="formatprice:gift/unitprice">Price</td>
+									  <td class="price" tal:content="formatprice:gift/price">Sum</td>
+								  </tr>
+								  
+							   <tal:block tal:condition="exists:gift/redeyeremoval">
+								  <tr>
+									  <td colspan="2" tal:content="gift/redeyeremoval/product/title"></td>
+									  <td tal:content="gift/redeyeremoval/quantity"></td>
+									  <td class="unitprice" tal:content="formatprice:gift/redeyeremoval/price"></td>
+									  <td class="price" tal:content="formatprice:gift/redeyeremoval/price"></td>
+								  </tr>
+								  </tal:block>
+								  
+								  <tal:block tal:condition="exists:gift/license">
+								  <tr tal:repeat="license gift/license">
+									  <td>
+										  <tal:block tal:condition="exists:license/product/title" tal:content="license/product/title">License</tal:block>
+									  </td>
+									  <td>
+										  &nbsp;
+									  </td>
+									  <td>
+										  <span class="quiet">1</span>
+									  </td>
+									  <td class="unitprice" tal:content="formatprice:license/unitfee">Price</td>
+									  <td class="price" tal:content="formatprice:license/totalfee">Sum</td>
+									  <td class="removeItem">
+										  &nbsp;
+									  </td>
+								  </tr>
+								  </tal:block>
+								  
+								  </tal:block>
+							  </tal:block>
+						  </tal:block>
+						  
+						  
+						  <!-- Merkelapp -->
+						  <tal:block tal:condition="exists: cart/items/merkelapp">
+							  <tal:block tal:repeat="products cart/items/merkelapp">
+								  <tal:block tal:repeat="merkelapp products">
+								  <tr>
+									  <td>
+										  <tal:block tal:content="merkelapp/product/title">Product</tal:block>
+									  </td>
+									  <td>
+										  
+									  </td>
+									  <td>
+										  <span tal:content="merkelapp/quantity"/> 
+									  </td>
+									  <td class="unitprice" tal:content="formatprice:merkelapp/unitprice">Price</td>
+									  <td class="price" tal:content="formatprice:merkelapp/price">Sum</td>
+								  </tr>
+								  
+								  
+								  
+								  </tal:block>
+							  </tal:block>
+						  </tal:block>
+						  
+						  <!-- Goods -->
+						  <tal:block tal:condition="exists: cart/items/goods">
+							  <tal:block tal:repeat="good cart/items/goods">
+								  <tr>
+									  <td>
+										  <tal:block tal:condition="not:exists: good/usertitle">
+										   <tal:block tal:content="good/product/title">Product</tal:block>
+										  </tal:block>
+										  <tal:block tal:condition="exists: good/usertitle">
+										   <tal:block tal:content="good/usertitle">Product</tal:block>
+										  </tal:block>
+										  
+										   
+									  </td>
+									  <td>
+										  
+									  </td>
+									  <td>
+										  <span tal:content="good/quantity"/> 
+									  </td>
+									  <td class="unitprice" tal:content="formatprice:good/unitprice">Price</td>
+									  <td class="price" tal:content="formatprice:good/price">Sum</td>
+								  </tr>
+							  </tal:block>
+						  </tal:block>
+		  
+						  
+						  <!-- mediaclip -->
+						  <tal:block tal:condition="exists: cart/items/mediaclip">
+							  
+							  <tal:block tal:repeat="mediaclip cart/items/mediaclip">
+								  <tal:block tal:repeat="mediaclipproduct mediaclip">
+								  <tr>
+									  <td>
+										  <tal:block tal:content="mediaclipproduct/product/title"></tal:block>
+									  </td>
+									  <td>
+										  <tal:block tal:content="mediaclipproduct/usertitle"></tal:block> 
+									  </td>
+									  <td>
+										  <span tal:content="mediaclipproduct/quantity|default" /> 
+									  </td>
+									  <td class="unitprice" tal:content="formatprice:mediaclipproduct/unitprice">Price</td>
+									  <td class="price" tal:content="formatprice:mediaclipproduct/price">Sum</td>
+								  </tr>
+								  
+								  <tal:block tal:condition="exists:mediaclipproduct/redeyeremoval">
+								  <tr>
+									  <td colspan="2" tal:content="mediaclipproduct/redeyeremoval/product/title"></td>
+									  <td tal:content="mediaclipproduct/redeyeremoval/quantity"></td>
+									  <td class="unitprice" tal:content="formatprice:mediaclipproduct/redeyeremoval/price"></td>
+									  <td class="price" tal:content="formatprice:mediaclipproduct/redeyeremoval/price"></td>
+								  </tr>
+								  </tal:block>
+								  
+								  <tal:block tal:condition="exists:mediaclipproduct/extrapages">
+								  <tr>
+									  <td colspan="2" tal:content="mediaclipproduct/extrapages/product/title"></td>
+									  <td tal:content="mediaclipproduct/extrapages/quantity"></td>
+									  <td class="unitprice" tal:content="formatprice:mediaclipproduct/extrapages/unitprice"></td>
+									  <td class="price" tal:content="formatprice:mediaclipproduct/extrapages/price"></td>
+								  </tr>
+								  </tal:block>
+								  
+								  <tal:block tal:condition="exists:mediaclipproduct/license">
+								  <tr tal:repeat="license mediaclipproduct/license">
+									  <td>
+										  <tal:block tal:condition="exists:license/product/title" tal:content="license/product/title">License</tal:block>
+									  </td>
+									  <td>
+										  &nbsp;
+									  </td>
+									  <td>
+										  <span class="quiet">1</span>
+									  </td>
+									  <td class="unitprice" tal:content="formatprice:license/unitfee">Price</td>
+									  <td class="price" tal:content="formatprice:license/totalfee">Sum</td>
+									  <td class="removeItem">
+										  &nbsp;
+									  </td>
+								  </tr>
+								  </tal:block>
+								  </tal:block>
+							  </tal:block>
+						  </tal:block>
+						  
+						  <!-- delivery and payment -->
+						  <tal:block tal:condition="exists: cart/deliverytype">
+							  <tr>
+								  <td i18n:translate="">Delivery method</td>
+								  <td tal:content="cart/deliverytype/title"></td>
+								  <td></td>
+								  <td></td>
+								  <td class="price" tal:content="formatprice:cart/deliverytype/price"></td>
+							  </tr>
+						  </tal:block>
+						  
+						  <tal:block tal:condition="exists: cart/paymenttype">
+							  <tr>
+								  <td i18n:translate="">Payment method</td>
+								  <td tal:content="cart/paymenttype/title"></td>
+								  <td></td>
+								  <td></td>
+								  <td class="price" tal:content="formatprice:cart/paymenttype/price"></td>
+							  </tr>
+						  </tal:block>
+		  
+						  
+						  <!-- discount -->
+						  <tal:block tal:condition="exists: cart/discount">
+							  <tr class="discount" tal:condition="exists:cart/discount/final" tal:repeat="rebate cart/discount/final">
+								  <td>
+									  <span class="quiet" tal:content="cart/discount/info/name"></span><br />
+									  <span tal:content="rebate/product/title"></span>
+								  </td>
+								  <td>
+								  </td>
+								  <td>
+									  <span tal:content="rebate/quantity">1</span><br />
+								  </td>
+								  <td class="unitprice">-<tal:block tal:content="formatprice:rebate/unitdiscount" /></td>
+								  <td class="price">-<tal:block tal:content="formatprice:rebate/totaldiscount" /></td>
+							  </tr>
+						  </tal:block>
+						  
+						  <!-- credits -->
+						  <tal:block tal:condition="exists: cart/credits">
+							<tal:block tal:condition="exists:cart/credits" tal:repeat="credit cart/credits">
+							  <tr class="discount" tal:condition="exists:credit/usedquantity">
+								  <td>
+									  <span class="quiet" tal:content="credit/usertitle|default"><tal:block i18n:translate="">Free</tal:block></span><br />
+									  <span tal:content="credit/product/title"></span>
+								  </td>
+								  <td>
+								  </td>
+								  <td>
+									 <span tal:content="credit/usedquantity">1</span><br />
+								  </td>
+								  <td class="unitprice"></td>
+								  <td class="price">-<tal:block tal:content="formatprice:credit/usedprice" /></td>
+							  </tr>
+							</tal:block>
+						  </tal:block>
+						  
+						  <!-- giftcard -->
+						  <tal:block tal:condition="exists:cart/giftcard">
+							<tal:block tal:condition="exists:cart/giftcard/usedvalue">
+							  <tr class="discount" tal:condition="exists:cart/giftcard/usedvalue">
+								  <td>
+									  <span class="quiet" tal:content="cart/giftcard/description|default"><tal:block i18n:translate="">Giftcard</tal:block></span><br />
+									  <span class="quiet">Rest value is </span><span class="quiet" tal:content="cart/giftcard/value"></span>
+								  </td>
+								  <td>
+								  </td>
+								  <td>
+									 <span>1</span><br />
+								  </td>
+								  <td class="unitprice"></td>
+								  <td class="price">-<tal:block tal:content="formatprice:cart/giftcard/usedvalue" /></td>
+							  </tr>
+							</tal:block>
+						  </tal:block>
+		  
+						  <tr>
+								
+							  <td colspan="4" class="mt-3">
+							
+								<strong><tal:block i18n:translate="">Total price</tal:block> </strong>
+						
+							  </td>
+							  <td class="total-price large" style="font-weight: bold;"> <strong tal:content="formatprice:cart/totalprice" id="total-price">?</strong></td>
+							  <br/>
+						  </tr>
+						  
+					  </tbody>
+				  </table>
+		  
+				  <hr/>
+		  
+					  
+				  
+				
+			
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col-md-12"  tal:condition="cart/deliveryinfo">
+					<strong>Leveringsadresse</strong><br/>
+					${cart/deliveryinfo/name}<br/>
+					${cart/deliveryinfo/address}<br/>
+					${cart/deliveryinfo/zipcode} ${cart/deliveryinfo/city}<br/>
+			
+				
+				
+			
+				
+				<div class="col-md-10 mb-3">
+					<div class="text-right">
+						<button class="btn btn-success call-to-action" type="submit" i18n:translate="">Confirm order</button>
+					 </div>
+				</div>
+			</div>
+			
+		</div>
+		</form>
+	</div>
+	<div metal:use-macro="../../${templates}/common.html/footer" />	
+</div>
+		
+
+<script type="text/javascript">
+	$("a.popup").fancybox({ 
+		'zoomSpeedIn': 300, 
+		'zoomSpeedOut': 300, 
+		'overlayShow': true,
+		'frameWidth': 900,
+		'frameHeight': 500 }
+	); 
+</script>
+
+<script type="text/javascript">
+
+		$(document).ready( function() {
+			
+		   $( '.call-to-action' ).click( function() {
+		      
+		      $('#loader-overlay')
+			   .css('opacity', '0.8')
+			   .css('margin','0')
+			   .css( 'visibility', 'visible' )
+			   .width( $(window).width() )
+			   .height( $(window).height() );
+			   
+		   });
+		   
+		   $('.refresh').click( function() {
+				window.location.reload();
+				return false;
+			});
+		   
+		});
+</script>
+
+
+</body>
+</html>

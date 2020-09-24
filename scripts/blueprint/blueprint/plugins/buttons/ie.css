@@ -1,0 +1,55 @@
+/* only ie6 */
+* html button { 
+	width: 0;
+	overflow:visible;
+	padding-left: .8em;
+	padding-right: .8em;
+	
+}
+
+
+button {
+	/*position: relative;
+	top: -.45em; */
+	margin-left: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+
+}
+
+button.inline {
+	position: relative;
+	top: -.45em;
+}
+
+
+button, a.button {
+	outline:      none !important;
+	border:       1px solid #000 !important;
+	border-top:   1px solid #ccc !important;
+	border-left:  1px solid #ccc !important;
+	filter: Shadow(Color=#cccccc, Direction=135, Strength=5)
+}
+
+button:hover, a.button:hover {
+	text-decoration: none;
+	border:       1px solid #333333 !important;
+	border-top:   1px solid #eee  !important;
+	border-left:  1px solid #eee  !important;
+}
+
+button:active, a.button:active,button:focus, a.button:focus {
+	border:       1px solid #000 !important;
+	border-top:   1px solid #ccc  !important;
+	border-left:  1px solid #ccc  !important;
+}
+
+#main-navigation {
+    height: 4.6em;
+    clear: both;
+}
+
+
+
+* html a.playButton_60x60 { background-image: url(gfx/play_60x60.gif) !important}
+* html a.playButton_60x60:hover { background-image: url(gfx/play_60x60.gif) !important}

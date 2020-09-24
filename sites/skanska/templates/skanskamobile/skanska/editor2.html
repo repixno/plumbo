@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
+        <meta name="viewport" content="width=540, user-scalable=yes" />
+        <link href="css/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
+        <link href="css/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+        <link href="css/web/css/redmond/jquery-ui.css" rel="stylesheet" />
+		<title>Skanska Photouploader</title>
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
+		<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+		<script>
+		    WebFont.load({
+			      custom: {
+				families: ['KidprintMTStd-Bold', 'Populaire', 'FairplexWideOT-Med'],
+				urls: ['/skanskastatic/fonts.css']
+			      }
+			    });
+		</script>
+		<link href="/css/mobile/css/main.css" rel="stylesheet" media="screen" />
+		<style>
+
+			input[type=radio]:checked ~ .check {
+				border: 5px solid #0DFF92;
+			}
+		  
+			input[type=radio]:checked ~ .check::before{
+				background: #0DFF92;
+			}
+			
+			input[type=radio]:checked ~ label{
+				color: #0DFF92;
+			}
+			
+input[type='radio'] { transform: scale(1.5);
+   
+      margin: 0 0 11px 0;
+}
+
+ input[type='radio']:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 30px;
+        
+    
+        background-color: #ffffff;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+     border: 1px solid #3498db;
+    }
+
+    input[type='radio']:checked:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 30px;
+       
+       
+        background-color: #fbdd00;
+        content: '';
+        
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid #ffffff;
+    }
+
+		</style>
+	
+	<div metal:use-macro="../common.html/javascript" />
+	<script src="https://malsup.github.com/jquery.form.js"></script>
+	
+	<!--cookie
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#edeff5",
+      "text": "#838391"
+    },
+    "button": {
+      "background": "transparent",
+      "text": "#4b81e8",
+      "border": "#4b81e8"
+    }
+  },
+  "content": {
+    "message": "Denne websiden bruker informasjonskapsler (cookies)",
+    "dismiss": "Ok",
+    "link": "Les mer"
+  }
+})});
+</script>
+Cookie Slutt-->
+    </head>
+    
+    <body>    
+        <div class="row text-center header">
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 33%; text-align: left">
+                        <button class="hide btn btn-skanska-white" id="back">BACK</button>
+                    </td>
+		    <td>
+			<div <td style="width: 33%; text-align: center">
+			    <h4 class="" id="indexhead-1">Upload photo</h4>
+			    <h4 class="hide" id="indexhead-2">Edit photo</h4>
+			   
+			</div> 
+		    </td>
+                    <td style="width: 33%; text-align: right">
+                        <button class="btn btn-skanska-white nextknapp" id="next">&nbsp;NEXT&nbsp;</button>
+                        <button class="btn btn-skanska-white bestillknapp hide nexttop">ORDER</button>
+                    </td>
+				</tr>
+            </table>
+        </div>
+       <div class="container center">
+                 
+            <div class="row" style="background-color: white">
+                <div class="text-center" style="position: relative; margin-top: 20px;">
+                    <canvas id="c" width="400" height="480" style="position: relative;"></canvas>
+		</div>
+                
+            </div>
+            <div id="menu">
+                <div class="row">
+			<div id="row">
+						<div class="selected" id="index-1" style="position: relative; padding:20px">
+														<span class="btn btn-skanska yellow fileinput-button">
+								<span>Choose photo</span>
+								<!-- The file input field used as target for the file upload widget -->
+								<input style="height:70px;" id="fileupload" type="file" name="files[]"  data-url="/api/1.0/upload/skanska" accept="image/jpeg" tal:attributes="multiple facebookapp"/>
+							</span>
+							<!--<button id="velgbilde" class="button yellow" style="width: 260px;">Last opp bilde</button>-->
+						</div>
+						<div class="hide buttons" id="index-2">
+							<div>
+								<button class="btn btn-skanska zoom" value="100" id="zooml">Zoom in</button>
+								<button class="btn btn-skanska zoom" value="100" id="zooms">Zoom out</button>
+							</div>
+							<div>
+								<button class="btn btn-skanska move" value="100" id="left">&#8592;</button>
+								<button class="btn btn-skanska move" value="100" id="up">&#8593;</button>
+								<button class="btn btn-skanska move" value="100" id="down">&#8595;</button>
+								<button class="btn btn-skanska move" value="100" id="right">&#8594;</button>
+							</div>
+							<button class="btn btn-skanska hide" value="100" id="roteteright">Mindre</button>
+							<button class="btn btn-skanska hide" value="100" id="roteteleft">Mindre</button>
+						</div>
+						
+						
+						
+						
+				<!--<div class="hide order" id="index-4" style="width: 540px; margin-top: 10px;">
+				    <div class="share">
+					<span id="facebook"><img src="http://test.static.repix.no/css/web/images/facebook.jpg"/><label>Del på facebook</label></span>
+				    </div>
+				</div>-->
+                <div class="hide order" id="index-3" <!--style="width: 540px; margin-top: 10px;-->">
+                                    <div class="orderform" style="text-align: center">
+                                            <form>
+                                                    <table style="">
+                                                        <tr>
+                                                            <td>
+                                                                <input type="radio" id="lokksize" name="lokksize" value="small" checked="checked" />
+                                                            </td>
+                                                            <td>
+                                                                <label class="orderlabel" >1 stickers</label>
+                                                            </td>
+                                                        </tr>
+                                                       
+                                                    </table>
+                                            </form>	
+                                    </div>
+                                    
+                            </div> 
+                       </div>
+                </div>
+            </div>
+        </div>
+        
+        <div metal:use-macro="../common.html/footer" />
+        
+
+	<!--<script src="js/jqupload/js/jquery.iframe-transport.js"></script>
+	
+	<script src="js/jqupload/js/jquery.fileupload.js"></script>
+    <script src="js/fabric/dist/fabric_with_gestures.js" />-->
+	
+	<script src="/js/jquery.iframe-transport.js"></script>
+	<!-- The basic File Upload plugin -->
+	<script src="/js/jquery.fileupload.js"></script>
+
+
+	<script src="/js/fabric/dist/fabric_with_gestures.js" />
+	
+	
+	
+	
+	<script src="/js/editormobile_uk.js" />
+        
+        <script>
+		var malimage = "/css/mal/150_omriss_400x480.png";
+		var blankimage = "/css/mal/bk_400x480.jpg";
+		var scale = 0.05;
+		var $idown;
+		
+		$( function(){
+			/*<![CDATA[*/
+			/*$('#year').on( 'keydown', function( event ){
+				if( $(this).val().length > 3 ){
+					if( event.keyCode == 8 || event.keyCode == 13 ) return true
+					else return false;
+				}
+				
+				console.log( event.keyCode );
+				//if( event.keyCode == 8 || event.keyCode == 13 ) return true;
+				//if( event.key != parseInt(event.key, 10) )return false;
+			});*/
+			/*]]>*/
+			showloader();
+			$(window).load( hideloader );
+			//quickHideAddressBar();
+			//<![CDATA[
+			$('#closedialog').on( 'click', function(){ $('.helptext').dialog('close')})
+			$( '.question').on( 'click', function(){
+				$('.helptext').dialog( {width: '500px', modal: true, dialogClass: 'noTitleStuff' });
+			});
+			
+			
+			$('button#next').on( 'click', function(){
+				donedit();
+				var str=$('.selected').attr('id');
+				var n=str.split("-");
+				
+				/*if( $(this).hasClass('button2')  ){
+					$('.firsttop').hide();
+					$('.nexttop').hide();
+					$('.lasttop').show();
+				}
+				else{
+					$('.firsttop').hide();
+					$('.nexttop').show();
+					$('.lasttop').hide();
+				}*/
+				
+				
+				
+			
+				$('#back').show();
+				$('.selected').hide().removeClass( 'selected' );
+				$('#indexhead-' +  n[1] ).hide();
+				var index = parseInt( n[1] ) + 1;
+				
+				if( index == 2 ){
+					$('.nexttop').show();
+					$('.nextknapp').hide();
+				}
+				else{
+					$('.nexttop').hide();
+					$('.nextknapp').show();
+				}
+				
+				$('#index-' + index ).show().addClass( 'selected' );
+				$('#indexhead-' + index ).show();
+			});
+			
+			$('button#back').on( 'click', function(){
+				donedit();
+				var str=$('.selected').attr('id');
+				var n=str.split("-");
+				if( n[1]  == 1 ){
+					return false;
+				}
+	
+				$('.firsttop').show();
+				$('.nexttop').hide();
+				$('.selected').hide().removeClass( 'selected' );
+				$('#indexhead-' +  n[1] ).hide();
+				var index = parseInt( n[1] ) - 1;
+				
+				if( index == 2 ){
+					$('.nexttop').show();
+					$('.nextknapp').hide();
+				}
+				else{
+					$('.nexttop').hide();
+					$('.nextknapp').show();
+				}
+				
+				$('#index-' + index ).show().addClass( 'selected' );
+				$('#indexhead-' + index ).show();
+				if( index == 1 ){
+					$('#back').hide();
+				}
+			});
+			
+            $('.canvas-container').bind( 'pinch' ,function( event, obj ){
+			    var scaling = 0.05;
+				if( obj.scale < 1 ){    
+				    var active = userimg;
+				    var scaleX = active.scaleX - scaling;
+				    var scaleY = active.scaleY - scaling;
+				    
+				    if( scaleX < 0.2 ){
+					return false;
+				    }
+				    active.set( { scaleX: scaleX, scaleY: scaleY } );
+				    canvas.renderAll();
+				    
+				}else{
+				    var active = userimg;
+				    var scaleX = active.scaleX + scaling;
+				    var scaleY = active.scaleY + scaling;
+				    active.set( { scaleX: scaleX, scaleY: scaleY } );
+				    canvas.renderAll();
+				    
+				}
+	
+				return false;
+			    });
+			//]]>
+				$('.orderlabel').on( 'click', function(){
+						$(this).parent().parent().find('input:radio').click();
+					});
+                        
+			$('#facebook').on( 'click', function(){
+			    showloader();
+			    shareThumb( 'facebook' );
+			    return false;
+			});
+			     
+	
+			$('.bestillknapp img' ).mouseover( function(){
+                            $(this).attr( 'src', 'css/web/images/bestillknapp-hover.png' ); 
+                        });
+			$('.bestillknapp img').mouseout( function(){
+                            $(this).attr( 'src', 'css/web/images/bestillknapp.png' );
+                        })
+			$('.bestillknapp img').mousedown( function(){
+                            $(this).attr( 'src', 'css/web/images/bestillknapp.png' );
+                            //window.location.href = '/stabburet/editor';                          
+                        });
+			$('.bestillknapp img').mouseup( function(){
+                            $(this).attr( 'src', 'css/web/images/bestillknapp.png' );
+                        });
+			
+				
+			$('#fileupload').fileupload({
+				replaceFileInput: false,
+				dataType: "json",        
+				datatype:"json",
+				xhrFields: {withCredentials: true},
+				acceptFileTypes: /(\.|\/)(jpe?g|tif)$/i,
+				add: function (e, data) {
+					
+					//console.log(e);
+					//console.log(data);
+					
+					showloader();
+					data.submit();
+					
+				},
+				done: function (e, data) {
+					
+					
+					$.each(data.result.files, function (index, file) {
+						
+						ChangeImageSrc( file.id );
+						$('img#' + file.id ).css( 'border-color', "#1077a5" );
+						hideloader();
+				
+					});
+					
+				},
+				progressall: function (e, data) {
+
+					var progress = parseInt(data.loaded / data.total * 100, 10);
+					var percentVal = progress + '%';
+					//bar.width(percentVal)
+					//percent.html(percentVal);
+                    $('#status').text( percentVal );
+				}
+			});
+			
+			
+			$ (window ).load( function(){
+				setTimeout(function(){
+					// Hide the address bar!
+					window.scrollTo(0, 1);
+				}, 1000);
+				
+				});
+		});
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle">${album/title}</tal:block>
+	
+	<link rel="alternate" type="application/rss+xml" title="" id="gallery" tal:condition="exists: mediarss" tal:attributes="href mediarss" />
+	
+	
+	<script type="text/javascript" src="${static:js/jquery.lazyload.mini.js}"></script>
+	<script type="text/javascript">
+		$("img").lazyload({placeholder : "http://static.eurofoto.no/gfx/gui/ajax-loader.gif"});
+	</script>
+	<style type="text/css">
+		#move-images-dialog .albums, #delete-images-dialog .selected-images {
+			height: 250px;
+			overflow:scroll;
+			overflow-x: hidden;
+		}
+
+		.albumlist .thumbnail {
+			width: 24px;
+			height: 24px;
+			overflow: hidden;
+			float: left;
+			margin-right: 12px;
+		}
+		.albumlist .thumbnail img {
+			border: 0;
+			width: 30px;
+			outline: none;
+		}
+		.oneline {
+			display: inline-block;
+		}
+		.addthis_toolbox.addthis_default_style {
+			float: left;
+		}
+	</style>
+	<meta name="title" content="${album/title}" />
+	<meta name="description" content="${album/description}" />
+	<link rel="image_src" href="${request/systemroot}/show_image_stream.php?bid=${album/defaultimageid}&dx=630&dy=400" />
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	
+	<div class="span-24 last">
+	
+		<div class="span-24 last bottom">
+			<h2 class="bottom oneline" >
+				<span class="title album-title" id="${album/id}" tal:content="album/title | default">
+				<tal:block i18n:translate=""></tal:block></span>
+			</h2>
+			<h3 tal:content="album/owner/name|default" class="quiet top"></h3>
+		</div>
+		
+		<div class="span-16 append-8 last">
+			<p class="description quiet top" id="${album/id}">
+				<tal:block tal:content="structure album/description|default"  tal:condition="album/descriptionraw" />
+			</p>
+		</div>
+		<div class="span-24 last">
+			<div class="span-12">
+				
+			</div>	
+
+			<!-- pagination -->
+			<div class="span-12 last pagination right append-bottom" tal:condition="exists:pagination">
+			<a class="" href="/shared/album/slideshow/${album/id}/${album/urlname}/${album/publickey}" i18n:translate="">Slideshow</a> | 
+			
+			&lt;&lt;  <a href="/shared/album/${album/id}/20/${pagination/first}" tal:condition="pagination/first" i18n:translate="">First</a> 
+			<a href="/shared/album/${album/id}/20/${pagination/prev}" tal:condition="pagination/prev" i18n:translate="">Prev</a> 
+			<span tal:condition="not:pagination/prev" class="quiet" i18n:translate="">Prev</span> 
+			
+			<span><tal:block  i18n:translate="">Page</tal:block> ${pagination/current} <tal:block i18n:translate="">of</tal:block> ${pagination/last}</span> 
+			
+			
+			<a href="/shared/album/${album/id}/20/${pagination/next}" tal:condition="pagination/next" i18n:translate="">Next</a> 
+			<span tal:condition="not:pagination/next" class="quiet" i18n:translate="">Next</span> 
+			<a href="/shared/album/${album/id}/20/${pagination/last}" tal:condition="pagination/last" i18n:translate="">Last</a> &gt;&gt;
+			</div>
+		
+		
+	</div>
+
+		<div class="imagelist clearfix span-16" id="images">
+			<form action="/order-prints/fromselected/${album/id}" method="post" id="images-form">
+			<tal:block tal:repeat="image images">
+				<tal:block tal:condition="mod:repeat/image/number,4">
+					<div class="imagecontainer thumb span-4 last">
+						<a href="" title="${image/title}" class="thumb" rel="" tal:attributes="href image/urls/shared">
+							<img src="" alt="" tal:attributes="src image/thumbnail; alt image/title" class="thumb_110px" />
+						</a>
+						<input type="checkbox" class="select" value="${image/id}" name="image[]" tal:condition="album/access/purchase" />
+						<label for="" tal:content="shorten:image/title;15" class="small name editable"id="${image/id}" title="${image/title}"/>
+						
+						<tal:block tal:condition="album/access/download">
+							<a class="small" href="/images/download/${image/id}" i18n:translate="">Download</a>
+						</tal:block>
+					</div>
+				</tal:block>
+				<tal:block tal:condition="not:mod:repeat/image/number,4">
+					<div class="imagecontainer thumb span-4">
+						<a href="" title="${image/title}" class="thumb" rel="" tal:attributes="href image/urls/shared">
+							<img src="" alt="" tal:attributes="src image/thumbnail; alt image/title" class="thumb_110px" />
+						</a>
+						<input type="checkbox" class="select" value="${image/id}" name="image[]" tal:condition="album/access/purchase"/>
+						<label tal:content="shorten:image/title;15" class="small name editable" id="${image/id}" title="${image/title}"/>
+						<tal:block tal:condition="album/access/download">
+							<a class="small"  href="/images/download/${image/id}" i18n:translate="">Download</a>
+						</tal:block>
+
+					</div>
+				</tal:block>
+			</tal:block>
+			</form>
+		</div>
+		<div class="span-8 last">
+			<h3 i18n:translate="">Share album</h3>
+			<!-- AddThis Button BEGIN -->
+			<div class="addthis_toolbox addthis_default_style">
+			<a class="addthis_button_facebook"></a>
+			<a class="addthis_button_email"></a>
+			<a class="addthis_button_favorites"></a>
+			<a class="addthis_button_twitter"></a>
+			<a class="addthis_button_google"></a>
+			<a class="addthis_button_digg"></a>
+			<a class="addthis_button_live"></a>
+			<a class="addthis_button_myspace"></a>
+			<script type="text/javascript">
+				var name = escape('${album/title}');
+				var url = escape(document.location);
+				var description = escape('${album/descriptionraw}');
+			</script>
+			<a style="float: left" href="javascript: 
+				wnd=window.open('http://www.nettby.no/user/edit_link.php?name='+name+'&url='+url+'&description='+description,
+				'edit_link',
+				'scrollbars=no,
+				width=450,height=430'
+				);
+				wnd.focus();" title="Legg til på nettby">
+				<img src="http://img1.nettby.no/img/share_icon.gif" />
+			</a>
+			<a href="http://addthis.com/bookmark.php?v=250&amp;pub=eurofoto" class="addthis_button_expanded">More</a>
+			
+			</div>
+			<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js?pub=eurofoto"></script>
+			<!-- AddThis Button END -->
+			
+			<hr class="space" />
+
+
+			<tal:block tal:condition="album/owner/yours">
+				<tal:block tal:condition="not:equal:album/id,0">
+					<div class="span-8 last">
+					<h3 i18n:translate="">Edit album</h3>
+					<a href="/myaccount/upload/${album/id}" class="button large green" i18n:translate="">
+						+ Add photos
+					</a>
+					<a href="">Sharing options</a>
+					</div>
+				</tal:block>
+			</tal:block>
+
+			<tal:block tal:condition="album/access/purchase">
+				<hr class="space" />
+				<h3 i18n:translate="">Order prints</h3>
+				<ul>
+					<li>
+						<a class="" tal:attributes="href string:/order-prints/fromalbum/${album/id}" href="order-prints"  i18n:translate="">Whole album</a>
+					</li>
+					<li>
+						<a href="/order-prints/fromselected/${album/id}" class="order-selected-photos" id="order-prints-selected-images" i18n:translate="">Selected photos</a>
+					</li>
+				</ul>
+			</tal:block>
+		</div>
+	</div>
+</div>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+	
+		$('#order-prints-selected-images').click( function() {
+			// orders selected image
+			$('#images-form').submit();
+
+			return false;
+		});
+
+		$('a.thumb, .left-top-corner-hover').mouseenter( function() {
+			$(this).parent().find('a.left-top-corner-hover').show('fast');
+		});
+
+		// selecting image
+		//ie-bug
+		$('input.select').click( function() { $(this).trigger('change') });
+
+		$('input.select').bind('change', function() {
+			if ( $(this).is(':checked') ) {
+				$(this).parent().addClass('selected');
+			} else {
+				$(this).parent().removeClass('selected');
+			}
+
+		});
+	});
+</script>
+</body>
+</html>

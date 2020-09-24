@@ -1,0 +1,805 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	
+	
+	<script>
+		
+		
+		window.location = "http://www.stabburetleverpostei.no";
+		
+	</script>
+	
+	<link rel="stylesheet" href="${static:css/portals/eurofoto/screen.css}?${version}" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="${static:css/portals/eurofoto/print.css}?${version}" type="text/css" media="print" /> 
+	<!--[if lt IE 8]>
+		<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/eurofoto/ie.css?3.05" type="text/css" media="screen, projection" />
+	<![endif]-->
+	<!--[if IE 8]>
+		<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/eurofoto/ie8.css?3.05" type="text/css" media="screen, projection" />
+	<![endif]-->
+
+	
+        <style type="text/css">
+
+                .add_text {
+                    height: 250px;
+                }
+                a {color:#000;text-decoration:underline;}
+                h4 {
+                    font-size: 1.2em;
+                    line-height: 1.25;
+                    margin-bottom: 0.25em;
+                }
+		body {
+                    font-family:Tahoma, Arial, Helvetica, sans-serif;
+                    padding-top: 300;
+                    margin: 0;
+                    line-height: 24px;
+                    font-size: 100%;
+                    background-color: #ffdd00;
+                    -webkit-background-size: 3000px 5px;
+                    background-image: url(${static:gfx/stabburet/background2.jpg});
+                    background-repeat: repeat;
+                    background-position: top;
+                    background-attachment: scroll;
+                }
+		
+                .header{
+                     margin-top: 1px;           
+                     }
+		     
+		     
+		.textfields, .imgefields{
+			width: 200px;
+		}
+		
+		@font-face {
+			font-family: 'FairplexWideOT-Med';
+			src: url('/teditor/fonts/FairplexWideOT-Med.otf');
+		}
+		@font-face {
+			font-family: 'FairplexWideOT-Black';
+			src: url('/teditor/fonts/FairplexWideOT-Black.otf');
+		}
+		
+		.button{
+			margin: 12px;
+		}
+		.box{
+			height: 300px;
+		}
+		
+                /*.header img{
+                     position: relative;
+                     left: -70px;
+                 }*/
+	  </style>
+        
+        <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script src="/fabric.js" />
+	<script src="http://b.static.eurofoto.no/js/jquery.upload-1.0.2.js?3.103"></script>
+	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+</head>
+
+<body>
+	<div class="container create-gift">
+		<div class="span-24 last">
+			<div style="height:350px;">
+				<img src="${static:gfx/stabburet/header.png}"/>
+			</div>
+		</div>
+		<div class="span-24 last">
+			<div class="box" style="background-color: #fff;width: 920px; height: 700px"> 
+				<div class="span-12">
+					<div style="position: relative;">
+						<canvas id="c" width="439" height="439" style="position: relative"></canvas>
+					</div>
+		    
+				</div>
+				<div class="span-11 last">
+					
+					
+					<div id="accordion">
+						<div class="group hide">
+							<h3>Size</h3>
+							<div>
+								<input name="size" type="radio" value="small" checked="checked"/> <label for="size">Small</label>
+								<input name="size" type="radio" value="large"/> <label for="size">Large</label>
+							</div>
+						</div>
+						<div class="imageval group box">
+							<div class="span-9 center">
+								<a href="#" class="button disabled">Images</a>
+								<a href="#" id="textval" class="button">Text</a>
+							</div>
+							<div>
+								<label for="imageupload">Choose image</label><br/>
+								<input type="file" name="imageupload" id="imageupload" />
+								<div id="imagelist"><img class="image"/></div>
+								<label for="zoom">Edit</label><br/>
+								<div class="span-10 center">
+									<div>Zoom</div>
+									<div id="zoom"></div>
+								</div>
+								<div class="span-10 center prepend-top">
+									<div>Rotate</div>
+									<div id="rotate"></div>
+								</div>
+								
+								
+								<!--<input type="range" id="zoom" name="zoom" value="50" min="20" max="100"/><br/>
+								<button id="zooms" >-</button><button id="zooml" >+</button>
+								<button class="move" id="left" >&larr;</button><button class="move"  id="up" >&uarr;</button><button class="move" id="down" >&darr;</button><button class="move"  id="right" >&rarr;</button>
+								<br/>						
+								<!---<button id="editimage">Rediger bildet</button>
+								<br/><button id="doneedit">Ferdig</button><br/>-->
+							</div>
+						</div>
+						<div class="textval group box hide">
+							<div class="span-9 center">
+								<a href="#" id="imageval" class="button">Images</a>
+								<a href="#" class="button disabled">Text</a>
+							</div>
+							
+							<div>
+								<label for="name">Dittnavn</label>
+								<input type="text" id="name" size="12" maxlength="111" value="LEVERPOSTEI"/><br/>
+								<label for="name">Year</label>
+								<input type="text" id="year" size="7" maxlength="4" value="1949"/>
+							</div>
+						</div>
+						<div class="group hide">
+							<h3>Share</h3>
+							<div>
+								<button id="download">Download</button>
+							</div>
+						</div>
+						<div class="group hide">
+							<h3>Order</h3>
+							<div>
+								<button id="next">Next</button>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>	
+		</div>
+		
+
+
+
+   </div>
+
+<!--
+<div class="footer container">
+   <img style="position: relative; left: -20px;" src="http://static.eurofoto.no/gfx/stabburet/footer.jpg"/>
+</div>
+-->
+
+<script>/*<![CDATA[*/
+
+	var canvas = new fabric.Canvas('c');
+	//var activeclipart;
+	/*var text = new fabric.Text('hello world', { left: 150, top: 150 });
+	canvas.add(text);*/
+	var userimg, template, rotateval, zoomval;
+	var text = new Array();
+	var textgroup = new fabric.Group( );
+	var yeargroup = new fabric.Group( );
+	
+	//var selectclipart = false;
+    
+	$( function(){
+		
+		$(document).on( 'click', '.disabled' , function(){return false;});
+		
+		$(document).on( 'click', '#imageval', function(){ $('.imageval').show(); $('.textval').hide(); return false;});
+		$(document).on( 'click', '#textval', function(){ $('.imageval').hide(); $('.textval').show(); return false;});
+		
+		$( "#zoom" ).slider( {
+			slide: zoom,
+			change: zoom,
+			value: 100,
+			min: 1,
+			max: 200,
+			disabled: 'true'
+			});
+		$( "#rotate" ).slider({
+			slide: rotate,
+			change: rotate,
+			value: 0,
+			min: -180,
+			max: 180,
+			disabled: 'true'
+			});
+		
+		$(document).on( 'mouseout', '.canvas-container', donedit );
+      
+		$('#deletebutton').hide();
+		$(document).on("click", ".clipart", function(){
+			addClipart( $(this).attr('id') );
+		});
+		
+		canvas.findTarget = (function(originalFn) {
+			return function() {
+			  var target = originalFn.apply(this, arguments);
+			  if (target) {
+			    if (this._hoveredTarget !== target) {
+			      canvas.fire('object:over', { target: target });
+			      if (this._hoveredTarget) {
+				canvas.fire('object:out', { target: this._hoveredTarget });
+			      }
+			      this._hoveredTarget = target;
+			    }
+			  }
+			  else if (this._hoveredTarget) {
+			    canvas.fire('object:out', { target: this._hoveredTarget });
+			    this._hoveredTarget = null;
+			  }
+			  return target;
+			};
+		      })(canvas.findTarget);
+		
+		canvas.on('object:over', function(e) {
+			activeclipart = e;
+			//console.log( "INN"  );
+			if( e.target.id == 'clipart' ){
+				selectclipart = true;
+			}else{
+				selectclipart = false; 
+			}
+		});
+		      
+		canvas.on('object:out', function(e) {
+			if( activeclipart.target.top == e.target.top ){
+				if( e.target.id == 'clipart' ){
+					selectclipart = false;
+				}
+			}
+		});
+		
+		$('#imageupload').change(function() {
+			
+			$(this).upload('/api/1.0/tedit/upload', function(res) {
+				//console.log( res.name ); 
+				var image = $('.image');
+				image.attr( 'id', res.name );
+				image.attr( 'src' , "/tedit/thumbs/" + res.name  );
+				
+				ChangeImageSrc( res.name );
+				
+				console.log( 'wtf' );
+				
+				$( "#zoom" ).slider( "option", "disabled", false );
+				$( "#rotate" ).slider( "option", "disabled", false );
+				
+				
+				
+			}, 'json');
+		    });
+		
+		fabric.Image.fromURL('/stabburet/Astronaut_alpha.png', function(img) {
+			template = img.set({
+			  left: 219.5,
+			  top: 219.5,
+			  selectable: false
+			});
+			canvas.add( img );
+		    });
+		
+		
+		
+		fabric.Image.fromURL('/stabburet/dittbilde.jpg', function(img) {
+			userimg = img.set({
+				left: 220,
+				top: 220,
+				id: "preimage",
+				lockUniScaling : true,
+				selectable : false,
+				textShadow: 'rgba(0,0,0,0.2) 0 0 5px'
+			});
+			//console.log( userimg );
+			canvas.add( img );
+			userimg.sendBackwards();
+		    });
+		
+		canvas.on('mouse:down',function(options) {
+			
+			var x = options.e.layerX;
+			var y = options.e.layerY;
+			var center = 220;
+			var radius = 110;
+			if( ( ( ( x- center) * ( x- center) ) + ( (y - center) * (y - center) )  ) < ( radius * radius )  ){
+				if( userimg.id == 'preimage'){
+					
+					$('#imageupload').click();
+					
+				}else{
+					userimg.set( { opacity: 0.7 })
+					userimg.bringToFront();
+					canvas.setActiveObject(userimg);	
+				}
+	
+			}
+			else{
+				/*if( userimg.active == true ){
+					userimg.set( { opacity: 1 });
+					userimg.sendBackwards();
+					userimg.active = false;
+				}*/
+			}
+			
+			
+				
+		})
+		
+		canvas.on('before:selection:cleared', function(options){
+				if( userimg.active == true ){
+					userimg.set( { opacity: 1 });
+					userimg.sendToBack();
+					//userimg.active = false;
+				}
+			});
+		canvas.on( 'selection:cleared' , function(){
+			$('#deletebutton').hide();
+			});
+		
+		//$(document).on( 'click' , '.image', ChangeImageSrc );
+		
+		//$('#zoom').val( 50 );
+		
+		$(document).on( 'click', '#editimage', function(){
+			userimg.set( { opacity: 0.7 })
+			//console.log( "true?" );
+			userimg.bringForward();
+			canvas.setActiveObject(userimg);	
+		});
+		
+		/*$('#name').keyup(function() {
+			//this.value = this.value.toUpperCase();
+			drawTextAlongArc();
+		});*/
+		
+		
+		$(document).keydown(function(e) {
+			switch( e.which ){
+				case 38:
+					$('#up').click();
+					return false;
+					break;
+				case 40:
+					$('#down').click();
+					return false;
+					break;
+					
+				case 39:
+					$('#right').click();
+					break;
+				case 37:
+					$('#left').click();
+					break;
+				case 107:
+				case 187:
+					$( '#zooml' ).click();
+					break;
+				case 109:
+				case 189:
+					$( '#zooms' ).click();
+					break;
+				case 13:
+					$( '#doneedit' ).click();
+					var activeObject = canvas.getActiveObject();
+						if( activeObject ){
+							activeObject.active = false;
+							canvas.renderAll();
+						}
+						$('#deletebutton').hide();
+					break;
+				case 46:
+				case 110:
+					var activeObject = canvas.getActiveObject();
+					if( activeObject ){
+						activeObject.remove();	
+					}
+					
+					break;
+				default:	
+					//console.log(  e.which  );
+			}
+		    });
+		
+		
+		
+		$(document).on( 'click', '#doneedit', donedit );
+		
+		/*
+		$(document).on( 'click', "#zooml", function(){
+			var active = canvas.getActiveObject();
+			if( !active ){
+				active = userimg;
+			}
+			var scaleX = active.scaleX + 0.05;
+			var scaleY = active.scaleY + 0.05;
+			
+			active.set( { scaleX: scaleX, scaleY: scaleY } );
+			canvas.renderAll();
+		});
+		$(document).on( 'click', "#zooms", function(){
+			
+			var active = canvas.getActiveObject();
+			if( !active ){
+				active = userimg;
+			}
+			var scaleX = active.scaleX - 0.05;
+			var scaleY = active.scaleY - 0.05;
+			
+			active.set( { scaleX: scaleX, scaleY: scaleY } );
+			canvas.renderAll();
+		});
+		
+		
+		$(document).on( 'click', '.move' , function(){
+			var direction = $(this).attr( 'id' );
+			var active = canvas.getActiveObject();
+			if( !active ){
+				active = userimg;
+			}
+			var left = active.left;
+			var top = active.top;			
+			//console.log( direction );
+			if( active.id != 'preimage' ){
+			
+				if( direction == 'up' ){
+					top = top - 5;
+				}
+				else if( direction == 'left' ){
+					left = left - 5;
+				}
+				else if ( direction == 'right' ){
+					left = left + 5;
+				}
+				else if( direction == 'down' ){
+					top = top + 5;
+				}
+			}
+			
+			active.set( { top: top, left: left } );
+			canvas.renderAll();
+			
+			});*/
+		
+		$(document).on( 'change', '#zoom', function(){
+			var zommval = $(this).val() / 100;
+			
+			userimg.set( { scaleX: zommval, scaleY: zommval } );
+			//console.log( $(this).val() );
+			
+			canvas.renderAll();
+			
+		});
+		
+		//$(document).on( 'change', '#name', drawTextAlongArc );
+		
+		$('#name').keyup(drawTextAlongArc);
+		
+		$(document).on( 'change', '#year', drawYearAlongArc );
+		
+		$(document).on( 'click', '#download', function(){
+			var activeObject = canvas.getActiveObject();
+			if( activeObject ){
+				activeObject.active = false;
+				canvas.renderAll();
+			}
+
+			//var data = canvas.toJSON();
+			var thumb = canvas.toDataURL();
+			
+			var name = "stabburet";
+			
+			$.post('/api/1.0/tedit/stabburetthumb', {
+			    name: name,
+			    image: thumb
+			    }, function (response) {
+				window.open(
+					"/stabburet/thumb/" + response.data + "/stabburetlokk.png",
+					'_blank' // <- This is what makes it open in a new window.
+				);
+				//console.log( response.data );
+			}, 'json');
+			
+			//canvas.toDataURL('jpg')
+			//console.log( canvas.toDataURL('jpg') );
+			
+		});
+		
+		
+		$(document).on( 'click', '#next', save );
+		
+		$(document).on( 'click' , '#deletebutton' ,function(){
+			var activeObject = canvas.getActiveObject();
+			if( activeObject.id == 'clipart' ){	
+				activeObject.remove();
+			}
+			});
+		
+	});
+	
+	function donedit(){
+		if( userimg.active == true ){
+			console.log( 'mouse out' );
+			userimg.set( { opacity: 1 });
+			userimg.sendToBack();
+			userimg.active = false;
+			canvas.renderAll();
+		}
+	}
+	
+	function zoom(){
+		zommval = $( "#zoom" ).slider( "value" ) / 100;
+		if( zommval > 1 ){
+			zommval = zommval * zommval;
+		}
+		userimg.set( { scaleX: zommval, scaleY: zommval } );
+		canvas.renderAll();
+	}
+	
+	function rotate(){
+		rotateval = $( "#rotate" ).slider( "value" );
+		userimg.set( { angle: rotateval  } );
+		//console.log( $(this).val() );	
+		canvas.renderAll();
+	}
+	
+	$(window).on( 'load' , function(){
+			drawTextAlongArc();
+			drawYearAlongArc();
+			
+			setTimeout(function (){
+				canvas.renderAll();
+			},150);
+		});
+
+	function ChangeImageSrc( name ){
+		canvas.remove( userimg );
+		var newsrc2 = $(this).attr('src');
+		var newsrc = "/tedit/thumbs/" + name  + '/300/300';
+		fabric.Image.fromURL(newsrc , function(img) {			
+			userimg = img.set({
+			  left: 220,
+			  top: 220,
+			  lockUniScaling : true
+			});
+			//console.log( userimg );
+			canvas.add( img );
+			userimg.sendToBack();
+		});
+		
+	}
+	
+	function positionBtn(obj) {
+		$('#deletebutton').show()
+		var offset = $('#c').offset();
+		$('#deletebutton').css( { top: ( obj.top  + offset.top - (obj.currentHeight / 2 ) - 30 ) + 'px', left: ( obj.left + offset.left +  (obj.currentWidth / 2 ) + 15 )  + 'px' });
+		}
+	
+	function drawTextAlongArc(){
+		var testtext = '';
+		var step = 0;
+		var textobjects = textgroup.getObjects();
+		var tolen = textobjects.length;
+		while (tolen>0){
+			textobjects = textgroup.getObjects();
+			tolen = textobjects.length;
+			for( var i = 0; i<tolen; i++ ){
+				textgroup.remove( textobjects[i] );
+				//console.log( textobjects[i] );
+			}
+			
+		}
+		var str = $('#name').val();
+		//var str = "LEVERPOSTEI";
+		if( str.length < 1 ){
+			str = "LEVERPOSTEI";
+		}
+		var len = str.length;
+		var s, move = 0 ;
+		var left = -140;
+		left = left + ( ( 11 - len ) * 12 );
+		
+		if( left < -140){
+			left = -140;
+		}
+		angle = Math.PI * ( len / 12 ) ;
+		var totalwidth = 0;
+		
+		
+		for(var n = 0; n < len; n++) {
+			var radius = 145;
+			var center = 218;
+			var rotate =  angle / len * 100;
+
+			left = left +  move;
+			var top  = ( radius * radius ) - ( left * left );
+			top = Math.sqrt(top);
+			var sinusa = left / radius;
+			sinusa = Math.acos(sinusa) * (180 / Math.PI) - 90 ;
+			
+			text[n] = new fabric.Text(
+						str[n].toUpperCase(),
+						{
+							fontSize: 55,
+							fontFamily: 'FairplexWideOT-Med',
+							fill: '#ffffff',
+							//textShadow: 'rgba(0,0,0,0.2) 0px 5px 5px',
+							textAlign: 'center'
+						}
+						);
+			totalwidth += text[n].width + 8;
+			
+			text[n].set( {left: left + center,top: top + center, angle: sinusa} );
+			
+			var angle = text[n].angle;
+			
+			//console.log( angle );
+			
+			if( angle < -71 ){
+				$('#name').attr( 'maxlength', len );
+			}
+			else{
+				$('#name').attr( 'maxlength', 111 );
+			}
+			
+			if( angle < 5 ){
+				angle = -angle + ( text[n].width / 2 );
+			}
+			
+			
+			if( len > n + 1  ){
+				testtext = new fabric.Text(
+						str[n + 1].toUpperCase(),
+						{
+							fontSize: 55,
+							fontFamily: 'FairplexWideOT-Med',
+							angle: sinusa,
+							fill: '#ffffff',
+							//textShadow: 'rgba(0,0,0,0.2) 0px 5px 5px',
+							textAlign: 'center'
+						});
+			}
+			
+			if( angle > 60){
+				step = 3;
+				//console.log( "step" );
+			}
+			else{
+				step = 3;
+			}
+	
+			var c1 = ( ( text[n].width / 2 ) + step )  *  Math.cos( sinusa / (180 / Math.PI) );
+			var c =  ( ( testtext.width / 2 ) + step )  *  Math.cos( angle / (180 / Math.PI) );
+			
+			move = c + c1;
+			textgroup.add( text[n]  );
+		}
+		
+		canvas.add( textgroup );
+		canvas.renderAll();		
+		textgroup.bringToFront();
+
+	}
+	
+	
+	
+	
+	function drawYearAlongArc() {
+		var textobjects = yeargroup.getObjects();
+		var tolen = textobjects.length;
+		while (tolen>0){
+			textobjects = yeargroup.getObjects();
+			tolen = textobjects.length;
+			for( var i = 0; i<tolen; i++ ){
+				yeargroup.remove( textobjects[i] );
+				//console.log( textobjects[i] );
+			}
+			
+		}
+		var str = $('#year').val();
+		//var str = "LEVERPOSTEI";
+		if( str.length < 1 ){
+			str = "ORGINALEN SIDEN 1949";
+		}else{
+			str = "ORGINALEN SIDEN " + str; 
+		}
+		var len = str.length;
+		var s, move = 90 ;
+		var left = -120;
+		left = left;
+		
+		//console.log( left );
+		
+		angle = Math.PI * ( len / 12 ) ;
+		
+		for(var n = 0; n < len; n++) {
+			var radius = 185;
+			var center = 218;
+			var rotate =  angle / len * 100;
+			move = 18;
+			left = left + ( move  / 1.6 );
+			var top  = ( radius * radius ) - ( left * left );
+			top = Math.sqrt(top);
+			var sinusa = left / radius;
+			sinusa = Math.acos(sinusa) * (180 / Math.PI) - 90 ;
+			move = Math.round( sinusa );
+
+			
+			//console.log( left );
+			//console.log( top );
+			//console.log( sinusa);
+			
+			text[n] = new fabric.Text(
+						str[n].toUpperCase(),
+						{
+							left: left + center,
+							top: top + center,
+							fontSize: 20,
+							fontFamily: 'FairplexWideOT-Med',
+							angle: sinusa,
+							fill: '#e3202d'
+						}
+						);
+			
+			yeargroup.add( text[n]  );
+
+		}
+		
+		canvas.add( yeargroup );
+		canvas.renderAll();		
+		yeargroup.bringToFront();
+
+	}
+	
+	this.save = function(category , name ){
+            //canvas.deactivateAll();
+		userimg.set( { opacity: 1 });
+		userimg.sendToBack();
+		userimg.active = false;
+            
+		var objects = canvas.getObjects();
+	    
+		//console.log( objects[0] );
+		//console.log( objects[0].left );
+	    
+		var imgsrc = objects[0]._element;
+		
+		//console.log( imgsrc.src );
+		var imgpos = '[' + objects[0].left + ',' + objects[0].top + ',' + objects[0].currentWidth + ',' + objects[0].currentHeight + ']';
+		
+		//console.log( imgpos );
+		var name = $('#name').val();
+		var year = $('#year').val();
+	    
+		
+	    
+	    
+	    
+            $.post('/api/1.0/stabburet/save', {
+                name: name,
+                year: year,
+		imgsrc: imgsrc.src,
+                imgpos: imgpos
+                }, function (response) {
+                    console.log( response.message );
+            }, 'json');
+            
+            
+        }
+    
+    
+/*]]>*/</script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../../${templates}/common.html/head" />
+</head>
+<body>
+<div class="container">
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	<div tal:define="global menuitem string:albums" metal:use-macro="../common.html/menu" />
+	<div class="span-8">
+		<h2>Albums</h2>
+	</div>
+	<div class="span-8 right">
+		View:
+		<a href="/myaccount/albums/">Default (thumbs)</a>  | <a href="/myaccount/albums/showlist">List</a> | Details
+	</div>
+	<div class="span-4 last">
+			<a href="/myaccount/album/new" class="button large green">+ new album</a>
+	</div>
+	<div id="content">
+		
+		<form>
+			<tal:block class="albumthumbs" tal:repeat="album albums">
+				<div class="albumcontainer medium">
+					<span class="album-functions">
+					
+						<input type="checkbox" tal:attributes="name album/id" />
+						
+						<a tal:attributes="href album/albumurl; title album/name">
+							<img tal:attributes="src album/thumbnailurl; alt album/name" class="thumb"/>
+						</a>
+					</span>
+				</div>
+			</tal:block>
+		</form>
+	</div>
+	<div metal:use-macro="../common.html/right-albumlist-menu" />
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

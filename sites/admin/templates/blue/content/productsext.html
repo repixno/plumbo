@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title i18n:translate="">Edit textentity - Eurofoto Admin</title>
+	<tal:block metal:use-macro="../common.html/css" />
+	<script src="http://www.google.com/jsapi?key=ABQIAAAA1XbMiDxx_BTCY2_FkPh06RRaGTYH6UMl8mADNa0YKuWNNa8VNxQEerTAUcfkyrr6OwBovxn7TDAH5Q"></script>
+	<script type="text/javascript" src="/js/admin.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/ckeditor/ckeditor.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/ckeditor/config.js"></script>
+   <script type="text/javascript" src="/js/jquery-1.3.2.min.js"></script>
+   <script type="text/javascript" src="/js/jquery-ui-1.7.2.custom.min.js"></script>
+	<script type="text/javascript">
+		google.load("language", "1");
+	</script>
+	<script type="text/javascript" src="http://static.eurofoto.no/js/jquery-1.3.2.min.js"></script>
+
+	<script tal:condition="exists:language" type="text/javascript" tal:content="structure string:var LANGUAGE = '';">
+		var LANGUAGE = 'en_US';
+	</script>
+
+	<!-- Table API -->
+	<script type="text/javascript" src="/js/admin/sortabletable.js"></script>
+
+</head>
+
+<body>
+   <div id="container" class="container">
+      <div id="header">
+         <h2>Eurofoto Admin <span class="quiet">content editor</span></h2>
+         <tal:block metal:use-macro="../common.html/topmenu" />
+      </div>
+      <tal:block metal:use-macro="../common.html/languages" />
+
+      <div class="span-20" id="content">
+         <h3>
+            <span tal:content="entitylist/header|default">Not Found</span>
+         </h3>
+
+         <div class="language ui-tabs-panel ui-widget-content ui-corner-bottom clear">
+
+            <table id="extendedproductlist">
+               <tbody>
+                  <tr>
+                     <th i18n:translate="">ID</th>
+                     <th i18n:translate="">Title</th>
+                     <th i18n:translate="">Options</th>
+                     <th i18n:translate="">Price</th>
+                     <th i18n:translate="">Tags</th>
+                     <th i18n:translate="">Weight</th>
+                     <th i18n:translate="">Menus</th>
+                     <th i18n:translate="">Images</th>
+                  </tr>
+                  <tal:block tal:repeat="entity entitylist/list">
+                     <tal:block tal:repeat="entopt entity/options">
+                        <tr class="${entity/zebra}" id="${entity/type}_${entity/id}">
+                           <td tal:condition="equal:entopt/seqno,0" tal:content="entity/id | default" tal:attributes="rowspan entity/optionsize">n/a</td>
+                           <td tal:condition="equal:entopt/seqno,0" tal:attributes="rowspan entity/optionsize">
+                              <a href="/content/products/${entity/id}" tal:content="entity/title | default">n/a</a>
+                           </td>
+                           <td tal:condition="not:exists:entopt/id">n/a</td>
+                           <td tal:condition="exists:entopt/id">
+                              <a href="/content/products/editoption/${entity/id}/${entopt/id}" tal:content="entopt/title | default">n/a</a>
+                           </td>
+                           <td tal:content="entopt/price | default">n/a</td>
+                           <td>
+                              <span tal:condition="not:exists:entopt/tags">n/a</span>
+                              <ul tal:condition="exists:entopt/tags">
+                                 <li tal:repeat="tag entopt/tags" tal:content="tag | default">n/a</li>
+                              </ul>
+                           </td>
+                           <td tal:content="entopt/weight | default">n/a</td>
+                           <td tal:condition="equal:entopt/seqno,0" tal:attributes="rowspan entity/optionsize">
+                              <span tal:condition="not:exists:entity/menus">n/a</span>
+                              <ul tal:condition="exists:entity/menus">
+                                 <li tal:repeat="menu entity/menus"><a href="${entity/menuhost}${menu/url}" tal:content="menu/title | default">n/a</a></li>
+                              </ul>
+                           </td>
+                           <td tal:condition="equal:entopt/seqno,0" tal:attributes="rowspan entity/optionsize">
+                              <span tal:condition="equal:entity/images,0">NO</span>
+                              <span tal:condition="not:equal:entity/images,0">YES</span>
+                           </td>
+                        </tr>
+                     </tal:block>
+                  </tal:block>
+               </tbody>
+            </table>
+
+            <div class="prepend-10 span-9 last right">
+               <p class="right">
+                  <button i18n:translate="" onclick="window.location='${entitylist/addlink}';">Add new</button>
+               </p>
+               <p class="right">
+                  <button i18n:translate="" onclick="window.location='/content/';">Back</button>
+               </p>
+
+            </div>
+         </div>
+         <br class="clear clearfix" />
+      </div>
+      <tal:block tal:define="productlist entitylist/list" metal:use-macro="common.html/content-menu" />
+      <div id="footer"/>
+   </div>
+
+   <!-- Modal dialog -->
+   <div id="dialog" title="Delete this item?" style="display:none;">
+	  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>This items will be permanently deleted. Are you sure?</p>
+   </div>
+
+
+   <script type="text/javascript" src="http://static.eurofoto.no/js/jquery-ui-1.7.1.custom.min.js"></script>
+   <script type="text/javascript">
+
+      $(function() {
+
+         $.ajax( {
+           url: "/menu/api/fetchentitygroups/grouplist/${entitylist/type}",
+           type: 'post',
+           cache: 'false',
+           data: {
+              type: '${entitylist/type}'
+           },
+           dataType: 'json',
+           success: function( data, status ) {
+
+              data.list.push( 'nogroup' );
+              activeList = [];
+
+              for( var i in data.list ) {
+                 $( "#group_" + data.list[ i ] ).click( function( e ) {
+
+                    group = this.text;
+                    groupbutton = this;
+
+                    // Find the activated groups
+                    if( $(groupbutton).hasClass( 'active' ) ) {
+                       // Remove from list
+                       pos = jQuery.inArray( group, activeList );
+                       activeList.splice( pos, 1 );
+                       $(groupbutton).removeClass( 'active' );
+                    } else {
+                       // Add to list
+                       activeList.push( group );
+                       $(groupbutton).addClass( 'active' );
+                    }
+
+                    toggleItems( activeList );
+
+                 });
+              };
+
+              function toggleItems( enabledGroups ) {
+
+                 $( ".entitygroups" ).each( function() {
+                    if( enabledGroups.length == 0 ) {
+                       $(this).parent().removeClass( 'disabled' );
+                    } else {
+                       $(this).parent().addClass( 'disabled' );
+                    }
+                 });
+
+                 $( ".entitygroups" ).each( function() {
+
+                    entitygroups = $(this).text().split( ' ' );
+
+                    for( var i in enabledGroups ) {
+                       group = enabledGroups[ i ];
+                       group = group == 'nogroup' ? '-' : group;
+                       // Find all not matching the clicked button
+                       if( jQuery.inArray( group, entitygroups ) != '-1' ) {
+
+                          $(this).parent().removeClass( 'disabled' );
+
+                       }
+                    }
+
+                 } );
+              };
+
+           }
+
+         } );
+
+      });
+   </script>
+
+</body>
+</html>

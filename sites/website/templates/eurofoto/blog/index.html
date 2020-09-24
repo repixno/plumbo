@@ -1,0 +1,12 @@
+<tal:block>
+<div>
+   The blog was not found. These are our most awesome and popular blogs:
+</div>
+
+<form method="post" action="/api/1.0/blog/create">
+   title: <input type="text" name="title" /><br />
+   shortname: <input type="text" name="shortname" /> <br />
+   <input type="submit" value="Create" />
+</form>
+
+</tal:block>

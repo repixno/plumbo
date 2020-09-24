@@ -1,0 +1,667 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Profile and settings</tal:block>
+   <script type="text/javascript" src="${static:js/dialog.js}"></script>
+   
+	<style  type="text/css">
+
+	</style>
+
+</head>
+
+
+<body>
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-2">
+				<div tal:define="global menuitem string:settings" metal:use-macro="common.html/menu" />
+			</div>
+		
+
+	
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div class="col-md-10">
+		<br class="clear clearfix" />
+		<!-- put the content here -->
+		<h2 i18n:translate="">Profile and settings</h2>
+		<div id="tabs">
+			<ul>
+			<tal:block tal:condition="equal:portal,EF-997">
+				<li><a href="#account-settings-tab" i18n:translate="">Account Settings</a></li>
+			</tal:block>
+			<tal:block tal:condition="not:equal:portal,EF-997">
+				<li><a href="#login-information-tab" i18n:translate="">Login information</a></li>
+				<li><a href="#contact-information-tab" i18n:translate="">Contact information</a></li>
+				<li><a href="#smsnewsletter-tab" i18n:translate="">SMS / Newsletter</a></li>
+			</tal:block>
+				<li><a href="#storage-tab" i18n:translate="">Secure storage</a></li>
+				<li tal:condition="credits"><a href="#free-products" i18n:translate="">Free products</a></li>
+				
+				<li><a href="#newsletter-tab" i18n:translate="">Nyhetsbrev</a></li>
+				
+			</ul>
+				<tal:block tal:condition="equal:portal,EF-997">
+				<div id="account-settings-tab">
+					<iframe style="width:100%;height:400px;overflow:scroll;overflow-x:hidden;" frameborder="0" src="https://www.japanphoto.no/MyAccountSharedHeader?catalogId=10051&myAcctMain=1&langId=124&storeId=10151" width="1200" height="1200"></iframe>
+				</div>
+				</tal:block>
+				<tal:block tal:condition="not:equal:portal,EF-997">
+				<div id="login-information-tab">
+					<h3 i18n:translate="" class="hide">Login information</h3>
+					<form method="post" action="/myaccount/settings/save/" id="login-information">
+						<input type="hidden" name="actiontype" value="login" />
+
+						<h4 class="quiet" i18n:translate="">Email</h4>
+						<div class="span-18">
+							<div class="span-3 right">
+								<label for="emailchange" i18n:translate="">E-mail</label>
+							</div>
+							<div class="span-9">
+								<input type="text" class="text" name="emailchange" tal:attributes="value user/email" />
+								<input type="hidden" class="text" name="oldemail" tal:attributes="value user/email" />
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+
+						<div class="span-18 prepend-top">
+							<h4 class="quiet" i18n:translate="">Change password</h4>
+							<div class="span-3 right">
+								<label for="password" i18n:translate="">Old Password</label>
+							</div>
+							<div class="span-9">
+								<input type="password" name="password" class="text" id="password"/>
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+						<div class="span-18">
+							<div class="span-3 right">
+								<label for="passwordnew" i18n:translate="">New password</label>
+							</div>
+							<div class="span-9">
+								<input type="password" name="passwordnew" class="text" id="passwordnew" />
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+						<div class="span-18">
+							<div class="span-3 right">
+								<label for="passwordnewrepeat" i18n:translate="">Repeat new password</label>
+							</div>
+							<div class="span-9">
+								<input type="password" name="passwordnewrepeat" class="text" id="passwordnewrepeat" />
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+						<div class="right">
+							<button type="submit" class="green large" id="logindata" i18n:translate="">Save changes</button>
+						</div>
+					</form>
+					<hr class="space" />
+				</div>
+				<div id="contact-information-tab">
+					<h3 i18n:translate="" class="hide">Contact information</h3>
+					<form method="post" action="/myaccount/settings/save/" id="login-information">
+
+						<input type="hidden" name="actiontype" value="user" />
+
+						<h3 class="quiet" i18n:translate="">Name</h3>
+
+						<div class="span-18">
+							<div class="span-3 right">
+								<label for="firstname" i18n:translate="">First name</label>
+							</div>
+							<div class="span-9">
+								<input type="text" class="text" name="firstname" value="" tal:attributes="value user/firstname|default" />
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+
+						<div class="span-18">
+							<div class="span-3 right">
+								<label for="middlename" i18n:translate="">Middle name</label>
+							</div>
+							<div class="span-9">
+								<input type="text" class="text" name="middlename" value="" tal:attributes="value user/middlename|default" />
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+
+						<div class="span-18">
+							<div class="span-3 right">
+								<label for="lastname" i18n:translate="">Surname</label>
+							</div>
+							<div class="span-9">
+								<input type="text" class="text" name="lastname" value="" tal:attributes="value user/lastname|default" />
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+
+						<hr class="space"/>
+
+						<h3 class="quiet" i18n:translate="">Address</h3>
+						<div class="span-18">
+							<div class="span-3 right">
+								<label for="address" i18n:translate="">Address</label>
+							</div>
+							<div class="span-9">
+								<input type="text" class="text" name="address" value="" tal:attributes="value user/contactinfo/address|default" />
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+						<div class="span-18">
+							<div class="span-3 right">
+								&nbsp;
+							</div>
+							<div class="span-9">
+								<input type="text" class="text" name="address2" value="" tal:attributes="value user/contactinfo/address2|default" />
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+						<div class="span-18">
+							<div class="span-3 right">
+								<label for="zipcode" i18n:translate="">Zip code</label>
+							</div>
+							<div class="span-9">
+								<input type="text" class="text" name="zipcode" value="" tal:attributes="value user/contactinfo/zipcode|default" />
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+						<div class="span-18">
+							<div class="span-3 right">
+								<label for="city" i18n:translate="">City</label>
+							</div>
+							<div class="span-9">
+								<input type="text" class="text" name="city" value="" tal:attributes="value user/contactinfo/city|default" />
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+						<div class="span-18">
+							<div class="span-3 right">
+								<label for="country" i18n:translate="">Country</label>
+							</div>
+							<div class="span-9">
+
+								<select name="country" id="country">
+									<!--
+									<tal:block tal:condition="user/contactinfo/country">
+										<option value="${user/contactinfo/country/iso}" tal:content="user/contactinfo/country/name" i18n:translate="" />
+									</tal:block>
+									<tal:block  tal:condition="not:user/contactinfo/country">
+										<option value="NO" i18n:translate="" selected="selected">Norway</option>
+									</tal:block>
+									-->
+									<tal:block tal:repeat="country countries">
+										<option tal:condition="equal:user/contactinfo/country,country/iso,true" value="${country/iso}" i18n:translate="" tal:content="country/name" selected="1"></option>
+										<option tal:condition="not:equal:user/contactinfo/country,country/iso,true" value="${country/iso}" i18n:translate="" tal:content="country/name"></option>
+									</tal:block>
+								</select>
+
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+
+						<hr class="space"/>
+
+						<h3 class="quiet" i18n:translate="">Contact information</h3>
+						<div class="span-18">
+							<div class="span-3 right">
+								<label for="mobile" i18n:translate="">Mobile phone</label>
+							</div>
+							<div class="span-9">
+								<input type="text" class="text" name="mobile" value="" tal:attributes="value user/contactinfo/mobile|default" />
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+						<div class="span-18">
+							<div class="span-3 right">
+								<label for="phone" i18n:translate="">Phone</label>
+							</div>
+							<div class="span-9">
+								<input type="text" class="text" name="phone" value="" tal:attributes="value user/contactinfo/phone|default" />
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+						<div class="span-18">
+							<div class="span-3 right">
+								<label for="phone_night" i18n:translate="">Additional phone</label>
+							</div>
+							<div class="span-9">
+								<input type="text" name="phone_night" class="text" value="" tal:attributes="value user/contactinfo/phone_night|default" />
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+
+						<hr class="space"/>
+						<h3 class="quiet" i18n:translate="">Optional information</h3>
+						<div class="span-18">
+							<div class="span-3 right">
+								<label for="birthday" i18n:translate="">Born</label>
+							</div>
+							<div class="span-9">
+								<input type="text" id="birthday" name="birthday" value="" tal:attributes="value user/birthdate | default"/>
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+						<div class="span-18">
+							<div class="span-3 right">
+								<label for="gender" i18n:translate="">Gender</label>
+							</div>
+							<div class="span-9">
+								<select id="gender" name="gender">
+									<option value="" i18n:translate=""></option>
+									<option value="f" i18n:translate="" tal:condition="equal:user/gender,f,0" selected="selected">Female</option>
+									<option value="f" i18n:translate="" tal:condition="not:equal:user/gender,f,0">Female</option>
+									<option value="m" i18n:translate="" tal:condition="equal:user/gender,m,0" selected="selected">Male</option>
+									<option value="m" i18n:translate="" tal:condition="not:equal:user/gender,m,0">Male</option>
+								</select>
+							</div>
+							<div class="span-6 last"></div>
+						</div>
+						<div class="right">
+							<button type="submit" class="green large" id="userdata" i18n:translate="">Save changes</button>
+						</div>
+					</form>
+					<hr class="space" />
+				</div>
+				<div id="smsnewsletter-tab">
+					<form method="post" action="/myaccount/settings/save/" id="smsnewsletter-information">
+					<input type="hidden" name="actiontype" value="smsnewsletter" />
+
+               <h3 i18n:translate="">SMS / Newsletter</h3>
+					<p></p>
+					<!-- fieldset>
+						<legend i18n:translate="">SMS</legend>
+						<div>
+							<input disabled="1" type="checkbox" name="sms-sharing-photo" id="sms-sharing-photo" tal:attributes=""/>
+							<label for="sms-sharing-photo" i18n:translate="">Alert me by SMS when someone is sharing photos with me.</label>
+						</div>
+						<div>
+							<input disabled="1" type="checkbox" name="sms-order-ship" id="sms-order-ship"/>
+							<label for="sms-order-ship" i18n:translate="">Alert me by SMS when a order is shipped</label>
+						</div>
+					</fieldset -->
+					<fieldset>
+						<legend i18n:translate="">Newsletter</legend>
+						<input type="checkbox" name="newsletter" id="newsletter" value="1" tal:condition="not:user/contact/newsletter"/>
+						<input type="checkbox" name="newsletter" id="newsletter" value="1" checked="checked" tal:condition="user/contact/newsletter"/>
+						<label for="newsletter" i18n:translate="">I want to receive news and special offers</label>
+						<br />
+						<input type="checkbox" name="newsletter_others" id="newsletter_others" value="1" tal:condition="not:user/contact/spam"/>
+						<input type="checkbox" name="newsletter_others" id="newsletter_others" value="1"  checked="checked" tal:condition="user/contact/spam"/>
+						<label for="newsletter_others" i18n:translate="">I want to receive information from third parties</label>
+					</fieldset>
+					<div class="right">
+						<button type="submit" class="green large" id="newsletter-save" i18n:translate="">Save changes</button>
+					</div>
+					</form>
+				</div>
+				</tal:block>
+				<div id="storage-tab">
+
+					<h3 i18n:translate="">Safe unlimited storage</h3>
+
+					<div class="span-12">
+
+
+
+               <tal:block tal:condition="subscription">
+
+   					<p class="bottom">
+   						<tal:block i18n:translate="">Your photos are securely stored until</tal:block>
+   						<b tal:content="formatdate:subscription/stop" />
+   					</p>
+   					<p class="quiet small">(<tal:block i18n:translate="">It started</tal:block> <tal:block tal:content="formatdate:subscription/start" />)</p>
+
+   					<div id="buy-secure-storage" tal:condition="exists:subscription/buymore">
+   						<form action="/cart/additembyproductoptionid/" method="post">
+   						<div>
+   							<input type="radio" name="productoptionid" id="buy-secure-storage-6months" value="1365" class="subscription"/><label for="buy-secure-storage-6months" i18n:translate="">6 months</label>
+   						</div>
+   						<div>
+   							<input type="radio" name="productoptionid" id="buy-secure-storage-12months" value="1366" class="subscription" checked="checked"/><label for="buy-secure-storage-12months" i18n:translate="">12 months</label>
+   						</div>
+   						<div>
+   							<button class="add-subscription-to-cart" i18n:translate="">Buy</button>
+   						</div>
+   						</form>
+   					</div>
+   					<br />
+   					<script type="text/javascript" tal:condition="exists:subscription/buymore">
+   						$(document).ready( function() {
+   							$('#buy-secure-storage button.add-subscription-to-cart').click( function() {
+   								<tal:block tal:condition="cart/items">
+   									messageDialog('<tal:block i18n:translate="">Buy secure storage</tal:block>','<tal:block i18n:translate="">You have items in your cart. You get 12 months free subscription when you check out the cart. Please empty the cart if you dont want to buy anything.</tal:block>','<tal:block i18n:translate="">Close</tal:block>');
+   									return false;
+   								</tal:block>
+   								var subscriptionId = $('#buy-secure-storage input.subscription:checked').val();
+   								document.location.href = '/cart/additembyproductoptionid/' + subscriptionId + '/';
+   								return false;
+   							});
+   						});
+   					</script>
+
+   				</tal:block>
+
+					<tal:block tal:condition="not:subscription">
+
+						<h4 class="red" i18n:translate="">This account does not currently have an active subscription for safe storage</h4>
+
+						<div id="buy-secure-storage">
+   						<form action="/cart/additembyproductoptionid/" method="post">
+   						<div>
+   							<input type="radio" name="productoptionid" id="buy-secure-storage-6months" value="1365" class="subscription"/><label for="buy-secure-storage-6months" i18n:translate="">6 months</label>
+   						</div>
+   						<div>
+   							<input type="radio" name="productoptionid" id="buy-secure-storage-12months" value="1366" class="subscription" checked="checked"/><label for="buy-secure-storage-12months" i18n:translate="">12 months</label>
+   						</div>
+   						<div>
+   							<button class="add-subscription-to-cart" i18n:translate="">Buy</button>
+   						</div>
+   						</form>
+   					</div>
+   					<br />
+   					<script type="text/javascript">
+   						$(document).ready( function() {
+   							$('#buy-secure-storage button.add-subscription-to-cart').click( function() {
+   								<tal:block tal:condition="cart/items">
+   									messageDialog('<tal:block i18n:translate="">Buy secure storage</tal:block>','<tal:block i18n:translate="">You have items in your cart. You get 12 months free subscription when you check out the cart. Please empty the cart if you dont want to buy anything.</tal:block>','<tal:block i18n:translate="">Close</tal:block>');
+   									return false;
+   								</tal:block>
+   								var subscriptionId = $('#buy-secure-storage input.subscription:checked').val();
+   								document.location.href = '/cart/additembyproductoptionid/' + subscriptionId + '/';
+   								return false;
+   							});
+   						});
+   					</script>
+
+					</tal:block>
+
+
+					<div class="hide">
+					<tal:block tal:condition="exists:user/subscription/type_subscription">
+						<h4 i18n:translate="">Type of subscription</h4>
+						<p tal:content="user/subscription/type_subscription"></p>
+					</tal:block>
+
+					<tal:block tal:condition="exists:user/subscription/registered">
+						<h4 i18n:translate="">Registered</h4>
+						<p tal:content="user/subscription/registered"></p>
+					</tal:block>
+
+					<tal:block tal:condition="exists:user/subscription/latest_changed">
+						<h4 i18n:translate="">Last changed</h4>
+						<p tal:condition="user/subscription/latest_changed" tal:content="user/subscription/latest_changed"></p>
+					</tal:block>
+
+					<tal:block tal:condition="exists:user/subscription/valid_to">
+						<h4 i18n:translate="">Valid to</h4>
+						<p tal:content="user/subscription/valid_to"></p>
+					</tal:block>
+					</div>
+					</div>
+					<div class="span-6 last">
+
+						<div class="box">
+							<h3 tal:content="cms:title:3f82f30a-e8ea-46c1-8ded-7d8f9383c638">Tip!</h3>
+							<p tal:content="cms:ingress:3f82f30a-e8ea-46c1-8ded-7d8f9383c638">If you buy something you will get secure storage for free for 12 months from the current day!</p>
+						</div>
+
+					</div>
+					<hr class="space clear" />
+
+				</div>
+				<div id="avatar-tab">
+					<div></div>
+				</div>
+				<div id="free-products" tal:condition="credits">
+					<tal:block tal:condition="credits">
+						<div class="span-6">
+							<h3 class="bottom" i18n:translate="">You have free products!</h3>
+							<p class="quiet"></p>
+							<ul class="">
+								<tal:block tal:repeat="credit credits">
+									<li>${credit/product/title} <span class="quiet right">(${credit/quantity})</span></li>
+								</tal:block>
+							</ul>
+						</div>
+					</tal:block>
+					<hr class="space clear clearfix" />
+				</div>
+				
+				
+			
+				
+				
+				
+				<div id="newsletter-tab" tal:condition="exists: session/email">
+					<tal:block tal:condition="exists: session/email">
+						<div class="col-md-10">
+			<form action="/register/check/newsletter" method="post" id="register">
+			
+				<div class="col-md-12">
+				<h2>Nyhetsbrev</h2>
+				<p >For å motta nyhetsbrev!</p>
+					
+					<div tal:content="structure cms:body:ad39995b-349e-4aa3-b519-4c45b2c92635" />
+					<div class="span-18 last">
+						<div class="span-3">
+							<label for="email" class="span-3 last" i18n:translate="">Email</label>
+						</div>
+						<div  class="span-7">
+													<tal:block tal:condition="not:exists: session/email" >
+														<input type="text" class="title span-7 required email" name="newEmail" tal:attributes="value email|default" value="" id="email"/>
+													</tal:block>
+													<tal:block tal:condition="exists: session/email" >
+														<input type="text" class="title span-7 required email" name="newEmail" tal:attributes="value session/email" value="" id="email"/>
+													</tal:block>
+							
+						</div>
+						<div class="span-8 last">
+						
+						</div>
+					</div>			
+					<!--
+					<div class="span-18 last">
+						<div class="span-3">
+							<label for="pasword" class="span-3 last" i18n:translate="">Password</label>
+						</div>
+						<div class="span-7">
+							<input type="password" class="span-7 title required password" name="password" tal:attributes="value password|default" value="" id="password"/>
+						</div>
+						<div class="span-8 last">
+						
+						</div>
+					</div>
+					<div class="span-18 last">
+						<div class="span-3">
+							<label for="pasword" class="span-3" i18n:translate="">Repeat password</label>
+						</div>
+						<div class="span-7">
+							<input type="password" class="span-7 title required password" name="password2" tal:attributes="value password|default" value="" />
+						</div>
+						<div class="span-8 last">
+						
+						</div>
+					</div>
+									
+					<div class="span-18 last">
+						<div class="prepend-3 span-7 prepend-top">
+							<input type="checkbox" id="eula" class="required eula" name="eula"/> 
+							<label for="eula">
+								<tal:block i18n:translate="">Yes, I accept the</tal:block> <a href="${url:/about/terms-and-conditions/}" id="open-terms-and-conditions" i18n:translate="">Terms and conditions</a>
+							</label>
+						</div>
+						<div class="span-8 last">
+							
+						</div>
+					</div>
+					<div class="prepend-3 span-15 last">
+						<input type="checkbox" id="newsletter" class="newsletter ignore" name="newsletter" checked="checked"/> 
+						<label for="newsletter" i18n:translate="">Yes, I want to receive newsletters</label>
+					</div>-->				
+					<div class="span-18 last">
+						<p class="right">
+							<button type="submit" class="button blue large submit">
+								 Motta nyhetsbrev
+							</button>
+						</p>
+					</div>			
+				</div>
+				
+				<!--<div id="terms-and-conditions">
+					<tal:block tal:content="structure cms:body:80f507f6-69c5-4a4e-9714-b2656514cb31" />
+				</div>-->
+				
+			</form>
+			
+		</div>
+					</tal:block>
+					<hr class="space clear clearfix" />
+				</div>
+				
+				
+				
+		
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+		</div><!-- end tabs -->
+		
+      <div class="hide" id="message" title="" i18n:attributes="title">
+         <p i18n:translate=""></p>
+      </div>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#tabs").tabs();
+				$("#birthday").datepicker({
+					changeMonth: true,
+					changeYear: true,
+					yearRange: '-100:+20',
+					maxDate: '+9m'
+				});
+
+				$('form#login-information').validate({
+					errorClass: "inputError",
+					errorPlacement: function(error, element) {
+						error.appendTo( element.parent("div").next("div") );
+					},
+					rules: {
+						emailchange:{
+							required: true,
+							email: true
+						},
+						password: {
+							required: true,
+							remote: '/api/1.0/user/checkpass/'
+						},
+						passwordnew: {
+							maxlength: '15',
+							minlength: '5'
+						},
+						passwordnewrepeat: {
+							equalTo: '#passwordnew'
+						}
+					},
+					messages: {
+						password: {
+							required: '<tal:block i18n:translate="">Enter your password to change these settings</tal:block>',
+							remote: '<tal:block i18n:translate="">Password is incorrect</tal:block>'
+						},
+						passwordnew: {
+							required: "<tal:block i18n:translate="">Please enter password</tal:block>",
+							maxlength: jQuery.format('<tal:block i18n:translate="">Your password cannot be longer than {0} characters.</tal:block>'),
+							minlength: jQuery.format('<tal:block i18n:translate="">Your password should be longer than {0} characters.</tal:block>')
+						},
+						passwordnewrepeat: {
+							required: "<tal:block i18n:translate="">Please enter password</tal:block>",
+							equalTo: "<tal:block i18n:translate="">Oops, your passwords don't match. </tal:block>"
+						}
+					}
+				});
+
+				$('#logindata').click( function() {
+				      $(this).parents('form').get(0).submit();
+				});
+				$('#userdata').click( function() {
+				      $(this).parents('form').get(0).submit();
+				});
+				$('#coupon-code').click( function() {
+				   $(this).parent().submit();
+				});
+
+				$('#sms-sharing-photo').click( function() {
+				   $.ajax({
+                  url: "/api/1.0/user/toggle/sms/sharephoto",
+                  type: 'get',
+                  cache: 'false',
+                  data: {
+                     value: $('#sms-sharing-photo').is(':checked')
+                  },
+                  dataType: 'json',
+                  success: function( data, status ) {
+                  }
+               });
+            });
+            $('#sms-order-ship').click( function() {
+				   $.ajax({
+                  url: "/api/1.0/user/toggle/sms/ordershipping",
+                  type: 'get',
+                  cache: 'false',
+                  data: {
+                     value: $('#sms-order-ship').is(':checked')
+                  },
+                  dataType: 'json',
+                  success: function( data, status ) {
+                  }
+               });
+            });
+            /*
+            $('#newsletter').click( function() {
+				   $.ajax({
+                  url: "/api/1.0/user/toggle/newsletter",
+                  type: 'get',
+                  cache: 'false',
+                  data: {
+                     value: $('#newsletter').is(':checked')
+                  },
+                  dataType: 'json',
+                  success: function( data, status ) {
+                  }
+               });
+            });
+            */
+			});
+			
+		</script>
+	</div>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+</body>
+</html>

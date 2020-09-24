@@ -1,0 +1,8 @@
+#!/bin/sh
+echo -n "Fixing permissions... "
+sudo chgrp ef /var/www/repix -R
+sudo chmod g+w /var/www/repix -R
+sudo chmod go+w /var/www/repix/data/images/
+sudo chmod go+w /var/www/repix/tmp/           
+echo "OK!"
+

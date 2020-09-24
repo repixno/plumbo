@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Products</tal:block>
+</head>
+
+<!-- Defining sections -->
+<tal:block define:section="mainproduct, Main products" /> <!-- article -->
+<tal:block define:section="bestsellers, Best sellers" /> <!-- auto -->
+
+<tal:block define:section="news, New products (max 4) " /> <!-- auto, with auto adjusting -->
+
+<tal:block define:section="occations, Occations " /> <!-- article -->
+<tal:block define:section="gifttips, Gift tips " /> <!-- article -->
+
+<tal:block define:section="bottompage, Bottom page " /> <!-- article -->
+
+
+<body>
+<div metal:use-macro="../../../${templates}/common.html/top" />
+	<div class="container">
+		<div class="span-4">
+			<div metal:use-macro="../cms.html/menu-current" />
+		</div>
+		<div class="product-main-page span-19 last">
+		    <div class="span 19 last">
+		       <img src="http://c.static.eurofoto.no/cms/images/banner.jpg"/>
+		    </div>
+		
+			<h2 class="hide" tal:content="menuitem/title"></h2>
+			
+			<!--<div tal:condition="exists: menuitem/article/body" tal:content="structure menuitem/article/body"></div>-->
+			<div class="span-20 last prepend-top">
+			
+   			<tal:block tal:repeat="item menuitems">	
+   				<tal:block tal:condition="item/expanded">
+   				
+   					<tal:block tal:condition="exists:item/children" tal:repeat="subitem1 item/children">
+   						<tal:block tal:condition="not:mod:repeat/subitem1/number,4">
+   						<div class="span-5 append-bottom center">
+   							<a href="${subitem1/url}" >
+   								<img src="${static:}images/menu/${subitem1/image}" alt="${subitem1/title}" width="190" height="108"/>
+   							</a>
+   							<h3 class="center bottom"><a href="${subitem1/url}" class="hide-link">${subitem1/title}</a></h3>
+   							<tal:block tal:condition="exists: subitem1/article">
+   								<p class="center quiet bottom">
+   									<tal:block tal:content="subitem1/article/ingress" />
+   								</p>
+   							</tal:block>
+   							<div class="center span-5 last">
+   								<a class="button center" href="${subitem1/url}" title="${subitem1/title}" i18n:translate="">See more</a>
+   							</div>
+   						</div>
+   						</tal:block>
+   						<tal:block tal:condition="mod:repeat/subitem1/number,4">
+   						<div class="span-5 append-bottom center last">
+   							<a href="${subitem1/url}" >
+   								<img src="${static:}images/menu/${subitem1/image}" alt="${subitem1/title}" width="190" height="108" />
+   							</a>
+   							<h3 class="center bottom"><a href="${subitem1/url}" class="hide-link">${subitem1/title}</a></h3>
+   							<tal:block tal:condition="exists: subitem1/article">
+   								<p class="center quiet bottom">
+   									<tal:block tal:content="subitem1/article/ingress" />
+   								</p>
+   							</tal:block>
+   							<div class="center span-5 last">
+   								<a class="button center" href="${subitem1/url}" title="${subitem1/title}" i18n:translate="">See more</a>
+   							</div>
+   						</div>
+   						<br class="clear clearfix" />
+   						</tal:block>
+   					</tal:block>
+   					
+   				</tal:block>
+   			</tal:block>
+			
+			</div>
+			
+		</div>
+		
+	</div>
+			<div metal:use-macro="../../../${templates}/common.html/footer" />
+</body>
+</html>

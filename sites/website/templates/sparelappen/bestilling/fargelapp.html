@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+	
+
+	<tal metal:use-macro="common.html/head" />
+</head>
+
+
+<body>
+
+
+
+<div metal:use-macro="../../${templates}/common.html/top" />
+
+<div id="container_content">
+
+   <div class="container">
+	
+        <tal:block metal:use-macro="./common.html/top-header" />
+        
+	
+	 
+        <div class="span-16">
+	<div class="span-4" style="width: 130px; line-height: 0; position: relative; top: 1px; z-index: 20">
+		  <img src="http://test.static.eurofoto.no/gfx/sparelappen/icons/meny_fargelapp_trykkt.png" />
+	    </div>
+	    <div class="span-4" style="width: 130px; line-height: 0;">
+	       <a href="/bestilling/merkelapp">
+		  <img src="http://test.static.eurofoto.no/gfx/sparelappen/icons/meny_merkelapp_vanlig.png" />
+	       </a>
+	    </div>
+	    <div class="span-4 last right" style="width: 350px; line-height: 0;">
+	       <a href="/produkter/tilbehor/merkelapp/">
+		  <img src="http://test.static.eurofoto.no/gfx/sparelappen/icons/meny_tilbehor_vanlig.png" />
+	       </a>
+	</div>
+	
+        <div class="editorbox fargelappbox span-16 last">
+         <div class="span-9">
+            <div  style="height:446px; padding: 0em;">
+               <form id="edit">
+               <div class="content222">
+			      
+			      <div class="tabscontent">
+
+                  <div id="tabs">
+                  	<ul>
+                  		<li><a id="tab-text" href="#tabs-1">Tekst</a></li>
+                  		<li><a id="tab-clipart" href="#tabs-2">Motiv</a></li>
+                  		<li><a id="tab-background" href="#tabs-3">Bakgrunn</a></li>
+                  		<li><a id="tab-image" href="#tabs-4">Eget bilde</a></li>
+                  	</ul>
+                  	<div id="tabs-1">
+				 <div>
+					<h2 style="color: blue">Lag din fargelapp her:</h2>
+					Velg tekst.
+				 </div>
+			
+                    <label>Linje 1:</label>
+                    <input type="text" name="line1" maxlength="18"/><br />
+                    <label>Linje 2:</label>
+                    <input type="text" name="line2" maxlength="18"/><br />
+                    <label>Linje 3:</label>
+                    <input type="text" name="line3" maxlength="18"/><br />
+                <div>
+                   <table>
+                     <tr>
+                        <td>
+                            Font-type:
+                        </td>
+                        <td>
+                           <select name="font-type" style="width:135px;">
+                               <option value="arial">Arial</option>
+                               <option value="comic">Comic Sans</option>
+                               <option value="verdana">Verdana</option>
+                               <option value="vivaldi">Vivaldi</option>
+                               <option value="present">Present</option>
+                            </select>
+                           
+                        </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        Tekst farge:
+                     </td>
+                     <td>
+		     <div style="display: block;">
+                      <div id="jquery-colour-picker-text">
+			<p>
+			    <label>
+
+				<select name="font-color"  id="font-color">
+				    <option value="ffffff">#ffffff</option>
+				    <option value="ffccc9">#ffccc9</option>
+				    <option value="ffce93">#ffce93</option>
+				    <option value="fffc9e">#fffc9e</option>
+				    <option value="ffffc7">#ffffc7</option>
+				    <option value="9aff99">#9aff99</option>
+				    <option value="96fffb">#96fffb</option>
+				    <option value="cdffff">#cdffff</option>
+				    <option value="cbcefb">#cbcefb</option>
+				    <option value="cfcfcf">#cfcfcf</option>
+				    <option value="fd6864">#fd6864</option>
+				    <option value="fe996b">#fe996b</option>
+				    <option value="fffe65">#fffe65</option>
+				    <option value="fcff2f">#fcff2f</option>
+				    <option value="67fd9a">#67fd9a</option>
+				    <option value="38fff8">#38fff8</option>
+				    <option value="68fdff">#68fdff</option>
+				    <option value="9698ed">#9698ed</option>
+				    <option value="c0c0c0">#c0c0c0</option>
+				    <option value="fe0000">#fe0000</option>
+				    <option value="f8a102">#f8a102</option>
+				    <option value="ffcc67">#ffcc67</option>
+				    <option value="f8ff00">#f8ff00</option>
+				    <option value="34ff34">#34ff34</option>
+				    <option value="68cbd0">#68cbd0</option>
+				    <option value="34cdf9">#34cdf9</option>
+				    <option value="6665cd">#6665cd</option>
+				    <option value="9b9b9b">#9b9b9b</option>
+				    <option value="cb0000">#cb0000</option>
+				    <option value="f56b00">#f56b00</option>
+				    <option value="ffcb2f">#ffcb2f</option>
+				    <option value="ffc702">#ffc702</option>
+				    <option value="32cb00">#32cb00</option>
+				    <option value="00d2cb">#00d2cb</option>
+				    <option value="3166ff">#3166ff</option>
+				    <option value="6434fc">#6434fc</option>
+				    <option value="656565">#656565</option>
+				    <option value="9a0000">#9a0000</option>
+				    <option value="ce6301">#ce6301</option>
+				    <option value="cd9934">#cd9934</option>
+				    <option value="999903">#999903</option>
+				    <option value="009901">#009901</option>
+				    <option value="329a9d">#329a9d</option>
+				    <option value="3531ff" selected="selected">#3531ff</option>
+				    <option value="6200c9">#6200c9</option>
+				    <option value="343434">#343434</option>
+				    <option value="680100">#680100</option>
+				    <option value="963400">#963400</option>
+				    <option value="986536">#986536</option>
+				    <option value="646809">#646809</option>
+				    <option value="036400">#036400</option>
+				    <option value="34696d">#34696d</option>
+				    <option value="00009b">#00009b</option>
+				    <option value="303498">#303498</option>
+				    <option value="000000">#000000</option>
+				    <option value="330001">#330001</option>
+				    <option value="643403">#643403</option>
+				    <option value="663234">#663234</option>
+				    <option value="343300">#343300</option>
+				    <option value="013300">#013300</option>
+				    <option value="003532">#003532</option>
+				    <option value="010066">#010066</option>
+				    <option value="340096">#340096</option>
+				</select>
+			    </label>
+			</p>
+			</div>
+		      </div>
+		  </td>
+                  </tr>
+                  <tr>
+                     <td>
+                           Tekstjustering:
+                     </td>
+                     <td>
+                           <span class="radio" id="left" style="background-position-x: -37px;  background-position-y: -7px;"></span>
+                           <span class="radio" id="center" style="background-position-x: -7px;  background-position-y: -37px;"></span>
+                           <span class="radio" id="right" style="background-position-x: -7px;  background-position-y: -67px;"></span>
+                     </td>
+                  </tr>
+                </table>
+                <div class="span-7 last right">
+                  <a id="removetext" class="button">
+                     <span>Fjern Tekst</span><span><img src="${static:gfx/sparelappen/icons/icondelete.png}"/></span>
+                  </a>
+                </div>
+                
+			      </div>
+                  </div>
+                  	<div id="tabs-2">
+                  	    <div>
+                  	    <div>Trykk på motiv for å velge.</div>
+                  	    <div id="clipart"></div>
+                  	    <div>
+                  	    Velg kategori:
+                          <select id="select_clipart">
+                  	        <OPTION value="Dyr" selected="true">Dyr</OPTION>
+                  	        <OPTION value="Sport">Sport</OPTION>
+                  	        <OPTION value="Smile ansikt">Smile Ansikt</OPTION>
+                  	        <OPTION value="Sure ansikt">Sure Ansikt</OPTION>
+                  	        <OPTION value="Transport">Transport</OPTION>
+                  	        <OPTION value="Leker">Leker</OPTION>
+                  	        <OPTION value="Kontor">Kontor</OPTION>
+                  	        <OPTION value="Symboler">Symboler</OPTION>
+                  	        <OPTION value="Sommerfugler">Sommerfugler</OPTION>
+                  	        <OPTION value="Stjernetegn">Stjernetegn</OPTION>
+                  	        <OPTION value="Blomster">Blomster</OPTION>
+                  	        <OPTION value="Katter">Katter</OPTION>
+                  	        <OPTION value="Fugler">Fugler</OPTION>
+                  	    </select>
+                  	    </div>
+                  	    </div>
+                         
+                         <div class="span-7 last right">
+                         </div>
+                         <div class="span-7 last right">
+
+                           <a id="removeclipart" class="button"><span>Fjern Motiv</span><span><img src="${static:gfx/sparelappen/icons/icondelete.png}"/></span></a> 
+                         </div>
+                         
+                  	</div>
+                  	<div id="tabs-3">
+                  	    <div>
+                  	    <div>Trykk på bakgrunn for å velge.</div>
+                  	    <div id="background"></div>
+			    <div>
+				
+			Velg kategori:
+                          <select id="select_background">
+                  	        <OPTION value="Dyr" selected="true">Dyr</OPTION>
+                  	        <OPTION value="Sport">Sport</OPTION>
+                  	        <OPTION value="Blomster">Blomster</OPTION>
+                  	        <OPTION value="Ensfarget">Ensfarget</OPTION>
+                  	        <OPTION value="Stjerner">Stjerner</OPTION>
+                  	        <OPTION value="Hjerter">Hjerter</OPTION>
+                  	    </select>
+				
+			    </div>
+                  	    </div>
+                         <div class="span-7 last right">
+                         </div>
+                         <div class="span-7 last right">
+
+                           <a id="removebackground" class="button"><span>Fjern Bakgrunn</span><span><img src="${static:gfx/sparelappen/icons/icondelete.png}"/></span></a> 
+                         </div>
+                         
+                  	</div>
+                  	<div id="tabs-4">
+                        <p id="status"></p>
+                         <input type="hidden" name="image" value="" />
+                         <input type="hidden" name="imagemode" value="color" />
+                         <input type="file" name="file" id="imagefile" />
+			 <!--<br/>
+			 <input type="checkbox" name="fillout" /><label for="fillout">Fillout</label>-->
+                         
+                         <div class="preimage">
+                           <p>
+                              <strong>Slik får du best resultat med egne motiv:</strong><br/>
+                              &nbsp;- Bruk bilder, illustrasjoner, logoer etc.<br/>
+                              &nbsp;- Unngå motiv med mange detaljer<br/>
+                              &nbsp;- Lag tett utsnitt<br/>
+                              &nbsp;- Motiv på merkelappen er ca 1x1 cm<br/>
+                           </p>
+                           </div>
+                         <div class="pastimage hide">
+                         <div id="imagecontainer"/><br/>
+                         </div>
+                         <div class="span-7 last right">
+                           <a id="removeimg" class="button"><span>Fjern Bilde</span><span><img src="${static:gfx/sparelappen/icons/icondelete.png}"/></span></a>
+                         </div>
+                  	</div>
+                  </div>
+
+               </div><!-- End demo -->
+			      </div>
+			      <div class="span-8 last right">
+			         <br/>
+			         <span style="padding: 20px;">
+			            <a id="removeall" class="button" href="#"><span>Nullstill</span><span><img src="${static:gfx/sparelappen/icons/iconreset.png}"/></span></a> 
+			            <a id="update" class="button" href="#"><span>Oppdater</span><span><img src="${static:gfx/sparelappen/icons/iconupdate.png}"/></span></a>
+			         </span>
+			      </div>
+			      
+			      </form>
+            </div>
+         </div>
+         <div class="span-7 last">
+            <div style="height:446px; padding: 0em;">
+            <div>Forhåndsvisning:</div>
+            <div style="padding: 0em 1.5em 1.5em 1.5em;">
+               <div>
+                  <p><strong>Fargelapper</strong> mål:30x14 mm</p>
+                  <div id="sticker">
+                     <img id="preview" class="sticker" src="${static:gfx/merkelapp/template_merkelapp.png}" />
+                  </div>
+               </div>
+               <table style="width:260px; margin-bottom:25px;">
+                  <tbody>
+                     <tr tal:repeat="select selected">
+                        <td style="width:20px; padding-top:10px;">
+                           <input tal:condition="repeat/select/start" type="radio" name="choose_product" checked="checked" value="${select/productoptionid}"/>
+                           <input tal:condition="repeat/select/index" type="radio" name="choose_product" value="${select/productoptionid}"/>
+                        </td>
+                        <td style="width: 130px" tal:content="select/product/title">
+                           ''
+                        </td>
+                        <td>
+                           Pris: ${select/productoption/prices/0/price},-
+                        </td>
+                     </tr>
+                  </tbody>
+              </table>
+               <div class="span-6 last right ">
+                     <a href="#" id="addtocart" class="button oppdater">
+                        <span i18n:translate="">Legg i handlekurv</span><span><img src="${static:gfx/sparelappen/icons/iconcart.png}"/></span>
+                     </a>
+                  </div>
+             </div>
+            </div>
+         </div>
+         </div>
+         </div>
+	 
+         <tal:block metal:use-macro="./common.html/shoppingcart" />
+         <tal:block metal:use-macro="./common.html/bottom" />
+   </div>
+
+</div>
+<div class="footer">
+   <div class="container">
+      <div metal:use-macro="../../${templates}/common.html/footer" />
+   </div>
+</div>
+
+<SCRIPT type="text/javascript">
+   var clipart = '';
+   var ownimage = '';
+   var treshhold = 50;
+   var imageselection = Object();
+   var projectid = ${projectid};
+   var gravity = 'left'; 
+   var category = 'Dyr';
+   var backgroundcat = 'Dyr';
+   var backgroundfile = '';
+   var totalprice = ${cart/totalprice};
+   var staticroot = "${request/staticroot}";
+   var type = 'fargelapp';
+   var disabled = true;
+   var alertmessage = 'false';
+   var colormode = 'color';
+   var ownimageratio = '1:1';
+
+   
+</SCRIPT>
+<script type="text/javascript" src="${static:js/merkelapp.min.js}?${version}"></script>
+
+<script type="text/javascript">
+	
+
+	
+	
+	
+</script>
+
+
+
+
+</body>
+</html>

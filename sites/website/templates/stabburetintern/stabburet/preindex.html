@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+	<div metal:use-macro="../common.html/head" />
+	<div metal:use-macro="../common.html/stylesheet" />
+
+    </head>
+    
+    <body>
+        <div class="row text-center hidden-phone header">
+	    <img  src="${static:css/portals/stabburet/web/images/preheader.png}" alt="LAG LOKK MED DITT BILDE"/>
+        </div>
+        <div class="container center">
+            <!-- Main hero unit for a primary marketing message or call to action -->
+            
+            <img src="${static:css/portals/stabburet/web/images/pretext.png}" alt="Kjøp 3 bokser Stabburet leverpostei"/>
+            <img src="${static:css/portals/stabburet/web/images/content-pre.jpg}" />
+
+			<h2>Kampanjen er avsluttet</h2>
+            <!-- Example row of columns -->
+            <div class="hide">
+                <div class="span5"><img src="${static:css/portals/stabburet/web/images/countdownlabel.png}" /></div>
+                <div class="span6 hide">
+                    <div id="counter"></div>
+                    <div class="desc">
+                        <div>Dager</div>
+                        <div>Timer</div>
+                        <div>Minutter</div>
+                        <div>Sekunder</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+	<div metal:use-macro="../common.html/javascript" />
+        <div metal:use-macro="../common.html/footer" />
+        <script  src="http://jquery-countdown.googlecode.com/svn/trunk/js/jquery.countdown.js"></script>
+        
+        
+        <script>
+              
+            $( function(){
+		var totalleft = "${totalleft}";  
+                $('#counter').countdown({
+                    image: '${static:css/portals/stabburet/web/images/digits.png}',
+                    startTime: totalleft,
+                    digitWidth: 45,
+                    digitHeight: 65
+                });
+                
+                
+            });
+            
+          /*<![CDATA[*/  
+        /*]]>*/</script>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+<tal:block>
+<tal:block tal:content="cms:ingress:24c844a6-bef8-4adf-9ca3-e3b61160e94f">Din merkelapp</tal:block>
+
+
+<tal:block>
+Mvh
+sparelappen.no
+(+47) 57 88 35 00
+post@sparelappen.no
+http://www.sparelappen.no
+</tal:block>
+</tal:block>

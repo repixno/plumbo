@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <tal:block metal:use-macro="../../${templates}/common.html/head" />
+  
+  <link href="/static/css/editor.css" rel="stylesheet" />
+  <link href="/static/css/jquery-ui.min.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="/static/css/spectrum.css" />
+  
+  <style type="text/css">
+    
+    .fonter-container{
+        z-index: 10000;
+    }
+    
+    #choose-template {
+        overflow-x: hidden;
+        height: auto;
+    }
+    
+  </style>
+  
+</head>
+
+  <body>
+    <tal:block metal:use-macro="../../${templates}/common.html/top" />
+    <div class="container">
+        <!--<h1>Editor</h1>-->
+        <div class="col-md-3" style="position: relative; z-index: 200">
+            <div class="row">
+            <h4>1. Välj modell</h4> 
+            <div class="functions row" id="choose-template">
+              <div class="">
+                  <tal:block tal:repeat="gifttemplate collections/gifttemplates">
+                      <div class="template-thumb">
+                        
+                          <a tal:attributes="href string:/create/gift/${selected/productid}/${selected/productoptionid}/${gifttemplate/id}/${selected/image/id}">
+                              <tal:block tal:repeat="page gifttemplate/pages">
+                                  <tal:block tal:condition="equal:repeat/page/number,1">
+                                  
+                                      <input 
+                                          type="hidden" class="websize_x" name="malid" value="${page/websize_x}" 
+                                          tal:condition="exists:page"/>
+                                      <input 
+                                          type="hidden" class="websize_y" name="malid" value="${page/websize_y}" 
+                                          tal:condition="exists:page"
+                                      />
+                                      
+                                      <tal:block tal:condition="page/fullsize_src">
+                                          <img 
+                                              src="${static:}images/gifttemplates/thumbs/width/280/${page/fullsize_src}" 
+                                              id="malid_${gifttemplate/id}" alt="eurofoto" class="mal"
+                                          />
+                                          <script type="text/javascript">
+                                              $('#malid_${gifttemplate/id}').data('websize_x', '${page/websize_x}');
+                                              $('#malid_${gifttemplate/id}').data('websize_y', '${page/websize_y}');
+                                              $('#malid_${gifttemplate/id}').data('fullsize_pos_x', '${page/fullsize_pos_x}');
+                                              $('#malid_${gifttemplate/id}').data('fullsize_pos_y', '${page/fullsize_pos_y}');
+                                              $('#malid_${gifttemplate/id}').data('fullsize_pos_dx', '${page/fullsize_pos_dx}');
+                                              $('#malid_${gifttemplate/id}').data('fullsize_pos_dy', '${page/fullsize_pos_dy}');
+                                              $('#malid_${gifttemplate/id}').data('fullsize_x', '${page/fullsize_x}');
+                                              $('#malid_${gifttemplate/id}').data('fullsize_y', '${page/fullsize_y}');	
+                                              
+                                          </script>
+                                          <input type="hidden" class="malid" name="malid" value="${gifttemplate/id}" />
+                                          <input type="hidden" class="malpageid" name="malpageid" value="${page/malpageid}" />
+                                      </tal:block>
+                                      
+                                      <tal:block tal:condition="not:page/fullsize_src">
+                                          <div class="empty-template-thumb">
+                                          <img 
+                                              src="${static:}images/gifttemplatesweb/thumbs/blankbox/50x50/${selected/template/id}.png" 
+                                              width="50" height="50"
+                                              id="malid_${gifttemplate/id}"
+                                          />
+                                          </div>
+                                      </tal:block>
+                                  </tal:block>
+                              </tal:block>
+                          </a>
+                          <a class="highres display-none" href="${static:}images/gifttemplates/thumbs/width/630/${page/fullsize_src}"></a>
+                      </div>
+                  </tal:block>
+              </div>
+          </div>
+        
+            </div>
+            </div>
+        <div class="col-md-9">
+            <div class="editorcontainer" style="text-align: left">
+                
+                <div class="col-md-6">
+                    <h4>2. Ange textval</h4>
+                    <div class="col-md-12">
+                        <div class="theme" id="sp-light">
+                            <div class='example'>
+                                <label for="text-color">Färg: </label><input id="text-color" type='text' />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 top-5">
+                        <label class="">Typsnitt:</label>
+                        <div id="font-list"/>
+                    </div>
+                </div>
+                <div class="col-md-6 addtocart">
+                    <h4>3. Välj antal</h4>
+                    <span>Studentbanderoll</span>
+                    <input type="hidden" value="${selected/product/id}" name="productid" id="productid"/>
+                    <input type="hidden" value="${selected/productoptionid}" name="productoptionid" id="productoptionid"/>
+                    <div class="form-inline top-15">
+                        <input id="choose-skum" class="choose-product" type="checkbox" checked="true"/><label for="choose-skum">Banderoll</label>
+                        <input type="text" data-productid="4120"  data-productoptionid="4128"  class="quantity form-control input-number productquantity" id="gift-quantity" value="1"/>
+                        <span class="price" id="gift-price">299:- kr</span>
+                    </div>
+                    <div class="top-15 col-md-12 text-right">
+                        <button class="call-to-action btn btn-primary" id="add-gift-to-cart" i18n:translate="">Add to cart</button>
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <div class="template selected-template" id="template-wrapper" style="margin-top: 15px; overflow: hidden; margin-left: 0px; width: 630px; height: 94px;">
+                        <img id="template" src="/static/assets/img/pixblank.gif"/>
+                            <div id="image-wrapper" class="imagecontainer">
+                                <tal:block tal:condition="selected/imageid">
+                                    <img id="image"	src="/images/stream/image/${selected/image/id}/630/400" alt="?"/>
+                                    <input type="hidden" id="selected-image" value="${selected/imageid}" />
+                                </tal:block>
+                                <tal:block tal:condition="not:selected/imageid">
+                                    <img id="image" class="noimage" alt="no image" src="/static/assets/img/pixblank.gif" />
+                                    <input type="hidden" id="selected-image" value="0" />
+                                </tal:block>
+                            </div>
+                        <div class="text1  text textholder" style="z-index: 2444" >
+                            <span contenteditable="true" style="font-size: 41px;">Din text här</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="original-template-width" class="coordinate" value="${page/fullsize_x}"/>
+                    <input type="hidden" id="original-template-height" class="coordinate" value="${page/fullsize_y}"/>
+                    <input type="hidden" id="original-pos-x" class="coordinate" value="${page/fullsize_pos_x}"/>
+                    <input type="hidden" id="original-pos-y" class="coordinate" value="${page/fullsize_pos_y}"/>
+                    <input type="hidden" id="original-pos-dx" class="coordinate" value="${page/fullsize_pos_dx}"/>
+                    <input type="hidden" id="original-pos-dy" class="coordinate" value="${page/fullsize_pos_dy}"/>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+    </div>
+    
+    <tal:block metal:use-macro="../../${templates}/common.html/footer" />
+    
+    <script src="${static:}js/jqupload/js/jquery.fileupload.js?${version}"></script>
+    <script src="${static:js/jquery.panzoom.min.js}?${version}" type="text/javascript"></script>
+    <script src="/static/js/banderoll.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/static/js/spectrum.js"></script>
+    <script type="text/javascript" src="/static/js/fontloader.js"></script>
+    
+    <script>
+    var fontdata = new Array();
+      var ajaxLoader = '<tal:block tal:content="static:gfx/gui/ajax-loader.gif" />';
+      var bigajaxLoader = '<tal:block tal:content="static:gfx/gui/ajax-loader-big.gif" />';
+      var bigajaxLoaderGray = '${static:gfx/gui/ajax-loader-gray.gif}';
+      var staticurl = '${static:}';
+      var maxHeight = 550;
+      var maxtemplatewidt = 630;
+      var productoptionid = ${selected/productoptionid};
+
+      var staticsite = "${static:}";
+        
+        $( function(){
+            
+            
+            
+            $('.price').each( function(){
+                var _this = $(this);
+                var quant =  _this.parent().find('.quantity');
+                $.post('/api/1.0/prices/get', {
+                        productoptionid: quant.data('productoptionid'),
+                        quantity: 1
+                    }, function(data) {
+                        var price = data.price;
+                        price = price.toString();
+                        price = price.replace( '.00', ':-');
+                        _this.text(price + " /st.");
+                    }, 'json');	
+              });
+              
+              
+              });
+            
+            
+        
+    </script>
+    
+  </body>
+</html>

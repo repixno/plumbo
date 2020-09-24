@@ -1,0 +1,277 @@
+<!-- HEAD -->
+
+<head metal:define-macro="head" tal:omit-tag="">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<link rel="shortcut icon" type="image/jpg" href="/fav_utetemme.png" />
+
+	<title>
+		<tal:block tal:condition="not:exists:pagetitle">Utestemme Merkelapp</tal:block>
+		<tal:block tal:condition="exists:pagetitle" tal:content="pagetitle" />
+	</title>
+
+	<link href="/css/main.css" rel="stylesheet" />
+	<script src="/js/bundle.js"></script>
+	<!-- cookiealert.css -->
+	<link rel="stylesheet" href="/css/cookiealert.css" />
+</head>
+
+<!-- Navigation -->
+<header metal:define-macro="top" tal:omit-tag="">
+	<nav class="navbar navbar-expand-md navbar-light flex-column">
+		<div class="container menuborder">
+
+			<button class="navbar-toggler mb-5" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+
+			<h1 class="mb-5"><a href="/"> <img class="d-lg-none" src="/gfx/logo/logo_utestemme_2020.png?text=Logo" style="width: 164px; height: 50px;" alt="" /></a></h1>
+			<h1 class="mb-5"><a href="/"> <img class="d-none d-lg-block" src="/gfx/logo/logo_utestemme_2020.png?text=Logo" style="width: 240px; height: 73px;" alt="" /></a></h1>
+
+
+			<!--Button bare synlig på xs device-->
+			<button onclick="location.href = '/cart';" type="button" class="btn btn-default d-block d-sm-none button5 mb-5"><a href="/cart" class="text-right carttext">
+					<span id="cart-total-items" class="varer" tal:content="cart/totalitems"></span>
+					<tal:block i18n:translate=""></tal:block>
+					<i class="fa fa-shopping-cart fa-1x" style="color:#ffffff"></i>
+				</a></button>
+
+			<div class="collapse navbar-collapse togg flex-column align-items-start ml-lg-2 ml-0" id="navbarCollapse">
+				<div class="offcanvas-header mt-3">
+					<h1 class="text-center"><a href="/"> <img src="/gfx/logo/logo_utestemme_2020.png?text=Logo" style="width: 164px; height: 40px;" alt="" /></a></h1>
+					<button class="btn btn-success btn-close float-right"> &times Lukk </button>
+
+				</div>
+
+
+
+				<div class="mx-auto order-0">
+					<!--tekst  bare skjult på xs device-->
+					<h5 class="d-none d-sm-block text-success">Gratis frakt – Norsk produksjon – 100% fornøyd</h5>
+				</div>
+
+				<div class="navbar-nav ml-auto ">
+
+					<!--Button bare skjult på xs device-->
+					<button onclick="location.href = '/cart';" type="button" class="btn btn-default d-none d-sm-block button5">
+						<a href="/cart" class="text-right carttext">
+							<span id="cart-total-items" class="varer" tal:content="cart/totalitems"></span>
+
+
+							<i class="fa fa-shopping-cart" style="color:#ffffff"></i></a></button>
+				</div>
+
+
+				<ul class="topnavlinks navbar-nav ml-1 mt-4">
+					<h6 class="d-block d-sm-none red text-success">PRODUKTER</h6>
+					<li class="nav-item">
+						<a class="nav-link py-0" href="/bestilling/fargelapp">Navnelapp</a>
+					</li>
+					<li class="nav-item marginspacer">
+						<a class="nav-link py-0" href="/bestilling/merkelappsett">NavnelappMix</a>
+					</li>
+					<li class="nav-item marginspacer">
+						<a class="nav-link py-0" href="/bestilling/strykelapp">Strykelapp</a>
+					</li>
+					<li class="nav-item marginspacer">
+						<a class="nav-link py-0" href="/bestilling/stempel">Navnestempel</a>
+					</li>
+					<li class="nav-item marginspacer">
+						<a class="nav-link py-0" href="/produkter/tilbehor/merkelapp">Tilbehør</a>
+					</li>
+				</ul>
+
+				<hr class=" d-block d-sm-none" />
+				<ul class="navbar-nav d-block d-sm-none red">
+					<h6 class="text-success">MATERIELL</h6>
+					<li class="nav-item">
+						<a class="nav-link" href="/skole-og-barnehage/">Skole og barnehage</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/sykehjem">Sykehjem</a>
+					</li>
+
+				</ul>
+
+				<hr class=" d-block d-sm-none" />
+				<ul class="navbar-nav d-block d-sm-none red">
+
+					<h6 class="d-block d-sm-none text-success">KUNDESENTER</h6>
+					<li class="nav-item">
+						<a class="nav-link" href="/om/kontakt-oss">Kontakt oss</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/om/tips">Spørsmål</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/om">100 % fornøyd</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</nav>
+
+</header>
+
+<tal:block metal:define-macro="footer">
+
+
+	<div class="alert alert-dismissible text-center cookiealert" role="alert">
+		<div class="cookiealert-container">
+			<img src="/gfx/logo/logo_utestemme_2020.png?text=Logo" style="width: 10px; height: 73px; alt="" />
+			<br />
+			<b> Vi bruker informasjonskapsler</b>
+
+			<button type="button" style="color: grey;" class="btn btn-outline-light m-variant" data-toggle="modal" data-target="#cookiemodal">
+				Mer info
+			</button>
+
+			<button type="button" class="btn btn-success acceptcookies text-white" aria-label="Close">
+				Det er greit
+			</button>
+		</div>
+	</div>
+
+	<!-- The Modal -->
+	<div class="modal" id="cookiemodal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Bruk av informasjonskapsler</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					Vi bruker cookies for å øke brukervennligheten i samsvar med lov om elektronisk kommunikasjon. <br />Ved at du fortsetter å bruke dinmerkelapp.no, forutsetter vi at du samtykker til dette.<br />
+
+
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" data-dismiss="modal">Lukk</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer class="page-footer font-small blue pt-4">
+
+		<!-- Footer Links -->
+		<div class="container-fluid text-center text-md-left">
+
+			<!-- Grid row -->
+			<div class="row">
+				<hr class="clearfix w-100 d-md-none pb-3" />
+
+				<div class="col-md-4 mb-md-0 mb-3 offset-md-1">
+					<h5 class="text-uppercase font-weight-bold">Produkter</h5>
+					<ul class="list-unstyled">
+						<li>
+							<a href="/bestilling/fargelapp">Navnelapper</a>
+						</li>
+						<li>
+							<a href="/bestilling/merkelappsett">Navnelapp Mix</a>
+						</li>
+						<li>
+							<a href="/bestilling/strykelapp">Strykelapper</a>
+						</li>
+						<li>
+							<a href="/bestilling/stempel">Navnestempel</a>
+						</li>
+					</ul>
+				</div>
+
+				<!-- Utkommenter til pdf er på plass
+    <div class="col-md-4 mb-md-0 mb-4">
+					<h5 class="text-uppercase">Materiell</h5>
+					<ul class="list-unstyled">
+						<li>
+							<a href="/skole-og-barnehage">Skole og barnehage</a>
+						</li>
+						<li>
+							<a href="/sykehjem">Sykehjem</a>
+						</li>
+					</ul>
+				</div>-->
+
+				<div class="col-md-4 mb-md-0 mb-3">
+					<h5 class="text-uppercase font-weight-bold">Kundeservice</h5>
+					<ul class="list-unstyled">
+						<li>
+							<a href="/om/kontakt-oss">Kontakt oss</a>
+						</li>
+						<li>
+							<a href="/om/tips">Spørsmål</a>
+						</li>
+						<li>
+							<a href="/om">100 % fornøyd</a>
+						</li>
+					</ul>
+				</div>
+
+
+				<!--<div class="col-md-2 mb-md-0 mb-2">
+					<h5 class="text-uppercase font-weight-bold">Kundeklubb</h5>
+					<ul class="list-unstyled">
+						<li>
+							<a href="https://nfoto.us4.list-manage.com/subscribe?u=9d33c2f56b22decb9fa96c903&id=4df7a5c6d1">Meld på nyhetsbrev</a>
+						</li>
+					</ul>
+				</div>-->
+
+				<div class="col-md-8 col-xs-12 mx-auto">
+					<img class="img-fluid mx-auto" src="https://cdn.klarna.com/1.0/shared/image/generic/badge/nb_no/checkout/long-white.png" />
+				</div>
+
+				<div class="row col-md-8 offset-md-2 mt-3">
+					<img class="mx-auto" src="/gfx/frontpage/vipps_logo_rgb2.png" alt="" />
+					<a class="mx-auto mt-2" href="https://www.facebook.com/Dinmerkelapp" type="button" role="button">Facebook <i class="fab fa-facebook-f"></i></a>
+					<a class="mx-auto mt-2" href="https://www.instagram.com/dinmerkelapp.no/" type="button" role="button">Instagram <i class="fab fa-instagram"></i></a>
+				</div>
+
+				<div class="row col-md-2 offset-md-5 mt-3">
+					<div class="mx-auto">
+						<a href="/vilkar">Vilkår</a></div>
+					<div class=" mx-auto">
+						<a href="/personvern">Personvern</a></div>
+				</div>
+
+			</div>
+   
+   
+   
+		</div>
+
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-3">© 2020 Copyright:
+			<a href="https://repix.no/"> REPIX.NO</a>
+		</div>
+
+		<!-- Copyright -->
+		<script>
+			$("[data-trigger]").on("click", function() {
+				var trigger_id = $(this).attr('data-trigger');
+				$(trigger_id).toggleClass("show");
+				$('body').toggleClass("offcanvas-active");
+			});
+
+			// close button 
+			$(".btn-close").click(function(e) {
+				$(".togg").removeClass("show");
+				$("body").removeClass("offcanvas-active");
+			});
+		</script>
+		<script src="/js/cookiealert.js"></script>
+	</footer>
+	<!-- Footer -->
+</tal:block>

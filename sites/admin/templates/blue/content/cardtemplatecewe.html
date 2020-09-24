@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Template</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+<style>
+    #catmenu ul {
+        list-style: none;
+        line-height: 25px;
+        color:#0068b4;
+        border-bottom: 2px solid #FFF;
+        margin: 0;
+    }
+    #catmenu li {
+        display: inline;
+    }
+
+    #catmenu a, #topmenu a:visited {padding:5px 12px 5px 12px;text-decoration:none;}
+    #catmenu .current a, #topmenu .current a:hover, #topmenu .current a:visited {padding:5px 12px 5px 12px;font-weight:bold;}
+
+    
+</style>
+<script type="text/javascript" src="/js/admin.js"></script>
+</head>
+
+<body>
+    
+    	<div id="container" class="container">
+            <div id="header" class="span-24 last">
+                <h2>Eurofoto Admin</h2>
+                <tal:block metal:use-macro="../common.html/topmenu" />
+            </div>
+        
+        
+            <div id="catmenu">
+                <h3>Categories</h3>
+                <ul>
+                <tal:block tal:repeat="cat catarray">
+                    <li><a href="/content/cardtemplatecewe/${cat/id}">${cat/title}</a></li>
+                </tal:block>
+                </ul>
+                
+            </div>
+       
+        
+            <div tal:condition="exists:selectedcat">
+                <h2 tal:content="selectedcat"></h2>
+            
+            
+                <div class="language ui-tabs-panel ui-widget-content ui-corner-bottom clear"> 
+                    <table>
+                        <tr>
+                             <th>ID</th>
+                             <th>Articleid</th>
+                             <th>Grouping</th>
+                             <th>link</th>
+                             <th>Sort</th>
+                             <th>Visible</th>
+                             <th>Created</th>
+                             <th>Rediger</th>
+                             <th>Slett</th>
+                        </tr>
+                        
+                        
+                        <tr tal:repeat="card cards">
+                            <td tal:content="card/id">ID</td>
+                            <td tal:content="card/articleid">Articleid</td>
+                            <td tal:content="card/grouping">Grouping</td>
+                            <td tal:content="card/link">link</td>
+                            <td tal:content="card/sort">Sort</td>
+                            <td tal:content="card/visible">Visible</td>
+                            <td tal:content="card/created">Created</td>
+                            <td><a href="edit/${card/id}">Rediger</a></td>
+                            <td><a href="delete/${card/id}/${selectedcatid}">Slett</a></td>
+                        </tr>
+                        
+                    </table>
+                </div>
+            
+            </div>
+            <div class="prepend-15 span-9 last right">
+                <tal:block tal:condition="exists:selectedcatid">
+                    <a class="button"href="/content/cardtemplatecewe/create/${selectedcatid}">Legg til ny</a>
+                </tal:block>
+                
+            </div>
+        </div>
+        
+        
+		<div id="footer" />
+        
+        
+        
+        
+    
+</body>
+</html>

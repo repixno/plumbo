@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block tal:define="global pagetitle" i18n:translate="">Create product</tal:block>
+	
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src="${static:js/jquery.eurofoto-1.0.js}"></script> <!-- Eurofoto API 1.0 -->
+	<script type="text/javascript" src="${static:js/dialog.js}"></script>
+	
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale = 1.0, user-scalable=no" />
+	
+	<style type="text/css">
+   html, body, div, iframe {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+   }
+   iframe {
+      display: block;
+      width: 100%;
+      border: none;
+      overflow: hidden;
+      border-image: initial;
+   }
+
+	
+	#login-warning {
+		position: fixed;
+		height: 400px;
+		background-color: #fff;
+		z-index: 65000;
+		top: 100px;
+		border: 2px solid #ccc;
+		padding: 20px;
+		box-shadow: 1px 2px 15px rgba(0,0,0,0.3); -webkit-box-shadow: 1px 2px 15px rgba(0,0,0,0.3); -moz-box-shadow: 1px 2px 15px rgba(0,0,0,0.3); 
+	}
+	
+   #logged-out-warning {
+      display:none; 
+      position: fixed;
+      height: 350px;
+      background-color: #fff;
+      z-index: 65000;
+      top: 100px;
+      border: 2px solid #ccc;
+      padding: 20px;
+	}
+   
+   #opaque {
+       position: fixed;
+       top: 0px;
+       left: 0px;
+       width: 100%;
+       height: 100%;
+       z-index: 1000;
+       display: none;
+       background-color: black;
+       filter: alpha(opacity=30);
+       opacity: 0.3;
+   }
+   * html #opaque {
+       position: absolute;
+   }
+	</style>
+</head>
+
+<body>
+
+   
+	
+
+	
+	<div id="mediaclip_container">
+		<iframe src="" tal:attributes="src flashurl" scrolling="no" height="100%" width="100%" id="mediaclip">
+			<p i18n:translate="">Your browser does not support iframes.</p>	
+		</iframe>
+	</div>
+	<div class="container">
+	  <!--
+		<iframe src="/util/refresh/300" height="1" width="0" frameborder="0" id="refresh" scrolling="no"></iframe>
+	   -->
+	   <!--
+      <div tal:condition="login_warning" id="login-warning" class="span-15">
+         <div class="span-15 last">
+            Your are not logged in
+            <h3 tal:content="cms:title:88117f39-96d1-42d6-83bf-325799f73730"></h3>
+            <div tal:content="structure cms:body:88117f39-96d1-42d6-83bf-325799f73730"></div>
+         </div>
+         <div class="span-6 colborder">
+			   <tal:block metal:use-macro="../common.html/quicklogin" />
+		   </div>
+		   <div class="span-7 last right">
+			   <a href="#" id="close-dialog" class="button blue large" i18n:translate="">Continue without login</a>
+         </div>
+	     <script type="text/javascript">
+		$(document).ready( function() {
+			//centers the box when not logged in
+			$('#login-warning').css('left', parseInt( $(window).width() / 2 - 295) + 'px' );
+			$('#close-dialog').css('margin-top', '50px');
+			
+			$('#close-dialog').click( function() {
+				$('#login-warning').fadeOut('fast', function() {
+					$('#login-warning').remove();
+				});
+				return false;
+			});
+		});
+	</script>
+      </div> -->
+      
+   </div>	
+	
+	
+	<script type="text/javascript">
+
+		$(document).ready( function() { 
+            
+		   window.setInterval(function(){
+               $.ajax({
+                  type: "POST",
+                  url: '/create/xml/logincheck',
+                  data: "id=${id}",
+                  success: function(data){
+                  if(data == "false"){
+                     window.location.reload();
+                     //$('#opaque').show("slow");
+                     //$('#logged-out-warning').show("slow");
+                  }
+                  /*if(data == "true"){
+                     $('#opaque').hide("slow");
+                     $('#logged-out-warning').hide("slow");
+                  }*/
+                }
+               });
+            }, 60000);
+          
+			$('#logged-out-warning').css('left', parseInt( $(window).width() / 2 - 160) + 'px' );
+      				$('#close-dialog_logged_out').css('margin-top', '50px');
+      				$('#close-dialog_logged_out').click( function() {
+      				   window.location = "/frontpage";
+      				});		
+			$('#save-project-title').click( function() {
+				$(this).after('<img src="//static.repix.no/gfx/gui/ajax-loader.gif" id="loader" />');
+				$.post('/api/1.0/project/rename', {projectid: ${id}, title: $('#title').val() }, function(data) {
+					$('#save-project-title').val( data.title );
+					$('#loader').remove();
+				});
+				return false;
+			});
+		});
+	</script>
+	
+	
+	<tal:block tal:condition="sharedproject">
+   <div class="hide" id="message" title="" i18n:attributes="title">
+   	<p i18n:translate=""></p>
+   </div>
+   
+   <script type="text/javascript">
+   
+      messageDialog('<tal:block i18n:translate="">Information</tal:block>', '<tal:block i18n:translate="">This project was copied to your account. You can not re-share a shared project, and changes made in the original project will not be reflected in your copy.</tal:block>', '<tal:block i18n:translate="">Close</tal:block>');   
+   
+   </script>
+   </tal:block>
+<!-- Google Code for Åpnet mediaclip Conversion Page -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1070265469;
+var google_conversion_language = "en";
+var google_conversion_format = "2";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "liSDCMW9xAEQ_eir_gM";
+var google_conversion_value = 0;
+//-->
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/1070265469/?label=liSDCMW9xAEQ_eir_gM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+</body>
+</html>

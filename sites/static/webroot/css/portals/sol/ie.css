@@ -1,0 +1,83 @@
+/* -----------------------------------------------------------------------
+
+
+ Blueprint CSS Framework 0.8
+ http://blueprintcss.org
+
+   * Copyright (c) 2007-Present. See LICENSE for more info.
+   * See README for instructions on how to use Blueprint.
+   * For credits and origins, see AUTHORS.
+   * This is a compressed file. See the sources in the 'src' directory.
+
+----------------------------------------------------------------------- */
+
+/* ie.css */
+body {text-align:center;}
+body * {text-align:left;}
+.container {text-align:left;}
+* html .column, * html div.span-1, * html div.span-2, * html div.span-3, * html div.span-4, * html div.span-5, * html div.span-6, * html div.span-7, * html div.span-8, * html div.span-9, * html div.span-10, * html div.span-11, * html div.span-12, * html div.span-13, * html div.span-14, * html div.span-15, * html div.span-16, * html div.span-17, * html div.span-18, * html div.span-19, * html div.span-20, * html div.span-21, * html div.span-22, * html div.span-23, * html div.span-24 {display:inline;overflow-x:hidden;}
+* html legend {margin:0px -8px 16px 0;padding:0;}
+ol {margin-left:2em;}
+sup {vertical-align:text-top;}
+sub {vertical-align:text-bottom;}
+html>body p code {*white-space:normal;}
+hr {margin:-8px auto 11px;}
+img {-ms-interpolation-mode:bicubic;}
+.clearfix, .container {display:inline-block;}
+* html .clearfix, * html .container {height:1%;}
+fieldset {padding-top:0;}
+textarea {overflow:auto;}
+input.text, input.title, textarea {background-color:#fff;border:1px solid #bbb;}
+input.text:focus, input.title:focus {border-color:#666;}
+input.text, input.title, textarea, select {margin:0.5em 0;}
+input.checkbox, input.radio {position:relative;top:.25em;}
+form.inline div, form.inline p {vertical-align:middle;}
+form.inline label {position:relative;top:-0.25em;}
+form.inline input.checkbox, form.inline input.radio, form.inline input.button, form.inline button {margin:0.5em 0;}
+button, input.button {position:relative;top:0.25em;}
+
+/* common */
+#loader-overlay {position:fixed;background-color:#333;padding:auto auto;margin:0 !important;width:100%;height:100%;z-index:10000;}
+
+/* fancybox */
+#fancybox-loading.fancybox-ie div {background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_loading.png', sizingMethod='scale');}
+.fancybox-ie #fancybox-close {background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_close.png', sizingMethod='scale');}
+.fancybox-ie #fancybox-title-over {background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_title_over.png', sizingMethod='scale');zoom:1;}
+.fancybox-ie #fancybox-title-left {background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_title_left.png', sizingMethod='scale');}
+.fancybox-ie #fancybox-title-main {background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_title_main.png', sizingMethod='scale');}
+.fancybox-ie #fancybox-title-right {background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_title_right.png', sizingMethod='scale');}
+.fancybox-ie #fancybox-left-ico {background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_nav_left.png', sizingMethod='scale');}
+.fancybox-ie #fancybox-right-ico {background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_nav_right.png', sizingMethod='scale');}
+.fancybox-ie .fancy-bg {background:transparent !important;}
+.fancybox-ie #fancy-bg-n {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_shadow_n.png', sizingMethod='scale');}
+.fancybox-ie #fancy-bg-ne {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_shadow_ne.png', sizingMethod='scale');}
+.fancybox-ie #fancy-bg-e {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_shadow_e.png', sizingMethod='scale');}
+.fancybox-ie #fancy-bg-se {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_shadow_se.png', sizingMethod='scale');}
+.fancybox-ie #fancy-bg-s {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_shadow_s.png', sizingMethod='scale');}
+.fancybox-ie #fancy-bg-sw {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_shadow_sw.png', sizingMethod='scale');}
+.fancybox-ie #fancy-bg-w {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_shadow_w.png', sizingMethod='scale');}
+.fancybox-ie #fancy-bg-nw {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='grafikk/fancy_shadow_nw.png', sizingMethod='scale');}
+
+/* images */
+
+/* jqueryui */
+.ui-dialog {border:3px solid #666 !important;}
+
+/* forms */
+form label.inputError, form label.inputError {background-image:url(images/arrow_error_left.gif) !important;}
+
+/* sprites */
+
+/* buttons */
+* html button {width:0;overflow:visible;padding-left:.8em;padding-right:.8em;}
+button {margin-left:10px;padding-left:5px;padding-right:5px;}
+button.inline {position:relative;top:-.45em;}
+button, a.button {outline:none !important;border:1px solid #000 !important;border-top:1px solid #ccc !important;border-left:1px solid #ccc !important;filter:Shadow(Color=#cccccc, Direction=135, Strength=5);}
+button:hover, a.button:hover {text-decoration:none;border:1px solid #333333 !important;border-top:1px solid #eee !important;border-left:1px solid #eee !important;}
+button:active, a.button:active, button:focus, a.button:focus {border:1px solid #000 !important;border-top:1px solid #ccc !important;border-left:1px solid #ccc !important;}
+#main-navigation {height:4.6em;clear:both;}
+* html a.playButton_60x60 {background-image:url(gfx/play_60x60.gif) !important;}
+* html a.playButton_60x60:hover {background-image:url(gfx/play_60x60.gif) !important;}
+
+/* jcrop */
+.jcExample {margin:3.5em 10% 2em 10%;}

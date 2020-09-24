@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Create</tal:block>
+</head>
+
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<!-- if no menu is used use id="widecontent" -->
+	<div class="span-20 last">
+		<br class="clear clearfix" />
+		<!-- put the content here -->	
+		<h2 tal:content="title | default">project</h2>
+
+	<form method="post" action="/create/create">
+  	<label>
+  	<input type="text" name="title" />
+  	</label>
+  	<p>
+    <label>
+    <input type="submit" name="submit" id="submit" value="Submit" />
+    </label>
+  	</p>
+	</form>
+<!--		
+	<div tal:repeat="project projects"><a href="" tal:attributes="href project/editurl" tal:content="project/title|default">LINK</a></div>
+		
+	</div>
+-->
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+</body>
+</html>

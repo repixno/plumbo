@@ -1,0 +1,38 @@
+.account-content-box {
+	/*behavior:url(/stylesheet/myaccount/border-radius.htc);*/
+}
+
+#account {
+	text-align: left;
+}
+
+#tiptip_content {
+	background-color: #333;
+}
+
+.account-wrapper #main-content{
+
+}
+.account-wrapper #main-content .account-content-box{
+	overflow: hidden
+}
+
+
+#myaccount ul.images li img {
+	outline: 1px solid #ccc;
+}
+#myaccount ul.images li.selected{ background-color: #efefef }
+
+
+#ie-overlay {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #fff;
+	height: 100%;
+	width: 100%;
+	filter:alpha(opacity=90);
+}
+
+

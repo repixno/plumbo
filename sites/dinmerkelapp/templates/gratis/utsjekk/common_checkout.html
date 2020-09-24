@@ -1,0 +1,643 @@
+<!-- HEAD -->
+<head metal:define-macro="head" tal:omit-tag="">
+	<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+   <link rel="shortcut icon" type="image/jpg"  href="/dm-fav.png"/>
+
+    <title> 
+		<tal:block tal:condition="not:exists:pagetitle">Din Merkelapp</tal:block> 
+		<tal:block tal:condition="exists:pagetitle" tal:content="pagetitle" /> 
+	</title>
+	<meta name="description" tal:attributes="content cms:ingress:468cb517-14df-4d55-9108-826fd151607c" />
+	<link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css' />
+	<link href='https://fonts.googleapis.com/css?family=Kalam:300,400' rel='stylesheet' type='text/css' />
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap_dm3_repix.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css" media="screen, projection" />
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/css/merkelapp3.css" type="text/css" media="screen, projection" />
+		<link rel="stylesheet" href="/css/mojo.css" type="text/css" media="screen, projection" />
+			<link rel="stylesheet" href="/js/mojo.js" type="text/css" media="screen, projection" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+	<meta tal:condition="exists:google" name="google-site-verification" content="${google/google-site-verification}" /> 
+	<meta name="msvalidate.01" content="F4FE8EE0C6A5F5AF802BFA2C54AB58E7" /> 
+	<tal:block tal:condition="exists:canonical"> 
+		<link tal:condition="canonical" rel="canonical" href="${canonical}" /> 
+	</tal:block> 
+
+
+	<tal:block tal:condition="exists:item/customjs"> 
+		<tal:block tal:content="structure item/customjs" /> 
+	</tal:block> 
+	<tal:block tal:condition="exists:item/customcss"> 
+		<tal:block tal:content="structure item/customcss" /> 
+	</tal:block>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="${static:js/jquery.fancybox-1.3.0.pack.js}"></script>
+
+	
+	<script src="${static:}js/eurofoto.min.js"></script>
+	
+	<script src="/js/mojo.js"></script>
+	<script src="/js/common.js"></script>
+<!--	<link href="https://static.lipscore.com/assets/lipscore-v1.css" rel="stylesheet" />
+	<script async="true" charset="utf-8" src="https://static.lipscore.com/assets/no/lipscore-v1.js"></script>
+	<script>
+		
+		window.lipscoreInit = function() {
+			lipscore.init({
+				apiKey: "dceece6a8d25003aebe2e673",
+			});
+		};
+	</script>-->
+
+
+  <!--css ril modal-->
+    <link href="/jqueryui/jquery-ui.css" rel="stylesheet" />
+	<!--Blir brukt til modal myaccount-->
+	<script src="/jqueryui/jquery-ui.min.js"></script>
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+</head>
+
+<tal:block metal:define-macro="blueprint">
+	<link rel="stylesheet" href="css/bootstrap/bootstrap.css" type="text/css" media="screen, projection" />
+
+
+	<tal:block metal:use-macro="javascript" />
+</tal:block>
+
+<tal:block metal:define-macro="javascript">
+	
+	
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="${static:}css/bootstrap/js/bootstrap.min.js"></script>
+	
+	
+	
+</tal:block>
+
+
+
+
+<!-- top-header -->
+<div metal:define-macro="top" tal:omit-tag="">
+	 
+
+   
+  
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+    
+	
+	<div class="naver visible-xs">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+				   <span class="icon-bar"></span>
+				</button>
+			
+			 
+			  
+			  <a href="/cart"><span class="glyphicon glyphicon-shopping-cart navbar-toggle"></span></a>
+			  
+			   <a href="/login"><span class="glyphicon glyphicon-user navbar-toggle"></span></a>
+			  
+			  
+                <a href="/"><img class="logodinmerkelapp2" src="/tmp/logo_2018.png"/></a>
+			
+        </div>
+	
+
+	
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+				</button>
+                <a href="/"><img class="img-responsive" src="/tmp/logo_2018.png"/></a>
+			
+        </div>
+		
+       
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                  <li ><a href="/bestilling/fargelapp"><strong>Merkelapp</strong><br/>med farger</a></li>
+                <li><a href="/bestilling/kutoppen"><strong>KuToppen</strong><br/>merkelapp</a></li>
+                <li><a href="/bestilling/merkelapp"><strong>Strykelapp</strong><br/>sort/hvitt</a></li>
+				 <li><a href="/bestilling/stempel"><strong>Stempel</strong><br/>til klær</a></li>
+				  <li><a href="/navnegaver"><strong>Navnegaver</strong><br/>personlige gaver</a></li>
+				   <li><a href="/produkter/tilbehor/merkelapp"><strong>Tilbehør</strong><br/>ekstra</a></li>
+			
+				
+				  
+            </ul>
+            <ul class="text-right">
+                <li>
+				
+				<a href="/cart" class="">
+													
+														<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+												<strong>Din handlevogn</strong><br/>
+												
+														<span  id="cart-total-items" class="varer" tal:content="cart/totalitems"></span>
+														<tal:block i18n:translate="">varer</tal:block>|
+														kr <span id="cart-total-price" tal:content="formatprice:cart/totalprice"></span>
+												</a>
+				<button onclick="location.href = '/cart';" type="button" class="kassebutton" >GÅ TIL KASSEN
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </button>
+				</li>
+            </ul>
+        </div>
+    </div>
+</nav>
+  
+
+	
+</div>
+
+<!-- top-small-navigation -->
+<div metal:define-macro="top-small-navigation" id="topsmallnavigation" class="span-19 last">
+
+</div>
+
+<!-- main-navigation add class "active" to the active anchor-->
+<div metal:define-macro="main-navigation" id="main-navigation">
+	
+
+</div>
+
+<div metal:define-macro="shopping-cart">
+	<tal:block tal:condition="exists: cart">
+		<tal:block tal:condition="cart/totalitems">
+		<div id="shopping-cart">
+			<span id="cart-functions">
+				<a href="/checkout/?from=main" id="go-to-checkout" class="" i18n:translate="">Go to checkout</a>
+				<a href="/cart/?from=main" id="cart-toggle" style="color:black" i18n:translate="">Show cart</a>
+			</span>
+		</div>
+		</tal:block>
+	</tal:block>
+</div>
+
+<!-- breadcrumbs -->
+<div metal:define-macro="breadcrumbs" id="breadcrumbs">
+	<ul>
+		<li><a href="" i18n:translate=""></a></li>
+		<li class="active" i18n:translate=""></li>
+	</ul>
+</div>
+
+
+
+<!-- RIGHT MENU (span-4) -->
+<div metal:define-macro="right-menu" id="rightmenu" class="last">
+	<p i18n:translate=""></p>
+</div>
+
+<!-- RIGHT ALBUM MENU (span-4) -->
+<div metal:define-macro="right-album-menu" id="rightalbummenu" class="last">
+	<ul id="right-album-menu">
+		<li>
+		</li>
+	</ul>
+</div>
+
+<!-- beta message -->
+<tal:block metal:define-macro="message">
+</tal:block>
+
+
+
+<tal:block metal:define-macro="modal">
+	<!-- The Modal -->
+<div id="produktinfomodal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content2">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2 class="text-center">VÅRE PRODUKTER </h2>
+    </div>
+    <div class="modal-body">
+    <div class="defProdDescrSection">
+			<div id="defProductDescr">
+				
+	<h2 class="liten_overskrift text-center">MERKELAPP MED FARGE / KUTOPPEN MERKELAPP</h2>			
+
+<p class="tekst"><br/>Vår merkelapp med farge sitter godt på det aller meste og kan benyttes til merking av både klær og ting. Vi anbefaler å feste lappen på klærnes vaskeanvisning.</p>
+<p class="tekst"><br/>For klær uten vaskeanvisning/klesmerke anbefaler vi strykelapp som festes direkte på plagget.</p>
+<p class="tekst"><br/>Merkelapp med farge brukes også merking av eiendeler med harde overflater, alt fra matbokser og drikkeflasker, til leker, bøker og blyanter.</p>
+<p class="tekst">&nbsp;</p>
+<p class="tekst"><img class="formattingLeft" src="/gfx/60grader.jpg" alt="Strykefrie navnelapper. Vaskeanvisning klistrelapper" />Vaskemasin</p>
+<p class="tekst"><img class="formattingLeft" src="/gfx/oppvask.jpg" alt="Tåler oppvaskmaskin"/>&nbsp; &nbsp; Oppvaskmaskin</p>
+
+<hr/>
+<p class="tekst">&nbsp;</p>
+
+<h2 class="liten_overskrift text-center">STRYKELAPPER</h2>
+<p class="tekst">Strykelapp er perfekt til merking av tøy uten vaskeanvisning/klesmerke, eller til tøy som vaskes på høye temperaturer. Monteres enkelt ved å stryke på plagget.</p>
+<p class="tekst">&nbsp;</p>
+<p class="tekst"><img class="formattingLeft" src="/gfx/90grader.jpg" alt="Strykelapper fargelapper. Vaskeanvisning." />Vaskemaskin</p>
+
+<hr/>
+
+<h2 class="liten_overskrift text-center">TEKSTILSTEMPEL</h2>
+<p class="tekst">Tekstilstempel brukes for rask merking av lyse tekstiler. Stemples rett på plagget eller vaskelappen. Kan vaskes på 90 grader, tåler ca 30 vask på 60 grader.</p>
+<p class="tekst">Blekkpute til bruk på tekstil følger med. Flere/nye blekkputer kan etterbestilles.</p>
+<p class="tekst">For mørke klær og klær uten vaskelapp anbefaler vi å bruke merkelapp med farge, eller strykelapp</p>
+<p class="tekst"><img class="formattingLeft" src="/gfx/60grader.jpg" alt="Strykelapper fargelapper. Vaskeanvisning." />Vaskemaskin</p>
+
+			</div>
+		</div>     
+    </div>
+  </div>
+</div>
+	<!--MODAL SLUTT-->
+	</tal:block>
+
+
+<!-- MOJO MODAL -->
+
+	<tal:block metal:define-macro="mojo">
+		
+	
+			 <!--Mojo modal-->
+ <button type="button" id="feedback" class="bmd-modalButton" data-toggle="modal" data-bmdSrc="https://repix.mailmojo.no/18061/s" data-bmdWidth="600" data-bmdHeight="450" data-target="#myModal">Nyhetsbrev</button>
+				  
+				      <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content bmd-modalContent">
+
+          <div class="modal-body">
+
+            <div class="close-button">
+              <button type="button" class="lukk" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" frameborder="0" scrolling="yes"></iframe>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+	<!--Mojo modal slutt-->
+<!--end modal-->
+</tal:block>
+	
+	
+<!-- FOOTER -->
+<tal:block metal:define-macro="footer">
+<div id="footer" class="last container">
+			<div class="footer">
+			<div class="row">
+				<div class="col-md-12 col-xs-12">					
+					<!--<div class="col-md-3 col-xs-4 col-md-offset-1">
+						<h4 class="footertitle">Min konto</h4>
+						<p>
+							<ul>
+								<li tal:condition="not:session/loggedin"><a href="/login">Logg inn</a></li>
+								<li tal:condition="session/loggedin"><a href="/logout">Logg ut</a></li>
+								<li><a href="/myaccount/settings">Mine Instillinger</a></li>
+								<li><a href="/myaccount/projects">Mine Prosjekt </a></li>
+								<li><a href="/myaccount/orders">Mine Bestillinger </a></li>
+							</ul>
+						</p>
+					</div>-->
+					<div class="col-md-5 col-xs-5 col-md-offset-2">
+						<h4 class="footertitle">Meny</h4>
+						<p>
+							<ul>
+								<li><a href="/bestilling/fargelapp">Fargelapper</a></li>
+								<li><a href="/bestilling/kutoppen">KuToppen</a></li>
+								<li><a href="/bestilling/merkelapp">Strykelapp</a></li>
+								<li><a href="/bestilling/stempel">Stempel</a></li>
+								<li><a href="/navnegaver">Navnegaver</a></li>
+								<li><a href="/produkter/tilbehor/merkelapp">Tilbehør</a></li>
+							
+								
+							</ul>
+						</p>
+					</div>
+					<div class="col-md-4 col-xs-4 col-md-offset-1">
+						<h4 class="footertitle">Kontakt oss</h4>
+						<ul>
+							<li><a href="/om/kontakt-oss/">Kundeservice</a></li>
+							<li><p>
+							Dinmerkelapp.no<br/>
+							 Repix AS<br/>
+							Reed Senter<br/>
+							6827 Breim<br/>
+						</p></li>
+						</ul>
+						
+						
+					</div>
+				</div>
+			
+			
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+				
+						<div class="col-md-4 col-xs-4 text-center">
+							<p><a href="https://www.facebook.com/Dinmerkelapp" target="_blank"><img src="/tmp/facebook.png"/> <span class="hidden-xs">Besøk oss på Facebook</span></a></p>
+						</div>
+						<div class="col-md-4 col-xs-4 text-center">
+							<p><a href="https://instagram.com/explore/tags/dinmerkelapp/" target="_blank"><img src="/tmp/Instagram-Icon.png"/> <span class="hidden-xs"> Følg oss på Instagram</span></a></p>
+						</div>
+						<div class="col-md-4 col-xs-4 text-center">
+						  <p><a href="/register/newsletter"><img src="/tmp/nyhetsbrev.png"/> <span class="hidden-xs">Meld deg på Nyhetsbrev</span ></a> </p>
+						</div>
+					
+				</div>
+					</div>
+			
+				<div class="col-md-12 col-xs-12 text-center">
+				   
+				   <img  class="img-responsive" style="margin: 0 auto;" src="https://cdn.klarna.com/1.0/shared/image/generic/badge/nb_no/checkout/long-white.png?width=440" />
+				  
+				   
+				</div>
+				<div class="col-md-12 text-center">
+					<p class="copywright">
+				   Copyright | © ${request/date/year} Repix AS
+				   </p>
+				</div>
+			</div>
+		    
+		</div>
+		
+		<br />
+		
+	</div>
+	<tal:block metal:use-macro="get-satisfaction" />
+	<tal:block metal:use-macro="google-analytics" />
+	<tal:block tal:condition="exists:lyrishq">
+	   	<!--
+	   	<script type="text/javascript">
+		document.write('<'
+			+ 'script type="text/javascript" src="'
+			+ document.location.protocol
+			+ '//stats.clicktracks.com/cgi-bin/ctasp-server.cgi?i=${lyrishq}'
+			+ '"><'
+			+ '/script>');
+		</script>-->
+		<script type="text/javascript" src="https://stats.clicktracks.com/cgi-bin/ctasp-server.cgi?i=${lyrishq}"></script>
+		
+   </tal:block>
+
+
+	<script type="text/javascript">
+		var ttConversionOptions = ttConversionOptions || [];
+		ttConversionOptions.push({
+		 type: 'lead',
+		 campaignID: '22709',
+		 productID: '33257',
+		 transactionID: '{transactionID}',
+		 email: '',
+		 descrMerchant: '',
+		 descrAffiliate: ''
+		});
+	   </script>
+	   <noscript>
+		<img src="//tl.tradetracker.net/?cid=CAMPAIGN_ID&amp;pid=33257&amp;tid={transactionID}&amp;data=&amp;eml=&amp;descrMerchant=&amp;descrAffiliate=&amp;event=lead" alt="" />
+	   </noscript>
+	   <script type="text/javascript">
+		(function(ttConversionOptions) {
+		 var campaignID = 'campaignID' in ttConversionOptions ? ttConversionOptions.campaignID : ('length' in ttConversionOptions && ttConversionOptions.length ? ttConversionOptions[0].campaignID : null);
+		 var tt = document.createElement('script'); tt.type = 'text/javascript'; tt.async = true; tt.src = '//tm.tradetracker.net/conversion?s=' + encodeURIComponent(campaignID) + '&t=m';
+		 var s = document.getElementsByTagName('script'); s = s[s.length - 1]; s.parentNode.insertBefore(tt, s);
+		})(ttConversionOptions);
+	</script>
+	   
+	   
+	   
+	   <script>
+	(function($) {
+    
+    $.fn.bmdIframe = function( options ) {
+        var self = this;
+        var settings = $.extend({
+            classBtn: '.bmd-modalButton',
+            defaultW: 640,
+            defaultH: 360
+        }, options );
+      
+        $(settings.classBtn).on('click', function(e) {
+          var allowFullscreen = $(this).attr('data-bmdVideoFullscreen') || false;
+          
+          var dataVideo = {
+            'src': $(this).attr('data-bmdSrc'),
+            'height': $(this).attr('data-bmdHeight') || settings.defaultH,
+            'width': $(this).attr('data-bmdWidth') || settings.defaultW
+          };
+          
+          if ( allowFullscreen ) dataVideo.allowfullscreen = "";
+          
+          // stampiamo i nostri dati nell'iframe
+          $(self).find("iframe").attr(dataVideo);
+        });
+      
+        // se si chiude la modale resettiamo i dati dell'iframe per impedire ad un video di continuare a riprodursi anche quando la modale è chiusa
+        this.on('hidden.bs.modal', function(){
+          $(this).find('iframe').html("").attr("src", "");
+        });
+      
+        return this;
+    };
+  
+})(jQuery);
+
+
+
+
+jQuery(document).ready(function(){
+  jQuery("#myModal").bmdIframe();
+});
+
+
+
+	
+</script>
+	   
+	   
+	   
+</tal:block>
+
+<!-- quick login -->
+<tal:block metal:define-macro="quicklogin">
+<form action="/login/" method="post"  id="quicklogin">
+	<div>
+		<label for="email" i18n:translate="">E-mail:</label><br/>
+		<input type="text" class="text lowercase" name="email" value="" />
+	</div>	
+	<div>
+		<label for="pasword" i18n:translate="">Password:</label><br/>
+		<input type="password" class="text" name="password" value="" />
+	</div>
+	<div>
+		<input type="checkbox" id="rememberme" /> 
+		<label for="rememberme" i18n:translate="">Remember me next time.</label>
+	</div>	
+	<div class="right prepend-top">
+		<a href="/register/" i18n:translate="">Register</a> &nbsp;
+ 		<button class="" type="submit" i18n:translate="">Log in</button>
+	</div>
+	<input type="hidden" name="referer" value="/${request/execpath}"/>
+</form>
+</tal:block>
+
+<!-- get Satisfaction -->
+<tal:block metal:define-macro="get-satisfaction">
+	<!--
+	<tal:block tal:replace="structure fastpass" tal:condition="exists:fastpass" />
+	<script type="text/javascript" charset="utf-8">
+		var is_ssl = ("https:" == document.location.protocol);
+		var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+		document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript" charset="utf-8">
+		var feedback_widget_options = {};
+		feedback_widget_options.display = "overlay";  
+		feedback_widget_options.company = "eurofoto";
+		feedback_widget_options.placement = "right";
+		feedback_widget_options.color = "#222";
+		feedback_widget_options.style = "idea";
+		var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+	</script>
+	-->
+</tal:block>
+
+<!-- Google Analytics gs.js www.eurofoto.no -->
+<tal:block metal:define-macro="google-analytics">
+
+   
+   
+
+
+   <tal:block tal:condition="exists:google">
+	<script type="text/javascript">
+	//<![CDATA[
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	//]]>
+	</script>
+	<script type="text/javascript">
+		try{
+		var pageTracker = _gat._getTracker("${google/analytics}");
+			<tal:block tal:condition="not:session/loggedin">
+				pageTracker._setVar('unregistered');
+			</tal:block>
+			<tal:block tal:condition="session/loggedin">
+				pageTracker._setVar('member');
+			</tal:block>
+			pageTracker._setDomainName(".dinmerkelapp.no");
+			pageTracker._trackEvent('Performance', 'Execution time', 'xml', Math.round( ${statistics/exectime} * 10 )/10 );
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+	</tal:block>
+</tal:block>
+
+<!-- sharing button -->
+<tal:block metal:define-macro="share-button">
+<!-- ADDTHIS BUTTON BEGIN -->
+<script type="text/javascript">
+var addthis_config = {
+	username: "eurofoto",
+	services_compact: 'facebook, email, twitter, digg, delicious, favorites, friendfeed, google, linkedin, live,  more',
+	services_exclude: 'print',
+	ui_language: "${i18n/country}"
+}
+</script>
+
+<a href="https://www.addthis.com/bookmark.php" 
+    class="addthis_button"
+    style="text-decoration:none;">
+        <img src="https://s7.addthis.com/static/btn/sm-plus.gif" 
+    width="16" height="16" border="0" alt="Share" /> <span i18n:translate="">Share</span></a>
+    
+<script type="text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js"></script>
+<!-- ADDTHIS BUTTON END -->
+</tal:block>
+
+<tal:block metal:define-macro="pagination">
+	
+	<a class="button">First</a>
+	<a class="button">Previous</a>
+	
+	<a href="">1</a><a href="">2</a><a href="">3</a>...<a href="">4</a><a href="" class="current">(5)</a><a href="">6</a><a href="">7</a><a href="">8</a><a href="">9</a><a href="">10</a><a href="">11</a><a href="">12</a>...<a href="">50</a><a href="">51</a><a href="">52</a>
+	
+	<a class="button">Last</a>
+	
+</tal:block>
+
+<div metal:define-macro="associatedproducts">
+	<tal:block tal:repeat="product associatedproducts">
+		<div class="span-14">
+			<div class="span-2 productimage">
+				<tal:block tal:condition="product/images">
+					<tal:block tal:repeat="image product/images">
+						<tal:block tal:condition="equal:repeat/image/number,1">
+							<tal:block tal:define="global staticurl" tal:content="static:" />
+							<a href="${product/urlname}" title="${product/title}">
+								<img src="${staticurl}images/products/thumbs/square/50/${image/url}" 
+								widht="50" height="50" class="left" alt="${product/title}" tal:condition="image/url" />
+							</a>
+							<img src="${static:gfx/404/not_found_50px.jpg}" 
+							class="left" alt="Product photo missing." tal:condition="not:image/url" 
+							style="border: 10px solid #fff; "
+							/> 
+						</tal:block>
+					</tal:block>
+				</tal:block>
+				<tal:block tal:condition="not:product/images"><span class="quiet small">No image</span></tal:block>
+			</div>
+			<div class="span-6">
+				<h4 class="bottom" tal:content="product/title|default"></h4>
+				<p tal:content="product/ingress|default"></p>
+			</div>
+			<div class="span-6 last" tal:condition="product/option/price">
+				<div class="price" tal:content="formatprice:product/option/price"></div>
+				<input class="quantity" value="1" type="text" />
+				
+				<tal:block tal:condition="gt:repeat/options/number,1">
+					more than 1
+				</tal:block>
+				
+				<a class="button add-to-cart" i18n:translate="" ref="${product/option/prodno}">Add to cart</a>
+			</div>
+		</div>
+	</tal:block>
+</div>

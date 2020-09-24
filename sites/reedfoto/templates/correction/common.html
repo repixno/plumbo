@@ -1,0 +1,34 @@
+<tal:block metal:define-macro="head">
+	<title tal:content="title | default">Reed Foto AS</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<link rel="stylesheet" href="/css/screen.css?${version}" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/css/print.css?${version}" type="text/css" media="print" />
+	<!--[if lt IE 8]>
+		<link rel="stylesheet" href="/css/ie.css?1" type="text/css" media="screen, projection" />
+	<![endif]-->
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script> 
+	<script type="text/javascript" src="/js/jquery.scrollTo-min.js"></script>
+	
+</tal:block>
+
+<tal:block metal:define-macro="header">
+<div id="header" class="container">
+   <img src="/images/logo.png" width="62" height="62" alt="" />
+</div>
+</tal:block>
+
+<tal:block metal:define-macro="footer">
+<div id="footer" class="container">
+   <div style="margin-top: 20px;">
+      <tal:block tal:condition="session/loggedin">
+         <form method="post" action="/logout">
+           <button type="submit" class="button small" i18n:translate="">Logout</button>
+         </form>
+      </tal:block>
+   </div>
+</div>
+<div id="msgdialog"></div>
+</tal:block>

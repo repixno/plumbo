@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" />
+<html>
+<head>
+	<title>An error occured :/</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
+
+	<![endif]-->
+	
+	<style type="text/css">
+      input.my-url{display:none;}
+
+
+   </style>
+</head>
+<body>
+<div class="container">
+	<div class="col-md-3 last">
+		<h1 class="site-logo"><a href="/">Repix.no - Minner for livet</a></h1>
+	</div>
+	
+	
+	
+	<div class="col-md-3">
+	
+		<img src="/gfx/dog.jpg" alt="We are sorry" i18n:attributes="alt" />
+	
+	</div>
+	
+	
+	<div class="col-md-6">
+		<h2>Beklager!</h2>
+		<h4 class="top quiet">Noe galt har hendt. Du kan hjelpe oss å rette feilen ved å forklare ut hendelseforløpet som førte til feilen i tekstboksen under. </h4>			
+		<!--<p>Om du opplever flere problem med våre nye nettsider, kan du 
+			<a href="/beta/revert" id="old-site-link-from-error">gå tilbake til våre gamle nettside</a> og prøve der.
+		</p>-->
+		<script type="text/javascript">
+			$('#old-site-link-from-error').click( function() {
+				try{
+					pageTracker._trackEvent('Old page', 'Clicked from error');
+					pageTracker._trackPageview();
+				} catch(err) {}
+				document.location.href = $(this).attr('href');
+				return false;
+			});
+		</script>
+
+		<form action="/contact/feedback/" method="post">
+			<label>Melding om feil:</label><br/>
+			<input type="hidden" name="reason" value="error" />
+			<input type="text" name="my_url" class="my-url" value="">
+			<textarea name="usercomment"></textarea>
+			<textarea class="hide" name="content"><!-- content /--></textarea>
+			<textarea class="hide" name="trace"><!-- trace /--></textarea>
+			<textarea class="hide" name="code"><!-- code /--></textarea>
+			<input type="hidden" value="defaulterror" name="errortype" />
+			<div class="span-6">
+				<a href="javascript:history.back(-1);">Go back</a>
+			</div>
+			<div class="span-6 last">
+				<button class="blue">Send tilbakemelding</button>
+			</div>
+		</form>
+	</div>
+	<hr class="space"/>
+	<div class="col-md-12 last">
+			<h3><!-- content /--></h3>
+	</div>
+	<div class="col-md-12 last quiet">
+		<div>
+			<p>The error occured on line <strong><!-- line /--></strong> in <strong><!-- file /--></strong>.</p>
+		</div>
+		
+		<div class="col-md-12 last">
+			<h3>Trace</h3>
+			<pre><!-- visual /--></pre>
+		</div>
+		
+		<div class="col-md-12 last">
+			<h3>Code</h3>
+			<pre><!-- code /--></pre>
+		</div>
+	</div>
+</div>
+
+	<script type="text/javascript">
+	//<![CDATA[
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	//]]>
+	</script>
+	<script type="text/javascript">
+		try{
+		var pageTracker = _gat._getTracker("UA-390524-10");
+			pageTracker._trackEvent('Error', 'Default');
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+
+</body>
+</html>

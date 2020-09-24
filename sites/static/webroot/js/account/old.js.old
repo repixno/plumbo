@@ -1,0 +1,182 @@
+
+function loadNextAndPrev(id) {
+	$(images).each( function(i, item) {
+		if (item.id == id) {
+			if( images[i + 1] ) {
+				var next = new Image();
+				next.src = images[i + 1].screensize;
+				$(next).load( function() {
+					$('#image-menu .image-navigation a.button.next').addClass('green');
+					$('#nextImage img').attr('src', images[i + 1].screensize);
+				});
+			}
+			if( images[i - 1] ) {
+				var prev = new Image();
+				prev.src = images[i - 1].screensize;
+				$(prev).load( function() {
+					$('#image-menu .image-navigation a.button.prev').addClass('green');
+					$('#prevImage img').attr('src', images[i - 1].screensize); 
+				});
+			}
+		}
+	});
+}
+
+function findNextImage( image ) {
+	var result = false;
+	$(images).each( function(i, item) {
+		if( image.id == item.id) {
+			if( i+1 >= images.length ) {
+				result = false;
+			} else {
+				result = images[i+1];
+			}
+			return false;
+		}
+	});
+	
+	return result;
+	
+}
+
+function findPrevImage( image ) {
+	var result = false;
+	$(images).each( function(i, item) {
+		if( image.id == item.id) {
+			if( i-1 < 0 ) {
+				result = false;
+			} else {
+				result = images[i-1];
+			}
+			return false;
+		}
+	});
+	
+	return result;
+	
+}
+
+
+
+function loadSharedAlbums( target ) {
+
+
+	$.ef('albums.sharedby',{'sortby':'title'}, function(result) {
+
+		initLoadAlbums();
+		
+		var looping = true;
+		var element;
+		
+		$(result.albums).each( function(i, album) {
+			$(target).append( 
+				$('<li/>', { 'id': 'album_' + album.id })
+				.append( 
+					$('<small/>', 
+						{ 'text': album.numimages }
+					)
+				).append( 
+					element = $('<a/>', 
+						{ 
+							text	: shorten( album.title, 14 ),
+							'title'	: album.title
+						}
+					).bind('click',  function() {
+						$('.selected', target).removeClass('selected');
+						$(this).parent().addClass('selected');
+						loadAlbum( $(this).parent(), $(this).parent().parent(), '#albumContainer' );
+					})
+				).data( 'id', album.id ).data( 'title' , album.title )
+			);
+
+			if( startAlbumId > 0 ) {
+				currentAlbumId = startAlbumId;
+				if( album.id == currentAlbumId ) {
+					$( element ).trigger('click');
+					loadedFirstTime = false;
+				}
+			}
+			
+		});
+		
+	});
+
+}
+
+function loadFriendsAlbums(target) {
+	$.ef('albums.sharedto',{'sortby':'title'}, function(result) {
+
+		initLoadAlbums();
+		
+		var looping = true;
+		var element;
+		
+		$(result.albums).each( function(i, album) {
+			$(target).append( 
+				$('<li/>', { 'id': 'album_' + album.id })
+				.append( 
+					$('<small/>', 
+						{ 'text': album.numimages }
+					)
+				).append( 
+					element = $('<a/>', 
+						{ 
+							text	: shorten( album.title, 14 ),
+							'title'	: album.title
+						}
+					).bind('click',  function() {
+						$('.selected', target).removeClass('selected');
+						$(this).parent().addClass('selected');
+						loadAlbum( $(this).parent(), $(this).parent().parent(), '#albumContainer' );
+					})
+				).data( 'id', album.id ).data( 'title' , album.title )
+			);
+
+			if( typeOf(startAlbumId) != 'undefined' ) {
+				if( startAlbumId > 0 ) {
+					currentAlbumId = startAlbumId;
+					if( album.id == currentAlbumId ) {
+						$( element ).trigger('click');
+						loadedFirstTime = false;
+					}
+				}
+			}
+			
+		});
+		
+	});
+}
+
+
+// deprecated after using fancybox
+$(document).ready( function() {
+	// Next/prev image keyboard-listener
+	$(document).keypress( function(event) {
+		if( $('#bigImage').is(':visible') ) {
+			if( event.keyCode == 37 ) {
+				$('.prev', '#image-menu').trigger('click');
+			} else if ( event.keyCode == 39 ) {
+				$('.next', '#image-menu').trigger('click');
+			}
+		}
+	});
+});
+
+
+// right-click menu on big image
+// Deprecrated after using fancybox
+$('#bigImage').contextMenu({
+	menu: 'imageContextMenu'
+}, function(action, element, position) {
+	if( action == 'photofunia') {
+		photofunia( currentImage, element );
+	} else if( action == 'delete') {
+		deleteImageDialog( currentImage, element );
+	} else if (action == 'setDefaultImage') {
+		setDefaultImage( currentImage.id, currentAlbumId );
+	} else if ( action == 'downloadImage') {
+		downloadImage( currentImage );
+	} else if ( action == 'move') {
+		moveImageDialog( currentImage );
+	}
+});

@@ -1,0 +1,363 @@
+<!-- HEAD -->
+<head metal:define-macro="head" tal:omit-tag="">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="shortcut icon" type="image/ico" href="${static:}css/bootstrap/css/themes/gfx/favicon.ico"/>
+    <link rel="alternate" hreflang="dk" href="https://www.ugeplan.org/" />
+    <link rel="alternate" hreflang="sv" href="https://www.veckoplan.se/" />
+
+    <title>Veckoplan</title>
+    <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Just+Another+Hand' rel='stylesheet' type='text/css' />
+    <!-- Bootstrap -->
+    <link href="${static:}css/bootstrap/css/bootstrap.min.css?${version}" rel="stylesheet"/>
+    <link href="${static:}css/bootstrap/css/themes/veckoplan.css?${version}" rel="stylesheet"/>
+    <link href="${static:}js/fancybox/jquery.fancybox.css" rel="stylesheet"/>
+    <link href="${static:}js/cropbox/jquery.cropbox.css" rel="stylesheet"/>
+    
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    
+    <![endif]-->
+    
+    <tal:block metal:use-macro="javascript" />
+</head>
+
+
+<tal:block metal:define-macro="to-gallery">
+    <div class="row">
+          <div class="col-md-8" tal:content="structure cms:body:84c00803-c5c0-4852-a881-4fc815081ebb" /> 
+    </div>  
+</tal:block>
+
+
+
+<tal:block metal:define-macro="javascript">
+   <script type="text/javascript" src="${static:js/jquery-1.10.2.js}?${version}"></script>
+   <script type="text/javascript" src="${static:css/bootstrap/js/bootstrap.min.js}?${version}"></script>
+   <script type="text/javascript" src="${static:gfx/portals/ukeplan/scripts/common.js}?${version}"></script>
+   <script src="${static:}js/fancybox/jquery.fancybox.js"></script>
+   <script type="text/javascript" src="${static:gfx/portals/ukeplan/scripts/jquery.validate.min.js}?${version}"></script>
+
+</tal:block>
+
+
+<tal:block metal:define-macro="newsletter">
+ <!--   <div class="row center" style="padding-top: 10px;">
+        <div class="col-md-12">
+            <h4>Vil du motta mer information om kampanjer och tips på hur man får mer tid till familjen? </h4>
+        </div> 
+        <div class="col-md-9 newsletter" style="text-align: left">
+            <form method="post" id="newsletterform" action="/register/check/newsletter">
+                <input type="text" placeholder="" i18n:attributes="placeholder Name" name="name" id="name" required="true" />
+                <input type="text" placeholder="" i18n:attributes="placeholder Email" name="newEmail" id="newEmail" required="true"/>
+                <button class="btn btn-default">Anmäl ditt intresse för nyhetsbrev</button>                  
+            </form>
+            
+            <script>
+                $(function(){
+                    
+                    $('#newsletterform').validate({
+                        rules: {
+                          newEmail: {
+                            required: true,
+                            email: true
+                          }
+                        },
+                        messages:{
+                            newEmail:{
+                                required : "Detta fält krävs.",
+                                email: "Ange en e-postadress."
+                            },
+                            name:{
+                                required : "Detta fält krävs."
+                            }
+                        }
+                      });
+                    
+                    })
+            </script>
+            
+        </div>
+        <div class="col-md-3">
+            Möt oss på:
+              
+                    <a  href="https://www.facebook.com/Veckoplan" target="_blank"><img src="${static:}gfx/ukeplan/new/facebook.jpg"/></a>
+                    <a href="http://instagram.com/veckoplan" target="_blank"><img src="${static:}gfx/ukeplan/new/instagram.jpg"/></a>
+        </div>
+    </div>-->
+ 
+ <div class="col-md-12 text-center">
+            Möt oss på:
+              
+                    <a  href="https://www.facebook.com/Veckoplan" target="_blank"><img src="${static:}gfx/ukeplan/new/facebook.jpg"/></a>
+                    <a href="https://instagram.com/veckoplan" target="_blank"><img src="${static:}gfx/ukeplan/new/instagram.jpg"/></a>
+        </div>
+</tal:block>
+
+
+<tal:block metal:define-macro="top">
+    <div class="col-md-12 payoff visible-xs">
+        -Tid till det som betyder något
+    </div>
+      <div class="masthead">
+    
+        <div class="row hidden-xs">
+            <div class="col-md-3 mainlogo">
+                 <a href="/"><img  src="${static:}gfx/ukeplan/new/veckoplanlogo.png"/></a>
+            </div>
+            
+            <div class="col-md-9">
+                <div class="header-top-right">
+                    <tal:block metal:use-macro="shopping-cart" />
+                    <div>
+                        <a href="/personvern">Personskydd</a>
+                    </div>
+                        <tal:block tal:condition="session/loggedin">
+                            <span tal:content="session/username"></span>
+                            <span><a href="/logout/" class="last" i18n:translate="">Logout</a></span>
+                        </tal:block>
+                        
+                        <tal:block tal:condition="not:session/loggedin">
+                            <div class="logininfo">
+                            <span><a href="/register/" i18n:translate="">Register</a></span>
+                            <span><a href="/login/" class="last" i18n:translate="">Log in</a></span>
+                            </div>
+                        </tal:block>
+                </div>
+                 
+            </div>
+           
+        </div>
+      
+      
+
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand visible-xs" href="/"><img class="img-responsive" src="${static:}gfx/ukeplan/new/norsklogomobil.png" style="max-height: 50px;position: absolute;top: 1px;left: 1px;" /></a>
+            
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-nav-main">
+              <li>
+                <a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" >Produkter<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/produkter">Alle produkter</a></li>
+                    <li tal:repeat="menuitem menu:3a693b22-dff3-451c-b159-ce58c05ddcf0,1">
+                        <a href="${menuitem/url}">${menuitem/title}</a>
+                    </li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bilder av tavlor/dörrskyltar<span class="caret"></span></a>
+                
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/gallery">Veckoplan akrylglas</a></li>
+                    <li><a href="/gallery/magnetplan">Veckoplan magnetfolie</a></li>
+                    <li><a href="/gallery/manedsplan">Månadsplan akrylglas</a></li>
+                    <li><a href="/gallery/dagplan">Dagsplan akrylglas </a></li>
+                    <li><a href="/gallery/dorskilt">Dörrskylt</a></li>
+                    <li><a href="/gallery/barnehageplan">Förskoleplan</a></li>
+                    <li><a href="/gallery/bedriftsplan">Företagsplan</a></li>
+                    <li><a href="/gallery/presseklipp">Pressutlåtande</a></li>
+                </ul>
+              
+              </li>
+              <li><a href="/designservice/">DesignService</a></li>
+              <li><a href="/fototips/fotografene">Fotografer</a></li>
+              <li><a href="/fototips/">Fototips</a></li>
+              <li><a href="/om-oss">Om oss</a></li>
+              <li><a href="/kontakt-oss">Kontakta oss</a></li>
+              <li class="visible-xs"><a href="/cart">Varukorg</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <div class="hidden-sm" style="position: relative; top: 7px;text-align: center">
+                <span><a href="https://www.facebook.com/veckoplan" target="_blank"><img src="${static:}gfx/ukeplan/new/facebook.jpg"/></a></span>
+                <span><a href="https://instagram.com/veckoplan" target="_blank"><img src="${static:}gfx/ukeplan/new/instagram.jpg"/></a></span>
+                </div>
+              </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+      </div>
+
+    
+</tal:block>
+
+
+
+<tal:block metal:define-macro="footer">
+    
+    <div class="footer" tal:content="structure cms:body:01839ffb-e084-456b-af28-4f26f415d9cb"></div>
+    <tal:block metal:use-macro="google-analytics" />
+    
+    
+    <script type="text/javascript">/*<![CDATA[*/
+        
+        $( function(){
+            var link = '';
+            
+            
+            $('.buy').on( 'click', function(){
+                
+                
+                link = $(this).attr('href');
+                
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && screen.width < '768'  ) {
+                    if( $(this).attr('data-toggle') != 'modal' ){
+						$('#Mobilealert').modal('show');
+						return false;
+					}
+                }
+                   
+                })
+        
+        
+            $('#Mobilealert').on('show.bs.modal', function(e) {
+
+            
+                //populate the textbox
+                $(e.currentTarget).find('#confirmlink').attr('href', link);
+            });
+                    
+        })
+    /*]]>*/
+    </script>
+    <div class="modal fade" id="Mobilealert">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Editor</h4>
+            </div>
+            <div class="modal-body">
+              <p>Mobilsitet vårt er desverre ikke den optimale plattform til å lage Ukeplanen din og vi anbefaler at du lager den på en datamaskin/nettbrett, så det er lettere å se alle detaljene og lage en Ukeplan du blir fornøyd med.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Avbryt</button>
+              <a href="#" id="confirmlink"  class="btn btn-primary">Gå videre</a>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</tal:block>
+
+<!-- quick login -->
+<tal:block metal:define-macro="quicklogin">
+<form action="/login/" method="post"  id="quicklogin">
+	<div>
+		<label for="email" i18n:translate="">E-mail:</label><br/>
+		<input type="text" class="text lowercase" name="email" value="" />
+	</div>	
+	<div>
+		<label for="pasword" i18n:translate="">Password:</label><br/>
+		<input type="password" class="text" name="password" value="" />
+	</div>
+	<div>
+		<input type="checkbox" id="rememberme" /> 
+		<label for="rememberme" i18n:translate="">Remember me next time.</label>
+	</div>	
+	<div class="right prepend-top">
+		<a href="/register/" i18n:translate="">Register</a> &nbsp;
+ 		<button class="" type="submit" i18n:translate="">Log in</button>
+	</div>
+	<input type="hidden" name="referer" value="/${request/execpath}"/>
+</form>
+</tal:block>
+
+<!-- Google Analytics gs.js www.ukeplan.no -->
+<tal:block metal:define-macro="google-analytics">
+   <tal:block tal:condition="exists:google">
+	<script type="text/javascript">
+	//<![CDATA[
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	//]]>
+	</script>
+	<script type="text/javascript">
+		try{
+		var pageTracker = _gat._getTracker("${google/analytics}");
+			<tal:block tal:condition="not:session/loggedin">
+				pageTracker._setVar('unregistered');
+			</tal:block>
+			<tal:block tal:condition="session/loggedin">
+				pageTracker._setVar('member');
+			</tal:block>
+			pageTracker._setDomainName(".ukeplan.no");
+			pageTracker._trackEvent('Performance', 'Execution time', 'xml', Math.round( ${statistics/exectime} * 10 )/10 );
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+	</tal:block>
+   
+</tal:block>
+
+<div metal:define-macro="shopping-cart">
+	<tal:block tal:condition="exists: cart">
+		<tal:block tal:condition="cart/totalitems">
+		<div id="shopping-cart">
+			<p>
+				<strong>
+					<span id="cart-total-items" tal:content="cart/totalitems"></span> <tal:block i18n:translate="">products</tal:block>
+				</strong> / 
+				<strong>kr 
+					<span id="cart-total-price" tal:content="formatprice:cart/totalprice"></span>
+				</strong>
+				<a href="/cart/clear/" id="emptycart">(<tal:block i18n:translate="" tal:omit-tag="">empty cart</tal:block>)</a>
+			</p>
+            <div style="position: absolute; right: 5px; top: 5px;">
+                <a href="/cart"><img class="img-responsive" src="${static:}gfx/ukeplan/new/cart.jpg" /></a>
+            </div>
+		</div>
+		<div id="shopping-cart-pusher" />
+		<script type="text/javascript">
+		$('#emptycart').click( function() {
+			 $.ajax({
+				type: "post",
+				dataType: "json",
+				url: "/api/1.0/cart/clear",
+				success: function(){
+					$('#shopping-cart p').text("0 PRODUKTER / 0,00 KR / DIN KORG ÄR TOM" );
+					//$('#shopping-cart').slideUp('fast');
+					//$('#shopping-cart-pusher').slideUp('fast');
+					return false;		
+				},
+				error: function(msg) {
+					location.href = "/cart/clear/"
+				}
+				
+			});
+			return false;
+		});
+		</script>
+		</tal:block>
+        <tal:block tal:condition="not:cart/totalitems">
+		<div id="shopping-cart">
+            <p>
+                0 PRODUKTER / 0,00 KR / DIN KORG ÄR TOM 
+            </p>
+            <div style="position: absolute; right: 5px; top: 5px;">
+                <a href="/cart"><img class="img-responsive" src="${static:}gfx/ukeplan/new/cart.jpg" /></a>
+            </div>
+			
+		</div>
+        </tal:block>
+	</tal:block>
+</div>

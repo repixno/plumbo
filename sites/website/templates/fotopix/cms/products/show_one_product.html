@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="item/title" />
+	
+	
+
+	<meta name="description" content="${item/ingress}" />
+
+	<style type="text/css">
+		.info-box {
+			overflow: scroll;
+			height: 350px;
+			overflow-x: hidden;
+		}
+				
+		.small-product-photos {
+			display: block;
+			width:218px;
+			float: left;
+		}
+		.small-product-photos a {
+			display:block;
+			float: right;
+			margin: 0 5px 5px 0;
+		}
+		.main-product-photo {
+			display: block;
+			float: right;
+			width: 231px; height: 231px
+		}
+		#fancybox-inner #about-from-prices {
+         display: block;
+		}
+		
+		.modal-dialog{
+			z-index: 20000;
+		}
+		
+	</style>
+	<tal:block tal:condition="session/isadmin">
+		<!-- admin css -->
+		<style type="text/css">
+		.cms-product-title:hover, .cms-product-ingress:hover, .cms-product-body:hover {
+			background-color: #eee !important;
+		}
+		
+		</style>
+	</tal:block>
+	
+	<tal:block tal:condition="exists:item/customjs">
+	  <tal:block tal:content="structure item/customjs" />
+	</tal:block>
+	
+	<tal:block tal:condition="exists:item/customcss">
+	  <tal:block tal:content="structure item/customcss" />
+	</tal:block>
+	
+	<link href="${static:}js/lightbox/ekko-lightbox.css" rel="stylesheet" />
+	
+</head>
+
+
+<body>
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	
+<div class="container showproduct">
+<div class="row">
+	
+	
+	<div class="col-md-10 show-one-product">
+		
+		<div class="col-md-12">
+			<h2 class="cms-product-title"><tal:block tal:content="item/title">?</tal:block> <span class="quiet small"></span></h2>
+		</div>
+
+		<div class="col-md-6">
+		
+			<h3 class="hide" i18n:translate="">Product info</h3>
+			
+			<h4 class="cms-product-ingress" tal:content="item/ingress|default">?</h4>
+			
+			<div class="cms-product-body" tal:content="structure item/body|default">
+				?
+			</div>
+			
+		</div>
+		<div class="col-md-6">
+			<tal:block tal:condition="item/images360">
+				<div id="Kort_nr_${item/id}" style="margin: 0px auto; margin-bottom: 20px;">
+						<a href="http://www.adobe.com/go/getflashplayer">
+							<img alt="Get Adobe Flash player" src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" />
+						</a>
+				</div>
+				<script type="text/javascript" src="/3dbilder/orbitvu12_basic/swfobject.js"></script>
+				<script type="text/javascript" src="/3dbilder/orbitvu12_basic/orbitvu.js"></script>
+				<script type="text/javascript">
+					
+					inject_orbitvu('Kort_nr_${item/id}',  // id of the viewer container element which is defined above
+								   '/3dbilder/orbitvu12_basic/orbitvuer12.swf',  // location of viewer swf file
+								   '/3dbilder/orbitvu12_basic/expressInstall.swf',
+								   {ovus_folder: "/3dimages/${item/id}/",  // location of presentation files (can be absolute or relative url)
+									content2: "yes",
+									width: "380" ,
+									height: "380",
+									auto_rotate: "yes"
+								   });
+				</script>
+			</tal:block>
+			<tal:block tal:condition="not:item/images360">
+				<!-- small photos -->
+				<div class="small-product-photos">
+					<tal:block tal:repeat="image item/images">
+						<tal:block tal:condition="image/url">
+							<tal:block tal:condition="gt:repeat/image/number,1">
+							
+								<a href="${static:}images/products/thumbs/height/500/${image/url}" data-toggle="lightbox" data-gallery="multiimages" data-title="${item/title}" class="col-sm-4">
+                                    <img src="${static:}images/products/thumbs/square/54/${image/url}" class="img-responsive" />
+                                </a>
+							
+							</tal:block>
+						</tal:block>
+					</tal:block>
+				</div>
+				<!-- one main image (the first) -->
+				<div class="main-product-photo">
+				
+					<tal:block tal:repeat="image item/images">
+						<tal:block tal:condition="equal:repeat/image/number,1">
+							<a rel="product-photos" tal:condition="image/url" href="${static:}images/products/thumbs/height/500/${image/url}" class="productphoto group" data-toggle="lightbox" data-gallery="multiimages" data-title="${item/title}" >
+								<img src="${static:}images/products/thumbs/square/231/${image/url}" title="" height="231" width="231" />
+							</a>
+							<tal:block tal:condition="not:image/url">
+								<a rel="product-photos" class="group" title="Product photo is missing" >
+									<img src="${static:}gfx/404/not_found_180px.jpg" alt="Product photo is missing" height="231" width="231" i18:attributes="alt"/>
+								</a>
+							</tal:block>
+						</tal:block>
+					</tal:block>
+				</div>
+			</tal:block>
+			
+			
+			
+			<hr class="clear clearfix space" />
+			<div class="col-md-12 clear prepend-top">
+			<h3 class="hide" i18n:translate="">Product options</h3>
+			<form action="/">
+				<p class="right">
+					<tal:block tal:condition="item/options">
+						<tal:block tal:define="options item/options">
+							<tal:block tal:condition="options">
+							
+								<!-- not showing 1 option, but defines global -->
+								<tal:block tal:condition="lte:options/length,1">
+									<tal:block tal:repeat="option options">
+										<tal:block tal:define="global defaultoption option/id" />
+									</tal:block>
+								</tal:block>
+								
+								<!-- listing out product options -->
+								<tal:block tal:condition="gt:options/length,1">
+									<label for="choose-product-option" i18n:translate="">Choose:</label>
+									<select id="choose-product-option">
+										<tal:block tal:repeat="option options">
+										
+											<option 
+												class="goods"
+												tal:content="option/title" 
+												value="${option/id}" 
+												id="price_${option/id}_${formatprice:option/price}" 
+												tal:condition="equal:option/type,goods">
+											</option>
+											
+											<option 
+												class="gift"
+												tal:content="option/title" 
+												value="${option/id}" 
+												id="price_${option/id}_${formatprice:option/price}" 
+												tal:condition="equal:option/type,gift">
+											</option>
+											
+											<option 
+												class="mediaclip"
+												tal:content="option/title" 
+												value="${option/purchaseurl}" 
+												id="price_${option/id}_${formatprice:option/price}" 
+												tal:condition="equal:option/type,mediaclip">
+											</option>
+											
+										</tal:block>
+									</select>
+								</tal:block>
+							</tal:block>
+						</tal:block>
+					</tal:block>
+				</p>
+				<div class="col-md-12 text-right last">
+					<div class="col-md-12 text-right last">
+						<p class="right" tal:condition="exists:item/option/type">
+							<tal:block tal:condition="equal:item/option/type,goods">
+								<span i18n:translate="">Quantity</span>: <input type="text" class="quantity" id="quantity" value="1"/>
+								<a href="/cart/additembyproductoptionid/${item/option/id}/" i18n:translate="" class="button call-to-action large" id="add-to-cart">Add to cart</a>
+								
+								<script type="text/javascript">
+								
+									$(document).ready( function() {
+										$('#choose-product-option').bind('change', function() {
+											var id = $('option:selected', this).val();
+											$('#price').text( $('option:selected', this).attr('id').split('_')[2] );
+											$('#add-to-cart').data('id', id);
+											$('#add-to-cart').attr('href', '/cart/additembyproductoptionid/' + id )
+										});
+										
+										$('#choose-product-option').trigger('change');
+										
+										$('#add-to-cart').click( function() {
+											if( $(this).data('prodno') ) {
+												document.location.href = '/cart/additembyproductoptionid/' + $(this).data('id') + '/' + $('#quantity').val();
+												return false;
+											}
+											
+											document.location.href = $(this).attr('href') + '/' + $('#quantity').val();
+											return false;
+										});
+									});
+
+								</script>
+								
+							</tal:block>
+							
+							<tal:block tal:condition="not:equal:item/option/type,goods">
+								<script type="text/javascript">
+									$(document).ready( function() {
+										// changes the url to include prodno
+										var url = $('#buy-button-with-productoptions').attr('href');
+										
+										$('#choose-product-option').bind('change', function() {
+											
+											if( $('option:selected', this).hasClass('mediaclip') ) {
+												var purchaseurl = $('option:selected', this).attr('value');
+												$('#price').text( $('option:selected', this).attr('id').split('_')[2] );
+												$('#buy-button-with-productoptions').attr('href',purchaseurl);
+											} else {
+												var id = $('option:selected', this).attr('value');
+												$('#price').text( $('option:selected', this).attr('id').split('_')[2] );
+												$('#buy-button-with-productoptions').attr('href',url+id);
+											}
+										});
+										
+										$('#choose-product-option').trigger('change');
+									});
+								</script>
+
+							
+								<tal:block tal:condition="not:exists:defaultoption">
+									<a class="button call-to-action large" id="buy-button-with-productoptions" tal:attributes="href string:/create/quickgift/${item/id}/" i18n:translate="">Create product</a>	
+								</tal:block>
+								
+								<tal:block tal:condition="exists:defaultoption">
+									<a class="button call-to-action large" tal:condition="item/option/purchaseurl"
+										tal:attributes="href item/option/purchaseurl"
+										i18n:translate="">
+										Create product
+									</a>
+									<a class="button call-to-action large" tal:condition="not:item/option/purchaseurl"
+										tal:attributes="href string:/create/quickgift/${item/id}/${defaultoption}/"
+										i18n:translate="">
+										Create product
+									</a>
+								</tal:block>
+							</tal:block>
+						</p>
+					</div>
+					<div class="col-md-12 last">
+						<p class="right">
+							<tal:block tal:repeat="option item/options">
+								<tal:block tal:condition="equal:repeat/option/number,1">
+									<span class="price"><tal:block i18n:translate="">from kr</tal:block> <span id="price" tal:content="formatprice:option/price">?</span> pr. stk </span><br />
+									<a href="#" type="button" class="" data-toggle="modal" data-target="#about-from-prices" i18n:translate="">View prices</a>
+								</tal:block>
+							</tal:block>
+						</p>
+					</div>
+				</div>
+				
+				
+				<div class="modal fade" id="about-from-prices" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel" i18n:translate="">Prices</h4>
+							</div>
+							<div class="modal-body">
+								<tal:block tal:condition="item/options" tal:define="options item/options">
+									<tal:block>
+										<tal:block tal:repeat="option options">
+											<table class="table">
+												<caption tal:content="option/title"></caption>
+												<tr tal:repeat="price option/prices">
+													<td>
+														<tal:block tal:condition="exists:price/max">
+															<span tal:content="price/min"/>-<span tal:content="price/max|default"></span>stk
+														</tal:block>
+														<tal:block tal:condition="not:exists:price/max">
+															<span tal:content="price/min"/>stk eller flere
+														</tal:block>
+													</td>
+													<td tal:content="formatprice:price/price"></td>
+												</tr>
+											</table>
+										</tal:block>
+									</tal:block>
+								</tal:block>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal" i18n:translate="">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		</div>
+
+		<!-- delivery and contact information
+		<div class="col-md-12" tal:content="structure cms:body:0dc5bea3-c9f7-4b7e-b3a5-c8aebff3bd8d" /> -->
+		
+	</div>
+
+</div>
+</div> <!-- end container -->
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+
+<script src="${static:}js/lightbox/ekko-lightbox.js"></script>
+
+<tal:block tal:condition="session/isadmin">
+	<script type="text/javascript">
+	$('.cms-product-title, .cms-product-ingress, .cms-product-body').dblclick( function() {
+		window.open('${request/adminroot}content/products/${item/id}');
+	});
+	</script>
+</tal:block>
+<script type="text/javascript">
+	
+	$(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+			event.preventDefault();
+			$(this).ekkoLightbox();
+		}); 
+	
+	$(document).ready(function() {
+		$("a.info").fancybox({
+			'autoDimensions': false,
+			'hideOnContentClick': false,
+			'transitionIn'		: 'elastic',
+			'transitionOut'		: 'elastic'
+		});
+		
+		$("a.video").fancybox({
+			'frameWidth':	742,
+			'frameHeight':	510,
+			'hideOnContentClick': false,
+			'callbackOnStart': function() { 
+				$f("player", "http://static.repix.no/flash/flowplayer-3.1.1.swf");
+			}
+		});
+
+	});
+	
+</script>
+</body>
+</html>

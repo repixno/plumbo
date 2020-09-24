@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin statistikk</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Ordre Info</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		
+		<div class="span-24 last">
+                    <form method="GET" style="margin: 5px; padding: 5px; background-color: lightgrey;">
+                        <label for="user">Konto:</label>
+                                       <select name="user">
+                                
+                                <option value="1030157" tal:attributes="selected php:uid == 1030157">Smilfoto</option>
+			
+                                                        
+			
+			</select>
+                        <label for="from">FRA:</label>
+                        <input type="text" name="from" value="${from}"/>
+                        <label for="to">TIL:</label>
+                        <input type="text" name="to" value="${to}"/>
+                        <input type="submit" value="Enter"/>
+                    </form>
+                </div>
+                
+		<div class="span-24 last"><h3>Statistikk</h3>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    Artikkelnr
+                                </th>
+                                <th>
+                                    Tekst
+                                </th>
+                                <th>
+                                    Antall
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody tal:condition="exists:stats">
+                            <tr tal:repeat="order stats">
+                                <td tal:content="order/artikkelnr" />
+                                <td tal:content="order/tekst" />
+                                <td tal:content="order/sum" />
+                            </tr>
+                        </tbody>
+                        
+                        
+                        
+                        
+                        
+                    </table>
+                    
+                     <input type="button" value="Hent liste"/>
+		 
+		
+		</div>
+        </div>
+</body>
+</html>

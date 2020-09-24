@@ -1,0 +1,90 @@
+/* Formatting  ---------------------------------------------------*/
+
+/* admonitional blocks */
+.note, .warning, .caution, .examplecode, .untext {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #BABFD4;
+	padding: 5px 5px 5px 10px;
+}
+
+/* color for warning and caution boxes */
+.warning, .caution {
+	background-color:#FFD685;
+	border-color:#ff9900;
+	color:#000000;
+}
+
+/* paragraphs inside notes */
+.note, .warning, .caution, .note p, .warning p, .caution p {
+	font-size:11px;
+	line-height:1.3em;
+}
+
+/* note specific */    
+.note {
+	color:#5F6681;
+	background-color:#ffffcc;
+}
+
+/* .examplecode is used to print out PHP code, output, etc.
+   .codelink is the link to copy the code to clipboard
+   .untext is user contributed notes text */
+.examplecode, .untext {
+	margin-top:10px;
+	background-color:#f3f3f3;
+}
+
+.form-table {
+	background-color: #eee;
+   border-top: 3px solid #F36E21;
+   border-right: 1px solid ThreeDShadow;
+   border-bottom: 1px solid ThreeDShadow;
+   border-left: 1px solid #f3f3f3;
+   padding: 5px;
+}
+
+.tableRow td {
+
+	background-color: white;
+	color: black;
+	
+}
+
+.tableRowMouseOver td {
+
+	background-color: #eee;
+	color: #F36E21;
+	
+}
+
+.tableRowMouseOver td a {
+
+   color: #F36E21;
+	
+}
+
+.bottomRow td {
+   border-top: 1px solid ThreeDShadow;
+	background-color: ButtonFace;
+}
+
+.no-table tr td {
+   border-top: 0px solid #f3f3f3;
+   border-right: 0px solid ThreeDShadow;
+   border-bottom: 0px solid ThreeDShadow;
+   border-left: 0px solid #f3f3f3;
+   padding: 2px;
+}
+
+.row1 {
+	background-color: #ffffff;
+}
+
+.row2 {
+	background-color: #f4f4f4;
+}
+
+.gui img {
+	border: 0pt none;
+}

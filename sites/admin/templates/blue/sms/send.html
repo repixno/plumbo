@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">SMS - Eurofoto Admin</title>
+<tal:block metal:use-macro="../common.html/css" />
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		<tal:block metal:use-macro="../common.html/languages" />
+		<div id="content">
+			<div id="box">
+			   <h3>Send SMS</h3>
+			   <tal:block i18n:translate="" tal:content="result" />
+			   <a href="/sms">Main</a>
+			   <a href="/sms/view/${smsid}">Edit</a>
+			   <a href="/sms/test/${smsid}">Test</a>
+			</div>
+		</div>
+	</div>
+	<div id="footer"></div>
+</body>
+</html>

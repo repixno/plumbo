@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Order received confirmation system</tal:block>
+	<style>
+      .ok {
+         background:lightgreen;
+      }
+      .bigorderid {
+         background: #eeeeee;
+         text-align: center;
+         padding: 10px;
+         font-weight: bold;
+         font-size: 24px;
+      }
+   </style>
+</head>
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	
+	<div id="container" class="container">
+		<div id="content">
+			<div id="box">	
+			   
+			   <h2 i18n:translate="">Order received</h2>
+			   <br />
+			   <div id="searchform">
+   			   <form method="POST" action="/partner/store/fotoclick/order">
+   			   <label value="Orderid" for="orderid" />
+   			   <input type="text" id="orderid" name="orderid" class="text" />
+   			   <button id="searchbutton" class="submit green large">Find order</button>
+   			   </form>
+			   </div>
+			   <br />
+			   <div tal:condition="exists:receivername" id="userform" class="bigorderid">
+			      ${orderid}
+			   </div>
+			   <div id="resultform">
+			      <tal:block tal:condition="exists:searchresult">
+			         <input type="hidden" id="currentorderid" value="${orderid}" />
+			         <table>
+			            <tr style="background:lightgrey;">
+			               <td style="font-weight:bold;text-align: center;">Received</td>
+			               <!--<td style="font-weight:bold;text-align: center;">SMS</td>-->
+			               <td style="font-weight:bold;text-align: center;">Email</td>
+			            </tr>
+			            <tr>
+			               <td style="text-align:center;" tal:condition="exists:received" id="statusreceived" class="ok">${received}</td>
+			               <td style="text-align:center;" tal:condition="not:exists:received" id="statusreceived">-</td>
+			               
+			               <!--<td style="text-align:center;" tal:condition="not:exists:smssent" id="statussms"><button tal:condition="exists:receivermobile" id="sendsms" class="small green">Send SMS</button></td>
+			               <td style="text-align:center;" tal:condition="exists:smssent" id="statussms" class="ok">${smssent}</td>-->
+			               
+			               <td style="text-align:center;" tal:condition="not:exists:emailsent" id="statusemail"><button id="sendemail" class="small green">Send Email</button></td>
+			               <td style="text-align:center;" tal:condition="exists:emailsent" id="statusemail" class="ok">${emailsent}</td>
+			            </tr>
+			         </table>
+			      </tal:block>
+			   </div>
+			</div>
+			
+		<div class="span-20 last">
+	
+			
+	</div>
+			
+		</div>
+	</div>
+
+</div>
+
+<script language="JavaScript">
+   
+</script>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+<script>
+
+
+   $( document ).ready( function() {
+      
+      $( '#sendsms' ).click( function() {
+         
+         $.post( '/partner/store/fotoclick/sendsms', {
+            'orderid': $( '#currentorderid' ).val(),
+            },
+            function( response ) {
+               if( response.result ) {
+                  
+                  $( '#statusreceived' ).html( response.received );
+                  $( '#statusreceived' ).css( 'background', 'lightgreen' );
+                  $( '#statussms' ).html( response.sms );
+                  $( '#statussms' ).css( 'background', 'lightgreen' );
+                  
+               } else {
+                  alert( 'Failed to update status for this order' );
+               }
+            }
+         , 'json' );
+         
+      });
+      
+      $( '#sendemail' ).click( function() {
+         
+         $.post( '/partner/store/fotoclick/sendemail', {
+            'orderid': $( '#currentorderid' ).val(),
+            },
+            function( response ) {
+               if( response.result ) {
+                  
+                  $( '#statusreceived' ).html( response.received );
+                  $( '#statusreceived' ).css( 'background', 'lightgreen' );
+                  $( '#statusemail' ).html( response.email );
+                  $( '#statusemail' ).css( 'background', 'lightgreen' );
+                  
+               } else {
+                  alert( 'Failed to update status for this order' );
+               }
+            }
+         , 'json' );
+         
+      });
+      
+   });
+   
+</script>
+
+</body>
+</html>

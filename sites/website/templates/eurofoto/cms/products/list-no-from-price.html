@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+	
+	
+	<style type="text/css">
+	
+		.product .starOfferPercent.left {
+			top: -25px;
+			left: -25px;	
+		}
+	
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+	<div class="span-4">
+		<div metal:use-macro="${templateroot}/eurofoto/cms/cms.html/menu-current" />
+	</div>
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div id="content" class="productlist">
+		<div metal:use-macro="${templateroot}/eurofoto/cms/cms.html/breadcrumbs" />
+		
+		<h2 class="bottom"tal:content="menuitem/title">Product list </h2>
+		<div class="top" tal:content="structure menuitem/article/body|default" />
+		
+	<!-- list for menudepth of 2-->
+			<tal:block tal:repeat="item items">
+			<div class="span-15 last product ${conditionalmatch:item/option/historical/showhistorical,1,special-offer} ${conditionalmatch:item/option/historical/newproduct,1,new-product}" tal:condition="equal:item/type,product">
+				<div class="span-3 productimage">
+				
+				  <div tal:condition="item/option/historical/showrebate" class="starOfferPercentContainer">
+				     <div class="starOfferPercent left percent${item/option/historical/rebate}">${item/option/historical/rabate}</div>
+				  </div>
+				  
+				  <div tal:condition="item/option/historical/newproduct" class="newProductStarContainer">
+				     <div class="newProductStar ${i18n/language}" i18n:translate="">New product!</div>
+				  </div>
+				  
+				
+				  <div style="padding-left: 10px;">
+					<tal:block tal:condition="item/images">
+						<tal:block tal:repeat="image item/images">
+							<tal:block tal:condition="equal:repeat/image/number,1">
+								<tal:block tal:define="global staticurl" tal:content="static:" />
+								<a href="${item/url}" title="${item/title}">
+									<img src="${staticurl}images/products/thumbs/square/90/${image/url}" 
+										widht="90" height="90" class="left" alt="${item/title}" tal:condition="image/url" style="margin-bottom: 10px"/>
+								</a>
+								<img src="http://static.eurofoto.no/gfx/404/not_found_50px.jpg" 
+									class="left" alt="Product photo missing." tal:condition="not:image/url" 
+									style="border: 10px solid #fff; "
+								/> 
+							</tal:block>
+						</tal:block>
+					</tal:block>
+					<tal:block tal:condition="not:item/images"><span class="quiet small">No image</span></tal:block>
+					</div>
+				</div>
+				<div class="span-12 last productinfo">
+					<h3>
+					    <a href="${item/url}" class="hide-link">${item/title}</a>
+					    <span tal:condition="item/option/historical/showhistorical" i18n:translate="" class="special-offer">Special offer!</span>
+					    <span tal:condition="item/option/historical/newproduct" i18n:translate="" class="new-product">New product!</span>
+			      </h3>
+					<div class="span-6">
+						<p class="quiet" tal:content="item/ingress"></p>
+					</div>
+					<div class="span-6 last functions">
+					 <div style="margin-right: 10px; padding-right: 10px">
+					   <div class="right">
+						   <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" />
+						</div>
+						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/more-info-link" />
+						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/buy-product-link" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</tal:block>
+
+		
+   </div>
+	<!-- use if menu is needed -->
+	<div metal:use-macro="../../../${templates}/common.html/right-menu" />
+
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>	
+</div>
+
+</body>
+</html>

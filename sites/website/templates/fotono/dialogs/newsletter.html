@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Register</tal:block>
+
+	<style media="screen" type="text/css">
+	  div#fancy_div {
+	     overflow: scroll;
+	     overflow-x: hidden;
+	     background-color: #fff;
+	     color: #111;
+	  }
+	  
+	  
+
+
+	  input[type=checkbox] {
+	  	display: inline !important;
+}
+
+
+.mnmemailaddress {
+	position: absolute;
+	top: -5000px;
+	left: -5000px;
+}
+
+
+.control-label{
+  display: inline !important;
+}
+
+.fotonotekst{
+	
+	color: #ee740b;
+	text-decoration: underline;
+}
+
+
+
+
+.form-controls {
+    display: block;
+    width: 	30px !important;
+    height: 30px;
+    padding: 6px 12px;
+    font-size: 20px;
+    line-height: 1.42857143;
+    color: #000;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+
+	</style>
+	
+</head>
+
+
+<body>
+<div metal:use-macro="../../${templates}/common.html/top" />
+<div class="container">
+
+
+	
+	<div id="content">
+		
+		<!--<div class="col-md-2 hidden-xs left-menu">
+			<div metal:use-macro="../../${templates}/common.html/leftmenu" />
+		</div>-->
+		<div class="col-md-8">
+			<!-- Start subscription -->
+<form action="https://ext.mnm.as/subscribe.asp" accept-charset="utf-8" method="post">
+<input type="hidden" name="f" value="3690" />
+<input type="hidden" name="k" value="10213" />
+<input type="hidden" name="a" value="on" />
+<input type="hidden" name="source" value="embedhtml" />
+<input type="hidden" name="subscriber_list_ids" value="111454" />
+<input type="text" class="mnmemailaddress" name="mnmhoneypot" />
+<input class="form-control" type="text" name="firstname" value="Fornavn" />
+<input class="form-control" type="text" name="lastname" value="Etternavn" />
+<input class="form-control" type="text" name="email" value="E-postadresse" />
+<input class="form-control" type="text" name="mobile" value="Mobil" />
+<div class="form-group">
+<label class="control-label">
+<input type="checkbox" class="form-controls checkbox" name="consent_email" value="1" />Ja, send meg informasjon på e-post
+</label>
+</div>
+<div class="form-group">
+<label class="control-label">
+<input type="checkbox" class="form-controls checkbox" name="consent_sms" value="1" />Ja, send meg informasjon på sms
+</label>
+</div>
+<div class="form-group">
+<label class="control-label">
+<a target="_blank" href="https://butikk.foto.no/informasjon/personvern-foto-no" class="fotonotekst">Les vår personvernerklæring her</a>
+</label>
+</div>
+<input type="submit" class="btn btn-default" value="Meld på" />
+</form>
+
+<!-- End subscription -->
+
+			
+		</div>
+	</div>
+</div>
+<div metal:use-macro="../../${templates}/common.html/footer" />
+<script type="text/javascript">
+
+$(document).ready(function() {  
+
+	$('form#register').validate({
+		errorClass: "inputError",
+		errorPlacement: function(error, element) {
+     		error.appendTo( element.parent("div").next("div") );
+   		},
+		rules: {
+			newEmail:{
+				required: true,
+				email: true,
+				//remote: '/api/1.0/user/registered/'
+			}
+		},
+		messages: {
+			newEmail: {
+				required: '<tal:block i18n:translate="">You need to provide a valid e-mail address.</tal:block>',
+				email: '<tal:block i18n:translate="">Please provide a valid email address.</tal:block>',
+				remote: jQuery.format('<tal:block i18n:translate="">{0} is already registered. Is this you? If so, try logging in.</tal:block><a href="/login/" i18n:translate="">Go to login</a>')
+			},
+			eula: {
+				required: "<tal:block i18n:translate="">You have to read and accept the terms and conditions</tal:block>"
+			}
+		}
+	});
+	
+	$('#terms-and-conditions').addClass('hide');
+	
+	$('#terms-and-conditions').css('background-color', '#fff');
+	
+	$('#open-terms-and-conditions').click( function() {
+		$('#terms-and-conditions').removeClass('hide').dialog({
+			width: 700,
+			height: 500,
+			buttons: {
+				'Ok': function() {
+					$(this).dialog('destroy')
+				}
+			},
+			close: function() {
+				$(this).dialog('destroy')
+			}
+		});
+		return false;
+	});
+});
+</script>
+</body>
+</html>

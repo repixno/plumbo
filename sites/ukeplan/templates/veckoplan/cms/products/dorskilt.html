@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title"/>
+	
+	<link href="/js/fotorama/fotorama.css" rel="stylesheet" />
+	<script src="/js/fotorama/fotorama.js"></script>
+	
+	
+	<style type="text/css">
+
+		.productcategories h2{
+			background: #e7e5e4;
+			font-size: 1.3em;
+			border-top: solid 1px #ccc;
+			border-bottom: solid 1px #ccc;
+			padding: 5px;
+			text-transform: uppercase;
+		}
+	</style>
+</head>
+
+
+
+<body>
+
+   <div class="container product-category">
+      
+      <div metal:use-macro="../../../${templates}/common.html/top" />
+	  
+	  
+	  
+	  <div class="frontpagemain row">
+		<div class="visible-xs col-md-12">
+			<h3 tal:content="menuitem/article/title"></h3>
+		</div>
+		<div class="col-md-8 col-md-push-4">
+			<div class="fotorama center"
+				data-nav="thumbs"
+				data-auto="false"
+				data-thumbmargin="15"
+				data-width="1000"
+				data-maxwidth="100%"
+				data-ratio="16/9"
+				data-shadows="true"
+				data-allowfullscreen="true">
+				<a href="" data-thumb="" data-caption=""></a>
+			</div>
+		</div>
+		<div class="col-md-4 col-md-pull-8 frontpage-top-left" >
+			<h3 class="hidden-xs"  tal:content="menuitem/article/title"></h3>
+			<div tal:content="structure menuitem/article/body|default"></div>
+		</div>
+	</div>
+  
+      <div class="col-md-12 productcategories">
+		
+		<div class="row">
+			<h2 class="col-md-12" tal:content="menuitem/title"></h2>
+		</div>
+		<div class="row content">	
+			<tal:block tal:repeat="item items">
+				<tal:block metal:use-macro="${templateroot}/ukeplan/cms/cms.html/product-as-list-item-with-image" />
+			</tal:block>
+		</div>
+		<div class="row productinfo">
+			<div class="content" tal:content="structure cms:body:5fae73e8-5d13-4e99-af9a-5ba8b55ab432"></div>
+		</div>
+
+	  
+	  <tal:block metal:use-macro="../../../${templates}/common.html/newsletter" />
+	  <hr/>
+	  <div class="row">
+        <div class="col-md-8">
+			<!-- article 3893 -->
+			<tal:block tal:content="structure cms:body:d9d6b996-c7a6-4b03-8212-90d3bb7a0019"/>
+        </div>
+      </div>
+	  </div>
+   </div>
+
+   
+   
+   
+   
+   <div metal:use-macro="../../../${templates}/common.html/footer" />
+
+<script type="text/javascript">
+
+$(document).ready( function(){
+   $('#ukeplan').addClass( 'active-module' );
+   //3730633
+   $.post( "/api/1.0/productpages/minigalleries/", { albumid: "4415704" }, function( data ) {	
+		$('.fotorama').fotorama({
+					data: data.imagedata
+				  });
+		}, "json");
+   
+});
+
+
+</script>
+</body>
+</html>

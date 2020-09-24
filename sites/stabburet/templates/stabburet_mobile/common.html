@@ -1,0 +1,285 @@
+<tal:block metal:define-macro="javascript">
+	<!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />-->
+	<script src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <!--<script  src="http://jquery-countdown.googlecode.com/svn/trunk/js/jquery.countdown.js"></script>-->
+	<script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+	<script>
+		WebFont.load({
+		  custom: {
+		    families: ['KidprintMTStd-Bold', 'Populaire'],
+		    urls: ['/stabburetstatic/fonts.css']
+		  }
+		});
+	</script>
+</tal:block>
+
+
+<tal:block metal:define-macro="stylesheet">
+	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+	<link href="/mobile/css/main.css" rel="stylesheet" media="screen" />
+    <!--<link href="${static:css/portals/stabburet/bootstrap/css/bootstrap-responsive.css}" rel="stylesheet" />-->
+    <link href="/web/css/redmond/jquery-ui.min.css" rel="stylesheet" />
+</tal:block>
+
+
+<tal:block metal:define-macro="stylesheet2">
+        <style>
+            body{
+                background: #ffdb00;
+		padding: 0px;
+		width: 640px;
+		font-size: 15px;
+            }
+	    .container{
+		width: 640px;
+
+	    }
+            @font-face {
+		font-family: 'FairplexWideOT-Med';
+		src: url('/teditor/fonts/FairplexWideOT-Med.otf');
+	    }
+	    .canvas-container{
+		margin:0px auto;
+	    }
+	    h4, label{
+		color:#ef321b;
+                font-family: 'KidprintMTStd-Bold';
+                font-size: 2.3em;
+	    }
+	    label{
+		font-weight: bold;
+	    }
+	    div.desktoplabel{
+		width: 110px;
+	    }
+	    
+	    .share span{
+		margin-left: 20px;
+		cursor: pointer;
+	    }
+
+	    .footer{
+		background-image: url('/mobile/images/footerback.jpg');
+		height: 126px;
+	    }
+            .center{
+                text-align: center;
+            }
+            .countdown{
+                background-image: url('/web/images/countdownback.png');
+                width: 315px;
+                height: 107px;
+                margin:0px auto;
+                vertical-align: middle;
+            }
+            .countdown div{
+                
+            }
+            .desc { margin: 5px 3px; }
+            .desc div {
+              float: left;
+              font-family: Arial;
+              width: 65px;
+              margin-right: 32px;
+              font-size: 17px;
+              font-weight: bold;
+              color: #ef321b;
+              font-family: 'FairplexWideOT-Med';
+            }
+	    .btn-stabburet, span.ui-button-text {
+		color: #ffffff;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+		font-family: 'Populaire';
+		background-color: #0078aa;
+		background-image: -moz-linear-gradient(top, #0092cf, #0078aa);
+		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0092cf), to(#0078aa));
+		background-image: -webkit-linear-gradient(top, #0092cf, #0078aa);
+		background-image: -o-linear-gradient(top, #0092cf, #0078aa);
+		background-image: linear-gradient(to bottom, #0092cf, #0078aa);
+		background-repeat: repeat-x;
+		border-color: #0078aa #0078aa #0092cf;
+		border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0092cf', endColorstr='#0078aa', GradientType=0);
+		filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+		padding: 17px 25px;
+		font-size: 3em;
+		-webkit-border-radius: 12px;
+		-moz-border-radius: 12px;
+		border-radius: 12px;
+	}
+	.btn:hover {
+		color: #FFF;
+		background-color: #0078aa;
+	}
+
+.ui-widget-content a {
+    color: #green;
+}
+            
+        </style>
+</tal:block>
+
+<tal:block metal:define-macro="head">
+	
+	
+	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128574459-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-128574459-2');
+</script>-->
+
+	
+
+
+
+
+
+
+
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=640, user-scalable=yes" />-->
+	<meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <!--<link href="${static:css/portals/stabburet/bootstrap/css/bootstrap-responsive.css}" rel="stylesheet" />-->
+    <link href="/web/css/redmond/jquery-ui.min.css" rel="stylesheet" />
+</tal:block>
+
+
+<!--<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		  
+			ga('create', 'UA-128574459-2', 'auto');
+		   ga('require', 'displayfeatures');
+			ga('send', 'pageview');
+	</script>-->
+
+
+
+<tal:block metal:define-macro="footer">
+	<div class="footer text-center">
+		<div class="logodinmerkelapp" style="margin: 0 0 0 0 ;" >
+			<a  href="https://repix.no"style=" font-family: Populaire; color: #ffffff; font-size: 1.9em; letter-spacing: 1px;">I samarbeid med:
+			<img style="margin: 20px 21px 20px 20px; height: 50px; background-color: #ffffff"  src="https://repix.no/css/repix/gfx/REPIX-x_web_2018.png" />
+			</a>
+		</div>
+		<div >
+			
+			
+			<a style=" font-family: Populaire; color: #ffffff; font-size: 1.9em; letter-spacing: 2px;">kundeservice 57883500</a>
+			<a style="color: #fff; font-size: 23px;">&bull;</a>
+			<a href="mailto:post@repix.no" style="font-family: Populaire; color: #ffffff; font-size: 1.9em; letter-spacing: 1px;">post@repix.no</a>
+			<a style="color: #fff; font-size: 23px;">&bull;</a>	
+				<a id="rulesbutton" href="rules" style="font-family: Populaire; color: #ffffff; font-size: 1.9em; letter-spacing: 1px;">se reglene her</a>
+			
+		</div>
+		<div style="width:100%; background: #0075a5; margin: 0px 0; padding: 1px 0px;">
+			<a href="https://www.stabburetleverpostei.no/"><h4 style="color: #fff; font-family: Populaire;font-size: 1.9em;line-height: 100%;">< Tilbake til stabburetleverpostei.no</h4></a>
+		</div>
+	</div>
+	
+	<!--Les kampankje reglane 2019-->
+	<div id="rule" class="hide">
+		<div tal:content="structure cms:body:c8b2b1c6-a157-463b-81ef-38f6cf4f99fa" />
+	</div>
+	
+	
+		<!--Les meir info a 2017-->
+	<div id="informasjon" class="hide">
+		<div tal:content="structure cms:body:d63f1098-f35f-4cca-bd87-44893a669b11" />
+	</div>
+	
+	<!--Les meir info ny a 2017-->
+	<div id="informasjon2" class="hide">
+		<div tal:content="structure cms:body:c6edd8bd-8a72-4f20-b3f9-5adf42a92105" />
+	</div>
+	
+		<!--Ny artikkel 2019 om Repix nyhetsbrev-->
+	<div id="informasjon3" class="hide">
+		<div tal:content="structure cms:body:c6edd8bd-8a72-4f20-b3f9-5adf42a92105" />
+	</div>
+	
+	
+	<script>
+		$( function(){
+			$(document).on( 'click', '#rulesbutton', function(){
+					$('#rule').dialog({
+						width: 600,
+						modal: true,
+						title: "Kampanjeregler",
+						buttons: {
+							Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			});
+		
+		
+		$( function(){
+			$(document).on( 'click', '#informasjonbutton', function(){
+					$('#informasjon').dialog({
+						width: 600,
+						modal: true,
+						title: "Informasjon",
+						buttons: {
+							Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			});
+		
+		
+		
+		
+		$( function(){
+			$(document).on( 'click', '#informasjonbutton2', function(){
+					$('#informasjon2').dialog({
+						width: 600,
+						modal: true,
+						title: "Informasjon2",
+						buttons: {
+							Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			});
+		
+		
+		
+		$( function(){
+			$(document).on( 'click', '#informasjon3button', function(){
+					$('#informasjon3').dialog({
+						width: 600,
+						modal: true,
+							title: "Tilbud fra Repix",
+						buttons: {
+							Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			});
+		
+	</script>
+   
+</tal:block>

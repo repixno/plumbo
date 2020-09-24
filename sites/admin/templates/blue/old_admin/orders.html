@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Orders - Eurofoto Admin</title>
+<tal:block metal:use-macro="../common.html/css" />
+<script type="text/javascript" src="/js/admin.js"></script>
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+
+		<tal:block metal:use-macro="../common.html/languages" />
+			
+		<div class="span-19">
+			
+			<iframe  frameborder="1" height="500" width="740" scrolling="auto" name="old_admin" src="http://susanne.eurofoto.no/adm_finnordre.php">
+			
+			</iframe>
+		</div>
+		<div class="span-5 last">
+
+			<h3>Orders</h3>
+			<ul>
+				<li><a target="old_admin" href="http://susanne.eurofoto.no/adm_finnordre.php">Søk Ordre</a></li>
+				<li><a target="old_admin" href="http://susanne.eurofoto.no/adm_ordre_haandtering.php">Ordre-håndtering</a></li>
+				<li><a target="old_admin" href="http://susanne.eurofoto.no/adm_registrer_sending.php">Sending gammel</a></li>
+			</ul>
+			<ul>
+			   <li><a href="/order/manual">Registrer Manuell ordre</a></li>
+			</ul>
+			<ul>
+				<li><a target="old_admin" href="http://susanne.eurofoto.no/adm_register_skjema.php">Registrer ordreskjema</a></li>
+				<li><a target="old_admin" href="http://susanne.eurofoto.no/adm_register_progress.php">Registrer produksjon</a></li>
+				<li><a target="old_admin" href="http://susanne.eurofoto.no/adm_register_progress_fotolab.php">Registrer prod. fotolab</a></li>
+				<li><a target="old_admin" href="http://susanne.eurofoto.no/adm_register_pakke.php">Pakking</a></li>
+				<li><a target="old_admin" href="http://www.eurofoto.no/adm_print_address.php">Pakkemaskine</a></li>
+				<li><a target="old_admin" href="http://susanne.eurofoto.no/adm_approve_photobook.php">Fotobøker</a></li>
+				<li><a href="/order/stabburetfix">Stabburet fix</a></li>
+			</ul>
+			<ul>
+			   <li><a href="/order/productionstat">Produksjonsoversikt</a></li>
+			</ul>
+		</div>
+	<div id="footer">
+	</div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+</head>
+
+
+<body>
+<div class="container">
+	<div class="span-24 last">
+		<div metal:use-macro="../../../${templates}/common.html/top" />
+	</div>
+
+	<div class="span-24 last">
+		
+		<tal:block tal:repeat="item items" tal:condition="exists:items">
+			<tal:block class="top" tal:content="structure item/body|default" tal:condition="equal:item/type,article"></tal:block>
+		</tal:block>
+		
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>	
+</div>
+
+</body>
+</html>

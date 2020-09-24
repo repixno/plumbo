@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../../${templates}/common.html/head" />
+</head>
+
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+	<div class="span-4">
+		<div metal:use-macro="../cms.html/menu-standard" />
+	</div>
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div id="content">
+		
+		<!-- 1 big product-->
+		
+		
+		<!-- 8 medium products-->	
+		<tal:block tal:condition="exists:items" tal:repeat="item items">
+			<h2 tal:content="item/title">Item title</h2>
+			<h4 class="large" tal:content="item/ingress"></h4>
+			<tal:block tal:content="structure item/body" />
+		</tal:block>
+		
+		<!-- list the rest of products-->
+		<ul>
+			<li>
+				<a></a>
+			</li>
+		</ul>
+	</div>
+
+	<!-- use if menu is needed -->
+	<div metal:use-macro="../../../${templates}/common.html/right-menu" />
+
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>	
+</div>
+
+</body>
+</html>

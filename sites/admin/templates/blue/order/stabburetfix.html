@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Manual orders</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Stabburetfix Orders Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+                <div tal:condition="not:exists:thumbid">
+                    <form name="stabburetfix" method="get">
+                        <label for="orderid" >Ordrenr:</label>                       
+                        <input type="text" name="orderid" />
+                        <input type="submit" />
+                     </form>
+                </div>
+                
+                <div tal:condition="exists:thumbid">
+                    
+                    
+                    <img src="http://stabburetdev.eurofoto.no/bestill/streamthumb/${thumbid}"/>
+                    
+                    
+                    <form method="post" action="/order/stabburetfix/update">
+                        
+                        <input type="hidden" name="lopenummer" value="${lopenummer}" />
+                        <select name="malname">
+                            <option>Astronaut_alpha.png</option>
+                            <option>fotballspiller.png</option>
+                            <option>ballettdanser.png</option>
+                            <option>brannmann.png</option>
+                            <option>Popstjerne_alpha.png</option>
+                            <option>standard.png</option>
+                        </select>
+                        
+                        
+                        <input type="submit"/>
+                    </form>
+                </div>
+		
+
+   </div>
+</body>
+</html>

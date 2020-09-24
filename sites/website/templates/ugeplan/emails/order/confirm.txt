@@ -1,0 +1,34 @@
+<tal:block>
+
+<tal:block tal:content="cms:ingress:71c33c1d-7096-4438-be34-9e88a9b679ca">Order confirmation</tal:block>
+
+
+<tal:block i18n:translate="">Ordered items:</tal:block>
+
+<tal:block i18n:translate="">Title</tal:block>                                              <tal:block i18n:translate="">Unitprice</tal:block> <tal:block i18n:translate="">Quantity</tal:block>    <tal:block i18n:translate="">Price</tal:block> 
+<tal:block tal:repeat="row textrow">
+<tal:block tal:replace="row"/>
+</tal:block>
+
+
+<tal:block i18n:translate="">Delivery Address:</tal:block>
+
+<tal:block tal:replace="deliveryinfo/name"/>
+
+<tal:block tal:replace="deliveryinfo/address"/>
+
+<tal:block tal:replace="deliveryinfo/zipcode"/> <tal:block tal:replace="deliveryinfo/city"/>
+
+
+<tal:block i18n:translate="">Comment:</tal:block>
+
+<tal:block tal:replace="comment"/>
+
+Tak fordi du handlede hos Ugeplan.dk! Kontakt venligst vores kundeservice, hvis du har spørgsmål vedrørende vores produkter og services, eller har brug for vores hjælp!
+
+<tal:block>
+Ugeplan 
+kontakt@ugeplan.dk
+http://www.ugeplan.dk
+</tal:block>
+</tal:block>

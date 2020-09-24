@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Dashboard</tal:block>
+	<script type="text/javascript">
+	
+		var currentAlbum;
+	
+		$(document).ready( function() {
+			$('#albums').bind('pageAnimationEnd', function(e, info) {
+				if (!$(this).data('loaded')) {
+					loadMyAlbums('#albums ul#myAlbums');
+					//loadFriendsAlbums('#albums ul#friendsAlbums');
+					$(this).data('loaded', true);
+				}
+			})
+			
+			$('#images').bind('pageAnimationEnd', function(e, info) {
+				if (!$(this).data('loaded')) {
+					loadImages('#images');
+					//loadFriendsAlbums('#albums ul#friendsAlbums');
+					$(this).data('loaded', true);
+				}
+			})
+
+		});
+
+		function loadFriendsAlbums(target) {
+			$.ef('albums.sharedto',{}, function(result) {
+				$(result.albums).each( function(i, album) {
+					$(target).append( 
+						$('<li/>').append(
+							$('<a/>', {
+								'class': 'flip',
+								'href': '#images',
+								text: album.title,
+								click: function() {
+									alert('clicked')
+								}
+							}).bind('touch', function() {
+								alert('touch me there')
+							})
+						).append(
+							$('<small/>', {
+								'class': 'counter', 
+								text: album.numimages
+							})
+						) 
+					)
+				})
+			})
+		}
+		
+		function loadMyAlbums(target) {
+			$.ef('albums.enum',{}, function(result) {
+				$(result.albums).each( function(i, album) {
+					currentAlbum = album;
+					$(target).append( 
+						$('<li/>').append(
+							$('<a/>', {
+								'href': '#images',
+								'class': 'flip',
+								text: album.title
+							}).bind('tap', function() {
+								$('#images ul').empty();
+								
+							})
+						).append(
+							$('<small/>', {
+								'class': 'counter', 
+								text: album.numimages
+							})
+						) 
+					)
+				})
+			})
+		}
+		
+		
+		function loadImages(target) {
+		
+			$.ef('album.images.enum', {	
+				albumid: currentAlbum.id 
+			}, function(result) {
+			
+				$('#images h1.albumtitle').text( currentAlbum.title );
+				
+				$(result.images).each( function(i, image) {
+					
+					$('#images').append('<a>'+image.thumbnail+'</a>').append('<img src="'+image.thumbnail+'" alt="'+image.title+'" />')
+				
+				})
+			})
+		}
+		
+	</script>
+</head>
+<body>
+
+	<div id="home">
+		<div class="toolbar">
+			<h1>Eurofoto</h1>
+			<a class="button" id="logOut" href="#logout">Logout</a>
+		</div>
+
+		<h2>Menyvalg</h2>
+		<ul class="rounded">
+			<li><a class="slide" href="#albums">Albums</a> <small class="counter">${numalbums}</small></li>
+			<li><a class="revealme" href="#images">Images</a></li>
+			<li><a class="revealme" href="#settings">Settings</a></li>
+			<li><a class="revealme" href="#friends">Friends</a></li>
+			<li><a class="revealme" href="#projects">Projects</a></li>
+		</ul>
+	</div>
+
+	<div id="albums">
+		<div class="toolbar">
+			<a class="button back" id="back" href="#home">back</a>
+			<h1>Eurofoto</h1>
+			<a class="button" id="logOut" href="#logout">Logout</a>
+		</div>
+
+		<h2>Your albums</h2>
+		<ul class="rounded" id="myAlbums">
+		</ul>
+		<h2>Friends albums</h2>
+		<ul class="rounded" id="friendsAlbums">
+		</ul>
+
+	</div>
+
+	<div id="images" class="white">
+		<div class="toolbar">
+			<a class="button back" id="back" href="#home">back</a>			
+			<h1 class="albumtitle">Album title</h1>
+			<a class="button" id="logOut" href="#logout">Logout</a>
+		</div>
+	</div>
+	
+	<div id="image">
+		<div class="toolbar">
+			<a class="button back" id="back" href="#home">back</a>			
+			<h1>Album title</h1>
+			<a class="button" id="logOut" href="#logout">Logout</a>
+		</div>
+		<div>
+			<img class="image" />
+		</div>
+	</div>
+
+	<div id="settings">
+		<div class="toolbar">
+			<a class="button back" id="back" href="#home">back</a>			
+			<h1>Settings</h1>
+			<a class="button" id="logOut" href="#logout">Logout</a>
+		</div>
+		
+		<h2>Login</h2>
+		<ul class="rounded">
+			<li>Username</li>
+			<li>Password</li>
+		</ul>
+		
+		<form>
+			<input type="text"/>
+		</form>
+		
+		
+	
+	</div>
+
+</body>
+</html>

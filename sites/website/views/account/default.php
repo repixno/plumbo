@@ -1,0 +1,5 @@
+<?
+
+   relocate( '/account/overview' );
+
+?>

@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Products</tal:block>
+
+	
+	<style type="text/css">
+		.imagecontainer{
+			height: 230px;
+		}
+		.infocontainer{
+			height: 100px;
+		}
+		.infocontainer div{
+			position: absolute;
+			bottom: 0px;
+			width: 100%
+		}
+		
+		
+	</style>
+</head>
+
+
+
+<body>
+
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/top" />
+		<div class="product-main-page ">
+		
+			<h2 class="" tal:content="menuitem/title"></h2>
+			
+			<!--<div tal:condition="exists: menuitem/article/body" tal:content="structure menuitem/article/body"></div>-->
+			<div class="row">
+			
+   			<tal:block tal:repeat="item menuitems">
+				
+   				<tal:block tal:condition="item/expanded">
+   					<tal:block tal:condition="exists:item/children" tal:repeat="subitem1 item/children">
+   						<div class="col-md-4 append-bottom mainproductbox" >
+                                
+                                
+                                <div class="productbody col-md-12" style="border: solid 1px #ccc; padding-bottom: 10px; padding-top: 10px; min-height: 375px;">
+                                    <div>
+                                        <a href="${subitem1/url}" >
+                                            <img class="img-responsive" src="${static:}images/menu/${subitem1/image}" alt="${subitem1/title}"/>
+                                        </a>
+                                    </div>
+                                    <div class="h3 col-md-12">
+                                        ${subitem1/title}
+                                    </div>
+                                        <a class="btn btn-default center" href="${subitem1/url}" title="${subitem1/title}" i18n:translate="">See more</a>
+    
+                                </div>
+                         </div>
+   					</tal:block>
+   					
+   				</tal:block>
+   			</tal:block>
+			
+			</div>
+			
+		</div>
+		<tal:block metal:use-macro="../../../${templates}/common.html/newsletter" />
+	</div>
+			<div metal:use-macro="../../../${templates}/common.html/footer" />
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!-- My Account Menu -->
+<div metal:define-macro="menu" id="leftmenu">
+	
+	<div class="myaccountmenu">
+		<button type="button" class="navbar-toggle collapsed myaccountmenu" data-toggle="collapse" data-target="#myaccount-menu" aria-expanded="false" aria-controls="navbar">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+	</div>
+
+	<div id="myaccount-menu" class="navbar-collapse collapse">
+		<ul>
+			<li class="" tal:attributes="class conditionalmatch:menuitem,dashboard,current">
+				<a href="/myaccount" i18n:attributes="title" i18n:translate="" title="Summary of your account">Dashboard</a>
+			</li>
+			<li class="" tal:attributes="class conditionalmatch:menuitem,reedfoto,current">
+				<a href="/myaccount/reedfoto" i18n:attributes="title" title="Your albums and photos">Fotograf bilder</a>
+			</li>
+			<li class="" tal:attributes="class conditionalmatch:menuitem,albums,current">
+				<a href="/myaccount/albums" i18n:attributes="title" i18n:translate="" title="Your albums and photos">My photos</a>
+			</li>
+			<!-- li class="" tal:attributes="class conditionalmatch:menuitem,mobilephotos,current">
+				<a href="/myaccount/mobilephotos" i18n:attributes="title" i18n:translate="" title="You can receive photos by MMS">My mobile photos</a>
+			</li -->
+			<li class="" tal:attributes="class conditionalmatch:menuitem,search,current">
+				<a href="/myaccount/search" i18n:attributes="title" i18n:translate="" title="Search your photos and albums.">Search photos</a>
+			</li>
+			<li class="" tal:attributes="class conditionalmatch:menuitem,upload,current">
+				<a href="/myaccount/upload" i18n:attributes="title" i18n:translate="" title="Transfer photos to your personal photo account.">Upload photos</a>
+			</li>
+			<li class="" tal:attributes="class conditionalmatch:menuitem,projects,current">
+				<a href="/myaccount/projects" i18n:attributes="title" i18n:translate="" title="Your projects that you started on, or you have saved.">My projects</a>
+			</li>
+			<li class="" tal:attributes="class conditionalmatch:menuitem,orders,current">
+				<a href="/myaccount/orders" i18n:attributes="title" i18n:translate="" title="Order history. Both current and old orders">My orders</a>
+			</li>
+			<li class="" tal:attributes="class conditionalmatch:menuitem,friends,current">
+				<a href="/myaccount/friends" i18n:attributes="title" i18n:translate="" title="Manage your friends">My friends</a>
+			</li>
+			<li class="" tal:attributes="class conditionalmatch:menuitem,friendsphotos,current">
+				<a href="/myaccount/friendsphotos" i18n:attributes="title" i18n:translate="" title="Photos shared with you by your friends">My friends photos</a>
+			</li>
+			<li class="" tal:attributes="class conditionalmatch:menuitem,sharedphotos,current">
+				<a href="/myaccount/shared_albums" i18n:attributes="title" i18n:translate="" title="Photos you shared">My shared photos</a>
+			</li>
+			<li class="" tal:attributes="class conditionalmatch:menuitem,settings,current">
+				<a href="/myaccount/settings" i18n:attributes="title" i18n:translate="" title="Settings, preferences etc.">My settings</a>
+			</li>
+			<li class="" tal:attributes="class conditionalmatch:menuitem,backup,current">
+				<a href="/order-prints/backup/minnepenn?from=myaccount" i18n:attributes="title" i18n:translate="" title="Backup">Backup</a>
+			</li>
+		</ul>
+	</div>
+	
+	
+
+	
+</div>
+
+
+<!-- sorting albums -->
+<tal:block metal:define-macro="albums-sorting">
+	<tal:block tal:condition="exists:albumsorting">
+		<strong i18n:translate="">Sort:</strong>
+
+		<tal:block tal:condition="equal:albumsorting,manual">
+			<tal:block i18n:translate="">Custom</tal:block> ( <a href="sort" id="enable-sorting" i18n:translate="">edit</a> )
+		 | 
+		</tal:block>
+		<tal:block tal:condition="not:equal:albumsorting,manual">
+			<a href="/myaccount/albums/sort/manual/asc" id="sort-manual" i18n:translate="">Custom</a>
+		 | 
+		</tal:block>
+
+		<tal:block tal:condition="not:equal:albumsorting,created">
+			<a href="/myaccount/albums/sort/created/desc" id="sort-by-date"  i18n:translate="">Date</a>
+		 | 
+		</tal:block>
+		<tal:block tal:condition="equal:albumsorting,created">
+			<tal:block i18n:translate="">Date</tal:block>
+		 | 
+		</tal:block>
+		<tal:block tal:condition="not:equal:albumsorting,title">
+			<a href="/myaccount/albums/sort/title/asc" id="sort-alphabetic"  i18n:translate="">Name</a>
+		</tal:block>
+
+		<tal:block tal:condition="equal:albumsorting,title">
+			<tal:block i18n:translate="">Name</tal:block>
+		</tal:block>
+		
+		&nbsp;
+		&nbsp;
+		
+		<span class="small" tal:condition="albumsortingorder">
+			(
+			<tal:block tal:condition="not:equal:albumsortingorder,asc">
+				<a href="/myaccount/albums/sort/${albumsorting}/asc" id="sort-alphabetic" i18n:translate="">Ascending</a>
+			</tal:block>
+
+			<tal:block tal:condition="equal:albumsortingorder,asc">
+				<tal:block i18n:translate="">Ascending</tal:block>
+			</tal:block>
+			 |
+ 			<tal:block tal:condition="not:equal:albumsortingorder,desc">
+				<a href="/myaccount/albums/sort/${albumsorting}/desc" id="sort-alphabetic" i18n:translate="">Descending</a>
+			</tal:block>
+
+			<tal:block tal:condition="equal:albumsortingorder,desc">
+				<tal:block i18n:translate="">Descending</tal:block>
+			</tal:block>
+			 )
+		</span>
+
+	</tal:block>
+</tal:block>
+
+<!-- sorting images -->
+<tal:block metal:define-macro="image-sorting">
+	<tal:block tal:condition="exists:imagesorting">
+		<strong i18n:translate="">Sort:</strong>
+
+		<tal:block tal:condition="equal:imagesorting,manual">
+			<tal:block tal:condition="album/owner/yours">
+				<tal:block i18n:translate="">Custom</tal:block> ( <a href="sort" id="enable-sorting" i18n:translate="">edit</a> )
+			</tal:block>
+		 | 
+		</tal:block>
+		<tal:block tal:condition="not:equal:imagesorting,manual">
+			<tal:block tal:condition="album/owner/yours">
+				<a href="/myaccount/album/sort/${albumid}/manual/asc" id="sort-manual" i18n:translate="">Custom</a>
+			</tal:block>
+		 | 
+		</tal:block>
+
+		<tal:block tal:condition="not:equal:imagesorting,created">
+			<a href="/myaccount/album/sort/${albumid}/created/desc" id="sort-by-date"  i18n:translate="">Date</a>
+		 | 
+		</tal:block>
+		<tal:block tal:condition="equal:imagesorting,created">
+			<tal:block i18n:translate="">Date</tal:block>
+		 | 
+		</tal:block>
+
+		<tal:block tal:condition="not:equal:imagesorting,title">
+			<a href="/myaccount/album/sort/${albumid}/title/asc" id="sort-alphabetic"  i18n:translate="">Name</a>
+		 | 
+		</tal:block>
+
+		<tal:block tal:condition="equal:imagesorting,title">
+			<tal:block i18n:translate="">Name</tal:block>
+		 | 
+		</tal:block>
+
+
+		<span class="small" tal:condition="imagesortingorder">
+			(
+			<tal:block tal:condition="not:equal:imagesortingorder,asc">
+				<a href="/myaccount/album/sort/${albumid}/${imagesorting}/asc" id="sort-alphabetic" i18n:translate="">Ascending</a>
+			</tal:block>
+
+			<tal:block tal:condition="equal:imagesortingorder,asc">
+				<tal:block i18n:translate="">Ascending</tal:block>
+			</tal:block>
+			 |
+ 			<tal:block tal:condition="not:equal:imagesortingorder,desc">
+				<a href="/myaccount/album/sort/${albumid}/${imagesorting}/desc" id="sort-alphabetic" i18n:translate="">Descending</a>
+			</tal:block>
+
+			<tal:block tal:condition="equal:imagesortingorder,desc">
+				<tal:block i18n:translate="">Descending</tal:block>
+			</tal:block>
+			 )
+		</span>
+
+	</tal:block>
+</tal:block>
+
+
+<!-- Albumlist menu (span-4) -->
+<div metal:define-macro="right-albumlist-menu" id="rightmenu" class="last">
+
+	<h4 i18n:translate="">Order prints</h4>
+	<ul>
+		<li>
+			<a href="/order-prints/all" i18n:translate="" id="order-prints-all-albums">All albums</a>
+		</li>
+		<li>
+			<a href="/order-prints/selected" id="order-prints-selected-albums" i18n:translate="">Selected albums</a>
+		</li>
+	</ul>
+
+	<h4 i18n:translate="">Make gift</h4>
+	<ul>
+		<li>
+			<a href="/create/photo-book/create/"  i18n:translate="">Photo book</a>
+		</li>
+		<li>
+			<a href="/create/calendar/create/" i18n:translate="">Calendar</a>
+		</li>
+		<!--
+		<li>
+			<a href="/create/dvd" i18n:translate="">Buy CD or DVD</a>
+		</li>
+		-->
+	</ul>
+	
+	<h4 i18n:translate="">Edit</h4>
+	<ul>
+		<li>
+			<a href="#" id="select-all-items" i18n:translate="">Select all</a>
+		</li>
+		<li>
+			<a href="#" id="select-no-items" i18n:translate="">Select none</a>
+		</li>
+	</ul>
+	
+	<div tal:condition="exists:years">
+	  <h4 i18n:translate="">Years</h4>
+      <tal:block  repeat="year years">
+         <a href="/myaccount/albums/year/${year}" >${year}</a>
+	  </tal:block>
+	</div>
+	
+	<script type="text/javascript">
+	
+		//select all
+		$('#select-all-items').click( function() {
+			$(':checkbox').attr('checked', 'checked').trigger('change');
+
+			return false;
+		});
+		//select none
+		$('#select-no-items').click( function() {
+			$(':checkbox').attr('checked', '').trigger('change');
+
+			return false;
+		});
+   
+	</script>
+
+</div>
+
+<!-- Album menu -->
+<div metal:define-macro="right-album-menu" id="rightmenu" class="last">
+
+	<tal:block tal:condition="album/owner/yours">
+		<tal:block tal:condition="not:equal:album/id,0">
+			<a href="/myaccount/upload/${album/id}" class="button large green" i18n:translate="">
+				+ Add photos
+			</a>
+		</tal:block>
+	</tal:block>
+	<p/>
+   <div class="hide quiet" id="appinfo"><tal:block i18n:translate="">You need</tal:block> <a href="http://itunes.apple.com/us/app/aurigma-up/id432611633">Arigma Up</a> <tal:block i18n:translate="">to be able to upload images from your iPad/iPhone</tal:block><p/></div>
+
+	<tal:block tal:condition="album/access/purchase">
+		<a href="/fetchalbum/album/${album/id}" class="btn btn-success">Bestill produktpakker</a>
+		
+		<h4 i18n:translate="">Order prints</h4>
+		<ul>
+			<li>
+				<a class="" tal:attributes="href string:/order-prints/fromalbum/${album/id}" href="order-prints"  i18n:translate="">Whole album</a>
+			</li>
+			<li>
+				<a href="/order-prints/selected" class="order-selected-photos" id="order-prints-selected-images" i18n:translate="">Selected photos</a>
+			</li>
+		</ul>
+	</tal:block>
+
+	<tal:block tal:condition="not:equal:album/id,0">
+	<h4 i18n:translate="">Show this album</h4>
+	<ul>
+		<li>
+			<a 	tal:attributes="href string:/myaccount/album/slideshow/${album/id}"
+				i18n:translate=""
+				i18n:attributes="title"
+				title="Show slideshow"
+				href="slideshow">
+				Slideshow
+			</a>
+		</li>
+	</ul>
+	</tal:block>
+
+	<tal:block tal:condition="album/owner/yours">
+		<h4 i18n:translate="">Edit this album</h4>
+		<ul>
+			<li tal:condition="exists:album/id">
+				<a tal:attributes="href string:/myaccount/upload/addtoalbum/${album/id}"
+					href="/myaccount/upload/${album/id}" class="upload-to-this-album" i18n:translate="">Add photos</a>
+			</li>
+			<tal:block tal:condition="not:equal:album/id,0">
+				<li>
+					<a href="preferences" class="show-album-preferences" i18n:translate="">Preferences</a></li>
+				<li>
+					<a href="delete" class="delete-album negative" i18n:translate="">Delete album</a>
+				</li>
+			</tal:block>
+		</ul>
+
+		<tal:block tal:condition="not:equal:album/id,0">
+		<h4 i18n:translate="">Share this album</h4>
+		<ul>
+			<li tal:condition="not:equal:album/id,0">
+				<a href="/myaccount/album/share/${album/id}/" class="share-album" i18n:translate="">
+					Share with friends and family
+				</a>
+			</li>
+			<li>
+				<a href="#" id="download-album" i18n:translate="">Download album</a>
+			</li>
+		</ul>
+		</tal:block>
+	</tal:block>
+	
+	<!-- tal:block tal:condition="not:album/owner/yours">
+   <tal:block tal:condition="album/access/download">
+		<h4 i18n:translate="">Download album</h4>
+		<ul>
+			<li>
+				<a href="#" id="download-album" i18n:translate="">Download album</a>
+			</li>
+		</ul>
+	</tal:block>
+	</tal:block -->
+	
+</div>
+
+<!-- show image  -->
+<div metal:define-macro="right-image-menu" id="rightmenu" class="last">
+   <tal:block tal:condition="not:image/quarantined">
+	<h4 tal:condition="album/access/purchase" i18n:translate="">Order prints</h4>
+	<ul tal:condition="album/access/purchase">
+		<li>
+			<a href="/order-prints/fromalbum/${image/aid}" i18n:translate="">Entire album</a>
+		</li>
+		<li>
+			<a href="/order-prints/fromimage/${image/id}" i18n:translate="">Only this photo</a>
+		</li>
+	</ul>
+
+	<!--
+	<h4 i18n:translate="">Make something</h4>
+	<ul>
+		<li>
+			<a href="/create/enlargement/imageid/${image/id}" i18n:translate="">Buy enlargement</a>
+		</li>
+		<li>
+			<a href="/create/cart/imageid/${image/id}"  i18n:translate="">Buy greeting card</a>
+		</li>
+		<li>
+			<a href="/create/cart/imageid/${image/id}" i18n:translate="">Buy photo gift</a>
+		</li>
+
+		<li>
+			<a href="#">Make MMS</a>
+		</li>
+		<li>
+			<a href="#">Send postcard</a>
+		</li>
+	</ul>
+	-->
+
+	<h4 i18n:translate="">Do stuff</h4>
+	<ul>
+		<li tal:condition="image/owner/yours">
+			<a href="delete" id="delete-image" i18n:translate="">Delete image</a>
+			<tal:block tal:define="global didsomething string:1" />
+		</li>
+		<!--
+		<li tal:condition="image/owner/yours">
+			<a href="share" id="share-image" i18n:translate="">Share image</a>
+			<tal:block tal:define="global didsomething string:1" />
+		</li>-->
+		<!--
+		<li tal:condition="image/owner/yours">
+			<a href="preferances" id="edit-image" i18n:translate="">Edit image preferences</a>
+			<tal:block tal:define="global didsomething string:1" />
+		</li>-->
+		<li tal:condition="album/access/download">
+			<a tal:attributes="href string:/images/download/${image/id}" i18n:translate="">Download image</a>
+			<tal:block tal:define="global didsomething string:1" />
+		</li>
+		<li tal:condition="image/owner/yours">
+			<a href="move-image" id="move-image" i18n:translate="">Move image</a>
+			<tal:block tal:define="global didsomething string:1" />
+		</li>
+	</ul>
+	<div i18n:translate="" tal:condition="not:exists:didsomething">No actions available</div>
+
+	</tal:block>
+	<tal:block tal:condition="image/owner/yours">
+	<tal:block tal:condition="image/quarantined">
+		<h3 class="" i18n:translate="">Buy secure storage</h3>
+
+      <div id="buy-secure-storage">
+      	<form action="/cart/additembyproductoptionid/" method="post">
+      	<div>
+				<input type="radio" name="productoptionid" id="buy-secure-storage-6months" value="1365" class="subscription"/><label for="buy-secure-storage-6months" i18n:translate="">6 months</label>
+			</div>
+			<div>
+				<input type="radio" name="productoptionid" id="buy-secure-storage-12months" value="1366" class="subscription" checked="checked"/><label for="buy-secure-storage-12months" i18n:translate="">12 months</label>
+      	</div>
+      	<div>
+      		<button class="add-subscription-to-cart" i18n:translate="">Buy</button>
+      	</div>
+      	</form>
+      </div>
+      <br/>
+      <div i18n:translate="">Regain access to this photo by buying a secure storage subscription</div>
+	</tal:block>
+	</tal:block>
+</div>

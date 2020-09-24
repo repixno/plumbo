@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    
+    <tal metal:use-macro="../../${templates}/common.html/head" />
+	<script src="${static:}css/bootstrap/js/carousel-swipe.js"></script>
+</head>
+
+<body>
+	
+	
+	
+	
+	
+	
+	
+    <div metal:use-macro="../../${templates}/common.html/top" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            
+
+            <div class="col-md-12">
+
+				
+                
+               
+			   
+
+                <div class="row">
+	
+					<tal:block tal:repeat="menuitem menucontent:33f2d94b-ba8b-4e86-82fa-1e4397269f64,maincontent">
+						
+						<!--
+						<div tal:condition="equal:repeat/menuitem/number,2" class="col-sm-4 col-lg-4 col-md-4">
+							<div class="thumbnail" data-id="${menuitem/id}">
+								<iframe src="/frontpage/instagram" style="height: 316px; width: 100%; border: 0px" scrolling="no"></iframe>
+						    </div>
+						</div>
+						-->
+						<div class="col-sm-4 col-lg-4 col-md-4">
+							<div class="thumbnail" data-id="${menuitem/id}">
+								<tal:block tal:content="structure menuitem/body|default" />
+								<tal:block tal:condition="session/isadmin">
+									<a href="#" class="display-none editarticle glyphicon glyphicon-pencil"></a>
+								</tal:block>
+						    </div>
+						</div>
+					</tal:block>
+				</div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <div metal:use-macro="../../${templates}/common.html/footer" />
+    <!-- /.container -->
+
+<tal:block tal:condition="session/isadmin">
+	<script>
+		
+		$( function(){
+			
+			$("#carousel-example-generic").carousel()
+
+			$('.item').first().addClass('active');
+			
+			
+			$('.thumbnail, .top').on( 'mouseover', function(){
+					$(this).find('.editarticle').show();
+				}).on('mouseleave', function(){
+					
+					$(this).find('.editarticle').hide();
+				
+				});
+			
+			$(document).on( 'click', '.editarticle', function(){
+				
+				console.log("wtf");
+				
+				var url = 'http://admin.eurofoto.no/content/articles/' + $(this).parent().data('id');
+				
+				var win = window.open(url, '_blank');
+				win.focus();
+				
+				});
+			
+				return false;
+			
+			});
+		
+	</script>
+</tal:block>
+
+</body>
+
+</html>

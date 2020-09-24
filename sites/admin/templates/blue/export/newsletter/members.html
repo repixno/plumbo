@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Dashboard - Admin Template</title>
+	<tal:block metal:use-macro="../../common.html/css" />
+	<script type="text/javascript" src="/js/admin.js" charset="utf-8"></script>
+	<script type="text/javascript" src="http://static.eurofoto.no/js/jquery-1.3.2.min.js"></script>
+   
+	<style type="text/css">
+      
+      
+      
+	</style>
+
+</head>
+<body>
+   
+	<div id="container" class="container">
+    	<div id="header">
+			<h2>Eurofoto Admin <span class="quiet">newsletter import</span></h2>
+			<tal:block metal:use-macro="../../common.html/topmenu" />
+		</div>
+		<tal:block metal:use-macro="../../common.html/languages" />
+		
+		<div class="span-20">
+			
+         <form method="post" action="/export/newsletter/members/create">
+            
+            <h3>Create new memberlist-export</h3>
+            <div>
+               <input type="checkbox" name="allmembers" value="1" />
+               <tal:block i18n:translate="">Export all members</tal:block>
+            </div>
+            <div class="append-bottom">
+               <input type="checkbox" name="onlyemail" value="1" />
+               <tal:block i18n:translate="">Export email only</tal:block>
+            </div>
+            <button id="submit" type="submit" class="blue large" i18n:translate="">
+   				Export
+   			</button>
+         
+         </form>
+         
+         <br /><br />
+         
+         <div tal:condition="exists:folder">
+         
+            <h3>Newsletter Export - ${folder}</h3>
+            
+            <ul>
+               <li tal:repeat="item items">
+                  <span class="quiet">${item/modified}</span>
+                  <a href="/export/newsletter/members/stream/${item/folder}/${item/file}">${item/file}</a>
+                  <span>${item/size} kb</span>
+               </li>
+            </ul>
+            
+         </div>
+         
+         <div>
+            
+            <h3>Newsletter Export - Members</h3>
+            
+            <ul>
+               <li tal:repeat="folder folders">
+                  <span class="quiet">${folder/modified}</span>
+                  <a href="/export/newsletter/members/${folder/folder}/">${folder/folder}</a>
+               </li>
+            </ul>
+            
+         </div>
+         
+      </div>
+		
+	</div>
+	<div id="footer">
+	</div>
+
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+
+	
+//]]>
+</script>
+</body>
+</html>

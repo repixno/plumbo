@@ -1,0 +1,24 @@
+<tal:block metal:define-macro="order-summary">
+ <div id="order-summary" class="left">
+	<h1 i18n:translate="">Your order</h1>
+	<div class="jp-box">
+		<table>
+			<tr>
+				<td i18n:translate="">Products</td>
+				<td>Kr <span class="price" tal:content="formatprice:cart/cartprice"></span></td>
+			</tr>
+			<tr class="delivery-method hide">
+				<td class="title" i18n:translate="">Delivery cost</td>
+				<td>Kr <span class="price"><tal:block tal:condition="exists:cart/deliverytype/price" tal:content="formatprice:cart/deliverytype/price" /><tal:block tal:condition="not:exists:cart/deliverytype/price" tal:content="string:0,00" /></span></td>
+			</tr>
+			<tr class="payment-method hide">
+				<td class="title" i18n:translate="">Payment</td>
+				<td>Kr <span class="price"><tal:block tal:condition="exists:cart/paymenttype/price" tal:content="formatprice:cart/paymenttype/price" /></span></td>
+			</tr>
+		</table>
+		<div class="right">
+			<h3><tal:block  i18n:translate="">Total</tal:block>: Kr <span class="total-price" tal:content="formatprice:cart/totalprice"></span></h3>
+		</div>
+	</div>
+ </div>
+</tal:block>

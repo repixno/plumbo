@@ -1,0 +1,93 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Statistics - Eurofoto Admin</title>
+<!-- tal:block metal:use-macro="../../common.html/css" /-->
+<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/screen.css?3.0995" type="text/css" media="screen, projection"/> 
+	<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/print.css?3.0995" type="text/css" media="print"/> 
+	<!-- get the portal-id and insert it under--> 
+	<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/custom.css?3.0995" type="text/css" media="screen, projection"/> 
+	<!--[if lt IE 8]>
+		<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/ie.css" type="text/css" media="screen, projection" />
+		<link rel="stylesheet" type="text/css" href="/css/ie-sucks.css" />
+	<![endif]--> 
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script> 
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script> 
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script> 
+	<script type="text/javascript" src="http://c.static.eurofoto.no/js/i18n/ui.datepicker-no.js"></script> 
+	<script type="text/javascript" src="http://b.static.eurofoto.no/js/flowplayer-3.1.1.min.js"></script> 
+	<script type="text/javascript" src="http://b.static.eurofoto.no/js/jquery.autocomplete.pack.js"></script> 
+	<script type="text/javascript" src="/js/jquery.tablesorter.min.js"></script> 
+	<script type="text/javascript" src="http://c.static.eurofoto.no/js/eurofoto.min.js?3.0995"></script> 
+<script type="text/javascript" src="/js/admin.js"></script> 
+<style type="text/css"> 
+ 
+	h3 a {
+		display: block;
+		padding: 0.2em;
+		color: #000;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	
+	h3 a:hover {
+		color: #09c;
+	}
+ 
+</style> 
+<script tal:condition="exists:language" type="text/javascript" tal:content="structure string:var LANGUAGE = '${language}';">var LANGUAGE = 'en_US';</script>
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>APressen Produktsalgsrapport</h2>
+		</div>
+      
+		<div class="container">
+			
+		<form method="post" action="/partner/apressen/productsales/report">
+			<h3>Velg portaler</h3>
+			<ul id="selectedportals">
+			   <li tal:repeat="host hosts">
+			      <input type="checkbox" title="${host}" id="${host}" name="hosts[]" checked="1" value="${host}" /> <label for="${host}">${host}</label>
+		      </li>
+			</ul>
+         
+			<h3>Velg produkter</h3>
+			<ul id="selectedproducts">
+			   <li tal:repeat="option options">
+			      <input type="checkbox" title="${option/title}" id="option-${option/prodno}" name="options[]" checked="1" value="${option/prodno}" /> <label for="option-${option/prodno}">${option/title}</label>
+		      </li>
+			</ul>
+         
+			<h3>Periode</h3>
+			<input type="text" class="text span-2" id="periodstart" name="periodstart" value="${periodstart}" />
+			<span class="text span-1" style="width: 30px !important; text-align: center; display: inline-block"> - </span>
+			<input type="text" class="text span-2" id="periodend" name="periodend" value="${periodend}" />
+			<br /><br /><br />
+			
+			<!-- h3>Tilvalg</h3>
+			<input type="checkbox" name="download" value="1" /> Last ned som Excel Spreadsheet
+			<br />
+			<br / -->
+			
+			<button type="submit" class="button">Hent statistikk</button>
+		</form>
+			
+		</div>
+		<div id="footer"></div>
+		
+		<script type="text/javascript">
+         $(document).ready( function(){
+            
+            
+         } );
+		
+		</script>
+		
+	</div>
+</body>
+</html>

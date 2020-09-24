@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dashboard - Admin Template</title>
+<tal:block metal:use-macro="../common.html/css" />
+<script src="http://www.google.com/jsapi?key=ABQIAAAA1XbMiDxx_BTCY2_FkPh06RRaGTYH6UMl8mADNa0YKuWNNa8VNxQEerTAUcfkyrr6OwBovxn7TDAH5Q"></script>
+<script type="text/javascript">
+   google.load("language", "1");
+   google.load("jquery", "1.3");
+</script>
+<script tal:condition="exists:language" type="text/javascript" tal:content="structure string:var LANGUAGE = '${language}';">var LANGUAGE = 'en_US';</script>
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+
+		<tal:block metal:use-macro="../common.html/languages" />
+
+		<div id="wrapper">
+			<div id="content">
+				<div id="box">
+					<h3>
+						<span tal:content="header|default">404 Not Found</span>
+					</h3>
+					
+					<h4 style="color:red">Hvis du ikke vet hvorfor du er her, gå et annet sted - Dette er et verktøy for å oppdatere servere! :)</h4>
+					
+					<ul id="serverlist">
+					 <li tal:repeat="server servers">
+					    <div id="server_${server/id}">
+					    
+                     <span tal:content="server/host">hostname</span>
+                     
+                     <span id="updated_${server/id}" class="quiet" tal:content="formatdatetime:server/updated,standardformat"></span>
+                     
+                     <tal:block tal:condition="not:server/active">
+                        Inactive
+                     </tal:block>
+                     
+                     <tal:block tal:condition="server/active">
+                     <button id="status_${server/id}" type="button" class="status">
+                        Status
+                     </button>
+                     
+                     <button id="update_${server/id}" type="button" class="update blue large">
+                        Update
+                     </button> 
+                     </tal:block>
+                     
+                     <img id="spinner_${server/id}" src="http://static.eurofoto.no/gfx/admin/img/simpletree/spinner.gif" class="hide" />
+                     
+				       </div>
+					    <pre id="output_${server/id}" class="hide output"></pre>
+					 </li>
+					
+					</ul>
+					
+				</div>
+				<br />
+				<p>
+               <button id="statusall" type="button">
+                  Status All
+               </button>
+               
+               <button id="updateall" type="button" class="blue large">
+                  Update All
+               </button> 
+            </p>
+				
+			</div>
+			
+			<button id="updateallcopy" type="button" class="blue large">
+                Update All
+            </button> 
+			
+		</div>
+		<div id="footer"></div>
+	</div>
+	<script language="JavaScript">
+	
+	$('button.update').each( function() {
+   	$(this).click( function() {
+   	   var serverid = $(this).parent().attr('id').split('_')[1];
+   	   $('#output_'+serverid).removeClass('hide').hide();
+   	   $('#spinner_'+serverid).removeClass('hide').show();
+   	   $.post( '/system/svn/api/update/', {
+   	      'serverid': serverid
+   	   }, function( data ) {
+   	      
+      	   $('#spinner_'+serverid).hide();
+   	      $('#output_'+serverid).
+   	        html( data.output ).
+   	        slideDown( 'slow' );
+   	      $('#updated_'+serverid).
+   	        html( data.updated );
+   	        
+   	   }, 'json' )
+	   });
+	});
+	
+	$('button.status').each( function() {
+	   
+	   $(this).click( function() {
+   	   var serverid = $(this).parent().attr('id').split('_')[1];
+   	   $('#output_'+serverid).removeClass('hide').hide();
+   	   $('#spinner_'+serverid).removeClass('hide').show();
+   	   $.post( '/system/svn/api/status/', {
+   	      'serverid': serverid
+   	   }, function( data ) {
+   	      
+   	      $('#spinner_'+serverid).hide();
+   	      $('#output_'+serverid).
+   	        html( data.output ).
+   	        slideDown( 'slow' );
+   	      
+   	   }, 'json' )
+	   });
+	});
+	
+	$('#updateall').click( function() {
+	   $('button.update').each( function() {
+	     $(this).click();
+	   });
+	});
+	
+	$('#statusall').click( function() {
+	   $('button.status').each( function() {
+	     $(this).click();
+	   });
+	});
+	
+    $('#updateallcopy').click( function() {
+	   $('button.update').each( function() {
+	     $(this).click();
+	   });
+	});
+	
+	</script>
+</body>
+</html>

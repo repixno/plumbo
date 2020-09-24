@@ -1,0 +1,491 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">My photos</tal:block>
+   <script type="text/javascript" src="${static:js/dialog.js}"></script>
+   
+   <style type="text/css">
+      .albumimage {
+         background-image: url(${static:gfx/icons/album-icon.png});
+         background-repeat: no-repeat;
+         padding: 0px;
+         width: 100px;
+         height: 90px;
+         background-position: center center;
+         margin: 1px;
+         display: block;
+         cursor: hand;
+         cursor: pointer;
+         display: block;
+         overflow: hidden;
+      }
+      
+      
+      .albumPreview {
+         width: 100px;
+         height: 140px;
+         margin: 5px 10px 3px 20px;
+         float: left;
+         text-align: center;
+         top:0;
+         bottom:0;
+         margin:auto;
+         overflow: hidden;
+         font-size: .8em;
+      }
+
+      
+      .imageThumb {
+         width: 80px;
+         height: 70px;
+         margin: 10px;
+         -moz-border-radius: 4px;
+         border-radius: 4px;
+         background-repeat: no-repeat;
+         background-position: center;
+         background-width: 100%;
+         background-height: 100%;
+         background-color: white;
+      }
+	  
+	
+	  
+	  
+   </style>
+</head>
+<body>
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+		<div class="container">
+	
+		<div class="row">
+			<div class="col-md-12">
+				<div tal:define="global menuitem string:albums" metal:use-macro="../common.html/menu" />
+			</div>
+		
+		
+
+
+			<div class="col-md-9">
+				<div class="row"> 
+					<div class="col-md-2">
+						<h4 i18n:translate="">My photos</h4>
+						<div tal:condition="exists:selectedyear">
+						<div>
+						 <tal:block  i18n:translate="">Albums from</tal:block>
+						</div>
+						<h3 tal:content="selectedyear">2000</h3>
+						</div>
+					</div>
+				
+					<!--
+					
+					<div class="col-md-8 right prepend-top">
+				
+						<tal:block metal:use-macro="../common.html/albums-sorting" />
+				
+						<strong i18n:translate="">View:</strong>
+						<span class="quiet">
+							<tal:block  i18n:translate="">Thumbnails</tal:block> | <a href="/myaccount/albums/showlist"  i18n:translate="">List</a>
+						</span>
+					</div>-->
+					
+				</div>
+			
+			<div class="row" id="content">
+		
+		
+				<tal:block metal:define-macro="inbox">
+				<tal:block tal:repeat="album albums">
+					<tal:block tal:condition="album">
+					<tal:block tal:condition="equal:repeat/album/number,1">
+					<tal:block tal:condition="equal:album/id,0">
+				 <tal:block tal:condition="gt:album/numimages,0">
+					<div class="col-md-12">
+						<div class="box inbox">
+							<div class="col-md-4">
+								<a href="">
+									<img src="${static:gfx/gui/inbox_160px.png}" width="160" height="111" id="inbox-image"/>
+								</a>
+							</div>
+							<div class="col-dm-8">
+								<h4 i18n:translate="">You have <span i18n:name="numberofimages" tal:replace="album/numimages"/> images in your inbox</h4>
+								<p>
+									<!--<span  i18n:translate="">You should move these images to an album</span><br/>-->
+									<a href="${album/albumurl}" class="btn btn-info" i18n:translate="">Go to your inbox</a>
+									
+								</p>
+								
+		
+								
+							</div>
+							<div class="col-md-12 clear clearfix last"></div>
+						</div>
+					</div>
+					</tal:block>
+					</tal:block>
+					</tal:block>
+					</tal:block>
+				</tal:block>
+				</tal:block>
+		
+				<tal:block metal:use-macro="inbox" />
+		
+		
+		<div class="col-md-10">
+						<a href="/myaccount/newalbum" i18n:translate="" class="new-album button large green">+ New album</a>
+					<a href="select-all" id="select-all" class="btn btn-info" i18n:translate="">Select all</a>  
+					<a href="select-none" id="select-none" class="btn btn-info" i18n:translate="">Select none</a>  
+					<!--<a href="/myaccount/newalbum" class="new-album" i18n:translate="">Make New album</a></li>-->
+					<a href="delete-selected-albums"  i18n:translate="" id="delete-selected-albums" class="negative btn btn-danger">Delete selected albums</a>
+					</div>
+		
+		
+				
+		
+				<div class="col-md-12" tal:condition="not:exists:selectedyear">
+				<!-- pagination -->
+				<div class="text-right append-bottom" tal:condition="exists:pagination">
+					&lt;&lt;  <a href="/myaccount/albums/${pagination/first}" tal:condition="pagination/first" i18n:translate="">First</a>
+					<a href="/myaccount/albums/${pagination/prev}" tal:condition="pagination/prev" i18n:translate="">Prev</a>
+					<span tal:condition="not:pagination/prev" class="quiet" i18n:translate="">Prev</span>
+					<span><tal:block  i18n:translate="">Page</tal:block> ${pagination/current} <tal:block i18n:translate="">of</tal:block> ${pagination/last}</span>
+					<a href="/myaccount/albums/${pagination/next}" tal:condition="pagination/next" i18n:translate="">Next</a>
+					<span tal:condition="not:pagination/next" class="quiet" i18n:translate="">Next</span>
+					<a href="/myaccount/albums/${pagination/last}" tal:condition="pagination/last" i18n:translate="">Last</a> &gt;&gt;
+					<a href="/myaccount/albums/all" i18n:translate="">Show all</a>
+				</div>
+				<div class="pagination text-right append-bottom" tal:condition="not:exists:pagination">
+					<a href="/myaccount/albums/" i18n:translate="">Use pagination</a>
+				</div>
+			  </div>
+			  <div class="pagination last right append-bottom" tal:condition="exists:selectedyear">
+				 <a href="/myaccount/albums/" i18n:translate="">Show all</a>
+			  </div>
+				<form action="/order-prints/choose-quantity/" id="albums-form" method="post">
+					<ul id="albums">
+						<tal:block tal:repeat="album albums">
+							<tal:block tal:condition="not:equal:album/id,0">
+								<li id="sortid_${album/id}" class="albumPreview" tal:condition="album">
+									<!--<input type="checkbox" tal:attributes="name album/id" />-->
+		
+									 <div class="albumimage">
+									   <a tal:attributes="href album/albumurl" title="${album/title} (${album/numimages})">
+										 <div class="imageThumb" style="background-image: url(${album/thumbnailurl});">
+										 
+										 </div>
+		
+										</a>
+									</div>
+									<div class="center">
+										<input type="checkbox" class="select" id="album_${album/id}" value="${album/id}" name="albums[]"/>
+										<label for="album_${album/id}" tal:content="shorten:album/title;15"></label>
+									</div>
+								</li>
+							</tal:block>
+						</tal:block>
+					</ul>
+				</form>
+		
+				<div id="delete-selected-albums-dialog" title="Delete albums" i18n:attributes="title" class="hidden" >
+					<h3>
+						<tal:block i18n:translate="">Do you really want to delete these albums? They will be lost forever.</tal:block>
+					</h3>
+				</div>
+		
+				<div id="make-new-album-dialog" style="display:none" i18n:attributes="title" title="Make new album">
+					<h3 i18n:translate="">Make New album</h3>
+					<p i18n:translate="">You can create a new album and transfer photos into it.</p>
+					<form id="new-album-form" action="/myaccount/albums/newalbum">
+		
+						<label for="new-albumtitle" i18n:translate="">Album title</label>
+						<input id="new-albumtitle" type="text" class="text" value="" name="title" />
+		
+						<label for="new-albumdescription" i18n:translate="">Description</label><br/>
+						<textarea rows="3" cols="20" style="width: 200px; height: 50px;" id="new-albumdescription" name="description"></textarea>
+		
+						<fieldset>
+							<legend i18n:translate="">Users with access can:</legend>
+							<input type="checkbox" name="forsale" checked="checked" />
+							<label for="new-albumforsale" i18n:translate="">Buy photos from this album</label>
+		
+							<input type="checkbox" name="fordownload" checked="checked" />
+							<label for="new-albumforsale" i18n:translate="">Download photos from this album</label>
+						</fieldset>
+		
+					</form>
+				</div>
+			</div>
+			
+			
+
+		</div>
+			<div class="col-md-2">
+				<div metal:use-macro="../common.html/right-albumlist-menu" />
+			</div>
+
+		</div>
+</div>
+<div class="hide" id="message" title="" i18n:attributes="title">
+	<p i18n:translate=""></p>
+</div>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<script type="text/javascript">
+
+var notFound80 = '${static:gfx/404/not_found_80px.jpg}';
+
+//<![CDATA[
+	function insertNewAlbum(id, title) {
+		$('ul#albums').append('<li class="albumPreview">'+
+			'<div class="skimmer">'+
+				'<a href="/myaccount/albums/'+id+'" title="'+title+'"'+
+					'<img src="'+notFound80+'" class="thumb" alt="not_found"/>'+
+				'</a>'+
+				'<div class="center">'+
+					'<input type="checkbox" class="select" id="album_'+id+'"/>'+
+					'<label for="album_'+id+'">'+title+'</label>'+
+				'</div>'+
+			'</div>'+
+		'</li>');
+	};
+//]]>
+	$(document).ready( function() {
+
+		$('#order-prints-selected-albums').click( function() {
+			if( $('input.select:checked', '#albums').length == 0) {
+				//alert('Please select some albums');
+				messageDialog('<tal:block i18n:translate="">An error occurred</tal:block>','<tal:block i18n:translate="">Please select one or more albums</tal:block>','<tal:block i18n:translate="">Close</tal:block>');
+				
+				return false;
+			}
+
+			$('#albums-form').submit();
+
+			return false;
+		});
+
+		$('#order-prints-all-albums').click( function() {
+
+			$('#select-all').trigger('click');
+
+			$('#albums-form').submit();
+
+			return false;
+		});
+
+
+		$('#delete-selected-albums').click(function(){
+
+			if( $('input.select:checked', '#albums').length == 0 ) {
+				//alert('please select some albums');
+				messageDialog('<tal:block i18n:translate="">An error occurred</tal:block>','<tal:block i18n:translate="">Please select one or more albums</tal:block>','<tal:block i18n:translate="">Close</tal:block>');
+				
+				return false;
+			}
+
+			var albumsToDelete = new Array();
+
+			$('#delete-selected-albums-dialog').append('<ul id="selected-albums" />');
+
+			$('input.select:checked', '#albums').each( function(i) {
+				$('ul', '#delete-selected-albums-dialog').append('<li>'+ $(this).next().text() +'</li>');
+				albumsToDelete.push(  $(this).attr('id').replace('album_','')  );
+			});
+
+			$('#delete-selected-albums-dialog').dialog({
+				modal: true,
+				bgiframe: true,
+				width: 400,
+				draggable: false,
+				resizable: false,
+				close: function() {
+					$('#selected-albums').remove();
+				},
+				overlay: {
+					backgroundColor: '#fff',
+					opacity: 0.9
+				},
+				buttons: {
+					'<tal:block i18n:translate="">No</tal:block>' : function() {
+						$(this).dialog('destroy');
+						$('#selected-albums').remove();
+					},
+					'<tal:block i18n:translate="">Yes, delete them</tal:block>': function() {
+						$.ajax({
+							type: 'post',
+							url: '/api/1.0/albums/delete',
+							dataType: 'json',
+							data: {albums: albumsToDelete.toString() } ,
+							success: function(msg) {
+								//insertNewAlbum( msg.result, $("input.text","#make-new-album-dialog").attr("value") );
+								document.location.reload(false);
+							},
+							error: function() {
+								alert('<tal:block i18n:translate="">Something bad happend</tal:block>');
+							}, complete: function() {
+								$('#delete-selected-albums-dialog').dialog('destroy');
+							}
+						})
+					}
+				}
+			});
+
+			return false;
+		});
+
+
+		$('.new-album').click(function(){
+			$('#make-new-album-dialog').dialog({
+				modal: true,
+				autoOpen: false,
+				bgiframe: true,
+				width: 400,
+				resizeable: false,
+				buttons: {
+					'<tal:block i18n:translate="">Cancel</tal:block>' : function() {
+						$(this).dialog('close');
+					},
+					'<tal:block i18n:translate="">Save</tal:block>': function() {
+						$.ajax({
+							type: 'post',
+							url: '/api/1.0/album/create',
+							dataType: 'json',
+							data: $('#new-album-form').serialize() ,
+							success: function(data) {
+								//insertNewAlbum( data.album.id, $("input.text","#make-new-album-dialog").attr("value") );
+								$('#make-new-album-dialog').dialog('close');
+								document.location.href = "/myaccount/album/" + data.album.id;
+							},
+							error: function() {
+								alert('<tal:block i18n:translate="">Something bad happend</tal:block>');
+							}
+						})
+					},
+					'<tal:block i18n:translate="">Save and transfer photos</tal:block>': function() {
+						$.ajax({
+							type: 'post',
+							url: '/api/1.0/album/create',
+							dataType: 'json',
+							data: $('#new-album-form').serialize() ,
+							success: function(msg) {
+								document.location.href = "/myaccount/upload/" + msg.result
+							},
+							error: function() {
+								alert('<tal:block i18n:translate="">Something bad happend</tal:block>');
+							}
+						})
+
+					}
+
+				}
+			});
+			
+			$('#make-new-album-dialog').dialog('open');
+			return false;
+		});
+
+
+		// sorting
+		$('#enable-sorting').click( function() {
+
+			$(this).addClass('hide');
+
+			// enable sorting
+			$('#albums .albumPreview').addClass('sortable');
+			$("#albums").sortable( {
+				placeholder: 'albumPreview placeholder',
+				revert: 'true',
+				start: function() {
+					$(this).addClass('isSorted');
+				},
+				stop: function() {
+
+
+				}
+			});
+
+			// creates cancel button
+			$("#albums").disableSelection();
+			$('#enable-sorting').after('<a href="cancel-sorting" class="cancel small button red" id="cancel-sorting" i18n:translate="">Cancel sorting</a>').next().click( function() {
+				if( $('#albums').hasClass('isSorted') ) {
+					$('#albums').sortable('cancel')
+				}
+				$('#albums .albumPreview').removeClass('sortable');
+				$('#save-sorting').remove();
+				$('#enable-sorting').removeClass('hide');
+				$(this).remove();
+				return false;
+			});
+
+			$('#enable-sorting').after(' <a href="save-sorting" class="save small button blue" id="save-sorting" i18n:translate="">Save sorting</a>').next().click( function() {
+
+			   var sortedtmp = $("#albums").sortable( 'toArray' );
+            var sorted = [];
+            for ( var albid in sortedtmp ) {
+               sorted.push( sortedtmp[ albid ].split( '_' )[1] );
+            }
+
+            $.ajax({
+               type: 'post',
+               url: '/api/1.0/albums/sort',
+               dataType: 'json',
+               data: {
+                  order: $.toJSON( sorted )
+               },
+               success: function(msg) {
+                  //alert( msg.message + ':: Sorted' );
+               },
+               error: function() {
+                  //alert("An error occurred!");
+               }
+            });
+
+				$("#albums").sortable('destroy');
+				$('#albums .albumPreview').removeClass('sortable');
+				$('#cancel-sorting').remove();
+				$('#enable-sorting').removeClass('hide');
+				$(this).remove();
+
+				return false;
+			});
+
+			return false;
+		});
+
+		$('input.select').click( function() { $(this).trigger('change') });
+
+		$('input.select').bind('change', function() {
+				if ( $(this).is(':checked') || $(this).hasClass('selected') ) {
+				$(this).parent().parent().find('.skimmer').addClass('selected');
+			} else {
+				$(this).parent().parent().find('.skimmer').removeClass('selected');
+			}
+		});
+
+		//select all
+		$('#select-all').click( function() {
+			$(':checkbox', '#albums').attr('checked', 'checked').trigger('change');
+			return false;
+		});
+
+		// select none
+		$('#select-none').click( function() {
+			$(':checkbox', '#albums').attr('checked', '').trigger('change');
+			return false;
+		});
+
+
+
+		$('.skimmer').skimmer();
+
+	});
+
+</script>
+
+</body>
+</html>

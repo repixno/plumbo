@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle">
+		
+	</tal:block>
+
+		<style type="text/css">
+	
+		.gifttemplate {
+			height: 160px;
+			padding: 10px 0;
+			border-bottom: 1px solid #ccc;
+			cursor: pointer;
+			
+		}
+		.gifttemplate:hover {		
+			background-color: #eee;
+		}
+		
+		.choose-template .template-thumb{
+			display: block;
+			float: left;
+			margin: 10px;
+			background-repeat: no-repeat;
+			background-position: top left;
+			border: 7px solid white;
+			outline: 1px solid #ccc;
+		}
+		
+		.choose-template .template-thumb img {
+			max-height: 80px;
+		}
+		
+		.fixed-height {
+			height: 500px;
+			overflow: auto;
+			overflow-x: hidden;
+		}
+		
+		#loader-overlay {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			opacity: 0.8;
+			background-color: #333;
+			padding: auto auto;
+			margin: 0;
+			z-index: 10000;
+		}
+		
+		.loadingInfo {
+			text-align: center;
+			margin-top: 300px;
+		}
+		
+		.loadingInfo * {
+			display: inline;
+			color: #fff;
+			
+		}
+		
+		#album-images img {
+			margin: 10px;
+			max-height: 80px;
+		}
+	
+	</style>
+</head>
+
+<body>
+	
+	<div metal:use-macro="../../${templates}/common.html/top" />
+    <div class="container">
+
+	
+    
+    
+    <div class="span-4">
+			
+    </div>
+    <div class="span-20 last">
+        				<!--<tal:block tal:repeat="gifttemplate collections/gifttemplates">
+									<div class="template-thumb">
+										
+										<a tal:attributes="href string:/create/gift/${selected/productid}/${selected/productoptionid}/${gifttemplate/id}/">
+											<tal:block tal:repeat="page gifttemplate/pages">
+												<tal:block tal:condition="equal:repeat/page/number,1">
+							
+													<tal:block tal:condition="page/fullsize_src">
+														<img 
+															src="${static:}images/gifttemplates/thumbs/squareaspect/150/${page/fullsize_src}" 
+															width="150" height="150"
+															id="malid_${gifttemplate/id}" alt="eurofoto" class="mal"
+														/>
+									
+										
+													</tal:block>
+													
+
+											
+													
+												</tal:block>
+											</tal:block>
+										</a>
+									</div>
+                        </tal:block>-->
+        
+    </div>
+     <div class="span-24 last choose-template">
+			<h3 i18n:translate="">2. Choose template</h3>
+			<div class="span-24 last">
+				<div class="functions span-24 last">
+					<div id="choose-template" class="span-24 last">
+						<tal:block tal:repeat="gifttemplate collections/gifttemplates">
+							<div class="span-11 last gifttemplate">
+								<div class="span-3 last">
+									<h4 tal:content="gifttemplate/title|default"></h4>
+								</div>
+								<div class="span-6">
+									<img src="" tal:attributes="src gifttemplate/images/medium|default" height="150" tal:condition="gifttemplate/images/medium"/>
+									<tal:block tal:condition="not:gifttemplate/images/medium">&nbsp;</tal:block>
+								</div>
+								<div class="span-2 last prepend-top">
+									<a 
+										tal:attributes="href string:/create/newgift/${selected/productid}/${selected/productoptionid}/${gifttemplate/id}/" 
+										class="button large call-to-action" i18n:translate="">Choose</a>
+								</div>
+							</div>
+						</tal:block>
+					</div>
+				</div>
+			</div>
+		</div>
+    
+    </div>
+	
+	<div metal:use-macro="../../${templates}/common.html/footer" />
+</body>
+</html>

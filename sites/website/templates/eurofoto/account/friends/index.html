@@ -1,0 +1,456 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="${i18n/country}">
+<head>
+	<tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" />
+	<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/head" />
+</head>
+<body>
+	
+<div class="container">
+	<div metal:use-macro="${templateroot}/${templates}/common.html/top" />	
+</div>
+
+
+<div id="account">
+
+	<div class="container">
+	
+		<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/account-menu" />
+	
+		<div class="span-6">
+			<h3>Friends</h3>
+			<div class="account-content-box accordion" style="font-size: 1.2em">
+				<ul class="accordion-list height-25" id="mainFriendList">
+					<tal:block tal:repeat="friend friends">
+						<li id="friend_${friend/friendid}" class="list" rel="${friend/friendid}">
+							<small>
+								<a class="edit">edit</a>
+								<a class="remove">remove</a>
+							</small>
+							<tal:block  tal:condition="friend/name">
+								<a href="#" title="${friend/name} (${friend/email})" tal:content="shorten:friend/name;18" class="name"></a> 
+							</tal:block>
+							<div class="id hide">${friend/friendid}</div>
+							<div class="fullname hide">${friend/name}</div>
+							<div class="email hide">${friend/email}</div>
+
+						</li>
+					</tal:block>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="span-12">
+			<div id="editFriend" class="hide">
+				<h3>Edit friend</h3>
+				<div class="account-content-box">
+				<form>
+					<input type="hidden" name="friendid" />
+					<div>
+						<label>Name</label>
+					</div>
+					<div>
+						<input type="text" class="title " name="name" style="width: 440px"/>
+					</div>
+					<div>
+						<label>E-mail</label>
+					</div>
+					<div>
+						<input type="text" class="text" name="email"/>
+						<button type="submit" class="blue">Update</button>
+						<button type="reset">Cancel</button>
+					</div>
+				</form>
+				</div>
+			</div>
+			
+			<div id="addFriend">
+			
+				<h3>Add friend</h3>	
+				<div class="account-content-box">
+				<form>
+					<div>
+						<label>Name</label>
+					</div>
+					<div>
+						<input type="text" class="title " name="name" style="width: 440px"/>
+					</div>
+					<div>
+						<label>E-mail</label>
+					</div>
+					<div>
+						<input type="text" class="text" name="email"/>
+						<button class="blue" type="submit">Save</button>
+					</div>
+				</form>
+				</div>
+				
+			</div>
+
+			<h3>Import friends</h3>	
+			<div class="account-content-box">
+			
+				<div id="providers" class="center append-bottom prepend-top">
+					<a href="#importFriendsDialog" class="provider" title="Gmail" rel="gmail">
+						<img src="${static:cms/images/webpage/email-import/gmail.png}" />
+					</a>
+					<a href="#importFriendsDialog" class="provider" title="Microsoft Live / Hotmail" rel="hotmail">
+						<img src="${static:cms/images/webpage/email-import/hotmail.png}" />
+					</a>
+					<a href="#importFriendsDialog" class="provider" title="Yahoo!" rel="yahoo">
+						<img src="${static:cms/images/webpage/email-import/yahoo.png}" />
+					</a>
+					<p class="quiet">
+						Click on the provider you use to import friends. 
+					</p>
+				</div>
+				
+
+				<div id="importFriendsDialog" class="hide">
+					<form id="importFriendsForm" action="/api/1.0/test" class="reset">	
+					
+					<div class="prepend-1 append-1 append-bottom">
+					
+						<h3>Enter email and password</h3>
+						<p class="quiet">Remember this is the username and password for your <strong>email account</strong>, and not this site. </p>
+					
+
+					
+						<div class="left">
+							<label for="">E-mail</label><br/>
+							<input type="text" class="text" name="user" id="user" />
+						</div>
+						<div class="left">
+							<label for="">Password</label><br/>
+							<input type="password" class="text" name="password" id="password" value="" />
+						</div>
+		
+						<input type="hidden" id="portal" name="portal" />
+
+		
+						<button id="showFriendsButton">Show friends</button>
+					</div>
+					</form>
+				</div>
+				
+				<div class="hide" id="importedFriends">
+					<h4>Choose the friends you want to import</h4>
+					<p>
+						<a>Select all</a>
+						<a>Select none</a>
+					</p>
+					<ul id="importedFriendsList" class="accordion-list noscroll"></ul>
+				</div>
+			</div>			
+			
+		</div>
+		
+		
+		<div class="span-6 last">
+			<h3>Groups</h3>	
+			<div class="account-content-box">
+				<ul class="accordion-list height-25 max" id="groups">
+					<tal:block tal:repeat="group groups">
+						<li rel="${group/groupid}">
+							<small class="expand">+</small>
+							<small><a class="edit">Edit</a> <a class="remove">Remove</a></small>
+							<a>${group/name}</a>
+						</li>
+					</tal:block>
+				</ul>
+				
+			</div>
+			<div class="right">
+				<a id="new-group" href="#">New group</a>
+			</div>
+		</div>
+	
+	</div>
+	
+	<script type="text/javascript">
+	
+$(document).ready(function() {
+
+
+	// remove group
+	
+	$('#groups li a.remove').click( function() {
+		alert( $(this).parent().parent().attr('rel') );
+	})
+	
+
+
+
+	// new group
+	$('#new-group').click( function() {
+	
+		$('#newGroupDialog').remove();
+		$('body').append('<div title="New group" id="newGroupDialog" />');
+		$('#newGroupDialog')
+			.append( $('<label>Group name</label><br/>') )
+			.append( $('<input class="text" type="text" name="groupname" id="newGroupName"/>') );
+			
+		$('#newGroupDialog').dialog({
+				'modal'		:	true,
+				'width'		:	340,
+				'draggable'	:	false,
+				'resizeable':	false,
+				'open'		:	function() {
+					$('#newGroupName').focus();
+				},
+				buttons		: {
+					'Cancel': function() {
+						$(this).dialog('destroy');
+					},
+					'Save'	:	function() {
+
+						var response = $.ef( 'user.groups.create', {
+							'title'		: 	$('#newGroupName').val()
+						});
+						
+						if( response.result ) {
+							window.location.reload( false );
+						} else {
+							alert( response );
+						}
+						
+						$(this).dialog('destroy');
+					}
+				}
+			})
+	});
+	
+
+	$('li a', '#mainFriendList').tipTip();
+
+	//<![CDATA[
+	$('#mainFriendList li > a').live('click', function() {
+		openFriend( $(this).parent().attr('rel'), $(this).parent() );
+	});
+	
+	$('#mainFriendList li a.edit').live('click', function() {
+		openFriend( $(this).parent().parent().attr('rel'), $(this).parent().parent() );
+	});
+	
+	$('#mainFriendList li a.remove').live('click', function() {
+		removeFriend( $(this).parent().parent().attr('rel'), $(this).parent().parent() );
+	});
+
+	/*$('#mainFriendList li a.remove').each(function(i, item) {
+		var friend = $(item).parent().parent();
+		$(item).tipTip({
+			activation: 'click',
+			content: 'Do you want to delete <strong>' + $( 'a.name', friend ).attr('title') + '</strong>? &nbsp; <div class="center prepend-top"><a class="button cancel blue">No way!</a> <a class="remove button red">Yes, delete</a></div> ',
+			defaultPosition: 'right',
+			keepAlive: true,
+			maxWidth: 500,
+			enter: function() {
+				console.log('test');
+				console.log( $('a.remove', '#tiptip_content') );
+			},
+			exit: function() {
+				// nothing?
+			}
+		});
+	})*/
+	
+
+	
+	$('button[type=submit]','#editFriend').bind('click',  function() {
+	
+		$(this).hide().after(inlineLoader);
+		
+		var response = $.ef( 'user.friends.edit',  $('#editFriend form').serialize() );
+
+		if(response.result) {
+			$('.loader', '#editFriend').remove();
+			$(this).show();
+			$('a.name', $('#editFriend').data('referer') ).text( $('input[name=name]', '#editFriend').val() );
+			$('div.fullname', $('#editFriend').data('referer') ).text( $('input[name=name]', '#editFriend').val() );
+			$('div.email', $('#editFriend').data('referer') ).text( $('input[name=email]', '#editFriend').val() );
+			$('#editFriend .account-content-box').effect('highlight');
+		}
+		
+		return false;
+	});
+	
+	$('button[type=reset]','#editFriend').click( function() {
+		$('#editFriend').slideUp();
+		return false;
+	});
+
+
+
+	//]]>
+	
+	// add friend
+	$('#addFriend form button[type=submit]').click( function() {
+	
+		var response = $.ef( 'user.friends.create', $('#addFriend form').serialize() );
+		
+		if(response.result) {
+			
+			
+			var name = $('#addFriend form input[name=name]').val();
+			var email = $('#addFriend form input[name=email]').val();
+			var id = response.userid;
+			
+			$('li:first', '#mainFriendList')
+				.clone().prependTo( '#mainFriendList' ).addClass('added').data('email', email ).attr('rel', id );
+			
+			$('li:first', '#mainFriendList').find('a.name').text( name ).attr('title', name + ' (' + email + ')'  );
+
+		} else {
+			console.log( response );
+		}
+		
+		return false;
+	});
+	
+
+	$('#providers a').click( function() {
+	
+		$( this ).animate({
+			opacity	: 1
+		}, 200 );
+		
+		
+		
+		console.log( $(this).attr('rel') );
+		$('#importFriendsDialog input[name=portal]').val( $(this).attr('rel') );
+	
+		$('#providers a').not( this ).animate({
+			opacity	: 0.15
+		}, 500, function() {
+			$('#importFriendsDialog').slideDown();
+		})
+		
+		
+		return false;
+		
+	});
+
+	$('#importFriendsForm button').bind('click', function() {
+	
+		$('#importFriendsDialog').fadeOut();
+		
+		$('#importedFriendsList').before( bigLoader );
+		
+		$('#importedFriends').show();
+	});
+
+	$('#importFriendsForm').jCryption({
+		submitTrigger: '#showFriendsButton',
+		submitEvent: 'click',
+		getKeysURL: '/api/1.0/user/friends/import/generatekeypair',
+		encryptionFinished: function(encryptedform, objectlength) {
+			var result = $.ef( 'user.friends.import', {
+				'encryptedform': encryptedform
+			});
+			
+			if(result) {
+				$('#importFriendsDialog').fadeOut();
+			}
+			
+			$(result.contacts).each( function( i, item ) {
+				$('#importedFriendsList').append( 
+					$('<li id="friend_'+item.id+'"><small><a class="add">Add to my friends</a></small><a>' + item.name + '<span>(' + item.email + ')</span></a></li>').data('id', item.id).data('email', item.email).data('name', item.name )
+				)
+			});
+			
+			makeImportable( '#importedFriendsList', '#mainFriendList' );
+
+			if (result) {
+				$('.loader').remove();
+				$('input').removeAttr('disabled');
+				$('select').removeAttr('disabled');
+
+			}
+
+			return false;
+			
+		}
+	});
+
+});
+
+function removeFriend( id, element) {
+
+	var answer = dialog( 'Do you want to delete ' + $('div.fullname', element).text() + ' (' + $('div.email', element).text() + ') ?' );
+
+	if(answer) {
+		$(element).prepend( inlineLoader );
+
+		var response = $.ef( 'user.friends.remove', {
+			'friendid': id
+		});
+	
+		if(response.result) {
+			$(element).remove();
+		}
+	}
+
+}
+
+
+function dialog(message) {
+	var answer = confirm( message );
+	console.log( answer );
+	return answer
+}
+
+
+
+function openFriend( id, element ) {
+
+	$('#editFriend h3').html( 'Edit <span>'+ $('div.fullname', element).text() +'</span>' );
+
+	$('#editFriend').slideDown();
+	
+	$('input[name=friendid]','#editFriend').val( $('div.id', element).text() );
+	$('input[name=name]','#editFriend').val( $('div.fullname', element).text() );
+	$('input[name=email]','#editFriend').val( $('div.email', element).text() );
+	
+	$('#editFriend').data('referer', element );
+
+}
+
+
+function makeImportable( list, target ) {
+	$('li a.add', list).click( function() {
+	
+		var item = $(this).parent().parent();
+		var email = $(item).data('email');
+		var name = $(item).data('name');
+		
+		var response = $.ef( 'user.friends.create', {
+			'email': email,
+			'name': name
+		});
+		
+		if(response.result) {
+			item.css( 'opacity', 0.5 );
+			$('li:first', target).clone().prependTo( target ).addClass('added').data('email', email).attr('rel', response.userid );
+			$('li:first', target).find('a.name').text( shorten( name, 18 ) ).attr('title', name + ' (' + email + ')'  );
+		} else {
+			console.log( response );
+		}
+		
+	})
+}
+	  
+	</script>
+
+</div>
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="${templateroot}/${templates}/common.html/footer" />
+		<div metal:use-macro="${templateroot}/${templates}/account/common.html/footer" />
+	</div>
+</div>	
+
+</body>
+</html>

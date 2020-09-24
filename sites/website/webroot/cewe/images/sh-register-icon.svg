@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20px"
+	 height="20px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+<g id="Layer_1">
+	<circle fill="#50a8e1" cx="10" cy="10" r="10"/>
+</g>
+<g id="Logg_inn_user" display="none">
+	<path display="inline" fill="#020202" d="M15.379,10.604c-0.615-1.508-3.773-1.475-3.773-1.475
+		c1.682-0.532,1.607-3.244,1.607-3.244C13.213,2.41,10,2.417,10,2.417S6.787,2.41,6.787,5.886c0,0-0.074,2.711,1.607,3.244
+		c0,0-3.158-0.033-3.773,1.475c0,0-0.77,1.682-0.339,4.739H10h5.719C16.148,12.286,15.379,10.604,15.379,10.604z"/>
+</g>
+<g id="Register_user">
+	<g>
+		<rect x="3.844" y="4.848" fill="#020202" width="12.312" height="2.308"/>
+		<rect x="3.844" y="8.579" fill="#020202" width="12.312" height="2.308"/>
+		<rect x="3.844" y="12.309" fill="#020202" width="12.312" height="2.309"/>
+	</g>
+</g>
+<g id="Shopcart" display="none">
+	<g display="inline">
+		<line fill="none" stroke="#000000" stroke-width="0.3" x1="4.589" y1="-47.952" x2="4.589" y2="-11.952"/>
+		<line fill="none" stroke="#000000" stroke-width="0.3" x1="-49.411" y1="6.048" x2="-13.411" y2="6.048"/>
+		<line fill="none" stroke="#000000" stroke-width="0.3" x1="-49.411" y1="11.712" x2="-13.411" y2="11.712"/>
+		<line fill="none" stroke="#000000" stroke-width="0.3" x1="4.589" y1="65.712" x2="4.589" y2="29.712"/>
+		<line fill="none" stroke="#000000" stroke-width="0.3" x1="15.885" y1="-47.952" x2="15.885" y2="-11.952"/>
+		<line fill="none" stroke="#000000" stroke-width="0.3" x1="69.885" y1="6.048" x2="33.885" y2="6.048"/>
+		<line fill="none" stroke="#000000" stroke-width="0.3" x1="69.885" y1="11.712" x2="33.885" y2="11.712"/>
+		<line fill="none" stroke="#000000" stroke-width="0.3" x1="15.885" y1="65.712" x2="15.885" y2="29.712"/>
+	</g>
+	<g display="inline">
+		<polygon fill="#020202" points="4.967,6.048 5.583,8.88 6.199,11.712 10.308,11.712 14.416,11.712 15.34,8.88 16.264,6.048 
+			10.615,6.048 		"/>
+		<circle fill="#020202" cx="7.723" cy="13.943" r="1.554"/>
+		<circle fill="#020202" cx="13.047" cy="13.943" r="1.555"/>
+		<path fill="#020202" d="M5.922,5.571c0.011,1.185,0.123,0.477-0.477,0.477H4.213c-0.264,0-0.477-0.213-0.477-0.477l0,0
+			c0-0.264,0.213-0.477,0.477-0.477h1.231C5.708,5.094,5.922,5.308,5.922,5.571L5.922,5.571z"/>
+	</g>
+</g>
+<g id="Layer_5" display="none">
+	<g display="inline">
+		<ellipse cx="10" cy="8.742" rx="6.648" ry="5.217"/>
+		<path d="M10.561,13.715c0,0,0.718,1.832,4.463,1.832c0,0-2.114-1.674-1.635-3.188L10.561,13.715z"/>
+	</g>
+</g>
+<g id="Layer_6" display="none">
+	<rect x="5.174" y="2.952" display="inline" fill="none" width="9.695" height="14.097"/>
+	<text transform="matrix(1 0 0 1 6.0166 15.7324)" display="inline" font-family="'MyriadPro-Bold'" font-size="18">?</text>
+</g>
+</svg>

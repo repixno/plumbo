@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title i18n:translate="">Menu Admin - Eurofoto</title>
+
+	<tal:block metal:use-macro="../common.html/css" />
+
+	<script src="http://www.google.com/jsapi?key=ABQIAAAA1XbMiDxx_BTCY2_FkPh06RRaGTYH6UMl8mADNa0YKuWNNa8VNxQEerTAUcfkyrr6OwBovxn7TDAH5Q"></script>
+	<script type="text/javascript" src="/js/admin.js" charset="utf-8"></script>
+	<script type="text/javascript">
+		google.load("language", "1");
+	</script>
+	<script tal:condition="exists:language" type="text/javascript" tal:content="structure string:var LANGUAGE = '${language}';">
+		var LANGUAGE = 'en_US';
+	</script>
+
+   <link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/menuedit.css" type="text/css" media="screen, projection" />
+	<script type="text/javascript" src="/js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="/js/jquery-ui-1.7.2.custom.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.json-1.3.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.lowpro.js"></script>
+	<script type="text/javascript" src="/js/iutil.js"></script>
+	<script type="text/javascript" src="/js/idrag.js"></script>
+	<script type="text/javascript" src="/js/idrop.js"></script>
+	<script type="text/javascript" src="/js/isortables.js"></script>
+	<script type="text/javascript" src="/js/inestedsortable.js"></script>
+	<script type="text/javascript" src="/js/me_framework_menu.js"></script>
+   <script type="text/javascript" src="/js/me_framework_tabs.js"></script>
+	<script type="text/javascript" src="/js/me_framework_activeitem.js"></script>
+   <script type="text/javascript" src="/js/me_framework_objects.js"></script>
+	<script type="text/javascript" src="/js/me_menuedit.js"></script>
+	<script type="text/ecmascript">
+
+      var menuarticles = [
+      <tal:block tal:repeat="article articles">
+      {
+         id: '${article/id}',
+         title: '${article/title}'
+		}<tal:block tal:condition="not:repeat/article/end">,</tal:block>
+		</tal:block>
+   	];
+
+   	var alllanguages = [
+		<tal:block tal:repeat="language languages">
+		{
+		   id: '${language/id}',
+		   code:  '${language/code}',
+		   short: '${language/short}',
+		   title: '${language/title}'
+		}<tal:block tal:condition="not:repeat/language/end">,</tal:block>
+		</tal:block>
+		];
+
+		var langvars = {
+
+		   urlFieldLabel: '<tal:block i18n:translate="">URL name</tal:block>',
+		   urlButtonCaption: '<tal:block i18n:translate="">Change</tal:block>',
+		   templateFieldLabel: '<tal:block i18n:translate="">Template</tal:block>',
+		   identifierFieldLabel: '<tal:block i18n:translate="">Identifier</tal:block>',
+		   identifierLinkLabel:  '<tal:block i18n:translate="">Show Test Page</tal:block>',
+		   scoreFieldLabel: '<tal:block i18n:translate="">Score</tal:block>',
+		   imageFieldLabel: '<tal:block i18n:translate="">Image</tal:block>',
+		   menuArticleFieldLabel: '<tal:block i18n:translate="">Article</tal:block>',
+		   strURLisNotUnique: '<tal:block i18n:translate="">URL is not unique. Try a different URL name.</tal:block>',
+		   strNoContentAvail: '<tal:block i18n:translate="">No content available!</tal:block>',
+		   strNoItemChosen: '<tal:block i18n:translate="">No item chosen</tal:block>',
+		   strDoYouReallyWantToDeleteThisMenuItem: '<tal:block i18n:translate="">Do you really want to delete this menu item (and sub items)?</tal:block>',
+		   strAreYouReallySureAboutThis: '<tal:block i18n:translate="">Are you really sure about this? I mean really?!?</tal:block>',
+		   strDropHereToAddContent: '<tal:block i18n:translate="">Drop here to add content.</tal:block>',
+		   strChangeTitle: '<tal:block i18n:translate="">Change title</tal:block>',
+		   strConnected: '<tal:block i18n:translate="">Connected</tal:block>',
+		   strOptions: '<tal:block i18n:translate="">Options</tal:block>',
+		   strPortals: '<tal:block i18n:translate="">Portals</tal:block>',
+		   strChange: '<tal:block i18n:translate="">Change</tal:block>',
+		   strTranslate: '<tal:block i18n:translate="">Translate</tal:block>',
+		   strURL: '<tal:block i18n:translate="">URL</tal:block>',
+		   strPath: '<tal:block i18n:translate="">Path</tal:block>',
+		   strSave: '<tal:block i18n:translate="">Save</tal:block>',
+		   strEdit: '<tal:block i18n:translate="">Edit</tal:block>',
+		   strDelete: '<tal:block i18n:translate="">Delete</tal:block>',
+		   strLabelAdd: '<tal:block i18n:translate="">Add</tal:block>',
+		   strLabelMenu: '<tal:block i18n:translate="">Menu</tal:block>',
+		   strLabelItem: '<tal:block i18n:translate="">Item</tal:block>',
+		   strLabelArticles: '<tal:block i18n:translate="">Articles</tal:block>',
+		   strLabelProducts: '<tal:block i18n:translate="">Products</tal:block>'
+
+		}
+
+		var request = {
+		   systemroot: '${request/systemroot}'
+		}
+
+		$(document).ready(function() {
+		   islockedforedit = true;
+			<tal:block tal:condition="exists: isunlocked">
+			islockedforedit = false;
+			</tal:block>
+
+			init();
+			
+			
+			   $("#uploadlanguage").dialog({
+                 autoOpen: false,
+                 closeOnEscape: true
+             });
+		});
+	</script>
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		<tal:block metal:use-macro="../common.html/languages" />
+		<div class="span-24">
+         <div>
+            <tal:block tal:condition="not: exists: isunlocked">
+            <a href="/menu/${unlockhash}" class="ss_sprite ss_lock_open edit_open">Edit</a>
+            </tal:block>
+            <tal:block tal:condition="exists: isunlocked">
+            <a href="/menu" class="ss_sprite ss_lock edit_lock">Lock</a>
+            </tal:block>
+            <br /><br />
+         </div>
+			<div id="menulist" class="span-7">
+				<h3 i18n:translate="">Menu</h3>
+			</div>
+			<div id="activeitem" class="span-12">
+				<h3 i18n:translate="">Active item</h3>
+			</div>
+			<div id="menucontent" class="span-5 last">
+				<h3 i18n:translate="">Available content</h3>
+			</div>
+		</div>
+	</div>
+	<div id="footer"></div>
+	
+	<div class="hide" id="uploadlanguage">
+	<form method="post" enctype="multipart/form-data" action="/menu/upload/language" id="form">
+	   <input name="filename" id="filename" type="hidden" value=""/>
+	   <input name="filelang" id="filelang" type="hidden" value=""/>
+	   <input name="menuid" id="menuid" type="hidden" value=""/>
+      <input type="file" name="image"/>
+      <input type="submit" />
+   </form>
+   
+   <img id="translatedImage" src="" style="max-width: 200px; max-height: 80px;"/>
+   </div>
+</body>
+</html>

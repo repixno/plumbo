@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+
+    <head>
+        <tal metal:use-macro="../../${templates}/common.html/head" />
+        <link href="${static:}gfx/portals/ukeplan/scripts/jquery.bxslider/jquery.bxslider.css?${version}" rel="stylesheet"/>
+        
+    </head>
+    <body>
+        
+        <div class="container">
+            
+            <tal:block metal:use-macro="../common.html/top" />
+            
+            <div class="content">
+                
+                <div class="frontpagemain row">
+                    <div class="col-md-8  col-md-push-4">
+                        
+                        <ul class="bxslider">
+                            
+                            <tal:block tal:repeat="menuitem menu:2e415739-fea5-4775-a7a7-7ae679cdff1e,1"> 
+                               <li tal:condition="lte:repeat/menuitem/number,7"> 
+                                   <img class="img-responsive" src="${static:}images/menu/${menuitem/image}" />
+                               </li>
+                            </tal:block> 
+                            
+                            <li class="video">
+                                <iframe width="740" height="417" src="https://www.youtube.com/embed/Adp9loZalmI?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen="true" id="video"></iframe>
+                            </li>
+                       
+                        
+                       
+                       
+                        </ul>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                     <div class="col-md-4 col-md-pull-8 frontpage-top-left" >
+                        
+                        <h2 tal:content="cms:title:48125354-1ca7-4c37-96d3-9b0419f3304f">Velkommen til oss</h2>
+                        <div tal:content="structure cms:body:48125354-1ca7-4c37-96d3-9b0419f3304f">Content</div>
+                        <ul>
+                            <li tal:repeat="menuitem menu:/products/"><!-- 129cdf90-4212-45e4-b7c0-fb32a437b48f -->
+                                <a href="${menuitem/url}?from=mainsub">${menuitem/title}</a>
+                            </li>
+                        </ul>
+                        <p class="right">
+                            <a  class="btn btn-default" href="/produkter">Se produkter her</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row prepend-top">
+                    <div class="col-md-1 hidden-xs hidden-sm center" >
+                        <img src="${static:}gfx/ukeplan/new/qouteleft.jpg"/>
+                    </div>
+                    
+                    <div class="rotating col-md-10 col-sm-12 col-xs-12" style="">
+                    <tal:block tal:repeat="sitat menu:36185efa-9207-4dde-9ea2-9447c1b0eb05,1,1">
+                        <tal:block tal:repeat="item sitat/content" tal:condition="exists:sitat/content">
+                            <div class="col-md-12 center rotatingcontent" >
+                                <div class="sitat" tal:content="structure item/body|default">
+                                    
+                                </div>
+                                <div class="right" tal:content="item/ingress">
+                                    -Familien Kjær
+                                </div>
+                            </div>
+                        </tal:block>
+                    </tal:block>
+                    </div>
+                    
+                    <div class="col-md-1 hidden-xs hidden-sm center">
+                        <img src="${static:}gfx/ukeplan/new/qouteright.jpg"/>
+                    </div>
+                </div>
+                
+                <div class="row prepend-top frontpage-box">
+                    <div class="col-md-3 col-sm-6 green">
+                        <div class="header" tal:content="cms:title:c3192234-9bf1-44c0-a59e-ce6ca7611470" />
+                        <!--articleid: 3802 -->
+                        <div class="main" tal:content="structure cms:body:c3192234-9bf1-44c0-a59e-ce6ca7611470"></div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 orange">
+                        <!--articleid: 3802 -->
+                        <div class="header" tal:content="cms:title:c98c24b3-f822-4fbd-a749-33326d6e46e1" />
+                        <div class="main" tal:content="structure cms:body:c98c24b3-f822-4fbd-a749-33326d6e46e1"></div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 blue">
+                        <!--articleid: 3802 -->
+                        <div class="header" tal:content="cms:title:32097bfa-00fa-41f9-a7bd-d49654e543ad" />
+                        <div class="main" tal:content="structure cms:body:32097bfa-00fa-41f9-a7bd-d49654e543ad"></div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 grey">
+                        <!--articleid: 3802 -->
+                        <div class="header" tal:content="cms:title:7c0ed7c8-124e-42fd-a0dc-555b4a4c96f1" />
+                        <div class="main" tal:content="structure cms:body:7c0ed7c8-124e-42fd-a0dc-555b4a4c96f1"></div>
+                        <!-- bugga
+                        <div class="main" tal:content="structure cms:body:ef8761e4-db81-44b6-9b22-aff14d49c541"></div>-->
+                        
+                        
+                    </div>
+                </div>
+                
+            <tal:block metal:use-macro="../common.html/newsletter" />
+                
+            <hr/>
+            
+            
+            <div class="productpage">
+                <tal:block tal:repeat="subitem1 menu:/products/">
+                         <div class="col-md-4 col-sm-6 append-bottom mainproductbox" >
+                                
+                                
+                                <div class="productbody col-md-12" style="border: solid 1px #ccc; padding-bottom: 10px; padding-top: 10px; min-height: 375px;">
+                                    <div>
+                                        <a href="${subitem1/url}" >
+                                            <img class="img-responsive" src="${static:}images/menu/${subitem1/image}" alt="${subitem1/title}"/>
+                                        </a>
+                                    </div>
+                                    <div class="h3 col-md-12">
+                                        ${subitem1/title}
+                                    </div>
+                                        <a class="btn btn-default center" href="${subitem1/url}" title="${subitem1/title}" i18n:translate="">See more</a>
+    
+                                </div>
+                         </div>
+                    </tal:block>
+			
+			</div>
+            
+            
+            		<div class="col-lg-12 col-xs-12 roundedborders">
+								<tal:block tal:content="structure cms:body:4592b186-4fab-4a4b-bdc3-62eca957d066"></tal:block>
+												
+										</div>
+             
+            </div>
+            
+            
+          
+        </div>
+
+        <tal:block metal:use-macro="../common.html/footer" />
+       <script src="${static:}js/sitatslider.js"></script>
+       <script src="${static:}gfx/portals/ukeplan/scripts/jquery.bxslider/plugins/jquery.fitvids.js"></script>
+       <script src="${static:}gfx/portals/ukeplan/scripts/jquery.bxslider/jquery.bxslider.js"></script>
+       
+        <script type="text/javascript">
+
+        
+            // Inject YouTube API script
+            /*var tag = document.createElement('script');
+            tag.src = "//www.youtube.com/player_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            
+            
+            var player;
+            function onYouTubePlayerAPIReady() {
+                // create the global player from the specific iframe (#video)
+                player = new YT.Player('video', {
+                  events: {
+                    // call this function when player is ready to use
+                    'onStateChange' : onStateChange
+                  }
+                });
+            }
+             
+             
+            function onStateChange(event) {
+                console.log("asdasW")
+                if( event.data == 0 ){
+                    
+                }
+                if( event.data == 3  || event.data == 1 ){
+                    console.log("asdasW")
+                   slider.stopAuto();  
+                }
+            }   
+            */
+            
+            
+            $('.rotating').sitatslider();
+            var slider =  $('.bxslider').bxSlider({
+                auto:true,
+                pause: 7000,
+                video: true,
+                useCSS: false,
+                pager: false,
+                onSlideNext: next
+              });
+            
+            function next( event ){
+                if( $( event ).hasClass('video') ){
+                    slider.stopAuto(); 
+                }
+            }
+            
+            
+            
+            $('.frontpage-box .col-md-3').on( 'click', function(){
+                
+                var boxlink = $(this).find('a').attr("href");
+                
+                window.location.href = boxlink;
+                
+                });
+            
+            $( ".bx-wrapper" ).hover(
+                function() {
+                  $( '.bx-controls' ).css("opacity", "1");
+                }, function() {
+                  $( '.bx-controls' ).css("opacity", "0")
+                }
+              );
+           
+            
+            
+        </script>
+
+    </body>
+
+</html>

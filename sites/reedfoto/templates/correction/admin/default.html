@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<div metal:use-macro="../common.html/head" />
+</head>
+<body>
+<div metal:use-macro="../common.html/header" />
+
+<div id="content" class="container">
+
+   <div class="span-15">
+      <h1 i18n:translate="">User list</h1>
+      <p><a href="javascript:;" id="newuser" i18n:translate="" class="ss_sprite ss_user_add">New user</a></p>
+     
+      <h3 i18n:translate="">Users</h3>
+      <ul class="userlist" id="userlist">
+      <tal:block tal:condition="exists: users" tal:repeat="user users">
+         <li>
+            <a tal:attributes="href string:/admin/user/${user/id}" tal:content="user/fullname | default">Name</a>
+            <a href="javascript:;" id="delete_${user/id}" class="delete ss_sprite ss_user_delete" i18n:translate=""></a>
+            <a href="javascript:;" id="change_${user/id}" class="change ss_sprite ss_user_edit" i18n:translate=""></a>
+         </li>
+      </tal:block>
+      </ul>
+      
+      <h3 i18n:translate="">Administrators</h3>
+      <ul class="userlist" id="adminlist">
+      <tal:block tal:condition="exists: admins" tal:repeat="user admins">
+         <li>
+            <a tal:attributes="href string:/admin/user/${user/id}" tal:content="user/fullname | default">Name</a>
+            <a href="javascript:;" id="delete_${user/id}" class="delete ss_sprite ss_user_delete" i18n:translate=""></a>
+            <a href="javascript:;" id="change_${user/id}" class="change ss_sprite ss_user_edit" i18n:translate=""></a>
+         </li>
+      </tal:block>
+      </ul>
+   </div>
+
+</div>
+
+<div id="deletedialog" class="container hide" i18n:translate="">Are you sure you want to delete this user?</div>
+
+<div id="edituserdialog" class="hide" style="* {text-align: left}">
+   <div class="span-5">
+      <label i18n:translate="">Full name</label>
+   </div>
+   <div class="span-5">
+      <input type="text" id="fullname" />
+   </div>
+   <div class="span-5">
+      <label i18n:translate="">Username</label>
+   </div>
+   <div class="span-5">
+      <input type="text" id="username" />
+   </div>
+   <div class="span-5">
+      <label i18n:translate="">Password</label>
+   </div>
+   <div class="span-5">
+      <input type="password" id="password" />
+   </div>
+   <div class="span-5">
+      <label i18n:translate="">Repeat password</label>
+   </div>
+   <div class="span-5">
+      <input type="password" id="password2" />
+   </div>
+   <div class="span-5">
+      <label i18n:translate="">Type</label>
+   </div>
+   <div class="span-5">
+      <select id="type">
+         <option id="user" value="user" i18n:translate="">User</option>
+         <option id="admin" value="admin" i18n:translate="">Admin</option>
+      </select>
+   </div>
+   
+   <div id="error" class="span-5"></div>
+</div>
+
+<script type="text/javascript">
+   $(function() {
+      
+      var userid = '';
+      
+      $( '#deletedialog' ).dialog({
+         autoOpen: false,
+         title: '<tal:block i18n:translate="">Delete user</tal:block>',
+         width: 300,
+         buttons: {
+            '<tal:block i18n:translate="">Cancel</tal:block>': function() {
+               $(this).dialog( 'close' );
+            },
+            '<tal:block i18n:translate="">OK</tal:block>': function() {
+               
+               $.post('/api/admin/user/remove', {
+                  'userid': userid
+               }, 
+               function( data ) {
+                  window.location.reload();
+               }, 'json' );
+            }
+         }
+      });
+
+      $( '#newuser' ).click( function() {
+         
+         $( '#error' ).text( '' );
+         $( '#username' ).val( '' );
+         $( '#password' ).val( '' );
+         $( '#fullname' ).val( '' );
+         $( '#password' ).val( '' );
+         $( '#password2' ).val( '' );
+         
+         $( '#edituserdialog' ).dialog({
+            autoOpen: false,
+            title: '<tal:block i18n:translate="">New user</tal:block>',
+            width: 300,
+            buttons: {
+               '<tal:block i18n:translate="">Cancel</tal:block>': function() {
+                  $( this ).dialog( 'close' );
+               },
+               '<tal:block i18n:translate="">Save</tal:block>': function() {
+                  
+                  if ( $( '#username' ).val() != '' ) {
+                     
+                     if ( $( '#password' ).val() != '' ) {
+                        
+                        if ( $( '#password' ).val() == $( '#password2' ).val() ) {
+
+                           $.post( '/api/admin/user/create', {
+                                 username: $( '#username' ).val(),
+                                 password: $( '#password' ).val(),
+                                 fullname: $( '#fullname' ).val(),
+                                 type: $( '#type' ).val()
+                              },
+                              function( data ) {
+       
+                                 window.location.reload();
+                              },
+                              'json'
+                           );
+                 
+                           $( '#edituserdialog' ).dialog( 'close' );
+                           
+                        } else {
+                        
+                           $( '#error' ).text( '<tal:block i18n:translate="">The passwords are not identical</tal:block>' );
+                        }
+                     } else {
+                        $( '#error' ).text( '<tal:block i18n:translate="">The password is empty</tal:block>' );
+                     }
+                  } else {
+                     $( '#error' ).text( '<tal:block i18n:translate="">The username is empty</tal:block>' );
+                  }
+               }
+            }
+         });
+            
+         $( '#edituserdialog' ).dialog( 'open' );
+         
+      });
+
+      $( '.delete' ).click( function() {
+         
+         userid = $(this).attr( 'id' ).split( '_' )[1];
+         
+         $( '#deletedialog' ).dialog( 'open' );
+         
+      });
+      
+      $( '.change' ).click( function() {
+         
+         $( '#error' ).text( '' );
+         $( '#username' ).val( '' );
+         $( '#password' ).val( '' );
+         $( '#fullname' ).val( '' );
+         $( '#password' ).val( '' );
+         $( '#password2' ).val( '' );
+                 
+         var userid = $( this ).attr( 'id' ).split( '_' )[1];
+
+         $( '#edituserdialog' ).dialog({
+            autoOpen: false,
+            title: '<tal:block i18n:translate="">Change user</tal:block>',
+            width: 300,
+            buttons: {
+               '<tal:block i18n:translate="">Cancel</tal:block>': function() {
+                  $(this).dialog( 'close' );
+               },
+               '<tal:block i18n:translate="">Save</tal:block>': function() {
+                  if ( $( '#username' ).val() != '' ) {
+                        
+                     if ( $( '#password' ).val() != '' ) {
+                                       
+                        if ( $( '#password' ).val() == $( '#password2' ).val() ) {
+               
+                           $.post( '/api/admin/user/change',
+                              {
+                                 userid: userid,
+                                 username: $( '#username' ).val(),
+                                 password: $( '#password', this).val(),
+                                 fullname: $( '#fullname', this).val(),
+                                 type: $( '#type', this).val()
+                              },
+                              function( data ) {
+
+                                 window.location.reload();
+                                 
+                              },
+                              'json'
+                           );
+                  
+                           $( '#edituserdialog' ).dialog( 'close' );
+                           
+                        } else {
+                           $( '#error' ).text( '<tal:block i18n:translate="">The passwords are not identical</tal:block>' );
+                        }
+                     } else {
+                        $( '#error' ).text( '<tal:block i18n:translate="">The password is empty</tal:block>' );
+                     }
+                  } else {
+                     $( '#error' ).text( '<tal:block i18n:translate="">The username is empty</tal:block>' );
+                  }         
+               }
+            }
+         });
+         
+         $( '#edituserdialog' ).dialog( 'open' );
+               
+         $.post( '/api/admin/user/fetch', {
+            'userid': userid
+         }, function( data ) {
+            
+            if ( data.result ) {
+               if ( data.user['fullname'] ) $( '#fullname' ).val( data.user['fullname'] );
+               if ( data.user['username'] ) $( '#username' ).val( data.user['username'] );
+               if ( data.user['type'] == 'admin' ) {
+                  $( '#admin' ).attr( 'selected', data.user['type'] );
+               } else {
+                  $( '#user' ).attr( 'selected', data.user['type'] );
+               }
+            }
+                  
+         }, 'json' );
+         
+      });
+   });
+
+</script>
+
+<div metal:use-macro="../common.html/footer" />
+
+</body>
+
+</html>

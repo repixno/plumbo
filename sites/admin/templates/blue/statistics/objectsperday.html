@@ -1,0 +1,237 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Statistics - Eurofoto Admin</title>
+<tal:block metal:use-macro="../common.html/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script tal:condition="exists:language" type="text/javascript" tal:content="structure string:var LANGUAGE = '${language}';">var LANGUAGE = 'en_US';</script>
+
+<style type="text/css">
+
+	.statistics-menu {
+		background-color: #0068B4;
+		padding-top: 8px;
+		margin: 0 !important;
+	}
+
+	.statistics-menu ul {
+		margin: 0 10px 10px 10px;
+	}
+
+	.statistics-menu ul li a {
+		color: #fff;
+		text-decoration: none;
+		padding: 0.5em;
+		
+		
+	}
+	.statistics-menu ul li a:hover {
+		background-color: #6ebadd;
+		color: #fff;
+
+	}
+</style>
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+      
+		<div class="container">
+			
+			<div class="span-24 last">
+			<div class="span-24 last statistics-menu">
+				<!--
+				<ul style="display:block; color: white">
+					<li style="display:inline-block;">Portal: </li>
+					<li style="display:inline-block;"><input type="radio" name="portal" value="all"/><label for="portal">Alle</label></li>
+					<li style="display:inline-block;"><input type="radio" name="portal" value="EF-001"/><label for="portal">Eurofoto</label></li>
+					<li style="display:inline-block;"><input type="radio" name="portal" value="TK-001"/><label for="portal">Takkekort</label></li>
+					<li style="display:inline-block;"><input type="radio" name="portal" value="all"/><label for="portal">Alle</label></li>
+					<li style="display:inline-block;"><input type="radio" name="portal" value="all"/><label for="portal">Alle</label></li>
+					<li style="display:inline-block;"><input type="radio" name="portal" value="all"/><label for="portal">Alle</label></li>
+					<li style="display:inline-block;"><input type="radio" name="portal" value="all"/><label for="portal">Alle</label></li>
+					
+				</ul>
+				-->
+            	<ul style="display:block;">
+            		<li style="display:inline-block;"><a href="/statistics/newordersperday/${year}/${month}/${numyears}/${offsetdata}" i18n:translate="">Orders/day</a></li>
+            		<li style="display:inline-block;"><a href="/statistics/newusersperday/${year}/${month}/${numyears}/${offsetdata}" i18n:translate="">Users/day</a></li>
+            		<li style="display:inline-block;"><a href="/statistics/newimagesperday/${year}/${month}/${numyears}/${offsetdata}" i18n:translate="">Images/day</a></li>
+            		<li style="display:inline-block;"><a href="/statistics/newmegabytesperday/${year}/${month}/${numyears}/${offsetdata}" i18n:translate="">MB/day</a></li>
+            		<li style="display:inline-block;"><a href="/statistics/averageimagesizeperday/${year}/${month}/${numyears}/${offsetdata}" i18n:translate="">Avg. size/day</a></li>
+            		<li style="display:inline-block;"><a href="/statistics/averageordertotalperday/${year}/${month}/${numyears}/${offsetdata}" i18n:translate="">Avg. order total/day</a></li>
+            		<li style="display:inline-block;"><a href="/statistics/totalsalesperday/${year}/${month}/${numyears}/${offsetdata}" i18n:translate="">Total sales/day</a></li>
+            		<li style="display:inline-block;"><a href="/statistics/activeusers/${year}/${month}/${numyears}/${offsetdata}" i18n:translate="">Returning users</a></li>
+            		<li style="display:inline-block;"><a href="/statistics/activeuserslastyear/${year}/${month}/${numyears}/${offsetdata}" i18n:translate="">Active users</a></li>
+            		<!--<li style="display:inline-block;"><a href="/statistics/hardware/totalsalesperday/${year}/${month}/${numyears}/${offsetdata}" i18n:translate="">Total HW sales/day</a></li>
+            		<li style="display:inline-block;"><a href="/statistics/hardware/newordersperday/${year}/${month}/${numyears}/${offsetdata}" i18n:translate="">New HW orders/day</a></li>
+            		<li style="display:inline-block;"><a href="/statistics/hardware/numproductsperday/${year}/${month}/${numyears}/${offsetdata}" i18n:translate="">HW Products/day</a></li>
+					-->
+				</ul>
+			</div>
+			<div class="span-10 prepend-top">
+				<h3>
+					${title} - ${monthdisplay}, ${year}
+				</h3>
+            </div>
+			<tal:block tal:condition="exists:values">
+				<div class="span-14 prepend-top right last">
+         	   <select id="select-year">
+         	   <tal:block tal:repeat="addyear years">
+         	     <option tal:condition="equal:year,addyear,1" value="${addyear}" selected="1">${addyear}</option>
+         	     <option tal:condition="not:equal:year,addyear,1" value="${addyear}">${addyear}</option>
+         	   </tal:block>
+         	   </select>
+         	   <select id="select-month">
+         	   <tal:block tal:repeat="addmonth months">
+         	     <option tal:condition="equal:month,addmonth/number,1" value="${addmonth/number}" selected="1">${addmonth/name}</option>
+         	     <option tal:condition="not:equal:month,addmonth/number,1" value="${addmonth/number}">${addmonth/name}</option>
+               </tal:block>
+         	   </select>
+         	   <select id="select-numyears">
+         	     <option tal:condition="equal:numyears,1" value="1" selected="1" i18n:translate="">Only this year</option>
+         	     <option tal:condition="not:equal:numyears,1" value="1" i18n:translate="">Only this year</option>
+
+         	     <option tal:condition="equal:numyears,2" value="2" selected="1" i18n:translate=""><span i18n:name="years">+1</span> year history</option>
+         	     <option tal:condition="not:equal:numyears,2" value="2" i18n:translate=""><span i18n:name="years">+1</span> year history</option>
+         	     
+         	     <option tal:condition="equal:numyears,3" value="3" selected="1" i18n:translate=""><span i18n:name="years">+2</span> years history</option>
+         	     <option tal:condition="not:equal:numyears,3" value="3" i18n:translate=""><span i18n:name="years">+2</span> years history</option>
+         	     
+         	     <option tal:condition="equal:numyears,4" value="4" selected="1" i18n:translate=""><span i18n:name="years">+3</span> years history</option>
+         	     <option tal:condition="not:equal:numyears,4" value="4" i18n:translate=""><span i18n:name="years">+3</span> years history</option>
+         	     
+         	     <option tal:condition="equal:numyears,5" value="5" selected="1" i18n:translate=""><span i18n:name="years">+4</span> years history</option>
+         	     <option tal:condition="not:equal:numyears,5" value="5" i18n:translate=""><span i18n:name="years">+4</span> years history</option>
+         	     
+         	     <option tal:condition="equal:numyears,6" value="6" selected="1" i18n:translate=""><span i18n:name="years">+5</span> years history</option>
+         	     <option tal:condition="not:equal:numyears,6" value="6" i18n:translate=""><span i18n:name="years">+5</span> years history</option>
+         	     
+         	     <option tal:condition="equal:numyears,6" value="6" selected="1" i18n:translate=""><span i18n:name="years">+6</span> years history</option>
+         	     <option tal:condition="not:equal:numyears,6" value="6" i18n:translate=""><span i18n:name="years">+6</span> years history</option>
+         	     
+         	     <option tal:condition="equal:numyears,7" value="7" selected="1" i18n:translate=""><span i18n:name="years">+7</span> years history</option>
+         	     <option tal:condition="not:equal:numyears,7" value="7" i18n:translate=""><span i18n:name="years">+7</span> years history</option>
+         	     
+         	     <option tal:condition="equal:numyears,8" value="8" selected="1" i18n:translate=""><span i18n:name="years">+8</span> years history</option>
+         	     <option tal:condition="not:equal:numyears,8" value="8" i18n:translate=""><span i18n:name="years">+8</span> years history</option>
+         	     
+         	     <option tal:condition="equal:numyears,9" value="9" selected="1" i18n:translate=""><span i18n:name="years">+9</span> years history</option>
+         	     <option tal:condition="not:equal:numyears,9" value="9" i18n:translate=""><span i18n:name="years">+9</span> years history</option>
+         	     
+         	     <option tal:condition="equal:numyears,10" value="10" selected="1" i18n:translate=""><span i18n:name="years">+10</span> years history</option>
+         	     <option tal:condition="not:equal:numyears,10" value="10" i18n:translate=""><span i18n:name="years">+10</span> years history</option>
+               </select>
+			   <select name="portal">
+					<option tal:condition="equal:selectedportal,0" value="0" selected="1" >Alle</option>
+					<option tal:condition="not:equal:selectedportal,0" value="0" >Alle</option>
+					<option tal:condition="equal:selectedportal,1" value="1" selected="1" >Takkekort</option>
+					<option tal:condition="not:equal:selectedportal,1" value="1" >Takkekort</option>
+					<option tal:condition="equal:selectedportal,2" value="2" selected="1" >Ukeplan</option>
+					<option tal:condition="not:equal:selectedportal,2" value="2" >Ukeplan</option>
+					<option tal:condition="equal:selectedportal,3" value="3" selected="1" >Merkelapp</option>
+					<option tal:condition="not:equal:selectedportal,3" value="3" >Merkelapp</option>
+					<option tal:condition="equal:selectedportal,4" value="4" selected="1" >VG</option>
+					<option tal:condition="not:equal:selectedportal,4" value="4" >VG</option>
+					<option tal:condition="equal:selectedportal,5" value="5" selected="1" >Eurofoto</option>
+					<option tal:condition="not:equal:selectedportal,5" value="5" >Eurofoto</option>
+					<option tal:condition="equal:selectedportal,6" value="6" selected="1" >Stabburet</option>
+					<option tal:condition="not:equal:selectedportal,6" value="6" >Stabburet</option>
+					<option tal:condition="equal:selectedportal,7" value="7" selected="1" >Smiles on Tiles</option>
+					<option tal:condition="not:equal:selectedportal,7" value="7" >Smiles on Tiles</option>
+			   </select>
+         	   &nbsp; &nbsp;
+         	   <a tal:condition="offsetdata" href="/statistics/${module}/${year}/${month}/${numyears}/0" i18n:translate="">Group data by date</a>
+         	   <a tal:condition="not:offsetdata" href="/statistics/${module}/${year}/${month}/${numyears}/1" i18n:translate="">Group data by weekday</a>
+			   
+         	</div>
+         	
+
+				
+
+
+         	<div id="graph0">
+               <strong i18n:translate="">This chart requires flash player</strong>
+            </div>
+         	
+         	<script type="text/javascript">
+         		<tal:block tal:content="structure string:// <![CDATA[" />
+         		
+               var flashvars = {
+                 path: "http://static.eurofoto.no/flash/",
+                 chart_data: escape( '<tal:block tal:replace='structure string:<?xml version="1.0" encoding="UTF-8" ?>' /><chart><series><value tal:attributes="xid repeat/serie/index" tal:repeat="serie series" tal:content="serie">01</value></series><graphs><graph tal:repeat="graph values" tal:attributes="gid repeat/graph/index" title="${graph/label}" line_width="2" fill_alpha="10" fill_color="${graph/color}" color="${graph/color}" color_hover="${graph/color}"><value tal:repeat="element graph/data" tal:attributes="xid repeat/element/index">${element}</value></graph></graphs></chart>' ), // <labels><label><x>0</x><y>20</y><align>center</align><text>${title} - ${monthdisplay}, ${year}</text></label></labels>
+                 chart_settings: escape( '<tal:block tal:replace='structure string:<?xml version="1.0" encoding="UTF-8" ?>' /><settings><zoom_out_button><text_color_hover>#0068B4</text_color_hover></zoom_out_button><legend><enabled>true</enabled></legend><indicator><enabled>true</enabled><zoomable>true</zoomable><color>#0068B4</color></indicator><background><color>#FFFFFF</color><alpha>100</alpha></background></settings>' ),
+                 preloader_color: "#FF00FF"
+               };
+               var params = {
+                 menu: "false"
+               };
+               var attributes = {
+                 id: "myDynamicContent",
+                 name: "myDynamicContent"
+               };
+               swfobject.embedSWF("http://static.eurofoto.no/flash/amline.swf", "graph0", "1000", "450", "8.0.0","expressInstall.swf", flashvars, params, attributes);
+         		<tal:block tal:content="structure string:// ]]>" />
+         		
+         	</script>
+         	
+         	<h3 i18n:translate="">Data table</h3>
+         	<div style="width: 940px; overflow-y: scroll; overflow-y: hidden;">
+         	<table style="width: 940px">
+         	  <thead>
+         	     <tr>
+         	        <th i18n:translate="">Period</th>
+         	        <th tal:repeat="serie series" tal:content="serie">01</th>
+      	        </tr>
+         	  </thead>
+         	  <tbody>
+      	        <tr tal:repeat="graph values">
+      	           <td tal:content="graph/label" style="background-color: ${graph/color};color: #fff;" nowrap="1"></td>
+      	           <td tal:repeat="element graph/data">${element}</td>
+   	           </tr>
+         	  </tbody>
+         	</table>
+         	</div>
+         	
+         	<div class="right" style="width:940px;">
+         	  <a href="/statistics/${module}/xls/${year}/${month}/${numyears}/${offsetdata}/0/${selectedportal}/${module}-${year}-${month}-${numyears}years.xls" i18n:translate="">Download as .XLS</a>
+         	</div>
+         	</tal:block>
+         	
+			</div>
+		</div>
+		<div id="footer"></div>
+		
+		<script type="text/javascript">
+         $(document).ready( function(){
+            
+            $('#select-year').change(function(){
+               window.location.href = '/statistics/${module}/'+$(this).val()+'/${month}/${numyears}/${offsetdata}/0/${selectedportal}';
+            });
+            
+            $('#select-month').change(function(){
+               window.location.href = '/statistics/${module}/${year}/'+$(this).val()+'/${numyears}/${offsetdata}/0/${selectedportal}';
+            });
+            
+            $('#select-numyears').change(function(){
+               window.location.href = '/statistics/${module}/${year}/${month}/'+$(this).val()+'/${offsetdata}/0/${selectedportal}';
+            });
+			$('select[name="portal"]').change(function(){
+               window.location.href = '/statistics/${module}/${year}/${month}/${numyears}/${offsetdata}/0/' + $(this).val();
+            });
+            
+         } );
+		
+		</script>
+		
+	</div>
+</body>
+</html>

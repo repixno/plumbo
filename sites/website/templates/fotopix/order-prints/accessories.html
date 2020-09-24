@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Order prints - Accessories</tal:block>
+</head>
+
+
+<body>
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	<div class="container">
+
+	
+
+	<div class="col-md-12" id="widecontent">
+
+		
+		<div class="col-md-12">
+		
+			<ul class="step-by-step-new">
+				<li class="completed">
+					<a href="/order-prints/" title="">
+						<strong tal:content="cms:title:c3e83ff3-1b74-499f-9d2c-578177d4f036">Step 1: Find your photos</strong>
+					</a>
+				</li>
+				<li class="completed">
+					<a href="/order-prints/transfer-photos/" title="" tal:condition="not:session/loggedin">
+						<strong tal:content="cms:title:0e90d43c-ebf2-4c79-83d5-b3f950bdae0e">Step 2: Transfer photos</strong>
+					</a>
+					<a href="/order-prints/choose-photos/" title="" tal:condition="session/loggedin">
+						<strong tal:content="cms:title:3ccf650d-5437-4e54-9940-b04c0aab2163">Step 2: Choose photos</strong>
+					</a>
+					
+				</li>
+				<li class="completed">
+					<a href="/order-prints/choose-quantity/" title="">
+						<strong tal:content="cms:title:6b897e85-a541-4a72-8905-e5ecb59b8968">Step 3: Choose quantity</strong>
+					</a>
+				</li>
+			   <li class="completed">
+					<a title="">
+						<strong>4: Tilpass bilder</strong>
+					</a>
+				</li>
+				<li class="last current">
+					<a title="">
+						<strong tal:content="cms:title:3dfbbdeb-678f-4594-8aab-171ea6d8f6fd">Step 5: Accessories</strong>
+					</a>
+				</li>
+			</ul>
+		</div>	
+
+		<div class="col-md-12 top-15 box choose-quantity ">
+		<div class="col-md-6"><h3 class="yanoneregular" ><span tal:content="cms:title:3dfbbdeb-678f-4594-8aab-171ea6d8f6fd">Step 5: Accessories</span></h3>
+			<div><strong i18n:translate="">We have something else for you!</strong></div>
+			<div i18n:translate="">We recommend this product to go with your prints.</div>
+		</div>
+		<div class="col-md-3"><tal:block i18n:translate=""></tal:block> kr <span class="total-price" id="total-price" >${formatprice:cart/totalprice}</span></div>
+		
+			
+		
+		<div class="span-3 last">
+				<a class="button back" i18n:translate="" href="javascript:history.back()">Forrige steg</a>
+			<hr class="space"/>
+			<a class="button next large call-to-action" href="/cart/" i18n:translate="">Continue to cart</a></div>
+		<hr class="space"/>
+		</div>
+		
+		<div class="col-md-10">
+			
+			
+			<div metal:use-macro="../common/productlisting.html/associatedproducts"></div>
+			
+		</div>
+		
+
+		
+	</div>
+</div>
+
+<div class="footer">
+   <div class="container">
+      <div metal:use-macro="../../${templates}/common.html/footer" />
+   </div>
+</div>
+
+</body>
+</html>

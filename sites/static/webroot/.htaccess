@@ -1,0 +1,22 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)$ /index.php?dispatch=$1&%{QUERY_STRING} [L]
+
+php_flag register_globals Off
+php_flag magic_quotes_gpc Off
+php_flag track_vars On
+
+Options -Indexes
+
+<FilesMatch ".*\.(ico|pdf|flv|jpe?g|png|gif|js|css|swf)$">
+    Header set Cache-Control "public"
+    ExpiresActive On
+    ExpiresDefault "access plus 1 year"
+    FileETag None
+#    FileETag MTime Size
+</FilesMatch>
+
+<FilesMatch ".*\.(js|css)$">
+    SetOutputFilter DEFLATE
+</FilesMatch>

@@ -1,0 +1,115 @@
+#menulist {
+
+   float: left;
+   width: 180px;
+
+}
+
+#menucontent {
+
+   width: 550px;
+   overflow: hidden;
+
+}
+#menutabs {
+
+   overflow: auto;
+
+}
+#portallist {
+
+   width: 550px;
+
+}
+
+.ui-tabs-panel {
+
+   overflow: hidden;
+
+}
+
+#menuitemportalconnector {
+}
+#connectedcontainer {
+
+   float: left;
+   width: 50%;;
+
+}
+#optionscontainer {
+
+   float: right;
+   width: 25%;
+
+}
+
+.productitem {
+
+   background-color: transparent;
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   border: 1px solid #000;
+   padding: 2px 5px;
+   cursor: pointer;
+
+}
+.contentitem {
+
+   background-color: transparent;
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   border: 1px solid #000;
+   padding: 2px 5px;
+   cursor: pointer;
+
+}
+
+/* NestedTree */
+div.wrap {
+				border:1px solid #BBBBBB;
+				padding: 1em 1em 1em 1em;
+			}
+
+			.page-list {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				display: block;
+			}
+
+			.clear-element {
+				clear: both;
+			}
+
+			.page-item1 > div,
+			.page-item2 > div,
+			.page-item3 > div,
+			.page-item4 > div {
+				background: #f8f8f8;
+				margin: 0.25em 0 0 0;
+			}
+
+			.left {
+				text-align: left;
+			}
+
+			.right {
+				text-align: right;
+			}
+
+			.sort-handle {
+				cursor:move;
+			}
+
+			.helper {
+			border:2px dashed #777777;
+			}
+
+			.current-nesting {
+				background-color: yellow;
+			}
+
+			.bold {
+				color: red;
+				font-weight: bold;
+			}

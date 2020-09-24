@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Feedback</tal:block>
+	<style type="text/css">
+		input.my-url{display:none;}
+	</style>
+</head>
+
+<body>
+
+<div class="container">
+   
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/top-navigation" />
+	
+	<div class="span-4">
+			<div metal:use-macro="../cms.html/menu-current" />
+	</div>
+   
+	<div class="span-19 last" style="padding-left: 1em;" tal:condition="not:exists:sentToEmail">
+		<div clas="clear clearfix"></div>
+			<h2 i18n:translate="">Contact</h2>
+			<p>Før du sender epost, les våre hjelpesider nøye!</p>
+			<form action="/contact/support" id="contact" method="post">
+				<input type="text" name="my_url" class="my-url" value=""/>
+				<div>
+					<label for="email" i18n:translate="">E-mail</label><br/>
+					<input type="text" class="required title" name="email" id="email" tal:attributes="value session/username|default"/><br/>
+				   <label for="name" i18n:translate="">Name</label><br/>
+					<input type="text" class="title required" name="name" id="name"/><br/>
+				</div>
+				<div>
+					<label for="reason" i18n:translate="">Reason for contacting us</label><br/>
+					<select name="reason" id="reason" class='required'>
+					   <option value="" selected="selected">--<tal:block i18n:translate="">Select An Option</tal:block>--</option>
+						<option value="error" i18n:translate="">Error on page</option>
+						<option value="suggestion" i18n:translate="">Suggestion</option>
+						<option value="orders" i18n:translate="">Orders</option>
+						<option value="products" i18n:translate="">Products</option>
+						<option value="faktura" i18n:translate="">Invoice</option>
+						<option value="reklamasjon" i18n:translate="">Complaint</option>
+						<option value="annet" i18n:translate="">Other</option>
+					</select>
+				  <div class="hide orderid">
+				   <label for="orderid" i18n:translate="">Ordrenr.</label><br/>
+					<input type="text" class="title" name="orderid" id="orderid"/><br/>
+					</div>
+					<br/>
+					 <label>Emne:</label><br/>
+					 <input class="title required" type="text" name="subject" id="subject" />
+				</div>
+				<div>
+
+					<label for="message"></label><br/>
+					<textarea class="required" name="message" id="message"></textarea>
+				</div>
+				<button type="submit" i18n:translate="">Submit</button>
+			</form>
+		</div>
+	</div>
+<script language="JavaScript">
+$(document).ready( function() {
+   
+   
+   $('#reason').change(function(){
+      if(this.value == 'orders' || this.value == 'reklamasjon' || this.value == 'faktura'){
+         $('.orderid').show('slow');
+      }
+      else{
+         $('.orderid').hide('slow');
+      }
+   });
+   
+   $.validator.messages.required = '<tal:block i18n:translate="">This field is required.</tal:block>';  
+   
+   $('#contact').validate({
+     rules: {
+       email: {
+         required: true,
+         email: true,
+       }
+     },
+     messages:{
+        email:{
+           required: '<tal:block i18n:translate="">Please provide an email address.</tal:block>',
+           email: '<tal:block i18n:translate="">Please provide a valid email address.</tal:block>'
+        },
+        reason : '<tal:block i18n:translate="">Please choose an option.</tal:block>',
+     }
+   });
+   
+   $('#email').focus();
+});
+</script>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

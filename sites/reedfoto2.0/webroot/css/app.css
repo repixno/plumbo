@@ -1,0 +1,21 @@
+.img-responsive{
+    max-width: 100%;
+}
+
+.bg-dart{
+    background-color: #bf001e;
+}
+
+.form-control-small{
+    border: solid 1px #ccc;
+    padding: 2px;
+    text-align: center;
+}
+
+@media (max-width: 575.98px) {
+    
+    .nopadding {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+}

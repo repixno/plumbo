@@ -1,0 +1,123 @@
+<tal:block metal:define-macro="validate-number">
+
+<div class="span-24 last">
+
+	<div class="span-15" id="validate-number">
+		<div class="span-7 last" id="insert-number">
+			<form style="margin: 0; padding: 0;">
+			<div class="span-7 last">
+				<h3>Validate your cellphone</h3>
+				<p class="quiet">Insert the number you want to use.</p>
+			</div>
+			<div class="span-3">
+				<label for="cellphone-number" class="top">Cellphone number</label>
+				<input id="cellphone-number" type="text" class="title span-3" />
+			</div>
+			
+			<div class="span-3 prepend-1 prepend-top last" id="get-code">
+				<button class="blue large">Get code</button>		
+			</div>
+			</form>
+		</div>
+
+		<div class="span-8 last hide" id="code-validation">
+			<form style="margin: 0; padding: 0">
+				<div class="span-8 last">
+					<h3>We sent you a code</h3>
+					<p class="quiet">A code is sent to your cellphone. Insert the code here.</p>
+				</div>
+				<div class="span-5">
+					<label for="validation-code" class="top">Validation code</label>
+					<input id="validation-code" type="text" class="title span-3" />
+				</div>
+				<div class="span-3 last">
+					<button type="submit" class="large blue">Confirm</button>	
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	
+		var ajaxLoader = $('<img/>').attr('src', '${static:gfx/gui/ajax-loader.gif}').addClass('ajaxLoader');
+		
+		// prevents the form from submitting when enter is hitted
+		$('#insert-number form').bind('submit', function() {
+			$('#insert-number button').trigger('click');
+			return false;
+		});
+	
+		$('#insert-number button').bind('click', function() {
+		
+			var cellphoneNumber = $('#cellphone-number').val();
+		
+			$(this).after( ajaxLoader );
+		
+			$.post('/api/1.0/validate/cellphone/' + cellphoneNumber, function(data) {
+				if(data.result) {
+					$.post('/api/1.0/sms/send/validation/' + cellphoneNumber, function(data) {
+						
+						if(data.result) {
+							$('#insert-number img.ajaxLoader, #insert-number .error').remove();
+							$('#insert-number').addClass('quiet');
+							$('#insert-number h3').css('color', '#ccc');
+							$('#insert-number input').css({
+								'border-color': '#ccc',
+								'color': '#ccc'
+							});
+							$('#get-code').fadeOut('slow');
+							$('#code-validation').fadeIn('slow');
+						} else {
+							$('#insert-number img.ajaxLoader').remove();
+							$('#insert-number input').addClass('error');
+							$('#insert-number p').after( 
+								$('<p/>')
+									.addClass('error')
+									.text('Sorry, But we could not verify your cellphone. Please contact support.')
+							);
+						}
+					}, 'json');
+					
+				} else {
+				
+					$('#insert-number img.ajaxLoader').remove();
+					$('#insert-number input').addClass('error');
+					$('#insert-number p').after(  $('<p/>').addClass('error').text('Please provide a valid 8 digit number (only available in Norway.'));
+					
+				}
+			}, 'json');
+		
+			return false;
+		});
+		
+		$('#code-validation button').click( function() {
+		
+			$(this).after( ajaxLoader );
+		
+			$.post('/api/1.0/sms/toggle/validation/' + $('#validation-code').val(), function(data) {
+				
+				if(data.result) {
+				
+					$('#validate-number').empty();
+					$('#validate-number').append( $('<h2/>').text('Your cellphone is verified') );
+				
+				} else {
+				
+					$('#validate-number .ajaxLoader').remove();
+					
+					('#code-validation p.error').remove();
+					
+					$('#code-validation p').after( 
+						$('<p/>')
+							.addClass('error')
+							.text('Sorry, but it seems like the code was wrong. Try again and type exactly the code you got on your cellphone. ')
+					); 
+					
+				}
+			}, 'json');
+		
+			return false;
+		});
+	</script>
+</div>
+</tal:block>

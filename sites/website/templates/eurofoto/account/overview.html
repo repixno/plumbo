@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+</head>
+<body>
+<div class="container">
+
+<h2>email: ${useremail}</h2>
+<h2>fullname: ${userfullname}</h2>
+<h2>cellphone: ${usercellphone}</h2>
+
+<h3>Logged in at ${userlastlogin}</h3>
+
+<tal:block tal:condition="usersubscription">
+<h3>Secure storage (${usersubscriptionlastdate})</h3>
+</tal:block>
+
+<h3>Images/albums: ${userimagecount} / ${useralbumcount}</h3>
+
+<h3>Images/albums shared to me: ${userimagessharedcount} / ${useralbumssharedcount}</h3>
+
+<h3>Latest projects:</h3>
+<tal:block tal:repeat="project projectslatest">
+   ${project/id}
+</tal:block>
+
+<h3>Latest albums:</h3>
+<tal:block tal:repeat="album albumslatest">
+   ${album/id}
+</tal:block>
+
+<h3>Albums shared to me:</h3>
+<tal:block tal:repeat="album albumssharedtome">
+   ${album/id}
+</tal:block>
+
+<h3>Albums shared by me:</h3>
+<tal:block tal:repeat="album albumssharedbyme">
+   ${album/id}
+</tal:block>
+
+<h3>Produkter til gode:</h3>
+<tal:block tal:repeat="credit usercredits">
+   ${credit/id}
+</tal:block>
+
+<h3>Preferences:</h3>
+<tal:block tal:condition="userpreferences/test">
+   ${userpreferences/test}
+</tal:block>
+
+</div>
+
+</body>
+</html>

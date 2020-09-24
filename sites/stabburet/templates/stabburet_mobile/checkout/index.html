@@ -1,0 +1,569 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+			<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		  
+			ga('create', 'UA-128574459-2', 'auto');
+		   ga('require', 'displayfeatures');
+			ga('send', 'pageview');
+	</script>
+	<div metal:use-macro="../common.html/head" />
+    <tal:block metal:use-macro="../common.html/stylesheet" />
+	
+	
+	<style>
+	    ul#products {
+			margin: 1em 0; padding: 0;
+	    }		
+	    ul.sizes { margin: 0; padding: 0}	
+	    ul#products li, ul.sizes li { 
+			list-style-type: none;
+			/*width: 150px;*/
+			padding: 0px 0 5px 0;
+			margin: 0;
+			float: left;
+	    }
+	    ul#products input {
+			width: 1em;
+	    }
+	    label{
+			color:#08c;
+			font-size: 1.3em;
+			line-height: 1.1em;
+			font-family: Helvetica;
+	    }
+		label.notice{
+			padding: 10px 2px 1px 2px;
+			font-size: 1.1em;
+			color: #000000;
+		}
+	    .span2{ width: 120px !important;}
+	    .button,.btn-stabburet{
+			border: none;
+			background-color: #0094d3;
+			display: inline-block;
+			padding: 5px 8px 2px 10px;
+			color: #fff;
+			text-decoration: none;
+			font-weight: bold;
+			font-size: 2em;
+			line-height: 1;
+			border-radius: 5px;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+			-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+			-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+			text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+			border-bottom: 1px solid rgba(0,0,0,0.25);
+			position: relative;
+			cursor: pointer;
+	    }
+	    a.button:hover{
+			text-decoration: none !important;
+	    }
+	    input.quantity, input.valg{
+			font-size: 1.5em;
+			height: 1.3em;
+			margin-bottom: 8px;
+	    }
+	    ul#products input, input.quantity {
+			width: 1em;
+	    }
+	    input[type="checkbox"]{
+			font-size: 1.2em;
+			height: 2em;
+			width: 2em !important;
+	    }
+	    label.error{
+			position: relative;
+			top: -8px;
+			left: 12px;
+			font-size: 0.8em;
+			color: #e83023;
+			font-family: helvetica;
+			margin: 0px;
+			width: 220px;
+			text-align: left;
+	    }
+	    [class*="span"] {
+			position: relative;
+	    }
+		.toptext{
+			color: #e83023;
+			font-family: populaire;
+			font-size: 2.2em;
+			line-height: 1.2em;
+		}
+		.infobutton{
+				padding: 2px 7px 0px 7px;
+				font-family: 'arial';
+				font-size: 0.8em;
+				border-radius: 8px;
+				-moz-border-radius: 8px;
+				-webkit-border-radius: 8px;
+		}
+		.ui-widget-content a {
+			color: #000;
+			text-decoration: underline;
+		}
+		input.span7{
+			width: 440px;
+		}
+		.span6{
+			width: 440px;
+		}
+		
+		
+		h3{
+			font-size: 1.2em;
+			
+			
+		}
+		
+		body{
+			
+			width: auto;
+			
+		}
+		
+			/*styled checkbox*/
+
+.checkbox
+{
+     -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance: none;
+     display: inline-block;
+     position: relative;
+     background-color: #f1f1f1;
+     color: #ffffff;
+   
+     height: 25px;
+     width: 25px !important;
+     border: 0;
+     border-radius: 1px;
+     cursor: pointer;
+	 
+     margin-right: 7px;
+     outline: none;
+	 border: 1px solid #0094d3;
+}
+.checkbox:checked::before
+{
+     position: absolute;
+     font: 19px/1 'Open Sans', sans-serif;
+     left: 9px;
+     top: 3px;
+     content: '\02143';
+     transform: rotate(40deg);
+}
+.checkbox:hover
+{
+     background-color: #f7f7f7;
+}
+.checkbox:checked
+{
+      background-color: #2196F3;
+}
+label
+{
+     font: 15px/1.7 'Open Sans', sans-serif;
+     color: #000000;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+     cursor: pointer;
+	 
+} 
+
+
+
+
+	</style>
+	
+	<div metal:use-macro="../common.html/javascript" />
+	<script src="/web/js/checkout.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    </head>
+    
+    <body>
+	<tal:block metal:define-macro="show-image">
+	    <tal:block tal:condition="exists:product/images" tal:repeat="image product/images">
+		 <a href="http://static.repix.no/images/products/thumbs/height/500/${image/url}" class="fancybox" title="${product/ingress}">
+		       <img src="http://static.repix.no/images/products/thumbs/height/100/${image/url}" title="${product/title}" height="100" tal:condition="equal:repeat/image/number,1" />
+	       </a>
+	    </tal:block>
+	</tal:block>
+	
+        <div class="text-right header" style="float: left;">
+		<!--	<div class="span text-left">
+				<button id="start-over" class="yellow">Forrige</button>
+			</div>
+			<div class="span text-center">
+				<h2 style="font-size: 23px;" >Kontaktinformasjon</h2>
+			</div>
+			<div class="span text-right">
+				<button id="add-to-cart" class="yellow">Neste</button>
+			</div>-->
+        </div>
+        <div class="container">
+			  <div class="content">
+
+
+		<p class="col-md-10 text-center toptext"><br/>
+			<br/>fyll inn feltene under så får du det i posten.
+		</p>
+
+		<div class="row">
+			<form method="post" action="/lag-lokk/checkout/confirm/" id="contact-and-delivery-info">
+				<div class="text-left" style="padding:0 0 30px 50px;">
+			<div class="row" tal:condition="session/loggedin">
+				<div class="">
+				<label for="contact-email" i18n:translate="">E-mail</label>
+				</div>
+				<div class="col-md-12">
+				<input id="contact-email" name="cemail" type="text" class=" required email valg" value="${session/username}" />
+				</div>
+			</div>
+			<div tal:condition="not:session/loggedin" class="row">
+				<div class="col-md-12">
+				<label for="contact-email" i18n:translate="">E-mail</label>
+				</div>
+				<div class="col-md-12">
+				<input id="contact-email" name="cemail" type="text" class=" text required email valg" value="" />
+				</div>
+			</div>
+			<div class="hide" id="password-container">
+				<p class="red" i18n:translate="">You are already registered, please provide password.</p>
+				<div class="row">
+					<div class="col-md-12">
+						<label for="password" i18n:translate="">Password</label>
+					</div>
+					<div class="col-md-12">
+					<input id="password" name="password" type="password" class="span4 password text valg"  />
+					</div>
+				</div>
+				<div class="row">
+					<div id="forgot-password" class="right span-8 last">
+					<a href="/login/forgot-password" class="small " i18n:translate="">Forgot password?</a>
+					</div>
+				</div>
+				
+			</div>
+			<div class="hide" id="new-user-container">
+				<p style="color:#e83023; font-weight: bold" i18n:translate="">This e-mail is not registered. Please choose a password so you can log in later.</p>
+				<div class="row">
+					<div class="col-md-6" style="width: 182px">
+						<label for="password-new-user">Passord</label>
+					</div>
+					<div class="col-md-6">
+					<input id="password-new-user" name="password-new-user" type="password" class="password text"  />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6" style="width: 182px">
+						<label for="repeat-password" i18n:translate="">Repeat password</label>
+					</div>
+					<div class="span2">
+					<input id="repeat-password" name="repeat-password" type="password" class="password text"  />
+					</div>
+				</div>
+			</div>
+			<div id="delivery-address">
+				<div class="row">
+				<div class="col-md-12">
+					<label for="contact-name" i18n:translate="">Name:</label>
+				</div>
+				<div class="col-md-6">
+					<input id="contact-name" name="cname" type="text" class="text required name  valg" value="${user/fullname}"/>
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-md-6">
+					<label for="contact-address" i18n:translate="">Address:</label>
+				</div>
+				<div class="col-md-6">
+					<input id="contact-address" name="caddress"  type="text" class="text required name valg" value="${user/address}"/>
+					<!--<textarea id="contact-address" name="caddress" style="height: 50px;" tal:content="user/address" class="required span7 valg" cols="30" rows="6"/>-->
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-md-6" style="margin-left: 0px">
+					<div>
+					<label for="contact-zipcode" i18n:translate="">ZIP code:</label>
+					</div>
+					<div class="col-md-6">
+					<input id="contact-zipcode" name="czipcode" type="text" class="text required valg" value="${user/zipcode}"/>
+					</div>
+				</div>
+				<div div="row">
+					<div class="col-md-6">
+					<label for="contact-city" i18n:translate="">City:</label>
+					</div>
+					<div class="col-md-6">
+					<input id="contact-city" name="ccity" type="text" class="text required  valg" value="${user/city}"/>
+					</div> 
+				</div>
+	
+				</div>
+				<div class="row">
+				<div class="col-md-6">
+					<label for="phone" >Telefon:</label>
+				</div>
+				<div class="col-md-6">
+					<input id="phone" name="phone" type="text" class="text required  valg" tal:attributes="value user/mobile|default" value=""/>
+				</div> 
+				</div>
+			</div>
+			
+			</div>
+				
+			<div class="text-left" style="padding:0 0 30px 50px;">
+				<table>
+					<!--Vilkår-->
+					<tr>
+						<td><input type="checkbox" id="eula" class="required checkbox" name="eula"/></td>
+						<td><label class="notice" for="eula">Ja, jeg godtar vilkårene  <a id="rulesbutton" href="#">(les vilkårene her)</a></label></td>
+						
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="newsletter" name="newsletter" class="checkbox" tal:attributes="checked newslettermobile"/></td>
+						<td><label class="notice" for="newsletter" >Nyhetsbrev fra Repix ( Få 50% rabatt )</label></td>				
+					</tr>	
+					<br/>
+					
+					<!--Nyhetsbrev Orkla-->
+					<tr>
+						<td><input type="checkbox" id="orklastats" name="orklastats" class="checkbox"/></td>
+						<td><label class="notice" for="orklastats"><strong>Nyhetsbrev:</strong> Ønsker du å få eksklusive tilbud og informasjon om produkter fra <a href="https://www.orkla.no/legal/no/behandling-av-personopplysninger/  " style="color:red; font-weight: bold !important;" target="_blank">Orkla </a>? <br/>Meld deg på nyhetsbrevet vårt, så er du blant de første som får tilsendt dette. <a href="#" id="informasjonbutton" style="text-decoration: underline; ">
+						<br/><strong>Mer informasjon finner du her:</strong></a></label>
+		    </td>
+					</tr>			
+				</table>
+			<div class="text-center"style="color: #0094d3;">◆</div>		
+			
+				<!--  START:ny Tilpasninger med valg inne i boksen-->			
+	<tr>			
+		<input type="checkbox" name="orklatilpasninger" id="orklatilpasninger" value="0" style="opacity:0;"  />
+			<label class="notice" for="orklatilpasninger"><p> Tilpasinger:</p>Vi ønsker å gi deg de beste tilbudene og relevant informasjon som er tilpasset deg, basert på kunnskap vi har om deg fra ulike kilder. For å øke kvaliteten på kommunikasjonen vår og kunne gi deg de mest relevante tilbudene, er dette avgjørende. Her finner du 
+			<a style="font-weight: bold; text-decoration: underline;"><br/>Mer informasjon og muligheten til å skru av denne funksjonen.</a></label>
+	</tr>
+	
+	<tr>
+		<div id="newsletter-orkla" style="display:none">
+			<input type="checkbox" id="newsletter-orkla" name="newsletter-orkla"  class="checkbox"/>
+				<label class="notice" for="newsletter-orkla"> Jeg ønsker generelle nyhetsbrev og tilbud i stedet for tilpassede. <br/>
+				<p>Tilpassede nyhetsbrev og tilbud innebærer at vi kan bruke dine personopplysninger og statistikk for å tilpasse kommunikasjonen vår, slik at den blir mer relevant for deg som mottaker. Dette utgjør en berettiget interesse for Orkla som annonsør, og skjer under forutsetning av god informasjon til deg, betryggende informasjonssikkerhet og gode muligheter for å skru av denne funksjonen.</p>
+				<h3>Tilpassede nyhetsbrev og tilbud betyr at vi kan bruke:</h3>
+<ul>
+	<li>Opplysninger du har oppgitt om deg selv og dine preferanser, for eksempel ved påmelding til våre kampanjer, medlemstjenester som PlussTid, eller markedsundersøkelser fra oss.</li>
+	<li>Registrerte klikk i e-poster fra oss, og dine påfølgende handlinger på våre nettsteder.</li>
+	<li>Kjøpshistorikk i nettbutikken til et Orkla-selskap.</li>
+	<li>Informasjon om deg som en tredjepart lovlig har innhentet og delt med oss. Slike opplysninger kan være:
+		<ul>
+			<li>
+				Navn, adresse, kjønn, medlemskap, telefonnummer, fødselsdato, epostadresse, kundeforhold hos organisasjon eller lignende fra såkalte adressemeglere (for eksempel Bring).
+			</li>
+			<li>
+				Min kjøpshistorikk fra aktører i varehandelsbransjen.
+			</li>
+		</ul>
+
+		<li>Statistisk generisk informasjon om preferansene til personer i visse segmenter i befolkningen. Valg av relevant segmentinformasjon skjer ut fra variabler som inntekt, kjønn og bosted.</li>
+	</li>
+</ul>
+				</label>
+		</div>
+	</tr>
+		<div class="text-center"style="color: #0094d3;">◆</div>		
+																		<!-- SLUTT: ny avkryssingsboks med valg inne i boksen-->
+
+				
+				<!--  START:ny Annonser med valg inne i boksen-->
+				
+	<tr>			
+		<input type="checkbox" name="orklaannonse" id="orklaannonse" value="0" style="opacity:0;"  />
+			<label class="notice" for="orklaannonse"><p> Annonser:</p>For at markedsføringen vår på nett (f.eks. nettaviser eller sosiale medier) skal være mest mulig relevant, ønsker vi å bruke e-postadressen din og opplysninger om din kontakt med oss. Her finner du
+			<a style="font-weight: bold; text-decoration: underline;"><br/>Mer informasjon og muligheten til å skru av denne funksjonen.</a></label>
+	</tr>
+	
+	
+	<tr>
+		<div id="orkla3part" style="display:none">
+			<input type="checkbox" id="orkla3part" name="orkla3part" class="checkbox" />
+				<label class="notice" for="orkla3part"> Jeg vil skru av bruk av min e-postadresse og opplysninger om min kontakt med Orkla for visning av tilpassede annonser på nett <br/>
+<p>Denne funksjonen innebærer at vi kan bruke din e-postadresse og opplysninger fra din kontakt med oss for å vise annonser på ulike typer nettsteder, som sosiale medier, søkemotorer eller nettaviser. Dette utgjør en berettiget interesse for Orkla som annonsør, og skjer under forutsetning av god informasjon til deg, betryggende informasjonssikkerhet og gode muligheter for å skru av denne funksjonen.
+</p>
+<h3>Opplysninger fra din kontakt med oss kan inkludere:</h3>
+
+<ul>
+  <li>Kjøp av produkt</li>
+  <li>Registrerte klikk i e-poster fra oss og dine videre handlinger på våre nettsteder</li>
+  <li>At man har mottatt visse nyhetsbrev</li>
+    <li>Deltagelse i reklamekampanjer fra Orkla</li>
+</ul>
+<p><i>Funksjonen kan for eksempel forløpe på denne måten: La oss si at du har kjøpt en genser fra et Orkla-selskap sin nettbutikk. Deretter kan vi sende din og epostadressene til andre personer som har kjøpt samme genser til en nettavis, og be dem om å vise en annonse til en gruppe personer som, ifølge deres egne opplysninger og analyse, har samme interesser som deg og andre som har kjøpt tilsvarende genser. Dette bygger på en gjetning om at andre personer med lignende interesseprofil kan være interessert i samme produkt. Analysen som gjennomføres hos nettavisen bygger utelukkende på opplysninger de har om sine brukere, og visningen av annonsen skjer kun til personer som har gitt nettavisen sitt samtykke til dette.</i></p>
+
+				</label>
+		</div>
+	</tr>	<!-- SLUTT: ny avkryssingsboks med valg inne i boksen-->	
+		
+		
+		<div class="text-center" style="color: #0094d3;">◆</div><br/>
+	
+	
+	<div class="row">
+		<div class="text-center">
+				
+					
+		<!--<div class="span text-center">
+				<div class="repix" style="margin-bottom: 10px; text-align: left; margin-left: 17px;">
+					
+					
+					 <strong class="notice" style="font-family: 'KidprintMTStd-Bold'; font-size: 1.5em;">JA, JEG VIL MOTTA GODE TILBUD </strong>
+					  <h4 style="    font-family: 'KidprintMTStd-Bold';font-size: 1.3em;">og nyheter fra Dinmerkelapp/Repix AS.<br/>Meld deg på vårt nyhetsbrev og motta eksklusive fordeler.</h4>
+				 <a href="#" id="informasjon3button" style="font-weight: bold; text-decoration: underline; font-family: 'KidprintMTStd-Bold'; font-size: 1.3em; ">Mer informasjon</a>
+			</div>
+	 
+			<label class="switch text-center" style="margin-left: 15px;">
+					  <input type="checkbox"  id="newsletter" name="newsletter" style="margin-left: 25px;" />
+				  <span class="slider round"></span>
+			</label>
+		</div>		-->	
+				
+		</div>
+		
+		
+
+		
+		<br/>
+		
+			<div class="row">
+			
+		
+	  <div class="col-md-10 text-center">
+				<button id="start-over" class="yellow">Forrige</button>
+				<button id="add-to-cart" class="yellow">Neste</button>
+			</div>
+			
+
+   </div>
+
+	   </div>
+		
+		
+				
+			</div>
+			</form>
+		</div>
+        </div>
+		</div>
+        <div metal:use-macro="../common.html/footer" />
+	
+	<div id="dialog" style="display: none; width: 100% !important">
+	    <img id="image" src=""/>
+	</div>
+	
+	<div id="dialog-confirm" title="Start på nytt?" style="display: none; height:110px">
+	    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Du er i ferd med å slette ditt lokk og begynne på et nytt.<br/>
+	    Er du sikker på at du ønsker dette?</p>
+	</div>
+	
+	<div id="newsletterinfo" class="hide" title="Nyhetsbrev fra Orkla">
+		Vi vil sende deg tips om nyheter og andre kampanjer fra Orkla.<br/>Stabburet Leverpostei er en del av Orkla, som også har andre kjente merkevarer som Stabbur-Makrell, Lano, Blenda, Pierre Robert, FunLight, Toro og Grandiosa. (Se full oversikt på <a href="https://orkla.no" >Orkla.no</a>.)<br/>Du kan når som helst melde deg av denne tjenesten.
+	</div>
+	
+	
+	<div id="stabburtinfo" class="hide" title="Nyhetsbrev fra Stabburet Leverpostei">
+		Vi vil sende deg tips om nyheter fra Stabburet Leverpostei, informasjon om kosthold og kampanjer.<br/>
+Du kan når som helst melde deg av denne tjenesten.
+	</div>
+	
+	
+	
+	
+    <script>
+	/*<![CDATA[*/
+	
+	
+	//ny checkbox
+		$(document).ready(function() {
+    $('#orklaannonse').change(function() {
+        $('#orkla3part').toggle();
+    });
+});
+			//ny checkbox slutt
+	
+	
+	
+		//ny checkbox
+		$(document).ready(function() {
+    $('#orklatilpasninger').change(function() {
+        $('#newsletter-orkla').toggle();
+    });
+});
+			//ny checkbox slutt		
+			
+			
+			
+	$(document).ready(function() {
+	    
+		$('.orklainfo').on( 'click', function(){
+			
+			$('#newsletterinfo').dialog({
+				width: 400,
+				'buttons' : {
+					'Lukk': function(){ $(this).dialog('close') }
+				},
+				});
+			
+				return false;
+			});
+		
+		
+		$('.stabburtinfo').on( 'click' , function(){
+			
+			$('#stabburtinfo').dialog({
+				width: 400,
+				'buttons' : {
+					'Lukk': function(){ $(this).dialog('close') }
+				},
+				
+				});
+			
+			return false;
+		
+			});
+		
+	   $('#add-to-cart').on( 'click', function(){
+			$('#contact-and-delivery-info').submit();
+		});
+	    
+	    $('.fancybox').click( function(){
+		
+		var src = $(this).attr( 'href' );
+		$('#image').attr( 'src', src );
+		
+		$('#dialog').dialog({
+		    modal: true,
+		    resizable: false,
+		    draggable: false
+		});
+		return false;
+	    });
+	    
+	    $('#start-over').on( 'click', function(){
+		   window.location =  '/lag-lokk/checkout/bestilling';
+		    return false;
+		});
+		
+	});
+	/*]]>*/
+    </script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">
+		Order prints - Transfer photos
+	</tal:block>
+	
+	<script type="text/javascript" src="${static:js/aurigma/iuembed.js}?${version}"></script>
+	<script type="text/javascript" src="${static:js/aurigma/iuembed.InstallationProgress.js}?${version}"></script>
+   <script type="text/javascript" src="/streams/i18n/iuembed/${i18n/language}.js?${version}"></script>
+	<style type="text/css">
+		form { margin: 0; padding: 0}
+	</style>
+	
+</head>
+<body>
+
+	<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+		<div class="span-24 last append-bottom">
+		 			<ul class="step-by-step-new">
+				<li class="completed">
+					<a href="/order-prints/" title="">
+						<strong tal:content="cms:title:c3e83ff3-1b74-499f-9d2c-578177d4f036">Step 1: Find your photos</strong>
+					</a>
+				</li>
+				<li class="current">
+   				<a href="#">
+   			      <strong tal:content="cms:title:0e90d43c-ebf2-4c79-83d5-b3f950bdae0e">Step 2: Transfer photos</strong>
+   				</a>
+				</li>
+				<li class="">
+					<a title="">
+						<strong tal:content="cms:title:6b897e85-a541-4a72-8905-e5ecb59b8968">Step 3: Choose quantity</strong>
+					</a>
+				</li>
+			   <li>
+					<a title="">
+						 <strong tal:content="cms:title:1fe8b6fd-690f-4a9f-b8e0-f45634bbf50d">4: Tilpass bilder</strong>
+					</a>
+				</li>
+				<li class="last">
+					<a title="">
+						<strong tal:content="cms:title:3dfbbdeb-678f-4594-8aab-171ea6d8f6fd">Step 5: Accessories</strong>
+					</a>
+				</li>
+			</ul>
+		</div>
+	<div id="widecontent">
+		
+
+	
+	
+      <tal:block tal:condition="session/loggedin">
+      <div class="box" style="min-height:110px;">
+      <div style="float: right;"><tal:block i18n:translate="">Do you have problems uploading?</tal:block> <a href="flash/"><tal:block i18n:translate="">Try our alternative uploader</tal:block></a></div>
+      <h4 i18n:translate="">Choose album to transfer the images to.</h4>
+      <form method="post" action="/myaccount/upload" id="selectalbum">
+      <div class="span-9">
+      	<div class="radioLabel selected" style="min-height:60px;">
+      		<label i18n:translate="">Upload to existing album:</label>
+      		<select name="uploadid" id="uploadid">
+      			<tal:block tal:repeat="album albums">
+      				<option tal:condition="equal:album/id,selected,true" selected="1" value="${album/id}">${album/title}</option>
+      				<option tal:condition="not:equal:album/id,selected,true" value="${album/id}">${album/title}</option>
+      			</tal:block>
+      		</select>
+      		<!--<button type="submit" class="button" id="choose-album" i18n:translate="">Choose</button>-->
+      	</div>
+      </div>
+	  
+      <div class="span-10">
+         <div class="radioLabel selected" style="min-height:60px;">
+         	<label for="new-album" i18n:translate="">Create new album:</label><br/>
+         	<input type="text" id="new-album-title" tal:attributes="value formatdatetime:request/date/full" class="text span-5" />&nbsp;
+         	<button class="create-album" id="create-new-album" i18n:translate="">Create album</button>
+         </div>
+		</div>
+		
+		</form>
+      </div>
+      </tal:block>
+
+      <tal:block tal:condition="not:session/loggedin">
+      <div class="box" style="min-height:20px;">
+      <div style="float: right;"><tal:block i18n:translate="">Do you have problems uploading?</tal:block> <a href="flash/"><tal:block i18n:translate="">Try our alternative uploader</tal:block></a></div>
+      </div>
+      </tal:block>
+      
+      <div class="clear"></div>
+	
+      <hr style="margin: 0px"/>
+      <center>
+      <script language="javascript">
+            
+      <tal:block metal:use-macro="${templateroot}/common/uploader.html/uploader-localization" />
+      
+      var iu = new ImageUploaderWriter("ImageUploader", 950, 650);
+      
+      iu.activeXControlEnabled = true;
+      iu.javaAppletEnabled = true;
+      iu.javaAppletCached = true;
+     
+      iu.activeXControlCodeBase = "http://static.eurofoto.no/js/aurigma/ImageUploader6.cab";
+      iu.javaAppletCodeBase="http://static.eurofoto.no/js/aurigma/";
+      
+      <tal:block metal:use-macro="${templateroot}/common/uploader.html/license-key" />
+      
+      iu.showNonemptyResponse = "off";
+      
+      iu.addParam( "FilesPerOnePackageCount", "1" );
+      iu.addParam("AutoRecoverMaxTriesCount", "5");
+      iu.addParam("AutoRecoverTimeOut", "5000");
+         
+      iu.addParam( "FileMask", "*.jpeg;*.jpg" );
+      iu.addParam( "UploadSourceFile", "true" );
+      iu.addParam( "AllowLargePreview", "true" );
+                                
+      iu.addParam( "ShowDebugWindow", "false" );
+
+      iu.addParam( "BackgroundColor","#ffffff" );
+      iu.addParam( "PaneLayout", "ThreePanes" );
+      iu.addParam( "TreePaneWidth", "150" );
+      iu.addParam( "FolderPaneHeight","300" );
+
+      iu.addParam( "AllowRotate", "false" );
+      iu.addParam( "BackgroundColor", "#ccccff" );
+      iu.addParam( "FolderPaneShowDescriptions", "false" );
+      iu.addParam( "UploadPaneShowDescriptions", "false" );
+      iu.addParam( "ButtonSendText", "<tal:block i18n:translate="">Upload</tal:block>" );
+
+      iu.addParam( "UploadThumbnail1FitMode", "Fit" );
+      iu.addParam( "UploadThumbnail1Width", "100" );
+      iu.addParam( "UploadThumbnail1Height", "100" );
+      iu.addParam( "UploadThumbnail1JpegQuality", "70" );
+      iu.addParam( "PreviewThumbnailActiveSelectionColor","#ff0000" );
+      iu.addParam( "PreviewThumbnailBorderColor","#000000" );
+
+      iu.addParam( "Action", "/upload/receive/SourceFile_1?sessionid=${session/sessionid}" );
+      
+      <tal:block tal:condition="exists:redirecturl">
+      iu.addParam( "RedirectUrl", '${redirecturl}' );
+      </tal:block>
+      
+      iu.addParam( "ShowUploadListButtons", "true" );
+      iu.addParam( "BackgroundColor","#ffffff" );
+      
+      iu.addParam( "TimeOut", "300000" );
+      
+      var ip = new InstallationProgressExtender(iu);        
+
+      ip.setCommonHtml(CommonHtml);
+      ip.setProgressHtml(ProgressHtml);
+      ip.setJavaProgressHtml(ProgressHtml);
+      ip.setBeforeIE6XPSP2ProgressHtml(BeforeIE6XPSP2ProgressHtml);
+      ip.setIE6XPSP2ProgressHtml(IE6XPSP2ProgressHtml);
+      ip.setIE7ProgressHtml(IE6XPSP2ProgressHtml);
+      ip.setIE8ProgressHtml(IE6XPSP2ProgressHtml);
+      ip.setCommonInstallJavaHtml(CommonInstallJavaHtml);
+      ip.setBeforeIE6XPSP2InstructionsHtml(BeforeIE6XPSP2InstructionsHtml);
+      ip.setIE6XPSP2InstructionsHtml(IE6XPSP2InstructionsHtml);
+      ip.setIE7InstructionsHtml(IE7InstructionsHtml);
+      ip.setIE8InstructionsHtml(IE7InstructionsHtml);
+      ip.setUpdateInstructions(UpdateInstructions);
+      ip.setBeforeIE6XPSP2InstallJavaHtml(BeforeIE6XPSP2InstallJavaHtml);
+      ip.setIE6XPSP2InstallJavaHtml(IE6XPSP2InstallJavaHtml);
+      ip.setIE7InstallJavaHtml(IE7InstallJavaHtml);    
+      ip.setIE8InstallJavaHtml(ip.getIE7InstallJavaHtml());
+      ip.setMacInstallJavaHtml(MacInstallJavaHtml);
+      ip.setMiscBrowsersInstallJavaHtml(MiscBrowsersInstallJavaHtml);
+      
+      ip.setProgressImageUrl("${static:gfx/gui/ajax-loader.gif}");
+
+      ip.setInstructionsCssClass('InstallationScreenStyle');        
+      ip.setProgressCssClass("ScreenStyle");
+      ip.setInstructionsCssClass("ScreenStyle");
+      
+      lang = "en";
+      en_resources.addParams( iu );
+      
+      iu.writeHtml();
+         
+      </script>
+      </center>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<script type="text/javascript" tal:condition="session/loggedin">
+
+var choosealbumerror = '<tal:block i18n:translate="">An error occured when choosing your album. Please try again later!</tal:block>';
+var createalbumerror = '<tal:block i18n:translate="">An error occured when creating your album. Please try again later!</tal:block>';
+
+var redirecturl = '${redirecturl}';
+
+//<![CDATA[
+	$(document).ready( function() {
+
+		$('.radioLabel').radioLabel();		
+			  
+   	$('#create-new-album').click( function() {
+   
+   		//$(this).after(ajaxLoader);
+   
+   		var albumtitle = $('#new-album-title').val();
+   		var self = $(this);
+   
+   			$.post('/api/1.0/album/create/', {
+   				'title': albumtitle
+   			}, function(data) {
+   				if( data.result ) {
+   					$('#uploadid option').attr('selected', 'selected').removeAttr('selected')
+   					$('#uploadid').append('<option selected="selected" value="'+data.album.id+'">'+data.album.title+'</option>');
+   					$('#uploadid').trigger('change');
+   				} else {
+   					alert( createalbumerror );
+   				}
+   			}, 'json'
+   		);
+   		return false;
+   	});
+
+   });
+		
+   $(function() {
+     
+   	$('#uploadid').change( function() {
+   
+   		//$(this).after(ajaxLoader);
+   
+   		var albumid = $('#uploadid').val();
+   		var self = $(this);
+         
+         $.post('/api/1.0/upload/setcurrentalbum/', {
+         	'albumid': albumid
+         	}, function(data) {
+               if( data.result ) {
+                  //alert(data.result);
+         		} else {
+         			alert( choosealbumerror );
+         		}
+         	}, 'json'
+         );
+         
+   		return false;
+   		
+   	});
+   	
+   	$('#choose-album').click( function() {
+   
+   		//$(this).after(ajaxLoader);
+   
+   		var albumid = $('#uploadid').val();
+   		var self = $(this);
+   
+         $.post('/api/1.0/upload/setcurrentalbum/', {
+         	'albumid': albumid
+         	}, function(data) {
+               if( data.result ) {
+                  //alert(data.result);
+         		} else {
+         			alert( choosealbumerror );
+         		}
+         	}, 'json'
+         );
+         
+   		return false;
+   		
+   	});
+   	
+   });
+//]]>
+</script>
+</body>
+</html>

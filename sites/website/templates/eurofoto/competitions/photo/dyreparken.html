@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+   <head>
+   	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Photo Competition</tal:block>
+   
+<style type="text/css">
+	h3 { font-weight: bold }
+	h4 { font-weight: bold }
+	.error-warning {
+		color: #cc3333;
+		float:left;
+	}
+
+</style>
+	
+   </head>
+<body>
+<div class="container">
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	
+
+	<h1 style="font-weight: bold; color: #3988c3; font-size: 50px;">
+		<span style="font-size: 14px; font-weight: normal; color: #666666;">Eurofoto og Kristiansand Dyreparks store<br/></span>
+		Fotokonkurranse
+	</h1>
+	
+	<h3>Denne konkurransen er avsluttet.</h3>
+	
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+
+   <script type="text/javascript">
+      $(document).ready(function() {  
+      
+      	$('form#register').validate({
+      		errorClass: "error-warning",
+      		errorPlacement: function(error, element) {
+           		error.appendTo( element.parent("div").prev("div") );
+         		},
+      		rules: {
+      			image: {
+                  required: true,
+                  accept: "jpg|jpeg"
+               }
+      		},
+      		messages: {
+      		   'fields[email]': {
+      				required: '<tal:block i18n:translate="">Please provide a valid email address.</tal:block>'
+      			},
+      			eula: {
+      				required: "<tal:block i18n:translate="">You have to read and accept the terms and conditions</tal:block>"
+      			},
+      			image: {
+      				accept: "<tal:block i18n:translate="">Image must be a .jpg</tal:block>"
+      			}
+      			
+      		}
+      	});
+      	$.extend($.validator.messages, {
+             required: "<tal:block i18n:translate="">This field is required.</tal:block>"
+         });
+      	
+      	$('#terms-and-conditions').addClass('hide');
+      	
+      	$('#terms-and-conditions').css('background-color', '#fff');
+      	
+      	$('#open-terms-and-conditions').click( function() {
+      		$('#terms-and-conditions').removeClass('hide').dialog({
+      			width: 700,
+      			height: 500,
+      			buttons: {
+      				'Ok': function() {
+      					$(this).dialog('destroy')
+      				}
+      			},
+      			close: function() {
+      				$(this).dialog('destroy')
+      			}
+      		});
+      		return false;
+      	});
+      });
+   </script>
+</body>
+</html>

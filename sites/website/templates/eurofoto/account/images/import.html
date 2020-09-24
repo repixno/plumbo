@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="${i18n/country}">
+<head>
+	<tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" />
+	<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/head" />
+</head>
+<body>
+   	
+   <div class="container">
+   	<div metal:use-macro="${templateroot}/${templates}/common.html/top" />	
+   </div>
+   
+   <div id="account">
+
+   	<div class="container">
+   		<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/account-menu" />
+   	</div>
+   	
+   	<div class="container account-wrapper canHazMaxWidth" id="show-albums">
+         <div class="account-container">
+            
+            <div class="span-5 last" id="albums-menu">
+               <tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/albums-menu" />
+            </div>
+            
+            <tal:block tal:condition="exists:albums">
+            
+               <tal:block tal:repeat="album albums">
+                  <div class="span-19 last">
+                  <h2>${album/name} - ${album/size} bilde(r)</h2>
+                  <tal:block tal:condition="exists:album/created"><h3>${album/created}</h3></tal:block>
+                  </div>
+                  <div class="span-19">
+                     <tal:block tal:repeat="image album/images">
+                        <div class="span-2">${image/description} ${image/created}<br/><a href="${image/large}"><img src="${image/small}" /></a></div>
+                     </tal:block>
+                  </div>
+               </tal:block>
+               
+            </tal:block>
+            
+            <tal:block tal:condition="not:exists:albums">
+               <div><a href="https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=123026291052567&redirect_uri=http://mercedes.eurofoto.no/account/images/import/facebook&scope=user_photos"><img src="http://stammen.no/wp-content/uploads/2010/02/facebook-logo.png" height="50" alt="facebook" /></a></div>
+               <div>               
+               <a href="/account/images/import/flickr"><img src="http://www.grmuseum.org/files/Flickr-logo.jpg" height="50" alt="flickr" /></a></div>
+            </tal:block>
+         
+         </div>
+	
+      </div>
+
+   </div>
+   
+   
+   <div class="footer">
+   	<div class="container">
+   		<div metal:use-macro="${templateroot}/${templates}/common.html/footer" />
+   		<div metal:use-macro="${templateroot}/${templates}/account/common.html/footer" />
+   	</div>
+   </div>	
+
+</body>
+</html>

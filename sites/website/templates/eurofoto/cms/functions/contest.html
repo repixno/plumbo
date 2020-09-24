@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title"/>
+</head>
+
+
+<body>
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/top" />
+		<div class="span-24">
+			<div metal:use-macro="../cms.html/breadcrumbs" />
+			<tal:block tal:condition="exists:items" tal:repeat="item items">
+				<h1 tal:content="item/title" class="cms-article-title">Item title</h1>
+				<p class="ingress cms-article-ingress top" tal:content="item/ingress"></p>
+				<tal:block tal:content="structure item/body" />
+				<tal:block tal:condition="session/isadmin">
+					<script type="text/javascript">
+						$('.cms-article-title').dblclick( function() {
+							window.open('${request/adminroot}content/articles/${item/id}');
+						});
+					</script>
+				</tal:block>
+			</tal:block>
+		</div>
+	</div>
+
+<script type="text/javascript" tal:condition="session/loggedin">
+
+	var name = '<tal:block tal:content="session/fullname" />';
+	var email = '<tal:block tal:content="session/username" />';
+	var pleaseAnswer = "<tal:block i18n:translate="">You need to answer this question.</tal:block>";
+	var pleaseProvideEmail = "<tal:block i18n:translate="">Please provide a valid email address.</tal:block>";
+
+
+	$(document).ready(function(){
+	
+		$('form.contest input[name=fullname]').val(name);
+		$('form.contest input[name=email]').val(email);
+		
+		$('form.contest input[name=email], form.contest input[name=fullname]').css('color', '#999').click( function() {
+			$(this).css('color', '#000');
+		});
+		
+
+		$('form.contest input[type=radio]').each( function(i, item) {
+			$(item).attr('id', 'answer_' + i);
+			$(item).after('<label for="answer_'+i+'">'+$(item).val()+'</label>');
+		});
+		
+		$('form.contest p').each( function(i, item) {
+			$('input[type=radio]:first', item).attr('checked', 'checked');
+		});
+	
+		$('form.contest').validate({
+			errorClass: "inputError",
+			rules: {
+				'email': {
+					required: true,
+					email: true
+				}
+			},
+			messages: {
+				'email': {
+					required: pleaseProvideEmail,
+					email: pleaseProvideEmail
+				}
+			}
+		});
+	
+	});
+
+</script>
+
+
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>	
+</div>
+
+</body>
+</html>

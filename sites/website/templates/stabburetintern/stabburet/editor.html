@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <div metal:use-macro="../common.html/editorhead" />
+        <link href="${static:css/portals/stabburet/web/css/editor.css}" rel="stylesheet" media="screen" />
+    </head>
+    
+    <body>
+	<div class="row text-center hidden-phone header">
+		<img  src="${static:css/portals/stabburet/web/images/preheader.png}" alt="LAG LOKK MED DITT BILDE"/>
+	</div>
+
+        <div class="container">
+            <!-- Main hero unit for a primary marketing message or call to action -->
+            
+            <!-- Example row of columns -->
+            <div class="row" style="background-color: white">
+		<!--editor-->
+		<div class="text-center span" style="width:439px;">
+		    <div class="text-center" style="position: relative; margin-top: 20px;">
+			<canvas id="c" width="439" height="439" style="position: relative;"></canvas>
+			
+			<div class="error"></div>
+		    </div>
+			<div>
+				<span class="templatebuttoncontainer" style="text-align: right;">
+					<button id="prevtemplate" class="temp"></button>
+				</span>
+				
+				<span class="choosetemplatecontainer">
+					<span class="choosetemplate">ASTRONAUT</span>
+				</span>
+				<span class="templatebuttoncontainer" style="text-align: left;">
+					<button id="nexttemplate" class="temp"></button>
+				</span>
+				
+			</div>
+		</div>
+		<div class="span6">
+			<!--image functions -->
+			    <div class="span6">
+				<div class="row">
+					<div class="row">
+						<div class="desktoplabel span2"><h4><strong>1: </strong>Velg drøm</h4></div>
+						<div class="span4 thumbcontainer">
+							<span><img class="template ASTRONAUT selectedtemplate"  id="template-0" src="/stabburetstatic/mal/thumb/Astronaut_alpha.png"/></span>
+							<span><img class="template FOTBALLSPILLER" id="template-1" src="/stabburetstatic/mal/thumb/fotballspiller.png"/></span>
+							<span><img class="template BALLERINA" id="template-2" src="/stabburetstatic/mal/thumb/ballettdanser.png"/></span>
+							<span><img class="template BRANNKONSTABEL" id="template-3" src="/stabburetstatic/mal/thumb/brannmann.png"/></span>
+							<span><img class="template ROCKESTJERNE" id="template-4" src="/stabburetstatic/mal/thumb/Popstjerne_alpha.png"/></span>
+							<span><img class="template KLASSISK LOKK" id="template-5" src="/stabburetstatic/mal/thumb/standard.png"/></span>
+						</div>
+					</div>
+					<div >
+						<img class="shortline" src="${static:css/portals/stabburet/web/images/shortline.png}" style="margin: 10px 0 10px 0;" />
+					</div>
+				    <div class="row">
+					 <div class="desktoplabel span2">
+						<h4><strong>2: </strong> Last opp bilder</h4>
+				    </div>
+					<div class="span4">
+					    <div class="row span5 text-left" style="margin-left: 0px;">
+					    <form class="upload" action="/api/1.0/upload/stabburet" method="post" enctype="multipart/form-data">	
+					    <input style="width: 190px;" type="file" name="image" size="9" accept="image/*"/>
+						<button class="btn-stabburet submit">LAST OPP</button>					    
+						    
+					    </form>
+					    </div>
+						    
+					    <div class="progress">
+						    <div class="bar"></div >
+						    <div class="percent">0%</div >
+					    </div>
+					    
+					    <!--
+					    <a href="#" id="file" class="btn">Velg fil</a>
+					    <input type="file" name="imageupload" id="imageupload" class="input-medium search-query" />
+					    -->
+					</div>
+				    </div>
+				<div >
+					<img class="shortline" src="${static:css/portals/stabburet/web/images/shortline.png}" style="margin: 10px 0 10px 0;" />
+				</div>
+				<div class="row">
+				    <div class="desktoplabel span2">
+					<h4><strong>3: </strong>Velg bilde</h4>
+				    </div>
+				    <div class="span4">
+						<div class="scroll" id="imagelist">&nbsp;</div>
+				    </div>
+				</div>
+				<div >
+				<img class="shortline" src="${static:css/portals/stabburet/web/images/shortline.png}" style="margin: 10px 0 10px 0;" />
+			</div>
+				<div class="row">
+				    <div class="hidden-phone desktoplabel span2">
+					<h4><strong>4: </strong>Juster bilde</h4>
+				    </div>
+				    <div class="span controlsbuttons">
+					<button class="button zoom" id="zooms" />
+					<button class="button zoom" id="zooml" />
+					<button class="button move" id="left" />
+					<button class="button move" id="up" />
+					<button class="button move" id="down" />
+					<button class="button move" id="right" />
+					<button class="button rotate" id="roteteright" />
+					<button class="button rotate" id="roteteleft" />
+				    </div>
+				</div>
+			    </div>
+			</div>
+			<div >
+				<img  class="shortline" src="${static:css/portals/stabburet/web/images/shortline.png}" style="margin: 10px 0 10px 0;" />
+			</div>
+			
+			<!-- order section  -->
+			<div class="span6">
+				<div class="row">
+					<span class="share" style="display: inline-block; width: 335px;">
+						<div class="sharecontent">
+							<span id="facebook"><img src="${static:css/portals/stabburet/web/images/facebookicon.png}"/>Del lokket på facebook</span><br/>
+							<!--<span id="twitter"><img src="${static:css/portals/stabburet/web/images/twitter.jpg}"/></span>
+							<span><img src="${static:css/portals/stabburet/web/images/instagram.jpg}"/></span>-->
+							<span class="hidden-tablet" id="download" ><img src="${static:css/portals/stabburet/web/images/lastned.png}"/>Last ned bildet</span>
+						</div>
+					</span>
+					<span style="display: inline-block">
+						<button class="btn-stabburet bestillknapp" style="width: 100px">Lag kopp</button>
+					</span>
+					
+				</div>
+				
+		    </div>
+	    
+	    
+	    </div>
+	    
+	    </div>
+        </div>
+        
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<!--<script src="http://b.static.eurofoto.no/js/jquery.upload-1.0.2.js?3.103"></script>-->
+	
+	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+    <script src="${static:css/portals/stabburet/bootstrap/js/bootstrap.min.js}"></script>
+	<script src="${static:css/portals/stabburet/web/js/fabric.js}" />
+	<script src="${static:css/portals/stabburet/web/js/editor.js}?${version}" />
+	<div metal:use-macro="../common.html/footer2" />
+	
+	
+	<script>/*<![CDATA[*/
+
+		
+	/*]]>*/
+	</script>
+
+</body>
+</html>

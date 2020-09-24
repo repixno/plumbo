@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin statistikk</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Fexlix Ordre Statistikk</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		
+		<div class="span-24 last">
+                    <form method="GET" style="margin: 5px; padding: 5px; background-color: lightgrey;">
+                        <label for="user">Konto:</label>
+                                       <select name="user">
+										
+							<option value="${portal}" name="portal" >UKEPLAN</option>
+							
+                
+                                                        
+			
+			</select>
+                        <label for="from">FRA:</label>
+                        <input type="text" name="from" value="${from}"/>
+                        <label for="to">TIL:</label>
+                        <input type="text" name="to" value="${to}"/>
+                        <input type="submit" value="Enter"/>
+                    </form>
+                </div>
+                
+		<div class="span-24 last">
+                    
+                    <table>
+                        <thead>
+                            <tr>
+								    <th>
+                                    LØPENR
+                                </th>  
+									 
+								 <th>
+                                    ORDRENR
+                                </th>
+                                <th>
+                                    NAVN
+                                </th>
+								<th>
+                                    ADRESSE
+                                </th>
+								<th>
+                                    POSTNR
+                                </th>
+								<th>
+                                    STED
+                                </th>
+								<th>
+                                    MOBIL
+                                </th>
+								<th>
+                                    EPOST
+                                </th>
+                               <th>
+                                    NL
+                                </th>
+								<th>
+                                    PRIS
+                                </th>
+								<th>
+                                    ENHET
+                                </th>
+								<th>
+                                    TIDSPUNKT
+                                </th>
+							<th>
+                                    SKJEMA
+                                </th>
+								
+								
+                            </tr>
+                        </thead>
+                        <tbody tal:condition="exists:stats">
+						<tr tal:repeat="order stats">
+							    <td tal:content="repeat/order/key">
+								
+							</td>
+						<td tal:content="order/ordrenr" />
+						<td tal:content="order/navn" />
+						<td tal:content="order/adresse1" />
+						<td tal:content="order/postnr" />
+						<td tal:content="order/sted" />
+						<td tal:content="order/mphone" />
+						<td tal:content="order/epost" />
+						<td tal:content="order/newsletter" />
+				
+						<td tal:content="order/pris" />
+						<td tal:content="order/source" />
+						<td tal:content="order/tidspunkt" />
+				
+						<td>
+                                <a href="javascript:window.open('http://susanne.eurofoto.no/adm_view_orderform_new.php?ordrenr=${order/ordrenr}','_blank', 'scrollbars=1,resizable=1,height=800,width=700');">Vis ordrekjema</a>
+                            </td>
+					
+						</tr>
+                        </tbody>
+                        
+                        
+                        
+                    </table>
+                    
+                    
+		 
+		
+		</div>
+        </div>
+	
+	
+	
+	   <div class="right" style="width:940px;">
+         	
+			   <a href="/order/order/ukeplan/xls?from=${from}&to=${to}" i18n:translate="">Last ned som Exel</a>
+			 
+         	</div>
+</body>
+</html>

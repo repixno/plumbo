@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+</head>
+
+
+<body>
+<div class="container">
+
+	<div class="span-24 last">
+		<div metal:use-macro="../../../${templates}/common.html/top" />
+	</div>
+
+	<div class="span-24 last top">
+	
+		<div class="span-24 last append-bottom" style="clear: both; background: rgb(255, 255, 255) url(http://c.static.eurofoto.no/cms/images/articles/landingssider/dyreparken/dyreparken_topp3.jpg) no-repeat scroll center top; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous; height: 288px; width: 950px;">
+			<h2 class="hide">Dyreparken</h2>
+		</div>
+      
+		<div class="span-24 last">
+			<div class="box">
+				<h3>Hent bildene dine fra dyreparken.</h3>
+				<p>Skriv inn den unike koden på kortet du mottok fra vår fotograf:<br /><span class="quiet">Husk bindestreker: AAAA-BBBB-CCCC</span></p>
+				<form action="/dyreparken/barcode/" method="post">
+					<input name="identifier" type="text" class="title" value=""/> &nbsp; <button class="large" type="submit">Hent bilder</button>
+				</form>
+			</div>
+		</div>
+      
+		<tal:block tal:repeat="item items" tal:condition="exists:items">
+			<tal:block class="top" tal:content="structure item/body|default" tal:condition="equal:item/type,article"></tal:block>
+		</tal:block>
+		
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>	
+</div>
+
+</body>
+</html>

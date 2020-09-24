@@ -1,0 +1,617 @@
+/*!
+ * Start Bootstrap - Modern Business HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Global Styles */
+
+html,
+body {
+	/* background: #C8F0FC url(http://www.zingerbug.com/Backgrounds/background_images/mini_white_snowflakes_on_light_blue.jpg);
+  */
+	background-color: #ffffff;
+	height: 100%;
+	font-family: quicksandbold;
+	font-family: 'Comfortaa';
+
+	/*padding-top: 60px; */
+	color: #000000;
+}
+
+
+.more-info{
+	
+	color: #0087ca !important;
+    text-decoration: underline;
+}
+
+
+.footer_title, .copyright{
+	color: #ffffff;
+   
+	
+}
+
+
+
+ 
+/* GLOBAL STYLES
+-------------------------------------------------- */
+
+/* Padding below the footer and lighter body text */
+
+.logodinmerkelapp2 {
+	width: 140px;
+	margin-top: 10px;
+}
+
+.glyphicon-shopping-cart {
+	background: #1a8ac8;
+	padding: 6px;
+	border-radius: 50%;
+}
+
+
+#text{
+	font-size: 16px;
+}
+
+
+.branding{
+	
+	font-size: 20px;
+	color: #ffffff;
+	
+}
+span {
+	font-family: 'Comfortaa', cursive;
+}
+
+
+.glyphicon-shopping-cart {
+	background: #1a8ac8;
+	padding: 6px;
+	border-radius: 50%;
+}
+
+
+.varer {
+	margin: 0px 0px 0px 50px;
+}
+
+
+
+
+
+
+.nav>li>a:hover,
+.nav>li>a:focus {
+	text-decoration: none;
+	background-color: #ff5b00;
+	color: black;
+}
+
+.margin15 {
+	margin-top: 15px;
+}
+
+.fremsideboks1 {
+	background-color: #ffffff;
+	border-left: 1px solid #BFC1C0;
+	border-top: 1px solid #BFC1C0;
+}
+
+.fremsideboks2 {
+	background-color: #ffffff;
+	border-left: 1px solid #BFC1C0;
+	border-top: 1px solid #BFC1C0;
+}
+
+.fremsideboks3 {
+	background-color: #ffffff;
+	border-left: 1px solid #BFC1C0;
+	border-top: 1px solid #BFC1C0;
+	border-right: 1px solid #BFC1C0;
+}
+
+.fremsideboks4 {
+	background-color: #ffffff;
+	border-left: 1px solid #BFC1C0;
+	border-top: 1px solid #BFC1C0;
+	border-bottom: 1px solid #BFC1C0;
+}
+
+.fremsideboks5 {
+	background-color: #ffffff;
+	border-left: 1px solid #BFC1C0;
+	border-top: 1px solid #BFC1C0;
+	border-bottom: 1px solid #BFC1C0;
+}
+
+.fremsideboks6 {
+	background-color: #ffffff;
+	border-left: 1px solid #BFC1C0;
+	border-top: 1px solid #BFC1C0;
+	border-right: 1px solid #BFC1C0;
+	border-bottom: 1px solid #BFC1C0;
+}
+
+
+
+.buttonmargin {
+	margin-top: 45px;
+	margin-bottom: 10px;
+	/*padding: 3px 3px 3px 3px ;*/
+	;
+}
+
+
+
+
+.fremsidetekst {
+	height: 100px;
+	font-size: 15px;
+}
+
+@media (max-width:480px) {
+	.fremsidetekst {
+		display: none !important;
+	}
+
+	#myCarousel {
+		display: none !important;
+	}
+
+
+	.footer ul {
+		list-style-type: none;
+		font-size: 10px;
+		padding: 0px;
+		margin: 0px;
+		color: #ffffff;
+	}
+
+	h4.footertitle {
+		color: #ffffff;
+		font-size: 14px;
+		/* text-decoration: underline; */
+		;
+	}
+
+	.fremsideboks1 {
+		height: 100px;
+		border-radius: 5px;
+	}
+
+	.fremsideboks2 {
+		height: 100px;
+		border-radius: 5px;
+	}
+
+	.fremsideboks3 {
+		height: 100px;
+		border-radius: 5px;
+	}
+
+	.fremsideboks4 {
+		height: 100px;
+		border-radius: 5px;
+	}
+
+	.fremsideboks5 {
+		height: 100px;
+		border-radius: 5px;
+	}
+
+	.fremsideboks6 {
+		height: 100px;
+		border-radius: 5px;
+	}
+
+	.fremsideboks7 {
+		height: 100px;
+		border-radius: 5px;
+	}
+
+
+	#navbarCollapse>ul.nav.navbar-right {
+		display: none;
+	}
+
+
+
+	.navbar-header {
+		display: none;
+	}
+
+	.produktbilde {
+		height: 100px;
+		border-radius: 5px;
+	}
+
+	.buttonmargin {
+		margin-top: 0px;
+		margin-bottom: 0px;
+		padding: 3px 3px 3px 3px;
+	}
+
+
+	.navbar-default .navbar-toggle .icon-bar {
+		background-color: #fff;
+	}
+
+
+
+}
+
+
+
+.dropdown-toggle:hover {
+	background-color: #00c95c;
+	border-color: #8c8c8c;
+	color: #000000 !important;
+	 list-style-type: none !important;
+	
+}
+
+.navbar-fixed-top {
+	border-width: 0 0 1px;
+}
+
+.carousel {
+	position: relative;
+}
+
+.kassebutton {
+	background-color: #1a8ac8;
+	color: #ffffff;
+	padding: 0px 5px 0px 6px;
+	margin: 0px 0 8px 18px;
+	border-radius: 6px;
+	border-color: #6290b9;
+}
+
+.tekst {
+	font-family: inherit;
+}
+
+.navbar-default {
+	background-color: #95c1d8;
+	border-color: #95c1d8;
+	padding-top: 1px;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: #ffffff;
+	background-color: #ff5b00;
+}
+
+
+
+.footertitle {
+	color: #ffffff;
+	font-size: 20px;
+	text-decoration: underline;
+}
+
+a {
+	color: #ffffff;
+	text-decoration: none;
+	
+}
+
+
+.productingress{
+	font-size: 17px;
+	
+}
+
+select {
+	font-size: 16px;
+	font-weight: bold;
+	
+}
+
+#chat {
+	z-index: 1000;
+	background: transparent url(//static.repix.no/gfx/merkelapp/chat_offline.png) no-repeat scroll -2px 0px;
+	width: 35px;
+	height: 150px;
+	right: 110px;
+	position: fixed;
+	right: 0px;
+	top: 200px;
+}
+
+.row-height {
+	display: table;
+	table-layout: fixed;
+	height: 100%;
+	width: 100%;
+}
+
+.content {
+	min-height: 500px;
+}
+
+.footer {
+	margin-top: 15px;
+	background: #3A5563;
+}
+
+.footer a {
+	color: #ffffff;
+}
+
+.footer ul {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+	color: #ffffff;
+}
+
+.footer li {
+	padding: 0 0 5px 15px;
+}
+
+
+
+.frontpagebilde {
+	width: 100%;
+}
+
+.copywright {
+	color: #ffffff;
+}
+
+.clipartselect {
+	background-color: #ade3ff;
+	padding: 5px 0 0 10px;
+	border-radius: 4px;
+	margin-bottom: 5px;
+}
+
+.kassecontainer hr {
+	margin: 0px;
+}
+
+.productline {
+	padding: 5px 0px 0px 15px;
+}
+
+.footer {
+	padding: 15px 0;
+}
+
+.top15 {
+	margin-top: 15px;
+}
+
+.top4 {
+	margin-top: 4px;
+}
+
+.form-control {
+	font-size: 14px;
+}
+
+.well {
+	padding: 10px 0px 0px 0px;
+	background-color: #26aaeb;
+}
+
+.imagecontainer {
+	position: relative;
+}
+
+.cp-popover-container {
+	width: 300px;
+}
+
+.form-control {
+	color: #000000;
+	border-color: #ade3ff;
+	border-radius: 2px;
+}
+
+.alignment .glyphicon {
+	color: #000;
+}
+
+.loadercontainer {
+	position: absolute;
+}
+
+.loadingInfo {
+	position: absolute;
+}
+
+#loader-overlay {
+	position: absolute;
+	background-color: #333;
+	padding: auto auto;
+	margin: 0 !important;
+	z-index: 10000;
+}
+
+.loadingInfo {
+	text-align: center;
+	margin-top: 300px;
+	position: absolute;
+	z-index: 1000000;
+}
+
+.loadingInfo {
+	color: #fff;
+}
+
+/*** custom checkboxes ***/
+
+input[type=radio].with-font,
+input[type=checkbox].with-font {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+.kundeservice ul {
+	list-style-type: none;
+}
+
+.ul.kundeservice>li,
+.kundeservice>li {
+	display: inline-block;
+	padding-right: 65px;
+	letter-spacing: 2px;
+}
+
+input[type=radio].with-font~label:before,
+input[type=checkbox].with-font~label:before {
+	font-family: FontAwesome;
+	display: inline-block;
+	content: "\f1db";
+	letter-spacing: 10px;
+	font-size: 1.2em;
+	color: #535353;
+	width: 1.4em;
+}
+
+input[type=radio].with-font:checked~label:before,
+input[type=checkbox].with-font:checked~label:before {
+	content: "\f00c";
+	font-size: 1.2em;
+	color: darkgreen;
+	letter-spacing: 5px;
+}
+
+input[type=checkbox].with-font~label:before {
+	content: "\f096";
+}
+
+input[type=checkbox].with-font:checked~label:before {
+	content: "\f046";
+	color: darkgreen;
+}
+
+input[type=radio].with-font:focus~label:before,
+input[type=checkbox].with-font:focus~label:before,
+input[type=radio].with-font:focus~label,
+input[type=checkbox].with-font:focus~label {
+	color: green;
+}
+
+/*** custom checkboxes ***/
+
+input[type=checkbox] {
+	display: none;
+}
+
+/* to hide the checkbox itself */
+
+input[type=checkbox]+label:before {
+	font-family: FontAwesome;
+	display: inline-block;
+}
+
+input[type=checkbox]+label:before {
+	content: "\f096";
+}
+
+/* unchecked icon */
+
+input[type=checkbox]+label:before {
+	letter-spacing: 10px;
+}
+
+/* space between checkbox and label */
+
+input[type=checkbox]:checked+label:before {
+	content: "\f046";
+}
+
+/* checked icon */
+
+input[type=checkbox]:checked+label:before {
+	letter-spacing: 5px;
+}
+
+/* allow space for check mark */
+
+/* CUSTOM BUTTONS */
+
+.btn {
+	background-color: #26aaeb;
+	color: #ffffff;
+}
+
+.btn:hover {
+	background-color: #00c95c;
+	border-color: #8c8c8c;
+	color: #ffffff;
+}
+
+.btn-primary {
+	color: #fff;
+	background-color: #26aaeb;
+	border-color: #ccc;
+}
+
+.btn-primary:hover {
+	background-color: #00c95c;
+}
+
+.spinner {
+	width: 60px;
+}
+
+.spinner input {
+	text-align: right;
+}
+
+.input-group-btn-vertical {
+	position: relative;
+	white-space: nowrap;
+	width: 1%;
+	vertical-align: middle;
+	display: table-cell;
+}
+
+.input-group-btn-vertical>.btn {
+	display: block;
+	float: none;
+	width: 100%;
+	max-width: 100%;
+	padding: 8px;
+	margin-left: -1px;
+	position: relative;
+	border-radius: 0;
+}
+
+.input-group-btn-vertical>.btn:first-child {
+	border-top-right-radius: 4px;
+}
+
+.input-group-btn-vertical>.btn:last-child {
+	margin-top: -2px;
+	border-bottom-right-radius: 4px;
+}
+
+.input-group-btn-vertical i {
+	position: absolute;
+	top: 0;
+	left: 4px;
+}
+
+@media (max-width: 480px) {
+	.logodinmerkelapp {
+		display: none;
+	}
+}
+
+}

@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+   <head>
+   	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Photo Competition</tal:block>
+   
+<style type="text/css">
+	h3 { font-weight: bold }
+	h4 { font-weight: bold }
+	.error-warning {
+		color: #cc3333;
+		float:left;
+	}
+
+</style>
+	
+   </head>
+<body>
+<div class="container">
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	
+
+	<h1 style="color: #f0bef1; font-weight: bold; font-size: 65px;">
+		<span style="color: #71c6eb; font-weight: bold; font-size: 18px;">Norges beste</span>
+		<br/>Barnebilde
+	</h1>
+	
+	<div class="span-9 append-15 last">
+		<p>${competition/description}</p>
+	</div>
+
+	<h3 class="center prepend-top" tal:condition="exists:oncompleted" tal:content="oncompleted">The competition has ended</h3>
+	
+	<tal:block tal:condition="not:exists:oncompleted">
+
+		<div class="span-9">	
+			<form method="post" action="/${request/execpath}" id="register" class="reset" enctype="multipart/form-data">
+			
+					<div class="span-9 last">
+						<div class="">
+							<label for="fullname" i18n:translate="" >Full name</label>
+						</div>
+						<div class="">
+							<input type="text" 
+								class="title text-7 required fullname" 
+								name="fields[fullname]" id="fullname" value="" 
+								tal:attributes="value session/fullname|default" />
+						</div>
+					</div>
+
+					<div class="span-9 last">
+						<div class="">
+							<label for="email" class="" i18n:translate="">Email</label>
+						</div>
+						<div class="">
+							<input type="text" 
+								class="text text-7 required email" 
+								name="fields[email]" id="email" value="" 
+								tal:attributes="value session/username|default" />
+						</div>
+					</div>			
+
+					<div class="span-9 last">
+						<div class="">
+							<label for="phone" class="" i18n:translate="">Phone</label>
+						</div>
+						<div class="">
+							<input type="text" 
+								class="text text-7 required phone" name="fields[phone]" 
+								tal:attributes="value phone|default" value="" id="phone"
+							/>
+						</div>
+					</div>
+
+					<div class="span-9 last">
+						<div class="">
+							<label for="text" i18n:translate="">Image title</label>
+						</div>
+						<div  class="">
+							<input type="text" class="text text-7 required title" name="fields[title]" value="" id="title"/>
+						</div>
+					</div>
+
+					<div class="span-9 last">
+						<div class="">
+							<label for="image" i18n:translate="">Choose image</label>
+						</div>
+						<div class="">
+							<input type="file" class="text text-7 required image" name="image" value="" id="image"/>
+						</div>
+					</div>
+
+					<div class="span-9 last">
+						<div class="">
+							<label for="message" class="" i18n:translate="">Description</label>
+						</div>
+						<div class="">
+							<textarea class="textarea" name="message" id="message" style="width: 270px; height: 7em"></textarea>
+						</div>
+					</div>
+               <div class="span-9 last prepend-top"></div>
+					<div class="span-9 last">
+						<input type="checkbox" id="eula" class="required eula" name="eula"/> 
+						<label for="eula">
+							<tal:block i18n:translate="">
+								Yes, I accept the
+							</tal:block> 
+							<a href="${url:/mammanett/konkurransevilkaar/}" 
+								id="open-terms-and-conditions" 
+								i18n:translate="">Competitions conditions
+							</a>
+						</label>
+					</div>
+					<div class="span-9 last prepend-top">
+						<input type="checkbox" id="newsletter" class="newsletter ignore" name="newsletter" checked="checked"/> 
+						<label for="newsletter" i18n:translate="">Yes, I want to receive newsletters from Eurofoto and Mammanett</label>
+					</div>				
+					<div class="span-7 append-1 last prepend-top">
+							<button type="submit" class="button blue large submit" i18n:translate="">
+								Register image
+							</button>
+					</div>			
+					<div id="terms-and-conditions">
+						<tal:block tal:content="structure cms:body:4846bbf1-369b-4e1d-96c5-9aa81fa0e399" />
+					</div>
+					<div class="span-9 last" style="margin-top: 10px;">
+						<h3><a href="http://www.eurofoto.no/shared/album/2646460/barnebilde/1/134f56c01d3557ae9ef3b4c6a226cd0b">Se innsendte bidrag</a></h3>
+					</div>
+			</form>
+		</div>
+		
+		<div class="span-9"
+			style="background-image:url('${static:cms/images/konkurranser/mammanett/mammanett-premier-2.jpg}'); 
+			background-repeat: no-repeat; height: 636px; margin-top: -210px">
+			<div class="" style="margin: 405px 0 0 30px;">
+				<a href="http://nikon.no/no_NO/products/product_details.page?ParamValue=Digital%20Cameras&Subnav1Param=SLR&Subnav2Param=Consumer&Subnav3Param=0&RunQuery=l3&ID=1788" target="_blank">Nikon D5000</a><br/>
+				<a href="/produkter/lerret/lerret-med-ramme/30x50cm-lerret-montert-pa-ramme/">50x30cm lerret med ramme</a><br/>
+				<a href="/produkter/fotoboker/tema-boker/babyalbum/">30x30cm Babybok</a>
+			</div>
+			<div class="" style="margin: 180px 0 0 30px;">
+				<a href="/produkter/lerret/lerret-med-ramme/30x50cm-lerret-montert-pa-ramme/">50x30cm lerret med ramme</a><br/>
+				<a href="/produkter/fotoboker/tema-boker/babyalbum/">30x30cm Babybok</a>
+			</div>
+			<div class="" style="margin: -36px 0 0 220px;">
+				<a href="/produkter/fotoboker/tema-boker/babyalbum/">30x30cm Babybok</a>
+			</div>	
+		</div>
+
+		<div class="span-6 last" style="background-image:url('${static:cms/images/konkurranser/mammanett/1x1_graa.gif}'); background-repeat: repeat-y; margin-top: -60px;">	
+			<div class="span-6 last" style="padding-left: 20px;">
+				<h4>
+					I samarbeid med:
+				</h4>
+				<p>
+					<a href="http://www.mammanett.no/" target="_blank"><img 
+						src="${static:cms/images/konkurranser/mammanett/mammanett-logo.jpg}" width="170" /></a>
+				</p>
+				<h4>
+					Dette er juryen:
+				</h4>
+				<a href="http://www.nadiafrantsen.no/" target="_blank"><img src="${static:cms/images/konkurranser/mammanett/nadia.jpg}" /></a>	
+				<p>
+					<a href="http://www.nadiafrantsen.no/" target="_blank">Nadia Frantsen</a><br/>
+					Fotograf Nadia Frantsen gikk ut fra Norsk Fotofagskole i 2005 og har siden jobbet som frilanser på fulltid i Trondheim og Oslo. Nadia har vunnet både gull, sølv og diplom i konkurransene Utsnitt og Sterk Reklame.
+				</p>
+
+				<a href="http://www.foto.no/cgi-bin/articles/articleView.cgi?articleId=34547" target="_blank"><img src="${static:cms/images/konkurranser/mammanett/anja.jpg}" /></a>		
+				<p>
+					<a href="http://www.foto.no/cgi-bin/articles/articleView.cgi?articleId=34547" target="_blank">Anja Elmine Basma</a><br/>
+					Fotograf Anja Elmine Basma jobber som frilanser i Oslo, og er utdannet ved Norsk Fotofagskole i Trondheim. Anja har vunnet 4 gull i Utsnitt, Norges mest prestisjefulle kommersielle fotografikonkurranse.
+				</p>
+
+				<a href="http://www.flickr.com/photos/monamonamona/sets/72157600127976861/show/" target="_blank"><img src="${static:cms/images/konkurranser/mammanett/odegard.jpg}" /></a>
+				<p>
+					<a href="http://www.flickr.com/photos/monamonamona/sets/72157600127976861/show/" target="_blank">Mona Ødegård</a><br/>
+					Fotograf Mona Ødegård gikk ut fra Norsk Fotofagskole i 2005. Mona har jobbet for flere fotografer i over 3 år, og driver nå for seg selv i Oslo.
+				</p>		
+				
+			</div>
+		</div>
+		
+	</tal:block>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+
+   <script type="text/javascript">
+      $(document).ready(function() {  
+      
+      	$('form#register').validate({
+      		errorClass: "error-warning",
+      		errorPlacement: function(error, element) {
+           		error.appendTo( element.parent("div").prev("div") );
+         		},
+      		rules: {
+      			image: {
+                  required: true,
+                  accept: "jpg|jpeg"
+               }
+      		},
+      		messages: {
+      		   'fields[email]': {
+      				required: '<tal:block i18n:translate="">Please provide a valid email address.</tal:block>'
+      			},
+      			eula: {
+      				required: "<tal:block i18n:translate="">You have to read and accept the terms and conditions</tal:block>"
+      			},
+      			image: {
+      				accept: "<tal:block i18n:translate="">Image must be a .jpg</tal:block>"
+      			}
+      			
+      		}
+      	});
+      	$.extend($.validator.messages, {
+             required: "<tal:block i18n:translate="">This field is required.</tal:block>"
+         });
+      	
+      	$('#terms-and-conditions').addClass('hide');
+      	
+      	$('#terms-and-conditions').css('background-color', '#fff');
+      	
+      	$('#open-terms-and-conditions').click( function() {
+      		$('#terms-and-conditions').removeClass('hide').dialog({
+      			width: 700,
+      			height: 500,
+      			buttons: {
+      				'Ok': function() {
+      					$(this).dialog('destroy')
+      				}
+      			},
+      			close: function() {
+      				$(this).dialog('destroy')
+      			}
+      		});
+      		return false;
+      	});
+      });
+   </script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Search photos</tal:block>
+</head>
+
+
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+	<tal:block tal:define="global menuitem string:search" metal:use-macro="../common.html/menu" />
+	
+	<div id="content">
+
+		<form action="/myaccount/search/result" method="post" id="login">
+			<div>
+				<h2 i18n:translate="">Search images and albums</h2>
+
+				<div class="span-16 last">
+					<label for="email" i18n:translate="">Search for:</label><br />
+					<input type="text" id="searchstring" class="text" name="string" value="${string}"/>
+					<button type="submit" name="Search" class="button inline">
+						<tal:block i18n:translate="" >Search</tal:block>
+					</button>
+				</div>
+
+				<hr class="space" />
+				
+				<ul class="search-categories" tal:condition="exists:result">
+					<li class="current">
+						<a href="." class="current" id="show-all" i18n:translate="">All</a>
+					</li>
+					<li tal:condition="exists: result/albums">
+						<a href="#albums" id="show-albums" i18n:translate="">Your albums</a>
+					</li>
+					<li tal:condition="exists: result/images">
+						<a href="#images" id="show-images" i18n:translate="">Your images</a>
+					</li>
+					<li tal:condition="exists: result/friendsimages">
+						<a href="#friends-images" id="show-friends-images" i18n:translate="">Friends' images</a>
+					</li>
+					<li tal:condition="exists: result/sharedalbums">
+						<a href="#friends-albums" id="show-friends-albums" i18n:translate="">Friends Albums</a>
+					</li>
+				</ul>
+				
+				<hr />
+				
+				<tal:block tal:condition="not:exists:result">
+					<h2 i18n:translate="">No results, try again</h2>
+				</tal:block>
+				
+				<div id="result">
+					
+					<div class="albums" id="albums">
+						<h4 class="bottom" i18n:translate="">Your albums</h4>
+						<ul tal:condition="exists: result/albums">
+							<tal:block tal:repeat="album result/albums">
+								<li class="albumPreview" tal:condition="album">
+								<div class="skimmer">	
+									<a tal:attributes="href album/albumurl; title album/title">
+										<img tal:attributes="src album/thumbnailurl; alt album/title" class="thumb" src="" tal:condition="album/thumbnailurl"/>
+										<img src="http://static.eurofoto.no/gfx/404/not_found_70px.jpg"class="thumb" tal:condition="not:album/thumbnailurl" alt="not found"/>
+									</a>
+									<ul class="hide" tal:condition="album/defaultthumbnails">
+										<tal:block tal:repeat="thumb album/defaultthumbnails">
+											<li>
+												<img src="" alt="${thumb/title}" tal:attributes="src thumb/thumbnail"/>
+											</li>
+										</tal:block>
+									</ul>
+								</div>
+								<div class="center">
+									<span tal:content="shorten:album/title;15"></span>
+								</div>
+								</li>
+							</tal:block>
+						</ul>
+						<hr />
+					</div>
+					
+					<div class="images" tal:condition="exists:result/images" id="images">
+						<h4 class="bottom" i18n:translate="">Your images</h4>
+						<tal:block tal:repeat="image result/images">
+							<div class="imagecontainer thumb span-4 last" tal:condition="lte:repeat/image/number,20">
+								<a href="" title="${image/title}" class="thumb" rel="" tal:attributes="href image/urls/private">
+									<img src="" alt="" tal:attributes="src image/thumbnail; alt image/title" class="thumb_110px" />
+								</a>
+								<!--<input type="checkbox" class="select" value="${image/id}" name="image"/>-->
+								<label for="" tal:content="shorten:image/title;15" class="small name editable"id="${image/id}" title="${image/title}"/>
+							</div>
+						</tal:block>
+						<hr />
+					</div>
+					
+					<div class="albums friendsalbums" tal:condition="exists:result/friendsalbums" id="friends-albums">
+						<h4 class="bottom" i18n:translate="">Friends albums</h4>
+						<hr />
+					</div>
+					
+					<div class="images friendimages" tal:condition="exists:result/friendimages" id="friends-images">
+						<h4 class="bottom" i18n:translate="">Friends' images</h4>
+						<hr />
+					</div>
+				</div>
+			</div>
+		</form>
+		
+	</div>
+	
+		
+</div>
+
+
+<div metal:use-macro="../../../${templates}/common.html/footer" />
+
+<script type="text/javascript">
+	//<![CDATA[
+	$(document).ready(function() {
+		$('#searchstring').select().focus();
+
+		$('.albums .skimmer').skimmer();
+
+		$('#show-all').click( function() {
+		   $('.search-categories li a').removeClass('current');
+		   $(this).addClass('current');
+			$('#result div').show('fast');
+			return false;
+		});
+
+		$('#show-albums').click( function() {
+		   $('.search-categories li a').removeClass('current');
+		   $(this).addClass('current');
+			$('#result div#albums').show();
+			$('#result > div').filter(':not(#albums)').hide('fast');
+			return false;
+		});
+
+		$('#show-images').click( function() {
+		   $('.search-categories li a').removeClass('current');
+		   $(this).addClass('current');
+			$('#result div#images').show();
+			$('#result > div').filter(':not(#images)').hide('fast');
+			return false;
+		});
+
+		$('#show-friends-images').click( function() {
+		   $('.search-categories li a').removeClass('current');
+		   $(this).addClass('current');
+			$('#result div#friends-images').show();
+			$('#result > div').filter(':not(#friends-images)').hide('fast');
+			return false;
+		});
+		$('#show-friends-albums').click( function() {
+		   $('.search-categories li a').removeClass('current');
+		   $(this).addClass('current');
+			$('#result div#friend-albums').show();
+			$('#result > div').filter(':not(#friends-albums)').hide('fast');
+			return false;
+		});
+	});
+	//]]>
+</script>
+
+
+</body>
+</html>

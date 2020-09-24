@@ -1,0 +1,197 @@
+<head metal:define-macro="head" tal:omit-tag="">
+
+   <link type="text/css" rel="stylesheet" href="${static:css/jquery/imageareaselect/imgareaselect-animated.css}" />
+
+   <script src="${static:js/jquery.colourPicker.js}"/>
+
+</head>
+
+
+<tal:block metal:define-macro="productlist">
+   
+  <div class="row top15">
+		
+		 <table class="table table-striped addtocart" style="border-bottom: solid 1px">
+			<thead>
+			   <tr>
+				  <td>Produkt</td>
+				  <td>Antall</td>
+				  <td>Enhetspris</td>
+				  <td class="hidden-xs">Total</td>
+			   </tr>
+			</thead>
+			<tbody>
+			    <tr tal:repeat="select selected" class="productline">
+				  
+				  <td>
+					 <input class="choose_product" type="hidden" name="productoptionid" value="5609" />
+					 <input class="malinput" type="hidden" name="mal" value="5609" />
+					 <label class="producttitle" tal:content="select/product/title"></label>
+				  </td>
+				  <td><div class="input-group spinner">
+						<input type="text" name="quantity" class="form-control input-number productquantity" tal:attributes="value repeat/select/start"/>
+						   <div class="input-group-btn-vertical">
+							  <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+							  <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+						   </div>
+						</div>
+				  </td>
+				  <td style="min-width: 75px; padding: 8px 2px">
+					 kr. <span class="unitprice">${select/productoption/prices/0/price}</span>
+					 
+					 <div class="visible-xs">
+						<tal:block tal:condition="repeat/select/start"> kr. <span class="productprice">${select/productoption/prices/0/price}</span> </tal:block>
+						<tal:block tal:condition="not:repeat/select/start"> kr. <span class="productprice">0</span> </tal:block>
+					 </div>
+				  </td>
+				  <td style="min-width: 75px; padding: 8px 2px" class="hidden-xs">
+					 <tal:block tal:condition="repeat/select/start"> kr. <span class="productprice">${select/productoption/prices/0/price}</span> </tal:block>
+					 <tal:block tal:condition="not:repeat/select/start"> kr.<br/> <span class="productprice">0</span> </tal:block>
+					
+				  </td>
+	
+			   </tr>
+			   
+			</tbody>
+			
+		 </table>
+		<!-- <div class="col-md-12 text-right">
+			Totalt: kr. <span class="totalprice">179,00</span>
+				Totalt kr: <span class="totalprice"></span>
+		 </div>-->
+   </div>
+   <div class="col-md-12 top15 text-right">
+		 <button id="addtocart" class="btn btn-primary" disabled="disabled">
+			<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> </span><span i18n:translate="">Legg i handlekurv</span>
+		 </button>
+   </div>
+   
+   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+	 <div class="modal-content">
+	   <div class="modal-body">
+		 <div class="row">
+			<div class="col-md-12 text-center">
+			   <h3>Dine varer er lagt i handlekurven.</h3>
+			</div>
+			
+			<div class="col-md-12 text-center">
+			   <a href="#" class="reload btn btn-default">Fortsett å handle</a>
+			   <a href="/cart" class="btn btn-primary">Gå til handlevognen</a>
+			</div>
+		 </div>
+	   </div>
+	 </div>
+   </div>
+ </div>
+</tal:block>
+
+<tal:block metal:define-macro="shoppingcart">
+
+         <div class="span-8 last">
+            <div class="editor-header-cart" i18n:translate="">Shoppingcart:</div>
+            <div class="box" style="height:452px; padding: 0em;">
+            
+            <div style="padding: 0em 1.5em 1.5em 1.5em;">
+            
+               <div id="shopping-cart" tal:condition="exists: cart/items/merkelapp" style="height:221px;">
+                    <table style="width:262px; margin-top:20px; border-bottom:1px solid #ddd;">
+                      <tbody>
+                      <tal:block tal:repeat="items cart/items/merkelapp">
+                      <tr tal:repeat="item items">
+                        
+                        <td><img style="border:1px solid black;"  src="/bestilling/thumb/${item/referenceid}"/> </td>
+                        <td tal:content="item/product/title">Content</td>
+                        <td> ${item/unitprice} </td>
+                        <td>
+                        <a href="/bestilling/remove/${item/prodno}/${item/referenceid}" title="Remove" name="${item/prodno}"><img src="${static:gfx/merkelapp/delete_btn.png}"/></a></td>
+                      </tr>
+                      </tal:block>
+                    </tbody></table>
+                    <div style="padding: 4px;">
+                     <span class="span-4">Total Pris:</span><span class="span-1 right">kr:</span> <span class="span-1 last" id="cart-price"></span>
+                    </div>
+                    
+                    <div class="span-7 last right">
+                     <a href="/bestilling/accessories" class="btn btn-primary"><span>Gå Videre</span><span><img src="${static:gfx/merkelapp/icons/iconbuy.png}"/></span></a>
+                    </div>
+                    
+                  </div>
+                  <div id="shopping-cart" tal:condition="not:exists: cart/items/merkelapp" style="height:221px;">
+                     <div tal:content="structure cms:body:5f0f301c-ec45-4680-922a-23d9cc926121"/>
+                  </div>
+                  
+                </div>
+            </div>
+         </div>
+         
+</tal:block>
+
+<tal:block metal:define-macro="top-header">
+   <script type="text/javascript" src="${static:js/merkelappslider.js}" />
+   
+   <div class="span-16">
+	       <!-- articleid 2914 -->
+               <div tal:content="structure cms:body:898b9940-4e7a-4ba0-9326-3c7465118a23"/>
+         </div>
+         <div class="span-8 last">
+	       <!-- articleid 2913, 3088, 3089 -->
+	    <div>
+	       <ul class="merkelapp-rotator" style="margin: 0 1.5em 1.5em 0.5em;">
+               <tal:block tal:repeat="menuitem menu:b733735d-4293-4cef-8900-191fb4d5b19c,1,1">
+		  <tal:block tal:repeat="item menuitem/content" tal:condition="exists:menuitem/content">
+			<li tal:content="structure item/body|default"></li>
+		  </tal:block>
+	       </tal:block>
+	       </ul>
+            </div>
+         </div>
+   
+</tal:block>
+
+<div metal:define-macro="bottominfo">
+   <div class="row top15 hidden-xs">
+		<div class="col-md-12">
+			<div class="col-md-4">
+				<img src="/tmp/maskotter.jpg"/>
+			</div>
+			<div class="col-md-4">
+				<p>
+					Merkelapper fås i to varianter. 
+				</p>
+				<p>
+					Strykelapper for merking av tøy (Anbefales for rimelig og holdbar merking) 
+				</p>
+
+				<p>
+					Eller fargelapper til bruk på både ting og tøy.
+				</p>
+			</div>
+			<div class="col-md-4">
+				<img src="/tmp/bestitest.jpg"/>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<tal:block metal:define-macro="bottom">
+   <div class="span-16">
+	    <!-- articleid 2915 -->
+            <div tal:content="structure cms:body:98267ca8-f3b4-4e7c-8426-e64995388504"/>
+         </div>
+         <div class="span-8 last">
+            <div class="facebook-box">
+            <div class="fb-like-box" data-href="https://www.facebook.com/Dinmerkelapp" data-width="292" data-height="250" data-show-faces="true" data-stream="false" data-header="false"></div>
+               <div id="fb-root"></div>
+               <script>(function(d, s, id) {
+                 var js, fjs = d.getElementsByTagName(s)[0];
+                 if (d.getElementById(id)) return;
+                 js = d.createElement(s); js.id = id;
+                 js.src = "//connect.facebook.net/nb_NO/all.js#xfbml=1";
+                 fjs.parentNode.insertBefore(js, fjs);
+               }(document, 'script', 'facebook-jssdk'));</script>
+            </div>
+         </div>
+   
+</tal:block>

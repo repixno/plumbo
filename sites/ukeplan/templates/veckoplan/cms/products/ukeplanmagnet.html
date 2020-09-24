@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title"/>
+		<!-- Fotorama -->
+	<link href="/js/fotorama/fotorama.css" rel="stylesheet" />
+	<script src="/js/fotorama/fotorama.js"></script>
+  
+
+	<style type="text/css">
+
+		.fotorama__wrap{
+		  margin: auto;
+		}
+		.fotorama__img{  
+		}
+		.productcategories h2{
+			background: #e7e5e4;
+			font-size: 1.3em;
+			border-top: solid 1px #ccc;
+			border-bottom: solid 1px #ccc;
+			padding: 5px;
+			text-transform: uppercase;
+		}
+	</style>
+</head>
+
+
+	
+	<tal:block define:section="plexi, Plexiglas (products)" /> <!-- static html, (article), 2+ products -->
+	<tal:block define:section="plexialu, Plexiglas + alu (products)" /> <!-- static html, (article), 2+ products -->
+	<tal:block define:section="magnet, Magnettavle (products)" /> <!-- static html, (article), 2+ products -->
+	<tal:block define:section="magnet_dk, Magnettavle DK (products)" /> <!-- static html, (article), 2+ products -->
+
+
+
+<body>
+
+   <div class="container product-category">
+      
+      <div metal:use-macro="../../../${templates}/common.html/top" />
+	  
+	  
+	  
+	  <div class="frontpagemain row">
+		<div class="visible-xs col-md-12">
+			<h3 tal:content="menuitem/article/title"></h3>
+		</div>
+		<div class="col-md-8 col-md-push-4">
+			<div class="fotorama center"
+				data-nav="thumbs"
+				data-auto="false"
+				data-thumbmargin="15"
+				data-width="1000"
+				data-maxwidth="100%"
+				data-ratio="16/9"
+				data-shadows="true"
+				data-allowfullscreen="true">
+				<a href="" data-thumb="" data-caption=""></a>
+			</div>
+			
+		</div>
+		<div class="col-md-4 frontpage-top-left col-md-pull-8" >
+			<h3 class="hidden-xs" tal:content="menuitem/article/title"></h3>
+			<div tal:content="structure menuitem/article/body|default"></div>
+		</div>
+	</div>
+  
+      <div class="col-md-12 productcategories">
+		
+		<div class="row" tal:condition="exists:sections/plexi">
+			<h2 class="col-md-12" i18n:translate="">Ukeplan i pleksiglass</h2>
+		</div>
+		<div class="row content">	
+			<tal:block tal:condition="exists:sections/plexi" tal:repeat="item sections/plexi">
+				<tal:block metal:use-macro="${templateroot}/ukeplan/cms/cms.html/product-as-list-item-with-image" />
+			</tal:block>
+		</div>
+		<div class="row productinfo" tal:condition="exists:sections/plexi">
+			<div class="content" tal:content="structure cms:body:758d2daf-fa4a-4987-8d9f-0c08a8289c11"></div>
+		</div>
+            
+		<div class="row" tal:condition="exists:sections/plexialu" >
+			<h2 i18n:translate="">Ukeplan i pleksiglass med aluminium bakside</h2>
+		</div>
+		
+		<div class="row">
+			
+	
+	
+			<tal:block tal:condition="exists:sections/plexialu"  tal:repeat="item sections/plexialu">
+				<tal:block metal:use-macro="${templateroot}/ukeplan/cms/cms.html/product-as-list-item-with-image" />
+			</tal:block>
+
+		</div>
+
+		<div class="row productinfo" tal:condition="exists:sections/plexialu">
+			<div class="content" tal:content="structure cms:body:14de4a7e-b89b-43d8-a7d1-9105b4a43828"></div>
+		</div>
+		
+		
+		<div class="row" tal:condition="exists:sections/magnet" >
+			<h2 i18n:translate="">Ukeplan i Magnetfolie</h2>
+		</div>	
+		<div class="row">
+			<tal:block tal:condition="exists:sections/magnet"  tal:repeat="item sections/magnet">
+				<tal:block metal:use-macro="${templateroot}/ukeplan/cms/cms.html/product-as-list-item-with-image" />
+			</tal:block>
+		</div>
+		<div class="row productinfo" tal:condition="exists:sections/magnet">
+			<div class="content" tal:content="structure cms:body:c63ef6ee-4dfd-4f0d-a1b0-f9dc9d2efab7"></div>
+		</div>
+
+      </div>
+	  
+	  <tal:block metal:use-macro="../../../${templates}/common.html/newsletter" />
+	  <hr/>
+	  <tal:block tal:condition="exists:sections/plexialu" metal:use-macro="../../../${templates}/common.html/to-gallery" />
+	  
+	  <tal:block tal:condition="not:exists:sections/plexialu">
+		<div class="row">
+			<div class="col-md-8">
+				<!-- article 3892 -->
+			  <tal:block tal:content="structure cms:body:6afd28a7-cb17-440d-80f3-70e200b7f0d3"/>
+			</div>
+		  </div>
+	  </tal:block>
+	  
+   </div>
+
+   
+   
+   
+   
+   <div metal:use-macro="../../../${templates}/common.html/footer" />
+
+<script type="text/javascript">
+
+//<a href="{image/fullsize}/1000/1000/{image/title}" data-thumb="{image/thumbnail}" data-caption="{image/description}"></a>
+
+$(document).ready( function(){
+   $('#ukeplan').addClass( 'active-module' );
+   
+   $.post( "/api/1.0/productpages/minigalleries/", { albumid: "4415695" }, function( data ) {	
+		$('.fotorama').fotorama({
+					data: data.imagedata
+				  });
+		}, "json");
+   
+   
+   
+});
+
+
+</script>
+</body>
+</html>

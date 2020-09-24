@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pricelist>
+
+   <segment id="standard" title="Standard" icon="" url="" i18n:attributes="title">
+   
+      <!-- prints -->
+      <subsegment id="prints" title="Prints" icon="" url="" i18n:attributes="title">
+   	<tal:block tal:repeat="print pricelist/prints">
+         <product prodno="${print/prodno}" title="${print/title}">
+         <tal:block repeat="price print/prices">
+            <price min="${price/min}" max="${price/max}" tal:content="formatprice:price/price"></price>
+   		</tal:block>
+         </product>
+   	</tal:block>
+   	</subsegment>
+      
+   	<!-- cropping -->
+      <subsegment id="cropping" title="Cropping" icon="" url="" i18n:attributes="title">
+   	<tal:block tal:define="global productionmethods pricelist/productionmethods" />
+   	<tal:block tal:repeat="productionmethod productionmethods">
+         <product prodno="${productionmethod/prodno}" title="${productionmethod/title}">
+         <tal:block repeat="price productionmethod/prices">
+            <price min="${price/min}" max="${price/max}" tal:content="formatprice:price/price"></price>
+   		</tal:block>
+         </product>
+   	</tal:block>
+   	</subsegment>
+   	
+   	<!-- paper quality -->
+      <subsegment id="paper-quality" title="Paper quality" icon="" url="" i18n:attributes="title">
+   	<tal:block tal:define="global paperquality pricelist/paperquality" />
+   	<tal:block tal:repeat="paper paperquality">
+         <product prodno="${paper/prodno}" title="${paper/title}">
+         <tal:block repeat="price paper/prices">
+            <price min="${price/min}" max="${price/max}" tal:content="formatprice:price/price"></price>
+   		</tal:block>
+         </product>
+   	</tal:block>
+   	</subsegment>
+   	
+   	<!-- color and brightness correction -->
+   	<subsegment id="color-and-brightness-correction" title="Color and brightness correction" icon="" url="" i18n:attributes="title">
+   	<tal:blck tal:define="global correctionmethods pricelist/correctionmethods" />
+   	<tal:block tal:repeat="correctionmethod correctionmethods">
+   	   <product prodno="${correctionmethod/prodno}" title="${correctionmethod/title}">
+         <tal:block repeat="price correctionmethod/prices">
+            <price min="${price/min}" max="${price/max}" tal:content="formatprice:price/price"></price>
+   		</tal:block>
+         </product>
+   	</tal:block>
+   	</subsegment>
+   	
+   	<!-- enlargements (with single photo) -->
+   	<subsegment id="enlargements-with-single-photo" title="Enlargements (with single photo)" icon="" url="" i18n:attributes="title">
+   	<tal:block tal:repeat="enlargement pricelist/enlargements">
+   	   <product prodno="${enlargement/prodno}" title="${enlargement/title}">
+         <tal:block repeat="price enlargement/prices">
+            <price min="${price/min}" max="${price/max}" tal:content="formatprice:price/price"></price>
+   		</tal:block>
+         </product>
+   	</tal:block>
+   	</subsegment>
+
+	</segment>
+	
+	<tal:block tal:repeat="category pricelist/products">
+		<segment id="${category/menu/article/urlname}" title="${category/menu/title}" icon="${static:}images/menu/${category/menu/image}" url="${category/menu/url}">
+			<tal:block tal:repeat="section category/sections">
+				<subsegment id="${urlize:section/title}" title="${section/title}" icon="" url="${section/product/product/url}">
+					<tal:block tal:repeat="product section/products">
+						<product prodno="${product/product/option/prodno}" title="${product/product/title}" url="${product/product/url}" tal:condition="exists:product/product/option/prices">
+							<tal:block repeat="price product/product/option/prices">
+								<price min="${price/min}" max="${price/max}" tal:content="formatprice:price/price"></price>
+							</tal:block>
+						</product>
+					</tal:block>
+				</subsegment>
+			</tal:block>
+		</segment>
+	</tal:block>
+	
+</pricelist>

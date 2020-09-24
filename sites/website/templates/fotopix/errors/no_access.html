@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../common.html/head" />
+	<title>No access</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="../common.html/top" />
+
+	
+	<div class="span-24">
+		
+		<div class="prepend-1 span-9 prepend-top">
+			<img src="http://static.repix.no/gfx/404/no_access.jpg" alt="Access denied" i18n:attributes="alt" />
+
+			<div class="prepend-1 span-7 append-1 last">
+			<h3 i18n:translate="">Are you certain that you are supposed to have access to this image?</h3>
+			<p i18n:translate="">Did you find a link? Did a friend send you this link. If you can't access it after logging in, you should try to contact the source of this link.</p>
+			</div>
+		</div>
+		
+		<div class="span-14 last  prepend-top">
+			<h2 class="bottom" i18n:translate="">Access denied</h2>
+			<h4 class="top" i18n:translate="errormessage"></h4>
+
+			<div class="span-8 last">
+				<div class="box">
+				<h3 i18n:translate="">Signed in incorrectly?</h3>
+				<form action="/login/" method="post">
+					<div>
+						<label for="login-email" i18n:translate="">E-mail</label><br/>
+						<input id="login-email" name="email" type="text" class="text span-4" />
+					</div>
+
+					<div>
+						<label for="login-password" i18n:translate="">Password</label><br/>
+						<input id="login-password" name="password" type="password" class="text span-4" />
+						<a i18n:translate="">Forgot password?</a>
+					</div>
+					<div>
+						<input type="checkbox" name="rememberme" id="login-rememberme"/>
+						<label for="login-rememberme" i18n:translate="">Remember me next time</label>
+					</div>
+					<div class="right">
+						<button class="blue large" i18n:translate="" type="submit">Log in</button>
+					</div>
+				</form>
+			</div>
+				<div class="prepend-top">
+					<h3 i18n:translate="">Not you, and not a user?</h3>
+					<a href="/register/" class="button blue large" i18n:translate="">Sign up now!</a>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../common.html/footer" />
+	</div>
+</div>
+
+	<script type="text/javascript">
+		try{
+			pageTracker._trackEvent('Security', 'No access');
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+
+
+</body>
+</html>

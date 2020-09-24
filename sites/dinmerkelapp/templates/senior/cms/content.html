@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+</head>
+
+
+<body>
+		<div id="seniorpage-main">
+			<aside id="seniorpage-hero" class="js-fullheight">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+	<!-- use if menu is needed -->
+	<div class="span-4">
+		<ul metal:use-macro="cms.html/menu-current"></ul>
+	</div>
+	
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div id="content">
+
+		<!-- put the content here -->	
+		
+		<tal:block tal:condition="exists:item">
+
+			<h2 tal:content="item/title">Item title</h2>
+
+			<p class="ingress"><strong tal:content="item/ingress"></strong></p>
+
+			<tal:block tal:content="item/body" />
+
+		</tal:block>
+
+		<tal:block tal:condition="exists:items"> 
+		</tal:block>
+
+	</div>
+
+	<!-- use if menu is needed -->
+	<div metal:use-macro="../../${templates}/common.html/right-menu" />
+</aside>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

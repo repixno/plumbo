@@ -1,0 +1,28 @@
+@import "_variables.scss";
+@import "./node_modules/bootstrap/scss/bootstrap";
+@import "./node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
+@import "./node_modules/@fortawesome/fontawesome-free/scss/regular";
+@import "./node_modules/@fortawesome/fontawesome-free/scss/brands";
+@import "./node_modules/@fortawesome/fontawesome-free/scss/solid";
+@import "./node_modules/jquery-ui/themes/base/core";
+//@import "./node_modules/jquery-ui/themes/base/theme";
+//@import "./node_modules/query-simplecolorpicker/jquery.simplecolorpicker.css";
+
+
+body {
+	/* background: #C8F0FC url(http://www.zingerbug.com/Backgrounds/background_images/mini_white_snowflakes_on_light_blue.jpg);
+  */
+	background-color: #ffffff;
+	height: 100%;
+	/*font-family: quicksandbold;*/
+	/*font-family: 'Comfortaa' !important;*/
+
+	/*padding-top: 60px; */
+	color: #000000;
+	font-size: 1.2rem;
+}
+
+
+
+
+

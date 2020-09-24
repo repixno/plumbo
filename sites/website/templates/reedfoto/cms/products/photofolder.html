@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+	<style type="text/css">
+		p.ingress {
+			color: #999;
+			font-size: 14px;
+			line-height: 18px;
+		}
+		h4 { font-weight: bold; margin-bottom: .5em}
+		
+		div.products div.product { border-bottom: 1px solid #f4f4f4; margin-top: .5em; padding-bottom: .5em }
+		div.products div.product:last-child { border-bottom: none }
+		
+      .calendar-top {
+        height: 208px;
+        
+        <tal:block tal:condition="exists:menuitem/article/attachments/background">
+        background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+        </tal:block>
+        
+        background-repeat:no-repeat;
+      }
+      .calendar-top p{ font-size: 14px }
+      
+      .photofolders{
+        border-right: 1px solid #EEE;
+        
+      }
+        
+		
+	</style>
+</head>
+
+
+
+<body>
+	<div class="container">
+
+		<div metal:use-macro="../../../${templates}/common.html/top"></div>
+		
+		<div metal:use-macro="../cms.html/top-navigation" />
+
+		<div id="leftmenu">
+			<div metal:use-macro="../cms.html/menu-current" />
+		</div>
+		<div class="span-20 last product-category">
+	     <div class="span-20 last calendar-top top">
+				<div class="content">
+					<h1>${menuitem/article/title}</h1>
+					<p>${menuitem/article/ingress}</p>
+				</div>
+			</div>
+			<div class="span-20 last">
+				<p tal:content="structure menuitem/article/body|default"></p>
+			</div>
+			<hr/>
+			
+		 	<div class="span-20 last">
+		 	<tal:block tal:repeat="item items">
+		 	<div class="span-9 colborder append-bottom" tal:condition="not:mod:repeat/item/number,2">
+		 	<div class="span-5">
+		 	<h3>${item/title}</h3>
+		 	${item/ingress} 
+		 	<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/more-info-link" />
+		 	<br/><br/>
+		 	<h4><tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" /></h4>
+		 	<a class="button large" tal:condition="item/option/purchaseurl"
+            tal:attributes="href item/option/purchaseurl"
+            i18n:translate="">
+            Create product
+         </a>
+		 	</div>
+		 	<div class="span-4 last">
+		 		 <tal:block tal:repeat="image item/images">
+					<tal:block tal:condition="equal:repeat/image/number,1">
+						<a rel="product-photos" tal:condition="image/url" href="${item/option/purchaseurl}" class="productphoto group">
+							<img src="${static:}images/products/thumbs/square/231/${image/url}" title="" height="150" width="150" />
+						</a>
+						<tal:block tal:condition="not:image/url">
+						<a rel="product-photos" class="group" title="Product photo is missing" >
+							<img src="${static:}gfx/404/not_found_180px.jpg" alt="Product photo is missing" height="150" width="150" i18:attributes="alt"/>
+						</a>
+						</tal:block>
+					</tal:block>
+				</tal:block>
+		 	</div>
+		 	</div>
+		 	
+		   <div class="span-10 append-bottom last photofolders2" tal:condition="mod:repeat/item/number,2">
+		 	<div class="span-4">
+		 	<h3>${item/title}</h3>
+		 	${item/ingress} 
+		 	<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/more-info-link" />
+		 	<br/><br/>
+		 	<h4><tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" /></h4>
+		 	<a class="button large" tal:condition="item/option/purchaseurl"
+            tal:attributes="href item/option/purchaseurl"
+            i18n:translate="">
+            Create product
+         </a>
+		 	</div>
+		 	<div class="span-4 last">
+		 		 <tal:block tal:repeat="image item/images">
+					<tal:block tal:condition="equal:repeat/image/number,1">
+						<a rel="product-photos" tal:condition="image/url" href="${item/option/purchaseurl}" class="productphoto group">
+							<img src="${static:}images/products/thumbs/square/231/${image/url}" title="" height="150" width="150" />
+						</a>
+						<tal:block tal:condition="not:image/url">
+						<a rel="product-photos" class="group" title="Product photo is missing" >
+							<img src="${static:}gfx/404/not_found_180px.jpg" alt="Product photo is missing" height="150" width="150" i18:attributes="alt"/>
+						</a>
+						</tal:block>
+					</tal:block>
+				</tal:block>
+		 	</div>
+		 	</div>
+		 	
+		 	<hr tal:condition="mod:repeat/item/number,2" />
+		 	</tal:block>
+			</div>
+			
+			
+			
+		</div>
+	</div> <!-- end container -->
+	<div class="footer">
+		<div class="container">
+			<div metal:use-macro="../../../${templates}/common.html/footer" />
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <!-- Facebook sharing information tags -->
+        <meta property="og:title" content="Stabburet leverpostei ordrebekreftelse" />
+        
+        <title>Skanska leverpostei ordrebekreftelse</title>
+		<style type="text/css">
+			body {
+				background: #eee;
+				width: 800px;
+				font-family: skanska;
+			}
+			
+			
+			 @font-face {
+                        font-family: "skanska";
+                        src: url('/skanska/SkanskaSansPro-Regular.ttf');
+                        /*src: url('/fonts/andbasr-webfont.eot?#iefix') format('embedded-opentype'),
+                                 url('/fonts/andbasr-webfont.woff') format('woff'),
+                                 url('/fonts/andbasr-webfont.ttf') format('truetype'),
+                                 url('/fonts/andbasr-webfont.svg#andika_basicregular') format('svg');*/
+                        font-weight: normal;
+                        font-style: normal;
+                }
+				
+			
+			
+			
+			
+			.content {
+				text-align: left;
+				font-family: skanska;
+				color: #014a81;
+			}
+			
+			td {
+				background: #e2e2e2;
+    color: #0880bd;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 9px 25px 9px 33px;
+    width: 350px;
+			}
+			
+        .wrapper{
+			margin-left: 10px;
+		}
+		
+		.footers{
+			height: 50px;
+			background-color: #002945;
+		}
+
+		.header{
+			height: 50px;
+			background-color: #002945;
+		}
+		
+		
+		</style>
+	</head>
+    <body>
+    	<center>
+			<div class="container" style="background: #fff;">
+				<div class="content">
+				<div class="header text-center">
+					<a  class="text-center" style="color: #ffffff;" href="https://www.skanska.no">Skanska.no</a>
+					<!--<img src="http://static.repix.no/cms/images/20180724_topp.jpg" alt="header"/>-->
+				</div>
+				
+                    <div class="wrapper">
+                        
+					<h3 style="margin-top:0px"><tal:block tal:content="cms:title:3fe7b71e-d895-4ad2-8460-f8bd44b236b6"></tal:block></h3>
+					<p>Ditt ordrenr er <tal:block tal:replace="orderid"/><br/><br/>
+					Ta godt vare på denne e-posten helt til du mottar dine varer.<br/>Ved kontakt med vårt kundesenter vennligst ha ditt ordrenummer klart.
+					</p>
+					
+					<p>
+					   <strong><tal:block i18n:translate="">Delivery Address:</tal:block></strong><br/>
+					   <tal:block tal:replace="deliveryinfo/name"/><br/>
+					   <tal:block tal:replace="deliveryinfo/address"/><br/>
+					   <tal:block tal:replace="deliveryinfo/zipcode"/> <tal:block tal:replace="deliveryinfo/city"/>
+					</p>
+                    <p>
+                     <strong><tal:block i18n:translate="">Ordered items:</tal:block></strong><br/>
+  <table>
+	<tr>
+		<td i18n:translate=""> <br/>
+			<br/> Title
+		</td>
+
+		
+
+
+		<td i18n:translate=""> <br/>
+			<br/> Quantity
+		</td>
+		
+	</tr>
+	<tr tal:repeat="row orderrow">
+		<td tal:content="row/title"> <br/> row
+		</td>
+		<br/>
+		
+		<td tal:content="row/quantity"> <br/> row
+		</td>
+		
+	</tr>
+</table>		</p>
+                  
+                    </div>
+					<div tal:content="structure cms:body:3fe7b71e-d895-4ad2-8460-f8bd44b236b6"/>
+
+                    
+                    <br/>
+                    <div><h3>Meld deg på vårt nyhetsbrev og få gode tilbud, inspirasjon og nyheter rett i din innboks.<br/> I tillegg får du også 75,- i velkomstgave til å lage en CEWE FOTOBOK!</h3>
+                         <a href="https://www.japanphoto.no/">
+                           <img style="width: 800px;"src="https://static.repix.no/cms/images/Grafikk%20Skanska.jpg" alt="skanska" title="skanska" />
+						
+                        </a>
+                    </div>
+                    </div>
+				 <br/>
+				
+				
+				
+				
+				
+				
+            
+					
+			</div>
+        </center>
+		
+		
+		
+		
+		
+		
+		
+		
+			<center>
+			<div class="container" style="background: #fff;">
+				<div class="content">
+				
+				
+                    <div class="wrapper">
+                        <h3> Thanks for your order</h3>
+					
+					<p>Your orderid is <tal:block tal:replace="orderid"/><br/><br/>
+					Take good care of this email until you receive your goods.<br/>When contacting our customer center please have your order number ready.
+					</p>
+					
+					<p>
+					   <strong><tal:block>Delivery Address:</tal:block></strong><br/>
+					   <tal:block tal:replace="deliveryinfo/name"/><br/>
+					   <tal:block tal:replace="deliveryinfo/address"/><br/>
+					   <tal:block tal:replace="deliveryinfo/zipcode"/> <tal:block tal:replace="deliveryinfo/city"/>
+					</p>
+                    <p>
+                     <strong><tal:block>Ordered items:</tal:block></strong><br/>
+  <table>
+	<tr>
+		<td i18n:translate=""> 
+			<br/> product
+		</td>
+
+		
+
+
+		<td>
+			<br/> Quantity
+		</td>
+		
+	</tr>
+	<tr tal:repeat="row orderrow">
+		<td tal:content="row/title"> <br/> row
+		</td>
+		<br/>
+		
+		<td tal:content="row/quantity"> <br/> row
+		</td>
+		
+	</tr>
+</table>		</p>
+                  
+                    </div>
+					<div tal:content="structure cms:body:3fe7b71e-d895-4ad2-8460-f8bd44b236b6"/>
+
+                    
+                    <br/>
+                    <div>
+						
+						
+						<h3>Sign up to our newsletter for good offers, inspiration and news straight to your inbox. <br/>We would als ogive you a welcome gift of 75 NOK for your first CEWE PHOTOBOOK!</h3>
+                         <a href="https://www.japanphoto.no/">
+                          
+						    <img style="width: 800px;"src="https://static.repix.no/cms/images/Grafikk%20Skanska2.jpg" alt="skanska" title="skanska" />
+                        </a>
+                    </div>
+                    </div>
+				 <br/>
+				
+				
+				
+				
+				
+				
+                    
+                <div class="footers text-center">
+					
+			<a  style="color: #ffffff;" href="https://www.skanska.no">Skanska.no</a>
+		
+				
+				</div>
+				
+					
+			</div>
+        </center>
+			
+			
+			
+			
+    </body>
+</html>

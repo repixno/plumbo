@@ -1,0 +1,282 @@
+.borderradius3 {
+  border-radius: 3px;-moz-border-radius:3px; -webkit-border-radius:3px;
+} 
+
+.lightshadow {
+ box-shadow: 1px 1px 2px rgba(0,0,0,0.1); -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.1); -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.1); 
+}
+
+.heavyshadow {  
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.5); 
+	-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.5); 
+	-moz-box-shadow: 2px 2px 5px rgba(0,0,0,0.5); 
+}
+
+/* /admin/user/<id> */
+
+#correctionlist .delete, #correctionlist .change, #correctionlist .view {
+   display: block;
+   float: right;
+   margin: 0px 4px;
+}
+
+#correctionlist li { margin: 3px; list-style: none }
+#correctionlist li:nth-child(even) { background-color: #CFDDDD }
+#correctionlist li:nth-child(odd) { background-color: #B7D3D9 }
+
+/* /admin/ */
+
+#userlist .delete, #userlist .change {
+   display: block;
+   float: right;
+   margin: 0px 4px;
+}
+
+#userlist li { margin: 3px; list-style: none }
+#userlist li:nth-child(even) { background-color: #CFDDDD }
+#userlist li:nth-child(odd) { background-color: #B7D3D9 }
+
+#adminlist .delete, #adminlist .change {
+   display: block;
+   float: right;
+   margin: 0px 4px;
+}
+
+#adminlist li { margin: 3px; list-style: none }
+#adminlist li:nth-child(even) { background-color: #CFDDDD }
+#adminlist li:nth-child(odd) { background-color: #B7D3D9 }
+
+/* /corrections/ */
+
+.correction {
+   /* vær så snill og gjør noe pent og boxete her... i tried and failed */
+   
+   display:inline;
+   background-color:#505050;
+   border:1px solid;
+   border-color:#505050;
+   margin:0 auto;
+   text-align: center;
+   margin: 0px 10px 10px 10px;
+   cursor: pointer;
+   width: 140px;
+   min-height: 140px;
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#606060', endColorstr='#888888'); /* for IE */
+   background: -webkit-gradient(linear, left top, left bottom, from(#606060), to(#888888)); /* for webkit browsers */
+   background: -moz-linear-gradient(top,  #606060,  #888888); /* for firefox 3.6+ */
+}
+
+.correctiontitle {
+   margin-top: 25px;
+}
+
+.correctionstatus {
+   top: 10%;
+   color: #F0F0F0;
+}
+
+.correction a {
+   text-decoration: none;
+   color: #F0F0F0;
+}
+
+/* /corrections/edit/<id> */
+
+.functions {
+   margin-top: -10px;
+}
+
+#commentdialog {
+   position: relative;
+   z-index: 100000;
+   height: 195px;
+   width: 300px;
+   padding: 10px;
+   border: 1px solid #666;
+   background-color: #fff;
+}
+
+
+.commentoverlay {
+   z-index: 0; 
+   background-color: #ccc;
+   padding: 2px;
+   opacity: .9;
+   position: absolute;
+   border: 1px solid #666;
+}
+
+.commentoverlaylink {
+   z-index:20000;
+}
+
+#addcommentiframe {
+   float: right;
+   margin-right: 10px; 
+}
+
+#addcomment {
+   float: right;
+}
+
+#listcomments {
+   border:1px solid;
+   border-color: #ccc;
+   width: 948px;
+}
+
+#listcomments h3 {
+   margin-top: 10px;
+   margin-left: 10px;
+}
+
+#listcomments button {
+   margin-right: 10px;
+   margin-bottom: 10px;
+}
+
+#comments {
+   padding:10px;
+}
+
+#comments li { margin: 3px; list-style: none }
+
+#comments .deletecomment, #comments .commentfile {
+   display: block;
+   float: right;
+   margin: 0px 4px;
+}
+
+#dio-loader {
+   background:url(/images/largespinner.gif) no-repeat;
+   background-position: center center;
+   background-color: #fff;
+}
+
+#dio-lens {
+   border:1px solid #000;
+}
+
+#imagebox { position: relative; }
+
+#imagebox {
+	border:1px solid #ccc;
+	width: 948px;
+	min-height: 650px;
+}
+
+#dio-sensor {
+	cursor:pointer;
+}
+	
+.scrollable-container {
+	background-color: #ccc;
+}
+
+.scrollable {
+	position:relative;
+	overflow:hidden;
+	/* width: 680px;    use blueprint */
+	height:120px;
+}
+
+.scrollable .items {
+
+	width:20000em;
+	position:absolute;
+	clear:both;
+}
+
+
+.scrollable img {
+	float:left;
+	margin:20px 5px 20px 21px;
+	background-color:#fff;
+	padding:2px;
+	border:1px solid #ccc;
+	cursor:pointer;
+	width:100px;
+	height:75px;
+	
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+}
+
+.scrollable .active {
+	border:2px solid #000;
+	z-index:9999;
+	position:relative;
+}
+
+.scrollable {
+	float:left;	
+}
+
+a.browse {
+	background:url(/images/scrollbuttons.png) no-repeat;
+	display:block;
+	width:30px;
+	height:30px;
+	float:left;
+	margin:40px 10px;
+	cursor:pointer;
+	font-size:1px;
+}
+
+a.right 				{ background-position: 0 -30px; clear:right; margin-right: 0px;}
+a.right:hover 		{ background-position:-30px -30px; }
+a.right:active 	{ background-position:-60px -30px; } 
+
+a.left				{ margin-left: 0px; } 
+a.left:hover  		{ background-position:-30px 0; }
+a.left:active  	{ background-position:-60px 0; }
+
+a.up, a.down		{ 
+	background:url(/images/scrollbuttons.png) no-repeat; 
+	float: none;
+	margin: 10px 50px;
+}
+
+a.up:hover  		{ background-position:-30px 0; }
+a.up:active  		{ background-position:-60px 0; }
+
+a.down 				{ background-position: 0 -30px; }
+a.down:hover  		{ background-position:-30px -30px; }
+a.down:active  	{ background-position:-60px -30px; } 
+
+a.disabled {
+	visibility:hidden !important;		
+}
+
+#searchresult {
+   margin-right: 28px;
+   z-index:2000; 
+   background-color:#fff;
+   padding: 20px;
+   border: 1px solid #666;
+   width: 320px;
+   right: 0;
+   top: 10px;
+   opacity: .9;
+   
+}
+#searchresult * { opacity: 1 }
+
+#searchnavigation {
+	  width: 390px;
+   position: absolute; z-index:3000;
+   right: 0;
+   top: 0;
+}
+
+#expand {
+   float: right;
+}
+
+#contract {
+   float: right;
+}
+
+#search {
+   margin-left: 15px;
+}

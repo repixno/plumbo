@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<tal:block tal:define="global dontShowCart" />
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Delivery method</tal:block>
+</head>
+
+
+<body>
+	<div class="container order-prints">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<div class="span-24 last">
+		<form method="post" action="/checkout/payment-method/">
+		
+		<div class="span-6">
+			<h2 i18n:translate="">Checkout</h2>
+		</div>
+		
+		<div class="span-18 last">
+			<ul class="step-by-step-4 step-by-step">
+				<li class="completed">
+					<a title="" href="/checkout/?from=breadcrumbs">
+						<strong tal:content="cms:title:f7970a6c-6d22-403c-a29a-06b8cb208518">1. Shipping adress</strong>
+						<span tal:content="cms:ingress:f7970a6c-6d22-403c-a29a-06b8cb208518">Where are you?</span>
+					</a>
+				</li>
+				<li class="current">
+					<a title="">
+						<strong tal:content="cms:title:0ccd06df-692b-40eb-8e4f-901966e548e5">2. Shipping method</strong>
+						<span tal:content="cms:ingress:0ccd06df-692b-40eb-8e4f-901966e548e5">Choose how we send it.</span>
+					</a>
+				</li>
+				<li>
+					<a title="">
+						<strong tal:content="cms:title:4753687f-5c04-48cc-8d64-896d0a1d51c8">3. Payment</strong>
+						<span tal:content="cms:ingress:4753687f-5c04-48cc-8d64-896d0a1d51c8">Credit card or invoice?</span>
+					</a>
+				</li>
+				<li class="last">
+					<a title="">
+						<strong tal:content="cms:title:bb35b968-8a9a-40ad-bb72-61f676891967">4: Finish!</strong>
+						<span tal:content="cms:ingress:bb35b968-8a9a-40ad-bb72-61f676891967">Check that everything is correct</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<hr class="space" />
+		<div class="span-5 colborder">
+			<!-- What deliverymethod should i choose? -->
+			<tal:block tal:content="structure cms:body:0ccd06df-692b-40eb-8e4f-901966e548e5" />
+		</div>
+		
+		<div class="span-12">
+			<h3 i18n:translate="">Choose delivery method:</h3>
+			<tal:block tal:repeat="deliverymethod deliveryoptions">
+				<div class="span-8 append-4 last">
+					<h5 class="bottom">
+					<tal:block tal:condition="exists:storedeliveryrefid">
+					   <tal:block tal:condition="equal:deliverymethod/artnr,storedeliveryrefid,1">
+                     <input id="storeon" tal:condition="exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" checked="1" /> 
+                     <input id="storeon" tal:condition="not:exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" /> 
+                  </tal:block>
+                  <tal:block tal:condition="not:equal:deliverymethod/artnr,storedeliveryrefid,1">
+                     <input class="storeoff" tal:condition="exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" checked="1" /> 
+                     <input class="storeoff" tal:condition="not:exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" /> 
+                  </tal:block>
+                  </tal:block>
+                  <tal:block tal:condition="not:exists:storedeliveryrefid">
+                     <input class="storeoff" tal:condition="exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" checked="1" /> 
+                     <input class="storeoff" tal:condition="not:exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" /> 
+                  </tal:block>
+						<label class="large">
+							<tal:block tal:content="deliverymethod/title"></tal:block> 
+							<tal:block tal:condition="conditionalmatch:deliverymethod/title,A-post,1">
+								 <span class="quiet small" tal:content="cms:ingress:c06236e7-c496-49a9-9324-b29ecf06c48a"></span>
+							</tal:block>
+							
+							<tal:block tal:condition="conditionalmatch:deliverymethod/title,Servicepakke,1">
+								 <span class="quiet small" tal:content="cms:ingress:3e6c5e80-dac2-4346-9039-bd20944ba366"></span>
+							</tal:block>
+							<tal:block tal:condition="conditionalmatch:deliverymethod/title,Dør til dør,1">
+								 <span class="quiet small" tal:content="cms:ingress:f515d742-143f-4556-8bcb-b4bbd8f30aa1"></span>
+							</tal:block>
+						</label>
+
+					</h5>
+					<div class="span-5">
+						<tal:block tal:condition="conditionalmatch:deliverymethod/title,A-post,1">
+							<tal:block class="quiet" tal:content="structure cms:body:c06236e7-c496-49a9-9324-b29ecf06c48a"></tal:block>
+						</tal:block>
+						<tal:block tal:condition="conditionalmatch:deliverymethod/title,Servicepakke,1">
+							<tal:block class="quiet" tal:content="structure cms:body:3e6c5e80-dac2-4346-9039-bd20944ba366"></tal:block>
+						</tal:block>
+						<tal:block tal:condition="conditionalmatch:deliverymethod/title,Dør til dør,1">
+							<tal:block class="quiet" tal:content="structure cms:body:f515d742-143f-4556-8bcb-b4bbd8f30aa1"></tal:block>
+						</tal:block>
+				      <tal:block tal:condition="conditionalmatch:deliverymethod/title,Hente i butikk,1">
+							<tal:block class="quiet" tal:content="structure cms:body:3e6c5e80-dac2-4346-9039-bd20944ba366"></tal:block>
+						</tal:block>
+					</div>
+					<div class="span-3 last">
+						<span class="large">
+							kr 
+							<span class="price hide" tal:content="deliverymethod/price"></span>
+							<span tal:content="formatprice:deliverymethod/price"></span>
+						</span>
+					</div>
+					<tal:block tal:condition="exists:storedeliveryrefid">
+						<div id="stores" style="display:none;" tal:condition="equal:deliverymethod/artnr,storedeliveryrefid,1">
+                                <label>Velg butikk: </label>
+                           <select name="delivertostore" class="select">
+                              <tal:block tal:repeat="chain storechains">
+                                 <optgroup label="${chain/chain}">
+                                 <tal:block tal:repeat="store chain/stores">
+                                    <option value="${store/store/id}">${store/store/name}:
+                                    ${store/store/address}</option>
+                                 </tal:block>
+                                 </optgroup>
+                              </tal:block>
+                           </select>
+                           </div>
+               </tal:block>
+				</div>
+			</tal:block>
+		</div>
+		<div class="span-6 last right">
+			<tal:block metal:use-macro="common.html/order-summary" />
+			<button class="button large call-to-action" type="submit" i18n:translate="">Next step</button>
+		</div>
+		<div class="span-24 last">
+			<a href="" class="back button" i18n:translate="">Back</a>
+		</div>
+	</form>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready( function() {
+	
+	   $( '#storeon' ).change( function() {
+
+	      if( $( this + ':checked' ) ) {
+	         $( '#stores' ).css( 'display', 'block' );
+	         $( '#delivertostore' ).removeAttr( 'disabled' );
+
+	      }
+	   });
+
+	   $( '.storeoff' ).change( function() {
+	      $( '#delivertostore' ).attr( 'disabled', 'disabled' );
+	      $( '#stores' ).css( 'display', 'none' );
+	   });
+
+	   
+		$('a.back').click(function() {
+			history.go(-1);
+			return false;
+		});
+	
+		$('.delivery-method', '#order-summary').show();
+		
+		$("a.popup").fancybox({ 
+			'zoomSpeedIn': 300, 
+			'zoomSpeedOut': 300, 
+			'overlayShow': true,
+			'frameWidth': 900,
+			'frameHeight': 500 }
+		); 
+		
+		$('form [name=delivery-method]').bind('click', function() {
+			$('#order-summary tr.delivery-method .price').text( 
+				formatPrice( $(this).parent().parent().find('.price').text() )
+			);
+			$('#order-summary tr.delivery-method');
+			
+			updateTotalPrice();
+			
+		});
+		
+		// init
+		$('form [name=delivery-method]:checked').trigger('click');
+
+	});
+	
+	function formatPrice(num) {
+   	num = num.toString();
+   	num = num.replace(',','.');	
+   	price = parseInt( num * 100 ) / 100;
+   	return price.toFixed(2).toString().replace('.', ',');
+	}
+	
+	function updateTotalPrice() {
+		var totalPrice = 0;
+		
+		$('#order-summary .price').each( function() {
+			if( $(this).text() ) {
+				totalPrice = totalPrice + parseFloat( $(this).text().replace('.','').replace(',','.') )
+			}
+		});	
+		
+		$('#order-summary .total-price').text( formatPrice(totalPrice) );
+	}
+</script>
+</body>
+</html>

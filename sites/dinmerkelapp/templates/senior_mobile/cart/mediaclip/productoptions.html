@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<tal:block tal:define="global dontShowCart" />
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Productoptions</tal:block>
+</head>
+
+
+<body>
+<div metal:use-macro="../../../${templates}/common.html/top" />
+		<div class="container editorcontainer">
+	<div class="content">
+	
+		<!--<div class="col-md-2 hidden-xs left-menu">
+            <div metal:use-macro="../../../${templates}/common.html/leftmenu" />
+        </div>-->
+		<div id="widecontent" class="col-md-12">
+		
+		
+		<div class="col-md-12">
+			<h2 tal:content="structure cms:title:6fb4842d-45fd-4d44-b443-10fa83d83b94">Productoptions</h2>
+		</div>
+      <div class="col-md-12 last choose-quantity append-top">
+         <span tal:content="structure cms:body:6fb4842d-45fd-4d44-b443-10fa83d83b94" />
+      </div>
+      <div class="col-md-12">
+      
+      <form method="post" action="/checkout/cartupdate" id="cart">
+         <table class="table">
+      		
+      	<thead>
+				<tr>
+					<th i18n:translate="" width="100">Bilde</th>
+					<th i18n:translate="">Product</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+						<tr id="${mediaclipproduct/optionid}">
+						<td>
+							<img src="/create/thumb/orderthumb/${mediaclipproduct/referenceid}" width="200" height="130" title="" />	
+							</td>
+							<td>
+								<tal:block tal:condition="exists:mediaclipproduct/product/title" tal:content="mediaclipproduct/product/title"></tal:block>
+							</td>
+							
+							
+						</tr>
+
+						
+   						<tal:block tal:condition="exists:mediaclipproduct/license">
+      						<tr tal:repeat="license mediaclipproduct/license">
+      							<td>
+      								&nbsp;
+      							</td>
+      							<td>
+      								<tal:block tal:condition="exists:license/product/title" tal:content="license/product/title">License</tal:block>
+      							</td>
+      							<td>
+      								&nbsp;
+      							</td>
+      							<td>
+      								<span class="quiet">1</span>
+      							</td>
+      							<td class="unitprice" tal:content="formatprice:license/unitfee">Price</td>
+      							<td class="price" tal:content="formatprice:license/totalfee">Sum</td>
+      						</tr>
+      						</tal:block>
+      											
+      						
+      			
+					</tbody> 
+				
+      </table>
+		
+				<div class="col-md-12">
+			<div class="row">
+		
+						<div class="col-md-6 text-left">
+							<a href="/myaccount/projects" class="next call-to-action btn-warning" style="btn-warning:
+    color: #fff;
+    background-color: #f0ad4e;
+    padding: 7px 14px 9px 15px;
+    border-color: #bd7b1d;
+    border-radius: 5px;" role="button">Mine prosjekter</a>
+						   
+						</div>
+						<br/>
+						<div class="col-md-12 text-right">
+						   <button type="submit" class="next call-to-action btn btn-primary">Fortsett til handlekurven</button>
+						</div>
+		</div>
+		</div>
+      
+      </form>  
+            
+      </div>
+      <hr class="space"/>
+
+	</div>
+
+	</div>
+		</div>
+	
+
+      <div metal:use-macro="../../../${templates}/common.html/footer" />
+     
+
+
+<script type="text/javascript">
+	$(document).ready( function() {
+
+	   /*$( '.printedgiftcard' ).click( function() {
+	      $.ef( 'cart.toggleprintgiftcard', {
+	         prodno: $( this ).val()
+	      }, function() {}, 'json' );
+	   });*/
+	   
+	   $( '.printedgiftcard' ).change( function() {
+	      
+	        $( '.printedgiftcard' ).each( function() {
+	           $( this ).attr( 'checked', 'true' );
+	           $.ef( 'cart.toggleprintgiftcard', {
+	              prodno: $( this ).val(),
+	              status: 'true'
+	           }, function(response) {}, 'json' );
+	        } );
+	      
+	        $.ef( 'cart.toggleprintgiftcard', {
+	           prodno: $( this ).val(),
+	           status: 'true'
+	        }, function(response) {}, 'json' );
+	   });
+	   
+	   $( '.notprintedgiftcard' ).change( function() {
+	         
+	         $( '.notprintedgiftcard' ).each( function() {
+	           $( this ).attr( 'checked', 'true' );
+	           $.ef( 'cart.toggleprintgiftcard', {
+   	           prodno: $( this ).val(),
+   	           status: 'false'
+   	        }, function(response) {}, 'json' );
+	         } );
+   	      
+	   });
+	   
+	   
+		$('td.quantity-editable').append('<a href="#" class="update-price-link" i18n:translate="">Update price</a>');
+		
+		$('.update-price-link').click( function() {
+			//$(this).parent().find('input.quantity').trigger('change');
+			$('#cart').attr('action','/checkout/cartupdate' ).submit();
+			return false;
+			
+		});
+		
+		$('input.quantity').bind('change', function() {
+		
+			var quantity = $(this).val();
+			var id = $(this).parent().parent().attr('id');
+			var price;
+			var item = this;
+			
+			$(this).parent().next().prepend('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader1"/>');
+			$(this).parent().next().next().prepend('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader2"/>');
+			$('#total-price').before('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader3"/>');
+			
+			$.post('/api/1.0/prices/get', {
+				productoptionid: id,
+				quantity: quantity
+			}, function(data) {
+				$(item).parent().parent().find('.unitprice').text( formatPrice(data.price) );
+				$(item).parent().parent().find('.price').text( formatPrice( parseFloat(quantity) * parseFloat(data.price) ) );
+				
+				var totalPrice = 0;
+				
+				$('.price', '#cart').each( function(i, item) {
+					totalPrice += parseFloat( $(item).text().replace(',','.') );
+				});
+				
+				$('#total-price').text( formatPrice(totalPrice) );
+				
+				$('#loader1, #loader2, #loader3').remove();
+				
+			}, 'json');			
+			
+			
+			return false;
+		});
+		
+		$('.removeItem a.remove').click( function() {
+			var item = this;
+			$.post('/api/1.0/cart/remove', {
+				prodno: $(item).attr('name'),
+				reference: $(item).next().attr('value')
+			}, function(msg) {
+				document.location.refresh(false);
+			})
+		});
+		
+	$("a.preview").hover(function(e){
+	 		
+		xOffset = 15;
+		yOffset = 10;
+		this.t = this.title;
+		this.title = "";
+	   $("body").append('<p id="preview"><img src="'+ this.t +'"/></p>');	
+	   $("#preview")
+			.css("top",(e.pageY - xOffset) + "px")
+			.css("left",(e.pageX + yOffset) + "px")
+			.fadeIn("fast");
+    
+	  },
+	  function(){
+		this.title = this.t;	
+		$("#preview").remove();
+      }
+	  );
+	  
+	  $("a.preview").mousemove(function(e){
+		$("#preview")
+			.css("top",(e.pageY - xOffset) + "px")
+			.css("left",(e.pageX + yOffset) + "px");
+	  });
+	});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="common.html/head" />
+	<title>${blog/title} - Eurofoto Blog</title>
+	<script type="text/javascript" src="${static:js/jquery.eurofoto-1.0.js}?${version}"></script> 
+</head>
+
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="common.html/top" />
+	
+      	<h1>
+      		<a href="/blog/${blog/shortname}">${blog/title}</a>
+      	</h1>
+      	<h3 class="blog-subtitle">
+      		<span i18n:translate="">A photo-blog written by <span i18n:name="owner" tal:content="blog/owner">Full name</span></span>
+      	</h3>
+
+	<div class="span-18" id="content">
+      
+      <div id="posts">
+      <ul>
+         <li tal:repeat="post posts" class="post" id="post_${post/id}">
+            <h2>
+            	<a tal:content="post/title|default" href="${post/url}"></a>
+            	<tal:block tal:condition="post/yours">
+            		<div class="right functions">
+            			<a href="#" class="edit">Edit this post</a> | 
+            			<a href="#" class="delete">Delete this</a>
+            		</div>
+            	</tal:block>
+            </h2>
+            <p tal:content="post/intro|default"></p>
+            <ul class="post-images">
+               <li tal:repeat="postimage post/images">
+                  <a href="${postimage/image/urls/shared}"><img src="${postimage/image/thumbnail}" alt="${postimage/image/title}" /></a>
+               </li>
+            </ul>
+            <a tal:condition="post/body" href="${post/url}">more...</a>
+            
+         </li>
+         
+         <hr />
+         
+         <button tal:condition="blog/yours" type="button" class="button blue" id="addpost-link">Add Post</button>
+         
+         <div tal:condition="blog/yours" id="addpost-form" class="hide">
+            
+         <input type="hidden" id="postid" />
+         
+            <p>
+               <label for="title">title:</label>
+               <input type="text" id="title" />
+            </p>
+            
+            <p>
+               <label for="intro">intro:</label>
+               <textarea id="intro"></textarea>
+            </p>
+            
+            <p>
+               <label for="body">body:</label>
+               <textarea id="body"></textarea>
+            </p>
+            
+            <p>
+               <button type="submit" class="button blue">Post</button>
+               <button type="reset" class="button" >Cancel</button>
+            </p>
+            
+         </div>
+         
+      </ul>
+      </div>
+      
+   </div>
+   <div class="span-8 last sidebar">
+   		<h4>Sidebar</h4>
+   </div>
+
+</div>
+
+<div id="footer">
+	<div class="container">
+		<div metal:use-macro="common.html/footer" />
+	</div>
+</div>
+
+<script language="JavaScript">
+   $(document).ready(function(){
+      
+      $('#addpost-link').click( function(){
+         $(this).fadeOut( 'fast', function(){
+            $('#addpost-form').slideDown('slow', function(){
+               $('#title').focus();
+            });
+         });
+      });
+      
+      $('#addpost-form button[type=submit]').click( function() {
+         
+         if ($('#postid').val() == '') {
+         
+            $.ef( 'blog.post.create', {
+               title: $('#title').val(),
+               intro: $('#intro').val(),
+               body: $('#body').val()
+            }, function( response ) {
+               
+               if( response.result ) {
+                  
+                  window.location.href = response.post.url;
+                  
+               } else {
+                  
+                  alert( response.message );
+                  
+               }
+               
+            } );
+            
+         } else {
+            
+            $.ef( 'blog.post.update', {
+               postid: $('#postid').val(),
+               title: $('#title').val(),
+               intro: $('#intro').val(),
+               body: $('#body').val()
+            }, function( response ) {
+               
+               if( response.result ) {
+                  
+                  window.location.href = response.post.url;
+                  
+               } else {
+                  
+                  alert( response.message );
+                  
+               }
+               
+            } );
+            
+         }
+         
+      } );
+      
+      $('#addpost-form button[type=reset]').click( function() {
+         $('#title').val('');
+         $('#intro').val('');
+         $('#body').val('');
+            
+         $('#addpost-form').slideUp('slow', function(){
+            $('#addpost-link').fadeIn( 'slow' );
+         });
+
+      } );
+      
+      <tal:block tal:condition="exists:post">
+      $('.delete').click( function( ) {
+         
+         $.ef( 'blog.post.delete', {
+            postid: $(this).parent().parent().parent().attr('id').replace('post_','')
+         }, function( response ) {
+            
+            if( response.result ) {
+               
+               window.location.href = '/blog/${blog/shortname}';
+               
+            } else {
+               
+               alert( response.message );
+               
+            }
+            
+         } );
+         
+      } );
+      
+      $('.edit').click( function() {
+         
+         $('#title').val('${post/title}');
+         $('#intro').val('${post/intro}');
+         $('#body').val('${post/body}');
+         $('#postid').val('${post/id}');
+            
+         $('#addpost-form').slideDown('slow', function(){
+            $('#title').focus();
+         });
+         
+      } );
+      </tal:block>
+      
+   });
+</script>
+
+</body>
+</html>

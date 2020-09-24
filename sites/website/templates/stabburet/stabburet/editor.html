@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="robots" content="noindex,nofollow"/>
+
+        <link href="${static:css/portals/stabburet/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+		<!--<link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />-->
+        <link href="${static:css/portals/stabburet/web/css/redmond/jquery-ui.min.css}" rel="stylesheet" />
+		<div metal:use-macro="../common.html/javascript" />
+		<link href="${static:css/portals/stabburet/web/css/editor.css}?${version}" rel="stylesheet" media="screen" />
+		<link rel="shortcut icon" href="${static:}css/portals/stabburet/web/images/favicon.ico" type="image/x-icon" />
+
+		<style>
+		.order{
+			position: relative;
+			background-image: url('${static:css/portals/stabburet/web/images/orderbackground2.jpg}');
+			width:439px;
+			height:194px;
+	    }
+	    .bestillknapp{
+		position: absolute;
+		top: 109px;
+		left: 300px;
+		cursor:pointer;
+	    }
+
+		.teksttillokk{
+
+		color: #1077a5;
+    font-family: 'KidprintMTStd-Bold';
+    font-size: 26px;
+
+
+		}
+
+
+
+
+
+		</style>
+
+			<!--cookie
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#edeff5",
+      "text": "#838391"
+    },
+    "button": {
+      "background": "transparent",
+      "text": "#4b81e8",
+      "border": "#4b81e8"
+    }
+  },
+  "content": {
+    "message": "Denne websiden bruker informasjonskapsler (cookies)",
+    "dismiss": "Ok",
+    "link": "Les mer"
+  }
+})});
+</script>
+Cookie Slutt-->
+
+
+
+
+    </head>
+
+    <body>
+	<tal:block metal:use-macro="../common.html/header" />
+
+        <div class="container">
+            <!-- Main hero unit for a primary marketing message or call to action -->
+
+            <!-- Example row of columns -->
+            <div class="row" style="background-color: white">
+		<!--editor-->
+		<div class="span6 text-center" >
+		    <div class="text-center" style="position: relative; margin-top: 20px;">
+				<canvas id="c" width="439" height="439" style="position: relative;"></canvas>
+			</div>
+
+		    <div>
+			<img src="${static:css/portals/stabburet/web/images/vislokk.jpg}" />
+		    </div>
+		    <div class="share">
+
+			<span id="facebook"><img src="${static:css/portals/stabburet/web/images/facebook.jpg}"/></span>
+			<!--<span id="twitter"><img src="${static:css/portals/stabburet/web/images/twitter.jpg}"/></span>
+			<span><img src="${static:css/portals/stabburet/web/images/instagram.jpg}"/></span>-->
+			<span class="hidden-tablet" id="download" ><img src="${static:css/portals/stabburet/web/images/lastned.jpg}"/></span>
+		    </div>
+		</div>
+		<div class="span5">
+			<!--image functions -->
+			    <div class="span6">
+				<div class="row">
+				    <div class="row">
+					<div class="desktoplabel span2 hidden-phone">
+					  <!--  <img src="${static:css/portals/stabburet/web/images/bilde.jpg}" />-->
+					</div>
+					<div class="span4">
+					    <div class="row span4 text-left" style="margin-left: 0px;">
+							<h4 class="hidden-phone">1: Last opp bilder</h4>
+							<span class="btn btn-stabburet fileinput-button" style=" width:120px;">
+								<span>Velg bilde</span>
+								<!-- The file input field used as target for the file upload widget -->
+								<input id="fileupload" type="file" name="files[]"  data-url="/api/1.0/upload/stabburet" accept="image/jpeg"  />
+							</span>
+					    </div>
+					    <div id="progress" class="progress">
+							<div class="progress-bar progress-bar-success"></div>
+						</div>
+					</div>
+				    </div>
+				<div class="row">
+				    <div class="desktoplabel span2">
+					<h4>Velg bilde</h4>
+				    </div>
+				    <div class="span4">
+					<div class="scroll" id="imagelist">&nbsp;</div>
+				    </div>
+				</div>
+				<div class="row">
+				    <div class="hidden-phone desktoplabel span2">
+					<h4>Rediger bilde</h4>
+				    </div>
+				    <div class="span">
+						<span class="button zoom" id="zooms" />
+						<span class="button zoom" id="zooml" />
+						<span class="button move" id="left" />
+						<span class="button move" id="up" />
+						<span class="button move" id="down" />
+						<span class="button move" id="right" />
+						<span class="button rotate" id="rotateright" />
+						<span class="button rotate" id="rotateleft" />
+				    </div>
+				</div>
+			    </div>
+			</div>
+			    <div >
+				    <img src="${static:css/portals/stabburet/web/images/shortline.png}" style="margin: 10px 0 10px 0;" />
+			    </div>
+			<!-- edit text section -->
+			<div class="span6" >
+				<div class="row">
+				    <div class="row">
+					<div class="desktoplabel span2 hidden-phone">
+						<!--utkommentert bildebakgrunn 27.06.2017-->
+					   <!-- <img src="${static:css/portals/stabburet/web/images/tekst.jpg}" />-->
+
+					</div>
+					<div class="span5">
+						 <h4 class="teksttillokk">Skriv din personlige tekst på lokket</h4>
+						 <!--utkommentert bildebakgrunn 27.06.2017-->
+					    <!--<img alt="skriv din personlige tekst på lokket" src="${static:css/portals/stabburet/web/images/skrivtekst.jpg}" />-->
+					</div>
+				    </div>
+				    <div>
+					<table class="text-left">
+					    <tr>
+						<td>
+							<label for="name">NAVN</label>
+						</td>
+						<td>
+							<input type="text" id="name" maxlength="111" value="LEVERPOSTEI"/>
+						</td>
+					    </tr>
+					    <tr>
+						<td>
+							<label for="name">FØDSELSÅR</label>
+						</td>
+						<td>
+							<input type="text" id="year"  maxlength="4" value="1949"/>
+						</td>
+					    </tr>
+					</table>
+				    </div>
+				</div>
+			</div>
+
+			<!-- order section  -->
+			<div class="span6">
+			<div class="row">
+			    <div class="row order">
+				<div class="orderform">
+					<form>
+
+						<h3 class="sizetekst">Velg størrelse på ditt lokk:</h3>
+						<input type="radio" id="small" name="lokksize" value="small" checked="checked" />
+						<label for="small"  class="labeltekst">Lite (100G) </label>
+						<br/>
+
+
+						<input type="radio" id="large" name="lokksize" value="large" />
+							<label for="large" class="labeltekst">Stort (200G) og Fersk (150g) </label>
+
+					</form>
+				</div>
+				<div class="bestillknapp"><img src="${static:css/portals/stabburet/web/images/bestillknapp.png}" /></div>
+			    </div>
+			</div>
+		    </div>
+
+
+	    </div>
+
+	    </div>
+        </div>
+      <div metal:use-macro="../common.html/footer2" />
+
+
+
+
+
+	<script src="${static:}js/jqupload/js/jquery.iframe-transport.js?${version}"></script>
+	<!-- The basic File Upload plugin -->
+	<script src="${static:}js/jqupload/js/jquery.fileupload.js?${version}"></script>
+
+
+	<script src="${static:js/fabric/dist/fabric_with_gestures.js}" />
+	<script src="${static:css/portals/stabburet/web/js/editor15.js}" />
+
+
+
+	<script>
+
+		var malimage = "/stabburetstatic/mal/liten-utentekst.png";
+		var blankimage = "/stabburetstatic/mal/dittbilde.jpg";
+		var scale = 0.05;
+		$( function(){
+
+			$('#year').on( 'keydown', function( event ){
+				console.log( event.keyCode );
+				if( event.keyCode == 8 || event.keyCode == 13 ) return true;
+				if( event.key != parseInt(event.key, 10) )return false;
+			});
+
+			$('button#velgbilde').on( 'click',  function(){
+				$('#choosefile').click();
+				return false;
+			});
+
+			$('input#choosefile').on( 'change',  function(){
+				$('#lastoppbilde').click();
+				return false;
+			});
+
+			showloader();
+
+			 $(window).load( hideloader );
+
+
+			$('#facebook').on( 'click', function(){
+			    showloader( );
+			    shareThumb( 'facebook' );
+			    return false;
+			});
+
+			$('.bestillknapp img' ).mouseover( function(){
+                            $(this).attr( 'src', '${static:css/portals/stabburet/web/images/bestillknapp-hover.png}' );
+                        });
+			$('.bestillknapp img').mouseout( function(){
+                            $(this).attr( 'src', '${static:css/portals/stabburet/web/images/bestillknapp.png}' );
+                        })
+			$('.bestillknapp img').mousedown( function(){
+                            $(this).attr( 'src', '${static:css/portals/stabburet/web/images/bestillknapp.png}' );
+                            //window.location.href = '/stabburet/editor';
+
+                        });
+			$('.bestillknapp img').mouseup( function(){
+                            $(this).attr( 'src', '${static:css/portals/stabburet/web/images/bestillknapp.png}' );
+							//showloader();
+                        });
+
+			$(document).on( 'mousedown', '.button' , function(){
+			    $(this).css( 'background-image' , 'url(${static:css/portals/stabburet/web/images/controlsdown.jpg})' );
+			});
+
+			$(document).on( 'mouseup', '.button' , function(){
+			    $(this).css( 'background-image' , '' );
+			});
+
+
+			$('#fileupload').fileupload({
+				replaceFileInput: false,
+				dataType: "json",
+				datatype:"json",
+				xhrFields: {withCredentials: true},
+				acceptFileTypes: /(\.|\/)(jpe?g|tif)$/i,
+				add: function (e, data) {
+
+					//console.log(e);
+					//console.log(data);
+
+					data.context = $('<p id="uploading" style="position: absolute; left: 20px;"/>').text('Uploading...').appendTo($('.progress-bar'));
+					data.submit();
+
+				},
+				done: function (e, data) {
+
+					//console.log(data.result.files);
+
+					$('#uploading').remove();
+
+					$.each(data.result.files, function (index, file) {
+
+						//console.log( index  );
+						//console.log( file  );
+						var image = '<img class="imagethumb" id="' + file.id + '"src="' + file.thumbnailUrl +'" style="height: 75px"  />';
+						$('#imagelist').append( image );
+						ChangeImageSrc( file.id );
+						$('img#' + file.id ).css( 'border-color', "#1077a5" );
+
+					});
+				},
+				progressall: function (e, data) {
+					var progress = parseInt(data.loaded / data.total * 100, 10);
+					$('.progress .progress-bar-success').css(
+						'width',
+						progress + '%'
+					);
+				}
+			});
+
+
+
+
+
+
+
+		});
+
+		 $(window).load( function(){
+                        drawTextAlongArc();
+                        drawYearAlongArc();
+                    });
+
+
+		var $idown;
+
+
+	</script>
+
+</body>
+</html>

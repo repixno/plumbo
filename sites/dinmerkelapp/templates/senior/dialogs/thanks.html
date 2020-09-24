@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Register</tal:block>
+
+	<style media="screen" type="text/css">
+	  div#fancy_div {
+	     overflow: scroll;
+	     overflow-x: hidden;
+	     background-color: #fff;
+	     color: #111;
+	  }
+	</style>
+	
+	<script src="${static:js/fancybox.min.js}" type="text/javascript"></script>
+	
+</head>
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+<body>
+
+		<div id="seniorpage-main">
+			<aside id="seniorpage-hero" class="js-fullheight">
+		
+		<div class="col-md-12">
+                <h3>Takk for at du meldte deg på nyhetsbrev!</h3>
+                <p>Epost: ${registeredemail}</p>
+		</div>
+		<div class="col-md-12">
+			<!--id:4010-->
+			<div tal:content="structure cms:body:4bc00c76-db53-44bb-a467-4fd484a20320"></div>
+			<div>
+				<a class="btn btn-primary" href="/">Fortsett å handle</a>
+			</div>
+		</div>
+		
+	</aside>
+
+	
+	
+</div>
+
+
+	
+
+
+</body>
+</html>

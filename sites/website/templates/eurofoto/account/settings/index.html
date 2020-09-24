@@ -1,0 +1,1044 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="${i18n/country}">
+<head>
+	<tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" />
+	<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/head" />
+	
+	<style type="text/css">
+      
+      
+      #contactinfoform .prefformtext {
+      
+         background: none;
+         border: none;
+      
+      }
+      
+      #contactinfoform .prefformtext:hover {
+      
+         background-color: #F6F7CA;
+         cursor: pointer;
+      
+      }
+      
+      
+      
+      #contactinfoform .prefformtexton {
+         
+         border-style: solid;
+         border-width: 1px;
+         border-color: #BBBBBB;
+         
+      }
+      
+      #birthday {
+      }
+      
+      #birthday:hover {
+         
+         background-color: #F6F7CA;
+      
+      }
+      
+      #email {
+         min-width: 100%;
+      }
+      
+      #email:hover {
+         background-color: #F6F7CA;
+         cursor: pointer;
+      }
+      
+	</style>
+	
+</head>
+<body>
+	
+<div class="container">
+	<div metal:use-macro="${templateroot}/${templates}/common.html/top" />	
+</div>
+
+
+<div id="account">
+
+	<div class="container">
+	
+		<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/account-menu" />
+		
+		<h2>Your settings <span class="right quiet" style="float: right; color: #ddd">#${session/userid}</span></h2>
+		<p class="quiet small">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam sit amet elit vitae arcu interdum ullamcorper. Nullam ultrices, nisi quis scelerisque convallis, augue neque tempor enim, et mattis justo nibh eu elit. Quisque ultrices gravida pede. Mauris accumsan vulputate tellus. Phasellus condimentum bibendum dolor. Mauris sed ipsum. Phasellus in diam. Nam sapien ligula, consectetuer id, hendrerit in, cursus sed, leo. Nam tincidunt rhoncus urna. Aliquam id massa ut nibh bibendum imperdiet. Curabitur neque mauris, porta vel, lacinia quis, placerat ultrices, orci.</p>
+
+
+	
+		<div class="span-9">
+			<h3 i18n:translate="">Login information</h3>
+			<div class="account-content-box height-15 min">
+				<h4 i18n:translate="">E-mail ( this is also your username )</h4>
+				<p id="email">${session/username}</p>
+				
+				<h4 i18n:translate="">Password</h4>
+				<p id="passwordchanged" class="green"></p>
+				<a class="button" id="changepassword" i18n:translate="">Change password</a>
+				
+			</div>
+		</div>
+		
+		<div class="span-9">
+			<h3 i18n:translate="">Secure storage</h3>
+			<div class="account-content-box height-15 min">
+			
+				<tal:block tal:condition="subscription">
+					<p class="bottom">
+						<tal:block i18n:translate="">Your photos are securely stored until</tal:block><br/>
+						<span tal:content="formatdate:subscription/stop" />
+					</p>
+					<p class="quiet small">(<tal:block i18n:translate="">It started</tal:block> <tal:block tal:content="formatdate:subscription/start" />)</p>
+					
+					<div id="buy-secure-storage" tal:condition="exists:subscription/buymore">
+						<form action="/cart/additembyproductoptionid/" method="post">
+						<div>
+							<input type="radio" name="productoptionid" id="buy-secure-storage-6months" value="1365" class="subscription"/><label for="buy-secure-storage-6months" i18n:translate="">6 months</label>
+						</div>
+						<div>
+							<input type="radio" name="productoptionid" id="buy-secure-storage-12months" value="1366" class="subscription" checked="checked"/><label for="buy-secure-storage-12months" i18n:translate="">12 months</label>
+						</div>
+						<div>
+							<button class="add-subscription-to-cart" i18n:translate="">Buy</button>
+						</div>
+						</form>
+					</div>
+					<br />
+               
+					<script type="text/javascript" tal:condition="exists:subscription/buymore">
+						$(document).ready( function() {					   
+                     						  
+							$('#buy-secure-storage button.add-subscription-to-cart').click( function() {
+								<tal:block tal:condition="cart/items">
+								
+                           messageDialog('<tal:block i18n:translate="">Buy secure storage</tal:block>','<tal:block i18n:translate="">You have items in your cart. You get 12 months free subscription when you check out the cart. Please empty the cart if you dont want to buy anything.</tal:block>','<tal:block i18n:translate="">Close</tal:block>');
+
+                           return false;
+									
+								</tal:block>
+								var subscriptionId = $('#buy-secure-storage input.subscription:checked').val();
+								document.location.href = '/cart/additembyproductoptionid/' + subscriptionId + '/';
+								return false;
+							});
+						});
+					</script>
+					
+				</tal:block>
+				<tal:block tal:condition="not:subscription">
+					<h3 i18n:translate="">Buy secure storage</h3>
+					
+					<div id="buy-secure-storage">
+						<form action="/cart/additembyproductoptionid/" method="post">
+						<div>
+							<input type="radio" name="productoptionid" id="buy-secure-storage-6months" value="1365" class="subscription"/><label for="buy-secure-storage-6months" i18n:translate="">6 months</label>
+						</div>
+						<div>
+							<input type="radio" name="productoptionid" id="buy-secure-storage-12months" value="1366" class="subscription" checked="checked"/><label for="buy-secure-storage-12months" i18n:translate="">12 months</label>
+						</div>
+						<div>
+							<button class="add-subscription-to-cart" i18n:translate="">Buy</button>
+						</div>
+						</form>
+					</div>
+					<br />
+					<script type="text/javascript">
+						$(document).ready( function() {
+							$('#buy-secure-storage button.add-subscription-to-cart').click( function() {
+								<tal:block tal:condition="cart/items">
+									
+                           messageDialog('<tal:block i18n:translate="">Buy secure storage</tal:block>','<tal:block i18n:translate="">You have items in your cart. You get 12 months free subscription when you check out the cart. Please empty the cart if you dont want to buy anything.</tal:block>','<tal:block i18n:translate="">Close</tal:block>'); 
+
+                           return false;
+									
+								</tal:block>
+								var subscriptionId = $('#buy-secure-storage input.subscription:checked').val();
+								document.location.href = '/cart/additembyproductoptionid/' + subscriptionId + '/';
+								return false;
+							});
+						});
+					</script>
+				</tal:block>
+
+			</div>
+		</div>
+		
+		<div class="span-6 last">
+			<h3 i18n:translate="">Notifications</h3>	
+			<div class="account-content-box height-15 min">
+				<h5 class="bottom">Newsletter</h5>
+				<tal:block tal:condition="user/contact/newsletter" >
+				   <input type="checkbox" id="newsletter" checked="checked" /><label for="newsletter" i18n:translate="">I want to recieve newsletter</label><br/>
+				</tal:block>
+				<tal:block tal:condition="not: user/contact/newsletter">
+				  <input type="checkbox" id="newsletter" /><label for="newsletter" i18n:translate="">I want to recieve newsletter</label><br/>
+				</tal:block>
+				<!--<small class="quiet">
+					<input type="checkbox" id="newsletter_html"/><label for="newsletter_html">Send me only text without graphics</label>
+				</small>-->
+				
+				<h5 class="bottom prepend-top" i18n:translate="">Send me SMS when</h5>
+				<tal:block tal:condition="not:exists: user/sms/order">
+				   <input type="checkbox" id="ordersms"/><label for="ordersms" i18n:translate="">Production is finished (free) </label><br/>
+				</tal:block>
+				<tal:block tal:condition="exists: user/sms/order">
+				   <input type="checkbox" id="ordersms" checked="checked" /><label for="ordersms" checked="checked" i18n:translate="">Production is finished (free) </label><br/>
+				</tal:block>
+				<tal:block tal:condition="exists: user/sms/order">
+   				<div id="ordersmswrapper" class="right">
+   				   <!--<br/><h6 class="left">You will receive a SMS on nr ${user/sms/cellnr} when orders are produced and sent</h6>
+   				   <input type="text" id="smscellphonenr" tal:attributes="value user/contactinfo/mobile|default" style="min-widt: 100%; text-align: center;"/><br/>
+   				   <button class="small button green" id="confirmcellphonenr" type="button" i18n:translate="" style="margin-left: 5px;">Validate</button>
+   				   <button class="small button red" id="cancelconfirmcellphonenr" type="button" i18n:translate="" style="margin-left: 5px;">Cancel</button>
+   				   -->
+   				</div>
+				</tal:block>
+				<tal:block tal:condition="not:exists: user/sms/order">
+   				<div id="ordersmswrapper" style="display:none;">
+   				  <!--
+   				   <h6 class="left">Please enter and confirm your cell phone number</h6>
+   				   <input type="text" id="smscellphonenr" tal:attributes="value user/sms/cellnr|default" style="min-width: 100%; text-align: center;"/><br/>
+   				   <button class="small button green right" id="confirmcellphonenr" type="button" i18n:translate="" style="margin-left: 5px;">Validate</button>
+   				   <button class="small button red right" id="cancelconfirmcellphonenr" type="button" i18n:translate="" style="margin-left: 5px;">Cancel</button>
+   				   -->
+   				</div>
+				</tal:block>
+				<!--
+				<p class="quiet hide">
+				<input type="checkbox" id="newsletter"/><label for="newsletter">Someone shares images to me (free)</label><br/>
+				<input type="checkbox" id="newsletter"/><label for="newsletter">Offers (free)</label><br/>
+				* Coming soon
+				</p>-->
+			</div>
+		</div>
+		
+		<div class="contact span-9">
+			<h3 i18n:translate="">Contact</h3>
+			<div class="account-content-box height-20 min">
+			   <form method="POST" action="" id="contactinfoform">
+				<h6 i18n:translate="">Full name</h6>
+				<input type="text" name="prefname" id="prefname" class="prefformtext span-8 text" readonly="true" value="${session/fullname}" />
+				<h6 i18n:translate="">Address</h6>
+				<input type="text" name="prefaddress" id="prefaddress" class="prefformtext span-8 text" readonly="true" value="${user/contactinfo/address}" />
+				<!--
+				<p class="editable bottom">${user/contactinfo/address}</p>
+				<p class="editable top">${user/contactinfo/address2}</p>
+				-->
+				
+				<div class="span-3">
+					<h6 i18n:translate="">Zip code</h6>
+					<!--<p class="editable">${user/contactinfo/zipcode}</p>-->
+					<input type="text" class="prefformtext span-2 text" id="prefzipcode" name="prefzipcode" readonly="true" value="${user/contactinfo/zipcode}" />
+				</div>
+				<div class="span-5">
+					<h6 i18n:translate="">City</h6>
+					<!--<p class="editable city" id="city">${user/contactinfo/city}</p>-->
+					<input type="text" class="prefformtext span-5 text" id="prefcity" name="prefcity" readonly="true" value="${user/contactinfo/city}" />
+				</div>
+				
+			   <h6 i18n:translate="">Country</h6>
+			   <input type="text" name="prefcountrytext" id="prefcountrytext" class="prefformtext" readonly="true" style="min-width: 100%;" value="${user/contactinfo/countryname}" />
+				<select id="prefcountry" class="prefformselect" name="prefcountry" style="min-width: 100%; display:none;" disabled="true">
+					<optgroup label="All" i18:attributes="label">
+					   <tal:block tal:repeat="country countries">
+					      <tal:block tal:condition="equal:user/contactinfo/country,country/iso,1">
+					         <option value="${country/iso}" tal:content="country/name" selected="selected"></option>
+					      </tal:block>
+					      <tal:block tal:condition="not:equal:user/contactinfo/country,country/iso,1">
+					         <option value="${country/iso}" tal:content="country/name"></option>
+					      </tal:block>
+						</tal:block>
+					</optgroup>
+				</select>
+				
+				
+				<br />
+				<br />
+				<hr />
+					
+				<h6 i18n:translate="">Phone</h6> 
+			   <!--<input tal:condition="exists:user/contactinfo/phone" type="text" class="prefformtext" name="prefformphone" style="min-width: 100%;" readonly="true" value="${user/contactinfo/phone | }" />-->
+			   <input type="text" class="prefformtext span-8 text" id="prefphone" name="prefphone" readonly="true" value="" tal:attributes="value user/contactinfo/phone|default" />
+			   
+			   
+			   <h6 i18n:translate="">Cellphone</h6> 
+				<input type="text" class="prefformtext span-8 text" id="prefcellphone" name="prefcellphone" readonly="true" tal:attributes="value user/contactinfo/mobile|default" /><br /><br /><br />
+				
+				<!--
+			   <h6 i18n:translate="">Phone night</h6> 
+				<p class="editable" tal:content="user/contactinfo/phone_night|default">Click to enter</p>
+				-->
+				
+				</form>
+				
+				<div class="prefform-button-box height-2 min right">
+				   <button class="small button green" id="prefformsave" type="button" i18n:translate="" style="display:none;">Save</button>
+				   <button class="small button red" id="prefformcancel" type="button" i18n:translate="" style="display:none;">Cancel</button>
+				</div>
+				
+			</div>
+		</div>
+		
+		
+		<div class="span-9">
+			<h3 i18n:translate="">About you</h3>
+			<div class="account-content-box height-15 min">
+			
+			
+				<h4 i18n:translate="">Gender</h4>
+				<tal:block tal:condition="equal:user/gender,m">
+					<input checked="checked" type="radio" name="gender" value="m" id="genderMale" class="genderRadioButton"/><label for="genderMale">Male</label>
+					<input type="radio" name="gender" value="f" id="genderFemale" class="genderRadioButton" /><label for="genderFemale">Female</label>
+				</tal:block>
+				<tal:block tal:condition="equal:user/gender,f">
+					<input type="radio" name="gender" value="m" id="genderMale" class="genderRadioButton" /><label id="genderMale">Male</label>
+					<input checked="checked" type="radio" name="gender" value="f" id="genderFemale" class="genderRadioButton" /><label id="genderFemale">Female</label>
+				</tal:block>
+
+				<h4 i18n:translate="">Birthday</h4>
+				<div class="birthday-box height-2 min">
+				   <input type="text" id="birthday"  class="span-3" tal:attributes="value user/birthdate|default" readonly="true" style="text-align:center;" />
+				</div>
+				
+				
+			</div>
+		</div>
+		
+		<div class="span-6 last" id="apperanceSettings">
+			<h3 i18n:translate="">Appearance</h3>	
+			<div class="account-content-box height-20 min">
+				<!-- account max width -->
+				<div>
+					<tal:block tal:condition="exists:userpreferences/accountMaxWidth">
+						<input tal:condition="equal:userpreferences/accountMaxWidth,true" 
+								type="checkbox" id="setMaxWidth" name="accountMaxWidth" value="accountMaxWidth"
+								checked="checked"
+						/>
+						<input tal:condition="not:equal:userpreferences/accountMaxWidth,true" 
+							type="checkbox" id="setMaxWidth" name="accountMaxWidth" value="accountMaxWidth"
+						/>					
+					</tal:block>
+					<tal:block tal:condition="not:exists:userpreferences/accountMaxWidth">
+						<input type="checkbox" id="setMaxWidth" name="accountMaxWidth" value="accountMaxWidth"/>
+					</tal:block>
+					<label for="setMaxWidth" i18n:translate="">Use max width</label>
+					<p class="quiet small" i18n:translate="">Uses all the space on your screen.</p>
+				</div>
+
+				<!-- Skimmer -->
+				<div>
+					<tal:block tal:condition="exists:userpreferences/skimmer">
+						<input tal:condition="equal:userpreferences/skimmer,true" 
+								type="checkbox" id="skimmer" name="skimmer" value="skimmer"
+								checked="checked"
+						/>
+						<input tal:condition="not:equal:userpreferences/skimmer,true" 
+							type="checkbox" id="skimmer" name="skimmer" value="skimmer"
+						/>					
+					</tal:block>
+					<tal:block tal:condition="not:exists:userpreferences/skimmer">
+						<input type="checkbox" id="skimmer" name="skimmer" value="skimmer"/>
+					</tal:block>
+					<label for="skimmer">Show images when hovering over album</label>
+					<p class="quiet small">Show 5 images while hover an album</p>
+				</div>
+				
+				<!-- Double click -->
+				<div>
+					<tal:block tal:condition="exists:userpreferences/dblclick">
+						<input tal:condition="equal:userpreferences/dblclick,true" 
+								type="checkbox" id="dblclick" name="dblclick" value="dblclick"
+								checked="checked"
+						/>
+						<input tal:condition="not:equal:userpreferences/dblclick,true" 
+							type="checkbox" id="dblclick" name="dblclick" value="dblclick"
+						/>					
+					</tal:block>
+					<tal:block tal:condition="not:exists:userpreferences/dblclick">
+						<input type="checkbox" id="dblclick" name="dblclick" value="dblclick"/>
+					</tal:block>
+					<label for="skimmer" i18n:translate="">Single click & double click</label>
+					<p class="quiet small" i18n:translate="">Makes you able to easier select multiple albums and images. Use double click to open album and images.</p>
+				</div>				
+				
+				<!-- View settings -->
+				<div>
+					<label for="album-list-appearance" i18n:translate="">View albumlist as</label>
+					<select id="album-list-appearance">
+						<option value="thumbnails" selected="selected" i18n:translate="">Thumbnails</option>
+						<option value="list" i18n:translate="">List</option>
+						<option value="details" i18n:translate="">Details</option>
+					</select>
+				</div>
+
+				<!--
+				<div>
+					<input type="checkbox" id="setShowAll"/><label for="setShowAll">Show all by default</label>
+					<p class="quiet small">makes it easier to select images. Warning: This can be slow in some conditions</p>
+				</div>
+				-->
+				
+			</div>
+		</div>
+		
+		
+		<div class="span-20">
+		<!--
+			<h3 i18n:translate="">Delivery adress</h3>
+			<div class="account-content-box">
+				<input type="checkbox" />
+				<label>Use the same as contact adress</label>
+			</div>
+			-->
+		</div>
+		
+		
+		<div class="span-15 last">
+			<h3 class="quiet" i18n:translate="">Information</h3>
+			<p class="quiet">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam sit amet elit vitae arcu interdum ullamcorper. Nullam ultrices, nisi quis scelerisque convallis, augue neque tempor enim, et mattis justo nibh eu elit. Quisque ultrices gravida pede. Mauris accumsan vulputate tellus. Phasellus condimentum bibendum dolor. Mauris sed ipsum. Phasellus in diam. Nam sapien ligula, consectetuer id, hendrerit in, cursus sed, leo. Nam tincidunt rhoncus urna. Aliquam id massa ut nibh bibendum imperdiet. Curabitur neque mauris, porta vel, lacinia quis, placerat ultrices, orci.</p>
+
+
+		</div>
+	
+	</div>
+
+</div>
+<script type="text/javascript">
+
+   var validationdialog = null;
+   var passworddialog = null;
+   var orgcellphonenr = null;
+   var emaildialog = null;
+   
+   var strings = {
+      okbutton             :'<tal:block i18n:translate="">OK</tal:block>',
+      closebutton          :'<tal:block i18n:translate="">Close</tal:block>',
+      cancelbutton         :'<tal:block i18n:translate="">Cancel</tal:block>',
+      validatebutton       :'<tal:block i18n:translate="">Validate</tal:block>',
+      validatecodebutton   :'<tal:block i18n:translate="">Validate code</tal:block>'
+   }
+   
+   $( document ).ready( function() {
+      
+      var d = new Date();
+      maxyear = d.getFullYear();
+      
+      $( '#birthday' ).datepicker( { 
+         dateFormat: 'dd.mm.yy',
+         changeYear: true,
+         yearRange: '1900:' + maxyear,
+         maxDate: '-1d',
+         onClose: function( dateText, inst ) {
+         
+            $.ef( 'user.set.birthdate', {
+			      'birthdate': $( this ).val()
+		      }, function( response ) {
+		         
+		         if( !response.result ) {
+		             
+		            alert( 'Not a valid date. Try again!' );   
+		         }
+		         
+		      }
+            ); 
+         }
+      });
+      
+      //<![CDATA[
+
+      $('#contactinfoform input,select').keypress( function(e) {
+         if( e.which == 13 ) {
+            $( this ).focusNextInputField();
+         }
+      });
+
+	
+      $.fn.focusNextInputField = function() {
+         return this.each(function() {
+            var fields = $(this).parents( 'form:eq(0),body' ).find('button,input,select');
+            var index = fields.index( this );
+            if( index > -1 && ( index + 1 ) < fields.length ) {
+               fields.eq( index + 1 ).focus();
+            }
+            return false;
+         });
+      };
+      
+      //]]>
+      
+      $( document ).prepend( inlineLoader );
+      
+   });
+   
+   
+   $( '#changepassword' ).click( function() {
+      
+      $( '.container' ).append( '<div id="password-dialog" title="Change password" i18n:attributes="title" />' );
+      $( '#password-dialog' ).append( '<h6 class="left" i18n:translate="">Enter old password</h6>' );
+      $( '#password-dialog' ).append( '<input type="password" name="oldpassword" class="text required" id="oldpassword" /><br />' );
+      $( '#password-dialog' ).append( '<div id="oldpassworderrors"></div><br/><br />' );
+      $( '#password-dialog' ).append( '<h6 class="left" i18n:translate="">Enter new password</h6>' );
+      $( '#password-dialog' ).append( '<input type="password" name="newpassword" class="text required" id="newpassword" /><br/>' );
+      $( '#password-dialog' ).append( '<h6 class="left" i18n:translate="">Retype new password</h6>' );
+      $( '#password-dialog' ).append( '<input type="password" name="newpasswordrep" class="text required" id="newpasswordrep" /><br/>' );
+      $( '#password-dialog' ).append( '<div id="newpassworderrors"></div><br/><br />' );
+      var buttons = {};
+      buttons[strings.okbutton] = function() {
+         $( this ).type = 'submit';
+         $.ef( 'user.set.password', {
+               'oldpassword': $( '#oldpassword' ).val(),
+               'newpassword': $( '#newpassword' ).val(),
+               'newpasswordrep': $( '#newpasswordrep' ).val()
+            }, function( response ) {
+               
+               if( response.result ) {
+                  
+                  destroyDialog( passworddialog );
+                  $( '#passwordchanged' ).html( 'Password changed' );
+                  $( '#passwordchanged' ).css( 'color', 'green' );
+                  
+                  
+               } else {
+                  
+                  resetDialogErrors();
+                  
+                  switch( response.errorcode ) {
+                     
+                     case 1:
+                        $( '#newpassword' ).css( 'background', 'pink' );
+                        $( '#newpasswordrep' ).css( 'background',  'pink' );
+                        $( '#newpassworderrors' ).html( '<p class="red" i18n:translate="">The two new password entries do not match</p><br />' );
+                        break;
+                     case 2:
+                        $( '#oldpassword' ).css( 'background', 'pink' );
+                        $( '#oldpasswordrep' ).css( 'background', 'pink' );
+                        $( '#oldpassworderrors' ).html( '<p class="red" i18n:translate="">Password mismatch</p><br />' );
+                        break;
+                     case 3:
+                        $( 'input', passworddialog ).each( function() {
+                           if( $( this ).val().length == 0 ) {
+                              $( this ).css( 'background', 'pink' );
+                              if( this.id == 'oldpassword' ) {
+                                 $( '#oldpassworderrors' ).html( '<p class="red" i18n:translate="">Please fill out all fields</p><br />' );
+                              } else {
+                                 $( '#newpassworderrors' ).html( '<p class="red" i18n:translate="">Please fill out all fields</p><br />' );
+                              }
+                           }
+                        } );
+                        
+                        break;
+                     default:
+                        break;
+                        
+                  }
+                  
+               }
+               
+            }
+         );
+         
+      }
+      
+      buttons[strings.cancelbutton] = function() {
+         destroyDialog( passworddialog );
+      };
+      
+      passworddialog = $( '#password-dialog' ).dialog( { 
+           modal: true, 
+           width: 350,
+           buttons: buttons,
+           resizable: false,
+           dragable: false,
+           close: function() {
+              destroyDialog( $( this ) );
+           }
+       } );
+       
+       $( '#oldpassword' ).focus();
+       
+   } );
+   
+   
+   function resetDialogErrors() {
+      
+      $( '#oldpassword' ).css( 'background', 'white' );
+      $( '#newpassword' ).css( 'background', 'white' );
+      $( '#newpasswordrep' ).css( 'background', 'white' );
+                  
+      $( '#oldpassword' ).focus( function() {
+         $( this ).css( 'background', 'white' );
+      } );
+      $( '#newpassword' ).focus( function() {
+         $( this ).css( 'background', 'white' );
+      } );
+      $( '#newpasswordrep' ).focus( function() {
+         $( this ).css( 'background', 'white' );
+      } );
+                  
+      $( '#oldpassworderrors' ).empty();
+      $( '#newpassworderrors' ).empty();
+      
+   }
+   
+   
+   function destroyDialog( dialog ) {
+      
+      if( dialog ) {
+         dialog.empty();
+         dialog.dialog( 'destroy' );
+         dialog = null;
+         $( '#validate-dialog' ).remove();
+      }
+      
+   }
+   
+   $( '#ordersms' ).click( function() {
+      
+      if( $( this ).is(':checked') ) {
+         
+         destroyDialog( validationdialog );
+      
+      $( '.container' ).append('<div id="validate-dialog" title="Validate cellnr" i18n:attributes="title" />');
+      $( '#validate-dialog' ).append( '<h6 class="left" i18n:translate="">Please enter and confirm your cell phone number</h6>' );
+      $( '#validate-dialog' ).append( '<input type="text" class="text" id="smscellphonenr" tal:attributes="value user/contactinfo/mobile|default"/><br/>' );
+      $( '#validate-dialog' ).append( '<div id="validateresponse" style="min-width: 100%;" /><br/>' );
+      
+      var buttons = {};
+      buttons[strings.validatebutton] = function() {
+
+         $.ef( 'validate.cellphone', {
+               'number': $( '#smscellphonenr' ).val(),
+            }, function( response ) {
+               
+               if( response.result ) {
+                  
+                  $( '#smscellphonenr' ).css( 'background','white' );
+                  
+                  $.ef( 'sms.send.validation', {
+                        'nr': $( '#smscellphonenr' ).val()
+                     }, function( validationresponse ) {
+                        
+                        if( validationresponse.result ) {
+                           
+                           var cellphonenr = $( '#smscellphonenr' ).val();
+                           
+                           destroyDialog( validationdialog );
+                           
+                           var buttons2 = {};
+                           buttons2[strings.validatecodebutton] = function() {
+                              
+                              if( $( '#validationcode' ).val().length == 0 ) {
+
+                                 $( '#validationcode' ).css( 'background', 'pink' );
+                              
+                              } else {
+                                 
+                                 $.ef( 'sms.toggle.validation', {
+                                    
+                                    'code': $( '#validationcode' ).val()
+                                    
+                                    }, function( coderesponse ) {
+                                       
+                                       if( coderesponse.result ) {
+                                          
+                                          $.ef( 'sms.toggle.ordersent', { 
+                                                'setting': 'true'
+                                             }, function( ordersentresponse ) {
+                                                
+                                                if( ordersentresponse.result ) {
+                                                   
+                                                   destroyDialog( validationdialog );
+                                                   
+                                                   var buttons3 = {};
+                                                   buttons3[strings.closebutton] = function(){
+                                                      
+                                                       validationdialog.dialog( 'close' );
+                                                       
+                                                   }
+                                                   validationdialog = $( '#validate-dialog' ).dialog( {
+                                                      'title': 'Thank you',
+                                                      "buttons": buttons3,
+                                                      "modal": true
+                                                   });
+                                                   validationdialog.append( '<h6 i18n:translate="">You will now receive a SMS message when your order is sent.</h6>' );
+                                                   $( '#prefcellphone' ).val( cellphonenr );
+                                                   orgcellphonenr = cellphonenr;
+                                                   
+                                                }
+                                                
+                                             }
+                                          );
+                                          
+                                       } else {
+                                          
+                                          destroyDialog( validationdialog );
+                                          
+                                          validationdialog = $( '#validate-dialog' ).dialog( {
+                                             'title': 'Validate sms code',
+                                             "buttons": buttons2,
+                                             "close": function() {
+                                                $( '#ordersms' ).removeAttr( 'checked' );
+                                             },
+                                             "modal": true,
+                                             'width': 350
+                                          } );
+                                          
+                                          validationdialog.append( '<h6 style="text-color:red;" i18n:translate="">Validation code missmatch.</h6>' );
+                                          validationdialog.append( '<h6 class="left" i18n:translate="">Please enter your received code</h6>' );
+                                          validationdialog.append( '<input type="text" class="text" id="validationcode" style="min-width: 100%;"/><br/>' );
+                                          $( '#validationcode' ).css( 'background', 'pink' );
+                                          
+                                       }
+                                       
+                                    }
+                                 );
+                                 
+                              }
+                              
+                           }
+                           
+                           destroyDialog( validationdialog );
+                           
+                           validationdialog = $( '#validate-dialog' ).dialog( {
+                              'title': 'Validate sms code',
+                              "buttons": buttons2,
+                              "close": function() {
+                                 $( '#ordersms' ).removeAttr( 'checked' );
+                              },
+                              "modal": true,
+                              'width': 350
+                           } );
+                           
+                           validationdialog.append( '<h6 class="left" i18n:translate="">Please enter your received code</h6>' );
+                           validationdialog.append( '<input type="text" id="validationcode"/><br/>' );
+                           
+                           
+                        } else {
+                           
+                           //alert( 'Failed to send a validation code' );
+                           
+                        }
+                        
+                     }
+               );
+               } else {
+                  
+                  destroyDialog( validationdialog );
+                  
+                  var buttons2 = {};
+                  buttons2[strings.cancelbutton] = function() { 
+                     $( '#ordersms' ).removeAttr( 'checked' );
+                     destroyDialog( validationdialog ); 
+                  }
+                  validationdialog = $( '#validate-dialog' ).dialog( {
+                     'title': 'Error',
+                     "buttons": buttons2,
+                     "close": function() {
+                        $( '#ordersms' ).removeAttr( 'checked' );
+                        destroyDialog( validationdialog );
+                     },
+                     "modal": true
+                  } );
+                  
+                  validationdialog.append( '<h6 i18n:translate="">Failed to validate your cell phone nr</h6>' );
+                  
+                  
+               }
+               
+            }
+             
+         );
+      }
+         
+         validationdialog = $( '#validate-dialog' ).dialog( {
+            "buttons": buttons,
+            "close": function() {
+               $( '#ordersms' ).removeAttr( 'checked' );
+            },
+            "modal": true,
+            'width': 350
+         } );
+         
+      } else {
+         
+         $.ef( 'sms.toggle.ordersent', {
+               'setting': 'false'   
+            }
+         );
+      }
+      
+   } );
+   
+   
+   
+   $( '#genderMale,#genderFemale' ).click( function() {
+      
+      $.ef( 'user.set.gender', {
+         'gender': $( this ).val()
+      } );
+      
+   });
+
+   
+   $( '#newsletter' ).click( function() {
+   
+      $.ef( 'user.toggle.newsletter', {
+         'value': $( this ).attr( 'checked' )
+      } );
+      
+   });
+   
+
+	$('#apperanceSettings input[type=checkbox]').change( function() {
+	
+		var e = this;
+		$(e).hide().after( inlineLoader);
+		
+		var response = $.ef( 'user.set.preference', {
+			'key': $(e).attr('name'),
+			'value': $(e).is(':checked') 
+		});
+		
+		if(response.result) {
+			$(e).show().next().remove()
+		} else {
+			
+			alert('error')
+		}
+		
+		
+	});
+	
+	
+	
+	$( '.prefformtext,.prefformselect' ).click( function() {
+
+	   orgcellphonenr = $( '#prefcellphone' ).val();
+	   
+      var $inputs = $( '#contactinfoform input:text' );
+      $inputs.each(function() {
+         $( this ).removeClass( 'prefformtext' );
+         $( this ).addClass( 'prefformtexton' );
+         $( this ).removeAttr( 'readonly' );
+      });
+      
+      $( '#contactinfoform select' ).css( 'display', 'block' );
+      $( '#contactinfoform select' ).removeAttr( 'disabled' );
+      $( '#prefcountrytext' ).css( 'display', 'none' );
+      $( '#prefformsave' ).show();
+      $( '#prefformcancel' ).show();
+      
+      
+	   
+	});
+	
+	$( '#prefformcancel' ).click( function() {
+	   
+	   var $inputs = $( '#contactinfoform input:text' );
+      $inputs.each(function() {
+         $( this ).removeClass( 'prefformtexton' );
+         $( this ).addClass( 'prefformtext' );
+         $( this ).attr( 'readonly', 'true' );
+      });
+      
+      $( '#contactinfoform select' ).attr( 'disabled', 'true' );
+      
+      $( '#contactinfoform select' ).css( 'display', 'none' );
+      $( '#contactinfoform select' ).attr( 'disabled', 'true' );
+      $( '#prefcountrytext' ).css( 'display', 'block' );
+      
+      $( '#prefformsave' ).hide();
+      $( '#prefformcancel' ).hide();
+	   
+	} );
+	
+	
+	$( '#prefformsave' ).click( function() {
+	   
+	   var fullname  = $( '#prefname' ).val();
+	   var address   = $( '#prefaddress' ).val();
+	   var zipcode   = $( '#prefzipcode' ).val();
+	   var city      = $( '#prefcity' ).val();
+	   var country   = $( '#prefcountry option:selected' ).val();
+	   var phone     = $( '#prefphone' ).val();
+	   var cellphone = $( '#prefcellphone' ).val();
+	   
+	   $.ef( 'user.set.contactinfo', {
+			'fullname'  : fullname,
+			'address'   : address,
+			'zipcode'   : zipcode,
+			'city'      : city,
+			'country'   : country,
+			'phone'     : phone,
+			'cellphone' : cellphone
+		}, function( response ) {
+		   
+		    if( response.result ) {
+		       
+		      if( orgcellphonenr != cellphone &&  $( '#ordersms' ).attr( 'checked' ) ) {
+		         $( '#ordersms' ).removeAttr( 'checked' );
+		      }
+		       
+		      var $inputs = $( '#contactinfoform input:text' );
+            $inputs.each(function() {
+               $( this ).removeClass( 'prefformtexton' );
+               $( this ).addClass( 'prefformtext' );
+               $( this ).attr( 'readonly', 'true' );
+            });
+      
+            $( '#contactinfoform select' ).css( 'display', 'none' );
+            $( '#contactinfoform select' ).attr( 'disabled', 'true' );
+            $( '#prefcountrytext' ).css( 'display', 'block' );
+            $( '#prefcountrytext' ).val( $('#contactinfoform select :selected').text() );
+      
+            $( '#prefformsave' ).hide();
+            $( '#prefformcancel' ).hide();
+		       
+		    } else {
+		       
+		       alert( 'error' );
+		       
+		    }
+		     
+		});
+	   
+	} );
+	
+	
+	$( '#email' ).click( function() {
+	   
+	   $( '.container' ).append( '<div id="email-dialog" title="Change Email" i18n:attributes="title" />' );
+	   $( '#email-dialog' ).append( '<p class="info" i18n:translate="">This will also change your login username to the new email.</p>' );
+      $( '#email-dialog' ).append( '<h6 class="left" i18n:translate="">Old email address</h6>' );
+      $( '#email-dialog' ).append( '<p><tal:block tal:content="session/username" /></p><br />' );
+      $( '#email-dialog' ).append( '<h6 class="left" i18n:translate="">Enter new email</h6>' );
+      $( '#email-dialog' ).append( '<input type="text" name="newemail" class="text required" id="newemail" /><br/>' );
+      $( '#email-dialog' ).append( '<h6 class="left" i18n:translate="">Retype new email</h6>' );
+      $( '#email-dialog' ).append( '<input type="text" name="newemailrep" class="text required" id="newemailrep" /><br/>' );
+      $( '#email-dialog' ).append( '<div id="newemailerrors"></div><br/><br />' );
+	   
+      $( '#newemail,#newemailrep' ).focus( function() {
+         $( '#newemail' ).css( 'background', 'white' );
+         $( '#newemailrep' ).css( 'background', 'white' );
+         $( '#newemailerrors' ).empty();
+      } );
+      
+      
+      var buttons = {};
+      buttons[strings.okbutton] = function() {
+         
+         $( '#newemailerrors' ).prepend( '<div id="emaildialogloader" style="text-align:center;">' + inlineLoader + '</div>' );
+         var newemail = $( '#newemail' ).val();
+         var newemailrep = $( '#newemailrep' ).val();
+         
+         if( newemail.length == 0 || newemailrep.length == 0 ) {
+           
+            $( '#newemailerrors' ).html( '<p class="red" i18n:translate="">Please enter the new email</p>' );
+            $( '#newemail' ).css( 'background', 'pink' );
+            $( '#newemailrep' ).css( 'background', 'pink' );
+             
+         } else if( newemail != newemailrep ) {
+            
+            $( '#newemailerrors' ).html( '<p class="red" i18n:translate="">The two new email entries do not match. Please try again</p>' );
+            $( '#newemail' ).css( 'background', 'pink' );
+            $( '#newemailrep' ).css( 'background', 'pink' );
+            
+         } else {
+            
+            var tmpbuttons = emaildialog.dialog( 'options', 'buttons' );
+            //buttons[strings.okbutton].attr( 'disabled', true );
+            $( this ).attr( 'disabled', true );
+            
+            
+            $.ef( 'user.set.email', {
+               'newemail': newemail,
+               'newemailrep': newemailrep
+               }, 
+               function( response ) {
+               
+                  if( response.result ) {
+                     
+                     $( '#email' ).html( newemail );
+                     destroyDialog( emaildialog );
+                     
+                  } else {
+                     
+                     $( '#emaildialogloader' ).remove();
+                     switch( response.errorcode ) {
+                        
+                        case 1:
+                           $( '#newemailerrors' ).html( '<p class="red" i18n:translate="">Required paramter missing</p>' );
+                           break;
+                        case 2:
+                           $( '#newemailerrors' ).html( '<p class="red" i18n:translate="">Email addresses do not match</p>' );
+                           break;
+                        case 3:
+                           $( '#newemailerrors' ).html( '<p class="red" i18n:translate="">Could not find user</p>' );
+                           break;
+                        case 4:
+                           $( '#newemailerrors' ).html( '<p class="red" i18n:translate="">Email validation failed</p>' );
+                           break;
+                        case 5:
+                           $( '#newemailerrors' ).html( '<p class="red" i18n:translate="">The new email address is the same as your old email address</p>' );
+                           break;
+                        case 6:
+                           $( '#newemailerrors' ).html( '<p class="red" i18n:translate="">User already registered</p>' );
+                           break;
+                        default:
+                           break;
+                        
+                     }
+                     
+                  }
+                  
+               }
+            );
+         }
+      }
+      buttons[strings.cancelbutton] = function() {
+         destroyDialog( emaildialog );
+      }
+      
+	   emaildialog = $( '#email-dialog' ).dialog( {
+         'title': 'Change email address',
+         'buttons': buttons,
+         'modal': true,
+         'width': 350,
+         'resize': false,
+         'draggable': false
+         
+      });
+	   
+	});
+	
+	
+	
+	function toggleInputReadable( dialog, readable ) {
+	   var $inputs = $( 'input email-dialog');
+      $inputs.each(function() {
+         if( readable ) {
+            $( this ).attr( 'readable', true );
+         } else {
+            $( this ).attr( 'readable', false );
+         }
+      });
+	   
+	}
+	 
+
+</script>
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="${templateroot}/${templates}/common.html/footer" />
+		<div metal:use-macro="${templateroot}/${templates}/account/common.html/footer" />
+	</div>
+</div>	
+
+</body>
+</html>

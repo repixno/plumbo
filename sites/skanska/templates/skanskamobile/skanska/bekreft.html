@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <div metal:use-macro="../common.html/head" />
+        <div metal:use-macro="../common.html/stylesheet" />
+	
+	<style type="text/css">
+	    .info{
+		padding:40px;
+	    }
+	    .valg{
+		width: 502px;
+		height: 70px!important;
+		font-size: 2em!important;
+		padding: 5px;
+	    }
+	    
+	</style>
+	
+	<div metal:use-macro="../common.html/javascript" />
+    </head>
+    
+    <body>
+        <div class="row text-center header">
+	    <img  src="${static:css/portals/stabburet/mobile/images/bekrefthead.jpg}" alt="ja, selvfølgelig har jeg kjøpt 3 bokser stabburet leverpostei - det er jo så godt!"/>
+        </div>
+        <div class="container center">
+	    <div class="info">
+		<form method="post" name="confirm" id="confirm" action="/bestill/editor">
+                <div class="shortinfo">
+                    <img src="${static:css/portals/stabburet/mobile/images/kortinfo.jpg}" alt="Kort info" />
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <td style="text-align: left">
+                                <img src="${static:css/portals/stabburet/web/images/month.png}" alt="Kort info" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="month" name="month" class="valg">
+				    <option value="default" disabled="true" selected="true">Velg Måned</option>
+                                    <option>August</option>
+                                    <option>September</option>
+                                    <option>Oktober</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <td style="text-align: left">
+                                <img src="${static:css/portals/stabburet/web/images/kommune.png}" alt="Kort info" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="kommune" name="kommune"  type="text" class="valg input-block-level"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <td style="text-align: left">
+                                <img src="${static:css/portals/stabburet/web/images/store.png}" alt="Kort info" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="store" id="store" class="valg">
+                                    <option value="default" disabled="true" selected="true">Velg Butikk:</option>
+                                    <option>Rema 1000</option>
+                                    <option>Bunnpris</option>
+                                    <option>Kiwi</option>
+                                    <option>Meny</option>
+                                    <option>Joker</option>
+                                    <option>Spar/Eurospar</option>
+                                    <option>Ultra/Centra</option>
+                                    <option>Rimi</option>
+                                    <option>Ica</option>
+                                    <option>Coop Mega</option>
+                                    <option>Coop Obs!</option>
+                                    <option>Coop Prix</option>
+                                    <option>Coop Extra</option>
+                                    <option>Coop Marked</option>
+                                    <option>Annet</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+		    <button class="btn btn-stabburet next" value="100" id="next" title="Velg Måned, Kommune og Butikk for kjøp før du går videre videre">Lag Lokk</button>
+
+                </div>
+		<input type="text" style="display: none;" />
+		</form>
+	    </div>
+
+        </div>
+	
+        <div metal:use-macro="../common.html/footer" />
+        
+        
+        <script>
+            
+	    var laglokkhover = "${static:css/portals/stabburet/web/images/laglokk-hover.png}";
+	    var laglokkdown = "${static:css/portals/stabburet/web/images/laglokk-down.png}";
+	    var laglokk = "${static:css/portals/stabburet/web/images/laglokk.png}";
+	    
+            $( function(){
+		
+    
+
+                    $('.next').click( function(){
+                            $(this).attr( 'src', laglokkdown);
+			    if( $('#month option:selected').val() == "default" ||  $('#store option:selected').val() == "default" || $('#kommune').val() == '' ){
+				alert( 'Velg Måned, Kommune og Butikk for kjøp før du går videre videre');
+				return false;
+			    }else{
+				$('#confirm').submit();
+				//window.location.href = '/stabburet/editor';
+			    }
+			    
+			    return false;
+                            
+                        });
+		    
+		    $('.valg').change( function(){
+			    if( $('#month option:selected').val() != "default" &&  $('#store option:selected').val() != "default" && $('#kommune').val() != '' ){
+				$('.next').attr('title', '');
+			    }else{
+				
+				
+			    }
+			});
+		
+    		
+		
+		});
+            
+            
+            
+        </script>
+
+</body>
+</html>

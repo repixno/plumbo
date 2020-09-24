@@ -1,0 +1,464 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	
+	
+	<tal:block metal:use-macro="../../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">My orders</tal:block>
+	
+	<style type="text/css">
+
+        .elever{
+            border: solid 1px #ccc;
+            margin: 15px;
+            padding: 5px;
+        }
+        
+        #preview{
+			position:absolute;
+
+			display:none;
+			color:#fff;
+		}
+		#preview img {
+			max-width: 400px;
+		}
+		.klassebilde{
+			height: 140px;
+			border: solid 4px white!important;
+		}
+		.selected, .selectedgruppebilde{
+			border: solid 4px green!important;
+		}
+
+		.thumbcheck{
+            position: relative;
+            top: 13px!important;
+            left: 3px;
+        }
+        .thumbcontainer{
+            border: solid 1px #ccc;
+            position: relative;
+            float: left;
+        }
+		#loader-overlay{
+			position: fixed;
+			opacity: 0.9;
+			margin: 0;
+			width: 100%;
+			height: 100%;
+			
+		}
+		.newform label{
+			width: 100px;
+		}
+		
+		input[type=checkbox] {
+			display: block;
+		}
+		
+		.bar{
+			background: green;
+			height: 20px;
+			width: 0px;
+		}
+		
+		label{
+			max-width:  100px;
+		}
+		
+	</style>
+</head>
+
+<body>
+	<div id="loader-overlay">
+		<div class="loadingInfo">
+			<img src="${static:gfx/gui/ajax-loader-gray.gif}" /><br/>
+			<br/>
+			<h3 i18n:translate="">Loading, please wait.</h3>
+			<p>
+				<tal:block  i18n:translate="">
+				If you waited too long, try refreshing the page.
+				</tal:block>
+				<a href="." class="refresh" i18n:translate="">Refresh</a>
+			</p>
+		</div>
+	</div>
+	<div metal:use-macro="../../../../${templates}/common.html/top" />
+    <div class="container">
+       
+        <!-- use if menu is needed -->
+        <div tal:define="global menuitem string:orders" metal:use-macro="../common.html/menu" />
+    
+        <div class="col-md-10">
+			
+				<div>
+					<form class="form-inline">
+						<label for="identifier">Kode: </label><input type="text" name="identifier" id="identifier" class="form-control"/>
+						<label for="ename">Etternavn: </label><input type="text" name="ename" id="ename" class="form-control"/>
+						<label>Kun dette prosjektet</label><input type="checkbox" name="thisproject" checked="checked" class="form-control"/>
+						
+						<input class="btn btn-primary" type="submit" value="Søk"/>
+					</form>	
+				</div>
+				<div class="span-10">
+					<span tal:condition="exists:prev">
+						<a href="${prev}">FORRIGE SIDE</a> 				
+					</span>
+					
+					
+					<span tal:repeat="pag pagination">
+						
+						<span tal:condition="php:pag == current" tal:content="repeat/pag/key">
+							sadsa
+						</span>
+						<tal:block tal:condition="php:pag != current">
+							<a href="${pag}" tal:content="repeat/pag/key"></a>
+						</tal:block>
+						
+						
+					</span>
+					
+					<span tal:condition="exists:last">
+						 <a href="${last}">NESTE SIDE</a>				
+					</span>
+				</div>
+				<div class="span-10 last right">
+					<button id="newstudent">Ny elev</button>
+				</div>
+            
+                <div class="elever col-md-12" tal:repeat="elev elever">
+                    
+                        <div class="col-md-6">
+  
+                        </div>
+                        <div class="col-md-6" >
+                            <form id="flyttbilder_${elev/id}" method="post" action="/partner/reedfoto/albums/moveimages/${school}" class="row moveimages">
+								
+								<div class="col-xs-12 last album${elev/aid}">
+									<div  class="col-md-3 text-center " tal:repeat="image elev/bilder" id="${image/bid}">
+										<div class="thumbcontainer">
+										<a href="/partner/reedfoto/albums/image/${image/bid}" title="${image/tittel}" class="thumb" rel="">
+											<img data-original="/partner/reedfoto/albums/thumbnail/${image/bid}" class="img-responsive" title="${image/tittel}" tal:attributes="alt image/tittel;"  id="image_${image/bid}"/>
+										</a>
+										<input type="checkbox" id="checkbox${image/bid}" class="thumbcheck" name="image[]" value="${image/bid}"/>
+										<label for="checkbox${image/bid}" style="font-size: 0.7em">${image/tittel}</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 form-inline">
+									
+									<input type="radio" value="move" checked="checked" name="type"/> <label>Flytt til</label> 
+									<select class="form-control" name="aid">
+										<!--<tal:block tal:repeat="elev2 elever">
+										<option value="${elev2/aid}">
+											${elev2/fname} ${elev2/ename}
+										</option>
+										</tal:block>-->
+									</select>
+								</div>
+								<div class="col-xs-12 form-inline">
+									<input type="radio" value="delete" name="type"/>
+									<label for="" >Gjør bildene utilgjengelige</label>
+								</div>
+								<div class="col-xs-12">
+									<button class="flyttbilder">Submit</button>
+								</div>
+							</form>
+							
+							<div class="col-md-12">
+								<fieldset>
+								<legend>Legg til bilde</legend>
+								<div>
+									<form id="Uploadform" action="/partner/reedfoto/albums/upload" method="post" enctype="multipart/form-data" data-albumid="${elev/aid}">
+										<input type="file" name="images[]" multiple="true"/>
+										<input type="checkbox" name="gruppe" value="gruppe" id="gruppecheckbox" /><label for="gruppecheckbox">Gruppebilde</label>
+										<input type="hidden" name="aid" value="${elev/aid}"/>
+										<input class="btn btn-primary" type="submit" value="Last opp" />
+									</form>
+								</div>
+								<div class="progress">
+									<div class="bar"></div>
+									<div class="percent">0%</div>
+								</div>
+								</fieldset>
+							
+							</div>
+                        </div>
+                </div>
+        </div>
+    </div>
+</body>
+
+
+
+<div class="newform" style="display: none;">
+	<div class="col-md-12">
+		<form action="/partner/reedfoto/albums/newstudent" method="post" class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">ID: </label>
+				<div class="col-sm-10">
+					<input class="form-control" type="text" name="identifier" value=""/>
+				</div>
+				
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" >Fornavn: </label>
+				<div class="col-sm-10">
+					<input class="form-control" type="text" name="fname" value=""/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" >Etternavn: </label>
+				<div class="col-sm-10">
+					<input class="form-control" type="text" name="ename" value=""/>
+				</div>
+				
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" >Skule:</label>
+				<div class="col-sm-10">
+					<input type="text"  class="form-control" name="showschool" value="${school}" disabled="true"/>
+				</div>
+				
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" >Klasse:</label>
+				<div class="col-sm-10">
+					<input type="text" name="grade" value="" class="form-control"/>
+				</div>
+				
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" >Adresse: </label>
+				<div class="col-sm-10">
+					<input class="form-control" type="text" name="address" value=""/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Postnr: </label><div class="col-md-3"><input class="form-control" type="text" name="zip" value=""/></div>
+				<label class="col-sm-2 control-label">Poststad: </label><div class="col-md-5"><input class="form-control" type="text" name="city" value=""/></div>
+			</div>
+			
+			<input type="hidden" name="school" value="${school}"/>
+			<input class="btn btn-primary" type="submit" />
+		</form>
+	</div>
+</div>
+
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="${static:}js/jquery.lazyload.min.js"></script>
+	
+<script>
+    
+	var school = '${school}';
+	
+    $(function(){
+		
+		$("img").lazyload();
+        xOffset = 10;
+		yOffset = 30;
+		
+		// these 2 variable determine popup's distance from the cursor
+		// you might want to adjust to get the right result
+		
+    
+		var bar = $('.bar');
+		var percent = $('.percent');
+		var status = $('#status');
+		
+		
+		$('#newstudent').on( 'click', function(){
+			
+				$('.newform').dialog({
+					width: 750,
+					height: 450,
+					title: "NY ELEV"
+					});
+			
+			
+			});
+		
+		
+		$('select[name=aid]').on( 'click', function(){
+
+			var thiselect = $(this);
+			$.post( "/partner/reedfoto/albums/elevlist/",
+				   { school: school },
+				   function( data ) {
+						//console.log(data);
+						
+						$(data).each( function( ret, elev ){
+		
+							
+							thiselect.append( '<option value="' + elev.aid + '">'
+											 + elev.fname + ' '  + elev.ename +'</option>');
+							
+							});
+						
+					
+				},'json');
+			
+			console.log( "asds" );
+			
+			});
+		   
+		$('form.moveimages').ajaxForm({
+			complete: function(xhr) {
+				
+				var retobject = JSON.parse( xhr.responseText );
+				//console.log(retobject);
+				
+				if( retobject.type == 'delete'){
+					
+					$(retobject.image).each( function(id, bid){
+						$('#' + bid ).remove();
+						})
+				}
+				else{
+					$(retobject.image).each( function(id, bid){
+						var imageobject = $('#' + bid );
+						//$('#' + bid ).remove();
+						
+						$('.album' + retobject.aid ).append(imageobject);		
+						
+						});
+				}
+			}
+		}); 
+
+		
+		
+		$('form#Uploadform').on( 'submit', function(){
+			
+			console.log( "Onsubmit", $(this));
+			var form = $(this);
+			console.log( $(this) );
+			console.log(form);
+			
+			bar = $(form).parent().parent().find('.bar');
+			console.log( bar );
+			percent = form.parent().parent().find('.percent');
+			status = form.parent().parent().find('#status');
+			
+			console.log(status);
+			
+			
+			});
+		
+		$('form#Uploadform').ajaxForm({
+			
+			
+			beforeSend: function(res, form ) {				
+				var percentVal = '0%';
+				
+				status.empty();
+				bar.width(percentVal)
+				percent.html(percentVal);
+			},
+			uploadProgress: function(event, position, total, percentComplete) {
+				var percentVal = percentComplete + '%';
+				bar.width(percentVal)
+				percent.html(percentVal);
+			},
+			success: function() {
+				var percentVal = '100%';
+				bar.width(percentVal)
+				percent.html(percentVal);
+			},
+			complete: function(xhr) {
+				
+				var retobjectarray = JSON.parse( xhr.responseText );
+				
+
+				console.log(retobjectarray);
+				
+				
+				$(retobjectarray).each( function(){
+					
+					
+					console.log(this);
+					
+					var retobject = this;
+				
+					var imageobject = $('<div class="center thumbcontainer" id="'+retobject.imageid+'">\
+										<a href="/partner/reedfoto/albums/image/'+retobject.imageid+'" title="undefined" class="thumb" rel="">\
+											<img src="/partner/reedfoto/albums/thumbnail/'+retobject.imageid+'" title="newimage.jpg" id="image_'+retobject.imageid+'" alt="newimage.jpg" style="display: inline;"/>\
+										</a>\
+										<br/>\
+										<label for="checkbox'+retobject.imageid+'"><input type="checkbox" id="checkbox'+retobject.imageid+'" class="thumbcheck" name="image[]" value="'+retobject.imageid+'"/>\
+										<span style="font-size: 0.7em">_MG_8267.jpg</span></label>\
+									</div>');
+					
+					$('.album' + retobject.aid ).prepend(imageobject);
+				
+				});
+				
+				//location.reload();
+	
+			}
+		}); 
+
+		
+		
+		
+        /* END CONFIG */
+        $("a.thumb").hover(function(e){
+            var src  = $(this).attr('href')
+           	var title = $(this).attr('title');
+            
+            
+            //console.log(src);
+            
+            $("body").append('<p id="preview"><img src="' + src + '" alt="Image preview" /> '+ title + '</p>');								 
+            $("#preview")
+                .css("top",(e.pageY - xOffset) + "px")
+                .css("left",(e.pageX + yOffset) + "px")
+                .fadeIn("fast");						
+        },
+        function(){
+            this.title = this.t;	
+            $("#preview").remove();
+        });	
+        $("a.thumb").mousemove(function(e){
+            $("#preview")
+                .css("top",(e.pageY - xOffset) + "px")
+                .css("left",(e.pageX + yOffset) + "px");
+        });
+        
+		
+        $("a.thumb").on('click', function(e){
+            
+			
+			var inputcheck = $(this).parent().find('.thumbcheck');
+			
+			if( inputcheck.prop('checked') ){
+				inputcheck.removeAttr('checked');
+			}else{
+				inputcheck.attr( "checked" , "true");
+			}
+			
+            e.preventDefault();
+            return false;
+            
+            });
+		
+		
+		
+		$(window).load( function() {
+			$('#loader-overlay').fadeOut('slow', function() {
+				$(this).hide();
+			})
+		});
+		$('.refresh').click( function() {
+			window.location.reload();
+			return false;
+		});
+           
+    })
+    
+</script>
+
+
+</html>

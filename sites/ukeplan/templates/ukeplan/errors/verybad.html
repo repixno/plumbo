@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" />
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="icon" href="../../favicon.ico"/>
+
+    <title>Ukeplan</title>
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Just+Another+Hand' rel='stylesheet' type='text/css' />
+    <!-- Bootstrap -->
+    <link href="https://static.repix.no/css/bootstrap/css/bootstrap.min.css?${version}" rel="stylesheet"/>
+    <link href="https://static.repix.no/css/bootstrap/css/themes/ukeplan.css?${version}" rel="stylesheet"/>
+    
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container">
+	      <div class="masthead">
+    
+        <div class="row">
+            <div class="col-md-3">
+                 <img  src="http://mariestatic.repix.no/gfx/ukeplan/new/logougeplan.jpg" />
+            </div>
+        </div>
+      
+	
+	
+	
+	<div class="span-9 prepend-1">
+	
+		<img src="https://static.repix.no/gfx/404/dog.jpg}" alt="We are sorry" i18n:attributes="alt" />
+	
+	</div>
+	
+	
+	<div class="span-12 append-2 last">
+		<h2>Beklager, noe veldig galt har hendt</h2>
+		<h4 class="top quiet">Det oppstod dessverre en feil i applikasjonen. Om du forklarer kort hva du forsøkte å gjøre, så hjelper du oss med å rette feilen. Takk for hjelpen!</h4>
+		
+		<div>
+			<script type="text/javascript">
+				$('#old-site-link-from-verybad-error').click( function() {
+				try{
+					pageTracker._trackEvent('Old page', 'Clicked from very bad error');
+					pageTracker._trackPageview();
+				} catch(err) {}
+				document.location.href = $(this).attr('href');
+				return false;
+				});
+			</script>
+
+			<p><!-- content /--></p>
+		</div>
+		
+		<form action="/contact/feedback/" method="post">
+			<label>Melding om feil:</label><br/>
+			<input type="hidden" name="reason" value="error" />
+			<textarea name="usercomment"></textarea>
+			<textarea class="hide" name="content"><!-- content /--></textarea>
+			<textarea class="hide" name="trace"><!-- trace /--></textarea>
+			<textarea class="hide" name="code"><!-- code /--></textarea>
+			<input type="hidden" value="verybad" name="errortype" />
+			<div class="span-6">
+				<a href="javascript:history.back(-1);">Go back</a>
+			</div>
+			<div class="span-6 last">
+				<button class="blue">Send tilbakemelding</button>
+			</div>
+		</form>
+	</div>
+	<hr class="space"/>
+	<div class="span-24 last quiet">
+		<div>
+			<p>The error occured on line <strong><!-- line /--></strong> in <strong><!-- file /--></strong>.</p>
+		</div>
+		
+		<div class="span-12">
+			<h3>Trace</h3>
+			<pre><!-- trace /--></pre>
+		</div>
+		
+		<div class="span-12 last">
+			<h3>Code</h3>
+			<pre><!-- code /--></pre>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+//]]>
+</script>
+<script type="text/javascript">
+	try{
+	var pageTracker = _gat._getTracker("UA-390524-10");
+		pageTracker._trackEvent('Error', 'Very bad');
+		pageTracker._trackPageview();
+	} catch(err) {}
+</script>
+</body>
+</html>

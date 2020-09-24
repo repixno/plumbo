@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title"/>
+	
+	<style type="text/css">
+		.ingress {
+			font-size: 1.3em;
+			color: #333;
+		}
+		
+		form.contest {
+			background-color: #f8f8f8;
+			border: 1px solid #ccc;
+			border-radius: 10px;-moz-border-radius:10px;-webkit-border-radius:10px;
+			text-align: center;
+			padding: 10px;
+		}
+		
+		h5 {
+			margin-bottom: 0;
+			color: #666;
+		}
+		.red { color: #c00}
+		
+		table tr td.expired * {
+			color: #ccc !important;
+		}
+		table tr td.expired img {
+			opacity: .5;
+			-moz-opacity: .5;
+			-webkit-opacity: .5;
+			filter:alpha(opacity=50);
+		}
+
+		table td {
+			vertical-align: top;
+			width: 14%;
+		
+		}
+		
+		#bigProductBody {
+			height: 100px;
+			overflow: auto;
+			overflow-y: hidden;
+		}
+		
+		.price {
+			font-size: 1.3em;
+			font-weight: bold;
+			
+		}
+		
+		.percentOffer {
+			float: right;
+		}
+		
+	</style>
+</head>
+
+
+<body>
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/top" />
+		
+		<h1>Gulltilbud hver dag under OL i Vancouver</h1>
+		
+		<div class="span-24 last">
+
+				<tal:block tal:define="global day request/date/day" />
+				<tal:block tal:define="global sectionMatch string:feb$day" />
+
+				<tal:block tal:condition="lt:day,12">
+					<div class="span-18">
+						<img src="http://c.static.eurofoto.no/cms/images/articles/landingssider/ol-kalender_landingsside.jpg" />
+					</div>
+					
+				</tal:block>
+			
+			<tal:block tal:repeat="section sections">
+			
+				
+				
+				<tal:block tal:condition="conditionalmatch:repeat/section/key,sectionMatch,1,0,1">
+					<div class="span-17 colborder">	
+						<tal:block tal:repeat="product section">
+							<div class="span-10">
+								<h2 tal:content="product/title"></h2>
+								<p tal:content="product/ingress"></p>
+								<!--<div tal:content="structure product/body" id="bigProductBody"></div>-->
+								<div class="right">
+									<span class="price">Kun Kr <span tal:content="formatprice:product/option/price"></span></span> &nbsp; 
+									<a class="button call-to-action large" i18n:translate="" href="${product/url}">Show product</a>
+								</div>
+							</div>
+							
+							<div class="span-7 last">
+							<tal:block tal:repeat="image product/images">
+								<tal:block tal:condition="equal:repeat/image/number,1">
+									<tal:block tal:define="global staticurl" tal:content="static:" />
+									<a href="${product/url}" title="${product/title}">
+										<img src="${staticurl}images/products/thumbs/square/270/${image/url}" 
+											widht="270" height="270" alt="${product/title}" tal:condition="image/url" />
+									</a>
+								</tal:block>
+							</tal:block>
+							</div>
+						</tal:block>
+					</div>
+				</tal:block>
+			</tal:block>
+			<div class="span-6 last">
+				<div class="box">
+					<h4>Meld deg på her</h4>
+					<p>Du vil motta 1 tilbud hver dag under vinter-OL</p>
+					<div id="signupform">
+						<form action="http://eurofoto.createsend.com/t/r/s/dhlje/" method="post" id="eurofoto-signup">
+							<label for="name">Navn:</label><br />
+							<input class="text span-5" id="name" name="cm-name" type="text" /><br />
+							<label for="dhlje-dhlje">E-post:</label><br />
+							<input class="text span-5 email" id="dhlje-dhlje" name="cm-dhlje-dhlje" type="text" /><br />
+							<button type="submit">Meld meg på</button>
+						</form>
+						<form action="http://eurofoto.createsend.com/t/r/s/dhltuh/" class="hide" id="vg-signup" method="post">
+							<div>
+								<label for="name">Name:</label><br />
+								<input class="text span-5" id="name" name="cm-name" type="text" /><br />
+								<label for="dhltuh-dhltuh">Email:</label><br />
+								<input class="text span-5 email" id="dhltuh-dhltuh" name="cm-dhltuh-dhltuh" type="text" /><br />
+								<button type="submit">Meld meg på</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="span-24">
+			<h2>Kalender</h2>
+			<table id="ol-calendar">
+				<thead>
+					<tr>
+						<th>Mandag</th>
+						<th>Tirsdag</th>
+						<th>Onsdag</th>
+						<th>Torsdag</th>
+						<th>Fredag</th>
+						<th>Lørdag</th>
+						<th><span class="red">Søndag</span></th>
+					</tr>
+				</thead>
+				<tr>
+					<td colspan="4"></td>
+					<td>
+						<div class="percentOffer"><div class="offer right percent50"></div></div>
+						<h5>12 februar</h5>
+						<tal:block tal:define="global offerDay string:12" />
+						<tal:block define:section="feb12, 12 februar" />
+						<tal:block tal:define="global currentSection string:feb12"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+					<td>
+						<div class="percentOffer"><div class="offer right percent50"></div></div>
+						<h5>13 februar</h5>
+						<tal:block tal:define="global offerDay string:13" />
+						<tal:block define:section="feb13, 13 februar" />
+						<tal:block tal:define="global currentSection string:feb13"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+					<td>
+						<div class="percentOffer"><div class="offer right percent75"></div></div>
+						<h5>14 februar</h5>
+						<tal:block tal:define="global offerDay string:14" />
+						<tal:block define:section="feb14, 14 februar" />
+						<tal:block tal:define="global currentSection string:feb14"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="percentOffer"><div class="offer right percent50"></div></div>
+						<h5>15 februar</h5>
+						<tal:block tal:define="global offerDay string:15" />
+						<tal:block define:section="feb15, 15 februar" />
+						<tal:block tal:define="global currentSection string:feb15"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+					<td>
+						<div class="percentOffer"><div class="offer right percent75"></div></div>
+						<h5>16 februar</h5>
+						<tal:block tal:define="global offerDay string:16" />
+						<tal:block define:section="feb16, 16 februar" />
+						<tal:block tal:define="global currentSection string:feb16"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+					<td>
+						<div class="percentOffer"><div class="offer right percent50"></div></div>
+						<h5>17 februar</h5>
+						<tal:block define:section="feb17, 17 februar" />
+						<tal:block tal:define="global offerDay string:17" />
+						<tal:block tal:define="global currentSection string:feb17"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+					<td>
+						<div class="percentOffer"><div class="offer right percent75"></div></div>
+						<h5>18 februar</h5>
+						<tal:block tal:define="global offerDay string:18" />
+						<tal:block define:section="feb18, 18 februar" />
+						<tal:block tal:define="global currentSection string:feb18"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+					<td>
+						<div class="percentOffer"><div class="offer right percent50"></div></div>
+						<h5>19 februar</h5>
+						<tal:block tal:define="global offerDay string:19" />
+						<tal:block define:section="feb19, 19 februar" />
+						<tal:block tal:define="global currentSection string:feb19"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+					<td>
+						<div class="percentOffer"><div class="offer right percent75"></div></div>
+						<h5>20 februar</h5>
+						<tal:block tal:define="global offerDay string:20" />
+						<tal:block define:section="feb20, 20 februar" />
+						<tal:block tal:define="global currentSection string:feb20"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+					<td>
+						<div class="percentOffer"><div class="offer right percent50"></div></div>
+						<h5>21 februar</h5>
+						<tal:block tal:define="global offerDay string:21" />
+						<tal:block define:section="feb21, 21 februar" />
+						<tal:block tal:define="global currentSection string:feb21"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="percentOffer"><div class="offer right percent50"></div></div>
+						<h5>22 februar</h5>
+						<tal:block tal:define="global offerDay string:22" />
+						<tal:block define:section="feb22, 22 februar" />
+						<tal:block tal:define="global currentSection string:feb22"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+					<td>
+						<div class="percentOffer"><div class="offer right percent75"></div></div>
+						<h5>23 februar</h5>
+						<tal:block tal:define="global offerDay string:23" />
+						<tal:block define:section="feb23, 23 februar" />
+						<tal:block tal:define="global currentSection string:feb23"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+					<td>
+						<div class="percentOffer"><div class="offer right percent50"></div></div>
+						<h5>24 februar</h5>
+						<tal:block tal:define="global offerDay string:24" />
+						<tal:block define:section="feb24, 24 februar" />
+						<tal:block tal:define="global currentSection string:feb24"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+					<td>
+						<div class="percentOffer"><div class="offer right percent50"></div></div>
+						<h5>25 februar</h5>
+						<tal:block tal:define="global offerDay string:25" />
+						<tal:block define:section="feb25, 25 februar" />
+						<tal:block tal:define="global currentSection string:feb25"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+					<td>
+						<div class="percentOffer"><div class="offer right percent50"></div></div>
+						<h5>26 februar</h5>
+						<tal:block tal:define="global offerDay string:26" />
+						<tal:block define:section="feb26, 26 februar" />
+						<tal:block tal:define="global currentSection string:feb26"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+					<td>
+						<div class="percentOffer"><div class="offer right percent75"></div></div>
+						<h5>27 februar</h5>
+						<tal:block tal:define="global offerDay string:27" />
+						<tal:block define:section="feb27, 27 februar" />
+						<tal:block tal:define="global currentSection string:feb27"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+					<td>
+						<div class="percentOffer"><div class="offer right percent50"></div></div>
+						<h5>28 februar</h5>
+						<tal:block tal:define="global offerDay string:28" />
+						<tal:block define:section="feb28, 28 februar" />
+						<tal:block tal:define="global currentSection string:feb28"></tal:block>
+						<tal:block metal:use-macro="listProducts"></tal:block>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>	
+</div>
+
+
+<tal:block metal:define-macro="listProducts">
+
+	<tal:block tal:repeat="section sections">
+		<tal:block tal:repeat="product section" tal:condition="conditionalmatch:repeat/section/key,currentSection,1,0,1">
+
+			<tal:block tal:condition="gte:day,offerDay,1">
+				<h4 tal:content="product/title" class="hide"></h4>
+				<tal:block tal:repeat="image product/images">
+					<tal:block tal:condition="equal:repeat/image/number,1">
+						<tal:block tal:define="global staticurl" tal:content="static:" />
+						<a href="/${request/execpath}${product/url}" title="${product/title}">
+							<img src="${staticurl}images/products/thumbs/square/70/${image/url}" 
+								widht="70" height="70" alt="${product/title}" tal:condition="image/url" />
+						</a>
+					</tal:block>
+				</tal:block>
+				
+				<p tal:content="product/ingress" class="small top"></p>
+
+				<span clas="price">Kun Kr <span tal:content="formatprice:product/option/price"></span></span> <a class="button hide small"  href="${product/url}" i18n:translate="">Show product</a>
+				
+			</tal:block>
+<div class="dateholder" tal:attributes="title repeat/section/key"></div>
+		</tal:block>
+	</tal:block>
+
+</tal:block>
+
+<script type="text/javascript">
+	$(document).ready( function() {
+
+		var month = '${request/date/month}';
+		var day = '${request/date/day}';
+		
+		$('#ol-calendar .dateholder').each( function(i, item) {
+			var offerDay = $(this).attr('title').substring(5,3);
+
+			//<![CDATA[
+			if( day == offerDay ) {
+				//$(this).parent().addClass('todaysOffer').prepend('<h2>Dagens tilbud</h2>');;
+				$(this).parent().find('h5').css('margin-top', '75px');
+				var cell = $(this).parent();
+				$('*', cell).show();
+			}
+
+			if( day > offerDay ) {
+				var cell = $(this).parent();
+				$('*', cell).show();
+				$(this).parent().addClass('expired');
+				$(this).parent().append('<h5>Utgått</h5>');
+				$(this).parent().find('a.button').hide();
+				$(this).parent().find('div.percentOffer').css('opacity', 0.1);
+			}
+
+			if( day < offerDay ) {
+				$(this).parent().addClass('coming').addClass('center');
+				$(this).parent().empty().append('<h4 class="quiet">kommer snart</h4>');
+			}
+			
+			//]]>
+		});
+		
+		if ( document.location.host == 'vg.no' || document.location.host == 'foto.vg.no') {
+			$('#eurofoto-signup').remove();
+			$('#vg-signup').show();
+		}
+		
+		$.getJSON('/api/1.0/user/get/info', function(data) {
+			$('#signupform input[name=cm-name]').val( data.info.fullname );
+			$('#signupform input.email').val( data.info.username );
+		});
+
+	});
+</script>
+
+</body>
+</html>

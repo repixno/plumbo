@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<tal:block tal:define="global dontShowCart" />
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head"></tal:block>
+	<title i18n:translate="">Checkout</title>
+</head>
+
+
+<body>
+	<div class="container order-prints">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<div class="span-24 last">
+		<div class="span-6">
+			<h2 i18n:translate="">Checkout</h2>
+			<h3 class="negative" i18n:translate="">Something went wrong</h3>
+			
+			<div tal:content="error|default">
+				No error message
+			</div>
+			<br />
+			<a href="/cart" i18n:translate="">Back to cart</a>
+			
+		</div>
+	</div>
+</div>
+		
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

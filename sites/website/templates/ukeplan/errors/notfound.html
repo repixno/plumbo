@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../common.html/head" />
+</head>
+
+<body>
+<div metal:use-macro="../common.html/top" />
+<div class="container">
+
+	
+
+	
+	<div class="span-24"  style="margin: 50px 0;">
+		
+		<div class="prepend-1 span-8">
+			<img src="${static:gfx/404/dog.jpg}" alt="We are sorry" i18n:attributes="alt" />
+		</div>
+		<div class="prepend-1 span-14 last">
+
+			<h2 class="notfound">404</h2>
+
+			<h3 class="notfound" i18n:translate="">Sorry!</h3>
+			<p class="notfound" i18n:translate="">We are terribly sorry, but we couldn't find the page you were looking for.</p>
+
+
+		</div>
+		<div class="clear clearfix"></div>
+		<div class="prepend-1 span-8">
+		&nbsp;
+			<!--<img src="http://static.eurofoto.no/gfx/404/contest.jpg" alt="We are sorry" />-->
+		</div>		
+		<div class="prepend-1 span-14 last">
+
+			<h4 class="searchtext" i18n:translate="">Try searching for what you are looking for.</h4>
+			<form action="/search/" method="get">
+				<input	class="large text" tal:attributes="value nicestring: request/execpath" name="q"/>
+				<button class="large" type="submit" i18n:translate="">Search the site</button>
+			</form>
+		</div>
+	</div>
+	
+</div>
+
+		<div metal:use-macro="../common.html/footer" />
+
+	<script type="text/javascript">
+		try{
+			pageTracker._trackEvent('Error', 'Not found');
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+</body>
+</html>

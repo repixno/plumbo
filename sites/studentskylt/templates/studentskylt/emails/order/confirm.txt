@@ -1,0 +1,36 @@
+<tal:block>
+<tal:block tal:content="cms:title:0a66c2bf-88bd-41c6-94ee-247138e3c389">Order confirmation</tal:block>
+
+<tal:block tal:content="cms:ingress:0a66c2bf-88bd-41c6-94ee-247138e3c389">Order confirmation</tal:block>
+
+Order nr:	<tal:block tal:replace="orderid"/>
+
+<tal:block i18n:translate="">Ordered items:</tal:block>
+
+<tal:block i18n:translate="">Title</tal:block>                                              <tal:block i18n:translate="">Unitprice</tal:block> <tal:block i18n:translate="">Quantity</tal:block>    <tal:block i18n:translate="">Price</tal:block> 
+<tal:block tal:repeat="row textrow">
+<tal:block tal:replace="row"/>
+</tal:block>
+
+
+<tal:block i18n:translate="">Delivery Address:</tal:block>
+
+<tal:block tal:replace="deliveryinfo/name"/>
+
+<tal:block tal:replace="deliveryinfo/address"/>
+
+<tal:block tal:replace="deliveryinfo/zipcode"/> <tal:block tal:replace="deliveryinfo/city"/>
+
+
+<tal:block i18n:translate="">Comment:</tal:block>
+
+<tal:block tal:replace="comment"/>
+
+<tal:block>
+CEWE Japan Photo Sverige AB
+031-619445
+kundservice@japanphoto.se
+http://student.japanphoto.se
+http://www.japanphoto.se
+</tal:block>
+</tal:block>

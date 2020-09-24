@@ -1,0 +1,90 @@
+<tal:block metal:define-macro="head">	
+	<title>Repix - Admin</title>
+	<tal:block metal:use-macro="css" />
+</tal:block>
+
+<tal:block metal:define-macro="css">
+	<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/screen.css?${version}" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/print.css?${version}" type="text/css" media="print" /> 
+	<!-- get the portal-id and insert it under-->
+	<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/customrepix.css?${version}" type="text/css" media="screen, projection" />
+	<!--[if lt IE 8]>
+		<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/ie.css" type="text/css" media="screen, projection" />
+		<link rel="stylesheet" type="text/css" href="/css/ie-sucks.css" />
+	<![endif]-->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+	<script type="text/javascript" src="${static:js/i18n/ui.datepicker-no.js}"></script>
+	<script type="text/javascript" src="${static:js/flowplayer-3.1.1.min.js}"></script>
+	<script type="text/javascript" src="${static:js/jquery.autocomplete.pack.js}"></script>
+	<tal:block tal:define="global staticurl" tal:content="static:js/eurofoto.min.js" />
+	<script type="text/javascript" src="/js/jquery.tablesorter.min.js"></script>
+	<script type="text/javascript" src="${staticurl}?${version}"></script>
+	
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+	
+</tal:block>
+
+
+
+
+<div id="languages" metal:define-macro="languages">
+	<ul>
+		<li>
+      <tal:block tal:condition="exists: countries">
+		<tal:block tal:repeat="country countries">
+			<a href="/settings/language/${country/segment}"><img src="http://static.eurofoto.no/gfx/flags/${country/country}.png" alt="NO" /></a>
+		</tal:block>
+      </tal:block>
+		</li>
+	</ul>
+</div>
+
+<div id="topmenu" metal:define-macro="topmenu">
+	
+	<img  class="logorepix" src="http://repix.itrening.com/wp-content/uploads/sites/52/2018/06/REPIX-x_web.png" alt="Repix" id="logo"/>
+	
+	
+	
+
+	<ul tal:condition="session/loggedin">
+		<li><a href="/" i18n:translate="">Dashboard</a></li>	
+		<li><a href="/system/translate/" i18n:translate="">Translation</a></li>	
+		<li><a href="/menu/" i18n:translate="">Menu</a></li>
+		<li><a href="/content/" i18n:translate="">Content</a></li>
+		<li><a href="/statistics/newordersperday/" i18n:translate="">Stats</a></li>
+		<li><a href="/old_admin/" i18n:translate="">Old admin</a></li>
+		<li><a href="/old_admin/orders" i18n:translate="">Orders</a></li>
+		<li><a href="/functions/" i18n:translate="">Functions</a></li>
+		<li style="background-color: none; border: none;"><a href="/logout/" style="background-color:#fff; color: #c00">Logout</a></li>
+		<li><form style="display: inline; float: right;" id="site-selector-form"><select id="site-selector">
+		<tal:block tal:repeat="site sites">
+         <option tal:condition="exists:site/selected" value="${site/id}" selected="1">${site/desc}</option>
+         <option tal:condition="not:exists:site/selected" value="${site/id}">${site/desc}</option>
+		</tal:block>
+		</select></form></li>
+	</ul>
+	<script language="JavaScript">
+	$(document).ready( function() {
+	   $('#site-selector').change(function(){
+	      if( confirm( '<tal:block i18n:translate="">Are you sure you want to switch the active site?</tal:block>' ) ) {
+	         window.location.href = '/system/setsite/'+$(this).val();
+	      } else {
+	         $('#site-selector-form').each(function(){
+   	         this.reset();
+         	});
+	      }
+	   });
+	})
+	</script>
+</div>

@@ -1,0 +1,410 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <div metal:use-macro="../common.html/head" />
+        <div metal:use-macro="../common.html/stylesheet" />
+        <div metal:use-macro="../common.html/javascript" />
+		
+    <style type="text/css">
+		
+		body{
+			background: #FFDB00;
+		}
+		
+        
+		
+		
+    </style>
+    
+    
+    </head>
+    
+    
+    
+    <body>
+		
+		
+		
+        <tal:block metal:define-macro="show-image">
+            <tal:block tal:condition="exists:product/images" tal:repeat="image product/images">
+                <a href="https://static.repix.no/images/products/thumbs/height/500/${image/url}" class="fancybox" title="${product/ingress}">
+                    <img src="https://static.repix.no/images/products/thumbs/height/100/${image/url}" title="${product/title}" height="100" tal:condition="equal:repeat/image/number,1" />
+                </a>
+            </tal:block>
+        </tal:block>
+        <div class="header">
+			<div class="span text-left">
+				<button id="start-over" class="yellow">Forrige</button>
+			</div>
+			<div class="span text-center" >
+				<h2>Velg Størrelse</h2>
+			</div>
+			<div class="span text-right">
+				<button id="add-to-cart" class="yellow">NEXT</button>
+			</div>
+        </div>
+        <div class="container center">
+
+        
+        
+     
+
+		<div class="row span" style="padding: 10px 0 10px 0">
+			<img src="/css/web/images/blueline.png" />
+		</div>
+        
+        
+		<div class="span row" style="text-align: left">
+			<h4>Lokket er gratis. Ønsker du i tillegg å kjøpe produkter med bildet ditt på, kan du bestille det her:</h4>
+		</div>
+		
+        <div class="span row">
+        <ul tal:condition="exists:sections/products_mobile" id="products">
+				<tal:block tal:repeat="product sections/products_mobile">
+				    <li tal:condition="equal:product/option/type,gift" class="gift ${conditionalmatch:product/options/length,1,one-option,more-options}" id="id${product/id}">
+					<div class="center span" style="height: 7em">
+					    <tal:block metal:use-macro="show-image" />
+					</div>
+					<div class="span">
+						<div class="left" style="height: 1.5em; margin-left: 5px;">
+							<h5 style="margin: 2px 0;">${product/title}</h5> 
+						</div>
+						<div class="left" style="height: 1.5em; margin-left: 5px;">
+						<strong><span class="large price">Kr ${product/option/price}</span></strong>
+						</div>
+						<tal:block tal:condition="equal:product/options/length,1">
+							<div class="left">
+								<tal:block tal:condition="exists:cart/items/gifts/${product/option/prodno}">
+									<tal:block tal:repeat="item cart/items/gifts/${product/option/prodno}">
+									<input type="text" class="quantity"  value="${item/quantity}" name="${product/option/prodno}" />
+									</tal:block>
+								</tal:block>
+								<tal:block tal:condition="not:exists:cart/items/gifts/${product/option/prodno}">
+								<input type="text" class="quantity"  value="0" name="${product/option/prodno}" />
+								</tal:block><br/>
+								
+							</div>
+						</tal:block>
+						<tal:block tal:condition="gt:product/options/length,1">
+							<div class="span6 text-left">
+								<div>
+								Antall:<span class="product-quantity">0</span><br/>
+								<a href="#open_options_${product/id}" class="open-options" i18n:translate="">Choose sizes</a><br/> 
+								<!--<span class="large price">Kr ${product/option/price}</span>-->
+								</div>
+								<div class="hide product-options" id="open_options_${product/id}" title="Choose size" i18n:attributes="title">
+									<table class="sizes">
+										<tal:block tal:repeat="option product/options">
+											<tr id="optionid${option/id}">
+												<td style="text-align: right; padding: 2px 8px 2px 0;">
+												<label>${option/title}</label>
+												</td>
+												<td style="text-align: left; padding: 2px 0 2px 0;">
+												<input type="text" class="quantity"  id="option${option/id}" value="0" name="${product/option/prodno}" rel="#id${product/id}"/>
+												<script type="text/javascript">
+													$('#optionid${option/id}').data({
+														'id'		:'${product/id}',
+														'optionid'	:	'${option/id}',
+														'prodno'	:	'${option/prodno}',
+														'lokkid'		:'${lokk/id}',
+														'imageid'		:'${lokk/imageid}'
+													});
+												</script>
+												</td>
+											</tr>
+										</tal:block>
+									</table>
+								</div>
+							</div>
+						</tal:block>
+						<script type="text/javascript">
+							$('#id${product/id}').data({
+							'id'			:	'${product/id}',
+							'optionid'		:	'${product/option/id}',
+							'prodno'		:	'${product/option/prodno}',
+							'lokkid'		: 	'${lokk/id}',
+							'imageid'		:	'${lokk/imageid}'
+							});
+						</script>
+					</div>
+				    </li>	
+				</tal:block>
+			</ul>
+        </div>
+
+        </div>
+        
+		<div id="startpanytt" title="Advarsel?" style=" display: none">
+			<h4>
+				Ved å gå tilbake til forrige steg vil lokket du har laget bli nullstilt.<br/>
+				Ønsker du å starte på nytt?
+			</h4>
+			<button class="yellow button" id="startover" style="font-family: 'Populaire'; font-size: 39px;">Start på nytt</button>
+			<button class="yellow button"  id="cancelstartover" style="font-family: 'Populaire'; font-size: 39px;">Avbryt</button>
+		</div>
+		
+        <div metal:use-macro="../common.html/footer" />
+        
+        
+        
+        <script type="text/javascript">
+            /*<![CDATA[*/
+			var totalskirts = 0;
+            var lokkid = ${lokk/id};
+            
+            $( function(){
+                
+				
+				$('#cancelstartover').on('click', function(){
+					
+					$('#startpanytt').dialog( "close" );
+					
+					})
+					
+					
+					
+				$('#startover').on('click', function(){
+						
+						window.location = '/checkout';
+					
+					})
+				
+				$('#start-over').on( 'click', function(){
+					$('#startpanytt').dialog({'width': "450px"});
+				})
+				
+                $('.fancybox').click( function(){
+                    var src = $(this).attr( 'href' );
+                    $('#image').attr( 'src', src );		
+                    $('#dialog').dialog({
+                        modal: true,
+                        resizable: false,
+                        draggable: false
+                    });
+                    return false;
+                });
+                
+                showloader();
+                $(window).load( hideloader );
+                
+                $('input.quantity').before('<button class="button changequantity large">-</button>').prev().click( function() {
+                    if ( parseInt( $(this).next().attr('value') ) <= 0) { return false };
+                    $(this).next().attr('value', parseInt( $(this).next().attr('value') ) - 1);
+                    $(this).next().trigger('change');
+                    return false;
+                });
+                $('input.quantity').after('<button class="button changequantity large">+</button>').next().click( function() {
+                    
+                    $(this).prev().attr('value', parseInt( $(this).prev().attr('value') ) + 1);
+                    $(this).prev().trigger('change');
+                    return false;
+                });
+                
+                
+                $('.size').on( 'click' , function(){
+			
+                    var lokksize = $(this).attr('id');
+                    //console.log( lokksize );
+                    
+                    $.post('/api/1.0/skanska/changesize', {
+                        lokkid: lokkid,
+                        lokksize: lokksize
+                        }, function (response) {
+                            
+                            
+                    }, 'json');
+                    
+                    $('.check').hide();
+                    $( '.size' ).css( { 'border-color': '#89d7fa' } ).removeClass( 'selected' );
+                    $(this).css({ 'border-color' : '#1077a5' }).addClass( 'selected' );
+                    $(this).find('.check').show();
+                });
+                
+                
+                 $('.skirts span').each( function(){
+					totalskirts += parseInt( $(this).attr('val' ));
+					$( '#option'  + $(this).attr('id')  ).attr( 'value',  $(this).attr('val') );
+					$('.product-quantity').text( totalskirts );
+				});
+			$('.quantity').on( 'change', function(){
+				
+				
+					$(this).parent().parent().parent().addClass("ischanged");
+				
+				});
+				
+			
+            $('#add-to-cart').on('click', function() {
+					showloader();              
+                    var actions = [];
+					
+                    $('#products li').each( function(i, item) {
+						
+                        if ( $(item).hasClass('gift') && $(item).hasClass('one-option')  && $(item).hasClass('ischanged') ) {
+						    
+								actions.push( orderGift( $(item).data('id'), $(item).data('optionid'),  $(item).data('prodno'), $('input.quantity', item).val(), $(item).data('lokkid') ) );
+										
+							} else if ( $(item).hasClass('gift') && $(item).hasClass('more-options') ) {
+					
+									var optionsContainer = $('a.open-options', item).attr('href');
+									$('tr', optionsContainer).each( function(i, option) {
+										
+										if( $('input', option).val() > -1) {
+											
+											if( orderGift( $(option).data('id'), $(option).data('optionid'), $(option).data('prodno'), $('input.quantity', option).val() ,$(item).data('lokkid') ) ) {
+												addedToCart = true;
+											}
+										}    
+									});	    
+								}
+						});
+					
+					
+                    $.when.apply($,actions).done(function(){
+                        //check results if you want on "arguments"
+                        var url = "/stickers/checkout/";
+                        window.location=url;
+                    });
+                return false;
+            });
+			
+			$('.open-options').click( function() {
+			
+				var id = $(this).attr('href');
+				var item = $(this).parent();
+				var quantity = 0;
+				
+				//$(id).dialog('open');
+				$(id).dialog({
+					'resizable'	:	'false',
+					'width': '450',
+					'modal': true,
+					'buttons' : {
+						'OK': function(){ $(this).dialog('close') }
+					},
+					'open' : function(event, ui){ $(this).parent().children().children('.ui-dialog-titlebar-close').show() }
+				});
+				
+				
+				$(id).find('ui-dialog-titlebar-close').hide();
+				return false;
+			});
+            
+			
+			$('input', '.product-options').bind('change', function() {
+				var container = $(this).attr('rel');
+				var totalQuantity = 0;
+				$(this).parent().parent().parent().find('input').each( function(i, item) {
+					totalQuantity = totalQuantity + parseInt( $(item).val() );
+				});
+				$('.product-quantity', container).text( totalQuantity );
+			});	
+            
+            
+            
+        });
+    
+		
+	
+        function orderGift( id, optionid, prodno, quantity, lokkid ) {
+
+            var finished = false;
+            var malid;
+            var malpageid;
+            var ratio;
+            var x = 0;
+            var y = 0;
+            var malarray = new Array();
+            
+            switch( optionid ){
+				case '4004': //smekke
+					malid 	= '2900';
+					malpageid 	= '6749';
+					tmplx	= '0';
+					tmply	= '0';
+					dx		= '591';
+					dy		= '591';
+				break;
+				
+            }
+            
+            x = x / ratio;
+            y = y / ratio;
+            
+            var pages = new Array();
+            pages.push();
+            pages[0] = new Object();
+            pages[0].malid = malid;
+            pages[0].malpageid = malpageid;
+            pages[0].giftQuantity = quantity;
+            pages[0].productoptionid = optionid;
+            pages[0].productid = id;
+            pages[0].size = "small";
+            pages[0].lokkid = lokkid;
+            pages[0].prodno = prodno;
+            /*pages[0].editor_x = tmplx / ratio;
+            pages[0].editor_y = tmply / ratio;
+            pages[0].image = new Object()
+            pages[0].image.x = (-crop.x1 + x ) * ratio;
+            pages[0].image.y = (-crop.y1 + y ) * ratio;
+            pages[0].image.dx = crop.imagewidth * ratio;
+            pages[0].image.dy = crop.imageheight * ratio;
+            //pages[0].image.dx = 1068.0619047619048;//$('#image').width() * ratioWidth;
+            //pages[0].image.dy = 728.4705882352941; //$('#image').height() * ratioHeight;
+            pages[0].image.bid = imageid;
+            pages[0].texts = new Array();
+            pages[0].cliparts = new Array();*/
+            /*if( quantity > 0 ){
+            console.log( pages );
+            }*/
+            
+            
+            $.ajax({
+                type: 'POST',
+                url: '/bestill/save',
+                async: false,
+                data: { 
+                    'pages'	: JSON.stringify( pages )
+                },
+                complete: function(msg) {
+                    addedToCart = true;
+                    finished = true;
+                },
+                success: function(msg) {
+                    addedToCart = true;
+                    finished = true;
+                },
+                error: function(msg) {
+                    alert('error' + msg);
+                }
+            });
+            
+            return finished;
+        }
+		
+		
+        function showloader(){
+			$('body').prepend( '<div id="loader-overlay"><div class="loadingInfo"><img src="https://static.repix.no/gfx/gui/ajax-loader-gray.gif" />\
+									<br/><br/><h3>Loading.......<span id="status"></span></h3></div></div>');
+									
+			$('#loader-overlay')
+				.css('opacity', '0.8')
+				.css('margin','0')
+				.width( $(window).width() )
+							.height( $(document).height() );
+											
+			return false;
+        }
+                                    
+        function hideloader(){
+            $('#loader-overlay').fadeOut('slow', function() {
+                $(this).remove();
+            });
+        }
+            
+            /*]]>*/
+        </script>
+        
+</body>
+</html>

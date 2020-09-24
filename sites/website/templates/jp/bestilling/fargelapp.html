@@ -1,0 +1,442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+	
+
+	<tal metal:use-macro="common.html/head" />
+	
+	<link rel="stylesheet" href="/js/bootstrap.colorpickersliders.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/css/bestilling.css" type="text/css" media="screen, projection" />
+	
+	<style>
+		.fileinput-button {
+			position: relative;
+			overflow: hidden;
+		}
+		
+		body{
+			background: #fff;
+		}
+		
+		
+		.fileinput-button input {
+			position: absolute;
+			top: 0;
+			right: 0;
+			margin: 0;
+			opacity: 0;
+			-ms-filter: 'alpha(opacity=0)';
+			font-size: 200px;
+			direction: ltr;
+			cursor: pointer;
+		}
+	</style>
+	
+</head>
+
+
+<body>
+
+<div class="container editorcontainer">
+<div class="content">	
+	<div class="row">
+		<div class="col-md-7">
+			<h3>Fargelapper</h3>
+			<div class="row">
+			<div class="col-md-12">
+				<form id="edit">
+					<div class="col-md-12">
+						<div class="col-md-7 form-horizontal">
+							<p><strong i18n:translate="">Text</strong></p>
+								<div class="form-group ">
+									<label for="line1" class="col-sm-3 control-label visible-lg"><span i18n:translate="">Line</span> 1:</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" name="line1" id="line1" maxlength="18" placeholder="Linje 1"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label visible-lg"><span i18n:translate="">Line</span> 2:</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" name="line2" maxlength="18" placeholder="Linje 2"/>
+									</div>
+								</div>
+								<div class="form-group">	
+									<label class="col-sm-3 control-label visible-lg"><span i18n:translate="">Line</span> 3:</label>
+									<div class="col-sm-9">
+										<input type="text"  class="form-control" name="line3" maxlength="18" placeholder="Linje 3"/>
+									</div>
+								</div>
+						</div>
+						<div class="col-md-5">
+							<div class="previewcontainer">
+								<p><strong i18n:translate="">Preview:</strong></p>
+							  <div id="sticker">
+								 <img id="preview" class="sticker " src="${static:gfx/merkelapp/template_merkelapp.png}" />
+							  </div>
+							</div>
+							<div class="top15">
+								<a id="update" class="btn" href="#">Oppdater</a>
+								<a id="removeall" class="btn" href="#">Nullstill</a>
+							</div>
+						</div>
+					</div>
+					<div class="row top15">
+						<div class="col-md-3">
+							<label for="font-type">
+								<span i18n:translate="">Font-type:</span>
+							</label>
+							<select class="form-control" name="font-type" style="width:135px;">
+									<option value="arial">Arial</option>
+									<option value="comic">Comic Sans</option>
+									<option value="verdana">Verdana</option>
+									<!--<option value="vivaldi">Vivaldi</option>-->
+									<option value="present">Present</option>
+							</select>
+						</div>
+						<div class="col-md-3">
+							<label for="swatchesonly" i18n:translate="">Text Color:</label>
+							<input type="text" name="font-color" class="form-control" id="swatchesonly" value="#000000" />
+						</div>
+						<div class="col-md-5">
+							<div class="row">
+							<div class="col-md-6">
+								<label>
+								   <span i18n:translate="">Text Alignment:</span>
+								</label>
+							</div>
+							<div class="col-md-12 btn-group">
+			
+								
+						
+								<button class="alignment btn active" id="left" >
+									<span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+								</button>
+								<button class="alignment btn" id="center">
+									<span class="glyphicon glyphicon-align-center"  aria-hidden="true"></span>
+								</button>
+								<button class="alignment btn" id="right">
+									<span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>
+								</button>
+					
+							</div>
+							</div>
+						</div>
+					</div>
+					<hr/>
+					<div class="row top15">
+						<div class="col-md-12 bs-example form-inline">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs nav-pills" role="tablist">
+							  <li role="presentation" class="active"><a href="#clipartcontainer" aria-controls="clipartcontainer" role="tab" data-toggle="tab" i18n:translate="">Clipart</a></li>
+							  <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Bakgrunn</a></li>
+							 <!-- <li role="presentation"><a href="#ownimagecontainer" aria-controls="ownimagecontainer" role="tab" data-toggle="tab">Eget bilde</a></li>-->
+							</ul>
+						  
+							<!-- Tab panes -->
+							<div class="tab-content">
+							  <div role="tabpanel" class="tab-pane active" id="clipartcontainer">
+								
+								<div>
+									<div class="col-md-6">
+										<label for="select_clipart">1. Velg kagegori:</label>
+										  <select class="form-control" id="select_clipart">
+											<OPTION value="Dyr" selected="true" i18n:translate="">Animals</OPTION>
+											<OPTION value="Sport" i18n:translate="">Sport</OPTION>
+											<OPTION value="Smile ansikt" i18n:translate="">Emoticons</OPTION>
+											<OPTION value="Sure ansikt" i18n:translate="">Sad emoticons</OPTION>
+											<OPTION value="Transport" i18n:translate="">Transportation</OPTION>
+											<OPTION value="teddybears" i18n:translate="">Teddy Bears</OPTION>
+											<OPTION value="Leker" i18n:translate="">Toys</OPTION>
+											<OPTION value="Kontor" i18n:translate="">Office</OPTION>
+											<OPTION value="Symboler" i18n:translate="">Symbols</OPTION>
+											<OPTION value="Sommerfugler" i18n:translate="">Butterflies</OPTION>
+											<OPTION value="Stjernetegn" i18n:translate="">Zodiac</OPTION>
+											<OPTION value="Blomster" i18n:translate="">Flowers</OPTION>
+											<!--<OPTION value="Katter" i18n:translate="">Cats</OPTION>
+											<OPTION value="Fugler" i18n:translate="">Birds</OPTION>-->
+										</select>
+									</div>
+									
+									<div class="col-md-6" style="padding:6px 12px">
+									<label for="clipart">
+									2. <span i18n:translate="">Choose category</span>:
+									</label>
+								</div>
+									  
+								</div>
+
+								<div id="clipart"></div>
+								
+							  </div>
+								<div role="tabpanel" class="tab-pane" id="profile">
+									<div>
+										<div class="col-md-6">
+										<label for="select_clipart">1. Velg kagegori:</label>
+											<select class="form-control" id="select_background">
+												<OPTION value="" disabled="true" selected="true" i18n:translate="">Velg Kategori</OPTION>
+												<OPTION value="dyr" i18n:translate="">Dyr</OPTION>
+												<OPTION value="symboler" i18n:translate="">Symboler</OPTION>
+												<OPTION value="Blomster" i18n:translate="">Blomster</OPTION>
+												<OPTION value="Ensfarget" i18n:translate="">Ensfarget</OPTION>
+												<OPTION value="monster" i18n:translate="">Mønster</OPTION>
+												<OPTION value="Transport" i18n:translate="">Transport</OPTION>
+											</select>
+										</div>
+										<div class="col-md-6" style="padding:6px 12px">
+											<label for="clipart">
+												<span >2. Trykk på bakgrunn for å velge:</span>
+											</label>
+										</div>
+									</div>
+									<div id="background"></div>
+							  </div>
+							  <div role="tabpanel" class="tab-pane" id="ownimagecontainer">
+									<div class="row span4 text-left" style="margin-left: 0px;">
+										<span class="btn btn-primary fileinput-button" style=" width:120px;">
+											<span>Velg bilde</span>
+											<!-- The file input field used as target for the file upload widget -->
+											<input id="fileupload" type="file" name="files[]"  data-url="/api/1.0/merkelapp/upload2" accept="image/jpeg"  />
+										</span>
+									</div>
+									<div id="progress" class="progress">
+										<div class="progress-bar progress-bar-success"></div>
+									</div>
+									
+									<div class="preimage">
+									  <div tal:content="structure cms:body:e42122ba-e45a-40d3-beff-8d0c0870a8fb"/>
+									  </div>
+									<div class="pastimage row" style="display: none">
+										<div class="col-md-6" id="imagecontainer"/>
+										<div class="col-md-6 text-right">
+											<a id="removeimg" class="btn btn-primary"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span i18n:translate="">Remove image</span></a>
+										</div>
+									</div>
+									<input type="hidden" name="image" value="" />
+									<input type="hidden" name="imagemode" value="color" />
+							  </div>
+							</div>
+						  </div>
+					</div>
+				</form>		
+			</div>
+			</div>
+
+				
+              
+		
+		</div>
+		<div class="col-md-5">
+			<div class="col-md-12">
+			<tal metal:use-macro="common.html/productlist_fargelapp" />
+			
+			<div class="col-md-12 top15 hidden-xs">
+				<h3>Så enkelt er det å bestille:</h3>
+				<p>
+					<ol>
+						<li>Legg inn ønsket tekst</li>
+						<li>Velg motiv eller eget bilde</li>
+						<li>Legg i handlekurv og fullfør bestillingen.</li>
+						<li>Tips dine venner om tjenesten</li>
+					</ol>
+				</p>
+			   </div>
+			</div>
+		<hr class="visible-xs" />
+		
+	
+		
+		
+		
+		</div>
+			   
+			   
+
+	</div>
+	
+	<div metal:use-macro="common.html/bottominfo" />
+	
+</div>
+</div>
+
+
+
+<SCRIPT type="text/javascript">
+   var clipart = '';
+   var ownimage = '';
+   var treshhold = 50;
+   var imageselection = Object();
+   var projectid = '${projectid}';
+   var gravity = 'left'; 
+   var category = 'Dyr';
+   var backgroundcat = 'Dyr';
+   var backgroundfile = '';
+   var totalprice = ${cart/totalprice};
+   var staticroot = "${static:}";
+   var type = 'fargelapp';
+   var disabled = true;
+   var alertmessage = 'false';
+   var colormode = 'color';
+   var ownimageratio = '1:1';
+   var msie = null;
+
+   
+</SCRIPT>
+
+<script src="${static:}js/jqupload/js/vendor/jquery.ui.widget.js?${version}"></script>
+<script src="${static:}js/jqupload/js/jquery.iframe-transport.js?${version}"></script>
+	<!-- The basic File Upload plugin -->
+<script src="${static:}js/jqupload/js/jquery.fileupload.js?${version}"></script>
+<script type="text/javascript" src="/js/imgareaselect.js"></script>
+<script type="text/javascript" src="/js/jp/merkelapp.js?${version}"></script>
+<script type="text/javascript" src="/js/common.js?${version}"></script>
+
+
+<script src="/js/tinycolor.js"></script>
+<script src="/js/bootstrap.colorpickersliders.js"></script>
+<script type="text/javascript">/*<![CDATA[*/
+
+	
+	
+		$( function(){
+			
+		backgroundcat = 'dyr';
+		getBackgrounds();
+		
+		
+		$(window).on("message onmessage", function(event){
+					
+						var data = JSON.parse(event.originalEvent.data);
+    						
+						if (data.action === "addToCartSuccess") {
+						  if (data.status === "success") {
+							//console.log( "DO SOMETHING :)" );
+							var data = JSON.stringify({'action': 'goToCart' });
+							
+							top.postMessage(data, '*');
+							
+							
+						  }
+						}
+					
+					});
+				
+		//showloader();
+	
+	      $('#fileupload').fileupload({
+				replaceFileInput: false,
+				dataType: "json",        
+				datatype:"json",
+				xhrFields: {withCredentials: true},
+				acceptFileTypes: /(\.|\/)(jpe?g|tif)$/i,
+				add: function (e, data) {
+					
+					console.log(e);
+					console.log(data);
+					
+					data.context = $('<p id="uploading" style="position: absolute; left: 20px;"/>').text('Uploading...').appendTo($('.progress-bar'));
+					data.submit();
+					
+				},
+				done: function (e, data) {
+					
+					file = data.result.files;
+					
+					$('#uploading').remove();
+					
+						
+                        $('#ownimage').imgAreaSelect({
+                             remove: true
+                         });
+                         
+                         
+                         
+                         ownimage = file.filename;
+                         $('input[name$="image"]').val(file.filename);
+            
+                         $('#ownimage').remove();
+                         $('.preimage').remove();
+                         $('.pastimage').show();
+                         $('#imagecontainer').append('<img  id="ownimage" alt="image" src="/streams/merkelapp/' + file.filename + '" />');
+                         //$('#ownimage').attr( 'src' , '/streams/merkelapp/' + res.filename );
+            
+                         $('#ownimage').load(function () {
+            
+                             $('#ownimage').imgAreaSelect({
+                                 handles: true,
+                                 aspectRatio: '1:1',
+                                 x1: 50,
+                                 y1: 50,
+                                 x2: 150,
+                                 y2: 150,
+                                 onInit: function (img, selection) {
+                                     imageselection = {
+                                         selection: selection,
+                                         imgx: img.width,
+                                         imgy: img.height
+                                     }
+                                     update();
+                                 },
+                                 onSelectEnd: function (img, selection) {
+                                     imageselection = {
+                                         selection: selection,
+                                         imgx: img.width,
+                                         imgy: img.height
+                                     };
+                                     update();
+                                 }
+                             });
+            
+                         });
+                        
+				},
+				progressall: function (e, data) {
+					var progress = parseInt(data.loaded / data.total * 100, 10);
+					$('.progress .progress-bar-success').css(
+						'width',
+						progress + '%'
+					);
+				}
+			});
+	
+	
+        $("input#swatchesonly").ColorPickerSliders({
+          placement: 'bottom',
+          previewformat: 'hex',
+		  customswatches: false,
+		  hsvpanel: false,
+		  swatches:["#000000", "#5c5c69", "#0000ff", "#00ccff", "#6699cc", "#330066", "#663399",  "#990099", "#ff00ff", "#ff0000", "#ca1111" ,"#ff7800" ,"#008000" ,"#12ff00"  ,"#ffcc00", "#993300"  ],
+		  sliders: false,
+		  onchange: function(container, color) {
+                update();
+            }
+        });
+		
+		
+		$( document ).scroll(function(ret) {
+					if( $(document).width() < 768 ){
+						var offsety = ret.currentTarget.body.scrollTop;
+						if( offsety < 51 ){
+							$('.previewcontainer').css('top', ( 51 - offsety ) + 'px');
+						}
+						else{
+							$('.previewcontainer').css('top', '0px');
+						}
+					
+					}
+				  });
+		
+		$( window ).load(function() {
+			//hideloader();
+		  });
+	});
+	
+/*]]>*/	
+</script>
+
+
+
+
+</body>
+</html>

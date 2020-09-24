@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="common.html/head" />
+	<title>${blog/title} på Eurofoto.no</title>
+</head>
+
+<body>
+
+<div class="container">
+
+      	<h1>
+      		<a href="/blog/${blog/shortname}">${blog/title}</a>
+      	</h1>
+      	<h3 class="blog-subtitle">
+      	<span i18n:translate="">A photo-blog written by <span i18n:name="owner" tal:content="blog/owner">Full name</span></span>
+      	</h3>
+
+
+	<div class="span-18" id="content">
+      <div id="post">
+         <h2>${post/title}</h2>
+         <div class="quiet" i18n:translate="">Posted <span i18n:name="posted" tal:replace="post/created">postedtime</span> by <span i18n:name="postedby" tal:replace="post/createdby">full name</span></div>
+         <span class="quiet">Permalink:</span> <a class="quiet" href="${post/url}">${request/systemroot}${post/url}</a>
+         <div>
+            <p><strong>${post/intro}</strong></p>
+            <p>${post/body}</p>
+         </div>
+         <ul class="post-images">
+            <li tal:repeat="postimage post/images">
+               <a href="${postimage/image/urls/shared}"><img src="${postimage/image/thumbnail}" alt="${postimage/image/title}" /></a>
+            </li>
+         </ul>
+      </div>
+      
+   </div>
+
+</div>
+
+<div id="footer">
+	<div class="container">
+		<div metal:use-macro="common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

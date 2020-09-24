@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Logged out</tal:block>
+   <meta http-equiv="refresh" content="3;url=/" />
+</head>
+
+
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+	<div class="prepend-6 span-6">
+
+		<h2 i18n:translate="">Logout</h2>
+
+		<p i18n:translate="">You have been logged out.</p>
+		<div class="silent" i18n:translate="">We are now sending you back to our front page...</div>
+	</div>
+
+</div>
+
+
+
+</body>
+</html>

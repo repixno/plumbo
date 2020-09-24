@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+	
+
+	<tal metal:use-macro="common.html/head" />
+	
+	<link rel="stylesheet" href="/js/bootstrap.colorpickersliders.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/css/bestilling.css" type="text/css" media="screen, projection" />
+	
+	<style>
+		.tab-content {
+			border-top: 1px solid #ddd;
+			border-radius: 4px;
+		}
+		#select_clipart{
+			/*background: #ade3ff;*/
+		}
+		body{
+			background: #fff;
+			padding: 0 0 0 0;
+		}
+		
+		
+	</style>
+	
+</head>
+
+<body>
+	
+	
+	
+<div class="container editorcontainer">
+<div class="content">	
+	<div class="row">
+		<div class="col-md-7">
+			<h3>Merkelapper</h3>
+			<div class="col-md-12">
+				<form id="edit">
+				<div class="row">
+					<div class="col-md-7 form-horizontal">
+						<p><strong i18n:translate="">Text</strong></p>
+							<div class="form-group ">
+								<label for="line1" class="col-sm-3 control-label visible-lg"><span i18n:translate="">Line</span> 1:</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" name="line1" id="line1" maxlength="18" placeholder="Linje 1"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label visible-lg"><span i18n:translate="">Line</span> 2:</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" name="line2" maxlength="18" placeholder="Linje 2"/>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label visible-lg"><span i18n:translate="">Line</span> 3:</label>
+								<div class="col-sm-9">
+									<input type="text"  class="form-control" name="line3" maxlength="18" placeholder="Linje 3"/>
+								</div>
+							</div>
+					</div>
+					<div class="col-md-5">
+					<div class="previewcontainer">
+						<p><strong i18n:translate="">Preview:</strong></p>
+					  <div id="sticker">
+						 <img id="preview" class="sticker " src="${static:gfx/merkelapp/template_merkelapp.png}" />
+					  </div>
+					</div>
+					<div class="top15">
+								<a id="update" class="btn" href="#">Oppdater</a>
+								<a id="removeall" class="btn" href="#">Nullstill</a>
+							</div>
+				</div>
+				</div>
+				<div class="row top15">
+					<div class="col-lg-3 col-md-4">
+						<label for="font-type">
+							<span i18n:translate="">Font-type:</span>
+						</label>
+						<select class="form-control" name="font-type" style="width:135px;">
+								<option value="arial">Arial</option>
+								<option value="comic">Comic Sans</option>
+								<option value="verdana">Verdana</option>
+							<!--	<option value="vivaldi">Vivaldi</option>-->
+								<option value="present">Present</option>
+						</select>
+					</div>
+					<div class="col-lg-9 col-md-7">
+						<div class="row">
+						<div class="col-md-6">
+							<label>
+							   <span i18n:translate="">Text Alignment:</span>
+							</label>
+						</div>
+						<div class="col-md-12 btn-group">
+		
+							
+					
+							<button class="alignment btn active" id="left" >
+								<span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+							</button>
+							<button class="alignment btn" id="center">
+								<span class="glyphicon glyphicon-align-center"  aria-hidden="true"></span>
+							</button>
+							<button class="alignment btn" id="right">
+								<span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>
+							</button>
+				
+						</div>
+						</div>
+					</div>
+				</div>
+				<div class="row top15">
+					<div class="col-md-12 bs-example">
+						<!-- Nav tabs -->
+						<p>
+							<strong i18n:translate="">Clipart</strong>
+						</p>
+						
+					  
+						<!-- Tab panes -->
+						<div class="tab-content">
+						  <div role="tabpanel" class="tab-pane active form-inline" id="clipartcontainer">
+							<div class="row clipartselect">
+								<div class="col-md-6"> 
+									<label for="select_clipart">
+										1. Velg kategori:
+									</label>
+									  <select class="form-control" id="select_clipart">
+										<OPTION value="Dyr" selected="true" i18n:translate="">Animals</OPTION>
+										<OPTION value="Sport" i18n:translate="">Sport</OPTION>
+										<OPTION value="Smile ansikt" i18n:translate="">Emoticons</OPTION>
+										<OPTION value="Maskiner" i18n:translate="">Machines</OPTION>
+										<OPTION value="Leker" i18n:translate="">Toys</OPTION>
+										<OPTION value="Stjernetegn" i18n:translate="">Zodiac</OPTION>
+										<OPTION value="Diverse" i18n:translate="">Miscellaneous</OPTION>
+									</select>
+								</div>
+								<div class="col-md-6" style="padding:6px 12px">
+									<label for="clipart">
+									2. <span i18n:translate="">Choose category</span>:
+									</label>
+								</div>
+								  
+							</div>
+							
+							<div id="clipart"></div>
+							
+						  </div>
+						</div>
+					  </div>
+				</div>
+				</form>	
+			</div>
+
+					
+              
+		
+		</div>
+		<div class="col-md-5">
+			<tal metal:use-macro="common.html/productlist" />
+			
+			<div class="col-md-12 top15 hidden-xs">
+			<h3>Så enkelt er det å bestille:</h3>
+			<p>
+				<ol>
+					<li>Legg inn ønsket tekst</li>
+					<li>Velg motiv eller eget bilde</li>
+					<li>Legg i handlekurv og fullfør bestillingen.</li>
+					<li>Tips dine venner om tjenesten</li>
+				</ol>
+			</p>
+		   </div>
+			<hr class="visible-xs" />
+			
+			
+			
+	<!--	<div class="col-md-4 text-left">
+
+	<a class="btn btn-primary glyphicon glyphicon-tags allemerkelapper " style="margin-top: 15px; background-color: #50a8e1; padding:9px 12px 11px 12px;border-color:#ffffff;" href="https://www.japanphoto.no/merkelapper/"><span class="test" style="font-family:helvetica ;">Bestill andre merkeprodukter</span> </a>
+
+
+
+</div>-->
+		
+		
+		</div>
+			  
+	</div>
+
+	
+	<div metal:use-macro="common.html/bottominfo" />
+	
+</div>
+</div>
+<SCRIPT type="text/javascript">
+   var clipart = '';
+   var ownimage = '';
+   var treshhold = 50;
+   var imageselection = Object();
+   var projectid = '${projectid}';
+   var gravity = 'left'; 
+   var category = 'Dyr';
+   var backgroundcat = '';
+   var backgroundfile = '';
+   var totalprice = ${cart/totalprice};
+   var staticroot = "${static:}";
+   var type = 'merkelapp';
+   var disabled = true;
+   var colormode = 'bw';
+   var alertmessage = 'false';
+
+
+   
+</SCRIPT>
+<script type="text/javascript" src="/js/jp/merkelapp.js?${version}"></script>
+<script type="text/javascript" src="/js/common.js?${version}"></script>
+
+
+<script src="/js/tinycolor.js"></script>
+<script src="/js/bootstrap.colorpickersliders.js"></script>
+<script type="text/javascript">/*<![CDATA[*/
+
+	
+
+	
+		$( function(){
+			
+				$(window).on("message onmessage", function(event){
+					
+						var data = JSON.parse(event.originalEvent.data);
+    						
+						if (data.action === "addToCartSuccess") {
+						  if (data.status === "success") {
+							console.log( "DO SOMETHING :)" );
+							var data = JSON.stringify({'action': 'goToCart' });
+							
+							top.postMessage(data, '*');
+							
+							
+						  }
+						}
+					
+					});
+			
+			
+				$( document ).scroll(function(ret) {
+					if( $(document).width() < 768 ){
+						var offsety = ret.currentTarget.body.scrollTop;
+						if( offsety < 51 ){
+							$('.previewcontainer').css('top', ( 51 - offsety ) + 'px');
+						}
+						else{
+							$('.previewcontainer').css('top', '0px');
+						}
+					
+					}
+				  });	
+		
+			
+			});
+		
+
+
+	
+	
+/*]]>*/	
+</script>
+
+
+
+
+</body>
+
+</html>

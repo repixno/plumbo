@@ -1,0 +1,8 @@
+/* 404 */
+
+h2.notfound, .huge { color: #333333; font-size: 110px; border: none; margin: 0; padding: 0;}
+h3.notfound { color: #333333; font-size: 24px; font-weight: bold; margin: 0; padding: 0;}
+h4.notfound { color: #333333; font-size: 18px; margin: 0; padding: 0;}
+
+p.notfound {  color: #333333; font-size: 16px; }
+h4.searchtext { color: #333333; font-size: 16px; font-weight: bold;margin: 0; padding: 0;}

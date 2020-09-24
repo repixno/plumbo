@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+</head>
+
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+	
+	<div id="content">
+
+	<form id="cellphone-validation">
+		
+		<label for="cellphone-number" class="top">Cellphone</label>
+		<input id="cellphone-number" type="text" class="title span-3" />
+		
+		<button type="submit">Send</button>
+		
+	</form>
+	
+	<hr />
+		
+	<form id="code-validation" class="hide">
+		<label for="validation-code">Validation code</label>
+		<input id="validation-code" type="text" class="text span-2" />
+		
+		<button type="submit">Meld på</button>
+		
+	</form>
+	
+	
+	<script type="text/javascript">
+	
+		$('#cellphone-validation button').click( function() {
+		
+			$.post('/api/1.0/validate/cellphone/' + $('#cellphone-number').val(), function(data) {
+				if(data.result) {
+				
+					console.log( $('#cellphone-number').val() + ' is valid');
+					
+					$('#code-validation').show();
+				
+				} else {
+				
+					console.error( $('#cellphone-number').val() + ' is NOT valid');
+					
+				}
+			}, 'json');
+		
+			return false;
+		});
+		
+		$('#code-validation button').click( function() {
+		
+			$.post('/api/1.0/validate/code/' + $('#validation-code').val(), function(data) {
+				if(data.result) {
+				
+					console.log( $('#validation-code').val() + ' is valid');
+					
+				
+				} else {
+				
+					console.error( $('#validation-code').val() + ' is NOT valid');
+					
+				}
+			}, 'json');
+		
+			return false;
+		});
+	
+	</script>
+	
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

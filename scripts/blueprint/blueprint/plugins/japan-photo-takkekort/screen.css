@@ -1,0 +1,26 @@
+div.container #header-container {
+   background-image: none;
+   background-color: transparent
+}
+
+
+#header {
+   height:50px;
+   margin-top: 4px;
+   padding:23px 0 22px;
+   position:relative;
+}
+
+#header a#logo {
+   background: url(jp-gfx/takkekort_logo.png) no-repeat;
+   width:331px;
+   height:51px;
+   display:block;
+   margin:-4px 0 0 -10px;
+}
+
+#header a#logo span {
+   display: none;
+}
+
+* html #header { overflow:hidden; }

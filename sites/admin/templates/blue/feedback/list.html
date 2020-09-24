@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Login - Eurofot Admin</title>
+<tal:block metal:use-macro="../common.html/css" />
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		<tal:block metal:use-macro="../common.html/languages" />
+		<div id="content">
+			<div id="box">
+				
+			   <h3>Unprocessed feedback</h3>
+				
+			   <table width="100%">
+		      <tr>
+               <th>ID</th>
+               <th>User</th>
+               <th>Type</th>
+               <th>Server</th>
+               <th>Logged</th>
+               <th>Actions</th>
+		      </tr>
+			   <tr tal:repeat="entry entries">
+			      <td>#${entry/id}</td>
+			      <td tal:condition="entry/anonymous">${entry/ipaddress}</td>
+			      <td tal:condition="not:entry/anonymous">${entry/user/fullname}</td>
+			      <td tal:condition="entry/trace">Crash report</td>
+			      <td tal:condition="not:entry/trace">Contact form</td>
+			      <td>${entry/serverhost}</td>
+			      <td tal:content="formatdatetime:entry/logged"></td>
+			      <td><a href="/feedback/${entry/id}">View</a></td>
+			   </tr>
+			   </table>
+				
+			</div>
+		</div>
+	</div>
+	<div id="footer"></div>
+</body>
+</html>

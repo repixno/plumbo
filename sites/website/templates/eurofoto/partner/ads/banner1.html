@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<style type="text/css">
+   body { 
+      padding: 0px;
+      margin: 0px;
+   }
+   /* rotator in-page placement */
+   div.rotator {
+   	position:absolute;
+   	height:120px;
+   	width: 320px;
+   }
+   /* rotator css */
+   div.rotator ul li {
+      top: 0px;
+      left: 0px;
+   	position:absolute;
+   	list-style: none;
+   }
+   div.rotator ul li.show {
+   	z-index:500;
+   }
+   .container{
+      position: relative;
+   }
+
+
+</style>
+</head>
+<body>
+<div class="container">
+   <div class="rotator">
+     <ul>
+       <li class="show">
+          <a href="http://www.japanphoto.no" target="_top">
+            <img src="${static:}gfx/ads/ekspress.jpg" width="320" height="120"  alt="pic1" />
+          </a>
+       </li>
+       <li>
+          <a href="http://www.japanphoto.no" target="_top">
+            <img src="${static:}gfx/ads/fotomesse.jpg" width="320" height="120"  alt="pic2" />
+          </a>
+       </li>
+       <li>
+          <a href="http://www.japanphoto.no" target="_top">
+            <img src="${static:}gfx/ads/pentax.jpg" width="320" height="120"  alt="pic3" />
+          </a>
+       </li>
+     </ul>
+   </div>
+</div>
+<SCRIPT type="text/javascript">
+
+function theRotator() {
+	$('div.rotator ul li').css({opacity: 0.0});
+	$('div.rotator ul li:first').css({opacity: 1.0});
+	setInterval('rotate()',6000);	
+}
+
+function rotate() {	
+	//Get the first image
+	var current = ($('div.rotator ul li.show')?  $('div.rotator ul li.show') : $('div.rotator ul li:first'));
+   if ( current.length == 0 ) current = $('div.rotator ul li:first');
+
+	//Get next image, when it reaches the end, rotate it back to the first image
+	var next = ((current.next().length) ? ((current.next().hasClass('show')) ? $('div.rotator ul li:first') :current.next()) : $('div.rotator ul li:first'));
+	
+	//Un-comment the 3 lines below to get the images in random order
+	
+	//var sibs = current.siblings();
+   //var rndNum = Math.floor(Math.random() * sibs.length );
+   //var next = $( sibs[ rndNum ] );
+			
+
+	//Set the fade in effect for the next image, the show class has higher z-index
+	next.css({opacity: 0.0})
+	.addClass('show')
+	.animate({opacity: 1.0}, 1000);
+
+	//Hide the current image
+	current.animate({opacity: 0.0}, 1000)
+	.removeClass('show');
+	
+};
+$(document).ready(function() {		
+	//Load the slideshow
+	theRotator();
+	$('div.rotator').fadeIn(1000);
+    $('div.rotator ul li').fadeIn(1000); // tweek for IE
+});
+
+</SCRIPT>
+</body>
+</html>

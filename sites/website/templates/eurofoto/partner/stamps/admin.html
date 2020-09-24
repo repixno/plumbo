@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Approval System for Stamp Production</tal:block>
+	
+	
+	<style type="text/css">
+		
+		.decline_reason.inactive {
+			color: #666;
+		}
+	
+	</style>
+	
+</head>
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	
+	<div id="container" class="container">
+		<div id="content">
+			<div id="box">	
+			   <h2 i18n:translate="">Approval System for Stamp Production</h2>
+			   
+			</div>
+			
+		<div class="span-20 last">
+
+		<tal:block tal:condition="not:jobs">
+			<div style="margin-top: 10px">
+				<h3 i18n:translate="">No new stamps</h3>
+			</div>
+		</tal:block>
+		
+		<tal:block tal:condition="jobs">	
+	
+			<table class="mytable" style="margin-top: 10px; border-left:none; border-bottom:none; border-top:none; border-right:none;">
+   			<tal:block tal:repeat="job jobs">
+   			   <tr id="row_${job/stampid}">
+   				  <td tal:condition="job/filepath" class="status" style="border-style:none;">
+   				     <table>
+   				        <tr>
+   				           <td tal:content="job/date" style="text-align:center; font-weight:bold; border-bottom:none;"></td>
+   				        </tr>
+   				        <tr>
+   				           <td>
+   				              <img src="${job/filepath}" alt="${job/imagename}" style="align:center;" />
+   				           </td>
+   				        </tr>
+   				     </table>
+   				  </td>
+   				  <td style="border:none;">
+   				     <button class="large button green" id="approve_${job/stampid}" type="button" i18n:translate="">Approve</button>
+   				  </td>
+   				  <td style="border:none;">
+   				  	<div class="box">
+   				     <textarea id="reason_${job/stampid}" style="height:60px; width:200px;" class="decline_reason inactive">Hvis avslått, skriv begrunnelse her.</textarea>
+   				      &nbsp;<button class="large button red" id="decline_${job/stampid}" type="button" i18n:translate="">Decline</button>
+   				     </div>
+   				  </td>
+   				  <td style="border:none;">
+   				     
+   				  </td>
+   			   </tr>
+   			</tal:block>
+			</table>
+		</tal:block>
+	</div>
+			
+		</div>
+	</div>
+
+</div>
+
+<script language="JavaScript">
+   
+var decline_reason_text = $('.decline_reason').val()
+   
+   $(document).ready( function() {
+   
+   
+   
+   	$('.decline_reason').click( function() {
+   		if( $(this).val() == decline_reason_text ) {
+   			$(this).removeClass('inactive');
+   			$(this).val('');
+   		}
+   	}).blur( function() {
+   		if( $(this).val() == '' ) {
+   			$(this).addClass('inactive');
+   			$(this).val(decline_reason_text);
+   		}
+   	
+   	});
+   
+      
+   });
+   
+   $( '.large.green' ).click( function() {
+      
+      var stampid = $(this).attr('id').split('_')[1];
+      
+      $.post( '/partner/stamps/admin/approve', { 
+         stampid: stampid
+      }, function( response ) {
+         if( response.result ) {
+            $( '#row_' + stampid ).fadeOut();
+         } else {
+            alert( 'Something failed when trying to approve stamp.' );
+         }
+      }, 'json' );
+      
+      
+   } );
+   
+   $( '.large.red' ).click( function() {
+      
+      var stampid = $(this).attr('id').split('_')[1];
+      var declinereason = $( '#reason_' + stampid ).val();
+      
+      if( //<![CDATA[ 
+         declinereason.length < 1  || declinereason == decline_reason_text
+         //]]> 
+      ) {
+         $( '#reason_' + stampid ).select().focus();
+         $( '#reason_' + stampid ).css('border-color', 'red');
+         alert('Vennligst oppgi en grunn for hvorfor bildet er avslått')
+         
+         
+      } else {
+         
+         $.post( '/partner/stamps/admin/decline', {
+            stampid: stampid,
+            reason: declinereason
+         }, function( response ) {
+            
+            if( response.result ) {
+               $( '#row_' + stampid ).fadeOut();
+            } else {
+               alert( 'Something failed when trying to decline stamp.' );
+            }
+            
+         }, 'json' );
+         
+      }
+      
+   } );
+   
+   
+   //$('reason_'+stampid).select().focus();
+   
+   
+   
+</script>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Order prints - Choose photos</tal:block>
+
+	<style type="text/css">
+	
+		.ui-effects-transfer  {
+			background-color: #ccc;
+		}
+
+		.choose-single-images li{
+			cursor: pointer;
+			padding-right: 1em;
+		}
+
+		.choose-single-images li:hover {
+			background-color: #eee;
+		}
+
+		ul.images {
+			margin: 0;
+		}
+
+		ul.images li {
+			display: block;
+			padding: .5em 0;
+			border-bottom: 1px solid #ccc;
+			clear: both;
+			height: 80px;
+		}
+		
+		ul.images li .mini-image {
+			display: block;
+			float: left;
+			width: 80px;
+			height: 80px;
+			overflow: hidden;
+		}
+		
+		.selected-images {
+		}
+		
+		.ui-dialog ul.images li.single-image span { margin-left: 10px; margin-top: 26px; float: left; display: block; }
+		.ui-dialog ul.images li.single-image a { padding-right: 10px; display: block; float: right; margin-top: 26px;}
+
+		ul.images.selected-images li span { width: 120px !important; height: 1.5em !important;  }
+		ul.images.selected-images li { height: 50px }
+		ul.images.selected-images li .mini-image {
+			width: 80px;
+			height: 50px;
+			padding-right: 10px;
+			overflow: hidden;
+		}
+
+		ul.images li span {
+			margin: 10px 0 0 40px;
+			font-weight: bold;
+			display: block;
+		}
+
+		ul.images li a.add {
+			float: right;
+			margin-top: -18px;
+		}
+
+		ul.images li a.remove {
+			font-weight: normal;
+			display: block;
+			margin-top: 10px;
+			float: right;
+		}
+
+		#single-images li span{
+			width: 140px;
+			height: 90px;
+			overflow: hidden;
+		}
+
+		#preview {
+			position:absolute;
+			border:1px solid #ccc;
+			background:#333;
+			padding:5px;
+			display:none;
+			color:#fff;
+			z-index: 10000;
+		}
+		#preview img {
+			max-width: 315px;
+		}
+		
+
+	</style>
+
+</head>
+<body>
+
+<div metal:use-macro="../../common/loader.html/fullscreen" />
+
+<div class="container order-prints">
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+   <div id="widecontent">
+		<div class="span-24 last">
+		 			<ul class="step-by-step-new">
+				<li class="completed">
+					<a href="/order-prints/" title="">
+						<strong tal:content="cms:title:c3e83ff3-1b74-499f-9d2c-578177d4f036">Step 1: Find your photos</strong>
+					</a>
+				</li>
+				<li class="current">
+					<a href="/order-prints/transfer-photos/" title="" tal:condition="not:session/loggedin">
+						<strong tal:content="cms:title:0e90d43c-ebf2-4c79-83d5-b3f950bdae0e">Step 2: Transfer photos</strong>
+					</a>
+					<a href="/order-prints/choose-photos/" title="" tal:condition="session/loggedin">
+						<strong tal:content="cms:title:3ccf650d-5437-4e54-9940-b04c0aab2163">Step 2: Choose photos</strong>
+					</a>
+					
+				</li>
+				<li class="">
+					<a title="">
+						<strong tal:content="cms:title:6b897e85-a541-4a72-8905-e5ecb59b8968">Step 3: Choose quantity</strong>
+					</a>
+				</li>
+			   <li>
+					<a title="">
+						 <strong tal:content="cms:title:1fe8b6fd-690f-4a9f-b8e0-f45634bbf50d">4: Tilpass bilder</strong>
+					</a>
+				</li>
+				<li class="last">
+					<a title="">
+						<strong tal:content="cms:title:3dfbbdeb-678f-4594-8aab-171ea6d8f6fd">Step 5: Accessories</strong>
+					</a>
+				</li>
+			</ul>
+		</div>
+	<hr class="space" />
+	
+	<form action="/order-prints/choose-quantity/" method="post">
+	<div class="span-23 last box">
+	<div class="span-13">	
+	  <h3><strong tal:content="cms:title:3ccf650d-5437-4e54-9940-b04c0aab2163">Step 2: Choose photos</strong></h3>
+	  <span tal:content="cms:ingress:3ccf650d-5437-4e54-9940-b04c0aab2163">Choose photos from your photo account.</span>
+	</div>
+	<div class="span-5">&nbsp;</div>
+	<div class="span-5 last">
+      <button class="large next call-to-action" i18n:translate="" type="submit" id="next-step">Next step</button>
+      <div class="hide" id="please-select-some-images" i18n:translate="">Please select some photos before you continue.</div>
+	</div>
+
+	</div>
+	
+	<tal:block metal:use-macro="common.html/albums-sorting-combo" />
+	
+		<div class="span-18">
+			<ul id="albums">
+				<tal:block tal:repeat="album albums">
+					<li class="albumPreview">
+						<!--<input type="checkbox" tal:attributes="name album/id" />-->
+						<div class="hide info">
+							<div class="numimages" tal:content="album/numimages"></div>
+						</div>
+						<div class="skimmer" title="${album/title}">
+
+							<img tal:attributes="src album/thumbnailurl; alt album/title" class="thumb" tal:condition="album/thumbnailurl"/>
+							<img src="${static:gfx/404/not_found_80px.jpg}"class="thumb" tal:condition="not:album/thumbnailurl" alt="Not found" i18n:attributes="alt"/>
+
+							<ul class="hide" tal:condition="exists:album/defaultthumbnails">
+								<tal:block tal:repeat="thumb album/defaultthumbnails">
+									<li>
+										<img src="" alt="${thumb/title}" tal:attributes="src thumb/thumbnail"/>
+									</li>
+								</tal:block>
+							</ul>
+
+						</div>
+						<div class="center">
+							<input type="checkbox" class="select" id="album_${album/id}" value="${album/id}" name="albums[]"/>
+							<label for="album_${album/id}" tal:content="shorten:album/title;7" title="${album/title}"></label>
+							<a href="${album/urls/privatealbum}"
+								tal:attributes="href string:/myaccount/album/${album/id}"
+								class="popup"
+								i18n:translate=""
+								name="${album/id}"
+								title="Click here to choose single images from this album"
+								i18n:attributes="title">Choose single images</a>
+						</div>
+					</li>
+					<div id="choose-single-images_${album/id}" class="hide choose-single-images" title="Choose single images" i18n:attributes="title">
+						<h3 class="hide" i18n:translate="">Images</h3>
+						<div class="prepend-top loader center">
+							<img tal:attributes="src static:gfx/gui/ajax-loader-big.gif" style="margin-top: 120px"/>
+						</div>
+						<ul class="imagelist images hide">
+
+						</ul>
+					</div>
+				</tal:block>
+			</ul>
+		</div>
+		<div class="span-6 last append-bottom sticky">
+			<div class="sticky">
+			<div class="stickyContent span-6 last">
+			<h3><tal:block i18n:translate="">Total</tal:block> <span id="total-number-of-images">0</span> <tal:block i18n:translate="">photos</tal:block></h3>
+
+			<!-- help text for choosing photos -->
+			<tal:block tal:content="structure cms:body:a7d52209-fd45-41be-90a9-063a69707e87"></tal:block>
+
+			<div id="single-images" class="span-6 last hide" title="Selected individual images" i18n:attributes="title">
+				<h3 i18n:translate="">Selected individual images</h3>
+				<ul id="images" class="imagelist images selected-images">
+				</ul>
+			</div>
+			</div>
+
+			</div>
+		</div>
+	</form>
+</div>
+
+</div>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<script type="text/javascript">
+	var removeText = '<tal:block i18n:translate="">Remove</tal:block>';
+	var albumIsSelectedText = '<tal:block i18n:translate="">You can not select single images when album is selected</tal:block>';
+	var clickToAdd = '<tal:block i18n:translate="">Add to order</tal:block> ';
+	var loader = '<img src="${static:gfx/gui/ajax-loader.gif}"/>';
+	var loaderSource = '${static:gfx/gui/ajax-loader.gif}';
+	var alreadySelected = '<tal:block i18n:translate="">Already selected. You can choose number of copies in the next step.</tal:block>';
+	var albumIsEmpty = '<tal:block i18n:translate="">This album is empty</tal:block>';
+</script>
+
+<script type="text/javascript" src="${static:js/choose-photos.js}?1"></script>
+
+</body>
+</html>

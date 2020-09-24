@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../../${templates}/common.html/head" />
+	<script type="text/javascript" src="${static:js/dialog.js}"></script>
+</head>
+<body>
+<div class="container">
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	<div tal:define="global menuitem string:albums" metal:use-macro="../common.html/menu" />
+	
+	<div class="span-20 last">
+		<div class="span-8">
+			<h2>Albums</h2>
+		</div>
+		<div class="span-8 right prepend-top">
+		
+			<tal:block metal:use-macro="../common.html/albums-sorting" />
+		
+			<strong i18n:translate="">View:</strong>
+			<a href="/myaccount/albums/" i18n:translate="">Thumbnails</a> | <tal:block i18n:translate="">List</tal:block>
+		</div>
+
+		<div class="span-4 last">
+			<a href="/myaccount/album/new" class="button large green">+ <tal:block i18n:translate="">New album</tal:block></a>
+		</div>
+	</div>
+	<div id="content">
+		
+		<tal:block metal:use-macro="showalbums.html/inbox" />
+		
+		
+		<div class="span-8 append-bottom">
+			<a href="select-all" id="select-all" i18n:translate="">Select all</a>  |  
+			<a href="select-none" id="select-none" i18n:translate="">Select none</a>  |  
+			<!--<a href="/myaccount/newalbum" class="new-album" i18n:translate="">Make New album</a></li>--> 
+			<a href="delete-selected-albums"  i18n:translate="" id="delete-selected-albums" class="negative">Delete selected albums</a>
+		</div>
+		
+		<!-- pagination -->
+		<div class="pagination span-8 last right append-bottom" tal:condition="exists:pagination">
+			&lt;&lt;  <a href="/myaccount/albums/showlist/${pagination/first}" tal:condition="pagination/first" i18n:translate="">First</a> 
+			<a href="/myaccount/albums/showlist/${pagination/prev}" tal:condition="pagination/prev" i18n:translate="">Prev</a> 
+			<span tal:condition="not:pagination/prev" class="quiet" i18n:translate="">Prev</span> 
+			<span><tal:block i18n:translate="">Page</tal:block> ${pagination/current} <tal:block i18n:translate="">of</tal:block> ${pagination/last}</span> 
+			<a href="/myaccount/albums/showlist/${pagination/next}" tal:condition="pagination/next" i18n:translate="">Next</a> 
+			<span tal:condition="not:pagination/next" class="quiet" i18n:translate="">Next</span> 
+			<a href="/myaccount/albums/showlist/${pagination/last}" tal:condition="pagination/last" i18n:translate="">Last</a> &gt;&gt;
+			<a href="/myaccount/albums/showlist/all" i18n:translate="">Show all</a>
+		</div>
+		<div class="pagination span-8 last right append-bottom" tal:condition="not:exists:pagination">
+			<a href="/myaccount/albums/showlist" i18n:translate="">Use pagination</a>
+		</div>
+		
+		
+		<form action="/order-prints/choose-quantity/" id="albums-form" method="post">
+			<ul class="albumlist" id="albumlist">
+				<tal:block tal:repeat="album albums">
+				
+					<li id="${album/id}" class="clear clearfix" tal:condition="not:equal:album/id,0">
+						<div class="span-3 holder">
+							
+							<div class="center" tal:condition="album/thumbnailurl">
+								<img tal:attributes="src album/thumbnailurl; alt album/title" class="thumb"/><br />
+							</div>
+							<div class="center" tal:condition="not:album/thumbnailurl">
+								<img tal:attributes="alt album/title" src="http://static.eurofoto.no/gfx/404/not_found_70px.jpg" class="thumb" alt="" />
+							</div>
+
+							<input type="checkbox" class="select" id="album_${album/id}" value="${album/id}" name="albums[]"/>
+						</div>
+						
+						<div class="span-13 last">
+							<h3>
+								<span tal:content="album/title" class="title editable" id="${album/id}"></span>
+							</h3>
+							<p class="description" tal:content="structure album/description | default">No description</p>
+							<p class="quiet" tal:content="structure album/identifier | default">No description</p>
+						</div>
+						<div class="span-13 last">
+						
+							<div class="span-2">
+								<dl>
+									<dt i18n:translate="">Quantity</dt>
+									<dd tal:content="album/numimages"></dd>
+								</dl>
+							</div>
+							<div class="span-2">
+								<!--<dl tal:condition="exists:album/numviewed">
+									<dt i18n:translate="">Viewed</dt>
+									<dd tal:content="album/numviewed">0</dd>
+								</dl>-->
+							</div>
+							<div class="span-4">
+								<dl>
+									<dt i18n:translate="">Sharing</dt>
+									
+									<tal:block tal:condition="album/isshared">
+										<dd tal:condition="album/shared/link">
+											<tal:block i18n:translate="">Shared with link</tal:block>
+											<tal:block i18n:translate="" tal:condition="album/shared/password">and secured with password</tal:block>
+										</dd>
+										<dd tal:condition="album/shared/public" i18n:translate="">Published in the gallery</dd>
+										<dd tal:condition="album/shared/groups" i18n:translate="">Shared with groups</dd>
+										<dd tal:condition="album/shared/friends" i18n:translate="">Shared with friends</dd>
+										<dd>
+											<a class="" i18n:translate=""  href="/myaccount/album/share/${album/id}/">Edit sharing</a>
+										</dd>
+									</tal:block>
+									
+									<tal:block tal:condition="not:album/isshared">
+										<dd>
+											<tal:block i18n:translate="">Not shared</tal:block>
+											<a class="" i18n:translate=""  href="/myaccount/album/share/${album/id}/">Share album</a>
+										</dd>
+										
+									</tal:block>
+									
+								</dl>
+							</div>
+							<div class="span-5 last right">
+								<div class="functions">
+									
+									<a class="button small" i18n:translate="" href="/order-prints/fromalbum/${album/id}">Buy album</a>
+									<a class="button small" href="${album/albumurl}" title="${album/title}" i18n:translate="">View</a>
+								</div>
+							</div>
+						</div>
+						
+					</li>
+				</tal:block>
+			</ul>
+		</form>
+	</div>
+	<div metal:use-macro="../common.html/right-albumlist-menu" />
+</div>
+<div class="hide" id="message" title="" i18n:attributes="title">
+	<p i18n:translate=""></p>
+</div>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+<script type="text/javascript">
+		$(document).ready(function() {  
+		   
+	     $('#order-prints-selected-albums').click( function() {
+			
+			if( $('input.select:checked').length == 0){
+			   console.log('test');
+			   messageDialog('<tal:block i18n:translate="">An error occurred</tal:block>','<tal:block i18n:translate="">Please select one or more albums</tal:block>','<tal:block i18n:translate="">Close</tal:block>');
+			   return false;
+			}
+			
+			$('#albums-form').submit();
+
+			return false;
+		});
+
+		$('#order-prints-all-albums').click( function() {
+
+			$('#select-all').trigger('click');
+
+			$('#albums-form').submit();
+
+			return false;
+		});
+		
+
+		// changing class when checkbox is selected and deselected
+			$('.albumlist input.select').bind('change', function() {
+				
+				if( $(this).is(':checked') ) {
+					$(this).parent().parent().addClass('selected', 'slow');
+				} else {
+					$(this).parent().parent().removeClass('selected', 'fast');
+				}
+				
+			});
+		
+		
+		// trigger change on every click
+		$('input.select', '#albumlist').click( function() { $(this).trigger('change') });
+		
+		//select all
+		$('#select-all').click( function() {
+			$(':checkbox', '#albumlist').attr('checked', 'checked').trigger('change');
+			return false;
+		});
+		
+		// select none
+		$('#select-none').click( function() {
+			$(':checkbox', '#albumlist').attr('checked', '').trigger('change');
+			return false;
+		});
+		
+		
+		// album preferances		
+		$('#show-album-preferences').click( function() {
+		
+			$('#album-preferences').slideToggle();
+			return false;
+		});	
+	});
+	</script>
+</body>
+</html>

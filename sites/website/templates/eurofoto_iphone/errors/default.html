@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" />
+<html>
+<head>
+	<title>An error occured :/</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="viewport" content="width=device-width, user-scalable=no" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+
+	<link media="all" href="http://static.eurofoto.no/css/portals/eurofoto_iphone/screen.css" type= "text/css" rel="stylesheet"/>
+	<!--<link media="only screen and (device-width: 320px)" href="http://static.eurofoto.no/css/portals/eurofoto-iphone/iphone_320.css" type= "text/css" rel="stylesheet"/>
+	<link media="only screen and (device-width: 480px)" href="http://static.eurofoto.no/css/portals/eurofoto-iphone/iphone_480.css" type= "text/css" rel="stylesheet"/>-->
+
+
+</head>
+<body>
+<div>
+	<div class="center">
+		<img src="http://static.eurofoto.no/gfx/404/dog.jpg" />
+	</div>	
+	
+	
+	<div class="center">
+		<h2>Beklager!</h2>
+		<h4 class="top quiet">Noe galt har hendt. Du kan hjelpe oss å rette feilen ved å forklare ut hendelseforløpet som førte til feilen i tekstboksen under. </h4>			
+		<p>Om du opplever flere problem med våre nye nettsider, kan du 
+			<a href="/beta/revert" id="old-site-link-from-error">gå tilbake til våre gamle nettside</a> og prøve der.
+		</p>
+		<script type="text/javascript">
+			$('#old-site-link-from-error').click( function() {
+				try{
+					pageTracker._trackEvent('Old page', 'Clicked from error');
+					pageTracker._trackPageview();
+				} catch(err) {}
+				document.location.href = $(this).attr('href');
+				return false;
+			});
+		</script>
+
+		<form action="/contact/feedback/" method="post">
+			<label>Melding om feil:</label><br/>
+			<input type="hidden" name="reason" value="error" />
+			<textarea name="usercomment"></textarea>
+			<textarea class="hide" name="content"><!-- content /--></textarea>
+			<textarea class="hide" name="trace"><!-- trace /--></textarea>
+			<textarea class="hide" name="code"><!-- code /--></textarea>
+			<input type="hidden" value="defaulterror" name="errortype" />
+			<div class="span-6">
+				<a href="javascript:history.back(-1);">Go back</a>
+			</div>
+			<div class="span-6 last">
+				<button class="blue">Send tilbakemelding</button>
+			</div>
+		</form>
+	</div>
+
+	<div class="container" style="width: 120px">
+		<textarea><!-- content /--></textarea>
+	</div>
+</div>
+
+	<script type="text/javascript">
+	//<![CDATA[
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	//]]>
+	</script>
+<!--	<script type="text/javascript">
+		try{
+		var pageTracker = _gat._getTracker("UA-390524-10");
+			pageTracker._trackEvent('Error', 'Default');
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>-->
+
+</body>
+</html>

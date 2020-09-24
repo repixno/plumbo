@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+	<style type="text/css">
+		.enlargements-top {
+         height: 208px;
+         
+         <tal:block tal:condition="exists:menuitem/article/attachments/background">
+         background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+         </tal:block>
+         
+         background-repeat:no-repeat;
+		}
+		.enlargements-top p{ font-size: 14px }
+		
+		.boxlist.small li {
+			height: 7em
+		}
+		
+	</style>
+</head>
+
+<!-- sections -->
+<tal:block define:section="wooden-frame-5cm, With wooden frame (5cm)"/>
+<tal:block define:section="wooden-frame-2-5cm, With wooden frame (2.5cm)"/>
+<tal:block define:section="other, Other frames"/>
+<tal:block define:section="poster, Poster"/>
+<tal:block define:section="popart, Popart"/>
+<tal:block define:section="with-design, With design"/>
+<tal:block define:section="no-frame, With frame"/>
+
+<body>
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	<div class="container">
+		<div class="row">
+			
+		
+		
+			
+			
+			<div class="col-md-10 product-category">
+			<div class="col-md-12 enlargements-top top">
+				<div class="content">
+					<h1 class="hide">${menuitem/article/title}</h1>
+					<p tal:content="structure menuitem/article/body|default"></p>
+				</div>
+			</div>
+
+			<div class="col-md-12 top-15">
+				<div class="col-md-8 colborder append-bottom">
+					
+					<h2 i18n:translate="">Enlargements</h2>
+					<div class="col-md-6">
+						<img src="http://d.static.repix.no/cms/images/webpage/produkter/forstorrelser/uten-ramme.jpg" />
+					</div>
+					<div class="col-md-6 last">
+						<div class="boxlist small">
+						<ul tal:condition="exists:sections/no-frame">
+							<tal:block tal:repeat="item sections/no-frame">
+								<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/product-as-list-item" />
+							</tal:block>
+						</ul>
+					</div>
+				</div>
+					
+					
+					<div class="col-md-6">
+						<img src="http://d.static.repix.no/cms/images/webpage/produkter/forstorrelser/tykk-ramme.jpg" />
+					</div>
+					<div class="col-md-6 last">
+						<h2 style="margin-bottom:0em;"><tal:block i18n:translate="">Thick wooden frame</tal:block> <span >5 cm</span></h2>
+						<h3 class="quiet">(ferdig innrammet)</h3>
+						<div class="boxlist medium">
+						<ul tal:condition="exists:sections/wooden-frame-5cm">
+							<tal:block tal:repeat="item sections/wooden-frame-5cm">
+								<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/product-as-list-item" />
+							</tal:block>
+						</ul>
+						</div>
+					</div>
+					
+					
+				<div class="col-md-12 prepend-top">
+					<h2 style="margin-bottom:0em;"><tal:block i18n:translate="">Thin wooden frame</tal:block> <span >2.5 cm</span></h2>
+					<h3 class="quiet">(ferdig innrammet)</h3>
+					<div class="col-md-6">
+						<div class="boxlist medium">
+						<ul tal:condition="exists:sections/wooden-frame-2-5cm">
+							<tal:block tal:repeat="item sections/wooden-frame-2-5cm">
+								<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/product-as-list-item" />
+							</tal:block>
+						</ul>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<img src="http://d.static.repix.no/cms/images/webpage/produkter/forstorrelser/tynn-ramme.jpg" />
+					</div>
+				</div>
+			</div>
+				
+				<div class="col-md-4 last">
+					<h2 i18n:translate="">Posters</h2>
+					<div>
+						<img src="http://d.static.repix.no/cms/images/aug_underside_minibilde_cowboy2.jpg" />
+					</div>
+
+					<div class="boxlist small">
+						<ul>
+							<tal:block tal:repeat="item sections/poster" tal:condition="exists:sections/poster">
+								<li>
+									<h5 class="bottom"><a href="${item/url}" class="hide-link product-title">${item/title}</a> </h5>
+									<div style="clear:both">
+										<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" />
+									</div>
+									<div class="more-info-and-button right" style="float: none; clear: both">
+										<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/more-info-link" />
+										<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/buy-product-link" />
+									</div>
+									<br class="clear" />
+								</li>
+							</tal:block>
+						</ul>
+						<h2>POP-ART</h2>
+					<div>
+						<img src="http://d.static.repix.no/cms/images/webpage/produkter/forstorrelser/popart.jpg" />
+					</div>
+					<div  class="boxlist">
+						<ul>
+							<tal:block tal:repeat="item sections/popart" tal:condition="exists:sections/popart">
+								<li>
+									<h5><a href="${item/url}" class="hide-link">${item/title}</a> </h5>
+									<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" />
+									<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/more-info-link" />
+									<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/buy-product-link" />
+								</li>
+							</tal:block>
+						</ul>
+					</div>
+					</div>
+				</div>	
+			</div>
+			
+			
+			<div class="col-md-12">
+				<hr />
+				<div class="col-md-12 colborder append-bottom">
+					<div class="col-md-6">
+						<h2 class="" i18n:translate="">Other frames</h2>
+						<div class="boxlist medium">
+							<ul tal:condition="exists:sections/other">
+								<tal:block tal:repeat="item sections/other">
+									<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/product-as-list-item" />
+								</tal:block>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<img src="http://d.static.repix.no/cms/images/webpage/produkter/forstorrelser/plastrammer.jpg" style="margin-top: 25px" />
+					</div>
+				</div>	
+			</div>
+		</div>
+		</div>
+		</div> <!-- end container -->
+	
+	
+	
+	<div class="footer">
+		<div class="container">
+			<div metal:use-macro="../../../${templates}/common.html/footer" />
+		</div>
+	</div>
+</body>
+</html>

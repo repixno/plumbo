@@ -1,0 +1,40 @@
+1;Hans Terje Helgaland;Bogafjell sykleklubb;SANDNES;M40-44;10;k1;k1_00001.jpg
+1;Hans Terje Helgaland;Bogafjell sykleklubb;SANDNES;M40-44;10;k1;k1_00002.jpg
+1;Hans Terje Helgaland;Bogafjell sykleklubb;SANDNES;M40-44;10;k2;k2_00001.jpg
+1;Hans Terje Helgaland;Bogafjell sykleklubb;SANDNES;M40-44;10;k2;k2_00002.jpg
+2;Kurt Thu;;KLEPPE;M40-44;22;k1;k1_00001.jpg
+2;Kurt Thu;;KLEPPE;M40-44;22;k2;k2_00002.jpg
+2;Kurt Thu;;KLEPPE;M40-44;22;k2;k2_00003.jpg
+3;Arne Løvoll;Klepp kommune;KLEPPE;M55-59;12;k1;k1_00001.jpg
+3;Arne Løvoll;Klepp kommune;KLEPPE;M55-59;12;k2;k2_00002.jpg
+3;Arne Løvoll;Klepp kommune;KLEPPE;M55-59;12;k2;k2_00003.jpg
+4;Nils Ove Nygård;Ryfylke Sykkelklubb / BDO AS;STAVANGER;M25-29;9;k1;k1_00001.jpg
+4;Nils Ove Nygård;Ryfylke Sykkelklubb / BDO AS;STAVANGER;M25-29;9;k2;k2_00002.jpg
+4;Nils Ove Nygård;Ryfylke Sykkelklubb / BDO AS;STAVANGER;M25-29;9;k2;k2_00003.jpg
+5;Thorfinn Oustorp;Smaalenene sykkelklubb;ØRJE;M45-49;9;k1;k1_00003.jpg
+5;Thorfinn Oustorp;Smaalenene sykkelklubb;ØRJE;M45-49;9;k2;k2_00004.jpg
+5;Thorfinn Oustorp;Smaalenene sykkelklubb;ØRJE;M45-49;9;k2;k2_00005.jpg
+6;Jarle L. Kristiansen;Ceres;LEIRSUND;M45-49;1;k1;k1_00007.jpg
+6;Jarle L. Kristiansen;Ceres;LEIRSUND;M45-49;1;k2;k2_00009.jpg
+6;Jarle L. Kristiansen;Ceres;LEIRSUND;M45-49;1;k2;k2_00010.jpg
+6;Jarle L. Kristiansen;Ceres;LEIRSUND;M45-49;1;k2;k2_00011.jpg
+7;John Sigurd Tolo;Laerdal Medical;STAVANGER;M35-39;7;k1;k1_00001.jpg
+7;John Sigurd Tolo;Laerdal Medical;STAVANGER;M35-39;7;k2;k2_00002.jpg
+7;John Sigurd Tolo;Laerdal Medical;STAVANGER;M35-39;7;k2;k2_00003.jpg
+7;John Sigurd Tolo;Laerdal Medical;STAVANGER;M35-39;7;k2;k2_00003.jpg
+8;Roger Møller;Flikkerud Frisørengros;SANDNES;M40-44;22;k1;k1_00011.jpg
+8;Roger Møller;Flikkerud Frisørengros;SANDNES;M40-44;22;k2;k2_00012.jpg
+8;Roger Møller;Flikkerud Frisørengros;SANDNES;M40-44;22;k2;k2_00013.jpg
+8;Roger Møller;Flikkerud Frisørengros;SANDNES;M40-44;22;k2;k2_00014.jpg
+9;Gaute Gunnari;Olga;OSLO;M45-49;19;k1;k1_00011.jpg
+9;Gaute Gunnari;Olga;OSLO;M45-49;19;k2;k2_00016.jpg
+10;Kjetil Høllen;Grenland SK;SKIEN;M50-54;19;k2;k2_00023.jpg
+10;Kjetil Høllen;Grenland SK;SKIEN;M50-54;19;k2;k2_00022.jpg
+10;Kjetil Høllen;Grenland SK;SKIEN;M50-54;19;k2;k2_00023.jpg
+11;Jesper Gejl;www.multitesta.dk/jesper;SANDNES;M25-29;4;k2;k2_00023.jpg
+11;Jesper Gejl;www.multitesta.dk/jesper;SANDNES;M25-29;4;k2;k2_00023.jpg
+11;Jesper Gejl;www.multitesta.dk/jesper;SANDNES;M25-29;4;k2;k2_00024.jpg
+12;Odd Erik Jakobsen;Team Mekonomen;SON;M40-44;22;k2;k2_00033.jpg
+12;Odd Erik Jakobsen;Team Mekonomen;SON;M40-44;22;k2;k2_00033.jpg
+12;Odd Erik Jakobsen;Team Mekonomen;SON;M40-44;22;k2;k2_00034.jpg
+12;Odd Erik Jakobsen;Team Mekonomen;SON;M40-44;22;k2;k2_00035.jpg

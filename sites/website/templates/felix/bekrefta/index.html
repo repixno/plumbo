@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//SE"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="se">
+    <head>
+        <tal metal:use-macro="../../${templates}/common.html/head" />
+        <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+
+        <script>
+	    WebFont.load({
+		      custom: {
+                families: ['felix_scriptregular', 'lets_eatregular'],
+                urls: ['/felix/fonts/stylesheet.css', '/felix/fonts/letseat/stylesheet.css' ],
+		      },
+              active: function(){
+                //console.log("daooasdo")
+                }
+		    });
+		</script>
+
+        <style>
+			.thumbetikett1{
+        position: absolute;
+        top: 194px;
+				left: 64px;
+				width: 126px;
+            }
+			.thumbetikett {
+				position: absolute;
+				top: 228px;
+				left: 59px;
+			  }
+				.thumbetikett05 {
+					position: absolute;
+			    top: 211px;
+			    left: 61px;
+			    width: 124px;
+					}
+          .thumboverlay{
+              position: relative;
+              z-index: 2;
+          }
+          .orderfom input[type="text"]{
+              width: 70%;
+              border:1px #cc0200 solid;
+              font-size: 1.2em;
+              margin: 5px;
+          }
+            .orderfom label{
+                width: 95px;
+                text-align: right;
+            }
+            .row{
+                margin-top: 15px;
+            }
+            .checkboxes{
+                margin-left: 50px;
+            }
+            label.error{
+                background: #ccc;
+                width:100%!important;
+                text-align: center;
+            }
+
+			@media all and (max-width: 350px) {
+				body{
+					font-size: 1.4em;
+				}
+				.orderfom label {
+					width: 100%;
+					text-align: left;
+				}
+				.orderfom input[type="text"] {
+					width: 90%;
+					border: 1px #cc0200 solid;
+					font-size: 1.2em;
+					margin: 5px;
+				}
+				.checkboxes {
+					margin-left: -25px;
+				}
+
+			}
+			@media all and (max-width: 768px) {
+				body{
+					font-size: 1.5em;
+				}
+				h2, h3{
+					font-size: 1.4em;
+				}
+
+				.row {
+					margin-top: 5px;
+				}
+				.container{
+					margin: 0px;
+					padding: 20px;
+
+				}
+			}
+
+			.confirmheader h2,.confirmheader h3{
+				font-family: brandon_printedone;
+				margin: 0px;
+			}
+
+        </style>
+    </head>
+    <body>
+			<div class="hidden-xs" style="position:absolute; z-index: 100; top: 0px; width: 100%; text-align: center;"><img src="/felix/topbg-1.png" /></div>
+        <div class="container">
+						<div class="row hidden-xs header" style="margin-top: 50px">
+						<div class="col-md-12 text-center">
+								<img src="${static:}css/portals/felix/gfx/logo.jpg" alt="FELIX"/>
+								<h1>Snyggt jobbat – nu skickas etiketten snart!</h1>
+						</div>
+						</div>
+            <div class="row">
+                <div class="col-md-7">
+
+                    <form id="orderform" method="post">
+											<div class="form-group col-md-12">
+                            <label for="name">Namn</label>
+														<input class="form-control" type="text" name="name" id="name"/>
+											</div>
+											<div class="form-group col-md-12">
+                            <label for="address">Adress</label>
+														<input class="form-control"type="text" name="address" id="address"/>
+											</div>
+											<div class="form-group col-md-4">
+                            <label for="zip">Postnummer</label>
+														<input class="form-control" type="text" name="zip" id="zip"/>
+											</div>
+											<div class="form-group col-md-8">
+                            <label for="city">Ort</label>
+														<input class="form-control" type="text" name="city" id="city"/>
+											</div>
+											<div class="form-group col-md-12">
+												<label for="phone">Telefon</label>
+												<input class="form-control" type="text" name="phone" id="phone"/>
+											</div>
+											<div class="form-group col-md-12">
+												<label for="email">E-post</label>
+												<input class="form-control" type="text" name="email" id="email"/>
+											</div>
+                        <div class="form-group col-md-12">
+													<input type="checkbox" name="eula" id="eula"  class="with-font"/>
+                          <label class="label_check" for="eula">Ja, jag har tagit del av <a href="#" data-toggle="modal" data-target="#myModal" style="text-decoration: underline">villkoren</a>.</label>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <!--<div class="col-md-10"><label class="label_check" for="newsletterfelix"><input type="checkbox" name="newsletterfelix" id="newsletterfelix" />Ja tack, jag vill få nyhetsbrev från Felix.</label></div>-->
+														<input type="checkbox" name="newsletterjp" id="newsletterjp" class="with-font" checked="checked" />
+														<label class="label_check" for="newsletterjp">Ja tack, vill få nyhetsbrev från Japan Photo.</label>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="text-left">
+                                <button class="btn btn-large">SKICKA!</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+
+								<div class="col-md-4 col-md-push-1 hidden-xs">
+									<div class="" tal:condition="equal:articleid,7441">
+					                    <img class="thumbetikett" src="${thumb}"/>
+					                    <img class="thumboverlay" src="/felix/flaske125-b.png"/>
+	                </div>
+									<div class="" tal:condition="equal:articleid,7438">
+					                    <img class="thumbetikett1" src="${thumb}"/>
+					                    <img class="thumboverlay" src="/felix/flaske-b.png"/>
+	                </div>
+									<div class="" tal:condition="equal:articleid,7554">
+						                    <img class="thumbetikett05" src="${thumb}"/>
+						                    <img class="thumboverlay" src="/felix/flaske05.png"/>
+	                </div>
+							</div>
+            </div>
+						<tal metal:use-macro="../../${templates}/common.html/facebook" />
+
+        </div>
+		 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times-circle-o" aria-hidden="true"></i></button>
+                <h4 class="modal-title" id="myModalLabel">VILLKOR</h4>
+              </div>
+              <div class="modal-body col-md-12">
+				<p>
+				Etiketterna skickas portofritt inom Sverige och kommer hem till dig inom 4 veckor.
+				Max 4 etiketter per hushåll.
+				</p>
+				<p>
+				Felix och Japan Photo tar inte ansvar för rättigheter till bildmaterial och förbehåller sig rätten att inte trycka etiketter med design som kan anses vara stötande eller på annat sätt olämpligt. Varje text kommer att kontrolleras för att försäkra att meddelandet är lämpligt. Om meddelandet avslås kommer du att få ett e-postmeddelande om att göra om beställningen med en annan text och/eller bild.
+				</p>
+				<p>
+				I samband med att du laddar upp din etikett överlåter du till Felix alla immateriella och närstående rättigheter till etiketten. Detta innebär bl.a. att Felix har rätt att förfoga över etiketten, genom att framställa exemplar av den och göra det tillgängligt för allmänheten på alla sätt i alla nutida och framtida medier i alla territorier utan begränsning i tiden och utan särskild ersättning.
+				</p>
+				<p>
+				Kampanjen gäller t o m 2017-11-30. Beställningar ska vara gjorda senast den 2017-11-30 kl. 23.59. Etikettbeställningar som kommer in efter denna tidpunkt kommer inte att kunna tryckas.
+				</p>
+				<p>
+					Vid frågor kontakta Konsumentkontakt på tel: 020-75 00 10.
+				</p>
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+		<tal metal:use-macro="../../${templates}/common.html/footer" />
+		<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script src="${static:js/fabric/dist/fabric.min.js}" />
+        <script src="${static:css/portals/felix/js/editor.js}" />
+        <script src="http://malsup.github.com/jquery.form.js"></script>
+        <script src="${static:}js/jquery.validate.1.12.0.min.js"></script>
+
+
+
+        <script>
+
+
+        //<![CDATA[
+            jQuery.validator.addMethod("fullname", function(value, element) {
+            	return value.split(' ').length > 1;
+            }, "Please provide first name and last name");
+        //]]>
+
+        $( function(){
+            $("#orderform").validate({
+                rules: {
+                    eula: {
+                        required: true,
+                    },
+                    name: {
+                        required: true,
+                        fullname: true
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    zip: {
+                        required: true,
+                        minlength: 4
+                    },
+                    city: {
+                        required: true
+                    },
+                    address: {
+                        required: true
+                    },
+                    phone:{
+                        required : true,
+                        minlength : 8
+                    }
+                },
+                messages: {
+                    name: {
+                        required: "<tal:block i18n:translate="">Required</tal:block>",
+                        fullname: "<tal:block i18n:translate="">Please enter your first name and surname.</tal:block>"
+                    },
+                    email: {
+                        required: "<tal:block i18n:translate="">Required</tal:block>",
+                        email: "<tal:block i18n:translate="">Your email address must be in the format of name@domain.com</tal:block>"
+                    },
+                    zip: {
+                        required: "<tal:block i18n:translate="">Required</tal:block>",
+                        minlength: "<tal:block i18n:translate="">Please enter at least 4 digits</tal:block>"
+                    },
+                    city: {
+                        required: "<tal:block i18n:translate="">Required</tal:block>"
+                    },
+                    address: {
+                        required: "<tal:block i18n:translate="">Required</tal:block>"
+                    },
+                    eula: {
+                        required: "<tal:block i18n:translate="">You have to read and accept the terms and conditions</tal:block>"
+                    },
+                    delivertostore:{
+                       required: "Du må velge en butikk!"
+                    },
+                    phone:{
+                       required: "<tal:block i18n:translate="">Required</tal:block>",
+                       number: "<tal:block i18n:translate="">Required</tal:block>"
+                    }
+                }
+            });
+
+            function setupLabel() {
+                if ($('.label_check input').length) {
+                    $('.label_check').each(function(){
+                        $(this).removeClass('c_on');
+                    });
+                    $('.label_check input:checked').each(function(){
+                        $(this).parent('label').addClass('c_on');
+                    });
+                };
+                if ($('.label_radio input').length) {
+                    $('.label_radio').each(function(){
+                        $(this).removeClass('r_on');
+                    });
+                    $('.label_radio input:checked').each(function(){
+                        $(this).parent('label').addClass('r_on');
+                    });
+                };
+            };
+            $(document).ready(function(){
+                $('body').addClass('has-js');
+                $('.label_check, .label_radio').click(function(){
+                    setupLabel();
+                });
+                setupLabel();
+            });
+        });
+        </script>
+    </body>
+</html>

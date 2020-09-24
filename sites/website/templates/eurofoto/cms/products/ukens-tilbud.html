@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+	<style type="text/css">
+	     span.price { font-size: .8em; margin: 0 !important }
+	     span.price span.newprice { font-size: 1em; margin: 0; }
+	     span.price span.price.oldprice { font-size: 0.7em }
+	     div.newProductStar.nb_NO {
+		left: -4px;
+		top: -11px;
+	     }
+	</style>
+</head>
+
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+	<div metal:use-macro="${templateroot}/eurofoto/cms/cms.html/top-navigation" />
+		
+	
+	<div class="span-24 last">
+		<h1 class="bottom" tal:content="menuitem/title"></h1>
+		<div class="span-24 last" tal:content="structure menuitem/article/body|default"></div>
+	</div>
+
+	<div class="productlist span-24 last">
+		<!-- list for menudepth of 2-->
+			<tal:block tal:repeat="item items">
+				<tal:block tal:condition="not:mod:repeat/item/number,2">
+					<div class="span-11 colborder last prepend-top" tal:condition="equal:item/type,product">
+						<tal:block metal:use-macro="show-product" />
+					</div>
+				</tal:block>
+				<tal:block tal:condition="mod:repeat/item/number,2">
+					<div class="span-11 last prepend-top append-1" tal:condition="equal:item/type,product">
+						<tal:block metal:use-macro="show-product" />
+					</div>
+				</tal:block>
+		</tal:block>
+	</div>
+</div>
+
+
+<tal:block metal:define-macro="show-product">
+   <div class="span-11 last">
+	<div class="span-4 productimage">
+      <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/starOfferPercent" />
+      <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/newProductStar" />
+
+		<tal:block tal:condition="item/images">
+			<tal:block tal:repeat="image item/images">
+				<tal:block tal:condition="equal:repeat/image/number,1">
+					<a href="${item/url}" title="${item/title}">
+						<img src="${static:}images/products/thumbs/square/150/${image/url}" 
+							widht="150" height="150" class="left" alt="${item/title}" tal:condition="image/url" />
+					</a>
+					<img src="http://static.eurofoto.no/gfx/404/not_found_130px.jpg" 
+						class="left" alt="Product photo missing." tal:condition="not:image/url" 
+						style="border: 10px solid #fff; "
+					/> 
+				</tal:block>
+			</tal:block>
+		</tal:block>
+		<tal:block tal:condition="not:item/images"><span class="quiet small">No image</span></tal:block>
+	</div>
+	<div class="span-7 last productinfo">
+		<h3 tal:content="item/title"></h3>
+		<div class="span-7 last">
+			<p tal:content="item/ingress" class="bottom"></p>
+		    <div class="right">
+		       <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price-oneline" />
+         </div>
+         <div class="right">
+            <a href="${item/url}" class="more-info" i18n:translate="">More info</a>
+            <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/buy-product-link" />
+         </div>
+		</div>
+	</div>
+	</div>
+</tal:block>
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>	
+</div>
+
+</body>
+</html>

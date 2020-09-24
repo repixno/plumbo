@@ -1,0 +1,67 @@
+<tal:block metal:define-macro="head">	
+	<title>Ukeplan - Admin</title>
+	<tal:block metal:use-macro="css" />
+</tal:block>
+
+<tal:block metal:define-macro="css">
+	
+		<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/repix.css" type="text/css" />
+	<!--<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/screen.css?${version}" type="text/css" media="screen, projection" />-->
+	<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/print.css?${version}" type="text/css" media="print" /> 
+
+
+	
+		<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/ie.css" type="text/css" media="screen, projection" />
+		<link rel="stylesheet" type="text/css" href="/css/ie-sucks.css" />
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+	<script type="text/javascript" src="${static:js/i18n/ui.datepicker-no.js}"></script>
+	<script type="text/javascript" src="${static:js/flowplayer-3.1.1.min.js}"></script>
+	<script type="text/javascript" src="${static:js/jquery.autocomplete.pack.js}"></script>
+	<tal:block tal:define="global staticurl" tal:content="static:js/eurofoto.min.js" />
+	<script type="text/javascript" src="/js/jquery.tablesorter.min.js"></script>
+	<script type="text/javascript" src="${staticurl}?${version}"></script>
+</tal:block>
+
+
+
+<div id="languages" metal:define-macro="languages">
+	<ul>
+		<li>
+      <tal:block tal:condition="exists: countries">
+		<tal:block tal:repeat="country countries">
+			<a href="/settings/language/${country/segment}"><img src="http://static.eurofoto.no/gfx/flags/${country/country}.png" alt="NO" /></a>
+		</tal:block>
+      </tal:block>
+		</li>
+	</ul>
+</div>
+
+<div id="topmenu" metal:define-macro="topmenu">
+	<!--<h2>Stabburet Admin</h2>-->
+	<ul tal:condition="session/loggedin">
+		<!--<li><a href="/" i18n:translate="">Dashboard</a></li>	
+		<li><a href="/system/translate/" i18n:translate="">Translation</a></li>
+		<li><a href="/menu/" i18n:translate="">Menu</a></li>
+		<li><a href="/content/" i18n:translate="">Content</a></li>-->
+		
+		  <a href="/logout/" class="btn btn-info" role="button">Logg ut </a>
+	
+		
+	</ul>
+	<script language="JavaScript">
+	$(document).ready( function() {
+	   $('#site-selector').change(function(){
+	      if( confirm( '<tal:block i18n:translate="">Are you sure you want to switch the active site?</tal:block>' ) ) {
+	         window.location.href = '/system/setsite/'+$(this).val();
+	      } else {
+	         $('#site-selector-form').each(function(){
+   	         this.reset();
+         	});
+	      }
+	   });
+	})
+	</script>
+</div>

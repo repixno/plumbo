@@ -1,0 +1,206 @@
+
+
+
+
+
+@media (max-width:480px) {
+    #previewdp {
+        display: none;
+     
+    }
+}
+
+@media (max-width:480px) {
+    #previewkt {
+       display: none;
+     
+    }
+}
+
+
+.carousel-showthreemoveone .carousel-control {
+  width: 4%;
+  background-image: none;
+}
+.carousel-showthreemoveone .carousel-control.left {
+  margin-left: 15px;
+}
+.carousel-showthreemoveone .carousel-control.right {
+  margin-right: 15px;
+}
+
+.carousel-showthreemoveone .cloneditem-1,
+.carousel-showthreemoveone .cloneditem-1,
+.carousel-showthreemoveone .cloneditem-3 {
+  display: none;
+}
+@media all and (min-width: 768px) {
+  .carousel-showthreemoveone .carousel-inner > .active.left,
+  .carousel-showthreemoveone .carousel-inner > .prev {
+    left: -33.333%;
+  }
+  .carousel-showthreemoveone .carousel-inner > .active.right,
+  .carousel-showthreemoveone .carousel-inner > .next {
+    left: 33.333%;
+  }
+  .carousel-showthreemoveone .carousel-inner > .left,
+  .carousel-showthreemoveone .carousel-inner > .prev.right,
+  .carousel-showthreemoveone .carousel-inner > .active {
+    left: 0;
+  }
+  .carousel-showthreemoveone .carousel-inner .cloneditem-1,
+  .carousel-showthreemoveone .carousel-inner .cloneditem-2 {
+    display: block;
+  }
+}
+@media all and (min-width: 768px) and (transform-3d), all and (min-width: 768px) and (-webkit-transform-3d) {
+  .carousel-showthreemoveone .carousel-inner > .item.active.right,
+  .carousel-showthreemoveone .carousel-inner > .item.next {
+    -webkit-transform: translate3d(33.333%, 0, 0);
+            transform: translate3d(33.333%, 0, 0);
+    left: 0;
+  }
+  .carousel-showthreemoveone .carousel-inner > .item.active.left,
+  .carousel-showthreemoveone .carousel-inner > .item.prev {
+    -webkit-transform: translate3d(-33.333%, 0, 0);
+            transform: translate3d(-33.333%, 0, 0);
+    left: 0;
+  }
+  .carousel-showthreemoveone .carousel-inner > .item.left,
+  .carousel-showthreemoveone .carousel-inner > .item.prev.right,
+  .carousel-showthreemoveone .carousel-inner > .item.active {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    left: 0;
+  }
+}
+/*@adele change from 16.6666 to 25% to get the carousel slider to be nice*/
+
+@media all and (min-width: 992px) {
+  .carousel-showthreemoveone .carousel-inner > .active.left,
+  .carousel-showthreemoveone .carousel-inner > .prev {
+    left: -25%;
+  }
+  .carousel-showthreemoveone .carousel-inner > .active.right,
+  .carousel-showthreemoveone .carousel-inner > .next {
+    left: 25%;
+  }
+  .carousel-showthreemoveone .carousel-inner > .left,
+  .carousel-showthreemoveone .carousel-inner > .prev.right,
+  .carousel-showthreemoveone .carousel-inner > .active {
+    left: 0;
+  }
+  .carousel-showthreemoveone .carousel-inner .cloneditem-3,
+  .carousel-showthreemoveone .carousel-inner .cloneditem-4,
+  .carousel-showthreemoveone .carousel-inner .cloneditem-5 {
+    display: block;
+  }
+}
+@media all and (min-width: 992px) and (transform-3d), all and (min-width: 992px) and (-webkit-transform-3d) {
+  .carousel-showthreemoveone .carousel-inner > .item.active.right,
+  .carousel-showthreemoveone .carousel-inner > .item.next {
+    -webkit-transform: translate3d(25%, 0, 0);
+            transform: translate3d(25%, 0, 0);
+    left: 0;
+  }
+  .carousel-showthreemoveone .carousel-inner > .item.active.left,
+  .carousel-showthreemoveone .carousel-inner > .item.prev {
+    -webkit-transform: translate3d(-25%, 0, 0);
+            transform: translate3d(-25%, 0, 0);
+    left: 0;
+  }
+  .carousel-showthreemoveone .carousel-inner > .item.left,
+  .carousel-showthreemoveone .carousel-inner > .item.prev.right,
+  .carousel-showthreemoveone .carousel-inner > .item.active {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    left: 0;
+  }
+}
+
+body {
+  color: #000000;
+}
+p {
+  font-family: 'Open Sans', sans-serif;
+  color: #000000;
+  margin-bottom: 2em;
+}
+h2 {
+  margin: 2em 0 1em;
+}
+.logo {
+  margin: 20px auto;
+  height: 100px;
+}
+@media only screen and (min-width: 768px) {
+  .logo {
+    margin: 28px;
+    float: left;
+  }
+}
+.title {
+  padding: 28px;
+  display: table-cell;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+}
+
+
+.carousel-inner {
+margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 110px;
+}
+
+
+.margintop30 {
+    
+    margin-top: 30px;
+}
+
+.container-fluid{
+    
+/*   background-image: url('../gfx/kutoppenbakgrunn.jpg') !important;*/
+    background-size: cover;
+    opacity: 0.9;
+    
+}
+
+.magrinbottom{
+   padding-bottom: 30px;
+}
+
+.content{
+  margin-bottom: 30px;
+}
+
+.kutopp{
+  
+  width: 180px;
+  height: 76px;
+  
+      
+  
+}
+
+.slide{
+  
+margin-left:  35px !important;
+  
+}
+
+
+.carousel-control:hover, .carousel-control:focus {
+    color: #85b435;
+    text-decoration: none;
+    filter: alpha(opacity=90);
+    outline: 0;
+    opacity: .9;
+}
+
+.carousel-control{
+  
+      color: #26aaeb;
+}

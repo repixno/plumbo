@@ -1,0 +1,9 @@
+<tal:block>
+Hei\n
+
+${yourname} har mottatt et sjokkerende bra tilbud fra Eurofoto, og vil tipse deg om dette!\n
+http://www.eurofoto.no/sjokkpris\n
+
+Med vennlig hilsen\n
+Eurofoto
+</tal:block>

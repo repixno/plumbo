@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Search</tal:block>
+</head>
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div class="searchresults span-16 prepend-4 append-6 last">
+		
+		<h3 i18n:translate="">Search results</h3>
+		
+		<tal:block tal:condition="searchstring">
+			<form action="/search/">
+				<label for="searchpagelabel" i18n:translate="">Your search:</label><br />
+				<input tal:attributes="value searchstring" name="q" class="text inline" id="searchpagelabel"/>
+				<button type="submit" class="button inline" i18n:translate="">
+					Search
+				</button>
+			</form>
+		</tal:block>
+		
+		
+		<p tal:condition="exists: searchresult/q">
+			<tal:block i18n:translate="">Search for:</tal:block> <tal:block tal:content="searchresult/q" />
+		</p>
+		
+		<!--
+		<ul class="facets" tal:condition="exists: searchresult">
+			<li>
+				<a tal:attributes="href string:/search/?q=${searchstring}" class="current">All</a>
+			</li>
+			<li tal:repeat="facet searchresult/facets">
+				<a tal:content="facet/anchor_text" tal:attributes="href string:/search/?q=${searchstring}+more:${facet/label}" />
+			</li>
+		</ul>
+		-->
+	
+		<hr />
+
+		<div class="res" tal:condition="exists:searchresult/RES" tal:repeat="RES searchresult/RES">
+			<h4><a tal:attributes="href RES/U" tal:content="structure RES/T"></a></h4>
+			<p tal:condition="RES/D" tal:content="structure RES/D"></p>
+			<p tal:content="structure RES/S"></p>
+			<a tal:attributes="href RES/U" tal:content="structure RES/U"></a>
+		</div>
+		
+		<p tal:condition="not:exists:searchresult/RES" i18n:translate="">
+			Your search yielded no results.
+		</p>
+		
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

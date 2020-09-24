@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Subscriptions - Admin Template</title>
+	<tal:block metal:use-macro="../../common.html/css" />
+	<script type="text/javascript" src="/js/admin.js" charset="utf-8"></script>
+	<script type="text/javascript" src="http://static.eurofoto.no/js/jquery-1.3.2.min.js"></script>
+   
+	<style type="text/css">
+      
+      
+      
+	</style>
+
+</head>
+<body>
+   
+	<div id="container" class="container">
+	
+      <div id="header">
+         <h2>Eurofoto Admin <span class="quiet">newsletter import</span></h2>
+         <tal:block metal:use-macro="../../common.html/topmenu" />
+      </div>
+      <tal:block metal:use-macro="../../common.html/languages" />
+      
+      <tal:block tal:condition="not:exists:subcount">
+         Upload file
+         <div>
+            <form enctype="multipart/form-data" action="/import/subscriptions/upload" method="POST">
+               <INPUT name="list" type="file"/>
+               <INPUT type="submit" value="Upload File"/>
+            </form>
+         </div>
+      </tal:block>
+      
+      
+      <tal:block tal:condition="exists:subcount">
+      
+         Subscription er oppdatert for ${subcount} kunder. <a href="/import/subscriptions/">tilbake</a>
+      
+      </tal:block>
+
+		
+	</div>
+	
+	<div id="footer">
+	</div>
+
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+
+	
+//]]>
+</script>
+</body>
+</html>

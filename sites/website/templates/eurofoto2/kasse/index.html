@@ -1,0 +1,629 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<tal:block tal:define="global dontShowCart" />
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Checkout</tal:block>
+
+	<style type="text/css">
+		.productline td{
+			padding: 0 5px;
+		}
+		.total-price{
+			width: 70px;
+		}
+		.content .navbar-dm{
+			border: 1px solid #ddd;
+			border-radius: 0px 0px 4px 4px;
+			min-height: 420px;
+		}
+		.error{
+			color: #BD042E;
+		}
+		.productline {
+			padding: 5px 0px 0px 15px;
+		}
+		.kassecontainer hr {
+			margin: 0px;
+		}
+		
+		.modal.in .modal-dialog {
+			z-index: 10000;
+		}
+	
+	</style>
+	<script src="https://mariestatic.eurofoto.no/js/jquery.fancybox-1.3.0.pack.js"></script>
+</head>
+
+<body>
+	
+	<!--<script>waitingDialog.show("Checkout klargjøres");</script>-->
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	
+	<div class="container maincontainer order-prints">
+	<div class="content">
+	<div class="row">
+		<div class="col-md-9 top15" style="margin-bottom: 15px;">
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a class="" href="#">For privatkunder</a>
+				</li>
+				<li class="">
+					<a  class="" href="/kasse/bedrift">For firmakunder</a>
+				</li>
+			</ul>
+		
+		<div class="col-md-12 navbar-dm" style="border-top: 0px">
+					<tal:block tal:condition="not:session/loggedin">
+					<form action="/register/check/" method="post" id="contact-and-delivery-info">
+					<div class="col-md-12">
+						<h3>Før du sjekker ut ordren trenger vi litt informasjon fra deg.</h3>
+						<div class="span-10 userreg">
+								<div>
+									<h4>Fyll inn din epostadresse under</h4>
+									<div class="form-inline">
+										<input id="contact-email" name="cemail" type="text" class="form-control text required email" placeholder="E-post" value="${session/username}" />
+										<a class="btn btn-primary nextstep" href="#">Neste steg</a>
+										
+									</div>
+									
+								</div>
+								
+								<script type="text/javascript">
+									$(document).ready( function() {
+										
+										
+										$("#contact-email").keydown(function (e) {
+											if (e.keyCode == 13) {
+											  $('#contact-email').blur();
+											}
+										  });
+										
+										$('#contact-email').on('blur', function(){
+											$(this).after( ajaxLoader );
+											$('#checkout-login-button').remove();
+											
+											$.get('/api/1.0/user/registered', {newEmail: $(this).val() }, function(response) {
+												
+												if (response == 'true') {
+													// removes required from login
+													$('#password-container').hide('fast');
+													$('#password', '#password-container').removeClass('required')
+													$('#checkout-login-button').remove();
+													$('#password-new-user', '#new-user-container').addClass('required');
+													$('#repeat-password', '#new-user-container').addClass('required');
+													$('#eula', '#new-user-container').addClass('required');
+													$('#new-user-container').show('fast', function() {
+													   $( '#password-new-user' ).trigger( 'focus' );
+													});
+													$('#delivery-address').show('fast');
+													$('.nextstep').remove();
+												}
+												else if(response == '"registered"' ){
+													$('#delivery-address').hide('fast');
+													$('#password', '#password-container').after('<button id="checkout-login-button" class="btn btn-primary"><tal:block i18n:translate="">Login</tal:block></button>');
+													// removes required from the dom when user changes his mind
+													$('#new-user-password', '#new-user-container').removeClass('required');
+													$('#repeat-password', '#new-user-container').removeClass('required');
+													$('#eula', '#new-user-container').removeClass('required');
+			
+													$('#new-user-container').hide('fast');
+													$('#password', '#password-container').addClass('required')
+													$('#password-container').show('fast', function() {
+														$('#password').trigger('focus');
+													});
+													$('.nextstep').remove();
+												}
+												$('.loader').remove();
+											});
+										});
+									});
+								</script>
+								
+								<div id="password-container" style="display: none">
+									<p class="red" i18n:translate="">You are already registered, please provide password.</p>
+									<div class="form-inline">
+										<label for="password" i18n:translate="">Password</label><br/>
+										<input id="password" name="password" type="password" class="form-control password text"  /> 
+									</div>
+									<div id="forgot-password" class="right span-8 last">
+										<a href="/login/forgot-password" class="small" i18n:translate="">Forgot password?</a>
+									</div>
+									<hr class="space"/>
+								</div>
+								
+								<div class="form-inline" id="new-user-container" style="display: none">
+										<p class="red" i18n:translate="">This e-mail is not registered. Please choose a password so you can log in later.</p>
+										<label for="password-new-user" i18n:translate="">Password</label> <br/>
+										<input id="password-new-user" name="password" type="password" class="form-control password text" placeholder="passord" /><br/>
+										<label for="repeat-password" i18n:translate="">Repeat password</label> <br/>
+										<input id="repeat-password" name="password2" type="password" class="form-control password text" placeholder="gjennta passord"/>
+										<div>
+											<input type="checkbox" id="newsletter" class="newsletter ignore" name="newsletter" checked="checked"/> 
+											<label for="newsletter" i18n:translate="">Yes, I want to receive newsletters</label>
+										</div>
+										<div>
+											<input type="checkbox" id="eula" class="required eula" name="eula"/> 
+											<label for="eula">
+												<tal:block i18n:translate="">Yes, I accept the</tal:block> 
+												<a href="#terms-and-conditions" class="" data-toggle="modal" data-target="#terms-and-conditions" i18n:translate="">terms and conditions</a>
+											</label>
+										</div>
+										<button class="btn btn-primary" i18n:translate="" id="registeruser">Register</button>
+						
+						
+						
+									<div class="modal fade" id="terms-and-conditions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+									  <div class="modal-content">
+										<div class="modal-header">
+										  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										  <h4 class="modal-title" id="myModalLabel" i18n:translate="">terms and conditions</h4>
+										</div>
+										<div class="modal-body">
+										  <tal:block tal:content="structure cms:body:80f507f6-69c5-4a4e-9714-b2656514cb31" />
+										</div>
+										<div class="modal-footer">
+										  <button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
+										</div>
+									  </div>
+									</div>
+								  </div>
+								</div>
+						</div>
+					</div>
+					</form>
+				</tal:block>
+		<!-- order summary -->
+		<tal:block tal:condition="session/loggedin">
+		<div class="col-md-12">
+			<tal:block metal:use-macro="common.html/order-summary-new" />
+		</div>
+		
+		
+		
+		
+		<div class="modal fade" id="delivery-and-payment-methods" tabindex="-1" role="dialog" aria-labelledby="delivery-and-payment-methods">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				</div>
+				<div class="modal-body">
+				  	<tal:block tal:condition="not:exists:serviceproduct">
+						<tal:block tal:condition="exists:deliveryoptions">
+							<div class="span-15" id="delivery-methods-wrapper" style="margin-bottom: 30px;">
+								<tal:block tal:repeat="deliverymethod deliveryoptions">
+									<div class="span-15 " style="border-bottom: 1px dotted grey; padding: 3px;">
+										<div class="span-5">
+					
+										</div>
+										<div class="span-3">
+											<span class="large">
+												kr 
+												<span class="price hide" id="deliveryprice_${deliverymethod/refid}" tal:content="deliverymethod/price"></span>
+												<span tal:content="formatprice:deliverymethod/price"></span>
+											</span>
+										</div>
+									</div>	
+								</tal:block>	
+							</div>
+						</tal:block>
+					</tal:block>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				  <button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			  </div>
+			</div>
+		</div>
+		<!-- NEW Delivery and payment methods -->
+			   
+		
+		
+		
+		
+		
+		<div class="col-md-12" style="padding: 0 15px">
+				   <div class="row">
+				   <div class="row" id="klarna-methods-wrapper">
+						<div tal:condition="exists:snippet" tal:content="structure snippet"></div>
+				   </div>
+				   </div>
+				   <div class="row" id="store-methods-wrapper" style="display: none">
+					<h3>Levering og betaling i butikk</h3>
+					<div>
+					<form method="post" action="/checkout/confirm/" id="contact-and-delivery-info">
+						<div class="col-xs-12">
+						<label for="stores">Velg Fotobutikk</label><br/>
+						<tal:block tal:condition="exists:storedeliveryrefid">
+							<div id="stores" tal:condition="equal:deliverymethod/artnr,storedeliveryrefid,1">
+								 <!--<label>Velg butikk: </label>-->
+								  <select id="storedelivery" name="delivertostore" class="select form-control">
+								  <option disabled="disabled" value="" selected="selected">Velg Fotobutikk</option>
+									 <tal:block tal:repeat="chain storechains">
+										<optgroup label="${chain/chain}">
+										<tal:block tal:repeat="store chain/stores">
+										   <option value="${store/store/id}">${store/store/name}:
+										   ${store/store/address}</option>
+										</tal:block>
+										</optgroup>
+									 </tal:block>
+								  </select>
+								  </div>
+						</tal:block>
+						<input type="hidden" name="payment-method" value="431" id="payment_3080"/>
+					  </div> 
+					<div class="col-xs-12 col-md-6" id="delivery-address">
+						<!--3 -->
+						  <div>
+							<label for="phone" i18n:translate="">Mobile number:</label><br/>
+							<input id="phone" name="phone" type="text" class="text required text-3 form-control" tal:attributes="value user/mobile|default" value="" readonly="readonly"/>
+							
+							<button id="phonelookup" class="hide" i18n:translate="">Get address</button>
+						  </div>
+							<!--PHONE END -->
+		
+							<div>
+								<label for="contact-name" i18n:translate="">Name:</label> <br/>
+								<input id="contact-name" name="cname" type="text" class="text required name form-control" value="${user/fullname}" readonly="readonly"/>
+							</div>
+			
+							<div>
+								<label for="contact-address" i18n:translate="">Address:</label><br/>
+								<input id="contact-address" type="text" name="caddress" value="${user/address}" class="text required form-control" readonly="readonly"/>
+							</div>
+							<div>
+								<div class="span-2">
+									<label for="contact-zipcode" i18n:translate="">ZIP code:</label> <br/>
+									<input id="contact-zipcode" name="czipcode" type="text" class="text required text-1 form-control" value="${user/zipcode}" readonly="readonly"/>
+								</div>
+								<div class="span-4">
+									<label for="contact-city" i18n:translate="">City:</label> <br/>
+									 <input id="contact-city" name="ccity" type="text" class="text required text-3 form-control" value="${user/city}" readonly="readonly"/>
+								</div>
+							
+								<div class="span-6 last">
+									<label for="contact-country" i18n:translate="">Country:</label> <br/>
+									
+									<select class="form-control" id="contact-country" name="ccountry" style="width: 120px">
+									<optgroup label="Common" i18n:attributes="label">
+										<option value="NO" i18n:translate="" selected="selected">Norway</option>	
+									</optgroup>
+									<optgroup label="All" i18:attributes="label">
+										<tal:block tal:repeat="country countries">
+										<option tal:condition="equal:user/country,country/iso,1" value="${country/iso}" tal:content="country/name|default" selected="true"></option>
+										<option tal:condition="not:equal:user/country,country/iso" value="${country/iso}" tal:content="country/name|default"></option>
+										</tal:block>
+										
+									</optgroup>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 text-right">
+							<input type="hidden" name="delivery-method" value="484" />
+							<button class="btn btn-primary submit last" type="submit" style="margin-right:0;" i18n:translate="">Next step</button>
+						</div>
+						</form>
+					<hr/>
+					</div>
+				</div>
+					</div>
+			<!--</form>-->
+		</tal:block>
+		</div>
+				   
+		</div>
+	
+	
+		<div class="col-md-3 last center">
+		
+				<div class="col-md-12">
+					<h4 class="info-header">Handle trygt hos<br/> Eurofoto.no</h4>
+					<div class="info-text">Faktura og delbetaling</div>
+					<div>
+						<img src="https://cdn.klarna.com/1.0/shared/image/generic/logo/nb_no/basic/blue-black.png?width=121&eid=2990" alt="Klarna"/>
+					</div>
+					
+				</div>
+				<div class="col-md-12">
+					<div class="info-text">Kortbetaling</div>
+					<div>
+						<img src="static.eurofoto.no/cms/images/visa_mastercard.png" alt=""/>
+					</div>
+					
+				</div>
+				
+				
+				<div class="col-md-12">
+					<h4>Eurofoto.no</h4>
+					<ul>
+						<li>Raskest levering</li>
+						<li>Best i test</li>
+						<li>Best kvalitet</li>
+					</ul>
+					
+				</div>
+		</div>
+	</div>
+    
+	</div>
+	</div>
+<div metal:use-macro="../../${templates}/common.html/footer" />	
+
+<script type="text/javascript" src="https://static.eurofoto.no/js/klarnacheckout.js"></script>
+<!--
+<script type="text/javascript" src="https://www.dinmerkelapp.no/js/jquery.validate.min.js"></script>
+-->
+<script type="text/javascript" src="https://www.eurofoto.no/js/jquery.validate.min.js"></script>
+<script type="text/javascript">
+    var loggedin = ${session/loggedin};
+	
+	$(document).ready( function(){
+		
+		
+		$('.deliverymethod').first().addClass('selected');
+		
+		//$('#loader-overlay').width( $(window).width() ).height( $(window).height() );
+		
+		/*$('a.remove').on('click', function(){
+
+			var $this = $(this);
+			var url = $(this).attr('href');
+
+			var productline = $this.parent().parent().parent();
+			
+			var id = productline.attr('id');
+			
+			$.ajax({
+					url: url,
+				}).done(function( msg ) {
+				
+					productline.next().remove();
+				
+					if( $this.parent().parent().hasClass('connected-from-prev') ){
+						$this.parent().parent().fadeOut('slow', function(item){
+								$this.parent().parent().remove()
+								updateTotal();
+								});
+					}else{
+						var ref = productline.attr('reference');
+						
+						if( ref ){
+							$('[reference="' + ref + '"]').fadeOut('slow', function(item){
+								$('[reference="' + ref + '"]').remove()
+								updateTotal();
+							});
+						}
+						else{
+							productline.fadeOut('slow', function(item){
+								productline.remove()
+								updateTotal();
+							});
+						}
+					}
+				
+				});
+			
+			
+			return false;
+			})*/
+		
+		
+		$(window).load( function() {
+			updateTotalNoklarna();
+			//waitingDialog.hide();
+		});
+		$('#registeruser').on('click', function(){
+			
+			$('#loader-overlay').fadeIn('fast', function() {
+				$(this).show();
+			})
+			
+			});
+		
+        $(document).on('click', '#checkout-login-button', function() {
+            $(this).after( ajaxLoader );
+            $('.inputError').remove();
+            $.ajax({
+            	url: '/api/1.0/user/login',
+            	type: 'post',
+            	dataType: 'json',
+            	data: {
+            		username: $('#contact-email').val(),
+            		password: $('#password').val()
+            	},
+            	success: function(msg) {
+    
+            		if( msg.result != false) {
+            		   window.location = '/kasse'
+            		   //location.reload();
+            		} else {
+            			$('.loader').remove();
+            			$('#checkout-login-button').after('<label class="inputError" i18n:translate="">Wrong password</label>');
+            			return false;
+            		}
+            	},
+            	error: function(msg) {
+            		$('#password').next('.loader').remove();
+            		alert('error: ' + msg);
+            	}
+        	});
+		
+            return false;	
+        });
+    
+        var deliveryid = "${cart/deliverytype/refid}";
+        
+        $('input[name="delivery-method"]').each( function(){
+            //console.log(deliveryid);
+            if( $(this).val() == deliveryid ){
+                $(this).attr('checked', 'checked' );
+            }
+        });
+
+		
+		
+		$('#comment').on('blur', function(){
+
+			$.post('/api/1.0/checkout/setcomment', {
+				'comment' :  $(this).val()
+				},
+				function(data){
+					//console.log( data )
+					
+					
+				},'json');
+			
+			});
+				
+		$('.deliverymethod').on( 'change' , function(){
+			
+			
+			$('.deliverymethod').removeClass('selected');
+			
+			var deliveryline = $(this);
+			
+			var delinput = $(this).find('input');
+			
+			deliveryline.addClass('selected');
+			
+			if( delinput.val() == 484){
+				$('#store-methods-wrapper').show();
+				$('#klarna-methods-wrapper').hide();
+				//return true;
+			}else{
+				$('#store-methods-wrapper').hide();
+				$('#klarna-methods-wrapper').show();
+			}
+			
+			var totalPrice = 0;
+	
+			$('.productprice').each( function(){
+				totalPrice += parseFloat( $(this).text().replace(',','.') );
+				});
+			
+			//console.log( $('#deliveryprice' + $(this).val() ).text() );
+			
+			
+			//console.log( $(this).find('.deliveryprice').text() );
+			
+			
+			totalPrice += parseFloat( $(this).find('.deliveryprice').text().replace(',','.') );
+			
+			
+			$(this).find('.deliveryprice').text();
+			
+			updateTotal();
+
+			$('.totalprice').text( formatPrice(totalPrice) );
+			
+			updateTotalNoklarna();
+			
+			if( delinput.val() == 2909 ){
+				window._klarnaCheckout(function (api) {
+						api.resume();
+					});	
+			}
+			
+			
+			});
+		
+        
+        
+		$('form#contact-and-delivery-info').validate({
+                    rules: {
+                        cname: {
+                            required: true,
+                            fullname: true
+                        },
+                        cemail: {
+                            required: true,
+                            email: true
+                        },
+                        czipcode: {
+                            required: true,
+                            minlength: 4
+                        },
+                        ccity: {
+                            required: true
+                        },
+                        caddress: {
+                            required: true
+                        },
+                        'repeat-password': {
+                            equalTo: '#password-new-user'
+                        },
+                        delivertostore:{
+                            //required: "#storeon:checked"
+                            required: true
+                        },
+                        phone:{
+                        required : true,
+                        digits : true,
+                        minlength : 8
+                        }
+                    },
+                    messages: {
+                        cname: {
+                            required: "<tal:block i18n:translate="">Required</tal:block>",
+                            fullname: "<tal:block i18n:translate="">Please enter your first name and surname.</tal:block>"
+                        },
+                        cemail: {
+                            required: "<tal:block i18n:translate="">Required</tal:block>",
+                            email: "<tal:block i18n:translate="">Your email address must be in the format of name@domain.com</tal:block>"
+                        },
+                        czipcode: {
+                            required: "<tal:block i18n:translate="">Required</tal:block>",	
+                            minlength: "<tal:block i18n:translate="">Please enter at least 4 digits</tal:block>"	
+                        },
+                        ccity: {
+                            required: "<tal:block i18n:translate="">Required</tal:block>"	
+                        },
+                        caddress: {
+                            required: "<tal:block i18n:translate="">Required</tal:block>"	
+                        },
+                        'repeat-password': {
+                            equalTo: "<tal:block i18n:translate="">Oops, your passwords don't match. </tal:block>"
+                        },
+                        eula: {
+                            required: "<tal:block i18n:translate="">You have to read and accept the terms and conditions</tal:block>"
+                        },
+                        delivertostore:{
+                           required: "Du må velge en butikk!"
+                        },
+                        phone:{
+                           required: "Du må oppgi et telefonummer",
+                           number: "Du må oppgi et gyldig mobilnummer"
+                        }
+                    }
+                });
+		});
+	
+</script>
+<!-- Google Code for Utsjekk påstartet Conversion Page -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1070265469;
+var google_conversion_language = "no";
+var google_conversion_format = "2";
+var google_conversion_color = "333333";
+var google_conversion_label = "JcKPCJ3CxAEQ_eir_gM";
+var google_conversion_value = 0;
+//-->
+</script>
+<script type="text/javascript" src="https://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="https://www.googleadservices.com/pagead/conversion/1070265469/?label=JcKPCJ3CxAEQ_eir_gM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+</body>
+</html>

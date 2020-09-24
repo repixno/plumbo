@@ -1,0 +1,250 @@
+body {
+    padding-bottom: 0px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #006aa7;
+    border-color: #2e6da4;
+}
+
+.top-5{
+  margin-top: 5px;
+}
+.top-15{
+  margin-top: 15px;
+}
+
+.spinner {
+  width: 60px;
+}
+.spinner input {
+  text-align: right;
+  padding: 5px 5px 5px 0;
+}
+.input-group-btn-vertical {
+  position: relative;
+  white-space: nowrap;
+  width: 1%;
+  vertical-align: middle;
+  display: table-cell;
+}
+.input-group-btn-vertical > .btn {
+  display: block;
+  float: none;
+  width: 100%;
+  max-width: 100%;
+  padding: 8px 10px;
+  margin-left: -1px;
+  position: relative;
+  border-radius: 0;
+}
+.input-group-btn-vertical > .btn:first-child {
+  border-top-right-radius: 4px;
+}
+.input-group-btn-vertical > .btn:last-child {
+  margin-top: -2px;
+  border-bottom-right-radius: 4px;
+}
+.input-group-btn-vertical i{
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+.jumbotron{
+  background: #fff;
+  background-image:  url( '/studentstatic/gfx/banner2018.jpg' );
+  background-repeat: no-repeat;
+  background-position: center;
+ 
+}
+
+.jumbotron .box{
+  color:#000;
+  text-shadow: 2px 2px #fff;
+ 
+}
+
+.top-header {
+    background: #c30c15;
+    min-height: 80px;
+    color: #fff;
+    border-color: #222;
+}
+
+.top-header a{
+  color: #fff;
+}
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+  background-color: #222;
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #222;
+    border-color: #337ab7;
+}
+
+.navbar {
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-bottom: 0px;
+  min-height: 20px;
+}
+.navbar-default {
+    background-color: #c30c15;
+    border-color: #c30c15;
+    border-right: none;
+    border-left: none;
+    color: #222;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #222;
+    background-color: #ffffff;
+}
+
+.shoppingcart{
+  margin-top: 10px;
+}
+ 
+@media (min-width: 768px){
+  .navbar-nav > li > a {
+      padding-top: 5px;
+      padding-bottom: 5px;
+  }
+}
+
+@media ( max-width: 768px){
+  .top-header {
+      min-height: 45px;
+  }
+}
+
+@media ( max-width: 1204px){
+   .logo h1{
+    font-size: 24px;
+   }
+}
+@media ( max-width: 996px){
+   .logo h1{
+      display: none;
+   }
+}
+
+.addtocart label{
+  min-width: 150px;
+ }
+ 
+ 
+ .footer{
+    background: #c30c15;
+    margin-top: 30px;
+    padding: 15px;
+    color: #ffffff;
+ }
+ 
+.error{
+  color: red;
+}
+input[type=checkbox] { visibility: hidden;width: 0; } /* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+}
+
+input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
+input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
+
+input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
+input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow space for check mark */
+
+#font-list{
+    position: relative;
+}
+
+
+.malid{
+    
+     
+  margin-bottom: 5px;
+    font-weight: bold;
+   box-shadow: none;
+   border:none;
+   display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+    
+}
+
+
+
+#font-list span{
+    display: block; 
+    border: solid 1px #ccc;
+    height: 30px;
+    padding: 4px 1px 0px 10px;
+    width: 200px;
+}
+
+#font-list span:after {
+	content: ' ';
+	height: 0;
+	position: absolute;
+	width: 0;
+	border: 8px solid transparent;
+	border-top-color: #333;
+    top: 30%;
+	left: 180px;
+}
+
+.fonter-container{
+    position: absolute;
+    height: 130px;
+    border: solid 1px #ccc;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#fonter{
+    list-style-type: none;
+    background: #fff;
+    width: 213px;
+    margin: 0px;
+    padding: 0;
+}
+#fonter li{
+    padding:5px;
+    font-size: 1.1em;
+    cursor:  default;
+}
+li.active{
+    background: lightblue;
+}
+#loader-overlay {position:absolute;background-color:#333;padding:auto auto;margin:0 !important;z-index:10000;}
+#loader-overlay .loadingInfo {text-align:center;margin-top:300px;}
+#loader-overlay .loadingInfo * {display:inline;color:#fff;}
+
+.productimage{
+	text-align: center;
+	vertical-align: middle;
+	min-height: 180px;
+}
+.productimage img{
+    margin:0 auto;
+ 
+}
+.productinfo{
+	min-height: 80px;
+}
+
+div:nth-child(19) > div > div > h3{
+    
+    font-size: 22px;
+}
+
+
+

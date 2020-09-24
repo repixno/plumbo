@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+   <title>${album/title}</title>
+   <description>${album/description}</description>
+   <tal:block tal:replace="structure string:<link>" />${album/sharingurl}<tal:block tal:replace="structure string:</link>" />
+	<item tal:repeat="image images">
+		<title tal:content="image/title|default" tal:condition="image"><tal:block i18n:translate="">No title</tal:block></title>
+		<media:description tal:content="image/description|default"><tal:block i18n:translate="">No description</tal:block></media:description>
+		<tal:block tal:replace="structure string:<link>" />http://${request/hostname}${image/urls/shared}<tal:block tal:replace="structure string:</link>" />
+		<media:thumbnail url="${image/thumbnail}"/>
+		<media:content url="${image/fullsize}&amp;dx=1440&amp;dy=900&amp;.jpg"/>
+	</item> 
+</channel>
+</rss>

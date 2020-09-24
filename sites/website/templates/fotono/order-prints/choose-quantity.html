@@ -1,0 +1,390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Order prints - Choose quantity</tal:block>
+	<style type="text/css">
+		table#prices {
+			text-align: center;
+			color: #ccc;
+			border: none;
+		}
+
+		table#prices td,
+		table#prices th {
+			padding: 0;
+			margin: 0;
+			text-align: center
+		}
+
+		table#prices th {
+			font-weight: normal;
+			color: #666
+		}
+
+		table#prices tr.category th {
+			color: #fff;
+			font-size: 1.1em;
+			font-family: yanoneregular;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			padding-top: 1em;
+			background-color: #ff9749
+		}
+
+		table#prices thead th,
+		table#prices thead td,
+		table#prices thead tr {
+			background: none;
+		}
+
+		table#prices td.added {
+			background-color: #ccff66;
+			color: #408000
+		}
+
+		.standard-prints .standard {
+			display: block;
+		}
+
+		.standard-prints .notstandard {
+			display: none;
+		}
+
+		h3 {
+			font-family: yanoneregular;
+		}
+
+
+		h2 {
+			font-family: yanoneregular;
+		}
+
+		table.pricelist {
+			table-layout: auto;
+			width: 100%;
+		}
+
+		tr {
+			font-family: yanoneregular;
+			font-size: 20px;
+		}
+
+		table,
+		th,
+		td {
+			border: 1px solid black;
+			font-family: yanoneregular;
+			font-size: 20px;
+		}
+		
+		.form-inline .form-control {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+}
+
+ul.step-by-step-new {
+    height: 53px;
+    border: 1px solid #fdfdfd;
+    margin: 0;
+}
+
+
+
+
+	</style>
+</head>
+
+
+<body>
+
+	<div metal:use-macro="../../common/loader.html/fullscreen" />
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	<div class="container">
+
+		<div class="row">
+			
+			<div class="col-md-12">
+		 		<ul class="step-by-step-new">
+					<li class="completed">
+						<a href="/order-prints/" title="">
+							<strong tal:content="cms:title:c3e83ff3-1b74-499f-9d2c-578177d4f036">Step 1: Find your photos</strong>
+						</a>
+					</li>
+					<li class="completed">
+						<a href="/order-prints/transfer-photos/" title="" tal:condition="not:session/loggedin">
+							<strong tal:content="cms:title:0e90d43c-ebf2-4c79-83d5-b3f950bdae0e">Step 2: Transfer photos</strong>
+						</a>
+						<a href="/order-prints/choose-photos/" title="" tal:condition="session/loggedin">
+							<strong tal:content="cms:title:3ccf650d-5437-4e54-9940-b04c0aab2163">Step 2: Choose photos</strong>
+						</a>
+						
+					</li>
+					<li class="current">
+						<a title="">
+							<strong tal:content="cms:title:6b897e85-a541-4a72-8905-e5ecb59b8968">Step 3: Choose quantity</strong>
+						</a>
+					</li>
+				   <li>
+						<a title="">
+							 <strong tal:content="cms:title:1fe8b6fd-690f-4a9f-b8e0-f45634bbf50d">4: Tilpass bilder</strong>
+						</a>
+					</li>
+					<li class="last">
+						<a title="">
+							<strong tal:content="cms:title:3dfbbdeb-678f-4594-8aab-171ea6d8f6fd">Step 5: Accessories</strong>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-12">
+				<form action="/order-prints/choose-quantity/each-print/" method="post" id="choose-quantity">
+					<div class="col-md-12 box top-15">
+						<div class="col-md-5">
+							<h3 class="yanoneregular">
+								<strong tal:content="cms:title:6b897e85-a541-4a72-8905-e5ecb59b8968">Step 3: Choose quantity</strong>
+							</h3>
+							<!--<span tal:content="cms:ingress:6b897e85-a541-4a72-8905-e5ecb59b8968">Choose production method and formats</span>
+							<strong tal:condition="conditionalmatch:defaultprodno,1,1,0">10x15cm</strong>
+							<strong tal:condition="conditionalmatch:defaultprodno,419,1,0">10x13cm</strong>-->
+						</div>
+						<div class="col-md-7">
+						   <div class="col-md-5 right">
+							<tal:block i18n:translate="">You have chosen</tal:block> 
+								<span class="loud total-num-images" id="total-num-of-images" tal:content="order/numimages">0</span> 
+							<tal:block i18n:translate="">photos</tal:block>
+								<h4 id="total-price-container right">
+									<!--<tal:block i18n:translate="">Price:</tal:block> kr <span id="total-price">0.00</span>-->
+								</h4>
+							</div>
+							<div class="col-md-7">
+							
+								<button class="next call-to-action large" type="submit" i18n:translate="">Next step</button>
+							
+						
+							
+						</div>
+						</div>
+					</div>	
+			
+						
+					<tal:block tal:condition="not: order/numimages">
+						<h3 i18n:translate="">No photos</h3>
+						<p>
+							<tal:block i18n:translate="">No photos was selected. Please go back and </tal:block> <a href="/order-prints/" i18n:translate="">Try again</a>
+						</p>
+					</tal:block>
+				
+						<div class="row" tal:condition="order/numimages">
+							<div class="col-md-12">
+								<!-- remember to make it in inches for english -->
+			
+								<div class="col-md-12 box">
+									
+									
+									
+									
+									<div class="enlargements col-md-5 last">
+								<!-- product options -->
+									<div class="col-md-12 last" id="standard-prints-product-options" tal:condition="order/numimages">
+										<!-- productions methods -->
+										<div class="block prepend-top" id="productionsmethods">
+			
+											
+											<h2 class="bottom yanoneregular">
+												<tal:block tal:content="cms:title:49c26da9-0783-4b1c-8dbd-e9ed1e890a65">Paper quality</tal:block> 
+											</h2>
+											<p class="quiet">
+												<tal:block tal:content="cms:ingress:49c26da9-0783-4b1c-8dbd-e9ed1e890a65" /> 
+												<!--<a href="#explain-paper-quality" class="popup" i18n:translate="">Read more</a>-->
+											</p>
+											
+											<div id="explain-paper-quality" class="hide" tal:content="structure cms:body:49c26da9-0783-4b1c-8dbd-e9ed1e890a65"></div>
+											
+											<p id="paperquality">
+												<tal:block tal:repeat="paper paperquality">
+													<input type="radio" id="prodno_${paper/prodno}" name="paperquality" value="${paper/prodno}" 
+														tal:attributes="checked conditionalmatch:paper/prodno,0010,checked"/>
+													<label for="prodno_${paper/prodno}">
+														<tal:block tal:content="paper/title"></tal:block>
+														<span class="quiet">(+ kr <span class="price" tal:content="formatprice:paper/price">1,50</span>)</span>
+													</label><br/>
+												</tal:block>
+											</p>
+											
+											<!-- light and correction -->
+											<h2 class="bottom yanoneregular">
+												<tal:block tal:content="cms:title:826317d8-d0e6-4356-b4d7-50582302052a">Light and color correction</tal:block> 
+											</h2>
+											<p class="quiet">
+												<tal:block tal:content="cms:ingress:826317d8-d0e6-4356-b4d7-50582302052a" />
+												<!--<a class="popup" i18n:translate="" href="#explain-light-and-color-correction">read more</a>-->
+											</p>
+											
+											<!-- <div id="explain-light-and-color-correction" class="hide" tal:content="structure cms:body:826317d8-d0e6-4356-b4d7-50582302052a"></div>-->
+											
+											<p id="correction">
+												<tal:block tal:repeat="method correctionmethods">
+													<input type="radio" id="prodno_${method/prodno}" name="correctionmethod" value="${method/prodno}" 
+														tal:attributes="checked conditionalmatch:method/prodno,0351,checked"/>
+													<label for="prodno_${method/prodno}">
+														<tal:block tal:content="method/title">Title</tal:block> 
+														<span class="quiet">(+ kr <span class="price" tal:content="formatprice:method/price">1</span>)</span> 
+													</label><br/>
+												</tal:block>
+											</p>
+										</div>
+									</div>
+							</div>
+									
+									
+									
+									
+									
+									
+			
+									<div class="standard-prints col-md-7">
+										<!-- standard prints -->
+										<div class="prodno_0001">
+										<h3 class="quiet yanoneregular" tal:content="cms:title:a0b88926-4c08-4eb1-b9f1-97d2ce791284">:</h3>
+												
+										<!-- white borders -->
+										<tal:block tal:repeat="method productionmethods">
+											<tal:block tal:condition="equal:method/prodno,0465">
+												<div class="prodno_${method/prodno} white-borders" id="white-borders">
+												<input type="checkbox" value="${method/prodno}" id="prodno_${method/prodno}" name="productionmethod" />
+												
+												<label for="prodno_${method/prodno}">
+													<span tal:content="method/title">Title</span>
+													<span class="quiet" tal:content="method/ingress"></span>
+													<span class="quiet">(+ kr 
+														<span class="price_classic" tal:content="formatprice:method/price"></span>)
+													</span>
+												</label>
+												
+												<a href="#popup_${method/prodno}" class="popup">?</a>
+												<div class="hide" tal:content="structure method/body" id="popup_${method/prodno}" />
+						
+												</div>
+											</tal:block>
+										</tal:block>
+										<div class="form-inline">
+											<SELECT class="form-control" name="std_choice">
+												<OPTION value="auto" i18n:translate="">Automatisk tilpassning 10x13/15 cm</OPTION>
+												<OPTION value="0419">Standard print 10x13 cm </OPTION>
+												<OPTION value="0001">Standard print 10x15 cm </OPTION>
+												<OPTION value="0006">Standard print 10x18 cm </OPTION> 
+												<OPTION value="0014">Kvadratisk print 10x10 cm </OPTION>  
+												<OPTION value="7345">Kvadratisk print 15x15 cm </OPTION>
+											</SELECT>
+											<h3 class="yanoneregular">Velg Antal kopier pr bildefil:</h3>
+											<INPUT type="text" class="order-print-quantity quantity" name="0001" id="prodno_0001" size="3" value="1" />
+											<label for="std_quantity">
+												<!--<span class="quiet">kr <span class="price" tal:content="formatprice:prints/0/price"></span> pr. stk</span>-->
+											</label>
+										</div>
+									 
+									 <tal:block tal:content="cms:ingress:a31c63d3-0b43-4b06-b8d0-d046c9133a97"></tal:block><br/>
+									 Velger du "Best Fit" vil vi automatisk velgde det riktige formatet for deg.
+									 <span class="hide">Sum: kr</span> <span class="totalPriceOfThisItem hide">0</span>
+							  </div>
+										
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									</div>
+							
+								</div>
+							</div>
+							
+							
+								
+						</div>
+						
+						
+						<div class="col-md-12">
+						<!--	<tal:block metal:use-macro="common.html/price-matrix" />-->
+						
+						<table id="prices" class="pricelist">
+		<thead>
+			<tr>
+				<th i18n:translate="">Quantity</th>
+				<th>1 - 4</th>
+				<th>5 - 9</th>
+				<th>10 - 23</th>
+				<th>24 - 99</th>
+				<th>100 - 249</th>
+				<th>250 +</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="category">
+				<th i18n:translate="" colspan="7">Standard prints</th>
+			</tr>
+				<tr class="prodno_${prints/1/prodno}">
+					<th>10x13/15cm</th>
+					<tal:block repeat="price prints/1/prices">
+						<td class="prodno_${prints/1/prodno}">
+							<span class="price" tal:content="formatprice:price/price"></span>
+							<span class="hide min" tal:content="formatprice:price/min"></span>
+							<span class="hide max" tal:content="formatprice:price/max" tal:condition="exists:price/max"></span>
+						</td>
+					</tal:block>
+				</tr>
+			
+			<tr class="category">
+				<th colspan="7" i18n:translate="">Enlargements</th>
+			</tr>
+			<tal:block tal:repeat="enlargement enlargements">
+				<tr>
+					<th tal:content="enlargement/title"></th>
+					<tal:block repeat="price enlargement/prices">
+						<td class="prodno_${enlargement/prodno}">
+							<span class="price" tal:content="formatprice:price/price"></span>
+							<span class="hide min" tal:content="formatprice:price/min"></span>
+							<span class="hide max" tal:content="formatprice:price/max" tal:condition="exists:price/max"></span>
+						</td>
+					</tal:block>
+				</tr>
+			</tal:block>
+		</tbody>
+	</table>
+						
+						
+						</div>
+						
+					</form>
+			</div>
+			
+		</div>	
+
+	<div id="widecontent">
+
+
+
+		<hr class="space" />
+
+	</div>
+</div>
+<div class="footer">
+   <div class="container">
+      <div metal:use-macro="../../${templates}/common.html/footer" />
+   </div>
+</div>
+<script type="text/javascript" src="${static:js/choose-quantity2.js}?${version}"></script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+
+
+	<style media="all" type="text/css">
+		div.productinfo p {
+			margin-bottom: 0;
+		}
+		
+		span.price {
+			font-size: 16px !important
+		}
+		
+		body .container span.price.oldprice {
+			margin: 0;
+			padding: 0;
+			font-size: 10px !important;
+		}
+		
+		span.price.newprice {
+			margin: 0;
+			padding: 0;
+			font-size: 14px !important;
+		}
+		
+		.functions {
+			position: relative;
+			text-align: left !important;
+		}
+		
+		.functions .links {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			text-align: right;
+		}
+		
+		div.starOfferPercentContainer {
+			height: 70px;
+			width: 70px;
+			float: right;
+		}
+		
+	
+		
+		.product-top p {
+			font-size: 14px
+		}
+		
+		.standardstempel {
+			padding-left: 23px
+		}
+		
+		
+
+	.artikkler{
+			
+		
+	    border-style: double;
+		border-color: #ffffff;
+		border-radius: 10px;
+		padding-bottom: 17px;
+		margin: 17px 14px 0px 12px;
+		background-color: #f5f5f3;
+		list-style-type: none;
+		padding-top: 20px;
+		}
+		
+		
+		 .product-top {
+        height: 322px;
+		width: 935px;
+        
+        <tal:block tal:condition="exists:menuitem/article/attachments/background">
+            background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+        </tal:block>
+        
+        background-repeat:no-repeat;
+      }
+      .product-top p{ font-size: 14px }
+		
+		
+		
+	</style>
+</head>
+
+<tal:block define:section="topbanner, Top banner" />
+<!-- article -->
+<tal:block define:section="2cm, 2 cmramme" />
+<!-- article -->
+<tal:block define:section="4cm, 4 cmramme " />
+<!-- article -->
+
+
+<tal:block metal:define-macro="show-product">
+	<div class="span-2 productimage">
+		<tal:block metaltal:use-macro="${templateroot}/eurofoto/cms/cms.html/starOfferPercent" />
+		<tal:block metaltal:use-macro="${templateroot}/eurofoto/cms/cms.html/newProductStar" />
+		<tal:block tal:define="global customsize string:70" />
+		<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/one-product-photo-custom-size" />
+	</div>
+	<div class="span-8 last productinfo">
+		<h3 tal:content="item/title"></h3>
+		<!--	<p tal:content="item/ingress"></p>
+		<tal:block metal:use-macro="${templateroot}/normerk/cms/cms.html/more-info-link" />-->
+	</div>
+
+</tal:block>
+
+
+
+<body>
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+
+
+
+	<div id="seniorpage-main">
+			<aside id="seniorpage-hero" class="js-fullheight">
+		<div class="row">
+			
+
+				
+			<!-- if no menu is used use id="widecontent" -->
+			<div id="" class="col-md-10">
+
+				<div class="col-md-12 append-bottom" tal:condition="exists:sections/topbanner">
+					<tal:block tal:repeat="item sections/topbanner">
+						<tal:block tal:condition="equal:repeat/item/number,1" tal:content="structure item/body" />
+					</tal:block>
+				</div>
+
+
+
+
+				<div class="col-md-10 product-category "  tal:condition="not:exists:sections/topbanner" >
+					<div class="col-md-10 product-top top" tal:condition="exists:menuitem/article/attachments/background">
+						<div class="content" tal:condition="exists:menuitem/article/attachments/background">
+							
+							<p tal:content="structure menuitem/article/body|default"></p>
+						</div>
+					</div>
+				</div>
+			
+
+
+
+
+
+				<div class="">
+					<div class="row">
+				<div id="" class="col-md-12 text-center">
+							
+					<div class="col-md-6">
+						<h3 class="product-category">Lerret montert på 2 cm blindramme</h3>
+							
+								<tal:block tal:repeat="item sections/2cm">
+	
+
+									<div class=" artikkler text-center">
+										<div metal:use-macro="../cms.html/product-as-list-item-with-image_mediaclip" />
+									</div>
+
+								</tal:block>
+						</div>
+					
+				
+					<div class="col-md-6">
+					
+						<h3 class="product-category">Lerret montert på 4 cm blindramme</h3>
+					
+							<tal:block tal:repeat="item sections/4cm">
+								<div class=" artikkler text-center">
+									<div metal:use-macro="../cms.html/product-as-list-item-with-image_mediaclip" />
+								</div>
+							</tal:block>
+					</div>
+				</div>
+					
+
+
+	</div>
+
+				</div>
+			</div>
+		</div>
+	</aside>			
+</div>
+
+
+	<div class="footer">
+		<div class="container">
+			<div metal:use-macro="../../../${templates}/common.html/footer" />
+		</div>
+	</div>
+
+</body>
+
+</html>

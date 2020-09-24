@@ -1,0 +1,699 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<tal:block tal:define="global dontShowCart" />
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Checkout</tal:block>
+
+	<style type="text/css">
+		.productline td{
+			padding: 0 5px;
+		}
+		.total-price{
+			width: 70px;
+		}
+		.content .navbar-dm{
+			border: 1px solid #ddd;
+			border-radius: 0px 0px 4px 4px;
+			min-height: 420px;
+		}
+		.error{
+			color: #BD042E;
+		}
+		.productline {
+			padding: 5px 0px 0px 15px;
+		}
+		.kassecontainer hr {
+			
+		
+	</style>
+	
+	
+	<script src="https://cdn.klarna.com/public/kitt/core/v1.0/js/klarna.min.js"></script>
+	<script src="https://cdn.klarna.com/public/kitt/toc/v1.1/js/klarna.terms.min.js"></script>
+</head>
+
+<body>
+   	<div id="loader-overlay">
+		<div class="loadingInfo">
+			<img src="${static:gfx/gui/ajax-loader-gray.gif}" /><br/>
+			<br/>
+			<h3 i18n:translate="">Loading, please wait.</h3>
+			<p>
+				<tal:block  i18n:translate="">
+				If you waited too long, try refreshing the page.
+				</tal:block>
+				<a href="." class="refresh" i18n:translate="">Refresh</a>
+			</p>
+		</div>
+	</div>
+	
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	<div class="container order-prints">
+	
+	<div class="col-md-10 ui-tabs  ui-widget-content ui-corner-all" style="padding: 5px 5px 20px 5px;">
+
+	<ul class="nav nav-tabs">
+		<li >
+			<a href="/kasse">For privatkunder</a>
+		</li>
+		<li class="active">
+			<a href="#">For firmakunder</a>
+		</li>
+	</ul>
+	<div class="col-md-12 navbar-dm" style="border-top: 0px">
+		<tal:block tal:condition="not:session/loggedin">
+		<form action="/register/check/" method="post" id="contact-and-delivery-info">
+		<div class="col-md-10">
+			<h3>Før du sjekker ut ordren trenger vi litt informasjon fra deg.</h3>
+			<div class="span-10 userreg">
+					<div>
+						<h4>Fyll inn din epostadresse under</h4>
+						<div class="form-inline">
+							<input id="contact-email" name="cemail" type="text" class="form-control text required email" placeholder="E-post" value="${session/username}" />
+							<a class="btn btn-primary nextstep" href="#">Neste steg</a>
+							
+						</div>
+						
+					</div>
+					
+					<script type="text/javascript">
+						$(document).ready( function() {
+							
+							
+							$("#contact-email").keydown(function (e) {
+								if (e.keyCode == 13) {
+								  $('#contact-email').blur();
+								}
+							  });
+							
+							$('#contact-email').on('blur', function(){
+								$(this).after( ajaxLoader );
+								$('#checkout-login-button').remove();
+								
+								$.get('/api/1.0/user/registered', {newEmail: $(this).val() }, function(response) {
+									
+									if (response == 'true') {
+										// removes required from login
+										$('#password-container').hide('fast');
+										$('#password', '#password-container').removeClass('required')
+										$('#checkout-login-button').remove();
+										$('#password-new-user', '#new-user-container').addClass('required');
+										$('#repeat-password', '#new-user-container').addClass('required');
+										$('#eula', '#new-user-container').addClass('required');
+										$('#new-user-container').show('fast', function() {
+										   $( '#password-new-user' ).trigger( 'focus' );
+										});
+										$('#delivery-address').show('fast');
+										$('.nextstep').remove();
+									}
+									else if(response == '"registered"' ){
+										$('#delivery-address').hide('fast');
+										$('#password', '#password-container').after('<button id="checkout-login-button" class="btn btn-primary"><tal:block i18n:translate="">Login</tal:block></button>');
+										// removes required from the dom when user changes his mind
+										$('#new-user-password', '#new-user-container').removeClass('required');
+										$('#repeat-password', '#new-user-container').removeClass('required');
+										$('#eula', '#new-user-container').removeClass('required');
+
+										$('#new-user-container').hide('fast');
+										$('#password', '#password-container').addClass('required')
+										$('#password-container').show('fast', function() {
+											$('#password').trigger('focus');
+										});
+										$('.nextstep').remove();
+									}
+									$('.loader').remove();
+								});
+							});
+						});
+					</script>
+					
+					<div id="password-container" style="display: none">
+						<p class="red" i18n:translate="">You are already registered, please provide password.</p>
+						<div class="form-inline">
+							<label for="password" i18n:translate="">Password</label><br/>
+							<input id="password" name="password" type="password" class="form-control password text"  /> 
+						</div>
+						<div id="forgot-password" class="right span-8 last">
+							<a href="/login/forgot-password" class="small" i18n:translate="">Forgot password?</a>
+						</div>
+						<hr class="space"/>
+					</div>
+					
+					<div class="form-inline" id="new-user-container" style="display: none">
+							<p class="red" i18n:translate="">This e-mail is not registered. Please choose a password so you can log in later.</p>
+							<label for="password-new-user" i18n:translate="">Password</label> <br/>
+							<input id="password-new-user" name="password" type="password" class="form-control password text" placeholder="passord" /><br/>
+							<label for="repeat-password" i18n:translate="">Repeat password</label> <br/>
+							<input id="repeat-password" name="password2" type="password" class="form-control password text" placeholder="gjennta passord"/>
+							<div>
+								<input type="checkbox" id="newsletter" class="newsletter ignore" name="newsletter" checked="checked"/> 
+								<label for="newsletter" i18n:translate="">Yes, I want to receive newsletters</label>
+							</div>
+							<div>
+								<input type="checkbox" id="eula" class="required eula" name="eula"/> 
+								<label for="eula">
+									<tal:block i18n:translate="">Yes, I accept the</tal:block> 
+									<a href="#terms-and-conditions" class="" data-toggle="modal" data-target="#terms-and-conditions" i18n:translate="">terms and conditions</a>
+								</label>
+							</div>
+							<button class="btn btn-primary" i18n:translate="" id="registeruser">Register</button>
+			
+			
+			
+						<div class="modal fade" id="terms-and-conditions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+						  <div class="modal-content">
+							<div class="modal-header">
+							  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							  <h4 class="modal-title" id="myModalLabel" i18n:translate="">terms and conditions</h4>
+							</div>
+							<div class="modal-body">
+							  <tal:block tal:content="structure cms:body:80f507f6-69c5-4a4e-9714-b2656514cb31" />
+							</div>
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+			</div>
+		</div>
+		</form>
+	</tal:block>
+    <!-- order summary -->
+	
+    <tal:block tal:condition="session/loggedin">
+		<div class="col-md-12">
+			<tal:block metal:use-macro="../common.html/order-summary-new" />
+		</div>
+		<!-- NEW Delivery and payment methods -->		
+
+
+		   
+    
+		<div class="row">
+                <form method="post" class="form-horizontal" action="/kasse/bedrift/confirm/" id="contact-and-delivery-info">
+					<div class="col-md-12" id="klarna-methods-wrapper">
+						<div class="col-md-12">
+							<h3>Velg betalingsmåte</h3>
+	
+							<div class="klarnapayment">
+								<div>
+									<input type="radio" checked="checked" name="payment-method" value="474" id="klarna-invoice" />
+									<label for="klarna-invoice">Faktura</label>
+									<div class="quiet">Ingen fakturagebyr | 14 dagers betalingstid</div>
+									<span id="invoicexx"></span>
+								</div>
+								<div>
+									<input type="radio" name="payment-method" value="klarna-card" id="klarna-card" />
+									<label for="klarna-card">Kortbetaling</label>
+									<div class="quiet">Visa/Mastercard</div>
+								</div>
+							</div>
+							
+						</div>
+						
+						<hr/>
+					</div>
+					<div class="col-md-12 display-none" id="store-methods-wrapper">
+						<div class="col-md-12">
+							<h3>Velg betalingsmåte</h3>
+							<div class="storepayment">
+								<div >
+									<input type="radio" name="payment-method" value="store-payment" id="store-payment" />
+									<label for="store-payment">Betaling i butikk</label>
+								</div>
+							</div>
+							
+						</div>
+						<label for="stores">Velg Fotobutikk</label><br/>
+						<tal:block tal:condition="exists:storedeliveryrefid">
+							<div id="stores">
+								 <!--<label>Velg butikk: </label>-->
+								  <select id="storedelivery" name="delivertostore" class="select">
+								  <option disabled="disabled" value="" selected="selected">Velg Fotobutikk</option>
+									 <tal:block tal:repeat="chain storechains">
+										<optgroup label="${chain/chain}">
+										<tal:block tal:repeat="store chain/stores">
+										   <option value="${store/store/id}">${store/store/name}:
+										   ${store/store/address}</option>
+										</tal:block>
+										</optgroup>
+									 </tal:block>
+								  </select>
+								  </div>
+						</tal:block>
+					</div>					
+                    <div class="col-md-11" id="delivery-address">
+						<h3>Dine opplysninger</h3>
+						<div class="form-group">
+							<label for="contact-email"class="col-sm-2 control-label" i18n:translate="">E-mail:</label>
+							<div class="col-sm-4">
+								<input name="cemail"  type="email" class="form-control" id="contact-email" i18n:attributes="placeholder E-mail:" value="${user/email}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="contact-phone" class="col-sm-2 control-label">Mobil:</label>
+							<div class="col-sm-4">
+								<input name="phone"  type="tel" class="form-control" id="contact-email" placeholder="Mobil" value="${user/mphone}"/>
+							</div>
+						</div>
+						<div class="form-group orgnr">
+							<label for="contact-orgnr" class="col-sm-2 control-label" i18n:translate="">Organisasjonsnummer:</label>
+							<div class="col-sm-4">
+								<input name="corgnr"  type="text" class="form-control" id="contact-orgnr" placeholder="Organisasjonsnummer" value="${user/orgnr}"/>
+							</div>
+						</div>
+						<div class="form-group orgnr">
+							<label for="contact-name" class="col-sm-2 control-label">Firmanavn:</label>
+							<div class="col-sm-3">
+								<input name="cname"  type="text" class="form-control" id="contact-name" placeholder="Firmanavn" value="${user/fullname}"/>
+							</div>
+							<label for="contact-contactperson" class="col-sm-2 control-label">Kontaktperson:</label>
+							<div class="col-sm-3">
+								<input name="contactperson"  type="text" class="form-control" id="contact-contactperson" placeholder="Kontaktperson"/>
+							</div>
+						</div>
+						<div class="form-group orgnr">
+							<label for="contact-address" class="col-sm-2 control-label" i18n:translate="">Address:</label>
+							<div class="col-sm-4">
+								<input name="caddress"  type="text" class="form-control" id="contact-address"  i18n:attributes="placeholder Address:" value="${user/address}"/>
+							</div>
+						</div>
+						<div class="form-group orgnr">
+							<label for="contact-zipcode" class="col-sm-2 control-label" i18n:translate="">ZIP code:</label>
+							<div class="col-lg-1 col-sm-2">
+								<input name="czipcode"  type="text" class="form-control" id="contact-zipcode" placeholder="Firmanavn" value="${user/zipcode}"/>
+							</div>
+							<label for="contact-city" class="col-sm-1 control-label" i18n:translate="">City:</label>
+							<div class="col-sm-3">
+								<input name="ccity"  type="text" class="form-control" id="contact-city" placeholder="Kontaktperson" value="${user/city}"/>
+							</div>
+						</div>
+						<div class="form-group orgnr">
+							<label for="contact-country" class="col-sm-2 control-label" i18n:translate="">Country:</label>
+							<div class="col-sm-4">
+								<select class="form-control" id="contact-country" name="ccountry">
+                                <optgroup label="Common" i18n:attributes="label">
+                                    <option value="NO" i18n:translate="" selected="selected">Norway</option>	
+                                </optgroup>
+                                <optgroup label="All" i18:attributes="label">
+                                    <tal:block tal:repeat="country countries">
+                                    <option tal:condition="equal:user/country,country/iso,1" value="${country/iso}" tal:content="country/name|default" selected="true"></option>
+                                    <option tal:condition="not:equal:user/country,country/iso" value="${country/iso}" tal:content="country/name|default"></option>
+                                    </tal:block>
+                                    
+                                </optgroup>
+                                </select>
+							</div>
+						</div>
+                        <div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <!--<button class="blue large submit last" type="submit" style="margin-right:0;" i18n:translate="">Next step</button>-->
+                        <a class="button blue large submit last" id="submitform" style="margin-right:0;" i18n:translate="">Next step</a>
+                    </div>
+                    </form>
+                
+			</div>
+		<!--</form>-->
+	</tal:block>
+    </div>
+			   
+	</div>
+	<div class="col-md-2 text-center">
+	
+			<div>
+				<h3 class="info-header">Handle trygt hos<br/> Eurofoto</h3>
+				<div class="info-text">Faktura og delbetaling</div>
+				<div>
+					<img src="https://cdn.klarna.com/1.0/shared/image/generic/logo/nb_no/basic/blue-black.png?width=121&eid=2990" alt="Klarna"/>
+				</div>
+				
+			</div>
+			<div>
+				<div class="info-text">Kortbetaling</div>
+				<div>
+					<img src="//c.static.eurofoto.no/cms/images/visa_mastercard.png" alt=""/>
+				</div>
+				
+			</div>
+			
+			
+	</div>
+    </div>
+	
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<script type="text/javascript" src="${static:js/klarnainvoice.js}?${version}"></script>
+<script type="text/javascript">
+	
+	
+	new Klarna.Terms.Invoice({
+		el: 'invoicexx',
+		eid: '2990',
+		locale: 'nb_no',
+		charge: 0,
+		type: 'desktop'
+	});
+	
+	
+    var loggedin = ${session/loggedin};
+	
+	$(document).ready( function(){
+		
+		$('#submitform').on('click', function(){
+			
+			
+			 if ($('form#contact-and-delivery-info').valid()) {
+				//alert('form is valid - not submitted');
+			} else {
+				//alert('form is not valid');
+				return false;
+			}
+			
+			
+			$('#loader-overlay').fadeIn('fast', function() {
+				$(this).show();
+			});
+			
+			$('.orgnr-error').remove();
+			
+			if( $('#klarna-invoice').prop('checked') ){
+			
+				$.post('/api/1.0/checkout/klarnainvoice', {
+						pno : $('#contact-orgnr').val(),
+						mobile: $('#contact-phone').val(),
+						firstname: $('#contact-firstname').val(),
+						lastname: $('#contact-lastname').val(),
+						address: $('#contact-address').val(),
+						city: $('#contact-city').val(),
+						zipcode: $('#contact-zipcode').val(),
+					},
+					function(data){
+						if( data.result == 1 ){
+							
+							$('#contact-and-delivery-info').submit();
+							/*$('#loader-overlay').fadeOut('fast', function() {
+								$(this).hide();
+							});*/
+						}else{
+							$('#loader-overlay').fadeOut('fast', function() {
+								$(this).hide();
+							});
+							//console.log( data );
+							
+							$('#contact-orgnr').after('<label for="contact-orgnr" class="error orgnr-error">'+ data.message +'</label>');
+							
+							//$('#contact-and-delivery-info').submit();
+							return false;
+						}
+					},'json');
+			}else{
+				$('#contact-and-delivery-info').submit();
+			}
+			
+			
+			return false;
+			
+			
+			});
+		
+		
+		 $('input[name="delivery-method"]').each( function(){
+            //console.log(deliveryid);
+            if( $(this).val() == deliveryid ){
+                $(this).attr('checked', 'checked' );
+            }
+        });
+		
+		
+
+		
+		
+		$(window).load( function() {
+			$('#loader-overlay').fadeOut('slow', function() {
+				$(this).hide();
+			})
+		});
+		$('.refresh').click( function() {
+			window.location.reload();
+			return false;
+		});
+		$('#registeruser').on('click', function(){
+			
+			$('#loader-overlay').fadeIn('fast', function() {
+				$(this).show();
+			})
+			
+			});
+		
+        $(document).on('click','#checkout-login-button',  function() {
+            $(this).after( ajaxLoader );
+            $('.inputError').remove();
+            $.ajax({
+            	url: '/api/1.0/user/login',
+            	type: 'post',
+            	dataType: 'json',
+            	data: {
+            		username: $('#contact-email').attr('value'),
+            		password: $('#password').attr('value')
+            	},
+            	success: function(msg) {
+    
+            		if( msg.result != false) {
+            		   window.location = '/kasse'
+            		   //location.reload();
+            		} else {
+            			$('.loader').remove();
+            			$('#checkout-login-button').after('<label class="inputError" i18n:translate="">Wrong password</label>');
+            			return false;
+            		}
+            	},
+            	error: function(msg) {
+            		$('#password').next('.loader').remove();
+            		alert('error: ' + msg);
+            	}
+        	});
+		
+            return false;	
+        });
+    
+        var deliveryid = "${cart/deliverytype/refid}";
+        
+        if( deliveryid == 484 ){
+            $('#store-methods-wrapper').show();
+            $('#klarna-methods-wrapper').hide();
+        }
+        
+        $('input[name="delivery-method"]').each( function(){			
+            //console.log(deliveryid);
+            if( $(this).val() == deliveryid ){
+                $(this).attr('checked', 'checked' );
+            }
+        });
+		
+		$('.deliverymethod').first().addClass('selected');
+		
+		
+		$('.deliverymethod').on( 'click' , function(){
+			
+			
+			$('.deliverymethod').removeClass('selected');
+			
+			var deliveryline = $(this);
+			
+			var delinput = $(this).find('input');
+			
+			deliveryline.addClass('selected');
+			
+			if( delinput.val() == 2313){
+				$('#store-payment').prop('checked', true);
+				$('#store-methods-wrapper').show();
+				$('#klarna-methods-wrapper').hide();
+				//return true;
+			}else{
+				$('#klarna-invoice').prop('checked', true);
+				$('#store-methods-wrapper').hide();
+				$('#klarna-methods-wrapper').show();
+			}
+			
+			var totalPrice = 0;
+	
+			$('.productprice').each( function(){
+				totalPrice += parseFloat( $(this).text().replace(',','.') );
+				});
+			
+			//console.log( $('#deliveryprice' + $(this).val() ).text() );
+			
+			totalPrice += parseFloat( $('#deliveryprice' + $(this).val() ).text().replace(',','.') );
+			
+
+			$('.totalprice').text( formatPrice(totalPrice) );
+			
+			
+			
+			if( delinput.val() == 2909 ){
+				window._klarnaCheckout(function (api) {
+						api.resume();
+					});	
+			}
+			
+			
+		});
+		
+		$('.open-terms-and-conditions').click( function(){
+				$('#terms-and-conditions').dialog({
+						width: 1024,
+						modal: true,
+						height: 600,
+						title: "Sluttbrukervilkår for Eurofoto",
+						buttons: {
+								"LUKK": function() {
+										$( this ).dialog( "close" );
+								}
+						}
+						});
+				
+				return false;
+				});
+		
+		
+			// Extend email validation method so that it ignores whitespace
+			jQuery.validator.addMethod("digits2", function(value, element) {
+				$(element).val(value.replace(/ /g,''));
+				return  value.replace(" ", "");
+			}, "Kan ikke inneholde mellomrom");
+		
+		
+        	$('form#contact-and-delivery-info').validate({
+                    rules: {
+                        cfirstname: {
+                            required: true
+                        },
+						clastname: {
+                            required: true
+                        },
+                        cemail: {
+                            required: true,
+                            email: true
+                        },
+                        czipcode: {
+                            required: true,
+                            minlength: 4
+                        },
+                        ccity: {
+                            required: true
+                        },
+                        caddress: {
+                            required: true
+                        },
+                        delivertostore:{
+                            required: "#storeon:checked"
+                            //required: true
+                        },
+                        phone:{
+							required:true,
+							digits2 : true,
+							digits : true,
+							minlength : 8,
+							maxlength: 8
+                        },
+						corgnr:{
+							required: "#klarna-invoice:checked",
+							//digits2 : "#klarna-invoice:checked"
+							//minlength: 9,
+							//maxlength: 9,
+							//digits : true,
+						}
+                    },
+                    messages: {
+						cfirstname:{
+							required: "<tal:block i18n:translate="">Required</tal:block>",
+						},
+						clastname:{
+							required: "<tal:block i18n:translate="">Required</tal:block>",
+						},
+                        cname: {
+                            required: "<tal:block i18n:translate="">Required</tal:block>",
+                            fullname: "<tal:block i18n:translate="">Please enter your first name and surname.</tal:block>"
+                        },
+                        cemail: {
+                            required: "<tal:block i18n:translate="">Required</tal:block>",
+                            email: "<tal:block i18n:translate="">Your email address must be in the format of name@domain.com</tal:block>"
+                        },
+                        czipcode: {
+                            required: "<tal:block i18n:translate="">Required</tal:block>",	
+                            minlength: "<tal:block i18n:translate="">Please enter at least 4 digits</tal:block>"	
+                        },
+                        ccity: {
+                            required: "<tal:block i18n:translate="">Required</tal:block>"	
+                        },
+                        caddress: {
+                            required: "<tal:block i18n:translate="">Required</tal:block>"	
+                        },
+                        'repeat-password': {
+                            equalTo: "<tal:block i18n:translate="">Oops, your passwords don't match. </tal:block>"
+                        },
+                        eula: {
+                            required: "<tal:block i18n:translate="">You have to read and accept the terms and conditions</tal:block>"
+                        },
+                        delivertostore:{
+                           required: "Du må velge en butikk!"
+                        },
+                        phone:{
+                           required: "Du må oppgi et telefonummer",
+                           digits: "Du må oppgi et gyldig mobilnummer",
+						   minlength: "Du må oppgi et gyldig mobilnummer",
+						   maxlength: "Du må oppgi et gyldig mobilnummer"
+                        },
+						corgnr:{
+							required: 'Du må oppgi et gyldig foretaksnummer',
+							minlength: 'Skriv inn foretaksnummer, 9 siffer, uten mellomrom.',
+							maxlength: 'Skriv inn foretaksnummer, 9 siffer, uten mellomrom.',
+							digits : 'Skriv inn foretaksnummer, 9 siffer, uten mellomrom.',
+						}
+                    }
+                });
+		});
+   
+   
+		function injectTrim(handler) {
+			return function (element, event) {
+			  if (element.tagName === "TEXTAREA" || (element.tagName === "INPUT" && element.type !== "password")) {
+				element.value = $.trim(element.value);
+			  }
+			  return handler.call(this, element, event);
+			};
+		  }
+	
+</script>
+<!-- Google Code for Utsjekk påstartet Conversion Page -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1070265469;
+var google_conversion_language = "no";
+var google_conversion_format = "2";
+var google_conversion_color = "333333";
+var google_conversion_label = "JcKPCJ3CxAEQ_eir_gM";
+var google_conversion_value = 0;
+//-->
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1070265469/?label=JcKPCJ3CxAEQ_eir_gM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" tal:define="global pagetitle" tal:content=""></tal:block>
+    <style>
+
+
+    </style>
+
+
+</head>
+
+
+
+<body>
+    <div class="container">
+      	<div metal:use-macro="${templateroot}/${templates}/common.html/top" />
+        
+        
+        
+        <div>
+            
+            <form method="post">
+				x: <input type="text" name="x" value=""/>
+				y: <input type="text" name="y" value=""/>
+				title:  <input type="text" name="title" value=""/>
+				artnr: <input type="text" name="artnr" value="${productid}"/>
+				<input type="submit" value="Ny mal"/>
+			</form>
+			
+			<table>
+				<thead>
+					<tr>
+						<td>
+							Malid
+						</td>
+						<td>
+							Navn
+						</td>
+						<td>
+							Synlig
+						</td>
+						<td>
+							Edit
+						</td>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr tal:repeat="mal maler">
+						<td tal:content="mal/id"></td>
+						<td tal:content="mal/title"></td>
+						<td tal:content="mal/visible"></td>
+						<td><a href="/producteditor/admin/edit?malid=${mal/id}">Edit</a></td>
+						
+					</tr>
+					
+					
+				</tbody>
+				
+			</table>
+			
+            
+        </div>
+    </div>
+       
+  
+
+    
+    
+</body>
+</html>

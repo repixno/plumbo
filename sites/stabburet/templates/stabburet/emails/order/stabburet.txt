@@ -1,0 +1,32 @@
+<tal:block>
+<tal:block tal:content="cms:title:3fe7b71e-d895-4ad2-8460-f8bd44b236b6">Order confirmation</tal:block>
+
+<tal:block tal:content="cms:ingress:3fe7b71e-d895-4ad2-8460-f8bd44b236b6">Order confirmation</tal:block>
+
+
+<tal:block i18n:translate="">Ordered items:</tal:block>
+
+<tal:block i18n:translate="">Title</tal:block>                                              <tal:block i18n:translate="">Unitprice</tal:block> <tal:block i18n:translate="">Quantity</tal:block>    <tal:block i18n:translate="">Price</tal:block> 
+<tal:block tal:repeat="row textrow">
+<tal:block tal:replace="row"/>
+</tal:block>
+
+
+<tal:block i18n:translate="">Delivery Address:</tal:block>
+
+<tal:block tal:replace="deliveryinfo/name"/>
+
+<tal:block tal:replace="deliveryinfo/address"/>
+
+<tal:block tal:replace="deliveryinfo/zipcode"/> <tal:block tal:replace="deliveryinfo/city"/>
+
+
+
+<tal:block>
+Stabburet / Japan Photo
+(+47) 57 88 35 00
+post@eurofoto.no
+http://www.stabburet.no
+http://www.japanphoto.no
+</tal:block>
+</tal:block>

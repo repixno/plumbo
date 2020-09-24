@@ -1,0 +1,609 @@
+<!-- AlbumList Dialogs -->
+<tal:block metal:define-macro="albumListDialogs">
+	<tal:block metal:use-macro="transferImagesByEmailDialog" />
+	<tal:block metal:use-macro="downloadAlbumDialog" />
+	<tal:block metal:use-macro="addToCollectionDialog" />
+	<tal:block metal:use-macro="albumPreferencesDialog" />
+	<tal:block metal:use-macro="shareAlbumDialog" />
+	<tal:block metal:use-macro="order-prints" />
+	<tal:block metal:use-macro="mergeSelectedAlbumsDialog" />
+	<tal:block metal:use-macro="deleteSelectedAlbumsDialog" />
+	<tal:block metal:use-macro="newAlbumDialog" />
+	<tal:block metal:use-macro="deleteAlbumDialog" />
+	<tal:block metal:use-macro="insertInBlogDialog" />
+	<tal:block metal:use-macro="secretLinkDialog" />
+</tal:block>
+
+<!-- Album Dialogs -->
+<tal:block metal:define-macro="albumDialogs">
+	<tal:block metal:use-macro="downloadAlbumDialog" />
+	<tal:block metal:use-macro="addToCollectionDialog" />
+	<tal:block metal:use-macro="albumPreferencesDialog" />
+	<tal:block metal:use-macro="shareAlbumDialog" />
+
+	<tal:block metal:use-macro="order-prints" />
+	<tal:block metal:use-macro="printImagesDialog" />
+	
+	<tal:block metal:use-macro="mergeSelectedAlbumsDialog" />
+	<tal:block metal:use-macro="deleteSelectedAlbumsDialog" />
+	<tal:block metal:use-macro="newAlbumDialog" />
+	
+	<tal:block metal:use-macro="slideshowAlbum" />
+	
+	<tal:block metal:use-macro="deleteImageDialog" />
+	<tal:block metal:use-macro="deleteAlbumDialog" />
+	<tal:block metal:use-macro="deleteSelectedImagesDialog" />
+	
+	<tal:block metal:use-macro="insertInBlogDialog" />
+	<tal:block metal:use-macro="secretLinkDialog" />
+	<tal:block metal:use-macro="transferImagesByEmailDialog" />
+	<tal:block metal:use-macro="transferImagesDialog" />
+
+	<tal:block metal:use-macro="photofuniaDialog" />
+	<tal:block metal:use-macro="effectDialog" />
+		
+	<tal:block metal:use-macro="moveImagesDialog" />
+	<tal:block metal:use-macro="moveImageDialog" />
+	
+</tal:block>
+
+
+
+<!-- Delete image -->
+<tal:block metal:define-macro="deleteImageDialog">
+	<div id="deleteImageDialog" class="hide imageActionDialog negative span-12" title="Do you want do delete this image?" i18n:attributes="title">
+		<div class="span-4">
+			<img class="image" />
+		</div>
+		<div class="span-8 last">
+			<h3 class="imageTitle"></h3>
+			<p i18n:translate="" class="quiet">If you delete this image, you will not be able to restore it</p>
+		</div>
+	</div>
+</tal:block>
+
+<tal:block metal:define-macro="slideshowAlbum">
+	<div style="display:none;">
+		<div id="slideshowContainer">
+			<div id="flashcontent" />
+		</div>
+	</div>
+</tal:block>
+
+
+
+<!-- Delete images -->
+<tal:block metal:define-macro="deleteSelectedImagesDialog">
+	<div id="deleteSelectedImagesDialog" class="hide negative" title="Do you want do delete theese images?" i18n:attributes="title">
+		<h3 i18n:translate="">Choose the images you want to delete.</h3>
+		<ul class="height-10 accordion-list">
+			<!-- <li/> -->
+		</ul>
+	</div>
+</tal:block>
+
+
+<!-- Photofunia dialog -->
+<tal:block metal:define-macro="photofuniaDialog">
+	<div id="photofuniaDialog" class="hide">
+	<div class="loader center" id="photofuniaLoader">
+		<div>
+			<img src="${static:gfx/gui/ajax-loader-big.gif}" />
+		</div>
+		<h4 i18n:translate="">Loading...</h4>
+	</div>
+	<div class="chooseEffect hide" id="photofuniaChooseEffect">
+		<img class="original"/>
+		<h2 class="" i18n:translate="">Choose your effect</h2>
+		<p class="quiet i18n:translate=""">Click on the effect you want. The image will be saved in this album.</p>
+		<hr class=""/>
+		<ul class="thumbs effects"></ul>
+	</div>
+	<div class="center hide" id="photofuniaNewImage">
+		<h2 class="" i18n:translate="">Your new image</h2>
+		<img class="newimage"/>
+		<div class="center prepend-top">
+			<a class="button red" id="photofuniaRemoveImage" i18n:translate="">No, let me try another. </a>
+			<a class="button green large" id="photofuniaKeepImage" i18n:translate="">This is perfect. Lets keep it</a>
+		</div>
+	</div>
+	</div>
+</tal:block>
+
+
+
+<!-- Photofunia dialog -->
+<tal:block metal:define-macro="effectDialog">
+	<div id="effectDialog" class="hide">
+	<div class="loader center" id="effectLoader">
+		<div>
+			<img src="${static:gfx/gui/ajax-loader-big.gif}" />
+		</div>
+		<h4 i18n:translate="">Loading...</h4>
+	</div>
+	<div class="chooseEffect hide" id="effectChoose">
+		<img class="original"/>
+		<h2 class="" i18n:translate="">Choose your effect</h2>
+		<p class="quiet i18n:translate=""">Click on the effect you want. The image will be saved in this album.</p>
+		<hr class=""/>
+		<ul class="thumbs effects"></ul>
+	</div>
+	<div class="center hide" id="effectNewImage">
+		<h2 class="" i18n:translate="">Your new image</h2>
+		<img class="newimage"/>
+		<div class="center prepend-top">
+			<a class="button red" id="effectRemoveImage" i18n:translate="">No, let me try another. </a>
+			<a class="button green large" id="effectKeepImage" i18n:translate="">This is perfect. Lets keep it</a>
+		</div>
+	</div>
+	</div>
+</tal:block>
+
+
+<!-- Download album -->
+<tal:block metal:define-macro="downloadAlbumDialog">
+	<div id="downloadAlbumDialog" class="hide center" title="Compressing album" i18n:attributes="title">
+		<div class="downloading">
+			<img src="${static:gfx/gui/ajax-loader-big.gif}" />
+			<h3 i18n:translate="">Please wait...</h3>
+			<p class="quiet" i18n:translate="">If you don't have the time, you can close this window. We will send you an email with the link to the compressed album.</p>
+		</div>
+	</div>
+</tal:block>
+
+
+
+<!-- Add To Collection -->
+<tal:block metal:define-macro="addToCollectionDialog">
+	<div id="addToCollectionDialog" class="hide" title="Add selected albums/images to collection?" i18n:attributes="title">
+	
+		<h3 class="hide albums">Remeber these albums?</h3>
+		<ul class="albums"/>
+	
+		<h3 class="hide images">Remeber these images?</h3>
+		<ul class="images"/>
+	
+	</div>
+</tal:block>
+
+
+<!-- Move images -->
+<tal:block metal:define-macro="moveImagesDialog">
+	<div id="moveImagesDialog" class="hide" title="Move images" i18n:attributes="title">
+		<div class="span-12 last">
+			<div class="span-5 imagesContainer">
+				<h4>Images <small class="quantity">5</small></h4>
+				<div class="account-content-box list center">
+					<ul class="accordion-list images height-15 center" />
+				</div>
+			</div>
+			<div class="span-1">
+				arrow
+			</div>
+			<div class="span-6 last">
+				<h4>Albums</h4>
+				<div class="account-content-box list">
+					<ul class="accordion-list height-15 albums" />
+				</div>
+			</div>
+		</div>	
+	</div>
+</tal:block>
+
+<!-- Move image -->
+<tal:block metal:define-macro="moveImageDialog">
+	<div id="moveImageDialog" class="hide" title="Move image" i18n:attributes="title">
+		<div class="span-14 last">
+			<div class="span-5">
+				<h4 i18n:translate="">Choosen image</h4>
+				<img src="" class="thumbnail"/>
+			</div>
+			<div class="span-1">
+				arrow
+			</div>
+			<div class="span-8 last">
+				<h4 i18n:translate="">Choose album</h4>
+				<div class="account-content-box list">
+					<ul class="accordion-list height-15 albums" />
+				</div>
+			</div>
+		</div>	
+	</div>
+</tal:block>
+
+
+
+
+<!-- Album preferences -->
+<tal:block metal:define-macro="albumPreferencesDialog">
+<div id="albumPreferencesDialog" class="hide" title="Album preferences" i18n:attributes="title">
+	<form class="reset" style="padding: 0; margin: 0">
+		<div class="span-15 last">
+			<div class="span-5">
+				<img class="thumbnail" />
+			</div>
+			<div class="span-10 last">
+				<div>
+					<label i18n:translate="">Title</label><br/>
+					<input type="text" class="title" name="title" />
+				</div>
+				<div>
+					<label i18n:translate="">Description</label><br/>
+					<textarea style="width: 300px; height: 3em" class="description"></textarea>
+				</div>
+				<div>
+					<label i18n:translate="">Year</label><br/>
+					<select name="year" class="year">
+						<option value="${request/date/year}" class="thisYear">${request/date/year}</option>
+					</select>
+					<a class="guessYear" href="#" i18n:translate="">
+						Guess a year for me
+					</a> 
+					<small i18n:translate="">Based on when the images in the album was taken.</small>
+				</div>
+			</div>
+		</div>
+		<div class="span-15 last">
+			<fieldset>
+				<legend i18n:translate="">Access</legend>
+				<div>
+					<input type="checkbox" id="albumPreferencesPurchase" />
+					<label for="albumPreferencesPurchase" i18n:translate="">All with access can purchase</label>
+				</div>
+				<div>
+					<input type="checkbox" id="albumPreferencesDownload" />
+					<label for="albumPreferencesDownload" i18n:translate="">All with access can download</label>
+				</div>
+			</fieldset>
+		</div>
+	</form>
+</div>
+</tal:block>
+
+<!-- Share album -->
+<tal:block metal:define-macro="shareAlbumDialog">
+	<div class="span-20 hide" id="shareAlbumDialog" title="Share album" i18n:attributes="title">
+
+
+		<div class="span-19 last">
+		
+			
+			
+			<h4 class="bottom">
+				<input type="checkbox" id="activeSecretLink"/>
+				<label for="activeSecretLink" i18n:translate="">Share with link</label>
+			</h4>
+			<!--<h4 i18n:translate="">Secret link</h4>-->
+			<div class="account-content-box disabled" id="secret-link-preferences">
+			
+				<div class="span-12">
+					<input class="text span-12" type="text" name="publiclink" id="secretLink" value="Click activate to get the secret link"/>
+					<div>
+					<input type="checkbox" id="usePassword"/>
+					<label for="usePassword" i18n:translate="">Use password</label>
+					<div class="passwordContainer hide">
+						<label i18n:translate="">Password</label> 
+						<input id="albumPassword"type="text" class="password text text-2"/>&nbsp;
+						<button id="saveAlbumPassword" class="extra-small" i18n:translate="">Save</button>
+					</div>
+					</div>
+					<p class="small quiet bottom">
+						Click the link and press <strong>Ctrl + C</strong> to copy the link. Press <strong>Ctrl + V</strong> to paste it where you want.
+					</p>
+				</div>
+				<div class="span-6 last social-media clearfix">
+					<h4 i18n:translate="">Social media</h4>
+					<a href="#share-facebook" class="facebook">Facebook</a>
+					<a href="#share-twitter" class="twitter">Twitter</a>
+					<a href="#share-forum" class="forum">Forum</a>
+					<a href="#share-blog" class="blog">Blog</a>
+				</div>
+				<br class="clear" />
+			</div>
+		</div>
+
+		<div class="span-19 last">
+		
+			<div class="span-6 all-friends">
+				<h4 i18n:translate="">Invite friends</h4>
+				<div class="account-content-box list">
+					<ul class="accordion-list height-15 friends"></ul>
+				</div>
+			</div>
+			<div class="span-6 groups">
+				<h4 i18n:translate="">Invite groups</h4>
+				<div class="account-content-box">
+					<ul class="accordion-list height-15 groups"></ul>
+				</div>
+			</div>
+			<div class="span-7 last">
+				<h4 i18n:translate="">About sharing</h4>
+				<p class="small quiet">
+					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam sit amet elit vitae arcu interdum ullamcorper. Nullam ultrices, nisi quis scelerisque convallis, augue neque tempor enim, et mattis justo nibh eu elit. Quisque ultrices gravida pede.
+				</p>
+			</div>
+			
+			
+			
+		</div>
+	</div>
+	<tal:block metal:use-macro="share-html-dialog" />
+</tal:block>
+
+
+
+<!-- Share HTML Dialog -->
+<tal:block metal:define-macro="share-html-dialog">
+
+	<div class="hide span-15" id="share-html-dialog" title="Insert to forum or blog">
+	
+		<h4>Slideshow</h4>
+		<form class="slideshow reset">
+			<div class="span-14 last">
+				<div class="span-10">
+					<textarea class="textarea slideshowEmbed" style="width: 370px; height: 100px"></textarea>
+					<a href="#preview" class="preview">Preview</a>
+					
+				</div>
+				<div class="span-4 last">
+					<input name="size" type="radio" value="560x340" checked="checked"/><label>Small <small>560 × 340</small></label><br/>
+					<input name="size" type="radio" value="640x385"/><label>Medium <small>640 × 385</small></label><br/>
+					<input name="size" type="radio" value="853x505"/><label>Big <small>853 × 505</small></label><br/>
+					<input name="size" type="radio" value="1280x745"/><label>Mega <small>1280 × 745</small></label><br/>
+					<input name="size" type="radio" value="custom" class="custom"/><label>Custom</label>
+					<div class="custom hide span-4 last">
+						<div class="span-2">
+							<label>Width</label><br/>
+							<input type="text" class="text width text-1" value="560"/>
+						</div>
+						<div class="span-2 last">
+							<label>Height</label><br/>
+							<input type="text" class="text height text-1" value="340"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		
+		<h4>Thumbnails</h4>
+	</div>
+
+	<div class="hide previewDialog" title="Preview slideshow" id="slideshow-preview-dialog"></div>
+
+</tal:block>
+
+
+<!-- Order one print -->
+<tal:block metal:define-macro="printImagesDialog">
+
+	
+
+	<div class="hide span-14" title="Print images" id="printImagesDialog">
+	
+		<!--
+		<div class="span-7">
+			<h4>Standard prints</h4>
+			<ul>
+				<li>
+					<label>10x13</label>
+					<input type="text" class="quantity" value="0" /> 
+				</li>
+				<li>
+					<label>10x15</label>
+					<input type="text" class="quantity" value="0" /> 
+				</li>
+			</ul>
+		</div>
+		<div class="span-7 last">
+			<h4>Enlargements</h4>
+			<ul>
+				<li>
+					<label>15x20</label>
+					<input type="text" class="quantity" value="0" /> 
+				</li>
+				<li>
+					<label>20x30</label>
+					<input type="text" class="quantity" value="0" /> 
+				</li>
+			</ul>
+		</div>
+		-->
+	</div>
+</tal:block>
+
+
+<!-- Order one print -->
+<tal:block metal:define-macro="order-one-print">
+	<div class="hide span-14" title="Order one print">
+		<div class="span-7">
+			<h4>Standard prints</h4>
+			<ul>
+				<li>
+					<label>10x13</label>
+					<input type="text" class="quantity" value="0" /> 
+				</li>
+				<li>
+					<label>10x15</label>
+					<input type="text" class="quantity" value="0" /> 
+				</li>
+			</ul>
+		</div>
+		<div class="span-7 last">
+			<h4>Enlargements</h4>
+			<ul>
+				<li>
+					<label>15x20</label>
+					<input type="text" class="quantity" value="0" /> 
+				</li>
+				<li>
+					<label>20x30</label>
+					<input type="text" class="quantity" value="0" /> 
+				</li>
+			</ul>
+		</div>
+	</div>
+</tal:block>
+
+
+<!-- Order prints -->
+<tal:block metal:define-macro="order-prints">
+	<div class="hide span-12" title="Order prints" id="order-prints-dialog">
+		<div class="span-7">
+			<h4>Standard prints</h4>
+			<ul>
+				<li>
+					<label>10x13</label>
+					<input type="text" class="quantity" value="0" /> 
+				</li>
+				<li>
+					<label>10x15</label>
+					<input type="text" class="quantity" value="0" /> 
+				</li>
+			</ul>
+		</div>
+		<div class="span-7 last">
+			<h4>Enlargements</h4>
+			<ul>
+				<li>
+					<label>15x20</label>
+					<input type="text" class="quantity" value="0" /> 
+				</li>
+				<li>
+					<label>20x30</label>
+					<input type="text" class="quantity" value="0" /> 
+				</li>
+			</ul>
+		</div>
+	</div>
+</tal:block>
+
+
+<!-- Merge album -->
+<tal:block metal:define-macro="mergeSelectedAlbumsDialog">
+	<div title="Merge selected albums" id="mergeSelectedAlbumsDialog" class="hide" i18n:attributes="title">
+		<h3 i18n:translate="">Choose the album you want to merge into.</h3>
+		<ul class="height-10 accordion-list" />
+	</div>
+</tal:block>
+
+
+<!-- Delete selected album -->
+<tal:block metal:define-macro="deleteSelectedAlbumsDialog">
+	<div title="Delete selected albums" id="deleteSelectedAlbumsDialog" class="hide negative" i18n:attributes="title">
+		<h3 i18n:translate="">Choose the albums you want to delete.</h3>
+		<ul class="height-10 accordion-list" />
+	</div>
+</tal:block>
+
+
+<!-- Create new album -->
+<tal:block metal:define-macro="newAlbumDialog">
+	<div title="Create new album" id="newAlbumDialog" class="hide">
+		<h3 i18n:translate="">Create new album</h3>
+		<label for="newAlbumTitle" i18n:translate="">Title</label>
+		<input id="newAlbumTitle" class="text text-3" value="" type="text" />
+	
+		<label for="newAlbumDescription" i18n:translate="">Description</label>
+		<textarea id="newAlbumDescription"></textarea>
+	
+		<fieldset>
+			<legend i18n:translate="">Users with access can:</legend>
+			<input id="newAlbumForSale" checked="checked" type="checkbox" />
+			<label for="newAlbumForSale" i18n:translate="">Buy pictures from this album</label>
+	
+			<input id="newAlbumForDownload" checked="checked" type="checkbox" />
+			<label for="newAlbumForDownload" i18n:translate="">Download pictures from this album</label>
+		</fieldset>
+	</div>
+</tal:block>
+
+<!-- Delete album -->
+<tal:block metal:define-macro="deleteAlbumDialog">
+	<div title="Delete album" id="deleteAlbumDialog" class="hide negative" i18n:attributes="title">
+		<h3 class="red" i18n:translate="">Delete this album</h3>
+	</div>
+</tal:block>
+
+<!-- Insert in blog -->
+<tal:block metal:define-macro="insertInBlogDialog">
+	<div title="Insert in blog" id="insertInBlogDialog" class="hide" i18n:attributes="title">
+		<label for="insertInBlogCode">Insert into blog</label>
+		<textarea id="insertInBlogCode"></textarea>
+	</div>
+</tal:block>
+
+<!-- Secret link -->
+<tal:block metal:define-macro="secretLinkDialog">
+	<div title="Secret link" id ="secretLinkDialog" i18n:attributes="title">
+		<label for="secretLink">Secret link</label>
+		<input type="text" id="secretLink" />
+	</div>
+</tal:block>
+
+<!-- Transfer images by mail -->
+<tal:block metal:define-macro="transferImagesByEmailDialog">
+	<div title="Transfer pictures by email" id="transferImagesByEmailDialog" i18n:attributes="title">
+		<h4>Send an email to <a href="#" id="emailAddress"></a> </h4>
+		<div>
+			<label for="emailAlbumTitle">Album title</label>
+			<input id="emailAlbumTitle" value="Enter title here" class="title"/>
+		</div>
+	</div>
+</tal:block>
+
+
+<!-- transfer images -->
+<tal:block metal:define-macro="transferImagesDialog">
+	<div title="Transfer pictures" id="transferImagesDialog" i18n:attributes="title">
+	
+      <form method="post" action="/flash_upload.php?noerror=1" id="transfer-manual" enctype="multipart/form-data">
+      	<input type="file" id="filedata" name="Filedata" onchange="$('#transfer-manual').submit();" />
+      	<input type="hidden" id="batchid" name="batchid" value="${batchid}" tal:condition="exists:batchid"/>
+      	<input type="hidden" id="sessionid" name="sessionid" value="${session/sessionid}" tal:condition="exists:session/sessionid"/>
+      </form>
+			
+      <tal:block tal:define="global strUpload" i18n:translate="">Velg bilde</tal:block>
+		<tal:block tal:define="global strJPEGImages" i18n:translate="">JPEG Images</tal:block>
+      
+      <div id="transfer-status" class="hide">
+      	<div class="span-6">
+      		<h3 i18n:translate="">Transfer photos</h3>
+      	</div>
+      	<div class="span-3 last">
+      		<p class="right">
+      			<a href="#" class="abort negative hide" id="transfer-stop" i18n:translate="">Abort transfer!</a> 
+      		</p>
+      		
+      	</div>
+      	
+      
+         <div class="span-9 last append-bottom">
+            <tal:block i18n:translate="">Total uploaded</tal:block>
+            <div id="progressbar-total" style="height: 10px"></div>
+            <span id="uplimages">0</span> <tal:block i18n:translate="">of</tal:block> <span id="numimages">0</span> <tal:block i18n:translate="">photos</tal:block>
+            <span id="uplspeed" style="float: right;">0 KB/s</span>
+         </div>
+            
+			<div id="upload-queue">
+				<div class="span-9 last" id="upload-master" style="display:none;">
+					<div class="span-3">
+						<div class="box" style="padding: 0.5em">
+							<img style="max-width: 96px;" src="${static:gfx/gui/ajax-loader-big.gif}" alt="" />
+						</div>
+						<p class="small success hide">
+							Good quality!
+							</p>
+					</div>
+					<div class="span-6 last">
+						<div>
+							<div class="progressbar" style="height: 10px"></div>
+							<input name="" class="quiet text" style="width: 220px" value="Image title" />
+							<textarea rows="3" cols="10" class="quiet" style="width: 220px; height: 20px" title="Description" i18n:attributes="title" i18n:translate="">Description</textarea>
+						</div>
+					</div>
+				</div>
+				
+         </div>
+      </div>
+	</div>
+</tal:block>

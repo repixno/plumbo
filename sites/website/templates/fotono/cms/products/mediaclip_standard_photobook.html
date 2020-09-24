@@ -1,0 +1,362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+<link href="${static:}gfx/portals/ukeplan/scripts/jquery.bxslider/jquery.bxslider.css?${version}" rel="stylesheet"/>
+	<style media="all" type="text/css">
+		div.productinfo p {
+			margin-bottom: 0;
+		}
+
+		span.price {
+			font-size: 21px !important
+		}
+
+		body .container span.price.oldprice {
+			margin: 0;
+			padding: 0;
+			font-size: 19px !important;
+		}
+
+		span.price.newprice {
+			margin: 0;
+			padding: 0;
+			font-size: 21px !important;
+		}
+
+		.functions {
+			position: relative;
+			text-align: left !important;
+		}
+
+		.functions .links {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			text-align: right;
+		}
+
+		div.starOfferPercentContainer {
+			height: 70px;
+			width: 70px;
+			float: right;
+		}
+
+
+		.product-top p {
+			font-size: 14px
+		}
+
+		.standardstempel {
+			padding-left: 23px
+		}
+
+
+		.artikkler {
+			border-style: double;
+			border-color: #ffffff;
+			border-radius: 10px;
+			padding-bottom: 17px;
+
+
+			list-style-type: none;
+			padding-top: 20px;
+		}
+
+		
+		
+	
+		.product-top {
+			margin-top: 19px;
+        height: 255px;
+		width: 565px;
+         background-repeat:no-repeat;
+        <tal:block tal:condition="exists:menuitem/article/attachments/background">
+            background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+        </tal:block>
+        
+       
+      }
+      .product-top p {
+      	font-size: 21px
+      }
+
+      h3.product-category {
+      	color: black;
+      	font-family: yanoneregular;
+      	font-size: 28px;
+      	letter-spacing: 2px;
+      	text-decoration: underline
+      }
+	  
+	</style>
+</head>
+
+<tal:block define:section="topbanner, Top banner" />
+<!-- article -->
+<tal:block define:section="a4medvindu, a4medvindu" />
+<!-- article -->
+<tal:block define:section="a4utenvindu, a4utenvindu " />
+<tal:block define:section="3030medvindu, 3030medvindu" />
+<!-- article -->
+<tal:block define:section="3030utenvindu, 3030utenvindu " />
+<!--<tal:block define:section="skinn, skinn " />-->
+<!-- article -->
+
+
+<tal:block metal:define-macro="show-product">
+	<div class="span-2 productimage">
+		<tal:block metaltal:use-macro="${templateroot}/eurofoto/cms/cms.html/starOfferPercent" />
+		<tal:block metaltal:use-macro="${templateroot}/eurofoto/cms/cms.html/newProductStar" />
+		<tal:block tal:define="global customsize string:70" />
+		<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/one-product-photo-custom-size" />
+	</div>
+	<div class="span-8 last productinfo">
+		<h3 tal:content="item/title"></h3>
+		<!--	<p tal:content="item/ingress"></p>
+		<tal:block metal:use-macro="${templateroot}/normerk/cms/cms.html/more-info-link" />-->
+	</div>
+
+</tal:block>
+
+
+
+
+
+<body>
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+
+
+
+
+	<div class="container">
+		<div class="row">
+
+			<!--menyen til ventstre-->
+		<!--	<div class="col-md-2 col-xs-12 col-lg-2 left-menu">
+
+				<div metal:use-macro="../../../${templates}/common.html/leftmenu" />
+
+
+
+
+			</div>-->
+			<!-- if no menu is used use id="widecontent" -->
+			<div id="" class="col-md-12">
+
+				<div class="col-md-12 append-bottom" tal:condition="exists:sections/topbanner">
+					<tal:block tal:repeat="item sections/topbanner">
+						<tal:block tal:condition="equal:repeat/item/number,1" tal:content="structure item/body" />
+					</tal:block>
+				</div>
+
+
+
+
+				
+<div id="" class="col-md-12">
+
+
+	<div class="col-md-6 product-top top" tal:condition="exists:menuitem/article/attachments/background">
+		<div class="content" tal:condition="exists:menuitem/article/attachments/background">
+
+			<p tal:content="structure menuitem/article/body|default"></p>
+		</div>
+
+	</div>
+	<div id="" class="col-md-6">
+		<ul class="bxslider">
+
+
+
+			<li class="video">
+				<iframe src="https://www.youtube.com/embed/au56jYG9m8w?t=3;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen="true" id="video"></iframe>
+			</li>
+
+		</ul>
+	</div>
+</div>
+
+				<div id="" class="col-md-12">
+
+					<div class="col-md-12 text-center">
+						<h3 class="product-category">A4 Fotobok med vindu</h3>
+
+						<tal:block tal:repeat="item sections/a4medvindu">
+
+
+								<div class="col-md-5 artikkler  col-md-offset-1">
+								<div metal:use-macro="../cms.html/product-as-list-item-with-image_mediaclip" />
+							</div>
+
+						</tal:block>
+					</div>
+
+				</div>
+
+
+
+
+<div id="" class="col-md-12">
+				<div class="col-md-12 text-center">
+
+					<h3 class="product-category">A4 Fotobok uten vindu</h3>
+
+					<tal:block tal:repeat="item sections/a4utenvindu">
+					<div class="col-md-5 artikkler  col-md-offset-1">
+							<div metal:use-macro="../cms.html/product-as-list-item-with-image_mediaclip" />
+						</div>
+					</tal:block>
+				</div>
+	</div>
+
+
+
+<div id="" class="col-md-12">
+				<div class="col-md-12 text-center">
+
+					<h3 class="product-category">30x30 Fotobok med vindu</h3>
+
+					<tal:block tal:repeat="item sections/3030medvindu">
+				<div class="col-md-5 artikkler  col-md-offset-1">
+							<div metal:use-macro="../cms.html/product-as-list-item-with-image_mediaclip" />
+						</div>
+					</tal:block>
+				</div>
+
+	</div>
+
+
+<div id="" class="col-md-12">
+				<div class="col-md-12 text-center">
+
+					<h3 class="product-category">30x30 Fotobok uten vindu</h3>
+
+					<tal:block tal:repeat="item sections/3030utenvindu">
+					<div class="col-md-4 artikkler text-center ">
+							<div metal:use-macro="../cms.html/product-as-list-item-with-image_mediaclip" />
+						</div>
+					</tal:block>
+				</div>
+	</div>
+
+
+				<!--<div id="" class="col-md-12">
+					<div class="col-md-12 text-center">
+
+
+						<tal:block tal:repeat="item sections/skinn">
+							<div class="col-md-4 artikkler text-center  col-md-offset-4">
+								<div metal:use-macro="../cms.html/product-as-list-item-with-image_mediaclip" />
+							</div>
+						</tal:block>
+					</div>
+				</div>-->
+
+
+			</div>
+
+
+
+		</div>
+
+	</div>
+
+
+
+
+
+	<div class="footer">
+		<div class="container">
+			<div metal:use-macro="../../../${templates}/common.html/footer" />
+		</div>
+	</div>
+
+
+
+ <script src="${static:}js/sitatslider.js"></script>
+       <script src="${static:}gfx/portals/ukeplan/scripts/jquery.bxslider/plugins/jquery.fitvids.js"></script>
+       <script src="${static:}gfx/portals/ukeplan/scripts/jquery.bxslider/jquery.bxslider.js"></script>
+       
+        <script type="text/javascript">
+
+        
+            // Inject YouTube API script
+            /*var tag = document.createElement('script');
+            tag.src = "//www.youtube.com/player_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            
+            
+            var player;
+            function onYouTubePlayerAPIReady() {
+                // create the global player from the specific iframe (#video)
+                player = new YT.Player('video', {
+                  events: {
+                    // call this function when player is ready to use
+                    'onStateChange' : onStateChange
+                  }
+                });
+            }
+             
+             
+            function onStateChange(event) {
+                console.log("asdasW")
+                if( event.data == 0 ){
+                    
+                }
+                if( event.data == 3  || event.data == 1 ){
+                    console.log("asdasW")
+                   slider.stopAuto();  
+                }
+            }   
+            */
+            
+            
+            $('.rotating').sitatslider();
+            var slider =  $('.bxslider').bxSlider({
+                auto:true,
+                pause: 7000,
+                video: true,
+                useCSS: false,
+                pager: false,
+                onSlideNext: next
+              });
+            
+            function next( event ){
+                if( $( event ).hasClass('video') ){
+                    slider.stopAuto(); 
+                }
+            }
+            
+            
+            
+            $('.frontpage-box .col-md-3').on( 'click', function(){
+                
+                var boxlink = $(this).find('a').attr("href");
+                
+                window.location.href = boxlink;
+                
+                });
+            
+            $( ".bx-wrapper" ).hover(
+                function() {
+                  $( '.bx-controls' ).css("opacity", "1");
+                }, function() {
+                  $( '.bx-controls' ).css("opacity", "0")
+                }
+              );
+           
+            
+            
+        </script>
+		
+		
+</body>
+
+</html>

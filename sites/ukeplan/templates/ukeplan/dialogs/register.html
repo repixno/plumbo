@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="//www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Register</tal:block>
+
+	<style media="screen" type="text/css">
+	  div#fancy_div {
+	     overflow: scroll;
+	     overflow-x: hidden;
+	     background-color: #fff;
+	     color: #111;
+	  }
+	</style>
+	
+	<script src="${static:js/fancybox.min.js}" type="text/javascript"></script>
+	
+</head>
+
+
+<body>
+
+<div class="container">
+
+<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<div id="content">
+		
+		<form action="/register/check/" method="post" id="register">
+		
+			<div class="col-md-5">
+			<h2 i18n:translate="">Register</h2>
+			<p i18n:translate="">Complete the form, and get a free membership and your own ukeplan account!</p>
+				
+				<div class="">
+					<div class="">
+						<label for="email" class="" i18n:translate="">Email</label>
+					</div>
+					<div  class="">
+						<input type="text" class="title required email" name="newEmail" tal:attributes="value email|default" value="" id="email"/>
+					</div>
+					<div class="">
+					
+					</div>
+				</div>			
+				
+				<div class="">
+					<div class="">
+						<label for="pasword" class="" i18n:translate="">Password</label>
+					</div>
+					<div class="">
+						<input type="password" class=" title required password" name="password" tal:attributes="value password|default" value="" id="password"/>
+					</div>
+					<div class="">
+					
+					</div>
+				</div>
+				<div class="">
+					<div class="">
+						<label for="pasword" class="" i18n:translate="">Repeat password</label>
+					</div>
+					<div class="">
+						<input type="password" class=" title required password" name="password2" tal:attributes="value password|default" value="" />
+					</div>
+					<div class="">
+					
+					</div>
+				</div>
+	
+				<div class="">
+					<div class="">
+						<input type="checkbox" id="eula" class="required eula" name="eula"/> 
+						<label for="eula">
+							<tal:block i18n:translate="">Yes, I accept the</tal:block> <a href="${url:/om-ukeplan/terms-and-conditions}" data-toggle="modal" data-target="#terms-and-conditions"  i18n:translate="">Terms and conditions</a>
+						</label>
+					</div>
+					<div class="span-8 last">
+						
+					</div>
+				</div>
+				<div class="prepend-3 span-15 last">
+					<input type="checkbox" id="newsletter" class="newsletter ignore" name="newsletter"/> 
+					<label for="newsletter" i18n:translate="">Yes, I want to receive newsletters</label>
+				</div>				
+				<div class="span-18 last">
+					<p class="right">
+						<button type="submit" class="btn submit" i18n:translate="">
+							 Register
+						</button>
+					</p>
+				</div>			
+			</div>
+			
+			
+			<div id="terms-and-conditions" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					 <div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel" tal:content="cms:title:fdc2b714-3a8d-4e32-a964-01716e44843b" >Modal title</h4>
+						</div>
+						<tal:block tal:content="structure cms:body:fdc2b714-3a8d-4e32-a964-01716e44843b" />
+					 </div>
+				</div>
+			</div>
+			
+		</form>
+	</div>
+</div>
+
+
+<div metal:use-macro="../../${templates}/common.html/footer" />
+<script type="text/javascript" src="${static:js/eurofoto.min.js}?${version}"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {  
+
+	$('form#register').validate({
+		errorClass: "inputError",
+		errorPlacement: function(error, element) {
+     		error.appendTo( element.parent("div").next("div") );
+   		},
+		rules: {
+			newEmail:{
+				required: true,
+				email: true,
+				remote: '/api/1.0/user/registered/'
+			},
+			password: {
+				required: true,
+				maxlength: '15',
+				minlength: '5'
+				
+			},
+			password2: {
+				equalTo: '#password'
+			}
+		},
+		messages: {
+			newEmail: {
+				required: '<tal:block i18n:translate="">You need to provide a valid e-mail address to log in.</tal:block>',
+				email: '<tal:block i18n:translate="">Please provide a valid email address.</tal:block>',
+				remote: jQuery.format('<tal:block i18n:translate="">{0} is already registered. Is this you? If so, try logging in.</tal:block><a href="/login/" i18n:translate="">Go to login</a>')
+			},
+			password: {
+				required: "<tal:block i18n:translate="">Please enter password.</tal:block>",
+				maxlength: jQuery.format('<tal:block i18n:translate="">Your password cannot be longer than {0} characters.</tal:block>'),
+				minlength: jQuery.format('<tal:block i18n:translate="">Your password should be longer than {0} characters.</tal:block>')
+			},
+			password2: {
+				required: "<tal:block i18n:translate="">Please enter password</tal:block>",
+				equalTo: "<tal:block i18n:translate="">Oops, the passwords don't match.</tal:block>"
+			},
+			eula: {
+				required: "<tal:block i18n:translate="">You have to read and accept the terms and conditions</tal:block>"
+			}
+		}
+	});
+	
+	
+	
+	$('#terms-and-conditions').css('background-color', '#fff');
+	
+	$('#open-terms-and-conditions').click( function() {
+		$('#terms-and-conditions').removeClass('hide').dialog({
+			width: 700,
+			height: 500,
+			buttons: {
+				'Ok': function() {
+					$(this).dialog('destroy')
+				}
+			},
+			close: function() {
+				$(this).dialog('destroy')
+			}
+		});
+		return false;
+	});
+});
+</script>
+</body>
+</html>

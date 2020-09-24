@@ -1,0 +1,35 @@
+<html>
+<head>
+
+</head>
+
+
+
+<body>
+<h3><tal:block tal:content="cms:title:3fe7b71e-d895-4ad2-8460-f8bd44b236b6"></tal:block></h3>
+<p>Ditt ordrenr er <tal:block tal:replace="orderid"/>.<br/>
+Ta godt vare på denne e-posten helt til du mottar dine varer. Ved kontakt med vårt kundesenter vennligst ha ditt ordrenummer klart.
+</p>
+<p>
+   <tal:block i18n:translate="">Delivery Address:</tal:block><br/>
+   <tal:block tal:replace="deliveryinfo/name"/><br/>
+   <tal:block tal:replace="deliveryinfo/address"/><br/>
+   <tal:block tal:replace="deliveryinfo/zipcode"/> <tal:block tal:replace="deliveryinfo/city"/>
+</p>
+
+
+<div tal:content="structure cms:body:3fe7b71e-d895-4ad2-8460-f8bd44b236b6"/>
+<!--<div>
+   Dersom du ønsker å motta gode tilbud og tips fra oss i tiden fremover, klikk <a href="/stabburet/newsletter/${orderid}">her</a>.
+</div>-->
+
+
+<tal:block>
+Stabburet / Japan Photo<br/>
+(+47) 57 88 35 00<br/>
+post@eurofoto.no<br/>
+http://www.stabburet.no<br/>
+http://www.japanphoto.no<br/>
+</tal:block>
+</body>
+</html>

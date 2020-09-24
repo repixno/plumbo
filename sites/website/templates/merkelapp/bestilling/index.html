@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+   <tal metal:use-macro="common.html/head" />
+</head>
+
+
+<body>
+	<!--<div id="loader-overlay">
+		<div class="loadingInfo">
+			<img src="${static:gfx/gui/ajax-loader-gray.gif}" /><br/>
+			<br/>
+			<h3 i18n:translate="">Loading, please wait.</h3>
+			<p>
+				<tal:block  i18n:translate="">
+				If you waited too long, try refreshing the page.
+				</tal:block>
+				<a href="." class="refresh" i18n:translate="">Refresh</a>
+			</p>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#loader-overlay')
+			.css('opacity', '0.8')
+			.css('margin','0')
+			.width( $(window).width() )
+			.height( $(window).height() );
+
+		$(document).ready( function() {
+			$(window).load( function() {
+				$('#loader-overlay').fadeOut('slow', function() {
+					$(this).remove();
+				})
+			});
+			$('.refresh').click( function() {
+				window.location.reload();
+				return false;
+			});
+		});
+	</script>-->
+
+
+<div metal:use-macro="../../${templates}/common.html/top" />
+
+<div id="container_content">
+
+   <div class="container">
+         <tal:block metal:use-macro="./common.html/top-header" />
+         
+         <div class="span-16">
+         <div class="span 16 last">
+         
+            <a href="/bestilling/fargelapp"><div class="editor-header inactiv"><span>FARGELAPP</span><img src="${static:gfx/merkelapp/icons/menyknapper_fargelapp.png}"/></div></a>
+            <div class="editor-header active"><span>MERKELAPP</span><span><img src="${static:gfx/merkelapp/icons/menyknapper_merkelapp.png}"/></span></div>
+            <a href="/bestilling/tips"><div class="editor-header inactiv" style="margin-left: 100px">TIPS / EKSEMPEL</div></a>
+        </div>
+        <div class="editorbox span-16 last">
+         <div class="span-9">
+            <div  style="height:446px; padding: 0em;">
+               <form id="edit">
+               <div class="content222">
+			      
+			      <div class="tabscontent">
+
+                  <div id="tabs">
+                  	<ul>
+                  		<li><a id="tab-text" href="#tabs-1">Tekst</a></li>
+                  		<li><a id="tab-clipart" href="#tabs-2">Motiv</a></li>
+                  		
+                  	</ul>
+                  	<div id="tabs-1">
+			  	        <p><strong>Lag din merkelapp:</strong></p>
+                    <label>Linje 1:</label>
+                    <input type="text" name="line1" maxlength="18"/><br />
+                    <label>Linje 2:</label>
+                    <input type="text" name="line2" maxlength="18"/><br />
+                    <label>Linje 3:</label>
+                    <input type="text" name="line3" maxlength="18"/><br />
+                <div>
+                   <table>
+                     <tr>
+                        <td>
+                            <p>Font-type:</p>
+                            <select name="font-type" style="width:135px;">
+                               <option value="ariblk">Arial</option>
+                               <option value="comicbd">Comic Sans</option>
+                               <option value="verdanab">Verdana</option>       
+                            </select>
+                        </td>
+                        <td>
+                           <p>Tekstjustering:</p>
+                           <span class="radio" id="left" style="background-position-x: -37px;  background-position-y: -7px;"></span>
+                           <span class="radio" id="center" style="background-position-x: -7px;  background-position-y: -37px;"></span>
+                           <span class="radio" id="right" style="background-position-x: -7px;  background-position-y: -67px;"></span>
+                        </td>
+                  </tr>
+                </table>
+                <div class="span-7 last right">
+                  <a id="removetext" class="button">
+                     <span>Fjern Tekst</span><span><img src="${static:gfx/merkelapp/icons/icondelete.png}"/></span>
+                  </a>
+                </div>
+                
+			      </div>
+                  </div>
+                  	<div id="tabs-2">
+                  	    <div>
+                  	    <div>Trykk på motiv for å velge.</div>
+                  	    <div id="clipart"></div>
+                  	    <div>
+                  	    Velg kategori:
+                          <select id="select_clipart">
+                  	        <OPTION value="Dyr" selected="true">Dyr</OPTION>
+                  	        <OPTION value="Sport">Sport</OPTION>
+                  	        <OPTION value="Smile ansikt">Smile Ansikt</OPTION>
+                  	        <OPTION value="Maskiner">Maskiner</OPTION>
+                  	        <OPTION value="Leker">Leker</OPTION>
+                  	        <OPTION value="Stjernetegn">Stjernetegn</OPTION>
+                  	        <OPTION value="Diverse">Diverse</OPTION>
+                  	    </select>
+                  	    </div>
+                  	    </div>
+                         
+                         
+                         <div class="span-7 last right">
+
+                  	    
+                         
+                         </div>
+                         <div class="span-7 last right">
+
+                           <a id="removeclipart" class="button"><span>Fjern Motiv</span><span><img src="${static:gfx/merkelapp/icons/icondelete.png}"/></span></a> 
+                         </div>
+                         
+                  	</div>
+                  </div>
+
+               </div><!-- End demo -->
+			      </div>
+			      <div class="span-8 last right">
+			         <br/>
+			         <span style="padding: 20px;">
+			            <a id="removeall" class="button" href="#"><span>Nullstill</span><span><img src="${static:gfx/merkelapp/icons/iconreset.png}"/></span></a> 
+			            <a id="update" class="button" href="#"><span>Oppdater</span><span><img src="${static:gfx/merkelapp/icons/iconupdate.png}"/></span></a>
+			         </span>
+			      </div>
+			      
+			      </form>
+            </div>
+         </div>
+         <div class="span-7 last">
+            <div style="height:446px; padding: 0em;">
+            <div>Forhåndsvisning:</div>
+            <div style="padding: 0em 1.5em 1.5em 1.5em;">
+               <div >
+                  <p><strong>Strykemerker</strong> mål:30x14 mm</p>
+                  <div id="iron" >
+                     <img id="preview" class="iron" src="${static:gfx/merkelapp/template_merkelapp.png}" />
+                  </div>
+                  <div id="not-iron"  class="hide" style="height: 87px">
+                     IKKE VALGT
+                  </div>
+               </div>
+               <div>
+                  <p><strong>Klistremerker</strong> mål:30x14 mm</p>
+                  <div id="sticker">
+                     <img id="preview" class="sticker" src="${static:gfx/merkelapp/template_merkelapp.png}" />
+                  </div>
+                  <div id="not-sticker" class="hide" style="height: 87px">
+                     IKKE VALGT
+                  </div>
+               </div>
+               <table style="width:280px; margin-bottom:25px;">
+                  <tbody>
+                     <tr tal:repeat="select selected">
+                        <td style="width:20px; padding-top:10px;">
+                           <input tal:condition="repeat/select/start" type="radio" name="choose_product" checked="checked" value="${select/productoptionid}"/>
+                           <input tal:condition="repeat/select/index" type="radio" name="choose_product" value="${select/productoptionid}"/>
+                        </td>
+                        <td style="width: 130px" tal:content="select/product/title">
+                           ''
+                        </td>
+                        <td>
+                           Pris: ${select/productoption/prices/0/price},-
+                        </td>
+                     </tr>
+                  </tbody>
+              </table>
+              <div class="span-6 last right">
+                     <a href="#" id="addtocart" class="button oppdater">
+                        <span i18n:translate="">Legg i handlekurv</span><span><img src="${static:gfx/merkelapp/icons/iconcart.png}"/></span>
+                     </a>
+              </div>
+             </div>
+            </div>
+         </div>
+         </div>
+         </div>
+	 <div><img src="${static:gfx/merkelapp/icons/line.gif}" style="position: absolute;top: 205px;left: 355px;" /></div>
+         <tal:block metal:use-macro="./common.html/shoppingcart" />
+         <tal:block metal:use-macro="./common.html/bottom" />
+   </div>
+
+</div>
+<div class="footer">
+   <div class="container">
+      <div metal:use-macro="../../${templates}/common.html/footer" />
+   </div>
+</div>
+
+<SCRIPT type="text/javascript">
+   var clipart = '';
+   var ownimage = '';
+   var treshhold = 50;
+   var imageselection = Object();
+   var projectid = ${projectid};
+   var gravity = 'left'; 
+   var category = 'Dyr';
+   var backgroundcat = '';
+   var backgroundfile = '';
+   var totalprice = ${cart/totalprice};
+   var staticroot = "${request/staticroot}";
+   var type = 'merkelapp';
+   var disabled = true;
+   var colormode = 'bw';
+   var alertmessage = 'false';
+
+   
+</SCRIPT>
+<script type="text/javascript" src="${static:js/merkelapp.min.js}?${version}"></script>
+
+
+
+
+
+</body>
+</html>

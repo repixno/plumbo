@@ -1,0 +1,23 @@
+input { margin: 0 !important;}
+button.large, a.button.large {
+ margin-bottom: 0 !important;
+}
+
+
+/* buttons plugin */
+button,a.button { 
+	/*background-image: none !important;*/
+}
+
+a.playButton_60x60 { background-image: url(gfx/play_60x60.gif) !important}
+a.playButton_60x60:hover { background-image: url(gfx/play_60x60.gif) !important}
+
+/*button { padding-left: 0; }
+button span { margin-left: -15px; }
+button.small span { margin-left: -15px; }
+button.medium span { margin-left: -20px; }
+button.large span { margin-left: -35px; }
+
+button:hover,a.button:hover { color: #fff;}
+button:active,a.button:active { color: #fff; }
+*/

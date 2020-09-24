@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Order prints - Accessories</tal:block>
+</head>
+
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+	<div id="widecontent">
+
+		<div class="span-6">
+			<h2 i18n:translate="">Archive DVD</h2>
+			&nbsp;
+		</div>
+
+		<div>
+		   <div class="span-2 productimage">
+			   <tal:block tal:condition="product/images">
+				  <tal:block tal:repeat="image product/images">
+					 <tal:block tal:condition="equal:repeat/image/number,1">
+					    <tal:block tal:define="global staticurl" tal:content="static:" />
+						   <a href="${product/urlname}" title="${product/title}">
+							<img src="${staticurl}images/products/thumbs/square/50/${image/url}" 
+									widht="50" height="50" class="left" alt="${product/title}" tal:condition="image/url" />
+									</a>
+									<img src="${static:gfx/404/not_found_50px.jpg}" 
+									class="left" alt="Product photo missing." tal:condition="not:image/url" 
+									style="border: 10px solid #fff; "
+							/> 
+						</tal:block>
+					 </tal:block>
+				  </tal:block>
+			   <tal:block tal:condition="not:product/images"><span class="quiet small">No image</span></tal:block>
+			</div>
+		</div>
+		<hr class="space"/>
+		<div>
+		   <tal:block tal:condition="product/ingress">
+		    <strong i18n:translate="" tal:content="product/ingress"></strong>
+		   </tal:block>
+		   <hr class="space"/>
+		   <tal:block tal:condition="product/body">
+		    <span tal:content="structure product/body"></span>
+		   </tal:block>
+		</div>
+		<hr class="space"/>
+		<div>
+		   <tal:block tal:condition="mbsize">
+		    <strong i18n:translate="">You have <span i18n:name="megabyte" tal:replace="mbsize"/> MB of images in your account.</strong>
+		    <hr class="space"/>
+		    <strong i18n:translate="">That is <span i18n:name="discquantity" tal:replace="discquantity"/> number of disc(s) per set you order.</strong>
+		   </tal:block>
+		   <hr class="space"/>
+		</div>
+		<hr class="space"/>
+		
+		<div class="span-6 last" tal:condition="price">
+		   <strong i18n:translate="">Each set costs: <p i18n:name="price" tal:replace="formatprice:price"/></strong><br/>
+			<input class="quantity" value="1" type="text" />
+			<a class="button add-to-cart" i18n:translate="" ref="${productoptionid}">Add to cart</a>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+   <div class="container">
+      <div metal:use-macro="../../../${templates}/common.html/footer" />
+   </div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready( function() {
+	
+		$('.add-to-cart').click( function() {
+			var quantity = parseInt( $(this).parent().find('.quantity').attr('value') );
+			var productoptionid = $(this).attr('ref');
+		   var page = '/order-prints/backup/dvd/addtocart/' + productoptionid + '/' + quantity;
+		   document.location.href = page;
+		});
+	
+	})
+</script>
+
+</body>
+</html>

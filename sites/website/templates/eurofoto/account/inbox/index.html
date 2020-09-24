@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="${i18n/country}">
+<head>
+	<tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" />
+	<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/head" />
+</head>
+<body id="account-albums">
+	
+<div class="container">
+	<div metal:use-macro="${templateroot}/${templates}/common.html/top" />	
+</div>
+
+
+<div id="account">
+
+	<div class="cotainer">
+		<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/account-menu" />
+	</div>
+
+	<div class="container account-wrapper" id="inbox">
+	
+		<tal:block tal:condition="not:images">
+			<h2 class="center append-bottom prepend-top">No Images in inbox</h2>
+		</tal:block>
+		
+		<tal:block tal:condition="images">
+	
+		<h1>Your inbox</h1>
+		<p>Inbox is the place for images that don't belong in an album. Please move them to an album</p>
+		
+		
+		<h3>Quickly move all images to a new album</h3>
+		<div class="account-content-box">
+			
+			
+			<label>New album</label>
+			<input type="text" class="title" id="new-album-name"/>
+			
+			or
+			
+			<select class="albumlist" id="albumlist" />
+			
+			<button class="extra-large" id="move-images">Move to album</button>
+		
+		</div>
+		
+		
+		<h3>Images in your inbox</h3>
+		<div class="account-content-box">
+			<ul id="images">
+				<tal:block tal:repeat="image images">
+					<li>
+						<a href="${image/screensize}" class="fancybox" rel="inbox">
+							<img src="${image/thumbnail}" alt="" rel="${image/id}"/>
+						</a>
+					</li>
+				</tal:block>
+			</ul>
+		</div>
+		</tal:block>
+		
+	</div>
+
+</div>
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="${templateroot}/${templates}/common.html/footer" />
+		<div metal:use-macro="${templateroot}/${templates}/account/common.html/footer" />
+	</div>
+</div>	
+
+<script type="text/javascript">
+	//<![CDATA[
+	//init
+	$(document).ready( function() {
+	
+		$('a.fancybox').fancybox();
+	
+		var albumid = 0;
+	
+		var result = $.ef( 'albums.enum' );
+		
+		if( result ) {
+			$(result.albums).each( function(i, item) {
+				$('select.albumlist').append(
+					$('<option/>', {
+						'value'	:	item.id,
+						'text'	:	item.title
+					})
+				)
+			});
+		}
+		
+		$('button#move-images').click( function() {
+		
+			if( $('#new-album-name').val().length > 0) {
+				var newalbum = $.ef( 'album.create', {
+					'title': $('#new-album-name').val()
+				});
+				
+				if(newalbum) {
+					albumid = newalbum.album.id;
+					moveImages( albumid );
+				}
+				
+			} else {
+				albumid = $('select#albumlist').val();
+				
+				console.log( albumid );
+				
+				moveImages( albumid );	
+			}
+		
+		});
+		
+	});
+	
+	function moveImages( albumid ) {
+	
+		var images = [];
+	
+		$('#images li a').each( function(i, item) {
+			images.push( $('img', item).attr('rel') )
+		})
+		
+		console.log( albumid, images )
+	
+		var movedimages = $.ef( 'images.move', {
+			'images': images.toString(), 
+			'albumid': albumid 
+		});
+		console.log( movedimages );
+
+	}
+	//]]>
+</script>
+
+</body>
+</html>
+

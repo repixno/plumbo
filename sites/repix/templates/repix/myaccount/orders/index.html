@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">My orders</tal:block>
+	
+	<style type="text/css">
+		td.status { padding: 0;}
+		
+		.status div { border: none; margin: 0;}
+		
+		td.status  {border-left:none;}
+		div.nextArrow, div.lasArrow {background-position:right center;background-repeat:no-repeat;}
+		div.nextArrow {background-image:url('//static.repix.no/css/portals/eurofoto/backgrounds/arrow_next.png');}
+		div.lasArrow {background-image:url('//static.repix.no/css/portals/eurofoto/backgrounds/backgrounds/arrow_last.png');}
+		div.percentOffer {position:relative}
+		.success {
+			background: #E6EFC2;
+			color: #264409;
+			border-color: #C6D880;
+			padding: .8em;
+		}
+		table{
+			width: 100%;
+			border: 1px solid #eee;
+		}
+		table td, table th {
+			border-left: 1px solid #eee;
+			border-bottom: 1px solid #eee;
+			padding: 12px;
+		}
+		.error {
+			background: #FBE3E4;
+			color: #8a1f11;
+			border-color: #FBC2C4;
+			padding: .8em;
+		}
+		
+		
+	</style>
+</head>
+
+<body>
+	
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+				<div id="repixpage-main">
+			<aside id="repixpage-hero" class="js-fullheight">
+				<div class="repixpage-narrow-content">
+
+		
+		<div class="row">
+			<div class="col-md-12">
+				<!-- use if menu is needed -->
+				<div tal:define="global menuitem string:orders" metal:use-macro="../common.html/menu" />
+			</div>
+			<div class="col-md-9">
+					<!-- if no menu is used use id="widecontent" -->
+				<div class="col-md-12">
+			
+					<form tal:condition="equal:session/userid, 969748" method="get" action="/myaccount/orders/utestemme">
+						<label for="utorderid">Søk Id</label>
+						<input type="text" name="utorderid"/>
+						<input type="submit" value="Søk"/>
+					</form>
+					
+					
+					<tal:block tal:condition="not:orders">
+						<div class="center" style="margin-top: 150px">
+							<h1 i18n:translate="">No orders</h1>
+							<h3><a href="${url:/products/}" i18n:translate="">Go shop</a></h3>
+						</div>
+					</tal:block>
+					
+					<tal:block tal:condition="orders">	
+				
+						<h2 class="bottom yanoneregular" i18n:translate="">My orders</h2>
+						<p i18n:translate="">All your orders</p>
+			
+						<table class="">
+						<tr>
+							<th i18n:translate="">Order ID</th>
+							<th i18n:translate="">Date</th>
+							<th i18n:translate="">Received</th>
+							<th i18n:translate="">Producing</th>
+							<th i18n:translate="">Produced</th>
+							<th i18n:translate="">Sent</th>
+							<th i18n:translate=""></th>
+						</tr>
+						<tal:block tal:repeat="order orders">
+							<tr id="$order_${order/orderid}">
+								<th tal:content="order/orderid" class="order-id"></th>
+								<td tal:content="order/date"></td>
+								<tal:block tal:condition="not:order/status/isdeleted">
+									<td tal:condition="order/status/isreceived" class="status">
+										<div class="isreceived success nextArrow" i18n:translate="">Received</div>
+									</td>
+									<td tal:condition="not:order/status/isreceived" class="status">
+										<div class="NOTreceived error nextArrow">&nbsp;</div>
+									</td>
+									<td tal:condition="order/status/isproduction" class="status">
+										<div class="isproduction success nextArrow" i18n:translate="">In production</div>
+									</td>
+									<td tal:condition="not:order/status/isproduction" class="status">
+										<div class="NOTproduction error nextArrow">&nbsp;</div>
+									</td>
+									<td tal:condition="order/status/isproduced" class="status">
+										<div class="isproduced success nextArrow" i18n:translate="">Produced</div>
+									</td>
+									<td tal:condition="not:order/status/isproduced" class="status">
+										<div class="NOTproduced error nextArrow">&nbsp;</div>
+									</td>
+									<td tal:condition="order/status/issent" class="status">
+										<div class="issent success lastArrow" i18n:translate="">Sent</div>
+									</td>
+									<td tal:condition="not:order/status/issent" class="status">
+										<div class="isnotsent error lastArrow">&nbsp;</div>
+									</td>
+								</tal:block>
+								
+								<tal:block tal:condition="order/status/isdeleted">
+									<td colspan="4" class="status deleted center">
+										<div class="error isDeleted center" i18n:translate="">The order is cancelled</div>
+									</td>
+								</tal:block>
+								
+								<td>
+									<a tal:attributes="href string:/myaccount/orders/info/${order/id}" i18n:translate="">View order</a>
+								</td>
+							</tr>
+						</tal:block>
+						</table>
+					</tal:block>
+				</div>
+			</div>
+		</div>
+	
+
+	
+	
+
+
+				</div>
+			</aside>
+		</div>
+
+
+
+</body>
+</html>

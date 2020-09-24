@@ -1,0 +1,520 @@
+<tal:block metal:define-macro="javascript">
+	<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+	<script>
+		WebFont.load({
+		  custom: {
+		    families: ['KidprintMTStd-Bold', 'Populaire'],
+		    urls: ['/stabburetstatic/fonts.css']
+		  }
+		});
+	</script>
+</tal:block>
+
+<tal:block metal:define-macro="stylesheet">
+		<style type="text/css">
+	    body{
+		background: #ffdb00;
+		-webkit-background-size: 1400px 1750px;
+		background-image: url('${static:css/portals/stabburet/web/images/background-pre.jpg}');
+		background-repeat: no-repeat;
+		background-position: top;
+		background-attachment: scroll;
+	    }
+	    .canvas-container{
+		margin:0px auto;
+	    }
+	    h4, label{
+		color:#ef321b;
+		font-family: 'KidprintMTStd-Bold';
+		font-size: 2.3em;
+	    }
+	    h3, label{
+		color:#0199d8;
+		font-family: 'populaire';
+		font-size: 2.3em;
+	    }
+	    label{
+		font-weight: normal;
+	    }
+	    div.desktoplabel{
+		width: 110px;
+	    }
+	    
+	    .share span{
+		margin-left: 20px;
+		cursor: pointer;
+	    }
+	    .header{
+		background-image: url('${static:css/portals/stabburet/web/images/pretop.png}');
+		position: relative;
+		top: 0px;
+		margin: 0px;
+	    }
+	    .footer{
+		background-image: url('${static:css/portals/stabburet/web/images/footerbackground.png}');
+	    }
+	    .footer2{
+		background-image: url('${static:css/portals/stabburet/web/images/footerbackground2.png}');
+	    }
+	    .center{
+		text-align: center;
+	    }
+	    .countdown{
+		background-image: url('${static:css/portals/stabburet/web/images/countdownback.png}');
+		width: 315px;
+		height: 107px;
+		margin:0px auto;
+		vertical-align: middle;
+	    }
+	    .countdown div{
+		
+	    }
+	    .desc { margin: 5px 3px; }
+	    .desc div {
+	      float: left;
+	      font-family: Arial;
+	      width: 65px;
+	      margin-right: 32px;
+	      font-size: 17px;
+	      font-weight: bold;
+	      color: #ef321b;
+	      font-family: 'FairplexWideOT-Med';
+	    }	    
+	
+	.kjopforsiden{
+		position: absolute;
+		top: -5px;
+		left: 200px;
+		width: 26%;
+	    }
+	select, input {
+		width: 170px;
+		background-color: #fff;
+		border: 1px solid #0094d3;
+	    }
+	.btn-stabburet {
+		color: #ffffff;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+		font-family: 'populaire';
+		background-color: #0078aa;
+		background-image: -moz-linear-gradient(top, #0092cf, #0078aa);
+		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0092cf), to(#0078aa));
+		background-image: -webkit-linear-gradient(top, #0092cf, #0078aa);
+		background-image: -o-linear-gradient(top, #0092cf, #0078aa);
+		background-image: linear-gradient(to bottom, #0092cf, #0078aa);
+		background-repeat: repeat-x;
+		border-color: #0078aa #0078aa #0092cf;
+		border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0092cf', endColorstr='#0078aa', GradientType=0);
+		filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+		padding: 15px 10px 10px 10px;
+		font-size: 2em;
+		-webkit-border-radius: 12px;
+		-moz-border-radius: 12px;
+		border-radius: 12px;
+	}
+	.btn:hover {
+		color: #FFF;
+		background-color: #0078aa;
+	}
+	
+.btn.btn-default{
+	
+	color: #020202;
+	background-image: linear-gradient(to bottom,#fff,#fedd00);
+}
+
+	</style>
+</tal:block>
+
+<tal:block metal:define-macro="head">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="${static:css/portals/stabburet/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+    <link href="${static:css/portals/stabburet/web/css/redmond/jquery-ui.min.css}" rel="stylesheet" />
+	<link href="${static:css/portals/stabburet/web/css/main.css}?${version}" rel="stylesheet" media="screen" />
+	<meta name="robots" content="noindex,nofollow"/>
+		
+	<link rel="icon" 
+      type="image/png" 
+      href="/somewhere/myicon.png" />
+	<title>Stabburet leverpostei</title>
+	<link rel="shortcut icon" href="${static:}css/portals/stabburet/web/images/favicon.ico" type="image/x-icon" />
+
+	
+	
+</tal:block>
+
+<tal:block metal:define-macro="header">
+	
+	<script type="text/javascript">/*<![CDATA[*/
+		var res = screen.width * screen.height;
+		if( res < 786432 ){
+			document.location.href = '/lag-lokk/setmobiledevice';
+		}
+	/*]]>*/</script>
+
+	<div class="row text-center hidden-phone header">
+		<div class="container">
+			<div class="likefacebook">
+					<iframe
+							src="//www.facebook.com/plugins/like.php?
+							href=https%3A%2F%2Fwww.facebook.com%2FStabburetLeverpostei&amp;
+							width&amp;
+							layout=button_count&amp;
+							action=like&amp;
+							show_faces=false&amp;
+							share=false&amp;
+							height=21&amp;
+							appId=131362673683184"
+							scrolling="no"
+							frameborder="0"
+							style="	border:none;
+									overflow:hidden;
+									height:21px;
+									width: 90px;"
+							allowTransparency="true">
+					</iframe>
+			</div>
+			<img  src="${static:css/portals/stabburet/web/images/preheader.png}" alt="LAG LOKK MED DITT BILDE"/>
+		</div>
+	</div>
+</tal:block>
+
+
+
+<tal:block metal:define-macro="footer">
+	<div class="footer text-center">
+		<div>
+			<img src="${static:css/portals/stabburet/web/images/footer.png}" />
+		</div>
+		<div>
+			<img src="${static:css/portals/stabburet/web/images/kundeservice.png}" />
+			<img src="${static:css/portals/stabburet/web/images/email.png}" />
+			<a id="rulesbutton" href="/lag-lokk/kampanjeregler"><img src="${static:css/portals/stabburet/web/images/rules.png}" /></a>
+			<!--<a id="informasjonbutton" href="/lag-lokk/informasjon"><img src="${static:css/portals/stabburet/web/images/rules.png}" /></a>
+			<a id="informasjonbutton2" href="/lag-lokk/informasjon2"><img src="${static:css/portals/stabburet/web/images/rules.png}" /></a>-->
+		</div>
+	</div>
+	
+	<div id="rule" class="hide">
+		<div tal:content="structure cms:body:bdfae130-4c73-4c7c-98eb-c0a769bddec2" />
+	</div>
+	
+	
+		<div id="informasjon" class="hide">
+		<div tal:content="structure cms:body:d63f1098-f35f-4cca-bd87-44893a669b11" />
+	</div>
+	
+	
+	<div id="orklainfoside" class="hide">
+		<!--<div tal:content="structure cms:body:5bd490c4-349e-4c46-aac2-cab20b8f9631" />-->
+		
+		<!--Ny for 2018-->
+		<div tal:content="structure cms:body:d63f1098-f35f-4cca-bd87-44893a669b11" />
+		
+	</div>
+	
+	
+	<div id="informasjon2" class="hide">
+		<div tal:content="structure cms:body:6902e31f-c7ea-42ce-8bf1-f39e7a95cc4d" />
+	</div>
+	
+	
+	<!--Ny artikkel 2018 om Japan Photo nyhetsbrev-->
+		<div id="informasjon3" class="hide">
+		<div tal:content="structure cms:body:7dd228ce-b34f-4178-98b8-a1f933cf41a8" />
+	</div>
+	
+	
+	<script>
+		$( function(){
+			
+			$(document).on( 'click', '#rulesbutton', function(){
+					$('#rule').dialog({
+						width: 990,
+						modal: true,
+						title: "Kampanjeregler",
+						buttons: {
+						Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			
+			$(document).on( 'click' , '.ui-widget-overlay' ,function () {
+				$("#rule").dialog( "close" );
+			});
+			
+			});
+		
+		
+		
+		
+		$( function(){
+			
+			$(document).on( 'click', '#informasjonbutton', function(){
+					$('#informasjon').dialog({
+						width: 990,
+						modal: true,
+						title: "Informasjon",
+						buttons: {
+						Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			
+			$(document).on( 'click' , '.ui-widget-overlay' ,function () {
+				$("#informasjonbutton").dialog( "close" );
+			});
+			
+			});
+		
+		$( function(){
+			
+			$(document).on( 'click', '#informasjon2button', function(){
+					$('#informasjon2').dialog({
+						width: 990,
+						modal: true,
+						title: "Annonser",
+						buttons: {
+						Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			
+			
+			
+			$( function(){
+			
+			$(document).on( 'click', '#informasjon3button', function(){
+					$('#informasjon3').dialog({
+						width: 990,
+						modal: true,
+						title: "asas",
+						buttons: {
+						Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+		
+		
+		
+		$( function(){
+			
+			$(document).on( 'click', '#orklainfosidebutton', function(){
+					$('#orklainfoside').dialog({
+						width: 990,
+						modal: true,
+						title: "Tilpassninger",
+						buttons: {
+						Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			
+			$(document).on( 'click' , '.ui-widget-overlay' ,function () {
+				$("#orklainfoside").dialog( "close" );
+			});
+			
+			});
+		
+	</script>
+   
+</tal:block>
+
+<tal:block metal:define-macro="footer2">
+	<div class="footer2 text-center">
+		<div class="logodinmerkelapp" style="margin: 0 0 0 0 ;" >
+			<a  href="http://www.dinmerkelapp.no"style=" font-family: Populaire; color: #ffffff; font-size: 1.9em; letter-spacing: 2px;">I sammarbeid med:
+			<img style="margin: 20px 21px 20px 20px;;"  src="${static:css/portals/stabburet/web/images/logo_2018.png}" />
+			</a>
+		</div>
+		<div >
+			
+			
+			<a style=" font-family: Populaire; color: #ffffff; font-size: 1.9em; letter-spacing: 2px;">kundeservice 57883500</a>
+			<a style="color: #fff; font-size: 23px;">&bull;</a>
+			<a href="mailto:post@dinmerkelapp.no" style="font-family: Populaire; color: #ffffff; font-size: 1.9em; letter-spacing: 2px;">Post@dinmerkelapp. no</a>
+			<a style="color: #fff; font-size: 23px;">&bull;</a>	
+				<a id="rulesbutton" href="rules" style="font-family: Populaire; color: #ffffff; font-size: 1.9em; letter-spacing: 2px;">se reglene her</a>
+			
+		</div>
+		<div style="width:100%; background: #0075a5; margin: 0px 0; padding: 1px 0px;">
+			<a href="http://stabburetleverpostei.no"><h4 style="color: #fff; font-family: Populaire;font-size: 1.9em;line-height: 100%;">< Tilbake til stabburetleverpostei.no</h4></a>
+		</div>
+	</div>
+	
+	
+	
+	<div id="rule" class="hide">
+		<div tal:content="structure cms:body:bdfae130-4c73-4c7c-98eb-c0a769bddec2" />
+	</div>
+	
+	
+	<div id="informasjon" class="hide">
+		<div tal:content="structure cms:body:d63f1098-f35f-4cca-bd87-44893a669b11" />
+	</div>
+	
+	
+	<div id="orklainfoside" class="hide">
+		<div tal:content="structure cms:body:5bd490c4-349e-4c46-aac2-cab20b8f9631" />
+	</div>
+	
+	
+	
+	
+	<div id="informasjon2" class="hide">
+		<div tal:content="structure cms:body:6902e31f-c7ea-42ce-8bf1-f39e7a95cc4d" />
+	</div>
+	
+	
+	<div id="informasjon3" class="hide">
+		<div tal:content="structure cms:body:7dd228ce-b34f-4178-98b8-a1f933cf41a8" />
+	</div>
+	
+	
+		
+		
+
+	<script>
+		$( function(){
+			
+			$(document).on( 'click', '#rulesbutton', function(){
+					$('#rule').dialog({
+						width: 990,
+						modal: true,
+						title: "Kampanjeregler",
+						buttons: {
+						Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			
+			$(document).on( 'click' , '.ui-widget-overlay' ,function () {
+				$("#rule").dialog( "close" );
+			});
+			
+			});
+		
+		
+		
+		
+		$( function(){
+			
+			$(document).on( 'click', '#informasjonbutton', function(){
+					$('#informasjon').dialog({
+						width: 990,
+						modal: true,
+						title: "Informasjon",
+						buttons: {
+						Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			
+			$(document).on( 'click' , '.ui-widget-overlay' ,function () {
+				$("#informasjon").dialog( "close" );
+			});
+			
+			});
+		
+		
+		
+		$( function(){
+			
+			$(document).on( 'click', '#informasjon2button', function(){
+					$('#informasjon2').dialog({
+						width: 990,
+						modal: true,
+						title: "Informasjon2",
+						buttons: {
+						Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			
+			$(document).on( 'click' , '.ui-widget-overlay' ,function () {
+				$("#informasjon2").dialog( "close" );
+			});
+			
+			});
+		
+		
+		
+		$( function(){
+			
+			$(document).on( 'click', '#informasjon3button', function(){
+					$('#informasjon2').dialog({
+						width: 990,
+						modal: true,
+						title: "Tilbud fra Repix",
+						buttons: {
+						Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			
+			$(document).on( 'click' , '.ui-widget-overlay' ,function () {
+				$("#informasjon3").dialog( "close" );
+			});
+			
+			});
+		
+			
+			
+			
+		
+		
+		$( function(){
+			
+			$(document).on( 'click', '#orklainfosidebutton', function(){
+					$('#orklainfoside').dialog({
+						width: 990,
+						modal: true,
+						title: "orklainfoside",
+						buttons: {
+						Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			
+			$(document).on( 'click' , '.ui-widget-overlay' ,function () {
+				$("#orklainfoside").dialog( "close" );
+			});
+			
+			});
+		
+	</script>
+   
+</tal:block>

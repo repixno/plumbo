@@ -1,0 +1,898 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title i18n:translate="">Content editor -  Eurofoto Admin</title>
+	<tal:block metal:use-macro="../common.html/css" />
+	<script src="http://www.google.com/jsapi?key=ABQIAAAA1XbMiDxx_BTCY2_FkPh06RRaGTYH6UMl8mADNa0YKuWNNa8VNxQEerTAUcfkyrr6OwBovxn7TDAH5Q"></script>
+	<script type="text/javascript" src="/js/admin.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/ckeditor/ckeditor.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/ckeditor/config.js?${version}"></script>
+	<script type="text/javascript">
+		google.load("language", "1");
+	</script>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js" type="text/javascript"></script> 
+   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" type="text/javascript"></script> 
+   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/i18n/jquery-ui-i18n.min.js" type="text/javascript"></script>
+
+	<script tal:condition="exists:language" type="text/javascript" tal:content="structure string:var LANGUAGE = '${language}';">
+		var LANGUAGE = 'en_US';
+	</script>
+
+   <script type="text/javascript">
+
+   var productid = window.location.href.split('#')[0].split('/').pop();
+
+   $(function() {
+
+      var fixWidthHelper = function(e, ui) {
+         ui.children().each(function() {
+            $(this).width($(this).width());
+         });
+         return ui;
+      };
+
+      $( '#productoptionslist tbody' ).sortable();
+      $( '#productoptionslist tbody' ).disableSelection();
+      $( '#productoptionslist tbody' ).sortable({
+         helper: fixWidthHelper,
+         axis: 'y',         
+         placeholder: 'ui-state-highlight',
+         update: function( event, ui ) {
+            var sorting = '';
+
+            $('.item').each(function( index, value ) {
+               //sortings = items + index + ':' + value.id + ','; 
+               sorting = sorting + value.id + ',';
+            });
+
+            sorting = sorting.substring( 0, sorting.length -1 );
+
+            $.post( '/content/actions/productoptionsorting', {
+               'sorting': sorting,
+               'productid': productid
+            }, function( data ) {
+               if ( !data.result ) alert( 'Something went horribly wrong.' );
+            }, 'json' );
+         }
+      });
+   });
+   </script>
+
+	<!-- Table API -->
+	<script type="text/javascript" src="/js/admin/sortabletable.js"></script>
+	
+	<style>
+   	.ui-state-highlight { height: 50px; line-height: 100px; }
+   	.imagelist img { cursor: move; }
+	</style>
+
+</head>
+
+<body>
+   <div tal:condition="exists:historicalprices" id="add-historical-price-dialog" class="hide" title="Add Historical Price" i18n:attributes="title"> 
+   	<form> 
+   	<fieldset> 
+   		<div>
+            <label for="addhistoricalportal">Portal</label> 
+            <select id="addhistoricalportal" class="text ui-widget-content ui-corner-all">
+            </select>
+         </div>
+   		<div>
+            <label for="addhistoricalprice">Price</label> 
+            <input type="text" id="addhistoricalprice" class="text ui-widget-content ui-corner-all"/> 
+         </div>
+   	</fieldset> 
+   	</form> 
+   </div>
+	<div id="container" class="container">
+    	<div id="header">
+			<h2>Eurofoto Admin <span class="quiet">content editor</span></h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		<tal:block metal:use-macro="../common.html/languages" />
+		
+		<div id="content" class="span-20">
+			<h3>
+				<span tal:content="header|default">Not Found</span>
+			</h3>
+			
+			<div id="languagetabs">
+				<ul>
+					<li tal:repeat="language languages">
+						<a href="#block_${language/segment}">
+							<img src="http://static.repix.no/gfx/flags/${language/country}.png"/>
+						</a>
+					</li>
+				</ul>	
+				
+				<form id="saveform" enctype="multipart/form-data" onsubmit="" action="" method="post" name="save"> 
+				<tal:block tal:repeat="language languages">
+					<div id="block_${language/segment}" class="span-20 last langauge">
+                  <div class="span-18">
+                     <a href="javascript:translateAll();" i18n:translate="" class="small">
+                     Translate all untranslated texts from US English<br />
+                     </a>			
+				  </div>
+				  <div class="span-2 last"><a href="#" class="revison" id="${language/segment}">.</a></div>
+                  <div class="span-9">
+						   <!--title -->
+							<label i18n:translate="">Title</label> 
+							<a href="#" onclick="translateContent( 'title', '${language/segment}', '#urlname_${language/segment}' ); return false;" i18n:translate="" class="small">
+								Translate from US English
+							</a><br />
+							
+							<input class="title" type="text" name="save[${language/segment}][title]" value="${language/title}"
+								id="title_${language/segment}" 
+							/>
+							<br />
+							
+							<label i18n:translate="">Short Title</label> 
+							<input class="title" type="text" name="save[${language/segment}][shorttitle]" value="${language/shorttitle}"
+								id="shorttitle_${language/segment}" 
+							/>
+							<br />
+							
+							<label i18n:translate="">URL Name</label> <a id="auto_${language/segment}" class="small">Auto generate url</a><br/>
+							<input type="text" class="text" name="save[${language/segment}][urlname]" value="${language/urlname}" id="urlname_${language/segment}"/>
+							
+							<script type="text/javascript">
+							//<![CDATA[
+								$('#auto_${language/segment}').click( function() {
+									urlize( $('#urlname_${language/segment}'), $('#title_${language/segment}').val() );
+									return false;
+								});
+							//]]>
+							</script>
+						</div>
+						
+						<div class="span-11 last">
+							<!-- ingress -->
+							<label i18n:translate="">Ingress</label>
+							<a href="#" onclick="translateContent( 'ingress', '${language/segment}' );  return false;" i18n:translate="" class="small">
+								Translate from US English
+							</a>
+							<br />
+							<textarea 
+								id="ingress_${language/segment}" 
+								name="save[${language/segment}][ingress]" 
+								tal:content="language/ingress"
+								class="ingress"
+								style="height: 7em;">
+							</textarea>
+						</div>
+
+						<br class="clear clearfix" />
+
+						<!-- body -->
+						<div class="span-19 last">
+							<label i18n:translate="">Body *</label>
+							<a href="#" onclick="translateContent( 'body', '${language/segment}' ); return false;" i18n:translate="" class="small">
+								Translate from US English
+							</a>
+							<br />
+							<tal:block tal:condition="exists:manual">
+							  <textarea id="body_${language/segment}" 
+								name="save[${language/segment}][body]" 
+								tal:attributes="value language/body" 
+								style="width: 750px;"
+								class="text" tal:content="language/body"></textarea>
+							</tal:block>
+							<tal:block tal:condition="not:exists:manual">
+							<input 
+								type="hidden" 
+								id="body_${language/segment}" 
+								name="save[${language/segment}][body]" 
+								tal:attributes="value language/body" 
+								class="body" 
+							/>
+							<input type="hidden" id="body_${language/segment}___Config" />
+							<div 
+								id="body_${language/segment}___Frame" 
+								tal:content="structure language/body" 
+								class="editable body">
+							</div>
+							</tal:block>
+						</div>
+					</div> <!-- end class language -->
+				</tal:block> <!-- end repeat languages -->
+				
+				<div class="language ui-tabs-panel ui-widget-content ui-corner-bottom">
+					<div class="span-5">
+						<label i18n:translate="" valign="top">Valid from</label><br />
+						<input type="text" name="save[common][validfrom]" value="${common/validfrom}" class="datepicker short-text" /><br />
+					</div>
+					<div class="span-5">
+						<label i18n:translate="" valign="top">Valid to</label><br />
+						<input type="text" name="save[common][validto]" value="${common/validto}" class="datepicker short-text" /><br />
+					</div>
+					<div class="span-5 last">
+						<label i18n:translate="" valign="top">Template</label><br />
+						<select type="text" name="save[common][template]" class="short-text">
+						<tal:block tal:repeat="template common/templates">
+						   <option tal:condition="template/selected" selected="1" value="${template/id}" tal:content="template/title">test</option>
+						   <option tal:condition="not:template/selected" value="${template/id}" tal:content="template/title">test</option>
+					   </tal:block>
+						</select><br />
+					
+						<tal:block tal:condition="exists:common/isproduct">
+							<label i18n:translate="" valign="top">Image</label>
+							<input type="file" name="save[common][image]"/><br />
+         				<div tal:condition="exists:common/images">
+         				   <ul id="sortable" class="imagelist">
+               				<li id="${repeat/image/key}" class="productimage" tal:repeat="image common/images">
+               					<img tal:condition="image" src="${static:}${image}" alt="Product Image" style="display: inline;" /> 
+                     			<a href="#">Delete this</a>
+               				</li>
+               		   </ul>
+							</div>
+						</tal:block>
+						
+						<tal:block tal:condition="exists:common/ispaymenttype">
+							<label i18n:translate="" valign="top">Refid</label>
+         				<div tal:condition="exists:common/refid">
+         				  <input type="text" name="save[common][refid]" id="refid-selector" value="${common/refid}" class="text" /><br />
+							</div>
+						</tal:block>
+						
+						<tal:block tal:condition="exists:common/isdeliverytype">
+							<label i18n:translate="" valign="top">Refid</label>
+         				<div tal:condition="exists:common/refid">
+         				  <input type="text" name="save[common][refid]" id="refid-selector" value="${common/refid}" class="text" /><br />
+							</div>
+						</tal:block>
+						
+					</div>
+					
+					<div class="span-5">
+						<label i18n:translate="" valign="top">Grouping</label><br />
+						<input type="text" name="save[common][grouping]" value="" tal:attributes="value common/grouping|default" class="text" style="text-transform: lowercase; width: 180px" /><br />
+					</div>
+					
+					<!-- TODO: Make this part of an ADVANCED view -->
+					<div class="span-5">
+						<label i18n:translate="" valign="top">Identifier</label><br />
+						<input type="text" id="identifier-selector" value="${common/identifier}" readonly="1" class="text" /><br />
+					</div>
+					<br/>
+					<br />
+               <div class="span-19 last">
+      				   <!-- Comment -->
+      				   <label i18n:translate="">Comment</label>
+      					<br />
+      					<textarea 
+      						id="comment" 
+      						name="save[common][comment]" 
+      						tal:content="common/comment|default"
+      						class="customcss"
+      						style="height: 7em;  width: 100%;"></textarea>
+      		   </div>
+      		   
+               <br />
+					<br />
+					
+               <div class="span-19 last" tal:condition="exists:historicalprices">
+      				   <!-- Historical Price -->
+      				   <label i18n:translate="">Historical Price</label>
+      					<br />
+      					<ul id="historicalprices">
+                        <li tal:repeat="historicalprice historicalprices" id="historicalprice-${historicalprice/id}">
+                           <span class="span-5" tal:content="historicalprice/portal|default">EF-997</span>
+                           <span class="span-5" tal:content="formatprice:historicalprice/price">0.00</span>
+                           <span class="span-2"><a href="#" class="delete-historicalprice">Delete</a></span>
+						   
+                           <span class="span-3" tal:condition="historicalprice/active">Set active: <input type="checkbox" name="activate-historical" checked="checked"/></span>
+                           <span class="span-3" tal:condition="not:historicalprice/active">Set active: <input type="checkbox" name="activate-historical"/></span>
+                        </li>
+      					</ul>
+      					<a href="javascript:;" id="add-historical-price-button" i18n:translate="">Add</a>
+      		   </div>
+      		   
+      		   <br />
+					<br />
+               
+               <div class="span-20">
+                  <label i18n:translate="" valign="top">Default menu url</label><br />
+                  <select name="save[common][defaultmenuid]">
+                  	<option value="" i18n:translate="">No url</option>
+                  	<tal:block tal:repeat="item published">
+                     <option value="${item/id}" tal:condition="equal:item/id,item/selected,true" selected="1">${item/url}</option>
+                     <option value="${item/id}" tal:condition="not:equal:item/id,item/selected,true">${item/url}</option>
+                  	</tal:block>
+                  </select>
+               </div>
+					<br/>
+					
+					<tal:block tal:define="global showexpandedoptions">0</tal:block>
+               <tal:block tal:condition="common/customcss">
+                  <tal:block tal:define="global showexpandedoptions">1</tal:block>
+               </tal:block>
+               <tal:block tal:condition="common/customjs">
+                  <tal:block tal:define="global showexpandedoptions">1</tal:block>
+               </tal:block>
+               <tal:block tal:condition="common/attachments">
+                  <tal:block tal:define="global showexpandedoptions">1</tal:block>
+               </tal:block>
+               
+               <a href="#advanced-settings" id="advanced" i18n:translate="">Show advanced...</a>
+               <div id="advanced-settings" class="${conditionalmatch:showexpandedoptions,1,,hide}">
+                  <div class="span-19 last">
+      				   <!-- Custom css -->
+      				   <label i18n:translate="">Custom css</label>
+      					<br />
+      					<textarea 
+      						id="customcss" 
+      						name="save[common][customcss]" 
+      						tal:content="common/customcss|default"
+      						class="customcss"
+      						style="height: 7em;  width: 100%;"></textarea>
+      				</div>
+      				
+      				<div class="span-19 last">
+      				   <!-- Custom js -->
+      				   <label i18n:translate="">Custom js</label>
+      					<br />
+      					<textarea 
+      						id="customjs" 
+      						name="save[common][customjs]" 
+      						tal:content="common/customjs|default"
+      						class="customcss"
+      						style="height: 7em; width: 100%;"></textarea>
+      				</div>
+      				
+      				<div class="span-19 last">
+      				<label i18n:translate="">Attachments</label>
+      				<ul id="attachments">
+      				  <li tal:repeat="attachment common/attachments">
+      				     <img src="http://static.repix.no/images/attachments/thumbs/height/64/${entityid}/${attachment}" height="64"/><br />
+      				     <span>${attachment}</span> | ${repeat/attachment/key} <a title="${repeat/attachment/key}" href="#">Delete</a>
+      				  </li>
+      				</ul>
+      				<iframe src="/content/attachments/upload/${entityid}"></iframe>
+      				</div>
+
+			         <script language="JavaScript">
+			            function addAttachment( filename, slotid ) {
+			               $('#attachments').append( '<li><img src="http://static.repix.no/images/attachments/thumbs/height/64/${entityid}/'+filename+'" height="64"/><br /><span>'+filename+'</span> | '+slotid+' <a title="'+slotid+'" href="#">Delete</a></li>' );
+			               enableAttachmentDeletes();
+			            }
+			            function enableAttachmentDeletes() {
+			               $('#attachments a').click( function(){
+			                  if( confirm( 'Are you sure you want to delete this attachment? This action cannot be undone!!' ) ) {
+			                     var self = $(this);
+   			                  $.post( '/content/attachments/delete/${entityid}/'+$(this).attr('title'), {}, function( response ) {
+   			                     if( response.result ) {
+   			                        
+   			                        self.parent().fadeOut('slow');
+   			                        
+   			                     } else {
+   			                        
+   			                        alert( response.message );
+   			                        
+   			                     }
+   			                  }, 'json' );
+			                  }
+			                  return false;
+			               });
+			            }
+   	               enableAttachmentDeletes();
+			         </script>
+      				
+               </div>
+   			   <br/>
+   			   <br />
+   			   <hr />
+   			   <br />
+					
+					<div class="prepend-10 span-9 last right">
+						<p class="right">
+   						<button type="submit" id="saveAll" class="call-to-action" i18n:translate="">Save all changes</button>
+						</p>
+					</div>
+				</div>
+				<br class="clear clearfix" />
+				
+			</form>
+			
+            <div class="prepend-10 span-9 last right">
+               <p class="right">
+               <button i18n:translate="" onclick="window.location='${common/backlink}';">Back</button>
+               </p>
+            </div>
+
+         <tal:block tal:condition="not:equal:entityid,0">
+         <h3 i18n:translate="" tal:condition="exists:common/isproduct">Product options</h3>
+
+         <table tal:condition="exists:common/isproduct" id="productoptionslist">
+            <thead>
+   			   <tr>
+   			      <th i18n:translate="">Title</th>
+   			      <th i18n:translate="">Tags</th>
+   			      <th i18n:translate="">Valid to</th>
+   			      <th i18n:translate="">Actions</th>
+   			   </tr>
+            </thead>
+            <tbody>
+               <tal:block tal:repeat="option productoptions" tal:condition="exists:productoptions">
+   			      <tr class="item" id="${option/id}">
+   			         <td><a href="${option/editlink}">${option/items/title}</a></td>
+   			         <td><tal:block tal:repeat="tag option/items/tags">${tag}</tal:block></td>
+   			         <td><span style="background-color: red;" tal:condition="option/expired">${option/items/validto}</span></td>
+   			         <td>
+   			            <a href="${option/editlink}" i18n:translate="">Edit</a>
+   			            <a href="${option/deletelink}" i18n:translate="" class="delete-option">Delete</a>
+   			         </td>
+   			      </tr>
+               </tal:block>
+			   </tbody>
+   		</table>
+
+            <tal:block tal:condition="exists:addlink">
+               <div class="prepend-10 span-9 last right">
+				      <p class="right">
+                     <button i18n:translate="" onclick="window.location='${addlink}';">Add option</button>
+				      </p>
+			      </div>
+			      <br class="clear clearfix" />
+            </tal:block>
+   		</tal:block>
+			
+		</div>
+		
+	</div>
+	<tal:block metal:use-macro="common.html/content-menu" />
+	<div id="footer">
+	</div>
+</div>
+
+<div id="dialogWarning" i18n:attributes="title" title="Translations are missing">
+   <p>&nbsp;</p>
+   <div i18n:translate="">Are you sure you want to save?</div>
+	<button id="yes" class="call-to-action" i18n:translate="" >Yes</button>
+	<button id="no" class="call-to-action" i18n:translate="" >No</button>
+</div>
+
+<div id="dialogCriticalWarning" i18n:attributes="title" title="Translations are missing">
+   <p>&nbsp;</p>
+   <div i18n:translate="">Are you sure you want to save? This will result in a broken website when viewed in these languages.</div>
+	<button id="criticalyes" class="call-to-action" i18n:translate="" >Yes</button>
+	<button id="criticalno" class="call-to-action" i18n:translate="" >No</button>
+</div>
+
+<div id="dialogRevision" class="hide">
+		<h1>Revisions</h1>
+</div>
+
+<script type="text/javascript">
+	
+	var entityid = ${entityid};
+	
+	jQuery(document).ready(function() {
+	
+	$('.revison').click( function(){
+		
+		$('.revisioncontainer').remove();
+		
+		console.log( $(this).attr('id') );
+		console.log( entityid );
+		
+		$.post( '/content/api/revisions', {
+      		         'language': $(this).attr('id'),
+					 'textentityid': entityid
+      		      }, function( response ) {
+					
+					$('#dialogRevision').append( '<div class="revisioncontainer" />' );
+					
+					$( response.revisions ).each( function( id, revision  ) {
+						
+						$('.revisioncontainer').append( '<a href="/content/articles/revision/' + entityid + '/' + revision.textrevisionid  +'" class="revisionlink">' + revision.updated + '</a><br/>');
+						console.log( revision.textrevisionid );
+						
+					})
+		   
+		}, 'json' )
+		
+		$('#dialogRevision').dialog();
+		
+		return false;
+	})
+	
+	
+    jQuery("#dialogWarning").dialog({
+      bgiframe: true, autoOpen: false, height: 200, modal: true
+    });
+    jQuery("#dialogCriticalWarning").dialog({
+      bgiframe: true, autoOpen: false, height: 200, modal: true
+    });
+  });
+</script>
+
+<!--<script type="text/javascript" src="http://static.eurofoto.no/js/jquery-ui-1.7.1.custom.min.js"></script>-->
+
+<script type="text/javascript" language="javascript">
+   $('.delete-option').click( function() {
+      return confirm( '<tal:block i18n:translate="">Are you sure you want to remove this option permanently?</tal:block>' );
+   } );
+</script>
+
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+	var editor_body;
+
+	$(document).ready( function() {
+	
+	   $('#identifier-selector').click( function(){
+	      $(this).select();
+	   } );
+	   
+	   $('#sortable').sortable( {
+         placeholder: 'ui-state-highlight',
+         update: function( event, ui ) {
+            
+            var sorting = new Array();
+	         var i = 0;
+	         // Fetch current sorting
+	         $('#sortable li').each( function() {
+	            sorting[i++] = $(this).attr( 'id' );
+	         });
+            
+	         $.getJSON( '/content/actions/productimagesorting/' + productid + '/' + sorting, null, function() {
+	            
+	            // Reset the sorting id's
+	            var i = 0;
+               $('#sortable li').each( function() {
+	              $(this).attr( 'id', i++ );
+   	         });
+	         } );
+         }
+	   });
+	
+		$(function() {
+			$(".datepicker").datepicker(
+				{
+					changeMonth: true,
+					changeYear: true,
+					regional: 'no'
+				}
+			);
+		});
+		
+		// starts the tabs
+		$('#languagetabs').tabs();
+      
+	});
+	
+//]]>
+</script>
+
+<script type="text/javascript" language="javascript" tal:condition="not:exists:manual">
+
+
+   function translateAll() {
+          
+      var missingfields = '';   
+      
+      if ( $( '#ingress_en_US' ).val() == '') missingfields = '<tal:block i18n:translate="">Ingress</tal:block>, ';
+      if ( $( '#title_en_US' ).val() == '') missingfields += '<tal:block i18n:translate="">Title</tal:block>, ';
+      if ( $( '#body_en_US' ).val() == '') missingfields += '<tal:block i18n:translate="">Body</tal:block>, ';
+      if ( $( '#urlname_en_US' ).val() == '') missingfields += '<tal:block i18n:translate="">URL Name</tal:block>, ';
+      
+      missingfields = missingfields.substring( 0, missingfields.length - 2 );
+            
+      <tal:block tal:repeat="language languages">
+      translateContentValidated( 'ingress', '${language/segment}' );
+      translateContentValidated( 'title', '${language/segment}', '#urlname_${language/segment}' );
+      translateContentValidated( 'body', '${language/segment}' );
+      </tal:block>
+      
+      if ( missingfields == '' ) {
+         alert( '<tal:block i18n:translate="">Done translating all untranslated texts from US English!</tal:block>' );
+      } else {
+         alert( '<tal:block i18n:translate="">Done translating! Missing texts in US English:</tal:block> ' + missingfields );
+      }
+   }
+
+   function translateContentValidated( translate, language, urlname ) {
+
+      var emptystrings = new Array('NewProductOption', 'NyProductOption'); 
+      
+      var element = $( '#' + translate + '_' + language );
+      
+      for ( var key in emptystrings ) {
+         if ( element.val().trim().toLowerCase() == emptystrings[key].toLowerCase() ) element.val( '' );
+      }  
+      
+      if ( ( element.val().trim() == '' ) && ( language != 'en_US' ) ) translateContent( translate, language, urlname );
+   }
+
+	$(document).ready( function() {
+	   
+	   var id = '';
+      
+		var previous;
+		var isSwitching = false;
+		var current = document.location.href.split("#")[1];
+		if( !current ) current = 'body_nb_NO';
+		
+		// starts with norwegian
+		editor_body = CKEDITOR.replace( document.getElementById("body_nb_NO___Frame"), {toolbar: 'Eurofoto'} );
+		
+		// add actions for the delete image icons
+		$('.productimage').each( function() {
+		   
+	      var image = $('img', $(this)).attr('src').split('/').pop();
+	      $('a', $(this)).click( function() {
+	         
+	         if( confirm( '<tal:block i18n:translate="">Are you sure you want to permanently remove this image from this product?</tal:block>' ) ) {
+   	         var block = $(this);
+   	         $.getJSON( '/content/actions/productdeleteimage/'+productid+'/'+image, null, function() {
+   	            block.fadeOut();
+   	         } );
+	         }
+	         
+	         return false;
+	         
+	      });
+		   
+		});
+		
+		$('#saveAll').click( function() {
+		   
+         var missingstring = '';
+         var element;
+         
+         <tal:block tal:repeat="language languages">
+         element = $( '#ingress_${language/segment}' );
+         if ( element.val().trim() == '' ) {
+            missingstring += '<img src="http://static.repix.no/gfx/flags/${language/country}.png" alt="${language/name}" /> <tal:block i18n:translate="">Ingress</tal:block><br />\n';
+         }
+         element = $('#title_${language/segment}');
+         if ( element.val().trim() == '' ) {
+            missingstring += '<img src="http://static.repix.no/gfx/flags/${language/country}.png" alt="${language/name}" /> <tal:block i18n:translate="">Title</tal:block><br />\n';
+         }
+         element = $('#urlname_${language/segment}');
+         if ( element.val().trim() == '' ) {
+            missingstring += '<img src="http://static.repix.no/gfx/flags/${language/country}.png" alt="${language/name}" /> <tal:block i18n:translate="">URL Name</tal:block><br />\n';
+         }
+         element = $('#body_${language/segment}');
+         if ( element.val().trim() == '' ) {
+            missingstring += '<img src="http://static.repix.no/gfx/flags/${language/country}.png" alt="${language/name}" /> <tal:block i18n:translate="">Body</tal:block><br />\n';
+         }
+         </tal:block>
+         
+         if ( missingstring != '' ) {
+            
+            if ( ${published/length} == 0 ) {
+               id = '#dialogWarning';
+            } else {
+               id = '#dialogCriticalWarning';
+            }
+            
+            $(id).find( 'p' ).html(missingstring);
+            $(id).dialog( 'open' );
+            
+            return false;
+            
+         } else {
+            
+            if(current.panel){
+				$( 'input.body',current.panel ).attr( 'value', editor_body.getData() );
+			}
+			else if( current ){
+				$( '#' + current ).attr( 'value', editor_body.getData() );
+			}
+			   
+            return true;
+            
+         }
+		   
+		});
+		
+		$( '#criticalyes' ).click( function() {
+
+			if(current.panel){
+				$( 'input.body',current.panel ).attr( 'value', editor_body.getData() );
+			}
+			else if( current ){
+				$( '#' + current ).attr( 'value', editor_body.getData() );
+			}
+			
+			$( '#saveform' ).submit();
+			
+		});
+		
+      $( '#criticalno' ).click( function() {
+         
+        $( id ).dialog( 'close' );
+        
+      });
+      
+		$( '#yes' ).click( function() {
+
+			if(current.panel){
+				$( 'input.body',current.panel ).attr( 'value', editor_body.getData() );
+			}
+			else if( current ){
+				$( '#' + current ).attr( 'value', editor_body.getData() );
+			}
+			
+			
+			$( '#saveform' ).submit();
+			
+		});
+		
+      $( '#no' ).click( function() {
+         
+        $( id ).dialog( 'close' );
+        
+      });
+	
+		// when selecting a tab
+		$('#languagetabs').bind('tabsselect', function(event, ui) {
+			
+		   while( isSwitching ) $('body');
+		   
+		   isSwitching = true;
+		   
+			// setting the current for the saveAll-button
+			current = ui;
+			
+			// if there is a body editor and a previous
+			if(editor_body && previous) {
+				$('input.body', previous.panel ).attr('value', editor_body.getData() );
+				editor_body.destroy();
+
+			// first time a tab is changed from the staring-tab
+			}  else if(editor_body && !previous) {
+				$('input.body', current).attr('value', editor_body.getData() );
+				editor_body.destroy();
+			} 
+			
+			// inserting the CKeditor
+			var editorid = $('.editable.body', current.panel).attr('id');
+			editor_body = CKEDITOR.replace( document.getElementById( editorid ), {toolbar: 'Eurofoto'} );
+			
+			// remeber the previous tab the next time
+			previous = ui;
+			
+			isSwitching = false;
+			
+			return true;
+		   
+		});
+
+	});
+	
+</script>
+<script type="text/javascript" language="javascript" tal:condition="exists:historicalprices">
+
+	$(document).ready( function() {
+      
+		$('#add-historical-price-button').click( function() {
+		   $('#add-historical-price-dialog').dialog('open');
+		   return false;
+		});
+		
+		//<![CDATA[
+      $.post( '/menu/api/fetchportals', {}, function( response ) {
+		   
+		   $( response.portals ).each( function( id, portal ) {
+		      $('#addhistoricalportal').append( $('<option>').val( portal.id ).text( portal.title ) );
+		   });
+		   
+		}, 'json' )
+		//]]>
+      
+		$('#add-historical-price-dialog').dialog({
+			bgiframe: true,
+			autoOpen: false,
+			height: 330,
+			width: 500,
+			modal: true,
+			buttons: {
+				'Add': function() {
+				   portal = $('#addhistoricalportal').val();
+      		   price = $('#addhistoricalprice').val();
+      		   
+      		   if( price ) {
+      		      
+      		      // do something
+      		      $.post( '/content/products/historicalprice/add', {
+      		         'productid': '${entityid}',
+      		         'price': price,
+      		         'portal': portal
+      		      }, function( response ) {
+      		         
+      		         window.location.reload();
+      		        
+      		      }, 'json' );
+      		      
+      		   } else {
+
+      		      $('#addhistoricalprice').focus();
+      		      alert( 'Invalid price or portal!' );
+      		      
+      		   }
+      		      
+				},
+				'Cancel': function() {
+					$(this).dialog('close');
+				}
+			},
+			open: function() {
+			   itemNameField.val('');
+			},
+			close: function() {
+				itemNameField.val('').removeClass('ui-state-error');
+			}
+		}).find('form').submit(function(){
+		   createItem();
+		   return false;
+		});
+		
+		$('.delete-historicalprice').click( function() {
+		   
+		   var self = $(this);
+		   var priceid = self.parent().parent().attr('id').split('-')[1];
+		   var productid = '${entityid}';
+		   
+		   if( confirm( '<tal:block i18n:translate="">Are you sure you want to delete this historical price?</tal:block>' ) ) {
+   		   
+   		   $.post( '/content/products/historicalprice/delete', {
+   	         'productid': productid,
+   	         'priceid': priceid,
+   	      }, function( response ) {
+   	         
+   	         self.parent().parent().fadeOut('slow', function() {
+   	            $(this).remove();
+   	         });
+   	         
+   	      }, 'json' );
+   	      
+		   }
+	      
+	      return false;
+	      
+		});
+		
+		$('input[name=activate-historical]').change( function() {
+		   
+		   var self = $(this);
+		   var priceid = self.parent().parent().attr('id').split('-')[1];
+		   var productid = '${entityid}';
+   		   
+		   console.log( self.attr( 'checked' ) );
+		   
+   		   $.post( '/content/products/historicalprice/activate', {
+   	         'productid': productid,
+   	         'priceid': priceid,
+			 'active' : self.attr( 'checked' )
+   	      }, function( response ) {
+   	         
+   	        console.log( response );
+			//$(this).attr();
+   	         
+   	      }, 'json' );
+   	      
+
+	      
+	      return false;
+	      
+		});
+	
+	});
+	
+//<![CDATA[
+//]]>
+</script>
+
+<script type="text/javascript" language="javascript">
+   $(document).ready( function() {
+		$('#advanced').click(function(){
+		   $('#advanced-settings').toggle('slow');
+		});
+   } );
+</script>
+
+</body>
+</html>

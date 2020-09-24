@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Today's photo</tal:block>
+
+	<style type="text/css">
+		.imageconatiner {
+			overflow: hidden;
+		}
+	</style>
+
+</head>
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	<div id="content">
+		
+		<tal:block condition="exists: image">
+			<h2 class="hide">
+				<tal:block i18n:translate="">Image</tal:block>: 
+				<span class="quiet" tal:content="image/name | default">
+					<tal:block i18n:translate="">No image title</tal:block>
+				</span>
+			</h2>
+			
+			<div class="span-8 prepend-top">
+				<h2 i18n:translate="">Today's photo</h2>
+				<h4 style="margin-left: 10px" class="imagetitle editable quiet" tal:content="image/title | default" id="${image/id}">
+					<tal:block i18n:translate="">No image title</tal:block>
+				</h4>
+			</div>
+
+			<div class="span-16 last imageconatiner center">
+				<!-- the image -->
+				<img tal:attributes="src string: ${image/fullsize}&dx=630&dy=400" alt="${image/name}" class="bigimage" id="image"/>
+			</div>
+			
+			<div class="span-10 prepend-top">
+				<p class="" id="description_${image/id}"> 
+					<tal:block tal:condition="image/description" tal:content="image/description" />
+				</p>
+			</div>
+		</tal:block>
+		
+		<tal:block condition="not: exists: image">
+			<h2 i18n:translate="">No image here</h2>
+			<p i18n:translate="">Sorry, but here is no image.</p>
+		</tal:block>
+		
+	</div>
+	
+	<tal:block tal:content="structure cms:body:3670a51b-5759-4fa8-b7f5-deaab58ebb80" />
+	
+</div>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../common.html/footer" />
+	</div>
+</div>
+</body>
+</html>

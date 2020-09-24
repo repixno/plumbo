@@ -1,0 +1,854 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+	<script src="${static:}js/jquery.Jcrop.min.js"></script>
+	<script type="text/javascript" src="${static:js/jquery.eurofoto-1.0.js}"></script>
+	
+	<link rel="stylesheet" href="${static:css/jquery/jcrop/jquery.Jcrop.min.css}?${version}" type="text/css" media="screen, projection" />
+	
+	<style type="text/css">
+	
+		#previewContainer {
+			overflow: hidden;
+			height: 50px;
+			width: 50px;
+		}
+		
+		#stampTemplates .selected {
+			border: 2px solid red;
+		}
+
+		
+		#preview {
+		}
+		
+		.pickerHeight {
+		
+			height: 300px;
+			overflow: hidden;
+			overflow-y: scroll;
+		
+		}
+		
+		#stampTemplates li {
+			display: block;
+			list-style-type: none;
+			float: left;
+			width: 55px;
+			height: 80px;
+		}
+		
+		#stampTemplates li a {
+			display: block;
+		}
+		
+		.jCropEurofoto {
+			display: inline-block;
+		}
+		.cropContainer {
+			overflow: hidden;
+		}
+		
+		#imagePickerAlbums {
+			height: 300px;
+			overflow: hidden;
+			overflow-y: scroll;
+		}
+		
+		#imagePickerAlbums li {
+			height: 2.5em;
+			border-bottom: 1px solid #ddd;
+		}
+		#imagePickerAlbums li a{
+			padding: .5em;
+			display: block;
+			text-decoration: none;
+			font-weight: bold;
+			color: #111;
+		}
+		
+		#imagePickerAlbums li a:hover {
+			background-color: #eee;
+		}
+		
+		#imagePickerAlbums li a.selected {
+			background-color: #0068B4 !important;
+			color: #fff !important;
+		}
+
+		
+		#imagePickerImages {
+			height: 300px;
+			overflow: hidden;
+			overflow-y: scroll;
+		}
+
+		#imagePickerImages li {
+			list-style-type: none;
+			float: left;
+			margin: 0 10px 10px 0;
+		}
+		
+		.postbox {
+			padding: 10px;
+			background-color: #eee;
+		
+		}
+		
+		.ui-dialog{
+			z-index: 10000000;
+		}
+
+		
+		
+	</style>
+	
+</head>
+
+
+<body>
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	<div class="container">
+
+	<div class="row">
+		
+	
+		<div class="col-md-12">
+			<h2><img alt="Postens frimerketjeneste" src="http://d.static.repix.no/cms/images/articles/frimerker/topp-small.gif" /></h2>
+		</div>
+		
+		<div class="col-md-3">
+		
+			<div class="">
+			
+			
+				<h3>1. <tal:block i18n:translate="">Choose image</tal:block></h3>
+				<p>
+					<tal:block tal:condition="session/loggedin">
+						<a class="small center button choose-image" href="#" i18n:translate="">Get image from your account</a>
+					</tal:block>
+					
+					<tal:block tal:condition="not:session/loggedin">
+						<tal:block metal:use-macro="../common.html/quicklogin" />
+					</tal:block>
+	
+					
+				</p>
+	
+				 <p>
+					Hent bilde fra din datamaskin
+					   <div style="position: relative">
+						   <span class="btn btn-primary fileinput-button">
+							   <span>Velg bilde</span>
+								   <!-- The file input field used as target for the file upload widget -->
+								   <input id="fileupload" type="file" name="files[]"  data-url="/api/1.0/upload/gift" accept="image/jpeg"  />
+						   </span>
+					   </div>
+					   <div id="progress" class="progress" style="display: none;">
+						   <div class="progress-bar progress-bar-success"></div>
+					   </div>
+					   <div id="upload-queue" style="padding:5px 0px;">
+						   
+					   </div>
+		   
+				 </p>
+				
+				<h3>2. <tal:block>Velg ramme</tal:block></h3>
+				
+				<div class="" id="stampTemplates">
+					<tal:block tal:repeat="gifttemplate collections/gifttemplates">
+						<li id="malid_${gifttemplate/id}">
+							<a href="#">
+								<tal:block tal:repeat="page gifttemplate/pages">
+									<img src="http://eurofoto.no/maler/${page/edit_src}" width="50" title="${gifttemplate/title}"/>
+									<script type="text/javascript">
+										$(document).ready( function() {
+											$('#malid_${gifttemplate/id}').data({
+													'id'			:	'${gifttemplate/id}',
+													'title'			:	'${gifttemplate/title}',
+													'pageid'		:	'${page/malpageid}',
+													'websize_x'		:	'${page/websize_x}',
+													'websize_y'		:	'${page/websize_y}',
+													'edit_mal_x'	:	'${page/edit_mal_x}',
+													'edit_mal_y'	:	'${page/edit_mal_y}',
+													'edit_mal_dx'	:	'${page/edit_mal_dx}',
+													'edit_mal_dy'	:	'${page/edit_mal_dy}',
+													'edit_image_x'	:	'${page/edit_image_x}',
+													'edit_image_y'	:	'${page/edit_image_y}',
+													'edit_image_dx'	:	'${page/edit_image_dx}',
+													'edit_image_dy'	:	'${page/edit_image_dy}',
+													'fullsize_pos_dx'      : '${page/fullsize_pos_dx}',
+													'fullsize_pos_dy'      : '${page/fullsize_pos_dy}'
+												});
+										});
+									</script>
+								</tal:block>
+							</a>
+						</li>
+					</tal:block>
+					<br class="clear" />
+				</div>
+				
+				<tal:block tal:repeat="page selected/template/pages">
+				<input type="hidden" id="original-template-width" class="coordinate" value="${page/fullsize_x}"/>
+				<input type="hidden" id="original-template-height" class="coordinate" value="${page/fullsize_y}"/>
+			   </tal:block>	
+						
+				<div id="developBox" class="display-none" title="Develop box" tal:condition="session/isadmin">
+				
+			
+				<label>productid</label>
+				<input type="text" value="${selected/product/id}" name="productid" id="productid" class="text text-1"/>
+				
+				<label>productoptionid</label>
+				<input type="text" value="${selected/productoptionid}" name="productoptionid" id="productoptionid" class="text text-1"/>
+				
+				
+				<tal:block tal:repeat="page selected/template/pages">
+					<div class="" tal:condition="equal:repeat/page/number,1">
+						<tal:block tal:content="selected/product/title" tal:condition="selected/product/title"/>
+						
+						<label>initMalpageid</label>
+						<input type="text" id="initMalpageid" name="malpageid" value="${page/malpageid}" tal:condition="exists:page" class="text text-1"/>
+						
+						<label>initMalid</label>
+						<input type="text" id="initMalid" name="malid" value="${selected/template/id}" tal:condition="exists:page" class="text text-1"/>
+						
+						<label>websize_x</label>
+						<input type="text" id="websize_x" name="malid" value="${page/websize_x}" tal:condition="exists:page" class="text text-1"/>
+						
+						<label>websize_y</label>
+						<input type="text" id="websize_y" name="malid" value="${page/websize_y}" tal:condition="exists:page" class="text text-1"/>
+					
+					
+						<tal:block condition="page/fullsize_src">
+							page/fullsize_src
+							<img id="template" class="highrestemplate" 
+								src="${static:}images/gifttemplates/thumbs/width/${page/websize_x}/${page/fullsize_src}" 
+							/>
+						</tal:block>
+						
+						<tal:block condition="not:page/fullsize_src">
+							not:page/fullsize_src
+							<img id="template" class="highrestemplate diplay-non" width="0" height="0" style="display: none"
+								src="${static:}images/gifttemplatesweb/thumbs/blankbox/${page/websize_x}x${page/websize_y}/${selected/template/id}.png" 
+							/>
+						</tal:block>
+						
+						
+						<div class="jc_coords">
+							<form onsubmit="return false;">
+								<div>
+									<label>X1</label><input type="text" name="x" id="x" size="4" />
+									<label>Y1</label><input type="text" name="y" id="y" size="4" />
+								</div>
+								<div>
+									<label>X2</label> <input type="text" name="x2" id="x2" size="4" />
+									<label>Y2</label> <input type="text" name="y2" id="y2" size="4" />
+								</div>
+								<div>
+									<label>W</label> <input type="text" name="w" id="w" size="4" />
+									<label>H</label> <input type="text" name="h" id="h" size="4" />
+								</div>
+							</form>
+						</div>
+						
+						<!-- finds other template if not set -->
+						<tal:block condition="not:page/fullsize_src">
+							<h3>OH NOS</h3>
+							${page/preview_src}
+							<img src="http://eurofoto.no/maler_preview/${page/preview_src}" id="previewimage" class="display-none"/>
+							<tal:block tal:repeat="gifttemplate collections/gifttemplates">
+								<tal:block tal:condition="equal:repeat/gifttemplate/number,1" tal:repeat="page gifttemplate/pages">
+									<input type="text" id="initMalid" name="malid" value="${gifttemplate/id}" tal:condition="exists:gifttemplate"/>
+									<tal:block tal:condition="equal:repeat/page/number,1">
+										<tal:block tal:condition="page/fullsize_src">
+											<img id="template" class="highrestemplate" 
+												src="${static:}images/gifttemplates/thumbs/width/630/${page/fullsize_src}" alt="template"
+											/>
+											<input type="text" id="initMalid" name="malid" value="${page/websize_x}" />
+											<input type="text" id="initMalid" name="malid" value="${page/websize_y}" />
+											<input type="text" id="initMalid" name="malid" value="${gifttemplate/id}" />
+											<input type="text" id="initMalpageid" name="malpageid" value="${page/malpageid}" />
+										</tal:block>
+										<tal:block tal:condition="not:page/fullsize_src">
+											<h4>No template</h4>
+										</tal:block>
+									</tal:block>
+								</tal:block>
+							</tal:block>
+						</tal:block>
+						<tal:block tal:condition="selected/imageid">
+							<img id="image"	src="/show_image_stream.php?bid=${selected/image/id}&dx=630&dy=400" alt="?"/>
+							<input type="hidden" id="selected-image" value="${selected/imageid}" />
+						</tal:block>
+						<tal:block tal:condition="not:selected/imageid">
+							<img id="image" class="noimage" alt="no image" src="//susanne.eurofoto.no/layout_grafikk/pixblank.gif" />
+							<input type="text" id="selected-image" value="0" />
+						</tal:block>
+	
+					</div>
+				</tal:block>
+			</div>
+			</div>
+			
+		</div>
+	
+		<div class="col-md-9">
+		<div class="col-md-8 center cropContainer">
+			<h3 class="left">3. Velg utsnitt</h3>
+			<img src="http://static.repix.no/gfx/tests/flowers.jpg" id="cropbox" width="510"/>
+			<div class="left prepend-top quiet">
+				<ul>
+					<li>Klikk og dra i hjørnene på det lyse området for å endre størrelse</li>
+					<li>Klikk og dra på det lyse området for å flytte utsnittet</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-4 jcropmenu">
+			<h3 class="left">4. Forhåndsvis og Fullfør</h3>
+			<!--<div id="aspectRatio">
+				<input type="radio" id="portrait" name="orientation"  value="portrait" checked="checked"/><label for="portrait">Portrait</label>
+				<input type="radio" id="landscape" name="orientation" value="landscape"/><label for="landscape">Landscape</label>
+			</div>-->
+			<div class="portrait" id="previewContainerContainer" style="">
+				<div id="previewContainer">
+					<img src="http://static.repix.no/gfx/tests/flowers.jpg" id="preview" />
+				</div>
+				
+			</div>
+			<h4 class="center" id="templateTitle">Title</h4>
+			<form>
+				<p class="right">
+					<span class="price">kr ${formatprice:selected/product/option/price}</span>
+					<button class="large call-to-action disabled" id="addToCart" i18n:translate="" >
+						Add to cart
+					</button>
+				</p>
+			</form>
+		</div>
+		</div>
+	
+
+	</div>
+</div>
+
+<!-- Dialogs -->
+
+<div id="uploadOneImageDialog"  title="Choose image" i18n:attributes="title" class="display-none">
+	<a class="button">Velg bilde</a>
+</div>
+
+<div id="loginDialog"  title="Login" i18n:attributes="title" class="display-none">
+		<form action="/login/" method="post" id="login" class="reset">
+			<div class="clear">
+				<div>
+					<label for="email" i18n:translate="">Email</label><br />
+					<input type="text" class="title lowercase span-8" name="email" value=""/>
+				</div>
+			</div>
+			
+			<div class="clear">
+				<label for="pasword" i18n:translate="">Password</label><br />
+				<input type="password" class="title span-8" name="password" value="" style="margin-bottom:0"/>
+				<p class="clear top bottom">
+					<a href="/login/forgot-password/" i18n:translate="">Forgot password?</a>
+				</p>
+			</div>
+			
+			<div class="clear">
+				<input type="checkbox" id="autologin" name="autologin" /> 
+				<label for="autologin" i18n:translate="">Remember me next time</label>
+			</div>
+
+			<input type="hidden" name="referer" value="${request/systemroot}/${request/execpath}" />
+		</form>
+</div>
+
+
+<div id="imagePicker" title="Choose image" i18n:attributes="title" class="display-none">
+	<div class="span-17 last">
+		<div class="span-6 column">
+			<h4 i18n:translate="">Choose album</h4><ul id="imagePickerAlbums" class="accordion-list albums"/>
+		</div>
+		<div class="span-11 column last">
+			<h4 i18n:translate="">Choose image</h4><ul id="imagePickerImages" class="accordion-list images"/>
+		</div>
+	
+	
+	</div>
+</div>
+
+<div metal:use-macro="../../${templates}/common.html/footer" />
+
+
+<script src="${static:}js/jqupload/js/jquery.iframe-transport.js?${version}"></script>
+<!-- The basic File Upload plugin -->
+<script src="${static:}js/jqupload/js/jquery.fileupload.js?${version}"></script>
+
+<script language="Javascript">
+
+
+//init
+var api;
+var portraitAspect 			=	295 / 390;
+var landscapeAspect 		=	390 / 295;
+var aspect 					=	portraitAspect;
+
+var currentTemplateId 		=	false;
+var currentImage 			=	false;
+var currentMalpageid 		=	false;
+
+var currentProductId		=	'${selected/product/id}'	;
+var currentProductOptionId 	=	'${selected/productoption/id}';
+
+var loader = '<img src="${static:gfx/gui/ajax-loader.gif}" class="loader" />';
+
+var productId;
+var productAlternativeId;
+var prodno;
+var templateIid;
+var imagePickerLoaded = false;	
+var stringChoseImage = '<tal:block i18n:translate="">Please choose an image</tal:block>';
+
+//<![CDATA[
+
+
+
+
+$( function(){
+	
+	$('#fileupload').fileupload({
+		replaceFileInput: false,
+		dataType: "json",        
+		datatype:"json",
+		xhrFields: {withCredentials: true},
+		acceptFileTypes: /(\.|\/)(jpe?g|tif)$/i,
+		add: function (e, data) {
+			
+			data.context = $('<p id="uploading" style="position: absolute; left: 20px;"/>').text('Uploading...').appendTo($('.progress-bar'));
+			data.submit();
+			$('.progress').show();
+			$('.progress .progress-bar-success').css(
+				'width',
+				0 + '%'
+			);
+			
+		},
+		done: function (e, data) {
+			
+			//console.log(data.result.files);
+			
+			$('#uploading').remove();
+			
+			$.each(data.result.images, function (index, file) {
+				
+				console.log( index  );
+				console.log( file  );
+				var image = '<img class="imagethumb" id="' + file.id + '"src="' + file.thumbnail +'" style="height: 75px"  />';
+				var href = $('<a/>', {
+							'href'	:	'#',
+							'click'	: function() {
+								pickImage( file );
+								return false;
+							}
+						});
+				href.append(image)
+				$('#upload-queue').append( href );
+				selectedImageId = $(this).attr('id');
+				var backgroundImage = this
+				$('#choose-template .template-thumb').css('background-image', 'url('+ file.thumbnail +')' );
+				$('img#' + file.id ).css( 'border-color', "#0199d8" );
+				pickImage(file);
+				$('.progress').hide();
+				
+		
+			});
+		},
+		progressall: function (e, data) {
+			var progress = parseInt(data.loaded / data.total * 100, 10);
+			$('.progress .progress-bar-success').css(
+				'width',
+				progress + '%'
+			);
+		}
+	});
+	
+	
+});
+
+
+
+function uploadOneImageDialog() {
+	$('#uploadOneImageDialog').dialog({
+		'modal'		:	true
+	});
+	return false;
+};
+
+function imagePicker() {
+
+	if( imagePickerLoaded ) {
+		$('#imagePicker').dialog('open');
+	} else {
+		$('#imagePicker').dialog({
+			'width' 	: 	720, //span-18
+			'height'	:	500,
+			'modal'		:	true,
+			'open'		: 	function() {
+				//load albums
+				$('#imagePicker .albums').append( loader );
+				var response = $.ef( 'albums.enum', { 'sortby'	:	'title'  });
+				if( response.result && !imagePickerLoaded ) {
+					imagePickerLoaded = true;
+					$('#imagePicker .loader').remove();
+					$(response.albums).each( function( i, album ) {
+						$('#imagePicker ul.albums').append( 
+							$('<li/>').append( 
+								$('<a/>', {
+									'href'	:	'#',
+									'text'	:	shorten(album.title,22),
+									'title'	:	album.title,
+									'click'	:	function() {
+										$('#imagePicker ul.albums li a.selected').removeClass('selected');
+										$(this).addClass('selected');
+										loadAlbum( $(this), album, '#imagePickerImages' );
+									}
+								})
+							)
+						)
+					})
+				}
+			}
+		});
+	}
+
+	return false;
+
+}
+
+function pickImage( image ) {
+
+	if( $("#imagePicker").hasClass('ui-dialog-content')  ){
+		$('#imagePicker').dialog('close');
+	}
+	
+	var newimage = new Image();
+	newimage.src = image.screensize;
+	
+	
+	var ratio = image.x / image.y;
+	
+	//console.log(ratio );
+	
+	var height = 377;
+	
+	var width = height * ratio;
+	
+	width = parseInt( width );
+	
+	$(newimage).load( function() {
+		$('#cropbox, #preview').attr({
+							'src': image.screensize,
+							'width': width
+							}).css({
+								'height': height + '.px',
+								'width': width + '.px' });
+		loadJcrop();
+		currentImage = image;
+	});
+	$('#addToCart').removeClass('disabled');
+}
+	
+function jCropUpdate(c) {
+	//showCoords(c);
+	showPreview(c);
+}
+	
+
+/*function showCoords(c)
+{
+	$('#x').val(c.x);
+	$('#y').val(c.y);
+	$('#x2').val(c.x2);
+	$('#y2').val(c.y2);
+	$('#w').val(c.w);
+	$('#h').val(c.h);
+};*/
+
+
+function inlineImageUploadCallback( imageid, image ) {
+
+
+	if ( image ) {
+		pickImage( image );
+	} else {
+		alert( 'Could not retrive image information' + imageid);
+	}
+
+/*	$.ef( 'image.info', {
+		'imageid': imageid 
+	}, function( response ) {
+		if( response.result ) {
+			alert( 'works' );
+			pickImage( response.image );
+		} else {
+		alert( 'Could not retrive image information' );
+		}
+	});*/
+}
+
+function changeTemplate( element ) {
+
+
+	var template = $(element).parent();
+	
+	console.log(template);
+	
+	
+	$('#templateTitle').text( template.data('title') );
+	
+	var width = parseInt( template.data('edit_mal_dx') );	
+	var height = parseInt( template.data('edit_mal_dy') );	
+	
+	$('#previewContainerContainer').css( {
+		'padding-left' 	:	template.data('edit_image_x') + 'px',
+		'padding-top' 	:	template.data('edit_image_y') + 'px',
+		'width' 		:	width + 'px',
+		'height' 		:	height + 'px'
+	});
+	
+	$('#previewContainer').css({
+		'width'			:	template.data('edit_image_dx') + 'px',
+		'height'		:	template.data('edit_image_dy') + 'px'
+		
+	});
+	
+	
+	aspect = template.data('edit_image_dx') / template.data('edit_image_dy');
+	
+	currentMalId = $(element).parent().data('id');
+	currentMalpageid = $(element).parent().data('pageid');
+	
+	
+	orientation = false;
+	
+	if( $('img', element).width() > $('img', element).height() ) {
+		orientation = 'landscape';	
+	} else {
+		orientation = 'portrait';	
+	}
+	
+	changeOrientation( orientation );
+	
+	$('#previewContainerContainer').removeClass('portrait, landscape').css('background-image', 'url('+$('img', element).attr('src')+')' ).addClass(orientation);
+	
+	$(element).parent().parent().find('.selected').removeClass('selected');
+	$(element).addClass('selected');
+	
+	$('#original-template-width').val( template.data('fullsize_pos_dx') );
+	$('#original-template-height').val( template.data('fullsize_pos_dy') );
+	return false;
+}
+	
+
+function loadAlbum(element, album, target) {
+
+	$(target).append( loader );
+
+	var selectedImage = false;
+	$.ef('album.images.enum', 
+		{
+			albumid: album.id
+			
+		}, function(result) {
+		
+			$(target).empty();
+
+			$(result.images).each( function(i, image) {
+			
+				$(target).append( 
+					$('<li/>').append(
+						$('<a/>', {
+							'href'	:	'#',
+							'click'	: function() {
+								pickImage( image );
+								return false;
+							}
+						})
+						.append('<img src="'+image.thumbnail+'" />')
+					)
+				);
+			});
+	});
+	
+	return selectedImage;
+	
+}
+
+function changeOrientation( orientation ) {
+
+	api.setOptions( { aspectRatio: aspect } );
+	api.enable();
+	
+}
+			
+// creating the preview
+function showPreview( coords )  {
+	var rx = $('#previewContainer').width() / coords.w;
+	var ry = $('#previewContainer').height() / coords.h;
+
+	if( aspect == portraitAspect ) {
+		$('#preview').css({
+			width: Math.round(rx * $('#cropbox').width() ) + 'px',
+			height: Math.round(ry * $('#cropbox').height() ) + 'px',
+			marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+			marginTop: '-' + Math.round(ry * coords.y) + 'px'
+		});
+	} else {
+		$('#preview').css({
+			width: Math.round(rx * $('#cropbox').width() ) + 'px',
+			height: Math.round(ry * $('#cropbox').height() ) + 'px',
+			marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+			marginTop: '-' + Math.round(ry * coords.y) + 'px'
+		});
+		
+	}
+}
+
+
+	$(document).ready( function() {
+	
+		$('a.choose-image.button').click( function() {
+			imagePicker();
+			return false;
+		});
+	
+		
+		$('a#openUploadDialog').click( function() {
+			uploadOneImageDialog();
+			return false;
+		});
+
+		$('#stampTemplates a').click( function() {
+			changeTemplate( $(this) );
+			return false;
+		
+		});
+		
+		$('#addToCart').click( function() {
+		
+			if( !$(this).hasClass('disabled') ) {
+				save();			
+			} else {
+				alert( stringChoseImage );
+			}
+			
+			return false;
+			
+		});
+		
+	});
+
+
+
+function loadJcrop() {
+	
+	if( api ) {
+		api.destroy();
+	}
+	
+	api = $.Jcrop('#cropbox',{
+		onChange: jCropUpdate,
+		onSelect: jCropUpdate,
+		addClass: 'jCropEurofoto',
+		bgColor: 'black',
+		bgOpacity: .3,
+		sideHandles: true,
+		aspectRatio: aspect
+	});
+	
+	api.setSelect( [50, 50, 200, 100] );
+	
+};
+
+		
+$(window).load(function(){
+	loadJcrop();
+		
+	$('#previewContainerContainer').css('background-image', 'url(' + $('#previewimage').attr('src') + ')');
+	$('#previewContainerContainer').addClass('portrait');
+			
+	$('#aspectRatio input').change( function() {
+		changeOrientation( $(this).val() );
+	});
+			
+	//$('#developBox').dialog();
+	
+	$('#stampTemplates li:first-child a').trigger('click');
+});
+		
+function save( debug ) {
+
+
+	var originalImageWidth = currentImage.x;
+	var originalImageHeight = currentImage.y;
+	
+	
+   var ratioWidth = $('#original-template-width').attr('value') / $('#previewContainer').width();
+   var ratioHeight = $('#original-template-height').attr('value') / $('#previewContainer').height();
+	
+	page = {};
+	page.malid = currentMalId;
+	page.malpageid = currentMalpageid;
+	page.giftQuantity = 1;
+	page.productoptionid = currentProductOptionId;
+	page.productid = $('#productid').attr('value');
+	page.size = 'small';
+	page.redeye = false;
+	/*
+	if ( $('#red-eye').is(':checked') ) {
+		page.redeye = 'true';
+	}*/
+	
+   page.editor_x = $('#previewContainer').width();
+	page.editor_y = $('#previewContainer').height();
+	
+	page.image     = {};
+	page.image.x   = parseInt( $('#preview').css('margin-left') ) * ratioWidth;
+	page.image.y   = parseInt( $('#preview').css('margin-top') ) * ratioHeight;
+	page.image.dx  = $('#preview').width() * ratioWidth;
+	page.image.dy  = $('#preview').height() * ratioHeight;
+	page.image.bid = currentImage.id;
+   
+	// empty
+	page.texts = [];
+	page.cliparts = [];
+	
+	// push the pages
+	var pages = [page];
+	
+	
+	if( debug ) {
+		console.log( $(pages) );
+	} else {
+		$.post( '/create/gift/save', { 
+			pages: $.toJSON(pages),
+			web: true
+		}, function(msg) {
+			document.location.href = '/cart/accessories/';
+			return false;
+		});
+	}
+	
+	
+
+
+}
+//]]>
+</script>
+</body>
+</html>

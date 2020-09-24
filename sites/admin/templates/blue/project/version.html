@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Dashboard - Admin Template</title>
+	<tal:block metal:use-macro="../common.html/css" />
+	<script type="text/javascript" src="/js/admin.js" charset="utf-8"></script>
+	<script type="text/javascript" src="http://static.repix.no/js/jquery-1.3.2.min.js"></script>
+   
+	<style type="text/css">
+      
+      
+      
+	</style>
+
+</head>
+<body>
+   
+	<div id="container" class="container">
+    	<div id="header">
+			<h2>Eurofoto Admin <span class="quiet">project versions</span></h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		<tal:block metal:use-macro="../common.html/languages" />
+		
+		<div class="span-20">
+			
+                
+                <h3>Project Versions</h3>
+			
+
+                <form>
+                    <label for="projectid">Projectid: </label>
+                    <input type="text" name="projectid" />
+                    <input type="submit" />
+                </form>
+                        
+                        
+                        
+                <div tal:condition="exists:projects">
+                    <h4>Versjoner</h4>
+                    
+                    <tal:block tal:repeat="project projects">
+                        <div>
+                           Prosjektid: <b tal:content="project/project_id" /> 
+                           Dato: <span tal:content="project/date_saved" /> <a href="/project/version/recover/${project/project_id}/${project/id}/${check}" onclick="return confirm('Er du sikker på at du vil tilabakestille prosjektet til ${project/date_saved}?')">Tilbakestill</a> 
+                        </div>
+                    </tal:block>
+                    
+                    
+                </div>
+		</div>
+		
+	</div>
+	
+	<div id="footer">
+	</div>
+	
+</body>
+</html>

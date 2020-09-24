@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+	<style type="text/css">
+		p.ingress {
+			color: #999;
+			font-size: 14px;
+			line-height: 18px;
+		}
+		h4 { font-weight: bold; margin-bottom: .5em}
+		
+		div.products div.product { border-bottom: 1px solid #f4f4f4; margin-top: .5em; padding-bottom: .5em }
+		div.products div.product:last-child { border-bottom: none }
+		
+      /*.calendar-top {
+        height: 208px;
+        
+        <tal:block tal:condition="exists:menuitem/article/attachments/background">
+        background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+        </tal:block>
+        
+        background-repeat:no-repeat;
+      }*/
+      .calendar-top p{ font-size: 14px }
+      
+      .photofolders{
+        border-right: 1px solid #EEE;
+        
+      }
+        
+	div.productbox {
+		background-color: #f0f0f0;
+		border: 4px solid #ededed;
+		border-radius: 3px;
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px;
+		box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+		-webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+		-moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+		height: 195px;
+		padding: 0px 20px 0px 0px;
+	}
+	
+	.productcontent a.button{
+		background-color: #c00 !important;
+		padding: 8px;
+		font-size: 1.1em;
+		font-weight: bold;
+	}
+	.productcontent h3{
+		color: #c00 !important;
+		font-weight: bold;
+		margin: 5px 0px;
+	}
+	div.price{
+		height: 50px;
+		width: 125px;
+		padding: 2px 0 0 10px;
+	}
+	</style>
+</head>
+
+
+
+<body>
+	<div metal:use-macro="../../../${templates}/common.html/top"></div>
+	<div class="container">
+
+		<!--<div class="col-md-2 hidden-xs left-menu">
+			<div metal:use-macro="../../common.html/leftmenu" />
+		</div>-->
+		<div class="col-md-10 product-category ">
+			<div class="col-md-12 hidden-xs">
+				<div metal:use-macro="../cms.html/menu-current" />
+			</div>
+			<div class="row calendar-top top">
+				<div class="col-xs-12 top-15">
+					<img src="${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background}" />
+				</div>
+				<!--<div class="content">
+					<h1>${menuitem/article/title}</h1>
+					<p>${menuitem/article/ingress}</p>
+				</div>-->
+			</div>
+			<div class="col-md-12">
+				<p tal:content="structure menuitem/article/body|default"></p>
+			</div>
+			
+		 	<div class="row productcontent">
+				
+				
+				<div class="col-xs-12 top-15">
+					<a href="/anledninger/jul/julekort">
+						<img class="img-responsive" src="${static:}cms/images/juleside_fotokort.jpg" title="Julekort" alt="Julekort"/>
+					</a>
+				</div>
+				<div class="col-xs-12 top-15">
+					<a href="/anledninger/jul/julegaver/">
+						<img class="img-responsive" src="${static:}cms/images/juleside_gaver.jpg" title="Julegaver" alt="Julegaver"/>
+					</a>
+				</div>
+				<div class="col-xs-12 top-15">
+					<a href="/produkter/kalendere/">
+						<img class="img-responsive" src="${static:}cms/images/julesider_kalender.jpg" title="Fotokalender" alt="Fotokalender"/>
+					</a>
+				</div>
+				<div class="col-xs-12 top-15">
+					<a href="/produkter/fotoboker/">
+						<img class="img-responsive" src="${static:}cms/images/juleside_bok.jpg" title="Fotobok" alt="Fotobok"/>
+					</a>
+				</div>
+				
+			</div>
+			
+			
+			
+		</div>
+	</div> <!-- end container -->
+	<div class="footer">
+		<div class="container">
+			<div metal:use-macro="../../../${templates}/common.html/footer" />
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Manual orders</title>
+<tal:block metal:use-macro="../common.html/css" />
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Leverpostei Orders Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		
+		<div tal:condition="not:exists: orderid">
+			<form method="get">
+				<label for="orderiod">Ordrenr:</label><input type="text" name="orderid"/>
+				<input type="submit" />
+			</form>
+		</div>
+		
+                <div class="span24" tal:condition="exists: orderid">
+			<h1>TEST</h1>
+                     
+                     
+			<div class="span-12">
+				<div class="text-center" style="position: relative; margin-top: 20px;">
+					<canvas id="c" width="439" height="439" style="position: relative;"></canvas>
+				</div>
+			</div>
+			<div class="span-12 last">
+				<div class="row">
+				    <div class="hidden-phone desktoplabel span2">
+					<h4>Endre bilde</h4>
+				    </div>
+				    <div>
+					<img src="/order/stabburet/thumb/${thumbid}/"/>
+				    </div>
+				    <div class="span">
+					<button class="button" id="zooms">-</button>
+					<button class="button" id="zooml">+</button>
+					<button class="button move" id="left">&#8678;</button>
+					<button class="button move" id="up">&#8679;</button>
+					<button class="button move" id="down">&#8681;</button>
+					<button class="button move" id="right">&#8680;</button>
+					<button class="button rotate" id="roteteright">&#8631;</button>
+					<button class="button rotate" id="roteteleft">&#8630;</button>
+				    </div>
+				</div>
+				<div>
+					<table class="text-left">
+					    <tr>
+						<td>
+							<label for="name">NAVN</label>
+						</td>
+						<td>
+							<input type="text" id="name" maxlength="111" value="${name}"/>
+						</td>
+					    </tr>
+					    <tr>
+						<td>
+							<label for="name">FØDSELSÅR</label>
+						</td>
+						<td>
+							<input type="text" id="year"  maxlength="4" value="${year}"/>
+						</td>
+					    </tr>
+					</table>
+				</div>
+				<div>
+					
+					<input type="hidden" name="malorderid" id="malorderid" value="${malorderid}" />
+					<button id="reprint">Reprint</button>
+				</div>
+			</div>
+                </div>
+		
+
+   </div>
+        
+        <tal:block tal:condition="exists: orderid">
+        <script src="http://d.static.repix.no/css/portals/stabburet/web/js/fabric.all.min.js"></script>
+        <script src="http://a.static.repix.no/css/portals/stabburet/web/js/editor.min.js?3.1034"></script>
+
+	<script>
+		
+		var malimage = "http://susanne.eurofoto.no/stabburetstatic/mal/liten-utentekst.png";
+		var blankimage = "http://susanne.eurofoto.no/stabburetstatic/mal/dittbilde.jpg";
+		var imageid = "http://admin.eurofoto.no/order/stabburet/image/${imageid}";
+		var orderid = "${orderid}"
+		
+		var scale = 0.05;
+		$( function(){
+			
+			
+			$('#reprint').on( 'click', reprint );
+			
+			
+			showloader();
+			 $(window).load( hideloader );
+		    
+			$('#facebook').on( 'click', function(){
+			    showloader();
+			    shareThumb( 'facebook' );
+			    return false;
+			});
+			$('#twitter').on( 'click', function(){
+			    showloader( );
+			    shareThumb( 'twitter' );
+			    return false;
+			});
+	
+			$('.bestillknapp img' ).mouseover( function(){
+                            $(this).attr( 'src', '${static:css/portals/stabburet/web/images/bestillknapp-hover.png}' ); 
+                        });
+			$('.bestillknapp img').mouseout( function(){
+                            $(this).attr( 'src', '${static:css/portals/stabburet/web/images/bestillknapp.png}' );
+                        })
+			$('.bestillknapp img').mousedown( function(){
+                            $(this).attr( 'src', '${static:css/portals/stabburet/web/images/bestillknapp.png}' );
+                            //window.location.href = '/stabburet/editor';        
+                            
+                        });
+			$('.bestillknapp img').mouseup( function(){
+                            $(this).attr( 'src', '${static:css/portals/stabburet/web/images/bestillknapp.png}' );
+			    //showloader();
+                        });
+			
+			
+			
+			var bar = $('.bar');
+			var percent = $('.percent');
+			var status = $('#status');
+			    	
+			
+		});
+		
+		 $(window).load( function(){
+                        drawTextAlongArc();
+                        drawYearAlongArc();
+			ChangeImageSrcAdmin( imageid );
+                    });
+		
+		
+		var $idown;
+		
+
+		
+		
+	function ChangeImageSrcAdmin( name ){
+		canvas.remove( userimg );
+		var newsrc2 = $(this).attr('src');
+		var newsrc = name;
+		fabric.Image.fromURL(newsrc , function(img) {			
+			userimg = img.set({
+			  left: 220,
+			  top: 220,
+			  lockUniScaling : true,
+			  id: name
+			});
+			//console.log( userimg );
+			canvas.add( img );
+			userimg.sendToBack();
+		});
+		
+	}
+	
+	function reprint(category , name ){
+                //canvas.deactivateAll();
+		userimg.set( { opacity: 1 });
+		userimg.sendToBack();
+		userimg.active = false;
+		var objects = canvas.getObjects();
+		var imgsrc = objects[0]._element;
+		
+		
+		var currentWidth = objects[0].width * objects[0].scaleX;
+		var currentHeight = objects[0].height * objects[0].scaleY;
+
+		var imgpos = JSON.stringify(  '[' + objects[0].left + ',' + objects[0].top + ',' + currentWidth + ',' + currentHeight + ',' + objects[0].angle +']' );
+		var malsize = $('#c').height();
+		
+		//console.log( imgpos );
+		var name = $('#name').val();
+                var year = $('#year').val();
+		var malorderid = $('#malorderid').val();
+                //var thumb = canvas.toDataURL();
+                var lokksize = $('#lokksize:checked').val();
+		var imageid = objects[0].id;
+		
+		$.post('/order/stabburet/save', {
+		    name: name,
+		    year: year,
+		    imageid: imageid,
+		    imgpos: imgpos,
+		    malorderid: malorderid,
+		    orderid: orderid,
+		    malsize: malsize,
+		    lokksize: lokksize
+		    }, function (response) {
+			console.log( response );
+			window.location.href = '/order/stabburet';
+		}, 'json');
+		
+	    
+		
+            return false;
+        }
+	
+	
+	</script>
+	</tal:block>
+
+</body>
+</html>

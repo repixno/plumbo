@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <tal:block metal:use-macro="../../${templates}/common.html/head" />
+  <style>
+ 
+  </style>
+  
+  
+  
+</head>
+
+  <body>
+    <tal:block metal:use-macro="../../${templates}/common.html/top" />
+    
+   
+    
+
+    <div class="container">
+        <div class="content">
+       <div class="row">
+        <!--  <div class="col-md-12 text-center">
+       <img class="img-responsive " style="padding-left: 15px; margin-top: 15px;" src="/static/gfx/banner2020.jpg" alt="student2020"/>
+           </div>-->
+      <div class="col-md-12 text-center">
+           
+            
+            
+          <h1 tal:content="cms:title:2df70d0e-341f-430c-8a34-8aa05c43409b"></h1>
+          <h3 tal:content="cms:ingress:2df70d0e-341f-430c-8a34-8aa05c43409b"></h3>
+          <h4 tal:content="structure cms:body:2df70d0e-341f-430c-8a34-8aa05c43409b"></h4>
+      </div>
+      <!-- Example row of columns -->
+     
+        
+          <tal:block tal:repeat="item productfrommenu:6a8424b6-c038-4805-9faf-5339cdee3a56">
+            <div class="col-md-12">
+             
+                <tal:block tal:condition="exists:item/images" tal:repeat="image item/images">  
+                <img src="${static:}images/products/thumbs/height/300/${image/url}" title="${item/title}" tal:condition="equal:repeat/image/number,1" class="img-responsive center-block"/>
+                </tal:block>
+                <div class="caption">
+                  <h3 tal:content="item/title" class="text-center"></h3>
+                  <p tal:content="structure item/body"></p>
+                  <div class="row">
+                    <div class="col-md-12 text-center">
+                      
+                      <tal:block metal:use-macro="../cms/cms.html/show-price" />
+                  <br/>
+                  <br/>
+               
+                    </div>
+               
+                <div class=" text-center">
+                       <!-- <tal:block metal:use-macro="../cms/cms.html/buy-product-link" />-->
+                        
+                          <a class="btn btn-primary btn-lg" href="/studentplakat" role="button">Beställ från digitalbild</a>
+                         <a class="btn btn-primary btn-lg" href="/pappersbilder" role="button">Beställ från pappersbild</a>
+                           <div class="spacer"/>
+                    </div>
+                  </div>
+                </div>
+             
+            </div>
+          </tal:block>
+         <div class="spacer"/>
+        <tal:block tal:repeat="item productfrommenu:82f700fa-08a0-4b3d-aaea-d943610ac592">
+          <div class="col-md-6">
+            
+                <tal:block tal:condition="exists:item/images" tal:repeat="image item/images">  
+                <img src="${static:}images/products/thumbs/height/300/${image/url}" title="${item/title}" tal:condition="equal:repeat/image/number,1" class="img-responsive center-block"/>
+                </tal:block>
+                <div class="caption">
+                  <h3 tal:content="item/title" class="text-center"></h3>
+                  <p tal:content="structure item/body"></p>
+                 
+                    <div class="col-md-12 text-center">
+                      
+                      <tal:block metal:use-macro="../cms/cms.html/show-price" />
+                     <br/>
+                  <br/>
+                    </div>
+            
+                <div class=" text-center ">
+                       <!-- <tal:block metal:use-macro="../cms/cms.html/buy-product-link" />-->
+                          <tal:block metal:use-macro="../cms/cms.html/buy-product-link-studentskylt" />
+                         <a class="btn btn-primary  " href="/pappersbilder" role="button">Beställ från pappersbild</a>
+                    </div>
+                 
+                </div>
+              
+            </div>
+         </tal:block>   
+        
+     
+     
+     
+     
+       
+      <div class="spacer2"/>
+         
+          
+            <div class="col-md-12">
+          <div class="spacer2"/>
+          <div class="col-md-7 col-xs-12 text-center">
+            
+            <a href="/create/banderoll/">
+<img class="img-responsive text-center" border="0" alt="Banderoll" src="/static/gfx/banner.jpg" />
+</a>
+            
+     
+       
+           <a class="btn btn-primary btn-lg spacer2" href="/create/banderoll/" role="button">Beställ banderoll</a>
+           </div>
+     
+            
+            <div class="col-md-5 text-center">
+       
+          <h4 tal:content="structure cms:body:ec351479-2ff1-43a0-97f3-cff30b5ebd84"></h4>
+        
+          <div class="col-md-4  col-xs-12 col-centered">
+       <img class="img-fluid" src="/static/gfx/tilbehor.jpg" alt="student2020"/>
+           </div>
+        </div>
+          
+          
+             </div>
+   
+      
+     
+
+      <hr/>
+ </div> <!-- /content -->
+       </div>
+    </div> <!-- /container -->
+
+
+<tal:block metal:use-macro="../../${templates}/common.html/footer" />
+
+  </body>
+</html>

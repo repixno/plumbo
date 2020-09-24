@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<div metal:use-macro="../common.html/head" />
+</head>
+<body>
+<div metal:use-macro="../common.html/header" />
+
+<div id="content" class="container">
+
+   <div class="span-15">
+      <h1 tal:content="userdata/fullname | default">Name</h1>
+   
+      <h3 i18n:translate="">Corrections</h3>
+
+      <a href="javascript:;" id="newcorrectionopener" i18n:translate="" class="ss_sprite ss_folder_add">New correction</a>
+
+      <ul id="correctionlist">
+         <li tal:condition="exists: corrections" tal:repeat="correction corrections" tal:attributes="title correction/id">
+            <a tal:content="correction/title | default" class="corrtitle" tal:attributes="href string:/admin/correction/${correction/id}">Title</a>
+            (<span i18n:translate="correction/state"></span>)
+            <span><a href="javascript:;" id="delete_${correction/id}" class="delete ss_sprite ss_folder_delete" i18n:translate=""></a>
+            <a href="javascript:;" id="change_${correction/id}" class="change ss_sprite ss_folder_edit" i18n:translate=""></a>
+            <a href="/corrections/edit/${correction/id}" class="view ss_sprite ss_folder_image" i18n:translate="" target="_blank"></a></span>
+         </li>
+      </ul>
+   
+      <p><a href="/admin" i18n:translate="" class="ss_sprite ss_arrow_left">Back</a></p>
+
+   </div>
+   
+   <div id="deletedialog" class="hide" i18n:translate="">Are you sure you want to delete this correction?</div>
+   
+   <div id="editcorrectiondialog" class="hide" style="* {text-align: left}">
+      <form action="">
+         <input type="hidden" name="corrid" class="corrid" />
+         <label i18n:translate="">Title</label>
+         <br/>
+         <input type="text" class="corrtitle" />
+         <br/>  
+         <label i18n:translate="">Comment</label>
+         <br/>
+         <textarea class="corrcomment"></textarea>
+      </form>
+   </div>
+   
+   <div id="newcorrectiondialog" class="hide" style="* {text-align: left}">
+      <form action="">
+         <label i18n:translate="">Title</label>
+         <br/>
+         <input type="text" class="corrtitle" />
+         <br/>  
+         <label i18n:translate="">Comment</label>
+         <br/>
+         <textarea class="corrcomment"></textarea>
+      </form>
+   </div>
+</div>
+
+<script type="text/javascript">
+
+$(function() {
+   
+   var userid = ${userid};
+   
+   var correctionid = '';
+   
+   $( '#deletedialog' ).dialog({
+      autoOpen: false,
+      title: '<tal:block i18n:translate="">Delete correction</tal:block>',
+      width: 300,
+      buttons: {
+         '<tal:block i18n:translate="">Cancel</tal:block>': function() {
+            $(this).dialog( 'close' );
+         },
+         '<tal:block i18n:translate="">OK</tal:block>': function() {
+                       
+            deleteFunc();
+            
+         }
+      }
+   });
+   
+   var changeFunc = function() {
+      var corrid = $(this).attr( 'id' ).split( '_' )[1];
+
+      $.post('/api/admin/correction/fetch',
+         {
+            id: corrid
+         },
+         function( data ) {
+
+            changedialog.find('.corrtitle').val( data.correction.title );
+            changedialog.find('.corrcomment').val( data.correction.comment );
+            changedialog.find('.corrid').val( data.correction.id );
+
+         },
+         'json'
+      );
+
+      changedialog.dialog( 'open' );
+
+   }
+
+   var deleteFunc = function() {
+
+	   var self = $(this);
+	   $.post('/api/admin/correction/remove',
+	      {
+		      id: correctionid
+		   },
+		   function( data ) {
+
+		      if ( data.result ) {
+            
+		         self.parent().remove();
+               window.location.reload();
+                                 
+		      }
+
+		   },
+		   'json'
+		);
+		return false;
+
+	}
+
+	$('#correctionlist li .delete').click( function() {
+	
+      correctionid = $(this).attr( 'id' ).split( '_' )[1];
+   
+      $( '#deletedialog' ).dialog( 'open' );
+      
+	} );
+
+	var newdialog = $( '#newcorrectiondialog' )
+	   .dialog({
+         autoOpen: false,
+         title: '<tal:block i18n:translate="">New correction</tal:block>',
+         width: 430,
+         buttons: {
+            '<tal:block i18n:translate="">Cancel</tal:block>': function() {
+               $(this).dialog( 'close' )
+            },
+            '<tal:block i18n:translate="">Save</tal:block>': function() {
+
+               var self = $(this);
+
+               $.post('/api/admin/correction/create',
+                  {
+                     userid: userid,
+                     title: $('.corrtitle', this).val(),
+                     comment: $('.corrcomment', this).val()
+                  },
+                  function( data ) {
+
+                     window.location.reload();
+                     
+                  },
+                  'json'
+               );
+
+               self.dialog( 'close' );
+
+            }
+         }
+	   });
+
+	var changedialog = $( '#editcorrectiondialog' )
+	   .dialog({
+         autoOpen: false,
+         title: '<tal:block i18n:translate="">Change correction</tal:block>',
+         width: 430,
+         buttons: {
+            '<tal:block i18n:translate="">Cancel</tal:block>': function() {
+               $(this).dialog( 'close' )
+            },
+            '<tal:block i18n:translate="">Save</tal:block>': function() {
+
+               var self = $(this);
+               var id = $('.corrid', this).val();
+
+               $.post('/api/admin/correction/change',
+                  {
+                     id: id,
+                     title: $('.corrtitle', this).val(),
+                     comment: $('.corrcomment', this).val()
+                  },
+                  function( data ) {
+
+                     window.location.reload();
+
+                  },
+                  'json'
+               );
+
+               self.dialog( 'close' );
+
+            }
+         }
+	   });
+
+   $('#newcorrectionopener').click( function() {
+      newdialog.find('form').get(0).reset();
+      newdialog.dialog( 'open' );
+   });
+
+   $('#correctionlist li .change').click( changeFunc );
+
+});
+
+</script>
+
+<div metal:use-macro="../common.html/footer" />
+
+</body>
+</html>

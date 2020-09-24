@@ -1,0 +1,443 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+
+<head>
+	<meta name="description" content="En oppslagstavle er noe alle familier bør ha. Med en Ukeplan holder du lett oversikt over familiens aktiviteter i en hel uke. Ukeplanen er som et funksjonelt bilde på veggen" />
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+
+	<style type="text/css">
+		.campaign {
+			height: 320px;
+			width: 270px;
+			position: relative;
+		}
+		.campaign a.button {
+			position: absolute;
+			bottom: 5px;
+			right: 5px;
+		}
+		
+		#campaign h3.ui-accordion-header a {
+			font-weight: normal;
+			font-size: 1.3em;
+		}	
+		
+      #presentation {
+         position: relative;
+         height: 305px;
+         background-color: #fefefe;
+         color: #666;
+         overflow: hidden;
+      }
+
+      #presentation p{
+         color: #666;
+         font-weight: bold;
+         overflow: hidden;
+         display: block; 
+         width:400px; 
+         padding-top: 110px; 
+         padding-left: 0px;  
+         font-size: 1.1em
+      }
+		
+		
+      #presentation #presentation-menu ul {
+         margin: 0;
+         padding: 0;
+         position: relative;
+         top: 15px;
+         left: 20px;
+         width: 178px;
+         -webkit-border-radius: 9px;
+         -moz-border-radius: 9px;
+         border-radius: 9px;
+         -webkit-box-shadow: 1px 1px 5px rgba(20,20,20,0.6);
+         -moz-box-shadow: 1px 1px 5px rgba(20,20,20,0.6);
+         box-shadow: 1px 1px 5px rgba(20,20,20,0.6);
+         background-color: #eee;
+         background-color: rgba(240,240,240, 0.5);
+         z-index: 100;
+         background: #eeeeee; /* old browsers */
+         background: -moz-linear-gradient(top, rgba(252,252,252,0.9) 0%, rgba(210,210,210,0.9) 100%); /* firefox */
+         /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(100%,#D2D2D2)); /* webkit */
+         background: -webkit-gradient(
+            linear, 
+            left top, 
+            left bottom, 
+            from(rgba(252,252,252,0.9)), 
+            to(rgba(210,210,210,0.9)) 
+         );
+         
+         padding-bottom: 12px;
+      }
+		
+		#presentation #presentation-menu ul li {
+         list-style-type: none;
+         display: block;
+		}
+		
+		#presentation #presentation-menu ul li a {
+		    background-color: transparent;
+		    text-decoration: none;
+		    font-size: 15px;
+		    color: #383838;
+		    display: block;
+		    padding: 7px 20px 7px 15px;
+		    border-bottom: 1px solid #e8e8e9;
+		    border-top: 1px solid #f5f4f5;
+		    border-top: 1px solid rgba(240,240,240,0.5);
+		    border-bottom: 1px solid rgba(150,150,150,0.3);
+      }
+		
+      #presentation ul li a:hover {
+         background-color: #e4e4e4;
+         color: #000;
+         background: -moz-linear-gradient(top, #EEE 0%, #D2D2D2 100%); /* firefox */
+         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#EEE), color-stop(100%,#D2D2D2)); /* webkit */
+      }
+
+      #presentation #presentation-menu { position: relative }
+      
+      #presentation #presentation-menu div.selected {
+         padding-top: 10px;
+         position: absolute;
+         width: 217px;
+         height: 37px;
+         border: none;
+         left: -7px;
+         background: transparent url(http://a.static.eurofoto.no/cms/images/Slider-arrow-ukeplan2.png) no-repeat top left;
+         z-index: 400;
+         top: 0px;
+      }
+      
+      #presentation #presentation-menu ul li.selected { 
+         z-index: 450; 
+         position: relative;
+      }
+      
+      #presentation #presentation-menu ul li.selected a {
+         color: #fff;
+         font-weight: bold;
+         border-color: transparent;
+         z-index: 500; 
+         position: relative;
+         outline: none !important;
+      }
+      #presentation #presentation-menu ul li.selected a:hover {
+         background: none !important;
+         background-color: transparent !important;
+         color: #fff;
+      }
+      
+      #presentation .article {
+         cursor: hand;
+         cursor: pointer;
+         padding-top: 20px;
+         height: 285px;
+         position: absolute;
+         top: 0;
+         left: 0;
+         z-index: 50;
+         /*-webkit-border-radius: 9px;
+         -moz-border-radius: 9px;
+         border-radius: 9px;*/
+      }
+      
+      #presentation .article h2 {
+         font-size: 3.5em;
+      }
+      
+      #presentation .article a.button.bottom { position: absolute; bottom: 20px }
+      #presentation .article a.button.top { position: absolute; top: 20px }
+      #presentation .article a.button.left { left: 20px }
+      #presentation .article a.button.right { right: 20px }
+      
+      .wirebox { margin-bottom: 1em }
+      
+      .FrontpageBox{
+         border: 1px solid #CCC; 
+         height: 230px;
+      }
+      
+      .FrontpageBoxHeader{
+         background-color: #CB1C61 !important;
+         border-bottom: 1px solid #CCC; 
+         padding: 5px 2px 5px 7px;  
+      }
+      .FrontpageBoxHeader h3{
+         font-size: 1.5em;
+         line-height: 1;
+         margin-bottom: 0em;
+         color: #FFF;
+      }
+      .FrontpageBoxContent{
+         padding: 15px;
+      
+      }
+    
+	</style>
+	
+   <!--[if lte IE 8]>
+	<style type="text/css">
+		#presentation ul {
+         display: block;
+         border: 1px solid #ccc;
+         z-index: 6000;
+
+      }
+      #presentation div#presentation-menu {
+         border: none;
+         z-index: 5000;
+         width: 220px;
+      }
+	</style>
+	<![endif]-->
+	
+</head>
+
+
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/nb_NO/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+   <div metal:use-macro="../../${templates}/common.html/top" />
+
+	<div class="container">
+		
+		<div class="span-24 last">
+		   <div class="span-24 last"> 
+         
+            <div id="presentation">
+               <div id="articles">
+                  <tal:block tal:repeat="menuitem menu:5fdc63eb-44e1-43e9-9961-44cf6e5df075,1,1">
+                     <tal:block tal:repeat="item menuitem/content" tal:condition="exists:menuitem/content">
+                        <tal:block tal:condition="lte:repeat/menuitem/number,7">
+                           <div id="${menuitem/identifier}" class="article prepend-6 span-18 last current first"
+                              style="background: #fff url(${static:}images/menu/${menuitem/image}) no-repeat top left"
+                              tal:condition="equal:repeat/menuitem/number,1">
+                                 <div tal:content="structure item/body|default"></div>
+                           </div>
+                        </tal:block>
+                        <div id="${menuitem/identifier}" class="article prepend-6 span-18 last"
+                           style="background: #fff url(${static:}images/menu/${menuitem/image}) no-repeat top left"
+                           tal:condition="not:equal:repeat/menuitem/number,1">
+                              <div tal:content="structure item/body|default"></div>
+                        </div>
+                     </tal:block>
+                  </tal:block>
+               </div>
+               <div id="presentation-menu">
+                  
+                     <ul>
+                        <div class="selected"></div>
+                        <tal:block tal:repeat="menuitem menu:5fdc63eb-44e1-43e9-9961-44cf6e5df075,1">
+                           <tal:block tal:condition="equal:repeat/menuitem/number,1">
+                              <li tal:condition="lte:repeat/menuitem/number,7" class="selected">
+                                 <a href="#${menuitem/url}" rel="${menuitem/identifier}">${menuitem/title}</a>
+                              </li>
+                           </tal:block>
+                           <tal:block tal:condition="not:equal:repeat/menuitem/number,1">
+                              <li tal:condition="lte:repeat/menuitem/number,7">
+                                 <a href="#${menuitem/url}" rel="${menuitem/identifier}">${menuitem/title}</a>
+                              </li>
+                           </tal:block>
+                        </tal:block>
+                     </ul>
+                  </div>
+               </div>
+
+		       <script type="text/javascript">
+	             var t;
+	             var stopped = false;
+	             var prevArticle;
+	             var currentArticle;
+
+               function changeMenuItem() {
+                  if( !stopped) {
+                     if( $('#presentation ul li:last-child').hasClass('selected') ) {
+                        $('#presentation ul li:first a').trigger('click');
+                     } else {
+                        $('#presentation ul li.selected').next().find('a').trigger('click');
+                     }
+                  }
+               }
+	             
+               function startInterval() {
+                  t = setInterval( 'changeMenuItem()', 10000 );
+               }
+               
+               $('.article.first').css('z-index', 55);
+
+		          $(document).ready( function() {
+		             
+                  $('#presentation ul li a').bind('click', function() {
+                     
+                     var item = this;
+                  
+                     if( $(this).parent().hasClass('selected') ) {
+                        stopped = true;
+                        window.location.href = $('#' + $(item).attr('rel') ).find('a').attr('href');
+                     } else {
+                        $('#presentation div.article').not('.current').hide();
+                        var position = $(item).position().top - 4;
+                        $('#presentation div.selected').animate({ top : position }, 1000);
+                        $('#presentation ul li.selected').removeClass('selected');
+                        $(this).parent().addClass('selected'); // ie can't handle animation here
+                        currentArticle = $('#' + $(item).attr('rel') );
+                        $(currentArticle).hide().css('z-index', 60 ).addClass('current');
+                        $(currentArticle).fadeIn(2000);
+                        $(prevArticle).removeClass('current').css('z-index', 55);
+                        prevArticle = currentArticle;
+                     }
+
+                     return false;
+                  });
+                  
+                  $('#presentation .article').click( function() {
+                     window.location.href = $('a.button', this).attr('href');
+                  });
+                  
+                  $('#presentation ul li:first-child a').trigger('click');
+                  
+                  startInterval();
+                  
+                  $('#presentation').mouseenter( function() { 
+                     stopped = true;
+                  }).mouseleave( function() { 
+                     stopped = false;
+                  });
+                  
+               });
+
+
+		       </script>
+		    </div>
+		    <div class="span-24 last">
+   		    <div class="span-16 ">
+   		      <div class="span-16 last prepend-top" style="line-height: 0em;">
+   		          <div tal:content="structure cms:body:edb1a49c-6ab6-4c98-96f3-285c45e4938a" />
+   		      </div>
+               <div class="span-8 prepend-top">
+                  <!-- id: 2948 -->
+                  <div class="FrontpageBox" style="height: 230px;">
+                  	<div class="FrontpageBoxHeader">
+                  		<h3><div tal:content="cms:title:7a3f90f0-5bf4-44ed-a973-7ed1ba3f3fc6" /></h3>
+                  	</div>
+                  	<div tal:content="structure cms:body:7a3f90f0-5bf4-44ed-a973-7ed1ba3f3fc6" />
+                  </div>
+                     
+               </div>
+               <div class="span-8 last  prepend-top">
+                  <!-- id: 2951 -->
+                  <div class="FrontpageBox" style="height: 230px;">
+                  	<div class="FrontpageBoxHeader">
+                  		<h3><div tal:content="cms:title:51ebda44-1eee-41f0-b501-e2860525b47a" /></h3>
+                  	</div>
+                  	<div tal:content="structure cms:body:51ebda44-1eee-41f0-b501-e2860525b47a" />
+                  </div>
+               </div>
+               <div class="span-16 last prepend-top">
+			
+			<div class="span-16 last">
+				<iframe width="630" height="354" src="//www.youtube.com/embed/vVtngGa2-p4" frameborder="0" allowfullscreen="true"></iframe>
+			</div>
+			<div class="span-16 last">
+				<div class="span-8">
+					<iframe src="http://webtv.tv2.no/multimedia/webtv/dido/embed.html?progId=785279&autoplay=false&useLiveMenu=false" width="310" height="176"></iframe>
+				</div>
+				<div class="span-8 last">
+					<iframe src="http://webtv.tv2.no/multimedia/webtv/dido/embed.html?progId=%20584134%20&autoplay=false&useLiveMenu=false" width="310" height="176" scrolling="no"></iframe>
+				</div>
+			</div>
+            </div>
+			<div class="span-16 last">
+				<h2>UKEPLAN PÅ GOD MORGEN NORGE OG LUKSUSFELLEN</h2>
+				Gründer av Ukeplan, Siri Hestad Solberg har deltatt på God morgen Norge på TV2.
+				Se filmen om hvordan hennes Ukeplan fungerer hjemme hos familien og Siri i studio der hun snakker med Vår Staude.
+				Her får travle småbarnsforeldre flere tips fra 4-barns moren.
+				Vi deltar også i denne sesongen av Luksusfellen og gir bort Ukeplantavler og matplaner til alle deltakerne, se klipp fra episodene i filmen over.
+			</div>
+	       <!--
+               <div class="span-8"><iframe src="http://webtv.tv2.no/multimedia/webtv/dido/embed.html?progId=584427&autoplay=false&useLiveMenu=false" width="310" height="176" scrolling="no"></iframe></div>
+               <div class="span-8 last"><iframe src="http://webtv.tv2.no/multimedia/webtv/dido/embed.html?progId=%20584134%20&autoplay=false&useLiveMenu=false" width="310" height="176" scrolling="no"></iframe></div>
+               -->
+	       <div class="span-4 prepend-top">
+                  <!-- id: 2959 -->
+                  <div tal:content="structure cms:body:e79f7839-6db2-47cc-a270-c681d082e137" />
+               </div>
+               <div class="span-4 prepend-top">
+                  <!-- id: 2960 -->
+                  <div tal:content="structure cms:body:e19570c9-19c3-40c0-8065-31cb5a8960e8" />
+               </div>
+               <div class="span-4 prepend-top">
+                  <!-- id: 2961 -->
+                  <div tal:content="structure cms:body:b3c71d7a-c78d-4198-9dda-a398dcee4ceb"/>
+               </div> 
+               <div class="span-4 last prepend-top">
+                  <!-- id: 2962 -->
+                  <div tal:content="structure cms:body:207f14b8-680c-480c-938d-00808fbcd7de"/>
+               </div> 
+   		    </div>
+		       <div class="span-8 last">
+		    	  <div class="span-8 prepend-top last">
+               <div class="fb-like-box" data-href="http://www.facebook.com/Ukeplan" data-height="597" data-width="310" data-show-faces="true" data-stream="true" data-header="true">
+               </div>
+               <div class="span-8 prepend-top last" style="position:relative;">
+               
+                  <div class="FrontpageBox" style="color: #666; font-weight: bold; height: 315px; background: url(http://a.static.eurofoto.no/cms/images/barnehageplanbackground.jpg)">
+
+                  <div style="padding: 10px">
+                  	<h3>Trenger du hjelp?</h3>
+                  <p>
+                  - til å organisere og strukturere hverdagen i barnehagen eller bedriften din?
+                  </p>
+
+
+                 <div style="">
+                  <p style="margin: 100px 0 0; color: #000;">
+                     <b>LES MER HER:</b>
+                  </p>
+                  <div>
+                  <a href="/produkter/bedriftsplan/"><img height="35" src="http://c.static.eurofoto.no/cms/images/BEDRIFTSplan_no_svart.jpg" /></a>
+                  </div>
+                  <div>
+                  <a href="//www.barnehageplan.no"><img height="35" src="http://d.static.eurofoto.no/cms/images/BARNEHAGEplan.jpg" /></a>
+                  
+                  </div>
+                  </div>
+
+                  </div>
+	               
+                  </div>
+               
+
+                  
+
+                  
+               
+               </div>
+		       </div>
+		    </div>
+		    
+		    </div>
+
+		</div>
+		
+
+      
+      
+   </div>	
+
+
+   <div metal:use-macro="../../${templates}/common.html/footer" />
+
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+   <style type="text/css">
+      .accessories-top {
+        height: 208px;
+        
+        <tal:block tal:condition="exists:menuitem/article/attachments/background">
+        background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+        </tal:block>
+        
+        background-repeat:no-repeat;
+      }
+      .accessories-top p{ font-size: 14px }
+   </style>
+</head>
+
+<body>
+	<div class="container">
+
+		<div metal:use-macro="../../../${templates}/common.html/top"></div>
+		
+		<div metal:use-macro="../cms.html/top-navigation" />
+
+		<div id="leftmenu">
+			<div metal:use-macro="../cms.html/menu-current" />
+		</div>
+
+		<div class="span-20 last product-category">
+         <div class="span-20 last accessories-top top">
+				<div class="content">
+					<h1 class="hide">${menuitem/article/title}</h1>
+					<p tal:content="structure menuitem/article/body|default"></p>
+				</div>
+			</div>
+         <div class="span-20 last">
+				<!-- menu that show the childs of current item and the siblings of the current -->
+				<tal:block>
+					<tal:block tal:repeat="item menuitems">
+
+						<tal:block tal:condition="item/expanded">
+							<div
+								tal:condition="exists:item/children"
+								tal:repeat="subitem1 item/children">
+
+								<tal:block tal:condition="subitem1/expanded">
+									<div tal:condition="exists:subitem1/children">
+										<tal:block tal:repeat="subitem2 subitem1/children">
+
+											<tal:block tal:condition="mod:repeat/subitem2/number,4">
+												<div class="span-5 last prepend-top center">
+													<a href="${subitem2/url}" title="${subitem2/article/ingress}">
+														<tal:block tal:define="global staticurl" tal:content="static:" />
+														<img src="${staticurl}images/menu/${subitem2/image}" alt="${subitem2/title}" width="190" height="108"/>
+													</a>
+													<h3 tal:content="subitem2/title"></h3>
+													<tal:block tal:condition="exists: subitem2/article">
+														<tal:block tal:content="subitem2/article/ingress">ingress</tal:block>
+													</tal:block>
+													<div class="span-5 last">
+														<a href="${subitem2/url}" title="" class="button" i18n:translate="">Show products</a>
+													</div>
+												</div>
+												<br class="clear clearfix" />
+											</tal:block>
+
+											<tal:block tal:condition="not: mod:repeat/subitem2/number,4">
+												<div class="span-5 prepend-top center">
+													<a href="${subitem2/url}" title="${subitem2/article/ingress}">
+                                       <tal:block tal:define="global staticurl" tal:content="static:" />
+													<img src="${staticurl}images/menu/${subitem2/image}" alt="${subitem2/title}" width="190" height="108"/>
+													</a>
+													<h3 tal:content="subitem2/title"></h3>
+													<tal:block tal:condition="exists: subitem2/article">
+														<tal:block tal:content="subitem2/article/ingress">ingress</tal:block>
+													</tal:block>
+													<div class="span-5 last">
+														<a href="${subitem2/url}" title="" class="button" i18n:translate="">Show products</a>
+													</div>
+												</div>
+											</tal:block>
+
+										</tal:block>
+									</div>
+								</tal:block>
+							</div>
+						</tal:block>
+					</tal:block>
+				</tal:block>
+			</div>
+		</div>
+	</div> <!-- end container -->
+	<div class="footer">
+		<div class="container">
+			<div metal:use-macro="../../../${templates}/common.html/footer" />
+		</div>
+	</div>
+</body>
+</html>

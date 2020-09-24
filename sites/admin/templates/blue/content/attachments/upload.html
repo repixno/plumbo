@@ -1,0 +1,20 @@
+<html>
+<head>
+   <title>Upload Attachment</title>
+</head>
+<body>
+   <form tal:condition="not:exists:uploaded" method="post" action="/content/attachments/upload/${entityid}" enctype="multipart/form-data">
+      Slot: <select name="slotid">
+         <option value="background">Background</option>
+         <option value="sidebartop">Sidebar (top)</option>
+         <option value="Xml">Xml</option>
+      </select><br />
+      File: <input type="file" name="attachment" /><br />
+      <input type="submit" class="button" value="Upload" />
+   </form>
+   <script tal:condition="exists:uploaded" type="text/javascript">
+      parent.addAttachment( '${uploaded/filename}', '${uploaded/slotid}' );
+      window.location = '/content/attachments/upload/${entityid}';
+   </script>
+</body>
+</html>

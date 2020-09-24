@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+   <meta name="Description" content="${menuitem/article/ingress}"/>
+   <link rel="canonical" href="http://www.eurofoto.no/produkter/cewe-fotobok" />
+	<tal metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title"/>
+	<script type="text/javascript" src="${static:js/flowplayer-3.1.4.min.js}"></script>
+	<script type="text/javascript" src="${static:js/jquery.tools.min.js}"></script>
+	<style type="text/css">
+      .photobook-top {
+        height: 208px;
+        
+        <tal:block tal:condition="exists:menuitem/article/attachments/background">
+        background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+        </tal:block>
+        
+        background-repeat:no-repeat;
+      }
+      .photobook-top p{ font-size: 14px }
+		
+	</style>
+</head>
+<body>
+   <div class="container product-category">
+      <div metal:use-macro="../../../${templates}/common.html/top" />
+      <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/top-navigation" />
+      <div class="span-4">
+         <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/menu-current" />
+      </div>
+   
+      <div class="span-20 last product-category">
+   
+         <div class="span-20 last photobook-top top">
+            <div class="content hide">
+            <h1>${menuitem/article/title}</h1>
+            </div>
+            <!--<a class="blue button extra-large bottom left" href="#quick-start">Kom igang nå!</a>-->
+      </div>
+      
+      <div class="span-20 last">
+         <div class="span-4 prepend-top">
+            <!-- id: 2142 Liten -->
+            <div tal:content="structure cms:body:3d910c64-8f31-4485-b6c6-46305e5df0c8" />
+         </div>
+         <div class="span-4 prepend-top">
+            <!-- id: 2141 Stor -->
+            <div tal:content="structure cms:body:a1e1401d-ab6b-4cd3-9b0a-d7eb54a68f50" />
+         </div>
+         <div class="span-4 prepend-top">
+            <!-- id: 2143 XXL -->
+            <div tal:content="structure cms:body:7f671a89-bd26-4802-b008-23a6cb1f2aec" />
+         </div>
+         <div class="span-4 prepend-top">
+            <!-- id: 2144 Fotopapir -->
+            <div tal:content="structure cms:body:5ec21ff5-3e43-443e-acaf-39be61aadbba" />
+         </div>
+         <div class="span-4 last prepend-top">
+            <!-- id: 2145 Blankt papir -->
+            <div tal:content="structure cms:body:66ea8f8d-551e-42ed-824e-4ccd1802d594" />
+         </div>
+	 <div class="span-20 last">
+         <i>* Estimerte leveringstider på</i> CEWE FOTOBOK <i>(inklusiv postgang) er 7-10 dager.</i>
+	 </div>
+         <div class="span-10 prepend-top">
+            <!-- id: 2138 -->
+            <div tal:content="structure cms:body:08ec0f90-7728-4767-8ac4-74ce95e29840" />
+         </div>
+         <div class="span-10 last prepend-top">
+            <!-- id: 2139 -->
+            <div tal:content="structure cms:body:87dcd4e3-a4a8-4423-86c1-54bfab655727" />
+         </div>
+         <div class="span-20 last prepend-top">
+         <!-- id: 2140 -->
+         <div tal:content="structure cms:body:8c042902-f25c-49c7-9c53-84e66402f008"/>
+      </div>
+      </div>
+      
+      <hr class="space" />
+   </div>
+   </div>
+   
+   
+   
+   <div class="footer">
+      <div class="container">
+         <div metal:use-macro="../../../${templates}/common.html/footer" />
+      </div>	
+   </div>
+   
+   
+      <SCRIPT type="text/javascript">
+      $(document).ready( function() {
+          
+         var os = $.client.os;
+
+         switch(os){
+            case 'Windows':
+                $('a#download').attr('href', 'http://dls.photoprintit.de/download/Data/22185/hps/setup_Eurofoto_Fotoservice.exe');
+            break;
+            case 'Mac':
+                $('a#download').attr('href', 'http://dls.photoprintit.de/download/Data/22185/hps/setup_Eurofoto_Fotoservice.zip');
+            break;
+            case 'Linux':
+                $('a#download').attr('href', 'http://dls.photoprintit.de/download/Data/22185/hps/setup_Eurofoto_Fotoservice.tgz');
+            break;
+         }
+         
+         
+      });
+   
+   </SCRIPT>
+</body>
+</html>

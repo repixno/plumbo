@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <title>${correction/title}</title>
+   <div metal:use-macro="common.html/head" />
+	<!--script type="text/javascript" src="/js/jquery-sylvester.min.js"></script> 
+   <script type="text/javascript" src="/js/jquery-transformie.min.js"></script--> 
+   <style type="text/css">
+      @media all {
+        .page-break  { display:none; }
+        .print-buffer { display: none }
+      }
+      
+      @media print {
+        .page-break  { display:block; page-break-before:always; }
+        .print-buffer { display: block; }
+        .screen-buffer { display: none; }
+      }
+   </style>
+</head>
+<body onload="loader();">
+
+<div id="content" class="screen-buffer container prepend-top">
+   <div id="downloading">
+      <h2 i18n:translate="">Please wait...</h2>
+      <tal:block i18n:translate="">Downloading high resolution graphics for print...</tal:block> <span id="progress">0%</span>
+   </div>
+   <div class="hide" id="printing">
+      <h2>Printing...</h2>
+      <tal:block i18n:translate="">Please wait...</tal:block>
+   </div>
+</div>
+
+<div class="print-buffer">
+<tal:block tal:repeat="page pages">
+<img style="padding: 10px;" src="/images/logo.png" />
+<h1><b>${correction/title}</b><i><small> - ${page/title}</small></i></h1>
+
+<img class="page" src="/images/pages/${page/id}/print.jpg" height="750" /><br />
+<div tal:condition="not:repeat/page/end" class="page-break"></div>
+</tal:block>
+</div>
+
+<script language="JavaScript">
+
+   var numPages = '${pages/length}';
+   var completed = 0;
+
+   var loader = function() {
+      $('#progress').text( '100%' );
+      $('#downloading').fadeOut('slow');
+      $('#printing').fadeIn('slow');
+      setTimeout( function() { window.print(); window.close(); }, 1000 );
+   };
+   
+   $('img.page').load(function() {
+      $('#progress').text( Math.round(100*++completed/numPages,2)+'%' );
+   });
+
+</script>
+
+</body>
+</html>

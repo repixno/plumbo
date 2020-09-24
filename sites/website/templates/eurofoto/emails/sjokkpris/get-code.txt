@@ -1,0 +1,10 @@
+<tal:block>
+<tal:block >Din SjokkPris-kode.</tal:block>
+
+
+
+Sjokkpriskode: ${code}
+
+Med vennlig hilsen\n
+Eurofoto
+</tal:block>

@@ -1,0 +1,339 @@
+<!-- HEAD -->
+<head metal:define-macro="head" tal:omit-tag="">
+	<meta name="description" content="Vi printer dine digital bilder og gir deg norges beste fotobok. Med sikker lagring er bildene dine lagret trygt hos oss. Vi har også et stort utvalg av fotogaver, takkekort, kalendere, julegaver, julegavetips, fotokort og julekort m.m." />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+	<link rel="shortcut icon" href="css/gfx/favicon.ico"/>
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700,700italic,600,600italic' rel='stylesheet' type='text/css' />
+
+    <title> 
+		<tal:block i18n:translate="" tal:condition="not:exists:pagetitle">Reed Foto</tal:block> 
+		<tal:block tal:condition="exists:pagetitle" tal:content="pagetitle" /> 
+	</title>
+	
+	<!-- jQuery -->
+    <script src="/js/jquery-1.11.3.min.js"></script>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+	<!-- Bootstrap Core JavaScript -->
+    <script src="/css/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link href="/css/reedfoto.css" rel="stylesheet" />
+    <link href="/css/jqueryui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+	
+    <script src="/js/reedfoto.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.fancybox-1.3.0.pack.js"></script>
+	<script src="/css/jqueryui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.reedfoto-1.0.js"></script> <!-- Eurofoto API 1.0 -->
+
+
+</head>
+
+
+<tal:block metal:define-macro="right-menu" tal:omit-tag="">
+</tal:block>
+
+<!-- top-header -->
+<div metal:define-macro="top" tal:omit-tag="">
+	<div metal:use-macro="topmenu" />
+</div>
+
+<!-- quick login -->
+<tal:block metal:define-macro="quicklogin">
+	<a href="javascript:CommonLogin.login();" class="button" i18n:translate="">Login in</a>
+	
+	<script>
+		$(function(){
+		 loginCallback = function(ret){
+			
+			if( ret.loggedIn == true ){
+				window.location.reload();
+			}
+		  
+		 }
+		});
+	 </script>
+</tal:block>
+
+<tal:block metal:define-macro="topmenu">
+<div class="navbar-wrapper">
+      <div class="container">
+        <nav class="navbar navbar-inverse navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/"><img class="img-responsive" alt="Reed Fotot" src="/css/gfx/logo.png" /></a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="visible-xs"><a href="/cart"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="cartcount">${cart/totalitems}</span> - Handlevogn</a></li>
+                <li class=""><a href="http://www.reedfoto.no/">www.reedfoto.no</a></li>
+                <li><a href="/fetchalbum">Finn bilder</a></li>
+				<tal:block tal:condition="session/loggedin">
+					<li><a href="/myaccount" i18n:translate="">My account</a></li>
+					<li><a href="/logout/" class="last" i18n:translate="">Logout</a></li>
+				</tal:block>
+				
+				<tal:block tal:condition="not:session/loggedin">
+					<li><a href="/register/" i18n:translate="">Register</a></li>
+					<li><a href="/login/" class="last" i18n:translate="">Log in</a></li>
+				</tal:block>
+				
+				<li><a href="/contact">Kontakt</a></li>
+              </ul>
+			  <ul class="nav navbar-nav navbar-cart hidden-xs">
+				
+				<tal:block tal:condition="exists: cart">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> <span class="cartcount">${cart/totalitems}</span> - Handlevogn<span class="caret"></span></a>
+					<ul class="dropdown-menu dropdown-cart" role="menu">
+						<tal:block  tal:condition="cart/items" tal:repeat="item cart/items" id="cart">
+							
+							<!--<tal:block tal:condition="exists:item/quantity">
+								<div class="row productline">
+								<div class="col-xs-7 col-md-6" tal:content="item/product/title" />
+								<div class="col-xs-4 col-md-6">
+									<span tal:content="formatprice:item/price">Total</span>
+								</div>
+								</div>
+								<hr />
+							</tal:block>-->
+							<tal:block tal:condition="not:exists:item/unitprice">
+								<tal:block tal:repeat="product item">
+									<tal:block tal:condition="exists:product/product/title">
+										<div class="row productline">
+										<div class="col-xs-7 col-md-6" tal:content="product/product/title" />
+										<div class="col-xs-4 col-md-6">
+											<span tal:content="product/quantity">Antall</span> stk. kr.<span tal:content="formatprice:product/price">Total</span>
+										</div>
+										</div>
+										<hr />
+									</tal:block>
+									<tal:block tal:condition="not:exists:product/product/title">
+										<tal:block tal:repeat="product product">
+										<div class="row productline">
+										<div class="col-xs-7 col-md-6" tal:content="product/product/title" />
+										<div class="col-xs-4 col-md-6">
+											<span tal:content="product/quantity">Antall</span> stk. kr.<span tal:content="formatprice:product/price">Total</span>
+										</div>
+										<div tal:condition="exists:product/extrapages">
+											<div class="col-xs-7 col-md-6" style="padding-left: 25px" tal:content="product/extrapages/product/title" />
+											<div class="col-xs-4 col-md-6">
+												<div class="col-xs-4">
+													<span tal:content="product/extrapages/quantity">Antall</span>
+												</div>
+												<div class="col-xs-8">
+													<div class="col-md-6">
+														<span tal:content="formatprice:product/extrapages/unitprice">Pris</span>
+													</div>
+													<div class="col-md-6">
+														<span tal:content="formatprice:product/extrapages/price">Total</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div tal:condition="exists:product/extrapages">
+											<div class="col-xs-7 col-md-6" style="padding-left: 25px" tal:content="product/extrapages/product/title" />
+											<div class="col-xs-4 col-md-6">
+												<div class="col-xs-4">
+													<span tal:content="product/extrapages/quantity">Antall</span>
+												</div>
+												<div class="col-xs-8">
+													<div class="col-md-6">
+														<span tal:content="formatprice:product/extrapages/unitprice">Pris</span>
+													</div>
+													<div class="col-md-6">
+														<span tal:content="formatprice:product/extrapages/price">Total</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										</div>
+										<hr />
+										</tal:block>
+									</tal:block>
+								</tal:block>
+							</tal:block>
+						</tal:block>
+						<!--
+						<tal:block tal:condition="exists: cart/items/gifts">
+							<tal:block tal:repeat="items cart/items/gifts">
+								<tal:block tal:repeat="item items">
+									<li>
+										<span class="item">
+										  <span class="item-left">
+											  <img src="/producteditor/stempel/thumb/${item/referenceid}"  style="width:80px;"/>
+											  <span class="item-info">
+												  <span tal:content="shorten:item/product/title;10;..">Item name</span>
+												  <span>NOK ${item/price},-</span> 
+											  </span>
+										  </span>
+										  <span class="item-right">
+											  <button data-prodno="${item/prodno}" data-referenceid="${item/referenceid}" class="btn btn-xs btn-danger pull-right remove-from-cart">x</button>
+										  </span>
+									  </span>
+									</li>
+								</tal:block>
+							</tal:block>
+						</tal:block>
+						-->
+						<li class="divider"></li>
+						<li ><a class="btn text-center" href="/cart" style="font-weight: bold"><span class="glyphicon glyphicon-shopping-cart"></span>Gå til Handlekurv</a></li>
+				  </ul>
+				</li>
+				</tal:block>
+			  </ul>
+            </div>
+          </div>
+        </nav>
+		
+		<div class="col-md-12" style="background: #fff;border-bottom: solid 1px #ccc;">
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1" style="float: left;">
+				<ul class="nav navbar-nav topnav" style=" display: inline; ">
+					<li role="presentation">
+						<a href="/">
+							FORSIDEN
+						</a>
+					</li>
+					<li role="presentation">
+						<a href="/fremkalle-bilder/">
+							FREMKALLING
+						</a>
+					</li>
+					<li role="presentation">
+						<a href="/fotobutikk/produkter/veggbilder">
+							VEGGBILDER
+						</a>
+					</li>
+					<li role="presentation" class="dropdown">
+						<a href="/fotobutikk/produkter/kalender/">KALENDERE</a>
+					</li>
+					<li role="presentation" class="dropdown">
+						<a href="/fotobutikk/produkter/fotokort/">FOTOKORT</a>
+					</li>
+					<!--<li role="presentation" class="dropdown">
+						<a href="/fotobutikk/produkter/fotobok/">
+							FOTOBOK
+						</a>
+					</li>-->
+					<li role="presentation" class="dropdown">
+						<a href="/fotobutikk/produkter/fotogaver">
+							GAVER
+						</a>
+					</li>						  
+			
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</tal:block>
+
+<tal:block metal:define-macro="leftmenu">
+</tal:block>
+
+<!-- beta message -->
+<tal:block metal:define-macro="message">
+</tal:block>
+
+
+
+<!-- FOOTER -->
+<tal:block metal:define-macro="footer">
+	
+	<div id="footer" class="last">
+		
+		<div class="col-md-12 text-center ">
+		   <p>Reed Foto AS<br />
+		   Tlf. 57 86 83 33 - post@reedfoto.no<br/>
+		   </p>
+			<p><a href="${url:/about/copyright/}">Copyright | © ${request/date/year} Reed Foto AS </a></p>
+			<a href="/settings/language/nb_NO"><img src="https://static.repix.no/gfx/flags/no.png" alt="NO" /> Bokmål</a>
+			<a href="/settings/language/nn_NO"><img src="https://static.repix.no/gfx/flags/no.png" alt="NO" /> Nynorsk</a>
+		</div>
+		
+		<br />
+		
+	</div>
+	<tal:block metal:use-macro="google-analytics" />
+	
+</tal:block>
+
+
+<!-- Google Analytics gs.js www.eurofoto.no -->
+<tal:block metal:define-macro="google-analytics">
+   <tal:block tal:condition="exists:google">
+	<script type="text/javascript">
+	//<![CDATA[
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	//]]>
+	</script>
+	<script type="text/javascript">
+		try{
+		var pageTracker = _gat._getTracker("${google/analytics}");
+			<tal:block tal:condition="not:session/loggedin">
+				pageTracker._setVar('unregistered');
+			</tal:block>
+			<tal:block tal:condition="session/loggedin">
+				pageTracker._setVar('member');
+			</tal:block>
+			pageTracker._setDomainName(".eurofoto.no");
+			pageTracker._trackEvent('Performance', 'Execution time', 'xml', Math.round( ${statistics/exectime} * 10 )/10 );
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+	</tal:block>
+</tal:block>
+
+
+<!-- top-search -->
+<tal:block metal:define-macro="top-search">
+	<form id="topsearch" class="navbar-form navbar-left" action="/search/" method="get" style="margin-top: 5px; margin-bottom: 0px;">
+	
+		<div class="input-group">
+			<input class="form-control" type="text" name="q" id="q" value="${searchstring}" tal:condition="exists: searchstring" style="max-width: 100%; width: 100%; height: 20px"/>
+			<input class="form-control" type="text" placeholder="Søk" name="q" id="q" tal:condition="not: exists: searchstring" style="max-width: 100%; width: 100%; height: 20px"/>
+			<div class="input-group-btn">
+				<button class="btn btn-default" style="" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+			</div>
+		</div>
+		<button type="submit" class="hide btn btn-default">Submit</button>
+	</form>
+	<script type="text/javascript">
+	//<![CDATA[
+		
+		$(document).ready( function() {
+
+			if( $('#q', '#topsearch').attr('value') == '') {
+					$('#q', '#topsearch').attr('value', $('#q', '#topsearch').parent().parent().find('h5.searchtitle').text() );
+			}
+
+			$('#q','#topsearch').click( function() {
+				if( $(this).attr('value') == $(this).parent().parent().find('h5.searchtitle').text() ) {
+					$(this).attr('value', '');
+				} else {
+					$(this).select();
+				}
+			});
+		
+			$('#q', '#topsearch').blur( function() {
+				if( $(this).attr('value') == '') {
+					$(this).attr('value', $(this).parent().parent().find('h5.searchtitle').text() );
+				}
+			});
+		})
+	//]]>
+	</script>
+</tal:block>

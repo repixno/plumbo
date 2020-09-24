@@ -1,0 +1,1150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<tal:block tal:define="global dontShowCart" />
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Cart</tal:block>
+	
+	<style type="text/css">
+		td.quantity-cell {
+			width: 90px;
+		}
+		
+		tr.discount td {
+		   background-color: #ffffe7;
+		}
+		#preview{
+			position:absolute;
+			border:1px solid #ccc;
+			background:#333;
+			padding:5px;
+			display:none;
+			color:#fff;
+		}
+		#gift-card {
+			margin:1px;
+			padding:4px;
+			/*width:90px;*/
+			margin-top:0px;
+		}
+		#gift-card-wrapper i {
+			color:#777;
+		}
+		#gift-card-wrapper h5 {
+			padding:0;
+			margin:0;
+		}
+		#gift-card-wrapper {
+			margin-bottom: 10px;
+		}
+		
+		.price, .unitprice{
+			min-width: 80px;
+		}
+	</style>
+	
+</head>
+
+
+<body>
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<div class="container">
+	<div class="row">
+		<div class="col-md-2 hidden-xs left-menu">
+            <div metal:use-macro="../../${templates}/common.html/leftmenu" />
+        </div>
+	<div class="col-md-10">
+		<div class="col-md-9" tal:condition="exists: cart">
+			<form method="post" action="/kasse/" id="cart">
+			<h2 i18n:translate=""  tal:condition="cart/items">Cart</h2>
+			
+			<table class="table" tal:condition="cart/items">
+			
+				<thead>
+					<tr>
+						<th i18n:translate="" width="100">Image</th>
+						<th i18n:translate="">Product</th>
+						<th></th>
+						<th i18n:translate="">Quantity</th>
+						<th i18n:translate="">Price</th>
+						<th i18n:translate="">Sum</th>
+						<th i18n:translate="">Remove</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<!-- prints -->
+					<tal:block tal:condition="exists: cart/items/prints">
+						<tal:block tal:repeat="print cart/items/prints">
+							<tr>
+								<td>
+									<tal:block tal:condition="exists: print/product/images">
+										<tal:block tal:repeat="image print/product/images">
+											<tal:block tal:condition="equal:repeat/image/number,1">
+												<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" title="" />
+											</tal:block>
+										</tal:block>
+									</tal:block>
+								</td>
+								<td>
+									<tal:block tal:condition="exists:print/product/title" tal:content="print/product/title">Product</tal:block>
+								</td>
+								<td>
+	
+								</td>
+								<td>
+									<span class="quiet" tal:content="print/quantity"></span>
+									<a href="/order-prints/choose-quantity/each-print/edit" i18n:translate="">Change</a>
+								</td>
+								<td class="unitprice" tal:content="formatprice:print/unitprice">Price</td>
+								<td class="price" tal:content="formatprice:print/price">Sum</td>
+								<td class="removeItem">
+									<a href="/cart/remove/${print/prodno}" title="Remove" i18n:translate="" name="${print/prodno}">Remove</a>
+								</td>
+							</tr>
+							
+							<tal:block tal:condition="exists:print/license">
+							<tr tal:repeat="license print/license">
+								<td>
+									<!-- tal:block tal:condition="exists: print/product/images">
+										<tal:block tal:repeat="image print/product/images">
+											<tal:block tal:condition="equal:repeat/image/number,1">
+												<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" title="" />
+											</tal:block>
+										</tal:block>
+									</tal:block -->&nbsp;
+								</td>
+								<td>
+									<tal:block tal:condition="exists:license/product/title" tal:content="license/product/title">License</tal:block>
+								</td>
+								<td>
+									&nbsp;
+								</td>
+								<td>
+									<span class="quiet">1</span>
+								</td>
+								<td class="unitprice" tal:content="formatprice:license/unitfee">Price</td>
+								<td class="price" tal:content="formatprice:license/totalfee">Sum</td>
+								<td class="removeItem">
+									&nbsp;
+								</td>
+							</tr>
+							</tal:block>
+							
+						</tal:block>
+					</tal:block>
+					
+					<!--merkelapp-->
+					<tal:block tal:condition="exists: cart/items/merkelapp">
+						<tal:block tal:repeat="products cart/items/merkelapp">
+							<tal:block tal:repeat="merkelapp products">
+								<tr id="${merkelapp/optionid}" class="productline">
+									<td>
+							  <img src="/bestilling/thumb/${merkelapp/referenceid}" />
+									</td>
+									<td>
+										<tal:block tal:condition="exists:merkelapp/product/title" tal:content="merkelapp/product/title">Product</tal:block>
+										<tal:block tal:condition="merkelapp/product/option">
+											<tal:block tal:condition="not:equal:merkelapp/product/option/title,Standard">
+											<span class="quiet">, <tal:block tal:content="merkelapp/currentproductoption/title" /></span>
+											</tal:block>
+										</tal:block>
+		
+									</td>
+									<td>
+									</td>
+									<td class="quantity-cell quantity-editable">
+										<div class="input-group spinner">
+											<input type="text" name="merkelapp[${merkelapp/prodno}][${merkelapp/referenceid}]" class="quantity input-number productquantity" tal:attributes="value merkelapp/quantity"/>
+											</div>
+									</td>
+									<td class="unitprice" tal:content="formatprice:merkelapp/unitprice">Price</td>
+									<td class="price productprice" tal:content="formatprice:merkelapp/price">Sum</td>
+									<td class="removeItem">
+										<a href="/cart/remove/${merkelapp/prodno}/${merkelapp/referenceid}" title="Remove" i18n:translate="" name="${merkelapp/prodno}">Remove</a>
+										<input type="hidden" value="${merkelapp/referenceid}" name="referenceid" />
+									</td>
+		
+								</tr>
+								
+								<tal:block tal:condition="exists:merkelapp/redeyeremoval">
+								
+									<tr class="connected-from-prev" id="${merkelapp/optionid}_redeye">
+										<td>
+											<tal:block tal:condition="exists:merkelapp/redeyeremoval/product/images">
+												<tal:block tal:repeat="image merkelapp/redeyeremoval/product/images">
+													<tal:block tal:condition="equal:repeat/image/number,1">
+														<img tal:condition="image/url" src="/images/products/thumbs/square/50/${image/url}" title="" />
+													</tal:block>
+												</tal:block>
+											</tal:block>
+										</td>
+										
+										<td colspan="3">
+											<tal:block tal:condition="exists:merkelapp/redeyeremoval/product/title" tal:content="merkelapp/redeyeremoval/product/title" />
+										</td>
+										<td>
+											<tal:block tal:content="formatprice:merkelapp/redeyeremoval/price" />
+										</td>
+										<td>
+											<tal:block tal:content="formatprice:merkelapp/redeyeremoval/price" />
+										</td>
+	
+										<td>
+											<a href="/cart/remove/redeye/${merkelapp/prodno}/${merkelapp/referenceid}" title="Remove" i18n:translate="" name="${merkelapp/redeyeremoval/prodno}">Remove</a>
+										</td>
+									</tr>
+								</tal:block>
+								
+								<tal:block tal:condition="exists:merkelapp/license">
+							<tr tal:repeat="license merkelapp/license">
+								<td>
+									<!-- tal:block tal:condition="exists: print/product/images">
+										<tal:block tal:repeat="image print/product/images">
+											<tal:block tal:condition="equal:repeat/image/number,1">
+												<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" title="" />
+											</tal:block>
+										</tal:block>
+									</tal:block -->&nbsp;
+								</td>
+								<td>
+									<tal:block tal:condition="exists:license/product/title" tal:content="license/product/title">License</tal:block>
+								</td>
+								<td>
+									&nbsp;
+								</td>
+								<td>
+									<span class="quiet">1</span>
+								</td>
+								<td class="unitprice" tal:content="formatprice:license/unitfee">Price</td>
+								<td class="price" tal:content="formatprice:license/totalfee">Sum</td>
+								<td class="removeItem">
+									&nbsp;
+								</td>
+							</tr>
+							   </tal:block>
+							   
+							</tal:block>
+						</tal:block>
+					</tal:block>
+					
+					
+					<!-- production method -->
+					<tal:block tal:condition="exists: cart/items/productionmethod">
+					
+						<tr tal:condition="not:equal:cart/items/productionmethod/prodno,348">
+							<td>
+								<tal:block tal:condition="exists:cart/items/productionmethod/product/images">
+									<tal:block tal:repeat="image cart/items/productionmethod/product/images">
+										<tal:block tal:condition="equal:repeat/image/number,1">
+											<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" title="" />
+										</tal:block>
+									</tal:block>
+								</tal:block>
+							</td>
+							<td>
+								<tal:block tal:content="cart/items/productionmethod/title">Product</tal:block>
+							</td>
+							<td>
+								
+							</td>
+							<td>
+								<tal:block tal:content="cart/items/productionmethod/quantity" />
+								<a href="/order-prints/choose-quantity/each-print/edit" i18n:translate="">Change</a>
+							</td>
+							<td tal:content="formatprice:cart/items/productionmethod/unitprice">Price</td>
+							<td class="price" tal:content="formatprice:cart/items/productionmethod/price">Sum</td>
+							<td class="removeItem">
+							</td>
+						</tr>
+					</tal:block>
+					
+					<!-- correction method -->
+					<tal:block tal:condition="exists: cart/items/correctionmethod">
+					
+						<tr tal:condition="not:equal:cart/items/correctionmethod/prodno,351">
+							<td>
+								<tal:block tal:condition="exists:cart/items/correctionmethod/product/images">
+									<tal:block tal:repeat="image cart/items/correctionmethod/product/images">
+										<tal:block tal:condition="equal:repeat/image/number,1">
+											<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" title="" />
+										</tal:block>
+									</tal:block>
+								</tal:block>
+							</td>
+							<td>
+								<tal:block tal:content="cart/items/correctionmethod/title">Product</tal:block>
+							</td>
+							<td>
+	
+							</td>
+							<td>
+								<tal:block tal:content="cart/items/correctionmethod/quantity" />
+								<a href="/order-prints/choose-quantity/each-print/edit" i18n:translate="">Change</a>
+							</td>
+							<td tal:content="formatprice:cart/items/correctionmethod/unitprice">Price</td>
+							<td class="price" tal:content="formatprice:cart/items/correctionmethod/price">Sum</td>
+							<td></td>
+						</tr>
+					</tal:block>
+					
+					<!-- Paper quality -->
+					<tal:block tal:condition="exists: cart/items/paperquality">
+					
+						<tr tal:condition="not:equal:cart/items/paperquality/prodno,10">
+							<td>
+								<tal:block tal:condition="exists:cart/items/paperquality/product/images">
+									<tal:block tal:repeat="image cart/items/paperquality/product/images">
+										<tal:block tal:condition="equal:repeat/image/number,1">
+											<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" title="" />
+										</tal:block>
+									</tal:block>
+								</tal:block>
+							</td>
+							<td>
+								<tal:block tal:content="cart/items/paperquality/title">Product</tal:block>
+							</td>
+							<td>
+	
+							</td>
+							<td>
+								<tal:block tal:content="cart/items/paperquality/quantity" />
+								 <a href="/order-prints/choose-quantity/each-print/edit" i18n:translate="">Change</a>
+							</td>
+							<td tal:content="formatprice:cart/items/paperquality/unitprice">Price</td>
+							<td class="price" tal:content="formatprice:cart/items/paperquality/price">Sum</td>
+							<td>
+							</td>
+						</tr>
+					</tal:block>
+					
+					<!-- enlargements -->
+					<tal:block tal:condition="exists: cart/items/enlargements">
+						<tal:block tal:repeat="enlargement cart/items/enlargements">
+							<tr>
+								<td>
+									<tal:block tal:condition="exists:enlargement/product/images">
+										<tal:block tal:repeat="image enlargement/product/images">
+											<tal:block tal:condition="equal:repeat/image/number,1">
+												<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" title="" />
+											</tal:block>
+										</tal:block>
+									</tal:block>
+								</td>
+								<td>
+									<tal:block tal:condition="exists:enlargement/product/title" tal:content="enlargement/product/title">Product</tal:block>
+								</td>
+								<td>
+									
+								</td>
+								<td class="quantity-cell">
+									<span class="quiet" tal:content="enlargement/quantity"></span> 
+									 <a href="/order-prints/choose-quantity/each-print/edit" i18n:translate="">Change</a>
+								</td>
+								<td tal:content="formatprice:enlargement/unitprice">Price</td>
+								<td class="price" tal:content="formatprice:enlargement/price">Sum</td>
+								<td class="removeItem">
+									<a href="/cart/remove/${enlargement/prodno}" title="Remove" i18n:translate="" name="${enlargement/prodno}">Remove</a>
+								</td>
+							</tr>
+							
+							<tal:block tal:condition="exists:enlargement/license">
+							<tr tal:repeat="license enlargement/license">
+								<td>
+									<!-- tal:block tal:condition="exists: print/product/images">
+										<tal:block tal:repeat="image print/product/images">
+											<tal:block tal:condition="equal:repeat/image/number,1">
+												<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" title="" />
+											</tal:block>
+										</tal:block>
+									</tal:block -->&nbsp;
+								</td>
+								<td>
+									<tal:block tal:condition="exists:license/product/title" tal:content="license/product/title">License</tal:block>
+								</td>
+								<td>
+									&nbsp;
+								</td>
+								<td>
+									<span class="quiet">1</span>
+								</td>
+								<td class="unitprice" tal:content="formatprice:license/unitfee">Price</td>
+								<td class="price" tal:content="formatprice:license/totalfee">Sum</td>
+								<td class="removeItem">
+									&nbsp;
+								</td>
+							</tr>
+							</tal:block>
+						</tal:block>
+					</tal:block>
+					
+					<!-- Gifts -->
+					<tal:block tal:condition="exists: cart/items/gifts">
+						<tal:block tal:repeat="products cart/items/gifts">
+							<tal:block tal:repeat="gift products">
+								<tr id="${gift/optionid}">
+									<td>
+									<tal:block tal:condition="exists: gift/malid/images/medium">
+									<a href="#" class="preview" title="${gift/image}">
+									 <img tal:condition="gift/malid/images/medium" src="${gift/malid/images/medium}" width="50px" />
+									</a>
+									</tal:block>
+									<tal:block tal:repeat="image gift/malid/images/medium">
+									<tal:block tal:condition="php:strlen(image) == 0">
+									<tal:block tal:condition="exists:gift/product">
+										<tal:block tal:repeat="image gift/product/images">
+											<tal:block tal:condition="equal:repeat/image/number,1">
+											<a href="#" class="preview" title="${gift/image}">
+												<img tal:condition="image/url" src="/images/products/thumbs/square/50/${image/url}" title="" />
+										   </a>
+											</tal:block>
+										</tal:block>
+									 </tal:block>
+								  </tal:block>
+								  </tal:block>
+									</td>
+									<td>
+										<tal:block tal:condition="exists:gift/product/title" tal:content="gift/product/title">Product</tal:block>
+										<tal:block tal:condition="gift/product/option">
+											<tal:block tal:condition="not:equal:gift/product/option/title,Standard">
+											<span class="quiet">, <tal:block tal:content="gift/currentproductoption/title" /></span>
+											</tal:block>
+										</tal:block>
+		
+									</td>
+									<td>
+									</td>
+									<td class="quantity-cell quantity-editable">
+										<input 
+											type="text" value="1" class="quantity" name="gifts[${gift/prodno}][${gift/referenceid}]" 
+											maxlength="4" tal:attributes="value gift/quantity"/> 
+									</td>
+									<td class="unitprice" tal:content="formatprice:gift/unitprice">Price</td>
+									<td class="price" tal:content="formatprice:gift/price">Sum</td>
+									<td class="removeItem">
+										<a href="/cart/remove/${gift/prodno}/${gift/referenceid}" title="Remove" i18n:translate="" name="${gift/prodno}">Remove</a>
+										<input type="hidden" value="${gift/referenceid}" name="referenceid" />
+									</td>
+		
+								</tr>
+								
+								<tal:block tal:condition="exists:gift/redeyeremoval">
+								
+									<tr class="connected-from-prev" id="${gift/optionid}_redeye">
+										<td>
+											<tal:block tal:condition="exists:gift/redeyeremoval/product/images">
+												<tal:block tal:repeat="image gift/redeyeremoval/product/images">
+													<tal:block tal:condition="equal:repeat/image/number,1">
+														<img tal:condition="image/url" src="/images/products/thumbs/square/50/${image/url}" title="" />
+													</tal:block>
+												</tal:block>
+											</tal:block>
+										</td>
+										
+										<td colspan="3">
+											<tal:block tal:condition="exists:gift/redeyeremoval/product/title" tal:content="gift/redeyeremoval/product/title" />
+										</td>
+										<td>
+											<tal:block tal:content="formatprice:gift/redeyeremoval/price" />
+										</td>
+										<td class="price">
+											<tal:block tal:content="formatprice:gift/redeyeremoval/price" />
+										</td>
+	
+										<td>
+											<a href="/cart/remove/redeye/${gift/prodno}/${gift/referenceid}" title="Remove" i18n:translate="" name="${gift/redeyeremoval/prodno}">Remove</a>
+										</td>
+									</tr>
+								</tal:block>
+								
+								<tal:block tal:condition="exists:gift/varnish">
+									<tr class="connected-from-prev" id="${gift/optionid}_varnish">
+										<td>
+											<tal:block tal:condition="exists:gift/varnish/product/images">
+												<tal:block tal:repeat="image gift/varnish/product/images">
+													<tal:block tal:condition="equal:repeat/image/number,1">
+														<img tal:condition="image/url" src="/images/products/thumbs/square/50/${image/url}" title="" />
+													</tal:block>
+												</tal:block>
+											</tal:block>
+										</td>
+										
+										<td colspan="3">
+											<tal:block tal:condition="exists:gift/varnish/product/title" tal:content="gift/varnish/product/title" />
+										</td>
+										<td>
+											<tal:block tal:content="formatprice:gift/varnish/unitprice" />
+										</td>
+										<td class="price varnishprice">
+											<tal:block tal:content="formatprice:gift/varnish/price" />
+										</td>
+	
+										<td>
+											<a href="/cart/remove/varnish/${gift/prodno}/${gift/referenceid}" title="Remove" i18n:translate="" name="${gift/varnish/prodno}">Remove</a>
+										</td>
+									</tr>
+								</tal:block>
+								<tal:block tal:condition="exists:gift/upgrade">
+									<tr class="connected-from-prev" id="${gift/optionid}_upgrade">
+										<td>
+											<tal:block tal:condition="exists:gift/upgrade/product/images">
+												<tal:block tal:repeat="image gift/upgrade/product/images">
+													<tal:block tal:condition="equal:repeat/image/number,1">
+														<img tal:condition="image/url" src="/images/products/thumbs/square/50/${image/url}" title="" />
+													</tal:block>
+												</tal:block>
+											</tal:block>
+										</td>
+										
+										<td colspan="3">
+											<tal:block tal:condition="exists:gift/upgrade/product/title" tal:content="gift/upgrade/product/title" />
+										</td>
+										<td>
+											<tal:block tal:content="formatprice:gift/upgrade/unitprice" />
+										</td>
+										<td class="price upgradeprice">
+											<tal:block tal:content="formatprice:gift/upgrade/price" />
+										</td>
+	
+										<td>
+											<a href="/cart/remove/upgrade/${gift/prodno}/${gift/referenceid}" title="Remove" i18n:translate="" name="${gift/upgrade/prodno}">Remove</a>
+										</td>
+									</tr>
+								</tal:block>
+								
+								<tal:block tal:condition="exists:gift/license">
+							<tr tal:repeat="license gift/license">
+								<td>
+									<!-- tal:block tal:condition="exists: print/product/images">
+										<tal:block tal:repeat="image print/product/images">
+											<tal:block tal:condition="equal:repeat/image/number,1">
+												<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" title="" />
+											</tal:block>
+										</tal:block>
+									</tal:block -->&nbsp;
+								</td>
+								<td>
+									<tal:block tal:condition="exists:license/product/title" tal:content="license/product/title">License</tal:block>
+								</td>
+								<td>
+									&nbsp;
+								</td>
+								<td>
+									<span class="quiet">1</span>
+								</td>
+								<td class="unitprice" tal:content="formatprice:license/unitfee">Price</td>
+								<td class="price" tal:content="formatprice:license/totalfee">Sum</td>
+								<td class="removeItem">
+									&nbsp;
+								</td>
+							</tr>
+							   </tal:block>
+							   
+							</tal:block>
+						</tal:block>
+					</tal:block>
+					<!-- Textgifts -->
+					<tal:block tal:condition="exists: cart/items/textgift">
+						<tal:block tal:repeat="products cart/items/textgift">
+							<tal:block tal:repeat="gift products">
+								<tr id="${gift/optionid}">
+									<td>
+									<img src="${static:}images/products/thumbs/square/60/${gift/currentproductoption/thumb}"/>
+									</td>
+									<td>
+										<tal:block tal:condition="exists:gift/product/title" tal:content="gift/product/title">Product</tal:block>
+										<tal:block tal:condition="gift/product/option">
+											<tal:block tal:condition="not:equal:gift/product/option/title,Standard">
+											<span class="quiet">, <tal:block tal:content="gift/currentproductoption/title" /></span>
+											</tal:block>
+										</tal:block>
+										<br/>
+										<span class="quiet">Tekst: ${gift/attributes/text}</span>
+		
+									</td>
+									<td>
+									</td>
+									<td class="quantity-cell quantity-editable">
+										<input 
+											type="text" value="1" class="quantity" name="gifts[${gift/prodno}][${gift/referenceid}]" 
+											maxlength="4" tal:attributes="value gift/quantity"/> 
+									</td>
+									<td class="unitprice" tal:content="formatprice:gift/unitprice">Price</td>
+									<td class="price" tal:content="formatprice:gift/price">Sum</td>
+									<td class="removeItem">
+										<a href="/cart/remove/${gift/prodno}/${gift/referenceid}" title="Remove" i18n:translate="" name="${gift/prodno}">Remove</a>
+										<input type="hidden" value="${gift/referenceid}" name="referenceid" />
+									</td>
+		
+								</tr>
+							</tal:block>
+						</tal:block>
+					</tal:block>
+					<!--ukeplan-->
+					<tal:block tal:condition="exists: cart/items/ukeplan">
+						<tal:block tal:repeat="products cart/items/ukeplan">
+							<tal:block tal:repeat="ukeplan products">
+								<tr id="${ukeplan/optionid}">
+									<td>
+	
+									</td>
+									<td>
+										<tal:block tal:condition="exists:ukeplan/product/title" tal:content="ukeplan/product/title">Product</tal:block>
+										<tal:block tal:condition="ukeplan/product/option">
+											<tal:block tal:condition="not:equal:ukeplan/product/option/title,Standard">
+											<span class="quiet">, <tal:block tal:content="ukeplan/currentproductoption/title" /></span>
+											</tal:block>
+										</tal:block>
+		
+									</td>
+									<td>
+									</td>
+									<td class="quantity-cell quantity-editable">
+										<input 
+											type="text" value="1" class="quantity" name="ukeplan[${ukeplan/prodno}][${ukeplan/referenceid}]" 
+											maxlength="4" tal:attributes="value ukeplan/quantity"/> 
+									</td>
+									<td class="unitprice" tal:content="formatprice:ukeplan/unitprice">Price</td>
+									<td class="price" tal:content="formatprice:ukeplan/price">Sum</td>
+									<td class="removeItem">
+										<a href="/cart/remove/${ukeplan/prodno}/${ukeplan/referenceid}" title="Remove" i18n:translate="" name="${ukeplan/prodno}">Remove</a>
+										<input type="hidden" value="${ukeplan/referenceid}" name="referenceid" />
+									</td>
+		
+								</tr>
+								
+								<tal:block tal:condition="exists:ukeplan/redeyeremoval">
+								
+									<tr class="connected-from-prev" id="${ukeplan/optionid}_redeye">
+										<td>
+											<tal:block tal:condition="exists:ukeplan/redeyeremoval/product/images">
+												<tal:block tal:repeat="image ukeplan/redeyeremoval/product/images">
+													<tal:block tal:condition="equal:repeat/image/number,1">
+														<img tal:condition="image/url" src="/images/products/thumbs/square/50/${image/url}" title="" />
+													</tal:block>
+												</tal:block>
+											</tal:block>
+										</td>
+										
+										<td colspan="3">
+											<tal:block tal:condition="exists:ukeplan/redeyeremoval/product/title" tal:content="ukeplan/redeyeremoval/product/title" />
+										</td>
+										<td>
+											<tal:block tal:content="formatprice:ukeplan/redeyeremoval/price" />
+										</td>
+										<td>
+											<tal:block tal:content="formatprice:ukeplan/redeyeremoval/price" />
+										</td>
+	
+										<td>
+											<a href="/cart/remove/redeye/${ukeplan/prodno}/${ukeplan/referenceid}" title="Remove" i18n:translate="" name="${ukeplan/redeyeremoval/prodno}">Remove</a>
+										</td>
+									</tr>
+								</tal:block>
+								
+								<tal:block tal:condition="exists:ukeplan/license">
+							<tr tal:repeat="license ukeplan/license">
+								<td>
+									<!-- tal:block tal:condition="exists: print/product/images">
+										<tal:block tal:repeat="image print/product/images">
+											<tal:block tal:condition="equal:repeat/image/number,1">
+												<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" title="" />
+											</tal:block>
+										</tal:block>
+									</tal:block -->&nbsp;
+								</td>
+								<td>
+									<tal:block tal:condition="exists:license/product/title" tal:content="license/product/title">License</tal:block>
+								</td>
+								<td>
+									&nbsp;
+								</td>
+								<td>
+									<span class="quiet">1</span>
+								</td>
+								<td class="unitprice" tal:content="formatprice:license/unitfee">Price</td>
+								<td class="price" tal:content="formatprice:license/totalfee">Sum</td>
+								<td class="removeItem">
+									&nbsp;
+								</td>
+							</tr>
+							   </tal:block>
+							   
+							</tal:block>
+						</tal:block>
+					</tal:block>
+					<!-- Goods -->
+					<tal:block tal:condition="exists: cart/items/goods">
+						<tal:block tal:repeat="good cart/items/goods">
+							<tr id="${good/optionid}">
+								<td>
+									<tal:block tal:condition="exists:good/product/images">
+										<tal:block tal:repeat="image good/product/images">
+											<tal:block tal:condition="equal:repeat/image/number,1">
+												<img tal:condition="image/url" src="/images/products/thumbs/square/50/${image/url}" title="" />
+											</tal:block>
+										</tal:block>
+									</tal:block>
+								</td>
+								<td>
+								   <tal:block tal:condition="not:exists:good/usertitle">
+									 <tal:block tal:condition="exists:good/product/title" tal:content="good/product/title">Product</tal:block>
+									</tal:block>
+									<tal:block tal:condition="exists:good/usertitle" tal:content="good/usertitle|default"></tal:block> 
+									<tal:block tal:condition="good/product/option">
+										<tal:block tal:condition="not:equal:good/product/option/title,Standard">
+											<span class="quiet">, <tal:block tal:content="good/currentproductoption/title" /></span>
+										</tal:block>
+									</tal:block>
+									<tal:block tal:condition="exists:good/giftcard">
+									<br />
+									<tal:block tal:condition="not:exists:good/giftcard/print">
+									<input type="radio" id="printedgiftcard" class="printedgiftcard" name="printedgiftcard-${good/optionid}[]" value="${good/prodno}" /><label for="printedgiftcard" tal:condition="not:exists:cart/giftcard/print" i18n:translate="">Giftcard sent by mail (postage in addition)</label><br />
+									<input type="radio" id="notprintedgiftcard" class="notprintedgiftcard" name="printedgiftcard-${good/optionid}[]" value="${good/prodno}" checked="true" /><label for="notprintedgiftcard" tal:condition="not:exists:cart/giftcard/print" i18n:translate="">Download and print by my own</label>
+									</tal:block>
+									<tal:block tal:condition="exists:good/giftcard/print">
+									<input type="radio" id="printedgiftcard" class="printedgiftcard" name="printedgiftcard-${good/optionid}[]" value="${good/prodno}" checked="true" /><label for="printedgiftcard" tal:condition="not:exists:cart/giftcard/print" i18n:translate="">Giftcard sent by mail (postage in addition)</label><br />
+									<input type="radio" id="notprintedgiftcard" class="notprintedgiftcard" name="printedgiftcard-${good/optionid}[]" value="${good/prodno}" /><label for="notprintedgiftcard" tal:condition="not:exists:cart/giftcard/print" i18n:translate="">Download and print by my own</label>
+									</tal:block>
+									<!--<input tal:condition="not:exists:good/giftcard/print" type="checkbox" class="printedgiftcard" name="printedgiftcard" value="${good/prodno}" /><label for="printedgiftcard" tal:condition="not:exists:cart/giftcard/print">Send printed giftcard</label>
+								   <input tal:condition="exists:good/giftcard/print" type="checkbox" class="printedgiftcard" name="printedgiftcard" value="${good/prodno}" checked="true" /><label for="printedgiftcard" tal:condition="exists:cart/giftcard/print">Send printed giftcard</label>-->
+								   </tal:block>
+								</td>
+								<td>
+								</td>
+								<td class="quantity-cell">
+									<input type="text" value="1" class="quantity" name="goods[${good/prodno}]" 
+										maxlength="4" tal:attributes="value good/quantity"/> 
+								</td>
+								<td class="unitprice" tal:content="formatprice:good/unitprice">Price</td>
+								<td class="price" tal:content="formatprice:good/price">Sum</td>
+								<td class="removeItem">
+									<a href="/cart/remove/${good/prodno}" title="Remove" i18n:translate="" name="${good/prodno}">Remove</a>
+								</td>
+							</tr>
+						</tal:block>
+					</tal:block>
+	
+					<!-- subscription -->
+					<tal:block tal:condition="exists: cart/items/subscription">
+						<tal:block tal:repeat="subscription cart/items/subscription">
+							<tr>
+								<td>
+									<tal:block tal:condition="exists:subscription/product/images">
+										<tal:block tal:repeat="image subscription/product/images">
+											<tal:block tal:condition="equal:repeat/image/number,1">
+												<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" title="" />
+											</tal:block>
+										</tal:block>
+									</tal:block>
+								</td>
+								<td>
+									<tal:block tal:condition="subscription/product/title" tal:content="subscription/product/title">Product</tal:block>
+									<span class="quiet" tal:content="subscription/currentproductoption/title"></span>
+								</td>
+								<td>
+									
+								</td>
+								<td>
+									1
+								</td>
+								<td class="unitprice" tal:content="formatprice:subscription/unitprice">Price</td>
+								<td class="price" tal:content="formatprice:subscription/price">Sum</td>
+								<td class="removeItem">
+									<a href="/cart/remove/${subscription/prodno}/${subscription/referenceid}" title="Remove" i18n:translate="" name="${subscription/prodno}">Remove</a>
+									<input type="hidden" value="${subscription/referenceid}" name="referenceid" />
+								</td>
+							</tr>
+						</tal:block>
+					</tal:block>
+					
+					<!-- mediaclip -->
+					<tal:block tal:condition="exists: cart/items/mediaclip">
+						
+						<tal:block tal:repeat="mediaclip cart/items/mediaclip">
+							<tal:block tal:repeat="mediaclipproduct mediaclip">
+							<tr id="${mediaclipproduct/optionid}" tal:condition="not:exists:mediaclipproduct/history">
+								<td>
+								  <img src="/create/thumb/orderthumb/${mediaclipproduct/referenceid}" widht="70" height="70" title="" />
+								</td>
+								<td>
+									<tal:block tal:condition="exists:mediaclipproduct/product/title" tal:content="mediaclipproduct/product/title"></tal:block>
+								</td>
+								<td>
+									<tal:block tal:content="mediaclipproduct/usertitle|default"></tal:block> 
+									
+									<tal:block tal:condition="exists: mediaclipproduct/projectid">
+										<a 	href="/create/photobook/edit/${mediaclipproduct/projectid}" 
+											tal:condition="mediaclipproduct/projectid" 
+											i18n:translate="">
+											Edit project
+										</a>
+									</tal:block>
+								</td>
+								<td class="quantity-cell quantity-editable">
+									<input type="text" value="1" class="quantity" maxlength="4" 
+										name="mediaclip[${mediaclipproduct/prodno}][${mediaclipproduct/referenceid}]" 
+										tal:attributes="value mediaclipproduct/quantity|default"
+									/> 
+								</td>
+								<td class="unitprice" tal:content="formatprice:mediaclipproduct/unitprice">Price</td>
+								<td class="price" tal:content="formatprice:mediaclipproduct/price">Sum</td>
+								
+								<td class="removeItem">
+									<a href="/cart/remove/${mediaclipproduct/prodno}/${mediaclipproduct/referenceid}" title="Remove" i18n:translate="" name="${mediaclipproduct/prodno}">Remove</a>
+									<input type="hidden" value="${mediaclipproduct/referenceid}" name="referenceid" />
+								</td>
+								
+							</tr>
+							
+							<tal:block tal:condition="exists:mediaclipproduct/extrapages">
+							<tr>
+								<td></td>
+								<td colspan="2" tal:content="mediaclipproduct/extrapages/product/title"></td>
+								<td tal:content="mediaclipproduct/extrapages/quantity"></td>
+								<td class="unitprice" tal:content="formatprice:mediaclipproduct/extrapages/unitprice"></td>
+								<td class="price" tal:content="formatprice:mediaclipproduct/extrapages/price"></td>
+							</tr>
+							</tal:block>
+						   
+							<tal:block tal:condition="exists:mediaclipproduct/redeyeremoval">
+							
+								<tr class="connected-from-prev" id="${mediaclipproduct/optionid}_redeye">
+									<td>
+										<tal:block tal:condition="exists:mediaclipproduct/redeyeremoval/product/images">
+											<tal:block tal:repeat="image mediaclipproduct/redeyeremoval/product/images">
+												<tal:block tal:condition="equal:repeat/image/number,1">
+													<img src="/images/products/thumbs/square/50/${image/url}" title="" />
+												</tal:block>
+											</tal:block>
+										</tal:block>
+									</td>
+									
+									<td colspan="3">
+										<tal:block tal:condition="exists:mediaclipproduct/redeyeremoval/product/title" tal:content="mediaclipproduct/redeyeremoval/product/title" />
+									</td>
+									<td>
+										<tal:block tal:content="formatprice:mediaclipproduct/redeyeremoval/price" />
+									</td>
+									<td>
+										<tal:block tal:content="formatprice:mediaclipproduct/redeyeremoval/price" />
+									</td>
+	
+									<td>
+										<a href="/cart/remove/redeye/${mediaclipproduct/prodno}/${mediaclipproduct/referenceid}" title="Remove" i18n:translate="" name="${mediaclipproduct/redeyeremoval/prodno}">Remove</a>
+									</td>
+								</tr>
+							</tal:block>
+							
+							<tal:block tal:condition="exists:mediaclipproduct/license">
+								<tr tal:repeat="license mediaclipproduct/license">
+									<td>
+										<!-- tal:block tal:condition="exists: print/product/images">
+											<tal:block tal:repeat="image print/product/images">
+												<tal:block tal:condition="equal:repeat/image/number,1">
+													<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" title="" />
+												</tal:block>
+											</tal:block>
+										</tal:block -->&nbsp;
+									</td>
+									<td>
+										<tal:block tal:condition="exists:license/product/title" tal:content="license/product/title">License</tal:block>
+									</td>
+									<td>
+										&nbsp;
+									</td>
+									<td>
+										<span class="quiet">1</span>
+									</td>
+									<td class="unitprice" tal:content="formatprice:license/unitfee">Price</td>
+									<td class="price" tal:content="formatprice:license/totalfee">Sum</td>
+									<td class="removeItem">
+										&nbsp;
+									</td>
+								</tr>
+							   </tal:block>
+							   
+							</tal:block>
+						</tal:block>
+					</tal:block>
+					
+					<!-- discount -->
+					<tal:block tal:condition="exists: cart/discount">
+						<tr class="discount" tal:condition="exists:cart/discount/final" tal:repeat="rebate cart/discount/final">
+							<td>
+								<span tal:content="cart/discount/info/code"></span>
+							</td>
+							<td colspan="2">
+								<span class="quiet" tal:content="cart/discount/info/name"></span><br />
+								<span tal:content="rebate/product/title"></span>
+							</td>
+							<td>
+								<span tal:content="rebate/quantity">1</span><br />
+								<a href="#" class="update-price-link" i18n:translate="">Update price</a>
+							</td>
+							<td class="unitprice">-<tal:block tal:content="formatprice:rebate/unitdiscount" /></td>
+							<td colspan="2" class="price">-<tal:block tal:content="formatprice:rebate/totaldiscount" /></td>
+						</tr>
+					</tal:block>
+					
+					<!-- credits -->
+					<tal:block tal:condition="exists: cart/credits">
+						<tal:block tal:condition="exists:cart/credits" tal:repeat="credit cart/credits">
+						<tr class="discount" tal:condition="exists:credit/usedquantity">
+							<td>
+								<tal:block tal:repeat="image credit/product/images">
+									<tal:block tal:condition="equal:repeat/image/number,1">
+										<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" />
+									</tal:block>
+							</tal:block>
+							</td>
+							<td colspan="2">
+								<span class="quiet" tal:content="credit/usertitle|default"><tal:block i18n:translate="">Free</tal:block></span><br />
+								<span tal:content="credit/product/title"></span>
+							</td>
+							<td>
+							   <span tal:content="credit/usedquantity">1</span><br />
+							</td>
+							<td>-</td>
+							<td colspan="2" class="price">-<tal:block tal:content="formatprice:credit/usedprice" /></td>
+						</tr>
+						</tal:block>
+					</tal:block>
+					
+					
+					<!-- giftcard -->
+					<tal:block tal:condition="exists: cart/giftcard">
+						<tal:block tal:condition="exists:cart/giftcard/usedvalue">
+						<tr class="discount" tal:condition="exists:cart/giftcard/usedvalue">
+							<td>
+								<tal:block tal:repeat="image cart/giftcard/product/images">
+									<tal:block tal:condition="equal:repeat/image/number,1">
+										<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" />
+									</tal:block>
+							</tal:block>
+							</td>
+							<td colspan="2">
+								<span class="quiet" tal:content="cart/giftcard/description|default"><tal:block i18n:translate="">Giftcard</tal:block></span><br />
+								<span class="quiet" i18n:translate="">Rest value of </span><span class="quiet" tal:content="formatprice:cart/giftcard/value"></span><br />
+							</td>
+							<td>
+							   <span>1</span><br />
+							</td>
+							<td>-</td>
+							<td colspan="2" class="price">-<tal:block tal:content="formatprice:cart/giftcard/usedvalue" /></td>
+						</tr>
+						</tal:block>
+					</tal:block>
+					
+					<tr>
+						<td i18n:translate="" colspan="5" class="right">Total price</td>
+						<td colspan="2" class="total-price">
+							kr <span tal:content="formatprice:cart/cartprice" id="total-price">?</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="col-md-6" tal:condition="cart/items">
+			<a class="button" href="/cart/clear/" i18n:translate="">Empty cart</a>
+				
+			</div>
+		
+			<div class="col-md-6" tal:condition="cart/items">
+				<a tal:attributes="href url:/products" class="green button large" i18n:translate="">Continue shopping</a>
+				<button type="submit" class="next call-to-action" i18n:translate="">Continue to checkout</button>
+			</div>
+			</form>
+		</div>
+		
+		<div class="col-md-12" tal:condition="not:cart/items">
+			<h2 i18n:translate="">Your cart is empty</h2>
+			<h3><a tal:attributes="href url:/products/" i18n:translate="">Go shop</a></h3>
+		</div> 
+		
+		<div class="col-md-3">
+			<!--<div class="row" id="gift-card-wrapper" tal:condition="cart/items">
+				<h5 i18n:translate="">Gift card?</h5>
+				<i i18n:translate="">Activate a gift card</i>
+				<form class="form-inline" action="/cart/giftcard" method="post">
+					<input class="form-control" type="text" id="gift-card" value="" name="code"/>
+					<button i18n:translate="">Ok</button>
+				</form>-->
+				
+				<!-- discount -->
+				<!--<tal:block tal:condition="exists:cart/discount/info">
+					<h4 i18n:translate="">Active code</h4>
+					<p class="quiet" tal:content="cart/discount/info/name"></p>
+					<h5 tal:content="cart/discount/info/code"></h5>
+				</tal:block>-->
+		<!--	</div>-->
+			
+			<div class="row"  tal:condition="cart/items">
+				<h5 i18n:translate="">Coupon code?</h5>
+				<form action="/cart/coupon" method="post" class="form-inline">
+					<div class="form-group"> 
+						<label for="coupon-code" class="hide" i18n:translate="">Coupon code</label>
+						<input class="form-control" type="text" id="coupon-code" value="" name="code"/>
+						<button i18n:translate="">Ok</button>
+					</div>
+				</form>
+				
+				<!-- discount -->
+				<tal:block tal:condition="exists:cart/discount/info">
+					<h4 i18n:translate="">Active code</h4>
+					<p class="quiet" tal:content="cart/discount/info/name"></p>
+					<h5 tal:content="cart/discount/info/code"></h5>
+				</tal:block>
+			</div>
+		</div>
+		</div>
+	
+	</div>
+	</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready( function() {
+
+	   /*$( '.printedgiftcard' ).click( function() {
+	      $.ef( 'cart.toggleprintgiftcard', {
+	         prodno: $( this ).val()
+	      }, function() {}, 'json' );
+	   });*/
+	   
+	   $( '.printedgiftcard' ).change( function() {
+	      
+	        $( '.printedgiftcard' ).each( function() {
+	           $( this ).attr( 'checked', 'true' );
+	           $.ef( 'cart.toggleprintgiftcard', {
+	              prodno: $( this ).val(),
+	              status: 'true'
+	           }, function(response) {}, 'json' );
+	        } );
+	      
+	        $.ef( 'cart.toggleprintgiftcard', {
+	           prodno: $( this ).val(),
+	           status: 'true'
+	        }, function(response) {}, 'json' );
+	   });
+	   
+	   $( '.notprintedgiftcard' ).change( function() {
+	         
+	         $( '.notprintedgiftcard' ).each( function() {
+	           $( this ).attr( 'checked', 'true' );
+	           $.ef( 'cart.toggleprintgiftcard', {
+   	           prodno: $( this ).val(),
+   	           status: 'false'
+   	        }, function(response) {}, 'json' );
+	         } );
+   	      
+	   });
+	   
+	   
+		$('td.quantity-editable').append('<a href="#" class="update-price-link" i18n:translate="">Update price</a>');
+		
+		$('.update-price-link').click( function() {
+			//$(this).parent().find('input.quantity').trigger('change');
+			$('#cart').attr('action','/checkout/cartupdate' ).submit();
+			return false;
+			
+		});
+		
+		$('input.quantity').bind('change', function() {
+		
+			var quantity = $(this).val();
+			var id = $(this).parent().parent().parent().parent().attr('id');
+
+			var price;
+			var item = this;
+			
+			$(this).parent().next().prepend('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader1"/>');
+			$(this).parent().next().next().prepend('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader2"/>');
+			$('#total-price').before('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader3"/>');
+			
+			$.post('/api/1.0/prices/get', {
+				productoptionid: id,
+				quantity: quantity
+			}, function(data) {
+
+				$(item).parent().parent().parent().parent().find('.unitprice').text( formatPrice(data.price) );
+				$(item).parent().parent().parent().parent().find('.price').text( formatPrice( parseFloat(quantity) * parseFloat(data.price) ) );
+				
+				var $upgrade = $( '#'  + id + '_upgrade' ).find( '.price' );
+				if( $upgrade ){
+					$upgrade.text( formatPrice( parseInt($upgrade.text()) * quantity ) );
+				}
+				var $upgradeprice = $( '#'  + id + '_varnish' ).find( '.price' ).prev();
+				var $upgrade = $( '#'  + id + '_varnish' ).find( '.price' );
+				
+				if( $upgrade ){
+					$upgrade.text( formatPrice( parseInt($upgradeprice.text()) * quantity ) );	
+				}
+				
+				
+				var totalPrice = 0;
+				
+				$('.price', '#cart').each( function(i, item) {
+					totalPrice += parseFloat( $(item).text().replace(',','.') );
+				});
+				
+				$('#total-price').text( formatPrice(totalPrice) );
+				
+				$('#loader1, #loader2, #loader3').remove();
+				
+			}, 'json');			
+			
+			
+			return false;
+		});
+		
+		$('.removeItem a.remove').click( function() {
+			var item = this;
+			$.post('/api/1.0/cart/remove', {
+				prodno: $(item).attr('name'),
+				reference: $(item).next().attr('value')
+			}, function(msg) {
+				document.location.refresh(false);
+			})
+		});
+		
+	$("a.preview").hover(function(e){
+	 		
+		xOffset = 15;
+		yOffset = 10;
+		this.t = this.title;
+		this.title = "";
+	   $("body").append('<p id="preview"><img src="'+ this.t +'"/></p>');	
+	   $("#preview")
+			.css("top",(e.pageY - xOffset) + "px")
+			.css("left",(e.pageX + yOffset) + "px")
+			.fadeIn("fast");
+    
+	  },
+	  function(){
+		this.title = this.t;	
+		$("#preview").remove();
+      }
+	  );
+	  
+	  $("a.preview").mousemove(function(e){
+		$("#preview")
+			.css("top",(e.pageY - xOffset) + "px")
+			.css("left",(e.pageX + yOffset) + "px");
+	  });
+    	
+		
+		
+		
+	});
+</script>
+
+</body>
+</html>

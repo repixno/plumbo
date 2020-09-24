@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-b//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" />
+	<meta name="description"  />
+</head>
+
+
+<body>
+
+<div metal:use-macro="../../${templates}/common.html/top" />
+<div class="maincontent container">
+
+	
+
+	<div class="row">
+	
+		
+		<div class="col-md-12" style="">
+				<img class="img-responsive" src="//static.eurofoto.no/cms/images/banner_ny_nc.jpg" />
+		</div>
+		<div class="col-md-12 top-15">
+			
+			<div class="box row">
+				<div class="col-md-4 form-inline" >
+					
+					<h3>Hent bilder fra Norwaycup.</h3>
+					<p>Skriv inn den unike koden fra eposten du mottok:<br /></p>
+					<form action="/fetchalbum/barcodenc/" method="post">
+						<input name="identifier" type="text" class="title form-control" value=""/> &nbsp; <button class="large" type="submit">Hent bilder</button>
+					</form>
+				</div>
+				<div class="col-md-8">
+					<h3>Bilder fra Norwaycup 2016</h3>
+					<p>
+						Hei, og vel overstått Norway Cup. Håpar at de hadde ei fin tid, og at bilda/diplomane de har fått tilsendt vil vere med på å ta vare på gode minner frå årets turnering.<br/>
+						Vi har fått mange spørsmål frå lag som vil kjøpe den digitale fila av lagbildet. De får tilgang til lagbildet ved å bruke koden motatt på epost.<br/>
+						Elles er det lag som vil gje bilde til sponsorar, eller vil ha produsert kalendarar for salg. Vi kan i samarbeid med JapanPhoto tilby slike produkt til spesialpris så de kan få inntekter til laget.
+					</p>
+				</div>
+			</div>
+		</div>
+      
+		<tal:block tal:repeat="item items" tal:condition="exists:items">
+			<tal:block class="top" tal:content="structure item/body|default" tal:condition="equal:item/type,article"></tal:block>
+		</tal:block>		
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>	
+</div>
+
+</body>
+</html>

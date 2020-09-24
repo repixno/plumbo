@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <!-- Facebook sharing information tags -->
+        <meta property="og:title" content="Stabburet leverpostei ordrebekreftelse" />
+        
+        <title>Stabburet leverpostei ordrebekreftelse</title>
+		<style type="text/css">
+			body{
+				background: #eee;
+			}
+			.container{
+				max-width: 600px;
+				min-width: 300px;
+				background: #fff;
+			}
+			img{
+				width: 100%;
+			}
+			
+			.content{
+				padding: 15px;
+				text-align: left;
+			}
+	
+		</style>
+	</head>
+    <body>
+    	<center>
+			<div class="container" style="max-width: 600px;min-width: 300px;background: #fff;">
+				
+				<div class="header">
+					<img src="http://static.repix.no/cms/images/topp.jpg" style="width: 100%;" alt="header"/>
+				</div>
+				<div class="content" style="padding: 15px; text-align: left">
+					<h3 style="margin-top:0px"><tal:block tal:content="cms:title:3fe7b71e-d895-4ad2-8460-f8bd44b236b6"></tal:block></h3>
+					<p>Ditt ordrenr er <tal:block tal:replace="orderid"/>.<br/>
+					Ta godt vare på denne e-posten helt til du mottar dine varer. Ved kontakt med vårt kundesenter vennligst ha ditt ordrenummer klart.
+					</p>
+					<p>I perioder kan det bli inntil 14 dagers leveringstid. Ordrer med flere produkt kan bli sendt hver for seg.</p>
+					<p>
+					   <strong><tal:block i18n:translate="">Delivery Address:</tal:block></strong><br/>
+					   <tal:block tal:replace="deliveryinfo/name"/><br/>
+					   <tal:block tal:replace="deliveryinfo/address"/><br/>
+					   <tal:block tal:replace="deliveryinfo/zipcode"/> <tal:block tal:replace="deliveryinfo/city"/>
+					</p>
+                    <p>
+                     <strong><tal:block i18n:translate="">Ordered items:</tal:block></strong><br/>
+                     <table>
+                      <thead>
+                         <tr>
+                            <td i18n:translate="">Title</td>
+                            <td i18n:translate="">Unitprice</td>
+                            <td i18n:translate="">Quantity</td>
+                            <td i18n:translate="">Price</td>
+                         </tr>
+                      </thead>
+                      <tbody>
+                         <tr tal:repeat="row orderrow">
+                               <td tal:content="row/title">title</td>
+                               <td tal:content="row/unitprice">unitprice</td>
+                               <td tal:content="row/quantity">quantity</td>
+                               <td tal:content="row/price">price</td>
+                         </tr>
+                      </tbody>
+                      <tr>
+                         <td>&nbsp;</td>
+                         <td>&nbsp;</td>
+                         <td>Total:</td>
+                         <td tal:content="totalprice">Total</td>
+                      </tr>
+                     </table>
+					</p>
+                    
+                    <!--
+                    <p>
+                     <strong>Bli med i trekningen av gavekort fra Japan Photo</strong><br/>
+                     Svar på en kort undersøkelse om Stabburet Leverpostei, og bli med i trekningen av gavekort på bildeprodukter fra Japan Photo à 500,-
+                     <a href="https://www.survio.com/survey/d/stabburetleverpostei">Klikk her for å delta</a>
+                    </p>
+                    -->
+                    
+					<div tal:content="structure cms:body:3fe7b71e-d895-4ad2-8460-f8bd44b236b6"/>
+
+                    <div>
+                        <a href="http://www.japanphoto.no/cewe-fotobok?cref=fix_newsl_20150801_stabburet_ordrebekreftelse_CFB_x_x">
+                           <img style="width: 100%;" src="http://static.repix.no/cms/images/CFB_orkla.jpg" alt="CEWE FOTOBOK" title="CEWE FOTOBOK"/>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="http://www.japanphoto.no/fotogaver?cref=fix_newsl_20150801_stabburet_ordrebekreftelse_fotogaver_x_x">
+                           <img style="width: 100%;" src="http://static.repix.no/cms/images/fotoprodukter_orkla.jpg" alt="Fotogaver" title="Fotogaver" />
+                        </a>
+                        
+                    </div>
+                    
+                    
+					<tal:block>
+					Stabburet / Japan Photo<br/>
+					(+47) 57 88 35 00<br/>
+					post@eurofoto.no<br/>
+					<a href="http://www.stabburetleverpostei.no/">http://www.stabburetleverpostei.no</a><br/>
+					<a href="http://www.japanphoto.no">http://www.japanphoto.no</a><br/>
+					</tal:block>
+				</div>
+				
+				
+				<div class="footer">
+					<img src="http://static.repix.no/cms/images/bunn.jpg" style="width: 100%;" alt="Footer"/>
+				</div>
+				
+					
+			</div>
+        </center>
+    </body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" />
+	<meta name="description"  />
+    
+    <style media="all" type="text/css">
+        .price{
+            /*position: absolute;
+            bottom: 10px;
+            right: 0px;*/
+        }
+        .productinfo{
+            position: relative;
+			margin-top: 15px;
+        }
+		
+		.pakketable td{
+			padding: 1px;
+		}
+		.productimage{
+			box-shadow: 3px 3px 1px #999;
+		}
+        
+    </style>
+</head>
+
+
+<body>
+<div metal:use-macro="../../${templates}/common.html/top" />
+<div class="container">
+	<div class="col-md-12">
+        <div class="col-md-2">
+            <div class="">
+                <h5>Valgte bilder</h5>
+                <hr/>
+            </div>
+           
+            <div class="text-center" tal:condition="exists:portrettfinns">
+                 <img src="${portrett/thumbnail}"/>
+            </div>
+
+        </div>
+    <div class="col-md-10">
+	<div class="col-md-12">
+		<h2>VELG PRODUKT:</h2>
+	</div>
+	<!--
+	<div class="col-md-2 pull-right">
+		<a class="button large green" href="/produkter">Velg andre produkt</a>
+	</div>
+	-->
+	
+     <div class="productlist row">
+        <tal:block tal:repeat="item products">
+            <div class="col-md-6">
+				
+				<div class="productbox row">
+				
+                <div class="col-md-5">
+					<h3 tal:content="item/product/title"/>
+					<tal:block tal:condition="not:exists:pakker/${item/option/id}">
+						<img class="productimage" src="/fetchalbum/productimage/?portrait=${portrett/id}&klassebilde=0&module=${item/option/prodno}"/>
+					</tal:block>
+					<tal:block tal:condition="exists:pakker/${item/option/id}">
+						<img src="${static:}images/products/thumbs/width/150/${item/product/images/0/url}"/>
+					</tal:block>
+                </div>
+                <div class="col-md-5 productinfo">
+					<p class="" tal:content="item/product/ingress"/>
+					<tal:block tal:condition="exists:pakker/${item/option/id}">
+						<table class="table table-condensed pakketable" style="padddding: 2px">
+							<tr>
+								<td>&nbsp;</td><td>Størrelse</td><td>Pris</td>
+							</tr>
+							<tbody>
+							<tr tal:repeat="kake pakker/${item/option/id}">
+									<td tal:content="products/${kake}/product/title"></td>
+									<td>20x30cm</td>
+									<td>
+										<span class="normal-price" tal:attributes="data-price products/${kake}/option/price">
+											<span tal:content="formatprice:products/${kake}/option/price"></span>
+										</span>
+									</td>
+									
+							</tr>
+							<tr>
+								<td>
+									VEIL PRIS
+								</td>
+								<td>
+									&nbsp;
+								</td>
+								<td class="veilpris">
+									
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<strong>PAKKEPRIS</strong>
+								</td>
+								<td>
+									&nbsp;
+								</td>
+								<td class="pakkepris">
+									 <strong>${formatprice:item/option/price}</strong>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+						
+					</tal:block>
+					<tal:block tal:condition="not:exists:pakker/${item/option/id}">
+						<h4 class="price">
+							<span class="normal-price"> kr ${formatprice:item/option/price}</span>
+						</h4>
+					</tal:block>
+                </div>
+                <div class="col-md-12 functions" tal:condition="exists:pakker/${item/option/id}">
+                    
+                    <div class="col-md-6 pull-left orderbox">
+						<!--<tal:block tal:condition="not:exists:pakker/${item/option/id}">
+							<input type="radio"  id="color${item/option/id}" name="bw${item/option/id}" checked="checked" value="color" /><label for="bw${item/option/id}">Farge</label>
+							<input type="radio"  id="bw${item/option/id}" name="bw${item/option/id}" value="bw"/><label for="bw${item/option/id}">Sort/hvitt</label>
+						</tal:block>-->
+                        <input type="text" class="quantity" value="1" id="${item/option/id}"/>
+                        <button id="${item/option/prodno}" class="addtocart">Legg i handlekurv</button>
+                    </div>
+                </div>
+				<div class="col-md-12 functions" tal:condition="not:exists:pakker/${item/option/id}">
+                    
+                    <div class="col-md-6 pull-right orderbox">
+						<!--<tal:block tal:condition="not:exists:pakker/${item/option/id}">
+							<input type="radio"  id="color${item/option/id}" name="bw${item/option/id}" checked="checked" value="color" /><label for="bw${item/option/id}">Farge</label>
+							<input type="radio"  id="bw${item/option/id}" name="bw${item/option/id}" value="bw"/><label for="bw${item/option/id}">Sort/hvitt</label>
+						</tal:block>-->
+                        <input type="text" class="quantity" value="1" id="${item/option/id}"/>
+                        <button id="${item/option/prodno}" class="addtocart">Legg i handlekurv</button>
+                    </div>
+                </div>
+            
+				</div>
+			</div> 
+		</tal:block>
+		
+		<div class="col-md-6" tal:condition="exists:portrettfinns">
+			<div class="productbox row">
+				<div class="col-md-6">
+					<img class="productimage" src="${portrett/thumbnail}" />
+				</div>
+				<div class="col-md-6 productinfo">
+					<h3>Digital bildefil</h3>
+					<div class="">Bildefilen er i høy kvalitet</div>
+					<span class="price">
+						<span class="normal-price"> kr 198,00</span>
+					</span>
+				</div>
+				<div class="col-md-12 functions">
+					<div class="col-md-6 pull-right">
+						<input type="hidden" class="quantity_digital" id="3966" value="1"/>
+						<button id="7291" class="addtocart_digital">Legg i handlekurv</button>
+					</div>
+				</div>
+			</div>
+        </div>
+		<div class="col-md-6">
+			<div class="productbox row">
+                <div class="col-md-6">
+                    <img src="${static:}images/menu/9758ba67-e565-4a95-b072-b81303a088c9.jpg"/>
+                </div>
+                <div class="col-md-6 productinfo">
+                    <h3>Lerret</h3>
+                    <div class="">Vi har et stort utvalg av lerret.</div>
+				</div>
+				<div class="col-md-12 functions">
+                    
+                    <div class="col-md-6 orderbox">
+                        <a class="button large green" href="/produkter/lerret/">Gå til lerret</a>
+                    </div>
+                
+				</div>
+			</div>
+        </div>
+		<div class="col-md-6" >
+				<div class="productbox row">
+					
+				
+					<div class="col-md-6">
+						<img src="${static:}images/menu/9758ba67-e565-4a95-b072-b81303a088c9.jpg"/>
+					</div>
+					<div class="col-md-6 productinfo">
+						<h3>Andre produkter</h3>
+						<div class="">Vi kan også tilby et bredt utvalg av andre produkter</div>
+					</div>
+					<div class="col-md-12 functions">
+						
+						<div class="col-md-6">
+							
+							<a class="button large green" href="/produkter">Andre produkt</a>
+						</div>
+					
+					</div>
+				</div>
+        </div>
+		</div>
+	
+	
+	<div class="col-md-12">
+		<a href="/cart" class="pull-right button" style="margin-top: 20px;">Videre til Handlevognen</a>
+	</div>
+	</div>	
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>	
+</div>
+
+
+
+<script type="text/javascript">
+	
+	var bid = ${portrett/id};
+	var aid = ${portrett/aid};
+	var gruppebid = 0;
+	
+	
+	$( function(){
+		$('.pakketable').parent().css( { height: "235px" } );
+		$('.pakketable' ).each( function(){
+			var price = 0;
+			$( this ).find( '.normal-price' ).each(function(){
+					price +=   $(this).data('price');	
+				});
+			$(this).find('.veilpris').text( price + ',00'  );
+			
+			});
+		
+		
+		
+		$('.addtocart').click( function(){
+			var bw = false;
+			
+			var quantity = $(this).parent().find('.quantity').val();
+			bw = $(this).parent().find('input[value="bw"]').prop('checked');
+			
+			var prodno = $(this).attr('id');
+			var attributes = { bid: bid, gruppebid : gruppebid, aid: aid, bw:bw };
+			
+			var sendshit = JSON.stringify(attributes)
+			
+			var item = this;
+			
+			$.ajax({
+				url: '/api/1.0/cart/add',
+				dataType: 'json',
+				type: 'post',
+				data: {
+					prodno: prodno,
+					quantity: quantity,
+					attributes: attributes
+				},
+				success: function(data) {
+					$('#cart-total-price, #total-price').text( formatPrice(data.totalprice) );
+					$('#cart-total-items').text( data.totalitems );
+					$('#shopping-cart').effect('highlight',{}, 'slow');
+					$('.ajax-loader').remove();
+					$(item).parent().parent().css('opacity', 0.4);
+				}, 
+				error: function(data) {
+					pageTracker._trackEvent('Error', 'Add to cart', 'Accessories', prodno);
+					pageTracker._trackPageview();
+					alert('Beklager, noe gikk galt');
+				}
+			});
+			});
+		
+		$('.addtocart_digital').click( function(){
+			
+			
+			var quantity = $(this).parent().find('.quantity_digital').val();
+			var prodno = $(this).attr('id');
+
+			var attributes = { bid: bid, aid: aid };
+			
+			var sendshit = JSON.stringify(attributes)
+			
+			var item = this;
+			
+			$.ajax({
+				url: '/api/1.0/cart/add',
+				dataType: 'json',
+				type: 'post',
+				data: {
+					prodno: prodno,
+					quantity: quantity,
+					attributes: attributes
+				},
+				success: function(data) {
+					$('#cart-total-price, #total-price').text( formatPrice(data.totalprice) );
+					$('#cart-total-items').text( data.totalitems );
+					$('#shopping-cart').effect('highlight',{}, 'slow');
+					$('.ajax-loader').remove();
+					$(item).parent().parent().css('opacity', 0.4);
+				}, 
+				error: function(data) {
+					pageTracker._trackEvent('Error', 'Add to cart', 'Accessories', prodno);
+					pageTracker._trackPageview();
+					alert('Beklager, noe gikk galt');
+				}
+			});
+		});
+		
+		});
+	
+	
+	
+	
+	
+</script>
+
+</body>
+</html>

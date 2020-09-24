@@ -1,0 +1,703 @@
+<!-- HEAD -->
+<head metal:define-macro="head" tal:omit-tag="">
+	<meta name="description" content="Vi printer dine digital bilder og gir deg norges beste fotobok. Med sikker lagring er bildene dine lagret trygt hos oss. Vi har også et stort utvalg av fotogaver, takkekort, kalendere, julegaver, julegavetips, fotokort og julekort m.m." />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+	<link rel="shortcut icon" href="${static:}css/portals/eurofoto/favicon.ico"/>
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700,700italic,600,600italic' rel='stylesheet' type='text/css' />
+
+    <title> 
+		<tal:block i18n:translate="" tal:condition="not:exists:pagetitle">Eurofoto.no - Memories for life</tal:block> 
+		<tal:block tal:condition="exists:pagetitle" tal:content="pagetitle" /> 
+	</title>
+	
+	<!-- jQuery -->
+    <script src="${static:}js/jquery-1.11.3.min.js"></script>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+	<!-- Bootstrap Core JavaScript -->
+    <script src="${static:}css/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link href="/css/template.css" rel="stylesheet" />
+    <link href="${static:}css/jqueryui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+	
+    <script src="${static:}js/eurofoto2.min.js"></script>
+	<script type="text/javascript" src="${static:js/jquery.fancybox-1.3.0.pack.js}"></script>
+	<script src="${static:}css/jqueryui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="${static:js/jquery.eurofoto-1.0.js}"></script> <!-- Eurofoto API 1.0 -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    
+    <script language="JavaScript" src="/cewe/js/cewecommonlogin.js"></script>
+    <script language="JavaScript" src="https://www.japanphoto.no/StatusJsView?storeId=10151&langId=124&catalogId=10051"></script>
+    
+</head>
+
+
+<tal:block metal:define-macro="right-menu" tal:omit-tag="">
+	
+</tal:block>
+
+<!-- top-header -->
+<div metal:define-macro="top" tal:omit-tag="">	
+
+	<tal metal:use-macro="message" />
+	<div metal:use-macro="topmenu" />
+</div>
+
+<!-- quick login -->
+<tal:block metal:define-macro="quicklogin">
+	<a href="javascript:CommonLogin.login();" class="button" i18n:translate="">Login in</a>
+	
+	<script>
+		$(function(){
+		 loginCallback = function(ret){
+			
+			if( ret.loggedIn == true ){
+				window.location.reload();
+			}
+		  
+		 }
+		});
+	 </script>
+</tal:block>
+
+<tal:block metal:define-macro="topmenu">
+	    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+				<div class="visible-xs">
+					<ul class="nav nav-pills">
+						<li  class="col-md-2" role="presentation">
+							<a href="javascript:void(0)"  data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+								<span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+							</a>	
+						</li>
+						<li class="col-md-2" role="presentation">
+							<a href="/cart">
+								<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+							</a>
+						</li>
+						<li class="col-md-3" role="presentation">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">
+								<span class="glyphicon glyphicon-earphone" aria-hidden="true"></span><span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="javascript:void(0)" class="text-center">
+										<strong>
+											<span class="glyphicon glyphicon-earphone" style="font-size: 14px"></span> 66 82 26 60<br/>
+											Man - fre: 09 - 22:00<br/>
+											Søndag: 14 - 22:00
+										</strong>
+									</a>
+								</li>
+								<li><a href="http://support.japanphoto.no/">Support</a></li>
+							</ul>
+						</li>
+						<li class="col-md-3" role="presentation">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">
+								<span class="glyphicon glyphicon-user"></span><span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<tal:block tal:condition="not:session/loggedin">
+									<li><a href="javascript:void(0)" onclick="CommonLogin.login();">Login</a></li>
+								</tal:block>
+								<tal:block tal:condition="session/loggedin">
+									<li><a href="/myaccount">Min side</a></li>
+								</tal:block>
+								<li><a class="register" href="javascript:void(0)" onclick="CommonLogin.logout();">Logg ut</a></li>
+								
+							</ul>
+							
+						</li>
+					  </ul>
+					
+				</div>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav topnav" style="margin: auto; width: 100% ">
+					<li>
+                        <a href="/frontpage">TIL FREMSIDEN</a>
+                    </li>
+					<!--
+					<li role="presentation" class="dropdown">
+						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							JULEN 2015 <span class="caret"></span>
+						</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="/anledninger/jul/julekort/" title="">JULEKORT</a>
+								</li>
+								<li>
+									<a href="/anledninger/jul/julegaver/" title="">JULEGAVER</a>
+								</li>
+								<li>
+									<a href="/produkter/kalendere/" title="">KALENDER</a>
+								</li>
+								<li>
+									<a href="/produkter/fotoboker/" title="">FOTOBOK</a>
+								</li>
+							</ul>
+                    </li>-->
+					<li>
+                        <a href="/ukens-tilbud/">UKENS TILBUD</a>
+                    </li>
+                    <li role="presentation" class="dropdown">
+						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							PRODUKTER <span class="caret"></span>
+						</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="/produkter">Alle produkter</a>
+								</li>
+								<li>
+									<a href="/produkter/lerret">VEGGBILDER</a>
+								</li>
+								
+								
+								<li>
+									<a href="/eurofotobok/">EUROFOTOBOK</a>
+								</li>
+								
+								<li>
+									<a href="/produkter/cewe-fotobok">CEWE FOTOBOK</a>
+								</li>
+								<li>
+									<a href="/etiketter/">ETIKETTER</a>
+								</li>
+								<li>
+									<a href="/produkter/kort-og-skrivesaker">FOTOKORT</a>
+								</li>
+								
+								<li>
+									<a href="/produkter/kalendere">KALENDER</a>
+								</li>
+								
+								<li>
+									<a href="/produkter/fotogaver">FOTOGAVER</a>
+								</li>
+								<li>
+									<a href="/produkter/tilbehor">TILBEHØR</a>
+								</li>
+							</ul>
+                    </li>
+					
+					<!--<li class="jul" style="background-color: #c0202c;">
+						<a href="/anledninger/jul/">&nbsp; JUL  2017  &nbsp; </a>
+					</li>-->
+					<li>
+						<a href="/anledninger/">ANLEDNINGER</a>
+					</li>
+					<li>
+						<a href="/priser">PRISER</a>
+					</li>
+					<!-- tatt vekk top søk på siden 05.12.2017
+					
+					<li class="top-search">
+						<tal:block metal:use-macro="top-search" />
+					</li>-->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+	
+</tal:block>
+
+<tal:block metal:define-macro="leftmenu">
+	<div class="hidden-sm hidden-xs">
+	<!--<p class="lead"><a href="/frontpage"><img class="img-responsive" src="/tmp/logo.jpg" /></a></p>-->
+	<div>
+		<!-- Venstre meny jul meny. tatt vekk 09.01.
+		<h4 style="background-color: #c0202c;"><a href="/anledninger/jul">Jul<span class="pull-right glyphicon glyphicon-circle-arrow-right"></span></a></h4>
+		<div class="list-group">
+			<a href="/anledninger/jul/julekort/" title="" class="list-group-item">Julekort</a>
+			<a href="/anledninger/jul/julegaver/" title="" class="list-group-item">Julegaver</a>
+			<a href="/produkter/kalendere/" title="" class="list-group-item">Kalender</a>
+			<a href="/eurofotobok/" title="" class="list-group-item">Eurofoto Fotobok</a>
+			<a href="/produkter/cewe-fotobok//" title="" class="list-group-item">CEWE Fotobok</a>
+		</div>-->
+	</div>
+	<div>
+		<h4><a href="/fremkalle-bilder/" >Fremkall bilder <span class="pull-right glyphicon glyphicon-circle-arrow-right"></span></a></h4>
+		<div class="list-group">
+			<a href="/fremkalle-bilder/" title="" class="list-group-item">Standard print</a>
+			<a href="/produkter/instagram-bilder/" title="" class="list-group-item">Instagram bilder</a>
+		</div>
+	</div>
+	
+	<div>
+		<h4><a href="/produkter/lerret/">Veggbilder<span class="pull-right glyphicon glyphicon-circle-arrow-right"></span></a></h4>
+		<div class="list-group">
+			<a href="/produkter/lerret/lerret-pa-1-2-3/" title="" class="list-group-item">Lerret 123</a>
+			<a href="/produkter/lerret/delte-lerretsbilder/" title="" class="list-group-item">Delte lerretsbilder</a>
+			<!--<a href="/blindrammelerret//" title="" class="list-group-item">Lerret i Editor</a>-->
+			<a href="/mediaclip-chromalux/" title="" class="list-group-item">Aluminiumsbilder</a>
+			<a href="/produkter/lerret/stoydempende-lerret/" title="" class="list-group-item">Støydempende Lerret</a>
+			<!--<a href="/produkter/lerret/lerret-med-ramme/" title="" class="list-group-item">Lerret med ramme</a>-->
+			<a href="/mediaclip-canvas/" title="" class="list-group-item">Lerret uten ramme</a>
+			<a href="/mediaclip-poster/" title="" class="list-group-item">Forstørrelser</a>
+		    <a href="/metallic-foto/" title="" class="list-group-item">Metallic Foto</a>
+		
+	
+				<!--<h4><a href="/mediaclip-poster/">Forstørrelser<span class="pull-right glyphicon glyphicon-circle-arrow-right"></span></a></h4>
+			<a href="/produkter/lerret/pop-art/" title="" class="list-group-item">Pop Art</a>
+	<h4><a href="/produkter/fotohefte/">Fotohefte<span class="pull-right glyphicon glyphicon-circle-arrow-right"></span></a></h4>
+	
+	-->
+		</div>
+	</div>
+	
+
+	
+	
+	
+	
+	<div>
+		<h4><a href="/eurofotobok/">EUROFOTObok<span class="pull-right glyphicon glyphicon-circle-arrow-right"></span></a></h4>
+		<div class="list-group">
+			<a href="/eurofotobok/standardfotobok/" title="" class="list-group-item">Standard Fotobok</a>
+			<a href="/eurofotobok/premiumfotobok/" title="" class="list-group-item">Premium Fotobok</a>
+			<a href="/eurofotobok/softcoverfotobok/" title="" class="list-group-item">Fotobok mykt omslag</a>
+		<!--	<a href="/produkter/fotohefte" title="" class="list-group-item">Fotohefter</a>-->
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	<div>
+		<h4><a href="/produkter/cewe-fotobok/">CEWE FOTOBOK<span class="pull-right glyphicon glyphicon-circle-arrow-right"></span></a></h4>
+		<div class="list-group">
+		<!--	<a href="/produkter/cewe-fotobok/om-produkter/" title="" class="list-group-item">Produkter</a>-->
+			<a href="/produkter/cewe-fotobok/nedlasting/" title="" class="list-group-item">Last ned programvare</a>
+		</div>
+	</div>
+	
+	
+	<div>
+		<h4><a href="/etiketter/">Etiketter<span class="pull-right glyphicon glyphicon-circle-arrow-right"></span></a></h4>
+		<div class="list-group">
+			<a href="/etiketter/gavelapper/" title="" class="list-group-item">Gavelapper</a>
+			<a href="/etiketter/glass/" title="" class="list-group-item">Glass</a>
+			<a href="/etiketter/flasker/" title="" class="list-group-item">Flasker</a>
+			
+	
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	<div>
+		<h4><a href="/produkter/kort-og-skrivesaker/">Fotokort<span class="pull-right glyphicon glyphicon-circle-arrow-right"></span></a></h4>
+		<div class="list-group">
+			<a href="/produkter/kort-og-skrivesaker/enkle/" title="" class="list-group-item">Enkle fotokort</a>
+			<a href="/produkter/kort-og-skrivesaker/doble/" title="" class="list-group-item">Doble fotokort</a>
+			<a href="/produkter/kort-og-skrivesaker/andre-fotokort/" title="" class="list-group-item">Andre kort</a>
+		</div>
+	</div>
+	
+	
+	
+	
+	<div>
+		<h4><a href="/produkter/kalendere/">Fotokalender<span class="pull-right glyphicon glyphicon-circle-arrow-right"></span></a></h4>
+		<div class="list-group">
+			<a href="/produkter/kalendere/veggmontert/" title="" class="list-group-item">Veggkalender</a>
+			<a href="/produkter/kalendere/bord/" title="" class="list-group-item">Bordkalender</a>
+			<a href="/produkter/kalendere/plakat/" title="" class="list-group-item">Posterkalender</a>
+		
+		</div>
+	</div>
+	
+	
+	
+	<div>
+		<h4><a href="/produkter/fotogaver/">Fotogaver<span class="pull-right glyphicon glyphicon-circle-arrow-right"></span></a></h4>
+	
+		<div class="list-group">
+		<a href="/produkter/fotogaver/kopper-og-flasker/" title="" class="list-group-item">Kopper og glass</a>
+		<a href="/produkter/fotogaver/bordartikler/dessertbord" title="" class="list-group-item">Dessertbord</a>
+		<a href="/produkter/fotogaver/vesker-og-sekker/" title="" class="list-group-item">Vesker og mapper</a>
+		<a href="/produkter/fotogaver/brodering/" title="" class="list-group-item">Broderte gaver</a>
+		<a href="/produkter/fotogaver/interiorartikler/" title="" class="list-group-item">Interiørartikler</a>
+		<a href="/produkter/fotogaver/bordartikler/" title="" class="list-group-item">Bordprodukter</a>
+		<a href="/produkter/fotogaver/leker-og-kosedyr/" title="" class="list-group-item">Leker og kosedyr</a>
+		<a href="/produkter/fotogaver/skole-og-kontorsaker/" title="" class="list-group-item">Skole- og kontorsaker</a>
+		<a href="/produkter/fotogaver/mobildeksel/" title="" class="list-group-item">Mobil- og iPad-deksel</a>
+		<a href="/produkter/fotogaver/hval/" title="" class="list-group-item">Hval Sjokolade</a>
+		<!--<a href="/produkter/fotogaver/konfekt-og-sjokolade/" title="" class="list-group-item">Konfekt og søtsaker</a>-->
+		<a href="/produkter/fotogaver/klar/" title="" class="list-group-item">Klær</a>
+		<a href="/produkter/fotogaver/personlige-smagaver/" title="" class="list-group-item">Personlige smågaver</a>
+			<a href="/produkter/fotogaver/andre-gaver/" title="" class="list-group-item">Andre gaver</a>
+	</div>
+	</div>
+	
+	<div>
+	
+	
+	<div class="list-group">
+	</div>
+	</div><div>
+	
+
+	
+	<div class="list-group">
+
+	
+	<!--<a href="/produkter/forstorrelser/postere/" title="" class="list-group-item">Plakater</a>-->
+	
+	</div>
+	</div><div>
+	
+	
+	
+	<div class="list-group">
+	</div>
+	</div><div>
+	
+	<h4><a href="/produkter/tilbehor/">Tilbehør<span class="pull-right glyphicon glyphicon-circle-arrow-right"></span></a></h4>
+	
+	<div class="list-group">
+	<a href="/produkter/tilbehor/konvolutter/" title="" class="list-group-item">Konvolutter</a>
+	<a href="/produkter/tilbehor/frimerker/" title="" class="list-group-item">Frimerker</a>
+	<a href="/produkter/tilbehor/penner/" title="" class="list-group-item">Penner / tusjer</a>
+	<a href="/produkter/tilbehor/rammer/" title="" class="list-group-item">Rammer</a>
+	<a href="/produkter/tilbehor/album/" title="" class="list-group-item">Album</a>
+	<a href="/produkter/tilbehor/passepartout/" title="" class="list-group-item">Passepartout</a>
+	<a href="/produkter/tilbehor/lim-etiketter/" title="" class="list-group-item">Klistremerker</a>
+	<a href="/produkter/tilbehor/diverse-produkter/" title="" class="list-group-item">Diverse tilbehør</a>
+	</div>
+	</div>
+	
+	</div>
+</tal:block>
+
+<!-- beta message -->
+<tal:block metal:define-macro="message">
+<script language="JavaScript">
+	var loginCallback = false;
+	CommonLogin.init(function(status){
+   	setTimeout(function(){
+	   	// optionally do a callback to the server with tokens to validate
+	      <tal:block tal:condition="not:session/loggedin">
+	   	if( status.loggedIn ) {
+	   		// alert( 'We were previously logged OUT locally, but we are now logged in. Logging in with token '+status.token );
+	   		var response = $.ef( 'auth.byxtcitoken',{
+	   			'token':    status.token,
+	   			'sign':     status.sign
+	   		} );
+	   		if( response.result ) {
+	   			var response = $.ef( 'cart.stat' );
+	   			if( response.result ) {
+	   				CommonLogin.setCart({
+						   'total': response.totalprice,
+						   'items': response.totalitems,
+						   'open': function(){
+						   	window.location.href = '/cart/?from=cewecommonheader';
+						   }
+						}, true );
+	   			}
+	   		}
+	   	}
+   		if( loginCallback ) {
+   			loginCallback( status );
+   		}
+	      </tal:block>
+	      <tal:block tal:condition="session/loggedin">
+		  
+		  //console.log(status);
+		  
+	   	if( !status.loggedIn ) {
+	   		// alert( 'We were previously logged in locally, but are no longer logged in. Logging out...' );
+	   		$.ef( 'auth.logout' );
+	   		window.location.href = '/';
+	      // make sure we've not switched to a different account
+      	} else if( status.userData.login != '${session/email}' ) {
+	   		// alert( 'We were previously logged in locally, and still are, so switching to the new account' );
+	      	$.ef( 'auth.logout' );
+	      	var response = $.ef( 'auth.byxtcitoken',{
+	   			'token':    status.token,
+	   			'sign':     status.sign
+	   		} );
+	   		if( response.result ) {
+	   			var response = $.ef( 'cart.stat' );
+	   			if( response.result ) {
+	   				CommonLogin.setCart({
+						   'total': response.totalprice,
+						   'items': response.totalitems,
+						   'open': function(){
+						   	window.location.href = '/cart/?from=cewecommonheader';
+						   }
+						}, true );
+	   			}
+	   		}
+	      } else {
+	      	$.ef( 'auth.updatetoken',{
+	   			'token':    status.token,
+	   			'sign':     status.sign
+	   		} );
+	      }
+   		if( loginCallback ) {
+   			loginCallback( status );
+   		}
+	      </tal:block>
+   	},1);
+	},{
+	   'total': '${formatprice:cart/totalprice}',
+	   'items': '${cart/totalitems}',
+	   'open': function(){
+	   	window.location.href = '/cart/?from=cewecommonheader';
+	   }
+	});
+</script>
+</tal:block>
+
+
+
+<!-- FOOTER -->
+<tal:block metal:define-macro="footer">
+	
+	<div class="footer">
+		<div class="container">
+			
+			<div id="footer" class="row">
+				<div class="col-md-12">
+					<div class="col-sm-2 col-xs-5">
+						<h3><a href="${url:/products/}" i18n:translate="">Products</a></h3>
+						<ul>
+							<li>
+								<a href="/order-prints/?from=footer" i18n:translate="">Order prints</a>
+							</li>
+							<li tal:repeat="menuitem menu:129cdf90-4212-45e4-b7c0-fb32a437b48f">
+								<a href="${menuitem/url}?from=footer">${menuitem/title}</a>
+							</li>
+						</ul>			
+					</div>
+					<div class="col-sm-2 col-xs-5">
+						<h3><a href="${url:/products/photo-gifts/}" i18n:translate="">Photo gifts</a></h3>
+						<ul>
+							<li tal:repeat="menuitem menu:f245eba1-bca9-48d0-a46f-4e80a89a6b62">
+								<a href="${menuitem/url}?from=footer">${menuitem/title}</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-sm-2 col-xs-5">
+						<h3><a href="${url:/occasions/}" i18n:translate="">Occasions</a></h3>
+						<ul>
+							<li tal:repeat="menuitem menu:0dc4b88b-f182-461f-884a-5140607e8600">
+								<a href="${menuitem/url}?from=footer">${menuitem/title}</a>
+							</li>
+						</ul>
+					</div>
+		
+					<div class="col-sm-2 col-xs-5">
+						
+						<h3><a href="${url:/about/services/}" i18n:translate="">Services</a></h3><!-- 39ff3f7e-a6d1-475c-b9a5-e580f411b9ee -->
+						<ul>
+							<li><a href="/gallery/" i18n:translate="">Public gallery</a></li>
+							<li><a href="/todays-photo/" i18n:translate="">Todays photo</a></li>
+							
+							<li tal:repeat="menuitem menu:39ff3f7e-a6d1-475c-b9a5-e580f411b9ee">
+								<a href="${menuitem/url}?from=footer">${menuitem/title}</a>
+							</li>
+							
+							<li>
+								<a href="/order-prints/backup/minnepenn?from=footer" i18n:translate="">Backup</a>
+							</li>
+							<li>
+								<a href="/myaccount/upload/?from=footer" i18n:translate="">Transfer photos</a>
+							</li>
+							<li>
+								<a href="http://minepreferanser.japanphoto.no/?from=footer" target="_blank">Mine preferanser</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-sm-2 col-xs-5">
+						<h3><a href="${url:/about/}" i18n:translate="">About us</a></h3>
+						<ul>
+							<li tal:repeat="menuitem menu:edd78b5e-fefc-47a2-8c0f-9bcb63f9ba36">
+								<a href="${menuitem/url}?from=footer">${menuitem/title}</a>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+				<div class="col-md-12 text-center">
+					<!--<h3 i18n:translate="" class="display-none">Change language</h3>
+					<ul class="list-inline">
+						<li><a href="/settings/language/en_US"><img src="${static:gfx/flags/us.png}" alt="EN" /> English</a> </li>
+						<li><a href="/settings/language/sv_SE"><img src="${static:gfx/flags/se.png}" alt="SE" /> Svenska</a> </li>
+						<li><a href="/settings/language/da_DK"><img src="${static:gfx/flags/dk.png}" alt="DK" /> Dansk</a> </li>
+						<li><a href="/settings/language/fi_FI"><img src="${static:gfx/flags/fi.png}" alt="FI" /> Suomi</a> </li>
+						<li><a href="/settings/language/nb_NO"><img src="${static:gfx/flags/no.png}" alt="NO" /> Norsk</a> </li>
+						<li><a href="/settings/language/fr_FR"><img src="http://static.eurofoto.no/gfx/flags/fr.png" alt="FR" /> Français</a> </li>
+						<li><a href="/settings/language/it_IT"><img src="http://static.eurofoto.no/gfx/flags/it.png" alt="IT" /> Italiano</a> </li>
+						<li><a href="/settings/language/es_ES"><img src="http://static.eurofoto.no/gfx/flags/es.png" alt="ES" /> Español</a> </li>
+						<li><a href="/settings/language/de_DE"><img src="http://static.eurofoto.no/gfx/flags/de.png" alt="DE" /> Deutsch</a> </li>
+						<li><a href="/settings/language/ja_JP"><img src="http://static.eurofoto.no/gfx/flags/jp.png" alt="JP" /> 日本語</a> </li>
+					</ul>-->
+				</div>
+				
+				<div class="append-bottom clearfix clear col-md-12 last text-center ">
+					<a href="${url:/about/copyright/}">Copyright | © ${request/date/year} Eurofoto/Cewe Norge AS </a>
+				</div>
+				
+				<br />
+				
+			</div>
+		
+		</div>
+	
+	</div>
+	
+		<tal:block metal:use-macro="google-analytics" />
+		<!--<tal:block metal:use-macro="omniture" />-->
+	
+
+
+	
+</tal:block>
+
+
+
+<tal:block metal:define-macro="omniture">
+	
+		<!-- SiteCatalyst code version: H.25.4.
+		Copyright 1996-2013 Adobe, Inc. All Rights Reserved
+		More info available at http://www.omniture.com -->
+	
+		<script language="JavaScript" type="text/javascript" src="${static:}js/s_code_ef.js"></script>
+		<script language="JavaScript" type="text/javascript">
+			var path = "${request/execpath}";
+			
+			var orderid, zip, price;
+			<tal:block tal:condition="exists:purchasedcart">
+				orderid = "${orderid}";
+				zip = "${purchasedcart/deliveryinfo/zipcode}";
+				price = "${purchasedcart/totalprice}";
+			</tal:block>
+			
+			<!--
+			/* You may give each page an identifying name, server, and channel on
+			the next lines. */
+			s.pageName="eurofoto.no:" + path
+			s.server=""
+			s.channel="eurofoto.no:" + path
+			s.pageType=""
+			s.prop1="eurofoto.no:" + path
+			s.prop2="eurofoto.no:" + path
+			s.prop3="eurofoto.no:" + path
+			s.prop4="eurofoto.no:" + path
+			s.prop5=""
+			s.prop6="eurofoto.no"
+			s.prop9="eurofoto.no"
+		
+			
+			if( orderid > 0 ){
+				s.products=";EF-products;1;" + price;
+				s.events="purchase";
+				s.purchaseID=orderid;
+				s.eVar10=orderid;
+				s.zip=zip;
+			}
+			
+			/* Conversion Variables */
+			/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+			var s_code=s.t();if(s_code)document.write(s_code)
+			//-->
+		</script>
+		<script language="JavaScript" type="text/javascript">
+			<!--
+			if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+			//-->
+		</script>
+		<noscript>
+			<img src="http://cewecolor.112.2o7.net/b/ss/cewe-eurofoto-no/1/H.25.4--NS/0" height="1" width="1" border="0" alt=""/>
+		</noscript><!--/DO NOT REMOVE/-->
+		<!-- End SiteCatalyst code version: H.25.4. -->
+</tal:block>
+<!-- Google Analytics gs.js www.eurofoto.no -->
+<tal:block metal:define-macro="google-analytics">
+   <tal:block tal:condition="exists:google">
+	<script type="text/javascript">
+	//<![CDATA[
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	//]]>
+	</script>
+	<script type="text/javascript">
+		try{
+		var pageTracker = _gat._getTracker("${google/analytics}");
+			<tal:block tal:condition="not:session/loggedin">
+				pageTracker._setVar('unregistered');
+			</tal:block>
+			<tal:block tal:condition="session/loggedin">
+				pageTracker._setVar('member');
+			</tal:block>
+			pageTracker._setDomainName(".eurofoto.no");
+			pageTracker._trackEvent('Performance', 'Execution time', 'xml', Math.round( ${statistics/exectime} * 10 )/10 );
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+	</tal:block>
+</tal:block>
+
+
+<!-- top-search -->
+<tal:block metal:define-macro="top-search">
+	<form id="topsearch" class="navbar-form navbar-left" action="/search/" method="get" style="margin-top: 5px; margin-bottom: 0px;">
+	
+		<div class="input-group">
+			<input class="form-control" type="text" name="q" id="q" value="${searchstring}" tal:condition="exists: searchstring" style="max-width: 100%; width: 100%; height: 20px"/>
+			<input class="form-control" type="text" placeholder="Søk" name="q" id="q" tal:condition="not: exists: searchstring" style="max-width: 100%; width: 100%; height: 20px"/>
+			<div class="input-group-btn">
+				<button class="btn btn-default" style="" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+			</div>
+		</div>
+		<button type="submit" class="hide btn btn-default">Submit</button>
+	</form>
+	<script type="text/javascript">
+	//<![CDATA[
+		
+		$(document).ready( function() {
+
+			if( $('#q', '#topsearch').attr('value') == '') {
+					$('#q', '#topsearch').attr('value', $('#q', '#topsearch').parent().parent().find('h5.searchtitle').text() );
+			}
+
+			$('#q','#topsearch').click( function() {
+				if( $(this).attr('value') == $(this).parent().parent().find('h5.searchtitle').text() ) {
+					$(this).attr('value', '');
+				} else {
+					$(this).select();
+				}
+			});
+		
+			$('#q', '#topsearch').blur( function() {
+				if( $(this).attr('value') == '') {
+					$(this).attr('value', $(this).parent().parent().find('h5.searchtitle').text() );
+				}
+			});
+		})
+	//]]>
+	</script>
+</tal:block>

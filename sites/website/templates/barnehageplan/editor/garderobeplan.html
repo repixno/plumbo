@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+   <head>
+	  <tal metal:use-macro="../../${templates}/common.html/head" />
+   
+     <tal:block metal:use-macro="./common.html/scripts" />
+	  <tal:block metal:use-macro="./common.html/css" />
+	  <script type="text/javascript" src="${static:gfx/portals/ukeplan/scripts/barnehageplan.min.js?}${version}"></script>
+     
+   </head>
+
+
+<body>
+<div metal:use-macro="../../${templates}/common.html/top" />
+	<div class="container main" style="height: 1300px">
+
+	
+	<div class="span-24 last "><strong>${selected/product/title}</strong></div>
+	
+	<div class="span-5"> <strong style="color:#CB1C61">Layout:</strong><br/>
+	  <!--<p><a href="#" class="button" id="new_column">Ny kolonne</a></p>
+	  <p><a href="#" class="button" id="remove_column">Slett kolonne</a></p>-->
+
+	  <form id="order_ukeplan">
+	  
+	  <tal:block tal:condition="exists:choosebackground" >
+	  <label for="background">Velg Bakgrunn:</label> <a href='' class="tip more-info">info</a>
+	     <select name="background" id="background">
+	        <option value="white">Hvit</option>
+	        <option value="trans">Gjennomsiktig</option>
+	     </select>   
+	  <br/>
+     </tal:block>
+	 <!-- <label for="columnquantity">Antall kolonner:</label><br/>
+	     <select name="columnquantity" id="columnquantity">
+	        <option value="1">1 kolonne</option>
+	        <option value="2">2 kolonner</option>
+	        <option value="3">3 kolonner</option>
+	        <option value="4" >4 kolonner</option>
+	        <option value="5" selected="true">5 kolonner</option>
+	        <option value="6">6 kolonner</option>
+	        <option value="7">7 kolonner</option>
+	     </select>
+	  <br/>
+	     <input type="radio" name="imagelayout" value="each"/>1. bilde pr. kolonne<br />
+	     <input type="radio" name="imagelayout" value="one"/><label>1. stort bilde</label>	     
+	     <select id="imagefield_height" name="imagefield_height" disabled="true">
+	        <option value="25">25%</option>
+	        <option value="30">30%</option>
+	        <option value="35">35%</option>
+	        <option value="40">40%</option>
+	        <option value="45">45%</option>
+	        <option value="50">50%</option>
+	     </select><br/>
+        <input type="radio" name="imagelayout" value="text" /><label class="imagelayoutlabel">Kun tekst</label>
+        <select id="textfield_height" name="textfield_height" >
+	        <option value="1">0%</option>
+	        <option value="10">10%</option>
+	        <option value="20" selected="true">20%</option>
+	     </select><br/>
+        <strong style="color:#CB1C61">Tekst:</strong><br/>
+        <input type="checkbox" name="names" value="names"/>Navn over hver kolonne:<br />-->
+         <div class="textchoices">
+           <label for="color">Velg Farge for text:</label><br/>
+   	     <select name="text-color" id="text-color" style="background-color: #ea7839;color: white;">
+   	        <tal:block metal:use-macro="./common.html/color-options" />
+            </select><br/>
+         
+            <label for="namefonts">Velg Font:</label>
+            <select name="text-font" id="text-font">
+               <tal:block metal:use-macro="./common.html/font-options" />
+            </select>
+         
+         </div>
+        <br/>
+	     
+	     <input type="hidden" value="${selected/product/id}" name="productid" id="productid" />
+	     <input type="hidden" value="${selected/productoptionid}" name="productoptionid" id="productoptionid" />
+	     
+	     <strong style="color:#CB1C61" i18n:translate="">Grid:</strong><br/>
+	     <label for="color" i18n:translate="">Choose Color grid:</label><br/> 
+	     <select name="color" id="color" style="background-color: #ea7839;color: white;">
+           <tal:block metal:use-macro="./common.html/color-options" />
+         </select><br/>
+         <label for="numberofrows">Velg antall rader:</label><br/>
+         <select name="numberofrows" id="numberofrows">
+            <option>5</option>
+            <option>10</option>
+            <option>15</option>
+            <option selected="selected">20</option>
+	    <option>25</option>
+	    <option>30</option>
+         </select>
+        
+        <!--<label for="day-color" i18n:translate="">Select Color for week:</label><br/>-->
+	     <select class="hide" name="day-color" id="day-color" style="background-color: #812990;color: white;">
+           <tal:block metal:use-macro="./common.html/color-options" />
+         </select><br/>
+         <input type="hidden" name="day-color-background" id="day-color-background" value="#FFFFFF" />
+         <p/>
+	     <input type="hidden" value="1" name="quantity" id="quantity" />
+	     <input type="hidden" name="project_id"  value="" id="project_id" />
+	     <div id="produksjonsvalg">
+   	     <strong i18n:translate="">Production options</strong><br/>
+   	     <input type="checkbox" name="maskit" id="maskit" value="true"/><label for="maskit">Jeg vil bruke grafisk designer</label>
+   	     <span class="quiet small">(Kr <span id="maskit-price"></span>) </span><a href='' class="maskittip help">info</a>
+	     </div>
+	     <p class="right">
+	     <br/>
+	        <button class="large" i18n:translate="">Add to cart</button>
+	     </p>
+	     
+ 
+	  </form>
+	</div>
+	
+	<div class="span-19 last" >
+   	  <div class="span-19 last">
+   	     <div class="editorcontainer">
+   	        <div class="imageandtextplaceholder">
+   	              <div class="imagecontainer">
+   	                 <div class="imageplaceholder center lastholder"></div>
+   	              </div>
+   	        <!--<div class="namescontainer"/>-->
+   	        </div>
+   	        <div class="textplaceholder">
+   	        </div>
+   	        <div class="gridplaceholder">
+   	        <div class="headergrid">
+   	           <div>
+      	        <TABLE class="grid current-grid" height="50px">
+      	           <tr>
+      	              <td>&nbsp;</td>
+      	           </tr>
+      	        </TABLE>
+      	        </div>
+   	        </div>
+   	        <div class="topgridcontainer">
+      	        <div >
+                    <TABLE class="topgrid">
+                        <tr><td class="fill">&nbsp;</td></tr>
+                        <tr><td class="gridspace">&nbsp;</td></tr>
+                        <tr><td class="fill">&nbsp;</td></tr>
+                        <tr><td class="gridspace">&nbsp;</td></tr>
+                        <tr><td class="fill">&nbsp;</td></tr>
+                    </TABLE>
+      	        </div>
+   	        </div>
+              <div class="maingridcontainer">
+                 <div>
+      	           <TABLE class="maingrid firstmain">
+      	              <tr>
+      	                 <td>&nbsp;</td>
+      	              </tr>
+      	           </TABLE>
+      	           <TABLE class="maingrid secondmain main-content">
+      	              <tr>
+      	                 <td>&nbsp;</td>
+      	              </tr>
+      	           </TABLE>
+      	        </div>
+              </div>
+   	        </div>
+   	     </div>
+   	     
+   	  </div>
+   	
+	</div>
+
+   <tal:block metal:use-macro="./common.html/imagecropbox" />
+	</div>
+	
+	<div id="imageselect" class="selectimage hide">
+		<div class='span-5'>
+		<p>
+		 <strong>Hent tidligere opplastet bilde:</strong> 
+		 <tal:block tal:condition="session/loggedin">
+         <a class="small center button choose-image" href="#" i18n:translate="">Get image</a>
+         </tal:block>
+         <tal:block tal:condition="not:session/loggedin">
+         <a class="button center" id="openLoginDialog" href="/login/" i18n:translate="">Login and get image from your account</a>
+         </tal:block>				
+      </p>
+       <p>
+         <strong>Hent bilde fra din datamaskin:</strong>
+         <iframe class="uploadframe" src="/upload/iframe/0/inlineImageUploadCallback" height="60" width="220" scrolling="no"/>
+         <div class="hide iOs">
+         <a href="/myaccount/upload?ref=L2NyZWF0ZS9lbmxhcmdlbWVudHM=" i18n:translate="" class="button large green" id="transfer_photos">Transfer photos</a><p/>
+         <div class="quiet" id="appinfo"><tal:block i18n:translate="">You need</tal:block> <a href="http://itunes.apple.com/us/app/aurigma-up/id432611633">Arigma Up</a> <tal:block i18n:translate="">to be able to upload images from your iPad/iPhone</tal:block><p/></div>
+         </div>
+      </p>
+		</div>
+		<div class="span-5">
+		<p><strong>Rediger bilde</strong> 
+		<button class="button" id="cropbutton" type="button" disabled="disabled">Rediger bildet</button></p>
+		<p>
+		
+		 <!--<a class="button" href="#" id="clipart">Middagskolonne</a>-->
+		</p>
+		
+		
+		</div>
+	</div>
+	
+	<div id="imagePicker" title="Choose image" i18n:attributes="title" class="hide">
+      <div class="span-23 last">
+         <div class="span-6 column">
+            <h4 i18n:translate="">Choose album</h4><ul id="imagePickerAlbums" class="accordion-list albums"/>
+         </div>
+         <div class="span-17 column last">
+            <h4 i18n:translate="">Choose image</h4><ul id="imagePickerImages" class="accordion-list images"/>
+         </div>
+      </div>
+   </div>
+   
+   <div id="loginDialog"  title="Login" i18n:attributes="title" class="hide">
+		<form action="/login/" method="post" id="login" class="reset">
+			<div class="clear">
+				<div>
+					<label for="email" i18n:translate="">Email</label><br />
+					<input type="text" class="title lowercase span-8" name="email" value=""/>
+				</div>
+			</div>
+			
+			<div class="clear">
+				<label for="pasword" i18n:translate="">Password</label><br />
+				<input type="password" class="title span-8" name="password" value="" style="margin-bottom:0"/>
+				<p class="clear top bottom">
+					<a href="/login/forgot-password/" i18n:translate="">Forgot password?</a>
+				</p>
+			</div>
+			
+			<div class="clear">
+				<input type="checkbox" id="autologin" name="autologin" /> 
+				<label for="autologin" i18n:translate="">Remember me next time</label>
+			</div>
+
+			<input type="hidden" name="referer" value="/${request/execpath}" />
+		</form>
+   </div>
+
+   
+   
+   <!--Help files -->
+   <!-- Backgrunn id 2867 -->
+   <div id="tip" class="hide" tal:content="structure cms:body:ddcbe2e0-b51f-4362-aa43-00b925123824" />
+   <!-- qualitytip id 2868-->
+   <div id="qualitytip" class="hide" tal:content="structure cms:body:d57b3af4-5c9b-40bf-91fd-0e015e59b89e" />
+   <!-- maskittip id 2873 -->
+   <div id="maskittip" class="hide" tal:content="structure cms:body:6c879a35-475a-4140-9ccd-be9ffe35a6e3" />
+   
+   <div id="confirmtip" title="Bekreft ditt prosjekt" class="hide"><dl><dt>Før du går til neste trinn, pass på:</dt>
+         
+                                                                                 <dd>-At det ikke er skrivefeil.</dd>
+                                                                                 <dd>-At bildene har ønsket utsnitt.</dd>
+                                                                                 <dd>-At du har valgt ønsket farge på skrift og rutenett.</dd>
+                                                                                 <dd>-Har du ønske om at det skal gjøres spesielle tilpasninger må det krysses av for bruk av grafisk designer.</dd>
+                                                                           
+                                                                       </dl>
+                                                                             </div> 
+   
+
+<script type="text/javascript">
+   var selectedcropbox = '';
+   var loader = '<img src="${static:gfx/gui/ajax-loader.gif}" class="loader" />';
+   var imagePickerLoaded = false;
+   var editorcontainer_width = 750;
+   var imagelayout = 'text';
+   var numberofcolumns = 6;
+   var imagefield_each = ${ukeplantemplates/1/imagefield_height};
+   var textimageheight = 20;
+   var clipartcolumn = false;
+   var toptext = "       Sett inn tekst       ";
+   var imageholderwidth = 0;
+   var gridholder = 0;
+   var bottommargin = 877;
+   var backgroundcolor = '#FFFFFF';
+   var templatefile = '${selected/template/pages/0/fullsize_src}';
+   var numberofdays = 7;
+   var rotate = 0;
+   var gridarray = ['Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag'];
+   
+   var originalimage = Object();
+   
+   
+   malArray = new Object();
+   malArray.mal_id = ${ukeplantemplates/1/id};
+   malArray.mal_width = ${ukeplantemplates/1/mal_width};
+   malArray.mal_height = ${ukeplantemplates/1/mal_height};
+   malArray.imagefield_height = imagefield_each;
+   malArray.imagefield_width = ${ukeplantemplates/1/imagefield_width};
+   malArray.imagefield_x = ${ukeplantemplates/1/imagefield_x};
+   malArray.imagefield_y = ${ukeplantemplates/1/imagefield_y};
+   malArray.imagefield_space = ${ukeplantemplates/1/imagefield_space};
+   malArray.prodno = ${selected/productoption/prodno};
+   var ratio = malArray.mal_width / editorcontainer_width;
+   
+   var imagetext_heigth = (imagefield_each / ratio / 4 ) + 2 ;
+   
+   var imagefield_one  = ( ( malArray.mal_height - malArray.imagefield_x - 877 )) / 100;
+   //var gridheight = parseInt((malArray.mal_height - malArray.imagefield_height - ( malArray.imagefield_x * 2 )) / ratio ) - 40;
+   var gridheight = ( malArray.imagefield_height / ratio );
+   
+   var velgbilde = "${static:gfx/portals/ukeplan/images/velgbilde.jpg}"
+   var middagsbestikk = "${static:gfx/portals/ukeplan/clipart/middagsbestikk2.png}";
+   
+     
+</script>
+	
+	
+</body>
+</html>

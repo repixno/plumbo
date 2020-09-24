@@ -1,0 +1,72 @@
+<!-- HEAD -->
+<tal:block metal:define-macro="head">
+	
+	<title>Eurofoto</title>
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	
+	<script type="text/javascript" src="${static:js/jquery.eurofoto-1.0.js}"></script>
+	<script type="text/javascript" src="${static:js/jqtouch.min.js}"></script>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="viewport" content="width=device-width, user-scalable=no" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	
+	<script type="text/javascript">
+		var jQT = new $.jQTouch({
+			icon: 'http://static.eurofoto.no/gfx/icons/eurofoto_iphone_icon.png',
+			addGlossToIcon: false,
+			startupScreen: 'http://static.eurofoto.no/gfx/icons/eurofoto_iphone_icon.png',
+			statusBar: 'black',
+		});
+	</script>
+	
+	<link rel="apple-touch-icon" href="http://static.eurofoto.no/gfx/icons/eurofoto_iphone_icon.png" />
+
+	<link media="all" 
+		href="${static:css/mobile/jqtouch.min.css}?${version}" 
+		type= "text/css" rel="stylesheet"
+	/>
+	<link media="all" 
+		href="${static:css/mobile/themes/apple/theme.min.css}?${version}" 
+		type= "text/css" rel="stylesheet"
+	/>
+
+	
+<!--	<link 
+		media="all" 
+		href="${static:css/portals/eurofoto_iphone/screen.css}?${version}" 
+		type= "text/css" 
+		rel="stylesheet"
+	/>
+	<link 
+		media="only screen and (device-width: 320px)" 
+		href="http://static.eurofoto.no/css/portals/eurofoto-iphone/iphone_320.css" 
+		type= "text/css" rel="stylesheet"
+	/>
+	<link media="only screen and (device-width: 480px)" 
+		href="http://static.eurofoto.no/css/portals/eurofoto-iphone/iphone_480.css" 
+		type= "text/css" rel="stylesheet"
+	/>-->
+
+</tal:block>
+
+
+
+<!-- top-header -->
+<div metal:define-macro="top" id="header-iphone">	
+	<h1 class="hide">Eurofoto.no - Minner for livet</h1>
+	<div metal:use-macro="top-small-navigation" />
+	<!--<form metal:use-macro="top-search" />-->
+</div>
+
+<!-- top-small-navigation -->
+<div metal:define-macro="top-small-navigation" id="topsmallnavigation-iphone">
+	<ul>
+		<li class="login"><a href="/login/">Login</a></li>
+		<li class="logout"><a href="/logout/">Logout</a></li>
+		<li class="register"><a href="/register/" class="last">Register</a></li>
+	</ul>
+</div>

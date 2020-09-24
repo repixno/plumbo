@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<tal:block tal:define="global dontShowCart" />
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Confirm your order</tal:block>
+	<style type="text/css">
+
+		body{
+			
+			font-size: 20px;
+		}
+		
+		
+		.table .thead-dark th {
+    color: #fff;
+    background-color: #3b5664;
+    border-color: #3b5664;
+	text-transform: uppercase;
+}
+	</style>
+</head>
+
+
+<body>
+   <div id="loader-overlay" style="display: none;">
+		<div class="loadingInfo">
+			<img src="${static:gfx/gui/ajax-loader-gray.gif}" /><br/>
+			<br/>
+			<h3 i18n:translate="">Order is being completed, please wait.</h3>
+		</div>
+	</div>
+<div metal:use-macro="../../${templates}/common.html/top" />
+	<div class="container">
+	<div class="content">
+		<!--<form action="/checkout/complete/" method="post">-->
+		<form action="/checkout_gratis/execute/" method="post">
+			<div class="row">
+				<div class="col-12"> 
+				 
+					  <h2 i18n:translate="">Confirm your order</h2>
+					  <!--<span i18n:translate="">Vennligst bekreft at bestillingen er korrekt..</span>-->
+				
+				</div>
+			  
+				  <div class="container">
+				  <div class="col-12 top15">	
+				  <table class="table" tal:condition="cart/items">
+					  <thead class="thead-dark">
+						  <tr>
+							  <th i18n:translate="">Product</th>
+							  <th></th>
+							  <th i18n:translate="">Quantity</th>
+							  <th i18n:translate="">Price</th>
+							  <th i18n:translate="">Sum</th>
+							  
+						  </tr>
+					  </thead>
+					  
+					  <tbody>
+						
+
+						  <!-- Merkelapp -->
+						  <tal:block tal:condition="exists: cart/items/merkelapp">
+							  <tal:block tal:repeat="products cart/items/merkelapp">
+								  <tal:block tal:repeat="merkelapp products">
+								  <tr>
+									  <td>
+										  <tal:block tal:content="merkelapp/product/title">Product</tal:block>
+									  </td>
+									  <td>
+										  
+									  </td>
+									  <td>
+										  <span tal:content="merkelapp/quantity"/> 
+									  </td>
+									  <td class="unitprice" tal:content="formatprice:merkelapp/unitprice">Price</td>
+									  <td class="price" tal:content="formatprice:merkelapp/price">Sum</td>
+								  </tr>
+
+								  </tal:block>
+							  </tal:block>
+						  </tal:block>
+						  
+
+						  
+		
+						  
+						  <!-- delivery and payment -->
+						  <tal:block tal:condition="exists: cart/deliverytype">
+							  <tr>
+								  <td i18n:translate="">Delivery method</td>
+								  
+								  <td tal:content="cart/deliverytype/title"></td>
+								  <td></td>
+								  <td></td>
+								  <td class="price" tal:content="formatprice:cart/deliverytype/price"></td>
+							  </tr>
+						  </tal:block>
+						  
+						  <tal:block tal:condition="exists: cart/paymenttype">
+							  <tr class="d-none">
+								  <td i18n:translate="">Payment method</td>
+								 
+								  <td class="price" tal:content="formatprice:cart/paymenttype/price"></td>
+							  </tr>
+						  </tal:block>
+		  
+						  
+						  <!-- discount -->
+						  <tal:block tal:condition="exists: cart/discount">
+							  <tr class="discount" tal:condition="exists:cart/discount/final" tal:repeat="rebate cart/discount/final">
+								  <td>
+									  <span class="quiet" tal:content="cart/discount/info/name"></span><br />
+									
+								  </td>
+								  <td>
+								  </td>
+								  <td>
+									  <span tal:content="rebate/quantity">1</span><br />
+								  </td>
+								  <td class="unitprice">-<tal:block tal:content="formatprice:rebate/unitdiscount" /></td>
+								  <td class="price">-<tal:block tal:content="formatprice:rebate/totaldiscount" /></td>
+							  </tr>
+							  
+						  </tal:block>
+						  
+						
+						
+		 
+						  <tr style="background-color: #d9d9d9; font-weight: bold;">
+							  <td class="right" >
+								  <tal:block i18n:translate=""><strong>Total</strong></tal:block> 
+							  </td>
+							  <td></td>
+							  <td></td>
+							  <td></td>
+							  <td class="total-price large">kr <span tal:content="formatprice:cart/totalprice" id="total-price">?</span></td>
+						  </tr>
+						 
+						  
+					  </tbody>
+				  </table>
+		  
+				  
+		  
+					  
+				  
+				  </div>	
+				  </div>
+
+		</div>
+		
+		<div class="row">
+			<div class="col-12">
+				<div class="col-md-12 " tal:condition="cart/deliveryinfo">
+					<strong style="text-transform: uppercase;">Leveringsadresse</strong><br/>
+					${cart/deliveryinfo/name}<br/>
+					${cart/deliveryinfo/address}<br/>
+					${cart/deliveryinfo/zipcode} ${cart/deliveryinfo/city}<br/>
+				</div>
+				<!--<div class="col-md-4 col-md-height">
+					<label i18n:translate="">Order comment:</label><br/>
+					<textarea id="comment" name="comment" style="height: 100px"></textarea><br/>
+				</div>-->
+			
+					<div class="col-md-12  col-xs-12 text-right mx-auto mb-3">
+						<button class="btn btn-success text-right call-to-action" type="submit" i18n:translate="">Confirm order</button>
+					 </div>
+				
+			</div>
+			
+		</div>
+		</form>
+	
+	</div>
+</div>
+	
+	<div class="container">
+			<div metal:use-macro="../../${templates}/common.html/footer" />
+		</div>			
+
+<script type="text/javascript">
+	$("a.popup").fancybox({ 
+		'zoomSpeedIn': 300, 
+		'zoomSpeedOut': 300, 
+		'overlayShow': true,
+		'frameWidth': 900,
+		'frameHeight': 500 }
+	); 
+</script>
+
+<script type="text/javascript">
+
+		$(document).ready( function() {
+			
+		   $( '.call-to-action' ).click( function() {
+		      
+		      $('#loader-overlay')
+			   .css('opacity', '0.8')
+			   .css('margin','0')
+			   .css( 'visibility', 'visible' )
+			   .width( $(window).width() )
+			   .height( $(window).height() );
+			   
+		   });
+		   
+		   $('.refresh').click( function() {
+				window.location.reload();
+				return false;
+			});
+		   
+		});
+</script>
+
+
+</body>
+</html>

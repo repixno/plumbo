@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+</head>
+
+
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+	<div tal:define="global menuitem string:mobilephotos" metal:use-macro="common.html/menu" />
+	
+	<div id="content">
+
+		<h2>My mobile photos</h2>
+	
+		<ul class="imagelist">
+			<li>
+				<div class="imagecontainer thumb" tal:repeat="mms mmses" style="position: relative">
+					<a href="" tal:attributes="title mms/code;" class="fancy" rel="group2" style="position: absolute; top: 0; left:0">
+						<span class="ss_sprite ss_magnifier"></span>
+					</a>
+					<a href="" tal:attributes="title mms/code; href mms/thumbnail" class="" rel="">
+						<img src="" alt="" tal:attributes="src mms/thumbnail; alt mms/code" />
+					</a>
+					<tal tal:omit-tag="" tal:content="mms/code | default"></tal>
+					<input type="checkbox" name="" value="" id="" tal:attributes="value mms/code; name 'check_${mms/id}'; id 'check_${mms/id}'"/>
+					
+				</div>
+			</li>
+   	</ul>
+		
+	</div>
+	
+	<div id="rightmenu" class="last">
+	  <ul>
+	     <li i18n:translate="">Create new MMS</li>
+	     <li><a i18n:translate="" style="cursor: pointer;" id="selectall">Select all</a></li>
+	     <li><a i18n:translate="" style="cursor: pointer;" id="selectnone">Select none</a></li>
+	     <li i18n:translate="">Delete selected</li>
+	     <li i18n:translate="">Publish in gallery</li>
+	     <li><a i18n:translate="" href="">Go to MMS gallery</a></li>
+	  </ul>
+   </div>
+		
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("a.fancy").fancybox();
+		
+      jQuery.fn.check = function( mode ) {
+         var mode = mode || 'on';
+         
+         return this.each( function() {
+            switch( mode ) {
+               case 'on':
+                  this.checked = true;
+                  break;
+               case 'off':
+                  this.checked = false;
+                  break;
+               }
+         });
+         
+      }
+		
+      $("#selectall").click(function() {
+         $("input[name*=check]").check('on');
+      });
+      
+      $("#selectnone").click(function() {
+         $("input[name*=check]").check('off');
+      });
+
+   });
+	
+</script>
+
+
+</body>
+</html>

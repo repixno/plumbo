@@ -1,0 +1,708 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Prices</tal:block>
+	
+	<script type="text/javascript" src="${static:js/jquery.tablehover.min.js}"></script>
+	
+	<style type="text/css">
+
+	h1 a, h2 a, h3 a, h4 a { text-decoration: none; color: #000 }
+	h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover { text-decoration: underline; color: inherit }
+	
+	a:focus { outline: none !important }
+	
+	table.pricelist { border: none }
+	table.pricelist thead th { background: none; color: #000; font-weight: normal; }	
+	table.pricelist a { text-decoration: none }
+	table.pricelist a:hover { text-decoration: underline }
+	
+	table.pricelist tbody tr td { color: #000; font-weight: normal }
+	
+	
+	table.pricelist tbody tr:last-child td, table.pricelist tbody tr:last-child th { border-bottom: none }
+	
+	a.right { display: block; text-align; right; }
+	
+	table.pricelist.basic tbody { font-size: .8em }
+	table.pricelist { text-align: center}
+	table.pricelist.basic td { text-align: left }
+	table.pricelist.basic td a { font-weight: normal }
+	
+	div.categories { position: fixed }
+	
+	table.pricelist td a { display: block; float: right}
+	
+	.categories { position: fixed; z-index: 100; background-color: #fff}
+	
+	#categories {position: relative; z-index: 200}
+	
+	#categories a { 
+		display: block; height: 14px; 
+		padding: 5px 50px 23px 0; font-size: 1.1em; text-decoration: none; z-index: 300;
+		color: #666;
+	}
+	#categories a.selected {
+		color: #0068B4;
+		font-size: 16px;
+		padding: 10px 50px 45px 0;
+	}
+	
+	#categories li { list-style: none }
+	
+	table.pricelist .rowHover, table.pricelist .hover { background-color: #f6f6f6; color: #0068B4 !important }
+	
+	table.pricelist .rowHover.hover { background-color: #0068B4; color: #fff !important}
+	
+	
+	table.pricelist tr th:first-child.rowHover { color: #fff !important}
+	
+	#fancybox-wrap .hide { display: block }
+	
+	div.options table.pricelist tbody tr td,
+	div.options table.pricelist tbody tr th { font-size: .9em; font-weight: normal !important }
+	
+	
+	
+	h2{
+		font-size: 30px;
+    letter-spacing: 2px;
+    font-family: yanoneregular;
+		
+		
+	}
+	
+	
+	h3{
+
+    font-family: yanoneregular;
+		
+		
+	}
+	
+	
+	h4{
+
+    font-family: yanoneregular;
+	color: #ee740b;
+		
+		
+	</style>
+	
+</head>
+
+<body>
+	
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<div class="container">
+
+	<div class="row">
+
+	<div class="col-md-12">
+		<div class="col-md-9">
+
+			<h2 i18n:translate="">Prices</h2>
+			<p i18n:translate="">Below is an overview of our products and prices. In the menu on the right are the main categories for faster navigation. You can click directly from the price list to the desired product.</p>
+			
+			<div class="col-md-6 prepend-top" id="order-prints" >
+				<h3 i18n:translate="">Order prints</h3>
+				<p i18n:translate="">All photos you order from us are made on the world's best photo paper from FujiFilm. We use a variety of paper called Supreme that is extra thick and provides extra durability and color reproduction. Digital photos are best on real photo paper!
+				</p>
+				<a href="/order-prints/" class="right" i18n:translate="">Order prints</a>
+
+			</div>
+			<div class="col-md-6">
+				<img  class="img-responsive" src="${static:cms/images/articles/pricelist/order-prints.jpg}" />
+			</div>
+			
+			<div class="pricelist advanced col-md-12 last">
+				<table id="prices" class="pricelist">
+					<thead>
+						<tr>
+							<th i18n:translate="">Quantity</th>
+							<th>1 - 4</th>
+							<th>5 - 9</th>
+							<th>10 - 23</th>
+							<th>24 - 99</th>
+							<th>100 - 249</th>
+							<th>250 +</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tal:block tal:repeat="print pricelist/prints">
+							<tr class="prodno_${print/prodno}">
+								<th tal:content="print/title"></th>
+								<tal:block repeat="price print/prices">
+									<td class="prodno_${print/prodno}">
+										Kr <span class="price" tal:content="formatprice:price/price"></span>
+									</td>
+								</tal:block>
+							</tr>
+						</tal:block>
+					</tbody>
+				</table>
+			</div>
+			
+	<div class="col-md-12 last options">
+			<div class="col-md-6 prepend-top" id="options">
+			   <h4><a href="/order-prints/" i18n:translate="">Options for photo printing</a></h4>
+				<p i18n:translate="">When you order regular prints and enlargements without a design, you can do some simple optional choices for your order. These are choices that affect the production method, the choices you make is applied to all images in the order. Options are made in the ordering process.</p>
+			</div>
+			<div class="col-md-6" name="order-prints">
+				<a href="/order-prints/">
+					<img class="img-responsive" src="${static:cms/images/articles/pricelist/corrections.jpg}" />
+				</a>
+			</div>
+			<div class="col-md-6 colborder">
+				<h5 i18n:translate="">Cropping</h5>
+				<table class="pricelist">
+					<tbody>
+						<tal:block tal:define="global productionmethods pricelist/productionmethods" />
+						<tal:block tal:repeat="productionmethod productionmethods">
+							<tr>
+								<th tal:content="productionmethod/title"></th>
+								<tal:block repeat="price productionmethod/prices">
+									<td class="prodno_${productionmethod/prodno}" colspan="6">
+										Kr <span class="price" tal:content="formatprice:price/price"></span>
+									</td>
+								</tal:block>
+							</tr>
+						</tal:block>
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="col-md-6 colborder">
+				<h5 i18n:translate="">Paper quality</h5>
+				<table class="pricelist">
+					<tbody>
+						<tal:block tal:define="global paperquality pricelist/paperquality" />
+						<tal:block tal:repeat="paper paperquality">
+							<tr>
+								<th tal:content="paper/title"></th>
+								<tal:block repeat="price paper/prices">
+									<td class="prodno_${paper/prodno}" colspan="6">
+										Kr <span class="price" tal:content="formatprice:price/price"></span>
+									</td>
+								</tal:block>
+							</tr>
+						</tal:block>
+					</tbody>
+				</table>
+			</div>
+			
+						
+			<div class="col-md-6 last">
+				<h5 i18n:translate="">Color and brightness correction</h5>
+				<table class="pricelist">
+					<tbody>
+						<tal:blck tal:define="global correctionmethods pricelist/correctionmethods" />
+						<tal:block tal:repeat="correctionmethod correctionmethods">
+							<tr>
+								<th tal:content="correctionmethod/title"></th>
+								<tal:block repeat="price correctionmethod/prices">
+									<td class="prodno_${correctionmethod/prodno}" colspan="6">
+										Kr <span class="price" tal:content="formatprice:price/price"></span>
+									</td>
+								</tal:block>
+							</tr>
+						</tal:block>
+					</tbody>
+				</table>
+			</div>
+			</div>
+
+			
+			<div class="col-md-6 prepend-top" id="enlargements">
+				<h3 i18n:translate="">Enlargements (with single photo)</h3>
+				<p i18n:translate="">Enlargements can be ordered in two different ways. Direct from your photo album along with regular images in 10x13 and 10x15 cm, or through one of our design tools. If you order directly from the photo album can not crop or make other adjustments to the pictures.
+				</p>
+				<a href="/order-prints/" class="right" i18n:translate="">Order prints</a>
+
+			</div>
+			<div class="col-md-6 last">
+				<img class="img-responsive" src="${static:cms/images/articles/pricelist/enlargements.jpg}" />
+			</div>
+			
+					
+			<div class="col-md-12 last">
+			
+				<table id="prices" class="pricelist advanced">
+					<thead>
+						<tr>
+							<th i18n:translate="">Quantity</th>
+							<th>1 - 4</th>
+							<th>5 - 9</th>
+							<th>10 - 23</th>
+							<th>24 - 99</th>
+							<th>100 - 249</th>
+							<th>250 +</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tal:block tal:repeat="enlargement pricelist/enlargements">
+							<tr>
+								<th tal:content="enlargement/title"></th>
+								<tal:block repeat="price enlargement/prices">
+									<td class="prodno_${enlargement/prodno}">
+										Kr <span class="price" tal:content="formatprice:price/price"></span>
+									</td>
+								</tal:block>
+							</tr>
+						</tal:block>
+					</tbody>
+				</table>
+			</div>
+			
+
+
+
+						
+			<tal:block tal:repeat="category pricelist/products">
+				<div class="normal-list" tal:condition="equal:category/sections/length,1">
+					<div class="col-md-6 prepend-top" id="${category/menu/article/urlname}">
+						<h3><a href="${category/menu/url}" tal:content="category/menu/title|default">No category name</a></h3>
+						<p tal:content="category/menu/article/ingress|default">No text in this product</p>
+					</div>
+					<div class="col-md-6 last">
+						<a href="${category/menu/url}">
+							<img class="img-responsive" src="${static:}images/menu/${category/menu/image}" alt="${category/menu/title}" />
+						</a>
+					</div>
+					<div class="col-md-12 last">
+						<tal:block tal:repeat="sections category/sections">
+							<tal:block metal:use-macro="pricelist" />
+						</tal:block>
+					</div>
+				</div>
+				<div class="basic-list" tal:condition="gt:category/sections/length,1">
+					<div class="col-md-6 prepend-top" id="${category/menu/article/urlname}" name="${category/menu/article/urlname}">
+						<h3><a href="${category/menu/url}" tal:content="category/menu/title|default">No category name</a></h3>
+						<p tal:content="category/menu/article/ingress|default">No text in this product</p>
+					</div>
+					<div class="col-md-6 last">
+						<a href="${category/menu/url}">
+							<img  class="img-responsive" src="${static:}images/menu/${category/menu/image}" alt="${category/menu/title}" />
+						</a>
+					</div>
+					<div class="col-md-12 last">
+						<tal:block tal:repeat="section category/sections">
+							<tal:block metal:use-macro="basic-pricelist" />
+						</tal:block>
+					</div>
+				</div>
+				
+			</tal:block>
+			   <div class="col-md-12 last" id="shipping-prices">
+			      <tal:block tal:content="structure cms:body:42dcb496-023c-4b98-b38e-dd000f2eb09c" />
+			   </div>
+			</div>
+		<div class="col-md-3 prepend-1">
+			<div class="categories">
+			
+			
+			<h3 i18n:translate="">Categories</h3>
+			<ul id="categories">
+				<li><a href="#order-prints" i18n:translate="" class="first">Prints</a></li>
+				<tal:block tal:repeat="category pricelist/products">
+					<li>
+						<a href="#${category/menu/article/urlname}">${category/menu/title}</a>
+					</li>
+				</tal:block>
+				<li>
+				  <a href="#shipping-prices" i18n:translate="">Shipping prices</a>
+				</li>
+			</ul>
+			
+			
+			</div>
+		</div>
+	</div>
+
+	
+	
+	</div>
+
+</div>
+	
+	
+<div metal:use-macro="../../${templates}/common.html/footer" />
+
+
+<script type="text/javascript">
+	$(document).ready( function() {
+	
+		$('a.see-more-prices').fancybox({
+			'autoDimensions': false,
+			'titleShow': false
+		});
+	
+		$('#order-prints tbody tr td').prepend('Kr ');
+		
+		/*$('table.pricelist tbody tr td:last-child').css({ 
+			'color': '#000', 'font-size': '1.1em' 
+		});*/
+		
+		$('.categories .arrow').css({
+			'position': 'absolute',
+			'top': '35px',
+			'margin-left': '-20px',
+			'display': 'block',
+			'z-index': 200
+		});
+		
+		
+		$('.categories').css('margin-bottom', $('#footer').outerHeight() );
+		
+		$('table.pricelist.advanced').tableHover({
+			rowClass: 'rowHover', 
+			colClass: 'hover', 
+			clickClass: 'click', 
+			headCols: true
+		});
+		
+		//$('.kriss').hide();
+	});
+</script>
+<script type="text/javascript">
+
+</script>
+
+	<tal:block metal:define-macro="basic-pricelist">
+
+		<div class="col-md-6" tal:condition="not:mod:repeat/section/number,2">
+			<h4><a href="${section/product/product/url}">${section/title}</a></h4>
+			<table class="pricelist basic">
+			<tbody>
+				<tal:block  tal:repeat="product section/products">
+				<tr>
+					<th><a href="${product/product/url}">${product/product/title}</a></th>
+					<td>
+						<tal:block tal:define="global item product/product" />
+						fra kr ${formatprice:product/product/option/price} 
+						<a 
+							id="product${item/id}" 
+							href="#productId${item/id}" 
+							class="see-more-prices" 
+							title="Se flere priser"
+							i18n:translate="">
+							More prices
+						</a>
+						
+					</td>
+				</tr>
+				</tal:block>
+			</tbody>
+			</table>
+		</div>
+		
+		<div class="col-md-6 last" tal:condition="mod:repeat/section/number,2">
+			<h4><a href="${section/product/product/url}">${section/title}</a></h4>
+			<table class="pricelist basic">
+			<tbody>
+				<tal:block tal:repeat="product section/products">
+				<tr>
+					<th><a href="${product/product/url}">${product/product/title}</a></th>
+					<td>
+						<tal:block tal:define="global item product/product" />
+						fra kr ${formatprice:product/product/option/price} 
+						<a 
+							id="product${item/id}" 
+							href="#productId${item/id}" 
+							class="see-more-prices" 
+							title="Se flere priser"
+							i18n:translate="">
+							More prices
+						</a>
+						
+					</td>
+				</tr>
+				</tal:block>
+			</tbody>
+			</table>
+		</div>
+		
+		
+		<tal:block tal:repeat="product section/products">
+			<tal:block tal:define="global item product/product" />
+			<tal:block metal:use-macro="price-popup" />
+		</tal:block>
+		
+		
+		
+	</tal:block>
+	
+	<tal:block metal:define-macro="price-popup">
+		<div class="hide" id="productId${item/id}">
+
+			<h4 i18n:translate="">Prices for <span i18n:name="productTitle" tal:replace="item/title"/>:</h4>
+			
+			<tal:block tal:condition="item/options" tal:define="options item/options">
+				<tal:block tal:repeat="option options">
+					<table>
+						<caption tal:content="option/title"></caption>
+						<tr tal:repeat="price option/prices">
+							<td>
+								<tal:block tal:condition="exists:price/max">
+									<span tal:content="price/min"/>-<span tal:content="price/max|default"></span>stk
+								</tal:block>
+								<tal:block tal:condition="not:exists:price/max">
+									<span tal:content="price/min"/>stk eller flere
+								</tal:block>
+							</td>
+							<td tal:content="formatprice:price/price"></td>
+						</tr>
+					</table>
+				</tal:block>
+			</tal:block>
+
+		</div>
+	</tal:block>
+	
+	
+	<table class="pricelist advanced" metal:define-macro="pricelist">
+		<thead>
+			<tr>
+				<th i18n:translate="">Quantity</th>
+				<th class="center quantity">1</th>
+				<th class="center quantity">2-4</th>
+				<th class="center quantity">5-9</th>
+				<th class="center quantity">10-24</th>
+				<th class="center quantity">25-49</th>
+				<th class="center quantity">50-99</th>
+				<th class="center quantity">100-249</th>
+				<th class="center quantity">250+</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr tal:repeat="product sections/products">
+			<th>
+				<a href="${product/product/url}" tal:content="product/product/title">10x13cm</a>
+			</th>
+			<tal:block tal:repeat="price product/product/option/prices">
+				<tal:block tal:condition="equal:price/min,1">
+					<tal:block tal:condition="exists:price/max">
+						<tal:block tal:condition="equal:price/max,1">
+							<td class="center " colspan="1" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="equal:price/max,4">
+							<td class="center" colspan="2" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="equal:price/max,9">
+							<td class="center" colspan="3" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="equal:price/max,23">
+							<td class="center" colspan="4" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="equal:price/max,24">
+							<td class="center" colspan="4" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+					</tal:block>
+					<tal:block tal:condition="not:exists:price/max">
+						<td class="center last" colspan="8" >
+							Kr <tal:block tal:content="formatprice:price/price" />
+						</td>
+					</tal:block>
+				</tal:block>
+
+				<tal:block tal:condition="equal:price/min,2">
+					<tal:block tal:condition="exists:price/max">
+						<tal:block tal:condition="equal:price/max,4">
+							<td class="center" colspan="1" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="equal:price/max,9">
+							<td class="center" colspan="1" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="equal:price/max,23">
+							<td class="center" colspan="2" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="equal:price/max,24">
+							<td class="center" colspan="2" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+					</tal:block>
+					<tal:block tal:condition="not:exists:price/max">
+						<td class="center last" colspan="7" >
+							Kr <tal:block tal:content="formatprice:price/price" />
+						</td>
+					</tal:block>
+				</tal:block>
+
+				
+				<tal:block tal:condition="equal:price/min,5">
+					<tal:block tal:condition="exists:price/max">
+						<tal:block tal:condition="equal:price/max,9">
+							<td class="center" colspan="1" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="equal:price/max,24">
+							<td class="center" colspan="2" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+					</tal:block>
+					<tal:block tal:condition="not:exists:price/max">
+						<td class="center last" colspan="6" >
+							Kr <tal:block tal:content="formatprice:price/price" />
+						</td>
+					</tal:block>
+				</tal:block>
+				
+				<tal:block tal:condition="equal:price/min,10">
+					<tal:block tal:condition="exists:price/max">
+						<tal:block tal:condition="equal:price/max,19">
+							<td class="center" colspan="1" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="equal:price/max,23">
+							<td class="center" colspan="1">
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+
+						<tal:block tal:condition="equal:price/max,24">
+							<td class="center" colspan="2" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="equal:price/max,25">
+							<td class="center" colspan="2" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+
+					</tal:block>
+					<tal:block tal:condition="not:exists:price/max">
+						<td class="center last" colspan="5" >
+							Kr <tal:block tal:content="formatprice:price/price" />
+						</td>
+					</tal:block>
+				</tal:block>
+				
+				<tal:block tal:condition="equal:price/min,24">
+					<tal:block tal:condition="exists:price/max">
+						<tal:block tal:condition="equal:price/max,49">
+							<td class="center" colspan="1" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="equal:price/max,99">
+							<td class="center" colspan="2" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="not:exists:price/max">
+							<td class="center last" colspan="4" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+					</tal:block>
+				</tal:block>
+				
+				<tal:block tal:condition="equal:price/min,25">
+					<tal:block tal:condition="exists:price/max">
+						<tal:block tal:condition="equal:price/max,49">
+							<td class="center" colspan="1" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="equal:price/max,99">
+							<td class="center" colspan="2" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="not:exists:price/max">
+							<td class="center last" colspan="4" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+					</tal:block>
+				</tal:block>
+				
+				<tal:block tal:condition="equal:price/min,50">
+					<tal:block tal:condition="exists:price/max">
+						<tal:block tal:condition="equal:price/max,99">
+							<td class="center" colspan="1" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="equal:price/max,149">
+							<td class="center" colspan="2" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="not:exists:price/max">
+							<td class="center last" colspan="5" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+					</tal:block>
+				</tal:block>
+				
+				<tal:block tal:condition="equal:price/min,100">
+					<tal:block tal:condition="exists:price/max">
+						<tal:block tal:condition="equal:price/max,">
+							<td class="center" colspan="1" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="equal:price/max,149">
+							<td class="center" colspan="2" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+						<tal:block tal:condition="equal:price/max,249">
+							<td class="center" colspan="1">
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+					</tal:block>
+					<tal:block tal:condition="not:exists:price/max">
+						<td class="center last" colspan="2" >
+							Kr <tal:block tal:content="formatprice:price/price" />
+						</td>
+					</tal:block>
+				</tal:block>
+				
+				<tal:block tal:condition="equal:price/min,250">
+					<tal:block tal:condition="exists:price/max">
+						<tal:block tal:condition="equal:price/max,">
+							<td class="center" colspan="1" >
+								Kr <tal:block tal:content="formatprice:price/price" />
+							</td>
+						</tal:block>
+					</tal:block>
+					<tal:block tal:condition="not:exists:price/max">
+						<td class="center last" colspan="1" >
+							Kr <tal:block tal:content="formatprice:price/price" />
+						</td>
+					</tal:block>
+				</tal:block>
+			</tal:block>
+		</tr>
+		</tbody>
+	</table>
+</body>
+</html>

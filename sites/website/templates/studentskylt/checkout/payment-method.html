@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<tal:block tal:define="global dontShowCart" />
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Payment method</tal:block>
+</head>
+
+
+<body>
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+	<div class="container order-prints">
+	
+	<div class="span-24 last">
+		
+		<form method="post" action="/checkout/confirm-order/">
+		
+		<div class="span-5 colborder">
+			<span tal:content="structure cms:body:4753687f-5c04-48cc-8d64-896d0a1d51c8" />
+			&nbsp;
+		</div>
+		
+		<div class="span-12">
+			<h1 i18n:translate="">Choose payment method</h1>
+			<div class="jp-box">
+				<tal:block tal:repeat="paymentmethod paymentoptions">
+					<div class="span-8 append-6 last">
+						<h5 class="bottom">
+							<input type="radio" name="payment-method" value="${repeat/paymentmethod/key}" tal:attributes="checked conditionalmatch:repeat/paymentmethod/number,1,checked"id="payment_${repeat/paymentmethod/key}" /> 
+							<label class="large" for="payment_${repeat/paymentmethod/key}">
+								<tal:block tal:content="paymentmethod/title"></tal:block> 
+								<span class="quiet">kr 
+								  <span class="price hide" tal:content="paymentmethod/price">?</span>
+								  <span tal:content="formatprice:paymentmethod/price">?</span>
+							   </span>
+							</label>
+						</h5>
+					</div>
+				</tal:block>
+				<br class="clear clearfix" />
+			</div>
+		</div>
+		<div class="span-6 last right">
+			<tal:block metal:use-macro="common.html/order-summary" />
+			<button class="large call-to-action" type="submit" href="/checkout/confirm/" i18n:translate="">Next step</button>
+		</div>
+		<div class="span-24 last">
+			<a href="" class="back button" i18n:translate="">Back</a>
+		</div>
+	</form>
+	</div>
+</div>
+			
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+<script type="text/javascript">
+
+	$('a.back').click(function() {
+		history.go(-1);
+		return false;
+	});
+	
+	$(document).ready( function() {
+
+		$('.delivery-method', '#order-summary').show();
+		$('.payment-method', '#order-summary').show();
+
+		$("a.popup").fancybox({ 
+			'zoomSpeedIn': 300, 
+			'zoomSpeedOut': 300, 
+			'overlayShow': true,
+			'frameWidth': 900,
+			'frameHeight': 500 }
+		); 
+		
+		$('form [name=payment-method]').bind('click', function() {
+			$('#order-summary tr.payment-method .price').text( 
+				formatPrice( $(this).next().find('.price').text() )
+			);
+			
+			updateTotalPrice();
+			
+		});
+
+		$('form [name=payment-method]:first').trigger('click');
+
+	});
+	
+	function formatPrice(num) {
+   	num = num.toString();
+   	num = num.replace(',','.');	
+   	price = parseInt( num * 100 ) / 100;
+   	return price.toFixed(2).toString().replace('.', ',');
+	}
+	
+	function updateTotalPrice() {
+		var totalPrice = 0;
+		
+		$('#order-summary .price').each( function() {
+			if( $(this).text() ) {
+				totalPrice = parseFloat( totalPrice ) + parseFloat( $(this).text().replace('.','').replace(',','.') )
+			}
+		});	
+		
+		$('#order-summary .total-price').text( formatPrice( totalPrice ) );
+	}
+</script>
+</body>
+</html>

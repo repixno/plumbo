@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">My orders</tal:block>
+	
+	<style type="text/css">
+		td.status { padding: 0;}
+		
+		.status div { border: none; margin: 0;}
+		
+		
+	</style>
+</head>
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../../../${templates}/common.html/top" />
+
+	<!-- use if menu is needed -->
+	<div tal:define="global menuitem string:orders" metal:use-macro="../common.html/menu" />
+	
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div class="span-20 last">
+
+		<form tal:condition="equal:session/userid, 969748" method="get" action="/myaccount/orders/utestemme">
+			<label for="utorderid">Søk Utestemmeid</label>
+			<input type="text" name="utorderid"/>
+			<input type="submit" value="Søk"/>
+		</form>
+		
+		
+		<tal:block tal:condition="not:orders">
+			<div class="center" style="margin-top: 150px">
+				<h1 i18n:translate="">No orders</h1>
+				<h3><a href="${url:/products/}" i18n:translate="">Go shop</a></h3>
+			</div>
+		</tal:block>
+		
+		<tal:block tal:condition="orders">
+	
+			<h2 class="bottom" i18n:translate="">My orders</h2>
+			<p i18n:translate="">All your orders</p>
+
+			<fieldset>
+			<form method="get">
+				
+				fra dato: <input type="date" name="from" value="${fromdate}"/>
+				til dato: <input type="date" name="to" value="${todate}"/>
+				<input type="submit"/>
+				
+			</form>
+			</fieldset>
+			<fieldset>
+				<form action="/partner/reedfoto/orderinfo/" method="post">
+					Søk ordrenr: <input type="text" name="ordrenr" /><input type="submit"/>
+				</form>
+				
+			</fieldset>
+			<table>
+			<tr>
+				<th i18n:translate="">Order ID</th>
+				<th i18n:translate="">Date</th>
+				<th i18n:translate="">Received</th>
+				<th i18n:translate="">Producing</th>
+				<th i18n:translate="">Produced</th>
+				<th i18n:translate="">Sent</th>
+				<th i18n:translate=""></th>
+			</tr>
+			<tal:block tal:repeat="order orders">
+				<tr id="$order_${order/orderid}">
+					<th tal:content="order/orderid" class="order-id"></th>
+					<td tal:content="order/date"></td>
+					<tal:block tal:condition="not:order/status/isdeleted">
+						<td tal:condition="order/status/isreceived" class="status">
+							<div class="isreceived success nextArrow" i18n:translate="">Received</div>
+						</td>
+						<td tal:condition="not:order/status/isreceived" class="status">
+							<div class="NOTreceived error nextArrow">&nbsp;</div>
+						</td>
+						<td tal:condition="order/status/isproduction" class="status">
+							<div class="isproduction success nextArrow" i18n:translate="">In production</div>
+						</td>
+						<td tal:condition="not:order/status/isproduction" class="status">
+							<div class="NOTproduction error nextArrow">&nbsp;</div>
+						</td>
+						<td tal:condition="order/status/isproduced" class="status">
+							<div class="isproduced success nextArrow" i18n:translate="">Produced</div>
+						</td>
+						<td tal:condition="not:order/status/isproduced" class="status">
+							<div class="NOTproduced error nextArrow">&nbsp;</div>
+						</td>
+						<td tal:condition="order/status/issent" class="status">
+							<div class="issent success lastArrow" i18n:translate="">Sent</div>
+						</td>
+						<td tal:condition="not:order/status/issent" class="status">
+							<div class="isnotsent error lastArrow">&nbsp;</div>
+						</td>
+					</tal:block>
+					
+					<tal:block tal:condition="order/status/isdeleted">
+						<td colspan="4" class="status deleted center">
+							<div class="error isDeleted center" i18n:translate="">The order is cancelled</div>
+						</td>
+					</tal:block>
+					
+					<td>
+						<a tal:attributes="href string:/partner/reedfoto/orderinfo/${order/id}">Ordredetaljer</a><br/>
+						<a class="sendmessage"  id="${order/orderid}" title="Slett ordre ${order/orderid}" href="#">Slett ordre</a>
+					</td>
+				</tr>
+			</tal:block>
+			</table>
+		</tal:block>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+
+<div class="sendform hide">
+	
+	<form method="post" action="/partner/reedfoto/sendmail">
+		<table>
+			<tr>
+				<td>
+					Ordrenr:
+				</td>
+				<td>
+					<input type="text" name="ordrenr"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Kommentar:
+				</td>
+				<td>
+					<textarea name="comment" style="width: 200px; height: 50px"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Epost:
+				</td>
+				<td>
+					<input type="text" name="email"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="right">
+					<input type="submit"/>
+				</td>
+			</tr>
+			
+		</table>
+		
+		
+	</form>
+	
+</div>
+
+<script>
+	
+	
+	$( function(){
+		
+		$('.sendmessage' ).on( 'click', function(){
+			
+			$('input[name="ordrenr"]').val($(this).attr('id'));
+			
+				$('.sendform').dialog({title:"Send til kundeservice", width: 425});
+			
+			
+			});	
+		
+		
+		
+		
+		
+		
+		
+	});
+	
+	
+</script>
+
+</body>
+</html>

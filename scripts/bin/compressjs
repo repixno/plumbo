@@ -1,0 +1,48 @@
+#!/usr/bin/php -q
+<?PHP
+   
+   $filestocompress = array(
+      // 'sites/static/webroot/js/choose-quantity-each.js' => 'sites/static/webroot/js/choose-quantity-each.min.js',
+      // 'sites/static/webroot/js/eurofoto.js'             => 'sites/static/webroot/js/eurofoto.min.js',
+      'sites/static/webroot/js/choose-quantity.js'      => 'sites/static/webroot/js/choose-quantity.min.js',
+      'sites/static/webroot/js/gift.js'                 => 'sites/static/webroot/js/gift.min.js',
+   );
+   
+   chdir( dirname( __FILE__ ) );
+   include "../../bootstrap.php";
+   library( 'jsmin.jsmin' );
+   import( 'system.cli' );
+
+   class JSMinCompressor extends Script {
+      
+      public function Main() {
+         
+         global $filestocompress;
+         foreach( $filestocompress as $infile => $outfile ) {
+            
+            $infile = sprintf( '%s/%s', getRootPath(), $infile );
+            $outfile = sprintf( '%s/%s', getRootPath(), $outfile );
+            
+            echo "Compressing $infile...";
+            if( file_exists( $outfile ) ) {
+               $hash = sha1_file( $outfile );
+            } else { $hash = false; }
+            $indata = file_get_contents( $infile );
+            $minified = JSMin::minify( $indata );
+            file_put_contents( $outfile, $minified );
+            if( $hash == sha1_file( $outfile ) ) {
+               echo "Unchanged\n";
+            } else {
+               echo "Updated\n";
+            }
+            
+         }
+         
+      }
+      
+   }
+   
+   // execute it
+   CLI::Execute();
+   
+?>

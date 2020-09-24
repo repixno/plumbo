@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head metal:use-macro="../../${templates}/common.html/head">
+
+	<style type="text/css">
+
+		table.order-history { border: none;}
+		table.order-history td{
+			padding: 0;
+			margin: 0;
+			border: none;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+		<div id="seniorpage-main">
+			<aside id="seniorpage-hero" class="js-fullheight">
+
+		<tal:block tal:condition="not:order">
+			<div class="center" style="margin-top: 150px">
+				<h1 i18n:translate="">No order here</h1>
+				<h3><a href="${url:/products/}"i18n:translate="">Go shop</a></h3>
+			</div>
+		</tal:block>
+
+		<tal:block tal:condition="order">
+
+			<h2><tal:block i18n:translate="">Order number:</tal:block> <span class="quiet" tal:condition="order/id">${order/orderid}</span></h2>
+
+			<table class="order-history">
+				<tr>
+					<tal:block tal:condition="not:order/status/isdeleted">
+						<td tal:condition="order/status/isreceived" class="status">
+							<div class="isreceived success nextArrow" i18n:translate="">Received</div>
+						</td>
+						<td tal:condition="not:order/status/isreceived" class="status">
+							<div class="NOTreceived error nextArrow" i18n:translate="">Not received</div>
+						</td>
+						<td tal:condition="order/status/isproduction" class="status">
+							<div class="isproduction success nextArrow" i18n:translate="">In production</div>
+						</td>
+						<td tal:condition="not:order/status/isproduction" class="status">
+							<div class="NOTproduction error nextArrow" i18n:translate="">Not sent to production</div>
+						</td>
+						<td tal:condition="order/status/isproduced" class="status">
+							<div class="isproduced success nextArrow" i18n:translate="">Produced</div>
+						</td>
+						<td tal:condition="not:order/status/isproduced" class="status">
+							<div class="NOTproduced error nextArrow" i18n:translate="">Not produced yet</div>
+						</td>
+						<td tal:condition="order/status/issent" class="status">
+							<div class="issent success lastArrow" i18n:translate="">Sent</div>
+						</td>
+						<td tal:condition="not:order/status/issent" class="status">
+							<div class="isnotsent error lastArrow" i18n:translate="">Not sent</div>
+						</td>
+					</tal:block>
+
+					<tal:block tal:condition="order/status/isdeleted">
+						<td colspan="4" class="status deleted center"><div class="error isDeleted center" i18n:translate="">The order is deleted</div></td>
+					</tal:block>
+				</tr>
+			</table>
+
+			<table>
+				<tr>
+					<th i18n:translate="">Title</th>
+					<th i18n:translate="">Description</th>
+					<th i18n:translate="">Quantity</th>
+					<th i18n:translate="">Unit price</th>
+					<th i18n:translate="">Price</th>
+				</tr>
+			<tal:block tal:repeat="item order/items">
+
+				<tr>
+					<td>${structure item/title}</td>
+					<td>${item/description}</td>
+					<td class="right">${item/quantity}</td>
+					<td class="right">${formatprice:item/unitprice}</td>
+					<td class="right">${formatprice:item/price}</td>
+				</tr>
+
+			</tal:block>
+
+				<tr>
+					<th colspan="4" i18n:translate="">Total price</th>
+					<td class="right">${formatprice:order/totalprice}</td>
+				</tr>
+				<tr>
+				   <td i18n:translate="">My comments</td>
+				   <td colspan="4" class="right">${order/comment}</td>
+				</tr>
+
+			</table>
+
+		</tal:block>
+	</asi>
+</div>
+
+
+
+</body>
+</html>

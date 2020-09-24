@@ -1,0 +1,52 @@
+
+	 .btn.btn-info.{
+        border-color: #28a4c9 !important;
+       background-color:  #28a4c9  !important;
+        
+    }
+
+	.logorepix{
+		height: 55px;
+	}
+	
+	
+	
+    
+    #topmenu a{
+        
+       
+    }
+    
+    body{
+        
+        background: none;
+        background-color: #ebfaff;
+    }
+    
+    
+   
+    
+    
+    
+    h4{
+      
+          font-size: 15px;
+    }
+
+
+	
+	
+	table {
+    background-color: #f5f5dc;
+}
+    
+    
+    thead {
+    background: #b6e3f1;
+}
+
+
+td, th {
+    border: 1px solid black;
+
+}

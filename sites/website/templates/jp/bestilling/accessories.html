@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../common.html/head" tal:define="global pagetitle" tal:content="item/title" />
+	
+	
+</head>
+
+
+<body>
+	
+	
+	<div class="container">
+		<div style="margin: auto; width: 300px;">
+			<img src="http://www.michelin.no/assets/img/launcher2/launcher-loader.gif"  />
+		</div>
+		
+		
+	</div>
+	
+	<script>
+		
+		
+		$( function(){
+			
+			projectid = 12234;
+			
+			$(window).on("message onmessage", function(event){
+					
+						var data = JSON.parse(event.originalEvent.data);
+    						
+						if (data.action === "addToCartSuccess") {
+						  if (data.status === "success") {
+							console.log( "DO SOMETHING :)" );
+							var data = JSON.stringify({'action': 'goToCart' });
+							
+							top.postMessage(data, '*');
+							
+							
+						  }
+						}
+					
+					});
+			
+			
+			
+			    var items = new Array();
+		
+				//var productoptionid = 7481;
+				var productoptionid = ${item/option/prodno};
+				var quantity = 1;
+	
+				//productoptionid = 7548 ;
+				
+				console.log( "Projectid",  projectid );
+				console.log( "Productoptionid",  productoptionid );
+							
+				items.push({
+					  "eurofoto_article_id": productoptionid,
+					  "quantity": quantity,
+					  "project_id": projectid,
+					  "thumb_url": "http://static.eurofoto.no/images/products/thumbs/squareaspect/50/63092ce0-6546-4312-ade9-2b7e2d5b8215.png"
+				   });
+
+					 
+				
+				var data = JSON.stringify({'action': 'addToCart', 'items' : items });
+				
+				//top.postMessage(data, 'https://as.photoprintit.com');
+				top.postMessage(data, 'https://tas12.photoprintit.com');
+				
+				console.log( "Add to cart" );
+				
+				//$('#myModal').modal();
+			 
+				/*alertmessage = 'false';
+			   if( disabled == true ){
+				   return false;
+			   }else{   
+				   document.location.href = '/bestilling/addItemByProductOptionId/' + $('input[name$="choose_product"]:checked').val() + '/' + projectid + '/' + type;
+			   }*/
+				return false;
+			
+			})
+		
+		
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+
+
+forms.reset { padding: 0; margin: 0;}
+
+/* fix for safari outline */
+input:active { outline: none !important; }
+
+
+input.text-1 { width:  30px !important}
+input.text-2 { width:  70px !important}
+input.text-3 { width: 110px !important}
+input.text-4 { width: 150px !important}
+input.text-5 { width: 190px !important}
+input.text-6 { width: 230px !important}
+input.text-7 { width: 270px !important}
+input.text-8 { width: 310px !important}
+
+input.span-1 { width:  30px !important}
+input.span-2 { width:  70px !important}
+input.span-3 { width: 110px !important}
+input.span-4 { width: 150px !important}
+input.span-5 { width: 190px !important}
+input.span-6 { width: 230px !important}
+input.span-7 { width: 270px !important}
+input.span-8 { width: 310px !important}
+
+
+select { padding: 3px }
+
+
+label {	font-weight: normal !important }
+label.top {
+	display:block;
+	text-align: left;
+}
+
+input[type=checkbox] { top: 0 !important }
+
+.radioLabel {
+	padding: .4em;
+	margin: 0 0 10px 0;
+	border: 1px solid transparent;
+	-moz-border-radius: 4px;
+}
+
+.radioLabel input.text, .radioLabel select {
+	margin-left: 28px;
+}
+
+.radioLabel input.text {
+	color: #ccc;
+}
+.radioLabel.selected input.text {
+	color: #000 !important;
+}
+
+.radioLabel label {
+	margin-left: 3px;
+} 
+
+.radioLabel label{
+	margin-top: 3px;
+}
+
+.radioLabel.selected {
+	background-color: #fff;
+	border: 1px solid #ddd;
+	-moz-border-radius: 4px;
+	margin: 0 0 10px 0;
+}
+
+
+
+div form label { text-align: right } /* ?????? */
+label.span-1, label.span-2, label.span-3, label.span-4, label.span-5, label.span-6, label.span-7, label.span-8, label.span-9, label.span-10 { padding-top: 15px }
+
+
+input.quantity, input.order-print-quantity { text-align: center }
+
+
+textarea.inputError, input.inputError {
+	color: #c00;
+	background-color: #fee;
+	border: 1px solid #c00;
+}
+label.inputError {
+	display: block;
+	clear: both;
+	color: #c00;
+	text-align: left;
+}
+
+input[type=checkbox].inputError {
+	border: 2px solid #c00;
+}
+
+form textarea.inputError, form input.inputError {
+	background-color: #fff;
+	border-color: #c00;
+}
+form label.inputError, form label.inputError {
+	margin-top: 1em;
+	background-color: #fee;
+	background-image: url(images/arrow_error_left.png);
+	background-position: left center;
+	background-repeat: no-repeat;
+	padding: 8px;
+	padding-left: 4em;
+	/* CSS3 border radius --> */ border-radius: 7px;-moz-border-radius:7px; -webkit-border-radius:7px;
+}
+form input.text.inputError:focus, form input[type=text].inputError:focus, form input[type=password].inputError:focus {
+	border-color:#c00;
+	outline:none;
+	color:#c00;box-shadow-color:0px 0px 5px rgba(204,0,0,0.9);
+	-webkit-box-shadow:0px 0px 5px rgba(204,0,0,0.9);-moz-box-shadow:0px 0px 5px rgba(204,0,0,0.9);
+} 
+
+p.red { color: #c00 }
+
+input.lowercase {
+	text-transform: lowercase;
+}
+input.uppercase {
+	text-transform: uppercase;
+}
+input.capitalize {
+	text-transform: capitalize;
+}

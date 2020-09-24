@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle">
+		<tal:block i18n:translate="">Create gift</tal:block> - <tal:block tal:content="selected/product/title" />
+	</tal:block>
+	
+	
+	<style type="text/css">
+	
+		.gifttemplate {
+			height: 160px;
+			padding: 10px 0;
+			border-bottom: 1px solid #ccc;
+			cursor: pointer;
+			
+		}
+		.gifttemplate:hover {		
+			background-color: #eee;
+		}
+		
+		.choose-template .template-thumb{
+			display: block;
+			float: left;
+			margin: 10px;
+			background-repeat: no-repeat;
+			background-position: top left;
+			border: 7px solid white;
+			outline: 1px solid #ccc;
+		}
+		
+		.choose-template .template-thumb img {
+			max-height: 80px;
+		}
+		
+		.fixed-height {
+			height: 500px;
+			overflow: auto;
+			overflow-x: hidden;
+		}
+		
+		#loader-overlay {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			opacity: 0.8;
+			background-color: #333;
+			padding: auto auto;
+			margin: 0;
+			z-index: 10000;
+		}
+		
+		.loadingInfo {
+			text-align: center;
+			margin-top: 300px;
+		}
+		
+		.loadingInfo * {
+			display: inline;
+			color: #fff;
+			
+		}
+		
+		#album-images img {
+			margin: 10px;
+			max-height: 80px;
+		}
+	
+	</style>
+	
+</head>
+<body>
+	<div id="loader-overlay">
+		<div class="loadingInfo">
+			<img src="${static:gfx/gui/ajax-loader-gray.gif}" /><br/>
+			<br/>
+			<h3 i18n:translate="">Loading, please wait.</h3>
+			<p>
+				<tal:block  i18n:translate="">
+				If you waited too long, try refreshing the page.
+				</tal:block>
+				<a href="." class="refresh" i18n:translate="">Refresh</a>
+			</p>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#loader-overlay')
+			.css('opacity', '0.8')
+			.css('margin','0')
+			.width( $(window).width() )
+			.height( $(window).height() );
+
+		$(document).ready( function() {
+			$(window).load( function() {
+				$('#loader-overlay').fadeOut('slow', function() {
+					$(this).remove();
+				})
+			});
+			$('.refresh').click( function() {
+				window.location.reload();
+				return false;
+			});
+		});
+	</script>
+	
+	<div class="container create-gift">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<div class="span-24 last" id="gift-editor">
+		<div class="span-9 colborder choose-photo">
+			<h3 id="accordion-photos" i18n:translate="">1. Choose photo</h3>
+			<div class="fixed-height">
+				<form method="post" action="/flash_upload.php?noerror=1" id="transfer-manual" enctype="multipart/form-data">
+					<input type="file" id="filedata" name="Filedata" onchange="$('#transfer-manual').submit();" />
+					<input type="hidden" id="batchid" name="batchid" value="${batchid}" />
+				</form>
+				<tal:block tal:define="global strUpload" i18n:translate="">Get from PC</tal:block>
+				<tal:block tal:define="global strJPEGImages" i18n:translate="">JPEG Images</tal:block>
+				<script type="text/javascript">
+				//<![CDATA[
+				$(document).ready( function() {
+					initUpload('${batchid}','${session/sessionid}','${strJPEGImages}','${strUpload}','#next-action' ,'#transfer-status, #total-loader-spinner, #single-transfer-headline','#show-on-finish', '#go-to-java, #choose-transfer-method-headline' );
+				});
+				//]]>
+				</script>
+				
+				<div id="transfer-status" class="hide small quiet">
+					<p class="right">
+						<a href="#" class="abort negative hide" id="transfer-stop" i18n:translate="">Cancel upload</a> 
+					</p>
+
+					<span id="uplspeed" style="float: right;">0 KB/s</span>
+					<div id="progressbar-total" style="height: 25px"></div>
+					<div id="upload-queue">
+						<div id="upload-master" style="display:none;">
+							<img style="max-width: 96px;" src="${static:gfx/gui/ajax-loader-big.gif}" alt="" />
+						</div>
+					
+						<div>
+							<div class="progressbar" style="height: 10px"></div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="photos prepend-top">
+					<h4 i18n:translate="">Click on the image you want to use.</h4>
+					<tal:block tal:condition="session/loggedin">
+						<label for="select-album" i18n:translate="">Choose album</label>
+						<select id="select-album">
+						   <optgroup label="My albums" tal:condition="gt:albums/length,0" i18n:attributes="label">
+							  <tal:block tal:repeat="album albums">
+								 <option value="${album/id}" tal:condition="exists:album/title">
+									<tal:block tal:content="shorten:album/title;18" tal:condition="album/title" />
+								</option>
+							</tal:block>
+						  </optgroup>
+						  <optgroup label="My Friends Albums" tal:condition="gt:sharedAlbums/length,0" i18n:attributes="label">
+							  <tal:block tal:repeat="sharedalbum sharedAlbums">
+								 <option value="${sharedalbum/id}" tal:condition="exists:sharedalbum/title">
+									<tal:block tal:content="shorten:sharedalbum/title;18" tal:condition="sharedalbum/title" />
+								</option>
+							</tal:block>
+						  </optgroup>
+						  <optgroup label="Reedfoto Album" tal:condition="gt:ReedfotoAlbums/length,0" >
+							  <tal:block tal:repeat="sharedalbum ReedfotoAlbums">
+								 <option value="${sharedalbum/id}" tal:condition="exists:sharedalbum/title">
+									<tal:block tal:content="shorten:sharedalbum/title;18" tal:condition="sharedalbum/title" />
+								</option>
+							</tal:block>
+						  </optgroup>
+						</select>
+						<div id="btnUpload" style="float:right"></div>
+					</tal:block>
+					
+					<tal:block tal:condition="not:session/loggedin">
+
+						<div class="prepend-top center append-bottom" style="margin-left: 50px">
+							<div id="btnUpload"></div>
+						</div>
+						<h5 i18n:translate="">Sign in to get photos from your account</h5>
+						<tal:block metal:use-macro="../common.html/quicklogin" />
+					
+					</tal:block>
+					
+					<div id="album-images">
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="span-14 last choose-template">
+			<h3 i18n:translate="">2. Choose template</h3>
+			<div class="span-14 last">
+				<div class="functions span-13 last">
+					<div id="choose-template" class="span-13 last">
+						<tal:block tal:repeat="gifttemplate collections/gifttemplates">
+							<div class="span-13 last gifttemplate">
+								<div class="span-13 last">
+									<h4 tal:content="gifttemplate/title|default"></h4>
+								</div>
+								<div class="span-5">
+									<p class="bottom top quiet small" i18n:translate="">Quick preview</p>
+									<div class="template-thumb">
+										<tal:block tal:repeat="page gifttemplate/pages">
+											<tal:block tal:condition="equal:repeat/page/number,1">
+												<tal:block tal:condition="page/fullsize_src">
+													<img 
+														src="${static:}images/gifttemplates/thumbs/width/130/${page/fullsize_src}" 
+														id="malid_${gifttemplate/id}" alt="eurofoto"
+													/>
+													<input type="hidden" class="malid" name="malid" value="${gifttemplate/id}" />
+													<input type="hidden" class="malpageid" name="malpageid" value="${page/malpageid}" />
+												</tal:block>
+												<tal:block tal:condition="not:page/fullsize_src">
+													<div class="empty-template-thumb">
+														<img 
+															src="${static:}images/gifttemplatesweb/thumbs/blankbox/100x100/${selected/template/id}.png" 
+															width="100" height="100"
+															id="malid_${gifttemplate/id}"
+														/>
+													</div>
+												</tal:block>
+											</tal:block>
+										</tal:block>
+									</div>
+								</div>
+								<div class="span-4">
+
+									<p class="bottom top quiet small" i18n:translate="" tal:condition="gifttemplate/images/medium">Example</p>
+									<img src="" tal:attributes="src gifttemplate/images/medium|default" height="100" tal:condition="gifttemplate/images/medium"/>
+									<tal:block tal:condition="not:gifttemplate/images/medium">&nbsp;</tal:block>
+								</div>
+								<div class="span-4 last prepend-top">
+									<a 
+										tal:attributes="href string:/create/gift/${selected/productid}/${selected/productoptionid}/${gifttemplate/id}/" 
+										class="button large call-to-action" i18n:translate="">Choose</a>
+								</div>
+							</div>
+						</tal:block>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr class="space clearfix clear"/>
+</div>
+		
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<script type="text/javascript">
+var ajaxLoader = '<tal:block tal:content="static:gfx/gui/ajax-loader.gif" />';
+var bigajaxLoader = '<tal:block tal:content="static:gfx/gui/ajax-loader-big.gif" />';
+var noImagesText = '<tal:block i18n:translate="">No images</tal:block>';
+var staticurl = '${static:}';
+var selectImage ='<tal:block i18n:translate="">Please select an image</tal:block>';
+var maxHeight = 450;
+
+//<![CDATA[
+	$(document).ready( function() {
+	
+		var selectedImageId;
+		
+		if(ie6) {
+			$('.choose-template').pngFix();
+		}
+		
+		// loads the selected album
+		$('#select-album').bind('change', function() {
+			$('#album-images').empty();
+			$('#album-images').append('<div class="loader center prepend-top"><img src="'+bigajaxLoader+'" title="loading" /></div>');
+			
+			$.getJSON('/api/1.0/album/images/forpurchase/' + $(this).attr('value'),
+				function(data) {
+					if( data.result ) {
+						$.each(data.images, function(i, item) {
+							$('#album-images').append('<img src="'+item.thumbnail+'" title="'+item.title+'" id="'+item.id+'" />');
+						});
+						$('.loader', '#album-images').remove();
+						$('#album-images img:first-child').trigger('click');
+					} else {
+						$('#album-images').empty();
+						$('#album-images').append('<h3 class="prepend-top center">'+noImagesText+'</h3>');
+					}	
+				}
+			);
+		});
+		
+		$('#select-album').trigger('change');
+
+		$('.gifttemplate a.button').click( function() {
+			if( !selectedImageId ) {
+				alert(selectImage);
+				return false;
+			}
+			document.location.href = $(this).attr('href') + selectedImageId;
+			return false;
+		});
+		$('.gifttemplate').click( function() {
+			if( !selectedImageId ) {
+				alert(selectImage);
+				return false;
+			}
+			document.location.href = $(this).find('a.button').attr('href') + selectedImageId;
+			return false;
+		});
+
+		
+		// inserts the image to the editor when clicked
+		$('img','#album-images').live('click', function() {
+			// remembers the image id
+			selectedImageId = $(this).attr('id');
+			var backgroundImage = this
+			$('#choose-template .template-thumb').css('background-image', 'url('+ $(this).attr('src') +')' );
+		});
+		
+		$('img', '#upload-queue').live('click', function() {
+			// remembers the image id
+			selectedImageId = $(this).attr('id');
+			var backgroundImage = this
+			$('#choose-template .template-thumb').css('background-image', 'url('+ $(this).attr('src') +')' );
+		});		
+		
+	// gets the url from imageID for old ef25 urls
+	function getImage(imageid) {
+		var height = 400;
+		var width = 630;
+		return '/show_image_stream.php?bid='+imageid+'&dx='+width+'&dy='+height;
+	}
+});
+//]]>
+</script>
+<script src="${static:}js/uploadhandlers.js?${version}" type="text/javascript"></script>
+<script src="${static:js/jquery.uploadify.v2.1.0.min.js}" type="text/javascript"></script>
+<!--[if lt IE 7]>
+<script type="text/javascript" src="http://static.eurofoto.no/js/jquery.pngFix.pack.js"></script>
+<![endif]-->
+<!-- Google Code for Gavegenerator - steg 1 Conversion Page -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1070265469;
+var google_conversion_language = "no";
+var google_conversion_format = "2";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "OUUZCK3AxAEQ_eir_gM";
+var google_conversion_value = 0;
+//-->
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1070265469/?label=OUUZCK3AxAEQ_eir_gM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+</body>
+</html>

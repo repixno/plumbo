@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="pagetitle" i18n:translate="">Sitemap</tal:block>
+</head>
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div class="span-24 last">
+		
+         <h1 i18n:translate="">Sitemap</h1>
+         <div id="sitemap" class="sitemap">
+
+			<ul id="utilityNav">
+				<li><a href="/prices/" i18n:translate="" class="button">Prices</a></li>
+				<li><a href="/search/" i18n:translate="" class="button">Search</a></li>
+				
+				
+				<li><a href="/sitemap/" i18n:translate="" class="button">Sitemap</a></li>
+				<li style="width: 12em"><a href="/register/" i18n:translate="" class="button">Register</a></li>
+				
+				<li><a href="/login/" i18n:translate="" class="button blue">Login</a></li>
+			</ul>
+			<hr class="space"/>
+			<ul id="primaryNav" class="col4">
+				<li id="home"><a href="/" i18n:translate="">Frontpage</a></li>
+				<li tal:repeat="item menuitems">	
+					<a tal:content="item/title" href="${item/url}"></a>
+					<ul tal:condition="exists:item/children">
+						<li tal:repeat="subitem1 item/children">
+							<a href="${subitem1/url}" tal:content="subitem1/title">Fotogaver</a>
+							<ul tal:condition="exists:subitem1/children">
+								<li tal:repeat="subitem2 subitem1/children">
+									<a href="${subitem2/url}" title="" tal:content="subitem2/title">Fotogaver</a>
+									<ul tal:condition="exists:subitem2/children">
+										<li tal:repeat="subitem3 subitem2/children">
+											<a href="${subitem3/url}" title="" tal:content="subitem3/title">Fotogaver</a>
+											<tal:block tal:condition="exists:subitem3/children" >
+												<ul>
+													<li tal:repeat="subitem4 subitem3/children">
+														<a href="${subitem4/url}" title="" tal:content="subitem4/title">Fotogaver</a>
+													</li>
+												</ul>
+											</tal:block>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>
+

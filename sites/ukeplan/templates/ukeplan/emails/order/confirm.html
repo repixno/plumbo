@@ -1,0 +1,61 @@
+<div>
+<h2 tal:content="cms:title:71c33c1d-7096-4438-be34-9e88a9b679ca">Order confirmation</h2>
+
+<div tal:content="structure cms:body:71c33c1d-7096-4438-be34-9e88a9b679ca">Order confirmation</div>
+
+
+<div i18n:translate="">Ordered items:</div>
+
+
+<table>
+    <thead>
+        <tr>
+            <td i18n:translate="">
+                Title
+            </td>
+            <td i18n:translate="">
+                Unitprice
+            </td>
+            <td i18n:translate="">
+                Quantity
+            </td>
+            <td i18n:translate="">
+                Price
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr tal:repeat="row orderrow">
+            <td tal:content="row/title"/>
+            <td tal:content="row/unitprice"/>
+            <td tal:content="row/quantity"/>
+            <td tal:content="row/price"/>
+
+        </tr>
+    </tbody>
+</table>
+
+
+
+<tal:block i18n:translate="">Delivery Address:</tal:block><br/>
+
+<tal:block tal:replace="deliveryinfo/name"/><br/>
+
+<tal:block tal:replace="deliveryinfo/address"/><br/>
+
+<tal:block tal:replace="deliveryinfo/zipcode"/> <tal:block tal:replace="deliveryinfo/city"/><br/>
+
+<p>
+<tal:block i18n:translate="">Comment:</tal:block>
+
+<tal:block tal:replace="comment"/>    
+</p>
+
+
+<div>
+Ukeplan<br/>
+(+47) 57 88 35 00<br/>
+post@ukeplan.no<br/>
+https://www.ukeplan.no
+</div>
+</div>

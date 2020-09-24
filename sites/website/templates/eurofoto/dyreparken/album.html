@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+	<tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" tal:define="global pagetitle">${album/title}</tal:block>
+	<script type="text/javascript" src="${static:js/jquery.lazyload.mini.js}"></script>
+	<script type="text/javascript" src="${static:js/jquery.eurofoto-1.0.js}"></script>
+	
+	<script type="text/javascript" tal:condition="not:exists:pagination">
+		//$(document).ready( function() {
+		//	$('img', '#images').lazyload({placeholder: '<tal:block tal:content="static:gfx/gui/ajax-loader.gif" />'});
+		//});
+	</script>
+	<script type="text/javascript" src="${static:js/dialog.js}"></script>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="${templateroot}/${templates}/common.html/top" />
+	<!--<div tal:define="global menuitem string:albums" metal:use-macro="../common.html/menu" />-->
+	<div id="content">
+		<h2 class="bottom oneline" tal:content="album/title | default"></h2>
+
+		<tal:block tal:condition="images">
+			<!-- pagination -->
+			<div class="pagination span-8 last right" tal:condition="exists:pagination">
+				<tal:block tal:condition="gt:pagination/last,1">
+					&lt;&lt;  <a href="/myaccount/album/${album/id}/${album/urlname}/${pagination/first}" tal:condition="pagination/first" i18n:translate="">First</a>
+					<a href="/myaccount/album/${album/id}/${album/urlname}/${pagination/prev}" tal:condition="pagination/prev" i18n:translate="">Prev</a>
+					<span tal:condition="not:pagination/prev" class="quiet" i18n:translate="">Prev</span>
+					<span><tal:block  i18n:translate="">Page</tal:block> ${pagination/current} <tal:block i18n:translate="">of</tal:block> ${pagination/last}</span>
+					<a href="/myaccount/album/${album/id}/${album/urlname}/${pagination/next}" tal:condition="pagination/next" i18n:translate="">Next</a>
+					<span tal:condition="not:pagination/next" class="quiet" i18n:translate="">Next</span>
+					<a href="/myaccount/album/${album/id}/${album/urlname}/${pagination/last}" tal:condition="pagination/last" i18n:translate="">Last</a> &gt;&gt;
+					<a href="/myaccount/album/${album/id}/${album/urlname}/all" i18n:translate="">Show all</a>
+				</tal:block>
+			</div>
+			<div class="pagination span-8 last right" tal:condition="not:exists:pagination">
+				<a href="/myaccount/album/${album/id}/${album/urlname}" i18n:translate="">Use pagination</a>
+			</div>
+			<hr class="space clear" />
+		</tal:block>
+
+
+		<div class="imagelist clearfix span-24 last" id="images" tal:condition="images">
+			<form action="/order-prints/choose-quantity/" method="post" id="images-form" style="margin: 0; padding: 0">
+			
+				<div class="span-18">
+					<tal:block tal:repeat="image images">
+						<div id="sortid_${album/id}_${image/id}_${pageoffset}" class="span-18 last">
+
+							<div class="span-5">
+								<a href="" title="${image/title}" class="thumb" rel="" tal:attributes="href image/urls/private">
+									<img src="" title="${image/title}" tal:attributes="src image/thumbnail; alt image/title; title image/title"  id="image_${image/id}"/>
+								</a>							
+							</div>
+
+							<div class="span-5">
+								<h6>Lag t-skjorte av dette bildet</h6>
+								<ul>
+									<li>
+										<a href="/create/quickgift/1484/1518" rel="#white-t-shirt" class="show-sizes">Sort t-skjorte</a> kr 199,-
+										<div class="hide" title="Velg størrelse" id="white-t-shirt">
+											<a href="/create/gift/1484/1485/0/${image/id}#choose-template">2-3år</a> |
+											<a href="/create/gift/1484/1515/0/${image/id}#choose-template">4-6år</a> |
+											<a href="/create/gift/1484/1516/0/${image/id}#choose-template">8-10år</a> |
+											<a href="/create/gift/1484/1517/0/${image/id}#choose-template">S</a> |
+											<a href="/create/gift/1484/1518/0/${image/id}#choose-template">M</a> | 
+											<a href="/create/gift/1484/1519/0/${image/id}#choose-template">L</a> | 
+											<a href="/create/gift/1484/1520/0/${image/id}#choose-template">XL</a> | 
+											<a href="/create/gift/1484/1501/0/${image/id}#choose-template">XXL</a>
+										</div>
+									</li>
+									<li>
+										<a href="/create/quickgift/1482/1511" rel="#black-t-shirt" class="show-sizes">Hvit t-skjorte</a> kr 199,-
+										<div class="hide" title="Velg størrelse" id="black-t-shirt">
+											<a href="/create/gift/1482/1483/0/${image/id}#choose-template">2-3år</a> |
+											<a href="/create/gift/1482/1508/0/${image/id}#choose-template">4-6år</a> |
+											<a href="/create/gift/1482/1509/0/${image/id}#choose-template">8-10år</a> |
+											<a href="/create/gift/1482/1510/0/${image/id}#choose-template">S</a> |
+											<a href="/create/gift/1482/1511/0/${image/id}#choose-template">M</a> | 
+											<a href="/create/gift/1482/1512/0/${image/id}#choose-template">L</a> | 
+											<a href="/create/gift/1482/1513/0/${image/id}#choose-template">XL</a> | 
+											<a href="/create/gift/1482/1514/0/${image/id}#choose-template">XXL</a>
+										</div>
+									</li>
+								</ul>
+
+								<strong>Velg</strong><input type="checkbox" class="select" value="${image/id}" name="images[]" id="checkbox_${image/id}"/>
+								<label for="checkbox_${image/id}" tal:content="shorten:image/title;15" class="hide"id="${image/id}" title="${image/title}"/>
+								&nbsp; &nbsp;
+								<a href="#" class="order-print-from-this-image" rel="#checkbox_${image/id}">Fremkall dette bildet</a>
+								
+							</div>
+
+							<div class="span-8 last">
+								<h6>Lag noe minneverdig av dette bildet</h6>
+								<ul>
+									<li>
+										<a href="/create/gifting/create/7004" class="open-choose-album-warning">Kaptein Sabeltann-lerret</a> kr 449,- <strong>(Barnas favoritt!)</strong>
+									</li>
+									<li>
+										<a href="/create/gift/1480/1481/2395/${image/id}#choose-template">Lag kopp av dette bildet</a> kr 199,- <strong>(bestselger)</strong>
+									</li>
+									<li>
+										<a href="/create/poster/create/952" title="${album/title}" class="open-choose-album-warning">Lag 40x50cm forstørrelse</a> kr 349
+									</li>
+									<li>
+										<a href="/create/poster/create/953" title="${album/title}" class="open-choose-album-warning">Lag 40x50cm forstørrelse</a>	 kr 449,- <span class="quiet">(med ramme)</span>
+									</li>
+									<li>
+										<a href="/create/gift/1494/1495/0/${image/id}#choose-template">Lag lerret med ramme</a>	kr 599,-
+									</li>
+								</ul>
+							</div>
+							<script type="text/javascript">$('#image_${image/id}').data('screensize', '${image/screensize}');</script>
+						</div>
+						<hr />
+					</tal:block>
+
+				</div>
+				<div class="span-6 last">
+				
+					<h3>Fremkalle bilder</h3>
+					<button type="submit" class="blue" id="order-selected-prints">Fremkall valgte bilder på fotopapir</button>
+					<hr />
+					<button type="submit" id="order-all-prints">Fremkall alle bildene på fotopapir</button>
+					
+					<br /><br />
+					
+					<h3>Last ned bildene</h3>
+					Du kan kjøpe alle bildene i dette albumet for nedlasting. Lisensavgiften er 80 kroner.<br />
+					<br />
+					Orginalbildene vil bli sendt deg per e-post innen 24 timer.<br />
+					<br />
+					<button type="button" class="blue" id="license-prints">Last ned disse bildene</button>
+					
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<div id="choose-album-warning" title="Hvordan finne bildene fra dyreparken" class="hide">
+		<p>Når du kommer til "Velge bilde", blar du nedover til du finner <strong class="albumname"></strong> og velg bildet du vil bruke.</p>
+		<img src="http://c.static.eurofoto.no/cms/images/articles/landingssider/dyreparken/finne-album-forklaring.jpg" />
+	</div>
+	
+	<div class="span-24 last">
+	
+		<tal:block tal:content="structure cms:body:c2c7c77a-d7ee-4a68-9a9f-3f4227bce4d7" />
+		
+		<tal:block tal:content="structure cms:body:bac533ba-89cd-4225-9223-d019f77b988c" />
+	
+	</div>
+	
+	<!--<div metal:use-macro="../common.html/right-album-menu" />-->
+</div>
+<div class="hide" id="message" title="" i18n:attributes="title">
+	<p i18n:translate=""></p>
+</div>
+
+
+<script type="text/javascript">
+	$(document).ready( function() {
+	
+		var response = $.ef( 'user.set.preference', {
+			'key': 'selectedAlbum',
+			'value': '${album/id}'
+		});
+		
+		$('.show-sizes').click( function() {
+			$(this).next().dialog({
+				'resizable'	:	false,
+				'modal'		:	true
+			});
+			return false;
+		})
+		
+		$('#license-prints').click( function() {
+		   
+		   window.location = '/cart/add/7012';
+		   return false;
+		   
+		});
+		
+		$('.open-choose-album-warning').click( function() {
+		
+			var url = $(this).attr('href');
+		
+			$('#choose-album-warning .albumname').text( $(this).attr('title') );
+		
+			$('#choose-album-warning').dialog({
+				'modal'		:	'true',
+				'width'		:	820,
+				'resizable'	:	false,
+				'buttons'	:	{
+					'Ok, gå videre'	:	function() {
+						window.location.href = url;
+					}
+				}	
+			});
+			
+			return false;
+		
+		});
+		
+		$('.order-print-from-this-image').click( function() {
+			$('form#images-form input[type=checkbox]:checked').removeAttr('checked');
+			$( $(this).attr('rel') ).attr('checked', true);
+			$('form#images-form').submit();
+			return false;
+		});
+      
+		$('#order-selected-prints').click( function() {
+			if(  $('form#images-form input[type=checkbox]:checked').length == 0 ) {
+				alert('Vennligst velg noen bilder');
+				return false;
+			}
+		});
+	   
+		$('#order-all-prints').click( function() {
+			$('form#images-form input[type=checkbox]').attr('checked', true);
+			$('form#images-form').submit();
+			return false
+		})
+	});
+
+</script>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="${templateroot}/${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

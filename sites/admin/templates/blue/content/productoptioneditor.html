@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Edit productoption - Eurofoto Admin</title>
+<tal:block metal:use-macro="../common.html/css" />
+<script src="http://www.google.com/jsapi?key=ABQIAAAA1XbMiDxx_BTCY2_FkPh06RRaGTYH6UMl8mADNa0YKuWNNa8VNxQEerTAUcfkyrr6OwBovxn7TDAH5Q"></script>
+<script type="text/javascript" src="/js/admin.js"></script>
+<script type="text/javascript">
+   google.load("language", "1");
+</script>
+<script tal:condition="exists:language" type="text/javascript" tal:content="structure string:var LANGUAGE = '${language}';">var LANGUAGE = 'en_US';</script>
+
+<!-- Table API -->
+<script type="text/javascript" src="/js/admin/sortabletable.js"></script>
+
+<!-- Table Stylesheet -->
+<link type="text/css" rel="StyleSheet" media="all" href="/css/sortabletable.css" />
+
+<!-- Slider API -->
+<script type="text/javascript" src="/js/admin/range.js"></script>
+<script type="text/javascript" src="/js/admin/timer.js"></script>
+<script type="text/javascript" src="/js/admin/slider.js"></script>
+
+<!-- Slider Stylesheet -->
+<link type="text/css" rel="StyleSheet" media="all" href="/css/winclassic.css" />
+
+<!-- Calendar API -->
+<script type="text/javascript" src="/js/admin/calendar.js"></script>
+<script type="text/javascript" src="/streams/i18n/calendar-widget"></script>
+<script type="text/javascript" src="/js/admin/calendar-helper.js"></script>
+
+<!-- Calendar Stylesheet -->
+<link type="text/css" rel="stylesheet" media="all" href="/css/calendar-win2k-2.css" />
+
+<script type="text/javascript" src="http://static.eurofoto.no/js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="http://static.eurofoto.no/js/jquery-ui-1.7.1.custom.min.js"></script>
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		<tal:block metal:use-macro="../common.html/languages" />
+		
+        <div id="wrapper">
+            <div id="content">
+       			<div id="box">
+       				<h3 tal:content="header|default"></h3>
+                    <form id="saveform" enctype="multipart/form-data" onsubmit="" action="" method="post" name="save">
+                     <div id="languagetabs">
+                        <ul>
+                           <li tal:repeat="language languages"><a href="#block_${language/segment}"><img src="http://static.eurofoto.no/gfx/flags/${language/country}.png"/></a></li>
+                        </ul>
+                        
+                           <tal:block tal:repeat="language languages">
+                           <div class="language" id="block_${language/segment}">
+                              <label i18n:translate="">Title</label> 
+         							<a href="#" onclick="translateContent( 'title', '${language/segment}', '#urlname_${language/segment}' ); return false;" i18n:translate="" class="small">
+         								Translate from US English
+         							</a><br />
+         							
+         							<input class="title" type="text" name="save[${language/segment}][title]" value="${language/title}"
+         								id="title_${language/segment}" 
+         							/>
+         							<br />
+         							
+         							<label i18n:translate="">URL Name</label> <a id="auto_${language/segment}" class="small">Auto generate url</a><br/>
+         							<input type="text" class="text" name="save[${language/segment}][urlname]" value="${language/urlname}" id="urlname_${language/segment}"/>
+									
+									
+         							
+         							<script type="text/javascript">
+         							//<![CDATA[
+         								$('#auto_${language/segment}').click( function() {
+         									urlize( $('#urlname_${language/segment}'), $('#title_${language/segment}').val() );
+         									return false;
+         								});
+         							//]]>
+         							</script>
+                           </div>
+                           </tal:block>
+                           
+                           <div class="language ui-tabs-panel ui-widget-content ui-corner-bottom">
+                              
+                              <div class="hide">
+                              
+                                 <small i18n:translate="" valign="top">Prod.no</small><br />
+                                 <input type="text" id="commonprodno" name="save[common][prodno]" value="${common/prodno}"/><br />
+                                 
+                              </div>
+							  
+							  <input type="file" name="productoptionimage"/>
+							  <tal:block tal:condition="exists:productoptiontumb">
+								 <img src="${productoptiontumb}"/>
+							  </tal:block>
+							  <br/>
+                              
+                              <small i18n:translate="" valign="top">References</small><br />
+                              <select name="save[common][refid]" id="commonrefid">
+                              <tal:block tal:repeat="legacyarticle common/articles">
+                                 <option tal:condition="legacyarticle/selected" value="${legacyarticle/refid}" tal:content="legacyarticle/title" selected="1">Article</option>
+                                 <option tal:condition="not:legacyarticle/selected" value="${legacyarticle/refid}" tal:content="legacyarticle/title">Article</option>
+                              </tal:block>
+                              </select><br />
+                              
+                              <select name="save[common][refsubid]" id="commonsubrefid">
+                              <tal:block tal:repeat="legacygroup common/options">
+                                 <optgroup label="${legacygroup/title}">
+                                 <tal:block tal:repeat="legacyoption legacygroup/items">
+                                    <option tal:condition="legacyoption/selected" value="${legacyoption/refid}" tal:content="legacyoption/title" selected="1">Article</option>
+                                    <option tal:condition="not:legacyoption/selected" value="${legacyoption/refid}" tal:content="legacyoption/title">Article</option>
+                                 </tal:block>
+                                 </optgroup>
+                              </tal:block>
+                              </select><br />
+							  
+							  
+							  <input tal:condition="common/useef" name="save[common][useef3]" type="checkbox" checked="checked"/>
+							  <input tal:condition="not: common/useef" name="save[common][useef3]" type="checkbox"/> <label>Bruk EF3 for produktadmin</label>
+                              
+                              
+                              <br />
+                              
+                              <a id="advanced" i18n:translate="" href="#advanced-settings">Show advanced options</a>
+                              <br/>
+                              <div id="advanced-settings" class="hide">
+                                 
+                                 <small i18n:translate="" valign="top">Purchase URL</small><br />
+                                 <input type="text" name="save[common][purchaseurl]" value="${common/purchaseurl}"/><br />
+                                 
+                                 <small i18n:translate="" valign="top">Valid from</small><br />
+                                 <input type="text" name="save[common][validfrom]" class="datepicker short-text" value="${common/validfrom}"/><br />
+                                 
+                                 <small i18n:translate="" valign="top">Valid to</small><br />
+                                 <input type="text" name="save[common][validto]" class="datepicker short-text" value="${common/validto}"/><br />
+                                 
+                                 <small i18n:translate="" valign="top">Tags</small><br />
+                                 
+                                 <input type="checkbox" name="tags[gift]" value="1" tal:condition="exists:common/tags/gift" checked="1" />
+                                 <input type="checkbox" name="tags[gift]" value="1" tal:condition="not:exists:common/tags/gift" />
+                                 <span i18n:translate="">Gift</span><small></small><br />
+								 
+								 <input type="checkbox" name="tags[textgift]" value="1" tal:condition="exists:common/tags/textgift" checked="1" />
+                                 <input type="checkbox" name="tags[textgift]" value="1" tal:condition="not:exists:common/tags/textgift" />
+                                 <span i18n:translate="">Textgift</span><small></small><br />
+
+				<input type="checkbox" name="tags[module]" value="1" tal:condition="exists:common/tags/module" checked="1" />
+                                 <input type="checkbox" name="tags[module]" value="1" tal:condition="not:exists:common/tags/module" />
+                                 <span i18n:translate="">module</span><small></small><br />
+                                 
+								 <input type="checkbox" name="tags[smilesontiles]" value="1" tal:condition="exists:common/tags/smilesontiles" checked="1" />
+                                 <input type="checkbox" name="tags[smilesontiles]" value="1" tal:condition="not:exists:common/tags/smilesontiles" />
+                                 <span i18n:translate="">Smiles on tiles</span><small></small><br />
+								 
+                                 <input type="checkbox" name="tags[ukeplan]" value="1" tal:condition="exists:common/tags/ukeplan" checked="1" />
+                                 <input type="checkbox" name="tags[ukeplan]" value="1" tal:condition="not:exists:common/tags/ukeplan" />
+                                 <span i18n:translate="">Ukeplan</span><small></small><br />
+                                 
+                                 <input type="checkbox" name="tags[merkelapp]" value="1" tal:condition="exists:common/tags/merkelapp" checked="1" />
+                                 <input type="checkbox" name="tags[merkelapp]" value="1" tal:condition="not:exists:common/tags/merkelapp" />
+                                 <span i18n:translate="">Merkelapp</span><small></small><br />
+                                 
+                                 <input type="checkbox" name="tags[enlargement]" value="1" tal:condition="exists:common/tags/enlargement" checked="1" />
+                                 <input type="checkbox" name="tags[enlargement]" value="1" tal:condition="not:exists:common/tags/enlargement" />
+                                 <span i18n:translate="">Enlargement</span><br />
+
+                                 <input type="checkbox" name="tags[mediaclip]" value="1" tal:condition="exists:common/tags/mediaclip" checked="1" />
+                                 <input type="checkbox" name="tags[mediaclip]" value="1" tal:condition="not:exists:common/tags/mediaclip" />
+                                 <span i18n:translate="">MediaClip</span><br />
+
+                                 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="tags[hardcover]" value="1" tal:condition="exists:common/tags/hardcover" checked="1" />
+                                 <input type="checkbox" name="tags[hardcover]" value="1" tal:condition="not:exists:common/tags/hardcover" />
+                                 <span i18n:translate="">Hardcover</span><br />
+
+                                 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="tags[softcover]" value="1" tal:condition="exists:common/tags/softcover" checked="1" />
+                                 <input type="checkbox" name="tags[softcover]" value="1" tal:condition="not:exists:common/tags/softcover" />
+                                 <span i18n:translate="">Softcover</span><br />
+
+                                 <input type="checkbox" name="tags[print]" value="1" tal:condition="exists:common/tags/print" checked="1" />
+                                 <input type="checkbox" name="tags[print]" value="1" tal:condition="not:exists:common/tags/print" />
+                                 <span i18n:translate="">Print</span><br />
+                                 
+                                 <input type="checkbox" name="tags[goods]" value="1" tal:condition="exists:common/tags/goods" checked="1" />
+                                 <input type="checkbox" name="tags[goods]" value="1" tal:condition="not:exists:common/tags/goods" />
+                                 <span i18n:translate="">Goods</span><br />
+                              
+                                 <input type="checkbox" name="tags[productionmethod]" value="1" tal:condition="exists:common/tags/productionmethod" checked="1" />
+                                 <input type="checkbox" name="tags[productionmethod]" value="1" tal:condition="not:exists:common/tags/productionmethod" />
+                                 <span i18n:translate="">Production method</span><br />
+                                 
+                                 <input type="checkbox" name="tags[correctionmethod]" value="1" tal:condition="exists:common/tags/correctionmethod" checked="1" />
+                                 <input type="checkbox" name="tags[correctionmethod]" value="1" tal:condition="not:exists:common/tags/correctionmethod" />
+                                 <span i18n:translate="">Correction method</span><br />
+                                 
+                                 <input type="checkbox" name="tags[paperquality]" value="1" tal:condition="exists:common/tags/paperquality" checked="1" />
+                                 <input type="checkbox" name="tags[paperquality]" value="1" tal:condition="not:exists:common/tags/paperquality" />
+                                 <span i18n:translate="">Paper quality</span><br />
+                                 
+                                 <input type="checkbox" name="tags[service]" value="1" tal:condition="exists:common/tags/service" checked="1" />
+                                 <input type="checkbox" name="tags[service]" value="1" tal:condition="not:exists:common/tags/service" />
+                                 <span i18n:translate="">Service</span><br />
+                                 
+                                 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="tags[subscription]" value="1" tal:condition="exists:common/tags/subscription" checked="1" />
+                                 <input type="checkbox" name="tags[subscription]" value="1" tal:condition="not:exists:common/tags/subscription" />
+                                 <span i18n:translate="">Subscription</span><br />
+                                 
+                                 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="tags[creditcardonly]" value="1" tal:condition="exists:common/tags/creditcardonly" checked="1" />
+                                 <input type="checkbox" name="tags[creditcardonly]" value="1" tal:condition="not:exists:common/tags/creditcardonly" />
+                                 <span i18n:translate="">Credit Card only</span><br />
+                                 
+                                 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="tags[notoplists]" value="1" tal:condition="exists:common/tags/notoplists" checked="1" />
+                                 <input type="checkbox" name="tags[notoplists]" value="1" tal:condition="not:exists:common/tags/notoplists" />
+                                 <span i18n:translate="">No Top Lists</span><br />
+     
+                                 <input type="checkbox" name="tags[showhistorical]" value="1" tal:condition="exists:common/tags/showhistorical" checked="1" />
+                                 <input type="checkbox" name="tags[showhistorical]" value="1" tal:condition="not:exists:common/tags/showhistorical" />
+                                 <span i18n:translate="">Show historical price</span><br />
+                                 
+                                 <input type="checkbox" name="tags[showrebate]" value="1" tal:condition="exists:common/tags/showrebate" checked="1" />
+                                 <input type="checkbox" name="tags[showrebate]" value="1" tal:condition="not:exists:common/tags/showrebate" />
+                                 <span i18n:translate="">Show rebate as percentage</span><br />
+                                 
+                                 <input type="checkbox" name="tags[newproduct]" value="1" tal:condition="exists:common/tags/newproduct" checked="1" />
+                                 <input type="checkbox" name="tags[newproduct]" value="1" tal:condition="not:exists:common/tags/newproduct" />
+                                 <span i18n:translate="">New product</span><br />
+                                 
+                                 <input type="checkbox" name="tags[giftcard]" value="1" tal:condition="exists:common/tags/giftcard" checked="1" />
+                                 <input type="checkbox" name="tags[giftcard]" value="1" tal:condition="not:exists:common/tags/giftcard" />
+                                 <span i18n:translate="">Giftcard</span><br />
+                                 
+                                 <input type="checkbox" name="tags[freeshipping]" value="1" tal:condition="exists:common/tags/freeshipping" checked="1" />
+                                 <input type="checkbox" name="tags[freeshipping]" value="1" tal:condition="not:exists:common/tags/freeshipping" />
+                                 <span i18n:translate="">Free shipping</span><br />
+                                 
+                              </div>
+                              
+                              <br />
+                              
+                              <input type="button" value="Back" i18n:attributes="value" onclick="window.location='${common/backlink}';" />
+                              <input type="submit" value="Save" i18n:attributes="value"/><br />
+                              <small i18n:translate="">* Language spesific</small>
+                              
+                           </div>
+                       </div>
+                    </form>
+                    
+                     <div tal:condition="exists:productoptions" tal:content="structure productoptions"></div>
+                    
+				    </div>
+			  </div>
+      </div>
+      <tal:block metal:use-macro="common.html/content-menu" />
+      <div id="footer">
+         
+      </div>
+</div>
+
+<script type="text/javascript" language="javascript">
+   $(document).ready( function() {
+      
+      $('#commonrefid').change(function(){
+         $('#saveform').submit();
+      });
+      $("#languagetabs").tabs();
+      $("#commonrefid").change(function(){
+         $("#commonprodno").val( $("#commonrefid").val() );
+      });
+      $(".datepicker").datepicker(
+			{
+				changeMonth: true,
+				changeYear: true,
+				regional: 'no'
+			}
+		);
+		$('#advanced').click(function(){
+		   $('#advanced-settings').toggle('slow');
+		});
+		
+		
+		$('#setref').click( function(){
+			
+			
+			return false;
+		 });
+   } );
+</script>
+</body>
+</html>

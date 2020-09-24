@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle">
+		<tal:block i18n:translate="">Thank you!</tal:block>
+	</tal:block>
+
+
+
+	
+		<style type="text/css">
+
+		.add_text {
+			height: 250px;
+		}
+		a {color:#000;text-decoration:underline;}
+		h4 {
+         font-size: 1.2em;
+         line-height: 1.25;
+         margin-bottom: 0.25em;
+      }
+		body {
+         font-family:Tahoma, Arial, Helvetica, sans-serif;
+         background-image: none;
+         padding-top: 300;
+         margin: 0;
+         line-height: 24px;
+         font-size: 100%;
+         background-color: #ffdd00;
+         -webkit-background-size: 3000px 5px;
+         background-image: url(${static:gfx/stabburet/background2.jpg});
+         background-repeat: repeat;
+         background-position: top;
+         background-attachment: scroll;
+         }
+		
+	   .header{
+         margin-top: 1px;  
+         
+		} 
+		.header img{
+		   position: relative;
+		   left: -70px;
+		}
+		
+		
+	  </style>
+</head>
+
+<body>
+	<div class="container create-gift">
+      <div class="header">
+          <img src="${static:gfx/stabburet/header.png}"/>
+	   </div>
+      
+	   
+	   
+	   <div class="box center" style="background-color: #fff;width: 920px;"> 
+	   
+	   
+   <h4>
+     Kampanjen er dessverre avsluttet.<br/>
+	  Ønsker du å lage andre flotte fotoprodukter av bildene dine? Gå til <a href="http://www.japanphoto.no/fremkalling">japanphoto.no</a>.
+	</h4>
+   <h4>
+      Gå tilbake til Stabburet <a href="http://www.stabburet.no/">her</a>&nbsp; &nbsp; &nbsp; &nbsp;Gå til Japan Photo <a href="http://www.japanphoto.no">her</a>
+   </h4>
+	   
+	   <!--<div class="" tal:content="structure cms:body:e8f0f1e9-dd8c-4046-98ca-50a8881e790d"/>-->
+
+	   
+	   </div>
+
+
+   </div>
+
+
+<div class="footer container">
+   <img style="position: relative; left: -20px;" src="http://static.eurofoto.no/gfx/stabburet/footer.jpg"/>
+</div>
+
+
+</body>
+</html>

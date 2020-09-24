@@ -1,0 +1,17 @@
+# refer to http://www.yaml.org/spec/1.1/ for clarification on YAML collections
+project1:
+  path: /var/www/repix/sites/static/css/blueprint
+  namespace: custom-namespace-1-
+  custom_css:
+    ie.css:
+      - custom-ie.css
+    print.css:
+      - docs.css
+      - my-print-styles.css
+    screen.css:
+      - subfolder-of-stylesheets/sub_css.css
+  plugins:
+    - fancy-type
+    - buttons
+project3:
+  path: /path/to/another/projects/styles

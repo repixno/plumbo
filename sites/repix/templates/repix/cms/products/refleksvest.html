@@ -1,0 +1,632 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="item/title" />
+	<meta name="description" content="${item/ingress}" />
+
+	<style type="text/css">
+		
+			
+		.strong {
+			font-weight: bold;
+			margin: 25px 0 0 0;
+		}
+
+		.fontpreview label {
+			font-size: 1.2em;
+			/* display: inline-flex; */
+			width: 350px;
+			height: 115px;
+			padding: 1px 0px 0px 10px;
+			border: solid 3px #1f2f6e;
+
+
+		}
+
+		#ar-berkley-label {
+			font-family: ArBerkley;
+		}
+
+		#billabong-label {
+			font-family: billabong;
+			font-size: 27px;
+		}
+
+		#brotherlove-label {
+			font-family: brotherlove;
+		}
+
+		#Gotic-label {
+			font-family: Gotic;
+		}
+
+		#intuitive-label {
+			font-family: intuitive;
+		}
+
+		#sisterlove-label {
+			font-family: sisterlove;
+		}
+
+		#Teen-label {
+			font-family: Teen;
+		}
+
+		/* TipTip CSS - Version 1.2 */
+
+		#tiptip_holder {
+			display: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 99999;
+		}
+
+		#tiptip_holder.tip_top {
+			padding-bottom: 5px;
+		}
+
+		#tiptip_holder.tip_bottom {
+			padding-top: 5px;
+		}
+
+		#tiptip_holder.tip_right {
+			padding-left: 5px;
+		}
+
+		#tiptip_holder.tip_left {
+			padding-right: 5px;
+		}
+
+		#tiptip_content {
+			font-size: 11px;
+			color: #fff;
+			text-shadow: 0 0 2px #000;
+			padding: 4px 8px;
+			border: 1px solid rgba(255, 255, 255, 0.25);
+			background-color: rgb(25, 25, 25);
+			background-color: rgba(25, 25, 25, 0.92);
+			background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(transparent), to(#000));
+			border-radius: 3px;
+			-webkit-border-radius: 3px;
+			-moz-border-radius: 3px;
+			box-shadow: 0 0 3px #555;
+			-webkit-box-shadow: 0 0 3px #555;
+			-moz-box-shadow: 0 0 3px #555;
+		}
+
+		#tiptip_arrow,
+		#tiptip_arrow_inner {
+			position: absolute;
+			border-color: transparent;
+			border-style: solid;
+			border-width: 6px;
+			height: 0;
+			width: 0;
+		}
+
+		#tiptip_holder.tip_top #tiptip_arrow {
+			border-top-color: #fff;
+			border-top-color: rgba(255, 255, 255, 0.35);
+		}
+
+		#tiptip_holder.tip_bottom #tiptip_arrow {
+			border-bottom-color: #fff;
+			border-bottom-color: rgba(255, 255, 255, 0.35);
+		}
+
+		#tiptip_holder.tip_right #tiptip_arrow {
+			border-right-color: #fff;
+			border-right-color: rgba(255, 255, 255, 0.35);
+		}
+
+		#tiptip_holder.tip_left #tiptip_arrow {
+			border-left-color: #fff;
+			border-left-color: rgba(255, 255, 255, 0.35);
+		}
+
+		#tiptip_holder.tip_top #tiptip_arrow_inner {
+			margin-top: -7px;
+			margin-left: -6px;
+			border-top-color: rgb(25, 25, 25);
+			border-top-color: rgba(25, 25, 25, 0.92);
+		}
+
+		#tiptip_holder.tip_bottom #tiptip_arrow_inner {
+			margin-top: -5px;
+			margin-left: -6px;
+			border-bottom-color: rgb(25, 25, 25);
+			border-bottom-color: rgba(25, 25, 25, 0.92);
+		}
+
+		#tiptip_holder.tip_right #tiptip_arrow_inner {
+			margin-top: -6px;
+			margin-left: -5px;
+			border-right-color: rgb(25, 25, 25);
+			border-right-color: rgba(25, 25, 25, 0.92);
+		}
+
+		#tiptip_holder.tip_left #tiptip_arrow_inner {
+			margin-top: -6px;
+			margin-left: -7px;
+			border-left-color: rgb(25, 25, 25);
+			border-left-color: rgba(25, 25, 25, 0.92);
+		}
+
+		/* Webkit Hacks  */
+
+		@media screen and (-webkit-min-device-pixel-ratio:0) {
+			#tiptip_content {
+				padding: 4px 8px 5px 8px;
+				background-color: rgba(45, 45, 45, 0.88);
+			}
+			#tiptip_holder.tip_bottom #tiptip_arrow_inner {
+				border-bottom-color: rgba(45, 45, 45, 0.88);
+			}
+			#tiptip_holder.tip_top #tiptip_arrow_inner {
+				border-top-color: rgba(20, 20, 20, 0.92);
+			}
+		}
+
+		.info-box {
+			overflow: scroll;
+			height: 350px;
+			overflow-x: hidden;
+		}
+
+		.small-product-photos {
+			display: block;
+			width: 118px;
+			float: left;
+		}
+
+		.small-product-photos a {
+			display: block;
+			float: right;
+			margin: 0 5px 5px 0;
+		}
+
+		.main-product-photo {
+			display: block;
+			/*	float: right;*/
+			width: 300px;
+			height: 300px
+		}
+
+		#fancybox-inner #about-from-prices {
+			display: block;
+		}
+
+		.choosecolor {
+			width: 100px;
+			height: 100px;
+			border: solid 0px #ccc;
+			margin: 2px;
+			float: left;
+			cursor: pointer;
+			
+		}
+
+		label {
+			font-weight: bold!important;
+		}
+
+		input.namefield {
+			font-size: 1.3em;
+			padding: 5px 0 5px 5px;
+			border: 1px solid #65e2db;
+			
+		}
+
+		input[disabled=disabled] {
+			border: 1px solid #ccc;
+		}
+
+		div.selectedborder {
+			border: solid 2px #8b8e93;
+		}
+
+		label.selectedborder {
+			border: solid 2px #65e2db;
+			BACKGROUND-COLOR: #e0e4ec;
+		}
+
+		.form-inline .input-group {
+			display: inline-table;
+			vertical-align: middle;
+			width: auto;
+
+		}
+
+		@media (max-width: 768px) {
+			.choosecolor {
+				width: 100px;
+				height: 100px;
+				border: solid 2px #ccc;
+				margin: 2px;
+				float: left;
+				cursor: pointer;
+			}
+
+		}
+
+
+
+		input[type='radio']:checked:after {
+			width: 15px;
+			height: 15px;
+			border-radius: 30px;
+			background-color: #65e2db;
+			content: '';
+			display: inline-block;
+			visibility: visible;
+			border: 2px solid #ffffff;
+			transform: scale(1.5);
+
+		}
+
+		input[type='radio']:after {
+			width: 15px;
+			height: 15px;
+			border-radius: 30px;
+			background-color: #ffffff;
+			content: '';
+			display: inline-block;
+			visibility: visible;
+			border: 2px solid #65e2db;
+		}
+
+
+
+		.button.changequantity.large {
+			font-size: 40px;
+		}
+
+
+
+		input[type=radio] {
+			margin: 0px 0px 35px 5px;
+
+
+		}
+
+
+		#nametype {
+
+			display: none;
+		}
+
+
+
+		.cms-product-title:hover,
+		.cms-product-ingress:hover,
+		.cms-product-body:hover {
+			background-color: #eee !important;
+		}
+	</style>
+	<tal:block tal:condition="session/isadmin">
+		<!-- admin css -->
+		
+	</tal:block>
+	
+	
+	
+</head>
+
+
+<body>
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+			
+		<div class="container showproduct" id="repixpage-main">
+	<div class="content">		
+<div class="row">
+	
+	
+	
+	
+	<div class="col-md-12 show-one-product" >
+		
+		<div class="col-md-12">
+			<h2 class="cms-product-title"><tal:block tal:content="item/title">?</tal:block> <span class="quiet small"></span></h2>
+		</div>
+		<form method="post" action="/cart/addItemByProductOptionId/">
+		<div class="col-md-4">
+            <div class="col-md-12">
+                
+                <h3 class="hide" i18n:translate="">Product info</h3>
+                <h4 class="cms-product-ingress" tal:content="item/ingress|default">?</h4>
+                <div class="cms-product-body" tal:content="structure item/body|default">
+                    ?
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <p class="text-left">
+                        <tal:block tal:repeat="option item/options">
+                            <tal:block tal:condition="equal:repeat/option/number,1">
+                                <span class="price"><tal:block i18n:translate="">Price</tal:block> <span id="price" tal:content="formatprice:option/price">?</span> pr. stk </span>
+                               <!-- <a href="#about-from-prices" class="info" i18n:translate="">View prices</a>-->
+                            </tal:block>
+                        </tal:block>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
+				
+				
+					<h3 class="hide">Din tekst:</h3>
+					
+					<input type="hidden" name="productid" value="${item/id}"/>
+					<input type="hidden" name="productoptionid" value="0"/>
+					
+					<div class="col-md-12 hide">
+						<input type="radio" name="attributes[type]" value="name" checked="checked" id="nametype"/>
+						<label for="nametype">Navn</label><br/>
+						<input class="namefield" name="attributes[name]" type="text" id="name" placeholder="Maks 28 tegn" maxlength="28"/>
+					</div>
+					
+					
+					<div class="col-md-12 hide">
+						<div class="strong">Velg skrifttype</div>
+						<div class="fontpreview">
+							<label for="Teen" id="Teen-label" class="selectedborder">ABC</label> <input type="radio" name="attributes[font]" value="Teen" id="Teen" checked="checked" /><br/>
+						<!--	<label for="lucida" id="lucida-label">ABC</label> <input type="radio" name="attributes[font]" value="lucida" id="lucida" /><br/>
+								<label for="Gotic" id="Gotic-label">ABC </label> <input type="radio" name="attributes[font]" value="Gotic" id="Gotic" />
+						<label for="sisterlove" id="sisterlove-label">ABC</label> <input type="radio" name="attributes[font]" value="sisterlove" id="sisterlove" />-->						
+						</div>
+					</div>
+			</div>
+			
+            
+		</div>
+		<div class="col-md-8">
+            <!-- small photos -->
+            <div class="small-product-photos">
+                <tal:block tal:repeat="image item/images">
+                    <tal:block tal:condition="image/url">
+                        <tal:block tal:condition="gt:repeat/image/number,1">
+                        <a rel="product-photos" href="${static:}images/products/thumbs/height/500/${image/url}" data-toggle="lightbox" data-gallery="multiimages"  class="productphoto group" 
+                            tal:condition="lte:repeat/image/number,9">
+                            <img src="${static:}images/products/thumbs/square/54/${image/url}" title="" width="54" height="54"/>
+                        </a>
+                        </tal:block>
+                    </tal:block>
+                </tal:block>
+            </div>
+            <!-- one main image (the first) -->
+            <div class="main-product-photo text-center">
+            
+                <tal:block tal:repeat="image item/images">
+                    <tal:block tal:condition="equal:repeat/image/number,1">
+                       
+							        <!--       <a rel="product-photos" tal:condition="image/url" href="${static:}images/products/thumbs/height/500/${image/url}"  data-toggle="lightbox" data-gallery="multiimages" class="productphoto group">-->
+											    <a rel="product-photos" tal:condition="image/url" href="${static:}images/products/thumbs/height/500/${image/url}"  data-toggle="lightbox" data-gallery="multiimages">
+                            <img src="${static:}images/products/thumbs/square/231/${image/url}" title=""  />
+                        </a>
+                        <tal:block tal:condition="not:image/url">
+                            <a rel="product-photos" class="group" title="Product photo is missing" >
+                                <img src="${static:}gfx/404/not_found_180px.jpg" alt="Product photo is missing" height="231" width="231" i18:attributes="alt"/>
+                            </a>
+                        </tal:block>
+                    </tal:block>
+                </tal:block>
+            </div>
+
+	
+		</div>
+		
+
+					<div class="row">
+						
+							<div class="col-md-12">
+			<!--<hr class="clear clearfix space" />-->
+			<div class="col-md-11 pull-right">
+				
+			<h3 class="hide" i18n:translate="">Product options</h3>
+
+				<div class="col-md-12">
+						<tal:block tal:condition="item/options">
+							<tal:block tal:define="options item/options">
+								<tal:block tal:condition="options">
+								
+									<!-- not showing 1 option, but defines global -->
+									<tal:block tal:condition="lte:options/length,1">
+										<tal:block tal:repeat="option options">
+											<tal:block tal:define="global defaultoption option/id" />
+										</tal:block>
+									</tal:block>
+									<br/>
+									<!-- listing out product options -->
+									<tal:block tal:condition="gt:options/length,1">
+										<label for="choose-product-option" i18n:translate="">Velg størrelse på Tskjorte:</label>
+										<div class="row">
+											<tal:block tal:repeat="option options">
+												
+												<div class="choosecolor" style="background-image: url(http://static.repix.no/images/products/thumbs/square/100/${option/thumb})" id="${option/id}" title="${option/title}" alt="${option/thumb}"></div>
+											</tal:block>
+											
+											
+										</div>
+											
+									</tal:block>
+								</tal:block>
+							</tal:block>
+						</tal:block>
+					</div>
+				
+				<div class="col-md-12 text-right">
+					<div class="col-md-12 text-left">
+						<br/>
+						<div class="col-md-11 text-right top-15">
+							<div class="text-right"><em>  Velg størrelse først:</em></div>
+						<!--	Antall: <input type="text" class="quantity"  id="quantity" value="1" /><hr/>-->
+							<button id="confirmbutton" class="btn btn-success" disabled="disabled"  title="Du må velge farge og tekst">Bestill produkt</button>
+						</div>
+					</div>
+				</div>
+				
+				<div class="hide" id="about-from-prices">
+					<div class="">
+
+					<h4 i18n:translate="">Prices for <span i18n:name="productTitle" tal:replace="item/title"/>:</h4>
+					
+					<tal:block tal:condition="item/options" tal:define="options item/options">
+						<tal:block>
+							<tal:block tal:repeat="option options">
+								<table>
+									<caption tal:content="option/title"></caption>
+									<tr tal:repeat="price option/prices">
+										<td>
+											<tal:block tal:condition="exists:price/max">
+												<span tal:content="price/min"/>-<span tal:content="price/max|default"></span>stk
+											</tal:block>
+											<tal:block tal:condition="not:exists:price/max">
+												<span tal:content="price/min"/>stk eller flere
+											</tal:block>
+										</td>
+										<td tal:content="formatprice:price/price"></td>
+									</tr>
+								</table>
+							</tal:block>
+						</tal:block>
+					</tal:block>
+					</div>
+				</div>
+		</div>
+			</div>
+			</div>		
+					
+					
+		</form>
+		<!-- delivery and contact information 
+		<div class="span-20 last" tal:content="structure cms:body:0dc5bea3-c9f7-4b7e-b3a5-c8aebff3bd8d" />
+		-->
+	</div>
+	</div>
+	</div>
+</div> <!-- end container -->
+
+
+
+<tal:block tal:condition="session/isadmin">
+	<script type="text/javascript">
+	$('.cms-product-title, .cms-product-ingress, .cms-product-body').dblclick( function() {
+		window.open('${request/adminroot}content/products/${item/id}');
+	});
+	</script>
+</tal:block>
+
+<script src="${static:}js/jquery.tipTip.minified.js"></script>
+<script type="text/javascript">
+	
+	var productid = "${item/id}";
+	
+	$(document).ready(function() {
+		
+		$('input[name="attributes[font]"]').on( 'change' , function(){
+			var thisvalue = $(this).val()
+			$('.fontpreview label' ).removeClass('selectedborder');
+			$( "#" +  thisvalue + "-label" ).addClass('selectedborder');
+		});
+		
+		$('.namefield').on( 'keyup', function(){
+				$( '.fontpreview label' ).text( $(this).val() );
+			});
+		
+		$('#initialer').on( 'keyup' , function(){
+			var thisthext = $(this).val().toUpperCase();
+			$(this).val(thisthext);
+			$( '.fontpreview label' ).text( thisthext );
+		})
+		
+        $('.choosecolor').tipTip();
+		
+        $('input[name="attributes[type]"]').on( 'change', function(){
+            var checked = $(this + ":checked").val();
+            if( checked == 'initialer' ){
+                $('#name').attr("disabled", "disabled");
+                $('#initialer').removeAttr("disabled");
+				$( '.fontpreview label' ).text(  $('#initialer').val() );
+            }else{
+                $('#initialer').attr("disabled", "disabled");
+                $('#name').removeAttr("disabled");
+				$( '.fontpreview label' ).text(  $('#name').val() );
+            }
+        });
+        
+		$("a.info").fancybox({
+			'autoDimensions': false,
+			'hideOnContentClick': false,
+			'transitionIn'		: 'elastic',
+			'transitionOut'		: 'elastic'
+		});
+		
+		//$( "#confirmbutton" ).tooltip();
+		
+		$('.choosecolor').on( 'touchstart mousedown', function(){
+			
+			$('.choosecolor').removeClass('selectedborder');
+			$(this).addClass('selectedborder');
+			$('#confirmbutton').removeAttr('disabled');
+			$("input[name='productoptionid']").val($(this).attr('id'));
+		//	$('.small-product-photos').remove();
+	// var imagelink = "${static:}images/products/thumbs/square/300/" + $(this).attr('alt');
+	//		$('.main-product-photo').html( '<img src="' + imagelink + '" />').css({'width' : "300px", "height" : "300ps" });
+			return false;
+		});
+		
+        
+        $("a.productphoto").fancybox({
+			'autoDimensions': false,
+			'titleShow': false,
+			'transitionIn'		: 'elastic',
+			'transitionOut'		: 'elastic'
+		});
+
+	});
+	
+</script>
+
+
+<!--Få inn modal på produktbilder-->
+<script src="/js/lightbox/ekko-lightbox.js"></script>
+
+<tal:block tal:condition="session/isadmin">
+	<script type="text/javascript">
+	$('.cms-product-title, .cms-product-ingress, .cms-product-body').dblclick( function() {
+		window.open('${request/adminroot}content/products/${item/id}');
+	});
+	</script>
+</tal:block>
+<script type="text/javascript">
+	
+	$(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+			event.preventDefault();
+			$(this).ekkoLightbox();
+		}); 
+	
+	$(document).ready(function() {
+		$("a.info").fancybox({
+			'autoDimensions': false,
+			'hideOnContentClick': false,
+			'transitionIn'		: 'elastic',
+			'transitionOut'		: 'elastic'
+		});
+		
+		$("a.video").fancybox({
+			'frameWidth':	742,
+			'frameHeight':	510,
+			'hideOnContentClick': false,
+			'callbackOnStart': function() { 
+				$f("player", "https://static.repix.no/flash/flowplayer-3.1.1.swf");
+			}
+		});
+
+	});
+	
+</script>
+</body>
+</html>

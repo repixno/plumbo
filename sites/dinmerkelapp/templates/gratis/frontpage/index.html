@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="no">
+  <head>
+   <tal metal:use-macro="../../${templates}/common.html/head" />
+	<!-- 	<link rel="stylesheet" href="/css/bestilling.css" type="text/css" media="screen, projection" />-->
+  
+	
+	</head>
+<style>
+	label{
+			min-width: 100px;
+		
+		}
+		.form-group{
+			margin-top: 15px;
+		}
+		
+		.error{
+			color: red;
+		}
+			
+	
+			
+	
+.red-star {
+    color: red;
+}
+
+
+
+
+</style>
+<body>   
+					<tal metal:use-macro="../../${templates}/common.html/top" />
+				
+	
+    <!-- Page Content -->
+    <div class="container">
+		  <div class="content">
+				 
+	     <div class="row">
+	  
+		 <h4>Motta gratis merkelapper</h4>
+		  			<div class="text-right">
+				<div class="round-corners-heading gradientdiv" style="margin-bottom: 10px;  ">
+				
+				</div>
+				
+				<div class="col-md-12 form-group">
+					<label for="contact-email" >E-post:</label>
+					<input id="contact-email" name="cemail" type="text" class="text required email form-control" value="${session/username}" />
+					<span class="red-star">★</span>
+          
+          
+							<!--<button class="btn btn-sucsess" onclick="window.location.href='/kasse'">Continue</button>-->
+							<button class="btn btn-success call-to-action" i18n:translate="" type="submit" style="margin-right:0;">
+								Next step
+							</button>
+				</div>
+
+				
+			</div>
+		 </div>  
+		 </div>
+		 
+		
+			
+						
+								
+	
+					
+					
+        <!-- Footer -->
+	
+		  <div metal:use-macro="../../${templates}/common.html/footer" />
+
+        
+		 
+    </div>
+    <!-- /.container -->
+
+	
+
+    <!-- Script to Activate the Carousel -->
+    <script>
+			
+			
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Cewe Orders</title>
+<tal:block metal:use-macro="../common.html/css" />
+<script type="text/javascript" src="/js/admin.js"></script>
+<style>
+   .tableheader {
+      background: #eee;
+   }
+   .tableheadercell {
+      text-align: center;
+      font-size: 20px;
+   }
+   
+   .tablecell {
+      text-align: center;
+   }
+   
+   .tablecellready {
+      background: lightgreen;
+      text-align: center;
+      font-weight: bold;
+   }
+   .tablecellfailed {
+      background: pink;
+      text-align: center;
+      font-weight: bold;
+   }
+</style>
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+
+		<tal:block metal:use-macro="../common.html/languages" />
+			
+		<div id="content" class="span-20">
+			
+				<div class="span-20">
+				<h3>
+				  Failed Cewe Orders: ${numfailed}
+				</h3>
+				<table>
+				  <tr class="tableheader">
+				     <td class="tableheadercell">id#</td>
+				     <td class="tableheadercell">Time</td>
+				     <td class="tableheadercell">Portal</td>
+				     <td class="tableheadercell">Source</td>
+				     <td class="tableheadercell">To Production</td>
+				     <td class="tableheadercell">Reset</td>
+				  </tr>
+					<tal:block tal:repeat="ceweorder failed">
+					          <tr>
+					             <td class="tablecell">
+					                <a href="http://www.eurofoto.no/adm_view_orderform_new.php?ordrenr=${ceweorder/orderid}" target="_blank">${ceweorder/orderid}</a>
+					             </td>
+					             <td class="tablecell">
+					                ${ceweorder/time}
+					             </td>
+					              <td class="tablecell">
+					                ${ceweorder/portal}
+					             </td>
+					              <td class="tablecell">
+					                ${ceweorder/source}
+					             </td>
+					              <td class="tablecell">
+					                ${ceweorder/toproduction}
+					             </td>
+					             <td id="resetcell_${ceweorder/orderid}" class="tablecell">
+					                <button id="${ceweorder/orderid}" class="small green resetbutton">Reset</button>
+					             </td>
+					          </tr>
+					       
+					</tal:block>
+			   </table>
+			</div>
+			
+		</div>
+		
+		<!--<tal:block metal:use-macro="../common.html/content-menu" />-->
+		<div id="footer" />
+	</div>
+	
+	<script type="text/javascript">
+	  
+	  $( document ).ready( function() {
+	     
+	     $( '.resetbutton' ).click( function( event ) {
+	        
+	        var orderid = this.id;
+	        $( '#resetcell_' + this.id ).html( '<img src="http://static.eurofoto.no/gfx/admin/img/simpletree/spinner.gif" />' );
+	        
+	        $.post( 'cewe/reset', {
+	           orderid: this.id
+	        }, function( response ) {
+	           if( response.result ) {
+	              
+	              $( '#resetcell_' + orderid ).html( 'ready' );
+	              $( '#resetcell_' + orderid ).removeClass().addClass( 'tablecellready' );
+	              
+	           } else {
+	              
+	              $( '#resetcell_' + orderid ).html( 'failed' );
+	              $( '#resetcell_' + orderid ).removeClass().addClass( 'tablecellfailed' );
+	              
+	           }
+	        }
+	        ,'json' );
+	        
+	     });
+	     
+	     
+	  });
+	
+	</script>
+</body>
+</html>

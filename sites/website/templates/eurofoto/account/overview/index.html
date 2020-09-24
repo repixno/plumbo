@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="${i18n/country}">
+<head>
+	<tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" />
+	<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/head" />	</head>
+<body>
+	
+<div class="container">
+	<div metal:use-macro="${templateroot}/${templates}/common.html/top" />	
+</div>
+
+<div id="account">
+
+<div class="container">
+
+<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/account-menu" />
+
+<h2>Overview</h2>
+<p class="quiet small">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam sit amet elit vitae arcu interdum ullamcorper. Nullam ultrices, nisi quis scelerisque convallis, augue neque tempor enim, et mattis justo nibh eu elit. Quisque ultrices gravida pede. Mauris accumsan vulputate tellus. Phasellus condimentum bibendum dolor. Mauris sed ipsum. Phasellus in diam. Nam sapien ligula, consectetuer id, hendrerit in, cursus sed, leo. Nam tincidunt rhoncus urna. Aliquam id massa ut nibh bibendum imperdiet. Curabitur neque mauris, porta vel, lacinia quis, placerat ultrices, orci.</p>
+
+
+<div class="span-15">
+	<h3>Latest albums:</h3>
+	<div class="account-content-box">
+		<tal:block tal:define="albums albumslatest">
+			<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/albums"/>
+		</tal:block>
+		<br class="clear" />
+	</div>
+
+	<h3>Albums shared to me:</h3>
+	<div class="account-content-box">
+		<tal:block tal:define="albums albumssharedtome">
+			<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/albums"/>
+		</tal:block>
+		<br class="clear" />
+	</div>
+
+
+	<h3>Albums shared by me:</h3>
+	<div class="account-content-box">
+		<tal:block tal:define="albums albumssharedbyme">
+			<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/albums"/>
+		</tal:block>
+		<br class="clear" />
+	</div>
+</div>
+
+<div class="span-9 last">
+	<h3>About my account</h3>
+		
+	<div class="account-content-box">
+	
+		<dl>
+			<dt>E-mail</dt>
+			<dd>${useremail}</dd>
+
+			<dt>Fullname</dt>
+			<dd>${userfullname}</dd> 
+		
+			<dt>Cellphone</dt>
+			<dd>${usercellphone}</dd>
+	
+			<dt>Last logged in</dt>
+			<dd tal:content="formatdatetime:userlastlogin"></dd>
+	
+			<tal:block tal:condition="usersubscription">
+				<dt>Secure storage</dt>
+				<dd>Varer til <span tal:content="formatdatetime:usersubscriptionlastdate"></span></dd>
+			</tal:block>
+		</dl>
+	</div>
+	
+	<h3>Statistics</h3>
+	<div class="account-content-box">
+		<p class="quiet small">Statistics available for your account.</p>
+		<div class="span-3 colborder">
+			<h5>Your account</h5>
+			<p>Images: ${userimagecount}</p>
+			<p>Albums: ${useralbumcount}</p>
+		</div>
+		
+		<div class="span-4 last">
+			<h5>Shared to me</h5>
+			<p>images: ${userimagessharedcount}</p>
+			<p>Albums: ${useralbumssharedcount}</p>
+		</div>
+		<hr class="space" />	
+	</div>
+	
+	<div class="span-7 last">
+		<h4>Latest projects:</h4>
+		<div class="account-content-box">
+			<tal:block tal:repeat="project projectslatest">
+				${project/id}
+			</tal:block>
+		</div>
+	</div>
+
+	<div class="span-7 last">
+		<h4>Produkter til gode:</h4>
+		<div class="account-content-box">
+			<tal:block tal:repeat="credit usercredits">
+				<dl rel="${credit/id}">
+					<dt>${credit/usertitle}</dt>
+					<dd><a href="${credit/product/url}">${credit/product/title}</a></dd>
+					<dd title="Quantity: ${credit/quantity}"><tal:block i18n:translate="">Quantity</tal:block>: ${credit/quantity}</dd>
+				</dl>
+			</tal:block>
+		</div>
+	</div>
+	
+</div>
+
+</div>
+</div>
+
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="${templateroot}/${templates}/common.html/footer" />
+	</div>
+</div>	
+
+
+</body>
+</html>

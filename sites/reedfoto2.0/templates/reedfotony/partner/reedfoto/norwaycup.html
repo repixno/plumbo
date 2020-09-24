@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">My orders</tal:block>
+	
+	<style type="text/css">
+
+	</style>
+</head>
+
+<body>
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+    <div class="container">
+       
+        <!-- use if menu is needed -->
+		<div class="col-md-2">
+			<div tal:define="global menuitem string:orders" metal:use-macro="common.html/menu" />
+		</div>
+        
+    
+        <div class="col-md-10">
+			<h1>Norwaycup Etterbestilling Admin</h1>
+			<form method="POST" enctype='multipart/form-data'>
+				<div class="form-group col-md-12">
+				  <label for="name">Navn</label>
+				  <input type="text" class="form-control" id="name" name="name" placeholder="Navn" />
+				</div>
+				<div class="form-group col-md-12">
+				  <label for="address">Addresse</label>
+				  <input type="text" class="form-control" id="address" name="address" placeholder="Addresse" />
+				</div>
+				<div class="form-group col-md-5">
+				  <label for="zipcode">Postnr</label>
+				  <input type="text" class="form-control" id="zipcode"  name="zipcode" placeholder="Postnr" />
+				</div>
+				<div class="form-group col-md-7">
+				  <label for="city">Poststad</label>
+				  <input type="text" class="form-control" id="city"  name="city" placeholder="Poststad" />
+				</div>
+				<div class="form-group col-md-12">
+				  <label for="team">Lag</label>
+				  <input type="text" class="form-control" id="team"  name="team" placeholder="Lag" />
+				</div>
+				<div class="form-group col-md-2">
+					<label for="quantity">Antall</label>
+					<input type="text" class="form-control" id="quantity"  name="quantity" placeholder="Antall" />
+				</div>
+				<div class="form-group col-md-3">
+				  <label for="exampleInputFile">Velg bilde</label>
+				  <input type="file" id="exampleInputFile" name="image"/>
+				  <p class="help-block">Lag foto bilde</p>
+				</div>
+				<div class="form-group col-md-5">
+					<label for="comment">Kommentar</label>
+					<textarea class="form-control" id="comment" name="comment"></textarea>
+				</div>
+				<div class="col-md-2">
+					<button type="submit" class="btn btn-large">Lag ordre</button>
+				</div>
+				
+			</form>	
+        </div>
+    </div>
+</body>
+</html>
+

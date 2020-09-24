@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" tal:define="global pagetitle" tal:content=""></tal:block>
+    <style>
+
+
+    </style>
+
+
+</head>
+
+
+
+<body>
+    <div class="container">
+      	<div metal:use-macro="${templateroot}/${templates}/common.html/top" />
+        <div>
+			
+            <form method="get">
+                <input type="text" name="productid" />
+                <input type="submit" />
+            </form>
+            
+        </div>
+    </div>
+       
+  
+
+    
+    
+</body>
+</html>

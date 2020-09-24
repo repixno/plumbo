@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<tal:block metal:use-macro="../${templates}/common.html/head" />
+<script type="text/javascript" src="/js/admin.js"></script>
+<style type="text/css">
+
+	h3 a {
+		display: block;
+		padding: 0.2em;
+		color: #000;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	
+	h3 a:hover {
+		color: #09c;
+	}
+
+</style>
+
+</head>
+
+
+<body>
+	<div id="container" class="container">
+	
+			<tal:block metal:use-macro="common.html/topmenu" />
+	
+		
+
+ <!-- <a href="/stabburet/statstotal" class="btn btn-info" role="button">Stabburet Statisikker 2017 og 2018</a>-->
+ 
+
+ <br/>
+       <a href="/student/student2020" class="btn btn-info" role="button">Studentskilt 2020</a>
+  
+  <!--<a href="/stabburet/stats" class="btn btn-info" role="button">Stabburet Statisikker Gammel</a>-->
+  
+
+
+		<!--
+		Flagga oppe til venstre
+		<tal:block metal:use-macro="common.html/languages" />-->
+			
+		<!--
+		oversettelse
+		rediger menyen
+		vis produkter
+		vis artikkler
+		
+		<div class="span-24 last">
+			<div class="span-6 center">
+				<h3 class="bottom">
+					<a href="/system/translate/">
+						<img src="${static:gfx/admin/dashboard/translation.jpg}" width="230" height="150" />
+						<tal:block i18n:translate="">Translation</tal:block>
+					</a>
+				</h3>
+				<p class="quiet">Oversett tekstar som ligg i websida</p>
+			</div>
+			<div class="span-6 center">
+				<h3 class="bottom">
+					<a href="/menu/">
+						<img src="${static:gfx/admin/dashboard/menu.jpg}" width="230" height="150" />
+						<tal:block i18n:translate="">Edit menu</tal:block>
+					</a>
+				</h3>				
+				<p class="quiet">Endre menypunkt for websida. <span class="red">Nyttast med varsomhet</span>.</p>
+			</div>
+			<div class="span-6 center">
+				<h3 class="bottom">
+					<a href="/content/products/">
+					<img src="${static:gfx/admin/dashboard/products.jpg}" width="230" height="150" />
+						<tal:block i18n:translate="">View products</tal:block>
+					</a>
+				</h3>
+				<p class="quiet">Liste over alle produkt som er tilgjengeleg</p>
+			</div>
+			<div class="span-6 last center">
+				<h3 class="bottom">
+					<a href="/content/articles/">
+						<img src="${static:gfx/admin/dashboard/articles.jpg}" width="230" height="150" />
+						<tal:block i18n:translate="">View articles</tal:block>
+					</a>
+				</h3>
+				<p class="quiet">Alle artikler som ligg i artikkelsystemet</p>
+			</div>
+		</div>-->
+	<div id="footer">
+	</div>
+</div>
+</body>
+</html>

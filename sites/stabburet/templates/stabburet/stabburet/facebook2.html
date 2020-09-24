@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+	<div metal:use-macro="../common.html/head" />
+	<div metal:use-macro="../common.html/stylesheet" />
+        
+        <meta name="descritption" content="Se så kult lokk jeg har laget! Kjøp tre bokser Stabburet
+Leverpostei, og lag lokk med ditt navn og bilde du også."/>
+        
+        <meta property="og:title" content="Lag ditt eget lokk!" />
+        <meta property="og:description" content="Se så kult lokk jeg har laget! Kjøp tre bokser Stabburet
+Leverpostei, og lag lokk med ditt navn og bilde du også." />
+        <meta property="og:image" content="http://kampanje.stabburetleverpostei.no/bestill/Thumbface/${id}/${id}.jpg" />
+
+		
+		
+		<style>
+			body {
+				margin: 0;
+				font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+				font-size: 14px;
+				line-height: 20px;
+				color: #333;
+			}
+			.header {
+				background-image: url('/web/images/editortop.png');
+				position: relative;
+				top: 0px;
+				margin: 0px;
+			}
+		</style>
+    </head>
+    
+    <body>
+        <tal:block metal:use-macro="../common.html/header" />
+        <div class="container center">
+
+            <h3>Se så kult lokk jeg har laget! Kjøp tre bokser Stabburet
+Leverpostei,<br/> og lag lokk med ditt navn og bilde på <a href="http://www.stabburetleverpostei.no" style="text-decoration: underline; color:#EB2C22;">stabburetleverpostei.no</a> du også. </h3>
+            
+            <img src="/bestill/Thumbface/${id}/${id}.jpg"/>
+
+            
+            <div>
+
+            </div>
+
+        </div>
+	<div metal:use-macro="../common.html/javascript" />
+       <div metal:use-macro="../common.html/footer" />
+
+</body>
+</html>

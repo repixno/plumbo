@@ -1,0 +1,131 @@
+/* -----------------------------------------------------------------------
+
+
+ Blueprint CSS Framework 0.8
+ http://blueprintcss.org
+
+   * Copyright (c) 2007-Present. See LICENSE for more info.
+   * See README for instructions on how to use Blueprint.
+   * For credits and origins, see AUTHORS.
+   * This is a compressed file. See the sources in the 'src' directory.
+
+----------------------------------------------------------------------- */
+
+/* grid.css */
+.column, .span-1, .span-2, .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-9, .span-10, .span-11, .span-12, .span-13, .span-14, .span-15, .span-16, .span-17, .span-18, .span-19, .span-20, .span-21, .span-22, .span-23, .span-24 {float:left;margin-right:10px;}
+.last {margin-right:0;}
+.span-1 {width:30px;}
+.span-2 {width:70px;}
+.span-3 {width:110px;}
+.span-4 {width:150px;}
+.span-5 {width:190px;}
+.span-6 {width:230px;}
+.span-7 {width:270px;}
+.span-8 {width:310px;}
+.span-9 {width:350px;}
+.span-10 {width:390px;}
+.span-11 {width:430px;}
+.span-12 {width:470px;}
+.span-13 {width:510px;}
+.span-14 {width:550px;}
+.span-15 {width:590px;}
+.span-16 {width:630px;}
+.span-17 {width:670px;}
+.span-18 {width:710px;}
+.span-19 {width:750px;}
+.span-20 {width:790px;}
+.span-21 {width:830px;}
+.span-22 {width:870px;}
+.span-23 {width:910px;}
+.span-24 {width:950px;margin-right:0;}
+.border {padding-right:4px;margin-right:5px;border-right:1px solid #eee;}
+.colborder {padding-right:24px;margin-right:25px;border-right:1px solid #eee;}
+.prepend-top {margin-top:1.5em;}
+.append-bottom {margin-bottom:1.5em;}
+.box {padding:1.5em;margin-bottom:1.5em;background:#E5ECF9;}
+hr {background:#ddd;color:#ddd;clear:both;float:none;width:100%;height:.1em;margin:0 0 1.45em;border:none;}
+hr.space {background:#fff;color:#fff;visibility:hidden;}
+.clearfix:after, .container:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
+.clearfix, .container {display:block;}
+.clear {clear:both;}
+
+
+#topmenu li.noactive {font-weight:bold;color:#333;}
+#topmenu li {-webkit-text-shadow:1px 1px 1px #fff;-moz-text-shadow:1px 1px 1px #fff;text-shadow:1px 1px 1px #fff;}
+
+/* portal-eurofoto */
+#main-navigation li.frontpage a {color:#0068b4;}
+#main-navigation li.fotosiden a {color:#c90;}
+#main-navigation li.my-account-hw a {color:#C4262E;}
+#main-navigation li.cewe-fotobok a {color:#34B233;}
+.searchresults .res > a {color:#34B233
+;}
+div.box {background-color:#f6f6f6;border:1px solid #ccc;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;box-shadow:1px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:1px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:1px 1px 2px rgba(0,0,0,0.1);}
+body {background-color:#fff;background-image:url(http://d.static.repix.no/css/portals/eurofoto/backgrounds/eurofoto-top.jpg);background-repeat:repeat-x;background-position:top;background-attachment:scroll;}
+#header {z-index:500;margin-bottom:1em !important;margin-top:30px !important;}
+h1.site-logo {display:block;width:70px;height:70px;text-indent:-9999px;background:transparent url(http://d.static.repix.no/css/portals/eurofoto/gfx/eurofoto-68px.gif) no-repeat 0 0;margin-top:12px;margin-left:24px;}
+h1.site-logo a {display:block;height:inherit;}
+#topsmallnavigation {clear:both;height:2em;float:none;}
+#topsmallnavigation ul {text-align:right;margin:0;padding:0;}
+#topsmallnavigation li {display:inline;list-style:none;}
+#topsmallnavigation a {margin:5px;padding-right:10px;border-right:1px solid #ccc
+;}
+#topsmallnavigation .last {border:none;}
+#main-navigation {position:relative;z-index:600;background:#dcdcdc url(http://d.static.repix.no/css/portals/eurofoto/backgrounds/gradient_lightgray.gif) scroll repeat-x top;border:1px solid #ccc;border-radius:14px;-moz-border-radius:14px;-webkit-border-radius:14px;box-shadow:1px 2px 15px rgba(0,0,0,0.3);-webkit-box-shadow:1px 2px 15px rgba(0,0,0,0.3);-moz-box-shadow:1px 2px 15px rgba(0,0,0,0.3);font-size:.9em;}
+#main-navigation ul {border:none;padding:0;margin:0;}
+#main-navigation ul:first-child {padding-left:10px;}
+#main-navigation li {float:left;list-style:none;background:transparent;position:relative;}
+#main-navigation a {display:block;text-decoration:none;font-size:140%;font-weight:bold;width:130px;padding:8px 10px 6px 10px;border-right:1px solid #ccc;text-shadow:0 -1px 1px rgba(0,0,0,0.15);}
+#main-navigation a div, #main-navigation ul li a span {color:#000;display:block;font-size:.6em;font-weight:normal;}
+#main-navigation a:hover {color:#000;background:#949494 url(http://d.static.repix.no/css/portals/eurofoto/backgrounds/gradient_gray.gif) scroll repeat-x top;}
+#main-navigation a.active, #main-navigation a:focus {background:#eee url(http://d.static.repix.no/css/portals/eurofoto/backgrounds/gradient_gray_dark_reverse.gif) scroll repeat-x center top;color:#fff;outline:none;}
+#topsearch input {font-size:1em;margin:1.0em 0 0 10px;background-color:#fff;height:1.7em;border:1px solid #aaa;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;float:right;padding:.6em 10px .2em 10px;color:#999;width:170px;}
+#topsearch input:focus {border-color:#0068b4;outline:none;color:#111;box-shadow-color:0px 0px 5px rgba(0,152,219,0.7);-webkit-box-shadow:0px 0px 5px rgba(0,152,219,0.7);-moz-box-shadow:0px 0px 5px rgba(0,152,219,0.7);}
+
+;}
+#topmenu ul li {list-style-type:none;padding:0;margin:0;}
+#topmenu ul {height:1.3em;margin:0;}
+#topmenu ul li:first-child {padding-left:0;}
+#topmenu ul li {float:right;line-height:1.3em;background:url(http://d.static.repix.no/css/portals/eurofoto/backgrounds/topmenu.gif) no-repeat right center;color:#666;font-size:1em;}
+#topmenu ul a {display:block;padding:2px 4px 2px 7px;color:#666;text-decoration:none;}
+#topmenu ul a:hover {color:#111;}
+#topmenu li.active a {background:none;color:#111
+;}
+.toplists li {border-top:1px solid #eee;}
+.toplists a {padding:6px 0;display:block;text-decoration:none;color:#666;padding-left:1em;}
+.toplists a:hover {background-color:#eee;color:#000;}
+
+
+.left {text-align:left
+;}
+.center {text-align:center
+;}
+.right {text-align:right
+;}
+ul.inline {list-style:none;display:inline
+;}
+ul.inline li {list-style:none;display:inline;margin-right:1em;}
+a {color:#0068b4
+;}
+a.negative {color:#c00;}
+img.right {float:right;}
+img.left {float:left;}
+
+#main-navigation span.arrow {display:block;width:1.5em;height:4.5em;float:left;background:transparent url(http://d.static.repix.no/css/portals/eurofoto/backgrounds/tinyarrow.png) scroll no-repeat center center;display:block;position:absolute;right:0px;top:0px;}
+#main-navigation span.arrow:hover {background-color:#ccc;}
+#main-navigation span.subhover {background-position:center bottombottom;cursor:pointer;}
+#main-navigation ul.mainnavsub {list-style:none;position:absolute;left:0;top:4.5em;background:#eeeeee;margin:0;padding:0;display:none;float:left;box-shadow:1px 2px 15px rgba(0,0,0,0.3);-webkit-box-shadow:1px 2px 15px rgba(0,0,0,0.3);-moz-box-shadow:1px 2px 15px rgba(0,0,0,0.3);border-radius:7px;-moz-border-radius-bottomleft:7px;-moz-border-radius-bottomright:7px;-webkit-border-bottom-left-radius:7px;-webkit-border-bottom-right-radius:7px;}
+#main-navigation li ul.mainnavsub li {margin:0;padding:0;clear:both;}
+html #main-navigation li ul.mainnavsub li a {float:left;width:13em;border-top:1px solid #ddd;font-weight:normal;-moz-box-shadow:none;box-shadow:none;-webkit-box-shadow:none;color:#222;}
+.topsmallnavigation-subnav {position:absolute;list-style:none;background-color:#fff;border:1px solid #cccdisplay:block;top:0;left:0;z-index:701;border:1px solid #ccc;box-shadow:1px 2px 15px rgba(0,0,0,0.3);-webkit-box-shadow:1px 2px 15px rgba(0,0,0,0.3);-moz-box-shadow:1px 2px 15px rgba(0,0,0,0.3);border-radius:7px;-moz-border-radius-bottomleft:7px;-moz-border-radius-bottomright:7px;-webkit-border-bottom-left-radius:7px;-webkit-border-bottom-right-radius:7px;text-align:left;}
+.topsmallnavigation-subnav a {padding:3px 1em 3px 1em;border:none !important;border-top:1px solid #eee;display:block;float:none;text-align:left;}
+.topsmallnavigation-subnav a:hover {background-color:#eee;float:none;}
+
+ul.menu {margin:0;padding:0;list-style:none;}
+ul.menu li {list-style:none;}
+ul.menu ul {margin:0
+;}
+ul.menu ul ul {padding-left:12px;margin-left:3px;border-left:1px solid #eee
+;}
+ul.menu ul li > a {text-decoration:none;color:#000;display:block;padding:.2em;}
+ul.menu a:hover {background-color:#eee;}

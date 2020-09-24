@@ -1,0 +1,22 @@
+
+.site-logo {
+	
+}
+.site-logo a {
+	text-indent: -9000px;
+	background: #fff url(gfx/logo.gif) no-repeat top left;
+	display: block;
+	height: 100px;
+	width: 400px;
+}
+
+/*frontpage */
+
+#frontpage-main {
+	/*background: #0cf url(gfx/frontpage-main.jpg) no-repeat scroll center center;*/
+	background: #fff url(gfx/frontpage-main.jpg) no-repeat scroll center center;
+	color: #fff;
+	height: 350px;
+}
+
+a.button.white { background-color: #efefef; color: #000 }

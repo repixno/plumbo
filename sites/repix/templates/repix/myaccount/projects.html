@@ -1,0 +1,402 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Mine Prosjekter</tal:block>
+
+	  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<style>
+		
+	</style>
+
+</head>
+
+
+<body>
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	<div id="repixpage-main">
+			<aside id="repixpage-hero" class="js-fullheight">
+    
+		<div class="repixpage-narrow-content">
+	
+
+	<div class="col-md-12">
+		<!-- use if menu is needed -->
+		<div tal:define="global menuitem string:projects" metal:use-macro="common.html/menu" />
+	</div>
+
+	
+
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div class="col-md-8" id="content">
+		<h2 class="bottom yanoneregular" i18n:translate=""></h2>
+		<!--<div class="quiet"
+			tal:content="structure cms:body:50a1a516-a31c-4a8f-acc8-af118dd3ebd6">
+		</div>-->
+
+		<!--<a class="read-more" href="" i18n:translate="">Read more</a>-->
+
+		<ul class="search-categories">
+			<li class="current">
+				<a href="#" class="current" id="show-all" i18n:translate="" style= "color:#ff6b11; ">Mine Prosjekt</a>
+			</li>
+		<!--	<li>
+				<a href="#" id="show-photobooks" i18n:translate="">Photo books</a>
+			</li>
+			<li>
+				<a href="#" id="show-calendars" i18n:translate="">Calendars</a>
+			</li>
+			<li>
+				<a href="#" id="show-gifts" i18n:translate="">Gifts</a>
+			</li>
+			
+			<li class="hide">
+				<a href="#shoe-gifts" id="show-friends-albums" i18n:translate="">Gifts</a>
+			</li>
+			<li class="hide">
+				<a href="#show-cards" id="show-friends-albums" i18n:translate="">Cards</a>
+			</li>
+			-->
+		</ul>
+
+		<hr />
+
+		<tal:block tal:condition="not:exists:projects">
+			<h2 i18n:translate="" class="yanoneregular">You have no projects yet.</h2>
+			<a href="${url:/products/}" i18n:translate="">Go to products and start a project</a>
+		</tal:block>
+
+		<div class="projects col-md-12" id="projects">
+
+			<tal:block tal:repeat="project projects">
+				<div class="row project ${project/type}" id="${project/id}">
+					<div class="col-md-2 append-bottom">
+
+									<a href="${project/url}" title="Edit project" i18n:attributes="title">
+										<img src="/create/thumb/projectthumb/${project/id}"
+											widht="70" height="70" class="left"
+											alt="${project/product/title}"
+										/>
+									</a>
+				
+
+					</div>
+					<div class="col-md-4">
+						<div class="">
+							<p class="small quiet top bottom date" tal:condition="exists:project/date">
+								${formatdate:project/date}
+							</p>
+							<h4 class="top bottom">
+								<tal:block tal:condition="not:project/title">
+									<span class="title" i18n:translate="">No title</span> <a href="#" class="set-title" name="${project/id}" i18n:translate="">Gi navn</a>
+								</tal:block>
+								<span class="title" tal:condition="project/title" tal:attributes="title project/title">
+									<tal:block tal:content="shorten:project/title;35" />
+								</span>
+							</h4>
+							<a href="${project/product/url}" class="quiet small" tal:content="project/product/title" tal:condition="exists:project/product/title"></a>
+						</div>
+						<div class="col-md-4 top append-bottom" tal:condition="project/isShared">
+							<p tal:condition="project/isShared">
+								<label for="" i18n:translate="">This project is shared. Secret url:</label>
+								<input value="${project/shareurl}" class="select-on-click text" tal:condition="exists:project/shareurl" type="text"/><a href="${project/shareurl}" i18n:translate="" class="small">Open shared link</a>
+							</p>
+
+							<div class="addthis_toolbox addthis_default_style" addthis:url="${project/shareurl}" addthis:title="${project/title}" addthis:description="${project/description}">
+								<a class="addthis_button_email"></a>
+								<a class="addthis_button_twitter"></a>
+								<a class="addthis_button_facebook"></a>
+								<a class="addthis_button_myspace"></a>
+								<a class="addthis_button_stumbleupon"></a>
+								<a class="addthis_button_digg"></a>
+								<span class="addthis_separator">|</span>
+								<a class="addthis_button_expanded" i18n:translate="">More</a>
+							</div>
+
+							<p tal:condition="project/description" class="quiet bottom" tal:content="project/description|default">
+								<tal:block i18n:translate="">No description</tal:block>
+							</p>
+						</div>
+						<div class="col-md-4" tal:condition="project/images">
+							<tal:block tal:repeat="image project/images">
+								<tal:block tal:condition="lt:repeat/image/number,10">
+									<img src="${image/thumbnail}" height="25" width="25" class="microthumb"/>
+								</tal:block>
+							</tal:block>
+
+							<tal:block tal:condition="not:project/images">
+								<tal:block i18n:translate="">No images</tal:block>
+							</tal:block>
+
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="text-right">
+							<a href="#" class="duplicate-project btn btn-info" i18n:translate="" name="${project/id}">Duplicate</a>&nbsp;&nbsp;  &nbsp;&nbsp;
+							<!--<a href="#" class="addtocart-project" i18n:translate="" name="${project/id}">Add to cart</a>&nbsp;&nbsp; | &nbsp;&nbsp;-->
+							<a href="#" class="negative delete-project btn btn-danger" i18n:translate="" name="${project/id}">Delete</a>&nbsp;&nbsp;  &nbsp;&nbsp;
+						
+						
+						<!--	<a href="#" class="button share-project" name="${project/id}" i18n:translate="" tal:condition="not:project/isShared">Share project</a>
+							<a href="#" class="button negative unshare-project" name="${project/id}" i18n:translate="" tal:condition="project/isShared">Stop sharing</a>-->
+
+							<a href="${project/url}" name="${project/id}" class="btn btn-success" i18n:translate="" >Open project</a>
+						</div>
+					</div>
+					<hr />
+				</div>
+			</tal:block>
+		</div>
+
+		<div class="display-none" title="Delete project" id="delete-project-dialog" i18n:attributes="title">
+			<p i18n:translate="" class="hide">Do you really want to delete this project?</p>
+		</div>
+
+		<div class="display-none" title="Share project" id="share-project-dialog" i18n:attributes="title">
+			<p i18n:translate="" class="hide">Do you want to share this project?</p>
+		</div>
+
+		<div class="display-none" title="Stop sharing of project" id="unshare-project-dialog" i18n:attributes="title">
+			<p i18n:translate="" class="hide">Do you want to stop sharing this project?</p>
+		</div>
+
+		<div class="display-none" title="Duplicate project" id="duplicate-project-dialog" i18n:attributes="title">
+			<p i18n:translate="" class="hide">Do you want to duplicate this project?</p>
+			<label for="duplicate_project_title_projectid" i18n:translate="">Title</label>
+			<input id="duplicate_project_title_projectid" type="text" />
+		</div>
+
+		<div class="display-none" title="Rename project" id="set-project-title-dialog" i18n:attributes="title">
+			<p i18n:translate="" class="hide">Do you want to rename this project?</p>
+		</div>
+
+	</div>
+	<!-- use if menu is needed -->
+	
+
+
+	
+	
+</div>
+</aside>
+</div>
+<script type="text/javascript">
+	$(document).ready( function() {
+
+		$('.select-on-click').click( function() {
+			$(this).select()
+		});
+
+		$('.delete-project').click( function() {
+		   var projectid = $(this).attr('name');
+         var currentItem = $(this).parent().parent().parent();
+
+	      $('#delete-project-dialog').
+	        data('projectid',projectid).
+	        data('currentItem',currentItem).
+	        dialog('open');
+
+			return false;
+		});
+
+		$('#delete-project-dialog').dialog({
+		   autoOpen: false,
+			buttons: {
+				'<tal:block i18n:translate="">No, keep it</tal:block>': function() {
+					$('#delete-project-dialog').dialog('close');
+				},
+				'<tal:block i18n:translate="">Yes, delete the project</tal:block>': function() {
+				   projectid = $(this).data('projectid');
+				   currentItem = $(this).data('currentItem');
+
+					$.post('/api/1.0/project/delete', {
+						projectid: projectid
+					}, function() {
+						$(currentItem).hide('slow').remove();
+						$('#delete-project-dialog').dialog('close');
+					});
+				}
+			}
+		});
+
+		$('.share-project').click( function() {
+		   var projectid = $(this).attr('name');
+
+	      $('#share-project-dialog').
+	        data('projectid',projectid).
+	        dialog('open');
+
+			return false;
+		});
+
+		$('#share-project-dialog').dialog({
+		   autoOpen: false,
+			buttons: {
+				'<tal:block i18n:translate="">No</tal:block>': function() {
+					$('#share-project-dialog').dialog('close');
+				},
+				'<tal:block i18n:translate="">Yes, share the project</tal:block>': function() {
+				   projectid = $(this).data('projectid');
+
+					$.post('/api/1.0/project/share', {
+						projectid: projectid
+					}, function(msg) {
+						window.location.reload();
+					});
+				}
+			}
+		});
+
+		$('.unshare-project').click( function() {
+		   var projectid = $(this).attr('name');
+
+	      $('#unshare-project-dialog').
+	        data('projectid',projectid).
+	        dialog('open');
+
+			return false;
+		});
+
+		$('#unshare-project-dialog').dialog({
+		   autoOpen: false,
+			buttons: {
+				'<tal:block i18n:translate="">No, keep sharing</tal:block>': function() {
+					$('#unshare-project-dialog').dialog('close');
+				},
+				'<tal:block i18n:translate="">Yes, stop sharing</tal:block>': function() {
+				   projectid = $(this).data('projectid');
+
+					$.post('/api/1.0/project/unshare', {
+						projectid: projectid
+					}, function(msg) {
+						window.location.reload();
+					});
+				}
+			}
+		});
+
+		$('.duplicate-project').click( function() {
+			var projectid = $(this).attr('name');
+
+			$('#duplicate-project-dialog').
+			   find('label').attr('for', 'duplicate_project_title_'+projectid ).
+		   end().
+		      find('input').attr('id', 'duplicate_project_title_'+projectid ).
+	      end().
+	         data('projectid', projectid ).
+	         dialog('open');
+
+         $('#duplicate-project-dialog label').focus();
+
+			return false;
+		});
+
+		$('#duplicate-project-dialog').dialog({
+			autoOpen: false,
+		   buttons: {
+				'<tal:block i18n:translate="">No</tal:block>': function() {
+					$('#duplicate-project-dialog').dialog('close');
+				},
+				'<tal:block i18n:translate="">Yes, duplicate the project</tal:block>': function() {
+
+				   projectid = $(this).data('projectid');
+
+					var newTitle = $('#duplicate_project_title_'+projectid).val();
+
+					$.post('/api/1.0/project/duplicate', {
+						projectid: projectid,
+						title: newTitle
+					}, function(msg) {
+						$('#duplicate-project-dialog').dialog('close');
+						window.location.reload();
+					});
+				}
+			}
+		});
+
+		$('.addtocart-project').click( function() {
+
+		   var projectid = $(this).attr('name');
+
+		   $.post('/cart/mediaclip/addfromlist', {
+		      id: projectid
+				}, function(msg) {
+					window.location.href = '/cart/mediaclip/accessories';
+				});
+
+		   return false;
+		});
+
+		$('.set-title').click( function() {
+			var link = this;
+			var projectid = $(this).attr('name');
+			$('#set-project-title-dialog').append('<label for="new_project_title_'+projectid+'" i18n:translate="">Title</label><input id="new_project_title_'+projectid+'" type="text" />');
+			$('#set-project-title-dialog').dialog({
+				buttons: {
+					'<tal:block i18n:translate="">Cancel</tal:block>': function() {
+						$('#set-project-title-dialog').dialog('close');
+					},
+					'<tal:block i18n:translate="">Save</tal:block>': function() {
+
+						var newTitle = $('#new_project_title_'+projectid).val();
+
+						$.post('/api/1.0/project/rename', {
+							projectid: projectid,
+							title: newTitle
+						}, function(msg) {
+							$(link).prev().text( newTitle );
+							$(link).remove();
+							$('label, input', '#set-project-title-dialog').remove();
+							$('#set-project-title-dialog').dialog('close');
+						});
+					}
+				}
+			});
+			return false;
+		});
+
+		$('#show-all').click( function() {
+			$('.project', '#projects').show();
+			$('.search-categories li a').removeClass('current');
+			$(this).addClass('current');
+			return false;
+		});
+		$('#show-photobooks').click( function() {
+			$('.Photobook', '#projects').show();
+			$('div.project', '#projects').filter(':not(.Photobook)').hide();
+			$('.search-categories li a').removeClass('current');
+			$(this).addClass('current');
+			return false;
+		});
+		$('#show-calendars').click( function() {
+			$('.Calendar', '#projects').show();
+			$('div.project', '#projects').filter(':not(.Calendar)').hide();
+			$('.search-categories li a').removeClass('current');
+			$(this).addClass('current');
+			return false;
+		});
+		$('#show-gifts').click( function() {
+			$('.Poster', '#projects').show();
+			$('div.project', '#projects').filter(':not(.Gifts)').hide();
+			$('.search-categories li a').removeClass('current');
+			$(this).addClass('current');
+			return false;
+		});
+
+	})
+</script>
+
+<script type="text/javascript" src="//s7.addthis.com/js/250/addthis_widget.js"></script>
+<script type="text/javascript">
+var addthis_config = {
+	username: "eurofoto",
+	ui_language: "${i18n/country}"
+}
+</script>
+</body>
+</html>

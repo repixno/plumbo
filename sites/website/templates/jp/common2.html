@@ -1,0 +1,170 @@
+<tal:block metal:define-macro="head" tal:omit-tag="">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Studentplakat & Studentskyltar snabbt och enkelt från Japan Photo studentplakat!" />
+	<meta name="Kewords" content="Studentplakat, Studentskylt, Studentbanderoll, Studentnalle, Visselpipa"/>
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="/studentstatic/favicon.ico"  />
+
+    <title>Studentplakat & Studentskyltar från Japan Photo</title>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="/studentstatic/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet" />
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="static/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/studentstatic/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Bootstrap core CSS -->
+    <link href="/studentstatic/css/bootstrap/main.css" rel="stylesheet" />
+    <link href="/studentstatic/css/template.css" rel="stylesheet" />
+    <link href="/studentstatic/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="/studentstatic/js/jquery-1.12.0.min.js"></script>
+    <script src="/studentstatic/js/jquery-ui.min.js"></script>
+    <script src="/studentstatic/js/bootstrap.min.js"></script>
+    <script src="/studentstatic/js/common.js"></script>
+    
+</tal:block>
+
+<tal:block metal:define-macro="loader" tal:omit-tag="">
+
+    <div id="loader-overlay">
+		<div class="loadingInfo">
+			<img src="${static:gfx/gui/ajax-loader-gray.gif}" /><br/>
+			<br/>
+			<h3>Laddar, vänligen vänta....</h3><br/>
+			<p>
+				<tal:block  i18n:translate="">
+				If you waited too long, try refreshing the page.
+				</tal:block><br/>
+				<a href="." class="refresh" i18n:translate="">Refresh</a>
+			</p>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		$('#loader-overlay')
+			.css('opacity', '0.8')
+			.css('margin','0')
+			.width( $(window).width() )
+			.height( $(window).height() );
+
+		$(document).ready( function() {
+			$(window).load( function() {
+				$('#loader-overlay').fadeOut('slow', function() {
+					$(this).remove();
+				})
+			});
+			$('.refresh').click( function() {
+				window.location.reload();
+				return false;
+			});
+		});
+	</script>
+
+</tal:block>
+
+<tal:block metal:define-macro="top" tal:omit-tag="">
+
+    
+    <div class="top-header hidden-xs">
+        <div class="container">
+            <div class="col-xs-9 logo">
+                <!--<a class="navbar-brand" href="/"><img class="img-responsive" src="//www.japanphoto.se/wcsstore/CEWEStorefrontAssetStore/Attachment/japan-photo-cewe-fotobok.png"/></a>
+				-->
+				<a class="navbar-brand" href="https://www.japanphoto.se/"><img class="img-responsive" src="/studentstatic/gfx/japan-photo-cewe-fotobok.png"/></a>
+                
+                <span class=""><h1>STUDENTPLAKAT</h1></span>
+            </div>
+            <div class="col-md-3 shoppingcart">
+                <ul class="nav navbar-right">
+                <!--<li><a href="/myaccount" ><div i18n:translate="">My page</div></a></li>-->
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-shopping-cart" style="font-size: 16px;"></span>
+                        Varukorg
+                        <span class="caret"></span>
+                        <div>
+                            <tal:block tal:condition="exists: cart">
+                                <tal:block tal:condition="cart/totalitems">
+                                    <span id="cart-total-items" tal:content="cart/totalitems"></span> <tal:block i18n:translate="">products</tal:block> , 
+                                    <span id="cart-total-price" tal:content="formatprice:cart/totalprice"></span> kr
+                                </tal:block>
+                            </tal:block>
+                            <tal:block tal:condition="not:cart/totalitems">
+								<span id="cart-total-items"> 0 </span> <tal:block i18n:translate="">products</tal:block> , 
+								<span id="cart-total-price"> 0 </span> kr
+                            </tal:block>
+                            </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a href="/checkout" id="go-to-checkout" class="" i18n:translate="">Go to checkout</a>
+                      </li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="/cart/?from=main" id="cart-toggle" style="color:black" i18n:translate="">Show cart</a></li>
+                    </ul>
+                  </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default">
+       <div class="container">
+         <div class="navbar-header">
+           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+             <span class="sr-only">Toggle navigation</span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+           </button>
+           <a class="navbar-brand visible-xs" href="#">Studentplakat</a>
+           
+         </div>
+         <div id="navbar" class="navbar-collapse collapse">
+           <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Startsida</a></li>
+            <li><a href="http://support.japanphoto.se/butiker/" target="_blank">Butiker</a></li>
+            <li><a href="http://support.japanphoto.se/" target="_blank">Kundservice</a></li>
+            <li class="Produkter">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Produkter <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/">Studentplakat</a></li>
+				 <li><a href="/create/banderoll/">Banderoll</a></li>
+                <li><a href="/produkter/tillbehor/">Tillbehör</a></li>
+              </ul>
+            </li>
+          </ul>
+         </div><!--/.navbar-collapse -->
+       </div>
+     </nav>
+
+</tal:block>
+
+<tal:block metal:define-macro="footer" tal:omit-tag="">
+    
+    
+    <div class="footer">
+        <div class="container text-center top-15">
+        <footer>
+          <p>
+              Japan Photo Sverige AB<br/>
+              Org.nr: 556381-1321
+          </p>
+          <p>
+              Telefon webbutik: 031-619445<br/>
+              kundservice@japanphoto.se
+          </p>
+        </footer>
+      </div>
+    </div>
+    
+</tal:block>

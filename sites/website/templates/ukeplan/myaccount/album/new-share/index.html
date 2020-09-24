@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../../../${templates}/common.html/head" />
+
+</head>
+
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="../../../../${templates}/common.html/top" />
+	<div tal:define="global menuitem string:albums" metal:use-macro="../../common.html/menu" />
+
+	<div class="span-20 last" tal:condition="exists:album">
+		<div class="span-20 last append-bottom">
+			<a href="${album/albumurl}" i18n:translate="">Back to album</a>
+		</div>
+		<div class="span-2">
+			<a href="${album/albumurl}">
+				<img src="${album/thumbnailurl}" title="${album/title}" height="40"/>
+			</a>
+		</div>
+
+		<div class="span-14">
+			<h2><tal:block i18n:translate="">Share this album</tal:block>: <span class="quiet" tal:content="album/title">Albumnavn</span></h2>
+		</div>
+	
+	</div>
+</div>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin statistikk</title>
+<tal:block metal:use-macro="../common.html/css" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="content">
+				<div class="row">
+	
+			<!--<h2>Eurofoto Smilfoto Orders Admin</h2>-->
+			<tal:block metal:use-macro="../common.html/topmenu" />
+	
+		
+		<div class="col-md-12 text-right">
+                    <form method="GET">
+                 
+                        <label for="from">FRA:</label>
+                        <input type="text" name="from" value="${from}"/>
+                        <label for="to">TIL:</label>
+                        <input type="text" name="to" value="${to}"/>
+                        <input type="submit" class="btn btn-info" value="Enter"/>
+                    </form>
+                </div>
+                
+               
+         	
+			   <a href="/stabburet/stats2018/xls?from=${from}&to=${to}" class="btn btn-info" i18n:translate="">Download as .XLS</a>
+			 
+         		<div class="content">
+				<div class="row">
+	
+		<div class="col-md-12">
+			
+			<h3>Bestilte Stabburet</h3>
+                    
+                    <table class="">
+                        <thead>
+                            <tr>
+								    <th>
+                                    Antall
+                                </th>  
+									 
+								 <th>
+                                    Ordrenr
+                                </th>
+                                <th>
+                                    Navn
+                                </th>
+								<th>
+                                    Adresse
+                                </th>
+								<th>
+                                    Postnr
+                                </th>
+								<th>
+                                    Sted
+                                </th>
+								<th>
+                                    Mobil
+                                </th>
+								<th>
+                                    Epost
+                                </th>
+                                
+								<th>
+                                    Samtykke Orkla
+                                </th>
+                                <th>
+                                    Tilpassninger
+                                </th>
+								
+								<th>
+                                    Annonser
+                                </th>
+								
+								<th>
+                                  Samtykke Repix
+                                </th>
+								<th>
+                                  Kunde Registrert
+                                </th>
+								
+								<th>
+                                    Enhets
+                                </th>
+								<th>
+                                    Tidspunkt
+                                </th>
+								<th>
+                                    Malid
+                                </th>
+								<th>
+                                    Tekst til produkt
+                                </th>
+								<th>
+                                    Produkt
+                                </th>
+								
+								
+                            </tr>
+                        </thead>
+                        <tbody tal:condition="exists:stats">
+						<tr tal:repeat="order stats">
+							     <td tal:content="repeat/order/key">
+								
+							</td>
+						<td tal:content="order/ordrenr" />
+						<td tal:content="order/namn" />
+						<td tal:content="order/adresse1" />
+						<td tal:content="order/postnr" />
+						<td tal:content="order/sted" />
+						<td tal:content="order/mphone" />
+						<td tal:content="order/epost" />
+						<td tal:content="order/newsletter_orkla" />
+						<td tal:content="order/stabburet_tilpassninger" />
+						<td tal:content="order/stabburet_annonser" />
+						<td tal:content="order/newsletter_repix" />
+						<td tal:content="order/registrert" />
+						<td tal:content="order/source" />
+						<td tal:content="order/tidspunkt" />
+						<td tal:content="order/malid" />
+						<td tal:content="order/text" />
+						<td tal:content="order/tekst" />
+						</tr>
+                        </tbody>
+                        
+                        
+                        
+                    </table>
+                    
+              	 </div>
+			 </div>
+		 </div>
+		
+		</div>
+        </div>
+        </div>
+    
+</body>
+</html>

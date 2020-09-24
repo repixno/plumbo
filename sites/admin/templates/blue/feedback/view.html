@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Login - Eurofot Admin</title>
+<tal:block metal:use-macro="../common.html/css" />
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		<tal:block metal:use-macro="../common.html/languages" />
+		<div id="content">
+			<div id="box">
+				
+			   <h3>Unprocessed feedback</h3>
+				
+			   <table width="100%">
+			   <tr>
+               <th width="10%">ID</th>
+			      <td>#${feedback/id}</td>
+		      </tr>
+		      <tr>
+               <th>Logged</th>
+			      <td tal:content="formatdatetime:feedback/logged"></td>
+			   </tr>
+		      <tr tal:condition="feedback/user">
+               <th>User</th>
+			      <td tal:content="feedback/user/fullname">User Name</td>
+			   </tr>
+		      <tr>
+               <th>IP-address</th>
+			      <td>${feedback/ipaddress}</td>
+			   </tr>
+		      <tr>
+               <th>Server</th>
+			      <td>${feedback/serverhost}</td>
+			   </tr>
+		      <tr tal:condition="feedback/trace">
+               <th>Trace</th>
+			      <td tal:content="feedback/trace">Crash report</td>
+			   </tr>
+		      <tr tal:condition="feedback/content">
+               <th>Trace</th>
+			      <td tal:content="feedback/content">Crash report</td>
+			   </tr>
+            <tr tal:condition="feedback/fields" tal:repeat="field feedback/fields">
+               <th width="10%">${field/key}</th>
+               <td>${field/value}</td>
+            </tr>
+		      <tr>
+			      <td><a href="/feedback/">Back</a></td>
+			      <td>&nbsp;</td>
+			   </tr>
+			   </table>
+				
+			</div>
+		</div>
+	</div>
+	<div id="footer"></div>
+</body>
+</html>

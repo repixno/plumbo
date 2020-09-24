@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head metal:use-macro="../../../../${templates}/common.html/head">
+
+	<style type="text/css">
+
+		table.order-history { border: none;}
+		table.order-history td{
+			padding: 0;
+			margin: 0;
+			border: none;
+		}
+
+	</style>
+
+</head>
+
+<body>
+	
+	<tal:block metal:define-macro="tablehead" >
+		<thead>
+			<tr>
+				<td>Artikkelnr</td>
+				<td>Tekst</td>
+				<td>Antall</td>
+				<td>Pris</td>
+				<td>Sum</td>
+			</tr>
+		</thead>
+	</tal:block>
+	<div metal:use-macro="../../../../${templates}/common.html/top" />
+	<div class="container">
+
+	
+
+	<!-- use if menu is needed -->
+	<div  class="col-md-2" tal:define="global menuitem string:orders" metal:use-macro="../common.html/menu" />
+
+
+	<div class="col-md-10">
+		
+		
+		<tal:block tal:repeat="project orderarray">
+			
+			<h3 tal:content="repeat/project/key"></h3>
+			
+			<table class="table">
+				<tal:block metal:use-macro="tablehead" />
+				<tbody>
+					<tr tal:repeat="order project">
+						<td tal:content="order/artikkelnr"></td>
+						<td tal:content="order/tekst"></td>
+						<td tal:content="order/antall"></td>
+						<td tal:content="order/pris"></td>
+						<td tal:content="order/total"></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			
+			
+		</tal:block>
+		
+	</div>
+
+
+	<div metal:use-macro="../../../../${templates}/common.html/right-menu" />
+
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

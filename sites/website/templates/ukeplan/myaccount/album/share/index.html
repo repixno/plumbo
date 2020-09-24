@@ -1,0 +1,469 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../../../${templates}/common.html/head" />
+
+	<style type="text/css">
+
+		.friends-container, .groups-container {
+			height: 240px;
+			overflow-y: auto;
+			overflow-x: hidden;
+			text-align: left;
+		}
+
+		#friends-dialog li {
+			list-style: none;
+			padding: .5em 0;
+			border-bottom: 1px solid #ccc;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="../../../../${templates}/common.html/top" />
+	<div tal:define="global menuitem string:albums" metal:use-macro="../../common.html/menu" />
+
+	<div class="span-20 last" tal:condition="exists:album">
+		<div class="span-20 last append-bottom">
+			<a href="${album/albumurl}" i18n:translate="">Back to album</a>
+		</div>
+		<div class="span-2">
+			<a href="${album/albumurl}">
+				<img src="${album/thumbnailurl}" title="${album/title}" height="40"/>
+			</a>
+		</div>
+
+		<div class="span-14">
+			<h2><tal:block i18n:translate="">Share this album</tal:block>: <span class="quiet" tal:content="album/title">Albumnavn</span></h2>
+		</div>
+
+		<div class="span-4 right last">
+			<a href="#" class="button red" i18n:translate="" id="cancel-all-sharing">Abort all sharing</a>
+		</div>
+
+		<hr />
+
+		<div class="span-8" tal:condition="not:album/shared/link">
+			<div class="box span-7 last">
+				<div class="span-7 last">
+					<h3 tal:content="cms:title:b09e0863-75bf-4412-816d-c1fe07705f88">Share with link</h3>
+					<div tal:content="structure cms:body:b09e0863-75bf-4412-816d-c1fe07705f88"></div>
+				</div>
+				<a class="button blue" href="/myaccount/share/link/enable" id="show-share-with-link-dialog" i18n:translate="">
+					Start share with link
+				</a>
+
+
+				<div class="hide" id="share-link-warning">
+					<h3 tal:content="cms:title:0fb721ae-4b4e-4036-b32d-fc9bd78739aa">All people with this link can access your album</h3>
+					<div tal:content="structure cms:body:0fb721ae-4b4e-4036-b32d-fc9bd78739aa"></div>
+
+					<a href="#" class="button red" id="disable-share-with-link" i18n:translate="">Cancel</a>
+					<a href="#" class="button green"  id="enable-share-with-link" i18n:translate="">Confirm</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="span-8" tal:condition="album/shared/link">
+			<div class="box shared span-7 last">
+				<h3 i18n:translate="">Shared with link</h3>
+
+				<p i18n:translate="" tal:condition="not:album/shared/password">This album is available for anyone who knows this url</p>
+				<p i18n:translate="" tal:condition="album/shared/password">This album is available for anyone who knows this url and the password.</p>
+
+				<input type="text" class="text span-7 last" value="${shareurl}" id="share-url" />
+
+				<p class="small bottom"><strong i18n:translate="">Tips</strong>: <span class="quiet" i18n:translate="">Press Ctrl+C (or + c on a mac) to copy the link and paste it anywhere you like with ctrl+v (+v on a mac)</span></p>
+
+				<script type="text/javascript">
+					$(document).ready( function() {
+						$('#share-url').focus().select();
+						$('#share-url').bind('click', function() {
+							$(this).select();
+						})
+					});
+
+				</script>
+
+				<div class="radioLabel selected" tal:condition="not:album/shared/password">
+					<input type="radio" id="no-password" name="use-password" checked="checked"/>
+					<label for="no-password" i18n:translate="">No password</label>
+				</div>
+				<div class="radioLabel" tal:condition="album/shared/password">
+					<input type="radio" id="no-password" name="use-password"/>
+					<label for="no-password" i18n:translate="">No password</label>
+				</div>
+
+				<div class="radioLabel" tal:condition="not:album/shared/password">
+					<input type="radio" id="use-password" name="use-password"/>
+					<label for="use-password" i18n:translate="">Use password</label>
+					<input type="text" class="text span-4" id="password"/> <a class="small button" id="save-password" i18n:translate="">Save</a>
+				</div>
+				<div class="radioLabel selected" tal:condition="album/shared/password">
+					<input type="radio" id="use-password" name="use-password" checked="checked"/>
+					<label for="use-password" i18n:translate="">Use password</label>
+					<input type="text" class="text span-4" id="password" value="${album/password}"/> <a class="button small" id="save-password" i18n:translate="">Save</a>
+				</div>
+
+
+				<script type="text/javascript">
+					$(document).ready( function() { $('.radioLabel').radioLabel(); });
+				</script>
+
+				<a class="button hide" href="${shareurl}" i18n:translate="" id="show-share-link-methods-dialog">Go to shared page</a>
+
+				<a class="button red" href="/myaccount/share/link/disable" id="disable-share-with-link" i18n:translate="">
+					Stop sharing
+				</a>
+			</div>
+
+			<div class="hide" id="share-link-methods-dialog">
+				<h3>Choose methods to shere link</h3>
+				<ul>
+					<li>Facebook</li>
+					<li>Nettby</li>
+					<li>E-mail</li>
+
+				</ul>
+			</div>
+		</div>
+
+		<tal:block tal:condition="not:album/shared/groups">
+		<div class="span-6" tal:condition="not:album/shared/friends">
+			<div class="box span-5 last">
+				<h3 tal:content="cms:title:abb3ac82-6cc7-4692-b9a6-8958c3384724">Use friend list</h3>
+				<div tal:content="structure cms:body:abb3ac82-6cc7-4692-b9a6-8958c3384724"></div>
+
+				<a class="button green" href="/myaccount/share/friendlist" id="choose-friends" i18n:translate="">
+					Choose friends
+				</a>
+
+				<a href="/myaccount/friends" i18n:translate="">Edit friend list</a>
+			</div>
+		</div>
+		</tal:block>
+		<input type="hidden" name="id" value="${album/id}" />
+
+		<div id="friends-dialog" class="hide" title="Choose friends and groups" i18n:attributes="title">
+			<form id="friends-and-groups">
+				<div class="span-9 friends-container colborder">
+					<h4 i18n:translate="">Friends</h4>
+					<ul class="friends">
+						<tal:block tal:repeat="friend friends" >
+							<li>
+								<input tal:condition="friend/shared"
+									type="checkbox" name="friend" value="${friend/id}" id="friend_id_${friend/id}"
+									checked="checked"
+									style="position: static;"
+								/>
+								<input tal:condition="not:friend/shared"
+									type="checkbox" name="friend" value="${friend/id}" id="friend_id_${friend/id}"
+									style="position: static;"
+								/>
+								<label for="friend_id_${friend/id}">
+									 <tal:block tal:content="friend/username" /> <a href="#" class="notify ${conditionalmatch:friend/shared,1,,hide}" i18n:translate="">Re-send email</a>
+								</label>
+							</li>
+						</tal:block>
+					</ul>
+				</div>
+				<div class="span-6 last groups-container">
+					<h4 i18n:translate="">Groups</h4>
+					<ul class="groups">
+						<tal:block tal:repeat="group groups">
+							<li>
+								<input
+									tal:condition="group/shared"
+									type="checkbox" name="group" value="${group/id}" id="group_id_${group/id}"
+									checked="checked"
+									style="position: static;"
+								/>
+								<input
+									tal:condition="not:group/shared"
+									type="checkbox" name="group" value="${group/id}" id="group_id_${group/id}"
+									style="position: static;"
+								/>
+								<label for="group_id_${group/id}">
+									<tal:block tal:content="group/name"></tal:block>
+									<a href="#" class="notify ${conditionalmatch:group/shared,1,,hide}" i18n:translate="">Re-send email</a>
+								</label>
+							</li>
+						</tal:block>
+					</ul>
+				</div>
+				<div class="span-16 last right">
+					<button class="red cancel" i18n:translate="">Cancel</button>
+					<button class="green save" i18n:translate="">Save</button>
+				</div>
+				<hr class="clear clearfix space" />
+			</form>
+		</div>
+
+		<div class="span-6" tal:condition="album/shared/friendsorgroups">
+			<div class="box">
+
+				<h3 i18n:translate="">Shared with friends</h3>
+
+				<tal:block tal:condition="album/shared/friends">
+					<h4 i18n:translate="">Friends</h4>
+					<ul class="friends">
+						<tal:block tal:repeat="friend friends">
+							<li tal:condition="friend/shared">
+								<tal:block tal:content="friend/username" />
+								<!--<a href="#" class="negative">Remove</a>-->
+							</li>
+						</tal:block>
+					</ul>
+				</tal:block>
+
+				<tal:block tal:condition="album/shared/groups">
+					<h4 i18n:translate="">Groups</h4>
+					<ul class="groups">
+						<tal:block tal:repeat="group groups">
+							<li tal:condition="group/shared">
+								<tal:block tal:content="group/name" />
+								<!--<a href="#" class="negative">Remove</a>-->
+							</li>
+						</tal:block>
+					</ul>
+				</tal:block>
+
+				<form class="quick-add hide">
+					<label for="new-friend" i18n:translate="">Quickly add a new friend</label>
+					<input type="text" id="new-friend-email" class="text span-3"/>
+					<a class="button" i18n:translate="">Add</a>
+				</form>
+
+				<a class="button green" href="/myaccount/share/friendlist" id="choose-friends" i18n:translate="">
+					Edit
+				</a>
+				<a class="button red" href="/myaccount/share/friendlist" i18n:translate="" id="disable-friend-sharing">
+					Stop sharing
+				</a>
+
+				<script	type="text/javascript">
+					$(document).ready( function() {
+						$('#save-friends').click( function() {
+							var friends = new Array();
+							$(':checkbox:checked','form#friends').each( function(i, item) {
+								friends.push(item.value);
+							});
+							$.post('/api/1.0/album/share/friends', {albumid: albumid, friends: friends.join(','), groups: '-'});
+						});
+
+						$(':checkbox','form#friends').change( function() {
+							$('#save-friends').trigger('click');
+						});
+					});
+				</script>
+			</div>
+		</div>
+
+
+		<div class="span-6 last" tal:condition="not:album/shared/public">
+			<div class="box">
+				<h3 tal:content="cms:title:bfba2d0f-ff1c-4fbc-a34a-87d50a73e6ae">Publish in gallery</h3>
+				<div tal:content="structure cms:body:bfba2d0f-ff1c-4fbc-a34a-87d50a73e6ae"></div>
+				<!--<div class="right"><a>Read more</a></div>-->
+				<a class="button blue" href="/myaccount/share/gallery" id="enable-public" i18n:translate="">
+					Publish in gallery
+				</a>
+			</div>
+		</div>
+
+		<div class="span-6 last" tal:condition="album/shared/public">
+			<div class="box">
+				<h3 i18n:translate="">Published in the gallery</h3>
+				<p class="warning" i18n:translate="">This album is public!</p>
+				<a href="" tal:attributes="href galleryurl" i18n:translate="">Go to album</a>
+				<a class="button red" href="/myaccount/share/gallery" id="disable-public" i18n:translate="">
+					Remove from gallery
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	var ajaxloader = '<img src="${static:gfx/gui/ajax-loader.gif}" id="loader" class="loader"/>';
+	var albumid = '<tal:block tal:content="album/id" />';
+
+	$(document).ready( function() {
+
+	   $('#friends-dialog').dialog({
+         width: 680,
+         height: 350,
+         autoOpen: false
+      });
+
+		$('#cancel-all-sharing').click( function() {
+			$(this).after(ajaxloader);
+			$.post('/api/1.0/album/share/friends/disableall', {albumid: albumid}, function() {
+				$.post('/api/1.0/album/share/link/disable', {albumid: albumid}, function() {
+					$.post('/api/1.0/album/share/public/disable', {albumid: albumid}, function() {
+						window.location.reload();
+					});
+				});
+			});
+			return false;
+		});
+
+		$('#disable-friend-sharing').click( function() {
+			$.post('/api/1.0/album/share/friends/disableall', {albumid: albumid}, function() {
+				window.location.reload();
+			});
+			return false;
+		});
+
+		$('#choose-friends').click( function() {
+			$('#friends-dialog').dialog( 'open' );
+			return false;
+		});
+
+		$('ul.friends .notify', '#friends-dialog').click( function() {
+			$(this).after(ajaxloader);
+			var element = this;
+
+			$.post('/api/1.0/album/share/notify', { albumid: albumid, userid: $(this).parent().parent().find('input').attr('value') }, function(data) {
+				if(!data.result) {
+					alert('error: ' + data.message );
+				}
+				$(element).next('.loader').remove();
+				return false;
+			}, "json");
+
+			return false;
+		});
+
+
+		$('.cancel', '#friends-dialog').click( function() {
+		   $('#friends-dialog').dialog( 'close' );
+			return false;
+		});
+
+		$('.save', '#friends-dialog').click( function() {
+			$(this).after(ajaxloader);
+
+			var friends = new Array();
+			$('[name=friend]:checkbox:checked','#friends-dialog').each( function(i, item) {
+				friends.push(item.value);
+			});
+			var groups = new Array();
+			$('[name=group]:checkbox:checked','#friends-dialog').each( function(i, item) {
+				groups.push(item.value);
+			});
+
+			var element = this;
+
+			$.post('/api/1.0/album/share/friends/',{ albumid: albumid, friends: friends.join(','), groups: groups.join(',') }, function(data) {
+				if(!data.result) {
+					pageTracker._trackEvent('Error', 'Api','Sharing', '/api/1.0/album/share/friends/');
+					return false;
+				}
+				$(element).next('.loader').remove();
+				 window.location.reload();
+
+				return false;
+			}, 'json');
+
+			return false;
+		});
+
+		$('ul.groups .notify', '#friends-dialog').click( function() {
+			$(this).after(ajaxloader);
+			var element = this;
+
+			$.post('/api/1.0/album/share/notify', { albumid: albumid, groupid: $(this).parent().parent().find('input').attr('value') }, function(data) {
+				if(!data.result) {
+					alert('error: ' + data.message );
+				}
+				$(element).next('.loader').remove();
+				return false;
+			}, "json");
+
+			return false;
+		});
+
+		$('#show-share-with-link-dialog').click( function() {
+			$('#share-link-warning').dialog();
+			return false;
+		});
+
+		$('#enable-share-with-link').click( function() {
+			$(this).after(ajaxloader);
+			$.post('/api/1.0/album/share/link/enable', {albumid: albumid}, function(data) {
+				window.location.reload();
+			});
+			return false;
+		});
+
+		$('#disable-share-with-link').click( function() {
+			$(this).after(ajaxloader);
+			$.post('/api/1.0/album/share/link/disable', {albumid: albumid}, function(data) {
+				window.location.reload();
+			});
+			return false;
+		});
+
+		$('#enable-public').click( function() {
+			$(this).after(ajaxloader);
+			$.post('/api/1.0/album/share/public/enable', {albumid: albumid}, function(data) {
+				window.location.reload();
+			});
+			return false;
+		});
+
+		$('#disable-public').click( function() {
+			$(this).after(ajaxloader);
+			$.post('/api/1.0/album/share/public/disable', {albumid: albumid}, function(data) {
+				window.location.reload();
+			});
+			return false;
+		});
+
+		$('#enable-password, #save-password').bind('click', function() {
+			$(this).after(ajaxloader);
+
+			$.post('/api/1.0/album/set/password/', {albumid: albumid, password: $('#password').attr('value') }, function(data) {
+				$('#loader').remove();
+			});
+		});
+
+		$('#disable-password').bind('click', function() {
+			$(this).after(ajaxloader);
+			$.post('/api/1.0/album/set/password/', {albumid: albumid, password: ''}, function(data) {
+				$('#loader').remove();
+			});
+		});
+
+		$('#use-password').bind('click', function() {
+			$(this).after(ajaxloader);
+			$.post('/api/1.0/album/set/password/', {albumid: albumid, password: $('#password').attr('value')}, function(data) {
+				$('#loader').remove();
+			} );
+		});
+
+		$('#no-password').bind('click', function() {
+			$(this).after(ajaxloader);
+			$.post('/api/1.0/album/set/password/', {albumid: albumid, password: '' }, function(data) {
+				$('#loader').remove();
+			});
+		});
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!-- HEAD -->
+<head metal:define-macro="head" tal:omit-tag="">
+	<meta name="description" content="Vi printer dine digital bilder og gir deg norges beste fotobok. Med sikker lagring er bildene dine lagret trygt hos oss. Vi har også et stort utvalg av fotogaver, takkekort, kalendere, julegaver, julegavetips, fotokort og julekort m.m." />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+	<link rel="shortcut icon" href="${static:}css/portals/eurofoto/favicon.ico"/>
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700,700italic,600,600italic' rel='stylesheet' type='text/css' />
+
+    <title> 
+		<tal:block i18n:translate="" tal:condition="not:exists:pagetitle">Eurofoto.no - Memories for life</tal:block> 
+		<tal:block tal:condition="exists:pagetitle" tal:content="pagetitle" /> 
+	</title>
+	
+	<!-- jQuery -->
+    <script src="${static:}js/jquery-1.11.3.min.js"></script>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+	<!-- Bootstrap Core JavaScript -->
+    <script src="${static:}css/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link href="/css/template.css" rel="stylesheet" />
+    <link href="${static:}css/jqueryui/jquery-ui.min.css" rel="stylesheet" />
+	<link href="/css/font-awesome.min.css" rel="stylesheet" />
+	
+    <script src="${static:}js/eurofoto2.min.js"></script>
+	<script type="text/javascript" src="${static:js/jquery.fancybox-1.3.0.pack.js}"></script>
+	<script src="${static:}css/jqueryui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="${static:js/jquery.eurofoto-1.0.js}"></script> <!-- Eurofoto API 1.0 -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+    <script language="JavaScript" src="/cewe/js/cewecommonlogin.js"></script>
+    <script language="JavaScript" src="/cewe/js/cewe-eurofoto.js"></script>
+    <script language="JavaScript" src="https://www.japanphoto.no/StatusJsView?storeId=10151&langId=124&catalogId=10051"></script>
+    
+</head>
+
+<tal:block metal:define-macro="message">
+<script language="JavaScript">
+	var loginCallback = false;
+	CommonLogin.init(function(status){
+   	setTimeout(function(){
+	   	// optionally do a callback to the server with tokens to validate
+	      <tal:block tal:condition="not:session/loggedin">
+	   	if( status.loggedIn ) {
+	   		// alert( 'We were previously logged OUT locally, but we are now logged in. Logging in with token '+status.token );
+	   		var response = $.ef( 'auth.byxtcitoken',{
+	   			'token':    status.token,
+	   			'sign':     status.sign
+	   		} );
+	   		if( response.result ) {
+	   			var response = $.ef( 'cart.stat' );
+	   			if( response.result ) {
+	   				CommonLogin.setCart({
+						   'total': response.totalprice,
+						   'items': response.totalitems,
+						   'open': function(){
+						   	window.location.href = '/cart/?from=cewecommonheader';
+						   }
+						}, true );
+	   			}
+	   		}
+	   	}
+   		if( loginCallback ) {
+   			loginCallback( status );
+   		}
+	      </tal:block>
+	      <tal:block tal:condition="session/loggedin">
+		  
+		  //console.log(status);
+		  
+	   	if( !status.loggedIn ) {
+	   		// alert( 'We were previously logged in locally, but are no longer logged in. Logging out...' );
+	   		$.ef( 'auth.logout' );
+	   		window.location.href = '/';
+	      // make sure we've not switched to a different account
+      	} else if( status.userData.login != '${session/email}' ) {
+	   		// alert( 'We were previously logged in locally, and still are, so switching to the new account' );
+	      	$.ef( 'auth.logout' );
+	      	var response = $.ef( 'auth.byxtcitoken',{
+	   			'token':    status.token,
+	   			'sign':     status.sign
+	   		} );
+	   		if( response.result ) {
+	   			var response = $.ef( 'cart.stat' );
+	   			if( response.result ) {
+	   				CommonLogin.setCart({
+						   'total': response.totalprice,
+						   'items': response.totalitems,
+						   'open': function(){
+						   	window.location.href = '/cart/?from=cewecommonheader';
+						   }
+						}, true );
+	   			}
+	   		}
+	      } else {
+	      	$.ef( 'auth.updatetoken',{
+	   			'token':    status.token,
+	   			'sign':     status.sign
+	   		} );
+	      }
+   		if( loginCallback ) {
+   			loginCallback( status );
+   		}
+	      </tal:block>
+   	},1);
+	},{
+	   'total': '${formatprice:cart/totalprice}',
+	   'items': '${cart/totalitems}',
+	   'open': function(){
+	   	window.location.href = '/cart/?from=cewecommonheader';
+	   }
+	});
+</script>
+</tal:block>
+
+
+
+
+
+<tal:block metal:define-macro="omniture">
+	
+		<!-- SiteCatalyst code version: H.25.4.
+		Copyright 1996-2013 Adobe, Inc. All Rights Reserved
+		More info available at http://www.omniture.com -->
+	
+		<script language="JavaScript" type="text/javascript" src="${static:}js/s_code_ef.js"></script>
+		<script language="JavaScript" type="text/javascript">
+			var path = "${request/execpath}";
+			
+			var orderid, zip, price;
+			<tal:block tal:condition="exists:purchasedcart">
+				orderid = "${orderid}";
+				zip = "${purchasedcart/deliveryinfo/zipcode}";
+				price = "${purchasedcart/totalprice}";
+			</tal:block>
+			
+			<!--
+			/* You may give each page an identifying name, server, and channel on
+			the next lines. */
+			s.pageName="eurofoto.no:" + path
+			s.server=""
+			s.channel="eurofoto.no:" + path
+			s.pageType=""
+			s.prop1="eurofoto.no:" + path
+			s.prop2="eurofoto.no:" + path
+			s.prop3="eurofoto.no:" + path
+			s.prop4="eurofoto.no:" + path
+			s.prop5=""
+			s.prop6="eurofoto.no"
+			s.prop9="eurofoto.no"
+		
+			
+			if( orderid > 0 ){
+				s.products=";EF-products;1;" + price;
+				s.events="purchase";
+				s.purchaseID=orderid;
+				s.eVar10=orderid;
+				s.zip=zip;
+			}
+			
+			/* Conversion Variables */
+			/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+			var s_code=s.t();if(s_code)document.write(s_code)
+			//-->
+		</script>
+		<script language="JavaScript" type="text/javascript">
+			<!--
+			if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+			//-->
+		</script>
+		<noscript>
+			<img src="http://cewecolor.112.2o7.net/b/ss/cewe-eurofoto-no/1/H.25.4--NS/0" height="1" width="1" border="0" alt=""/>
+		</noscript><!--/DO NOT REMOVE/-->
+		<!-- End SiteCatalyst code version: H.25.4. -->
+</tal:block>
+<!-- Google Analytics gs.js www.eurofoto.no -->
+<tal:block metal:define-macro="google-analytics">
+   <tal:block tal:condition="exists:google">
+	<script type="text/javascript">
+	//<![CDATA[
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	//]]>
+	</script>
+	<script type="text/javascript">
+		try{
+		var pageTracker = _gat._getTracker("${google/analytics}");
+			<tal:block tal:condition="not:session/loggedin">
+				pageTracker._setVar('unregistered');
+			</tal:block>
+			<tal:block tal:condition="session/loggedin">
+				pageTracker._setVar('member');
+			</tal:block>
+			pageTracker._setDomainName(".eurofoto.no");
+			pageTracker._trackEvent('Performance', 'Execution time', 'xml', Math.round( ${statistics/exectime} * 10 )/10 );
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+	</tal:block>
+</tal:block>
+

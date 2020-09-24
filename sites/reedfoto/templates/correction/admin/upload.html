@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<div metal:use-macro="../common.html/head" />
+</head>
+<body>
+<div metal:use-macro="../common.html/header" />
+
+<div id="content" class="container">
+
+   <h2 i18n:translate="">Upload</h2>
+   <div class="span-10">
+   
+      <tal:block tal:condition="not:exists:uploadsuccess">
+         <form action="/admin/upload" method="post" enctype="multipart/form-data">
+         <input type="file" name="uploadfile" /><br />
+         <button type="submit" style="margin-top:5px;">Upload file</button>
+         </form>
+         <tal:block tal:condition="exists:uploadfailed">
+            <p>${uploadmessage}</p>
+         </tal:block>
+      </tal:block>
+      
+      <tal:block tal:condition="exists:uploadsuccess">
+         <h3 id="process" i18n:translate="">Analyzing PDF, extracting and converting data...</h3>
+         <div id="progressbar"></div>
+         <div><span id="progress" style="margin-top:5px;" i18n:translate="">Calculating time remaining...<img src="/images/spinner.gif" alt="" /></span><button id="cancel" style="float: right;" i18n:translate="">Cancel</button></div>
+      </tal:block>
+   </div>
+   
+</div>
+<script type="text/javascript">
+
+   var estimated = '<tal:block i18n:translate="">Estimated</tal:block>';
+   var remaining = '<tal:block i18n:translate="">remaining</tal:block>';
+   var collectingdata = '<tal:block i18n:translate="">Collecting data and creating pages...</tal:block>';
+   var calculatingtime = '<tal:block i18n:translate="">Calculating time remaining...</tal:block>';
+   var uploadfailed = '<tal:block i18n:translate="">Uploading failed horribly. Contact your web developer.</tal:block>';
+   
+   //<![CDATA[
+
+   $(function() {
+      $('#progressbar').progressbar({
+      	value: 1
+      });
+   });
+
+   var guid = '${guid}';
+   var page = 1;
+   var pages = 0;
+   var started = 0;
+   var assemblepage = 1;         
+   var cancel = false;
+   
+   function unixtime() {
+      return parseInt( new Date().getTime() / 1000 );
+   }
+   
+   $( '#cancel' ).click( function() {
+      cancelExtract();
+   });
+   
+   $( 'spinner' ).hide();
+   
+   $.post('/api/admin/pdf/pagescount', {
+   	'filehash': guid
+   }, function(data) {
+   	if( data.result ) {
+         
+   	   started = unixtime();
+   	   pages = data.pages;
+   	   extractNextPage();
+   	   
+   	}
+   	
+   }, 'json');
+   
+   function extractNextPage() {
+      
+      $.post('/api/admin/pdf/extract', {
+         'filehash': guid,
+         'page': page,
+         'type': 'both',
+      }, function(data) {
+         
+         if( data.result ) {
+            
+            var newvalue = $( '#progressbar' ).progressbar( 'option', 'value' ) + ( 100 / pages );
+            $( '#progressbar' ).progressbar({
+               value: newvalue
+            });
+            
+            if( newvalue > 1 ) {
+               
+               var s = Math.round( ( ( unixtime() - started ) / newvalue ) * ( 100 - newvalue ) );
+               var m = Math.floor( s / 60 );
+                   s-= m * 60;
+               
+               if ( m >= 0 ) { $( '#progress' ).html( estimated + ' <b>' + m + '</b>m <b>' + s + '</b>s ' + remaining ); }
+            }
+            
+            page++;
+            
+            if( ( page <= pages ) && ( !cancel ) ) {
+               
+               extractNextPage();
+               
+            } else {
+               
+               if ( !cancel ) {
+                  
+                  started = unixtime();
+                  
+                  $( '#process' ).text( collectingdata );
+                  $( '#progress' ).text( calculatingtime );
+                  
+                  $( '#progressbar' ).progressbar({
+                     value: 0
+                  });
+                  
+                  assembleNextPage();
+                  
+               } else {
+                  
+                  window.location.href='/admin/correction/${correctionid}';
+                  
+               }
+            }
+
+         } else {
+            
+            alert( uploadfailed );
+            
+         }
+         
+      }, 'json');
+      
+   }
+   
+   function assembleNextPage() {
+      
+      $.post('/api/admin/page/assemble', {
+         'filehash': guid,
+         'correctionid': ${correctionid},
+         'pagenumber': assemblepage
+      }, function(data) {
+         
+         if( data.result ) {
+            
+            var newvalue = $( '#progressbar' ).progressbar( 'option', 'value' ) + ( 100 / pages * 2 );
+            $( '#progressbar' ).progressbar({
+               value: newvalue
+            });
+            
+            if( newvalue > 5 ) {
+               
+               var s = Math.round( ( ( unixtime() - started ) / newvalue ) * ( 100 - newvalue ) );
+               var m = Math.floor( s / 60 );
+                   s-= m * 60;
+               
+               if ( m >= 0 ) { $( '#progress' ).html( estimated + ' <b>' + m + '</b>m <b>' + s + '</b>s ' + remaining ); }
+            }
+                              
+            if (assemblepage == 1) {
+               assemblepage++;
+            } else {
+               assemblepage+=2;
+            }
+         
+            if( ( assemblepage <= pages ) && ( !cancel ) ) {
+               assembleNextPage();
+            } else {
+   
+               $.post('/api/user/correction/state', {
+                  'correctionid': ${correctionid},
+                  'state': 'ready'
+               }, function( data ) { 
+
+                  $.post('/api/admin/pdf/cleanup', {
+                     'filehash': guid,
+                  }, function( data ) { 
+                     
+                     window.location.href='/admin/correction/${correctionid}';
+                     
+                  });
+               });
+
+            }  
+            
+         }
+                  
+      }, 'json');
+            	      
+   }
+   
+   function cancelExtract() {
+      cancel = true;
+   }
+
+   //]]>
+
+</script>
+<div metal:use-macro="../common.html/footer" /> 
+</body>
+</html>

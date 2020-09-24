@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+
+
+
+ <title>Strykelapper til klær. Slitesterke strykelapper</title>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<tal metal:use-macro="../../${templates}/common.html/head" />
+<!-- 	<link rel="stylesheet" href="/css/bestilling.css" type="text/css" media="screen, projection" />-->
+
+<style>
+.nav-link {
+padding: 0.5rem 0.5rem;
+}
+
+.clip,
+.backgroundfile {
+cursor: pointer;
+}
+
+.simplecolorpicker.icon,
+.simplecolorpicker span.color {
+display: inline-block;
+cursor: pointer;
+border-radius: 40px;
+width: 40px;
+height: 40px;
+}
+
+.backgroundfile {
+
+border-radius: 12px;
+}
+
+
+.backgroundfile {
+
+margin: 15px 15px 15px 15px;
+}
+
+
+a.kategorier.active {
+background-color: #3a5563 !important;
+border-radius: 15px;
+color: #ffffff !important;
+
+}
+
+@media only screen and (max-width: 700px) {
+  .previewcontainer {
+			background: #fff;
+			z-index: 100;
+			position: sticky;
+			top: 5px;
+  }
+	  .cartinfo {
+			background: #fff;
+			z-index: 100;
+			position: sticky;
+			top: 132px;
+  }
+}
+
+
+.font-container input {	
+  position: absolute;	
+  opacity: 0;	
+  cursor: pointer;	
+  height: 0;	
+  width: 0;	
+}	
+.font-container input:parent{	
+  position: absolute;	
+  opacity: 0;	
+  cursor: pointer;	
+  height: 0;	
+  width: 0;	
+}	
+:checked+img {
+    background-color: #dbe0e2;
+    border-radius: 15px;
+    /* border: 2px solid #73AD21; */
+    padding: 6px;
+    max-width: 100%;
+    height: auto;
+
+}
+
+.bg-repix{
+	background-color:#dbe0e2  !important;
+	color: #3c5765;
+}
+
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: #ffffff;
+    background-color: #3a5563;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+a:hover {
+    color: #cc3817;
+    text-decoration: underline;
+}
+
+
+ .repixtoggler {
+    /* color: rgb(58, 85, 99); */
+    color: #ffffff !important;
+    border: 1px solid #red;
+    background-color: #3a5563;
+    /* border-color: rgba(0, 0, 0, 0.1); */
+}
+
+
+</style>
+
+<link href="/simple-colorpicker/jquery.simplecolorpicker.css" rel="stylesheet"></link>
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet" />
+</head>
+<body>
+	
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+<div class="container">
+
+	<form id="edit">
+	<div class="row">
+		
+			<div class="col-12">
+				<h5>150 Strykelapper</h5>
+				<h6></h6>
+			
+				</div>
+					<div class="col-md-8 text-center order-md-2 previewcontainer">
+			<div class="row">
+				<div class="col-md-6">
+						<img class="img-fluid" id="preview" src="/gfx/merkelapp_308.png" />
+				</div>
+							
+					<div class="col-md-6 text-left mb-2">
+						<div class="mt-2">
+							<span class="ml-4" tal:content="selected/0/productoption/prices/0/price"></span> kr pr sett
+							<input type="hidden" id="productquantity" class="form-control input-number productquantity" value="1" />
+							<input type="hidden" id="productoptionid" value="${selected/0/productoptionid}" />
+							<button id="addtocart" class="btn btn-success float-center">Legg i handlekurv</button>
+						</div>
+					</div>
+				
+			</div>
+
+		</div>
+				<!--textinput-->
+			<div class="col-md-4 text-center order-sm-1 mt-2">
+				<div class="form-group ">
+					<div class="col-xs-12">
+						<input type="text" class="form-control lines" name="line1" id="line1" maxlength="17" placeholder="Linje 1" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-12">
+						<input type="text" class="form-control lines" name="line2" maxlength="17" placeholder="Linje 2" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-12">
+						<input type="text" class="form-control lines" name="line3" maxlength="17" placeholder="Linje 3" />
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12 p-0 p-sm-2 order-sm-4">
+				<!--<ul class="nav nav-tabs navbar-light bg-light nav-fill justify-content-center" id="editorMainTabs" role="tablist">
+					<li class="nav-item">
+						
+				
+						
+						<a class="nav-link active" id="motiv-tab" data-toggle="tab" href="#motiv-tab-content" role="tab" aria-controls="motiv-tab-conten" aria-selected="true">
+							<i class="fas fa-cat"></i> Motiv
+						</a>
+					</li>
+				
+				<li class="nav-item">
+						<a class="nav-link" id="background-tab" data-toggle="tab" href="#background-tab-content" role="tab" aria-controls="background-tab-content" aria-selected="false">
+							<i class="fas fa-palette"></i> Bakgrunn
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="text-tab" data-toggle="tab" href="#text-tab-content" role="tab" aria-controls="text-tab-content" aria-selected="false">
+							<i class="fas fa-font"></i> Tekst
+						</a>
+					</li>
+				</ul>-->
+					<div class="col-md-12">
+						<ul class="nav nav-tabs navbar-light bg-repix nav-fill justify-content-center" id="editorMainTabs" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link active" id="motiv-tab" data-toggle="tab" href="#motiv-tab-content" role="tab" aria-controls="motiv-tab-conten" aria-selected="true">
+										<i class="fas fa-cat"></i> Motiv
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="text-tab" data-toggle="tab" href="#text-tab-content" role="tab" aria-controls="text-tab-content" aria-selected="false">
+										<i class="fas fa-font"></i> Tekst
+									</a>
+								</li>
+							</ul>
+								</div>
+					<div class="tab-content mb-4" id="myTabContent">
+							<!--MOTIV-->
+							<div class="tab-pane fade show active" id="motiv-tab-content" role="tabpanel" aria-labelledby="motiv-tab">
+								<div>
+									<!-- CLIPARTS MERKELAPP -->
+									<nav class="navbar navbar-expand-lg navbar-light bg-default text-center">
+									<!--	<div class="form-group form-inline mt-3">
+											<label class="mr-2">clipart: </label>
+											<input id="toggle-clipart" type="checkbox" checked data-toggle="toggle" data-width="90" />
+										</div>-->
+										<button class="navbar-toggler repixtoggler mx-auto" type="button" data-toggle="collapse" data-target="#navbarCatergoryContent" aria-controls="navbarSupportedContent" aria-expanded="false">
+											<i class="fas fa-angle-double-down"></i> Kategori
+										</button>
+										<div class="collapse navbar-collapse" id="navbarCatergoryContent">
+											<ul class="nav cattabs" role="tablist">
+												<li role="presentation" class="nav-item col-12 col-md-auto p-1"><a class="nav-link kategorier" href="#Alle" aria-controls="alle" role="tab" data-toggle="tab">Alle</a></li>
+												<li class="nav-item col-4 col-md auto p-1" role="presentation"><a class="nav-link kategorier" href="#Dyr" aria-controls="dyr" role="tab" data-toggle="tab">Dyr</a></li>
+														<li class="nav-item col-6 col-md auto p-1" role="presentation"><a class="nav-link kategorier" href="#Sport" aria-controls="sport" role="tab" data-toggle="tab">Sport</a></li>
+																<li class="nav-item col-4 col-md auto p-1" role="presentation"><a class="nav-link kategorier" href="#Leker" aria-controls="Leker" role="tab" data-toggle="tab">Leker</a></li>
+																			<li class="nav-item col-4 col-md auto p-1" role="presentation"><a class="nav-link kategorier" href="#Diverse" aria-controls="Diverse" role="tab" data-toggle="tab">Diverse</a></li>
+														<li class="nav-item col-4 col-md auto p-1" role="presentation"><a class="nav-link kategorier" href="#Maskiner" aria-controls="maskiner" role="tab" data-toggle="tab">Maskiner</a></li>
+														
+												
+											</ul>
+										</div>
+									</nav>
+									<!-- KATEGORIER CLIPARTS -->
+									<div class="tab-content text-center">
+
+
+										<div role="tabpanel" class="clips tab-pane active" id="Alle"></div>
+										<div role="tabpanel" class="clips tab-pane" id="Dyr"></div>
+										<div role="tabpanel" class="clips tab-pane" id="Sport"></div>
+											<div role="tabpanel" class="clips tab-pane" id="Leker"></div>
+										<div role="tabpanel" class="clips tab-pane" id="Diverse"></div>
+										<div role="tabpanel" class="clips tab-pane" id="Maskiner"></div>
+									</div>
+								</div>
+							</div>
+
+
+							
+				
+
+							<!--TEKST-->
+							<div class="tab-pane fade" id="text-tab-content" role="tabpanel" aria-labelledby="text-tab">
+									
+										<div class="row">
+							<div class="form-group form-inline font-container">
+								<label class="col-12 text-center mt-3" i18n:translate="">Skrift-type:</label>
+								<label class="col-md-1 col-sm-3 col-xs-2 p-1 mx-auto fonts" style="width: 35%; height:auto" for="font-Verdena">
+                  <input type="radio" name="font-type" value="verdanab" id="font-Verdena" checked="checked" />
+                  <img class="img-fluid" src="/gfx/merkelapp/fonter/test/verdana.png" />
+								</label>
+                <label class="col-md-1 col-sm-3 col-xs-2 p-1 mx-auto fonts" style="width: 35%; height:auto" for="font-Arial">
+                  <input type="radio" name="font-type" value="arial" id="font-Arial" />
+                  <img class="img-fluid" src="/gfx/merkelapp/fonter/test/arial.png" />
+								</label>
+                <label class="col-md-1 col-sm-3 col-xs-2 p-1 mx-auto fonts" style="width: 35%; height:auto" for="font-Comic">
+                  <input type="radio" name="font-type" value="comicbd" id="font-Comic" />
+                  <img class="img-fluid" src="/gfx/merkelapp/fonter/test/comic.png" />
+								</label>
+							</div>
+						</div>
+								
+								<div id="text"></div>
+
+
+							</div>
+						</div>
+			</div>
+	</div>
+	</form>
+
+					<div class="col-12">
+<div class="card-deck mb-3 text-center">
+<div class="card mb-4 box-shadow">
+  <div class="card-header">
+	<h4 class="my-0 font-weight-normal">Strykelapper</h4>
+  </div>
+  <div class="card-body">
+   <p>Navnelapper som festes til tøy med strykejern. Disse sitter som støpt på alt av tøy, både på vaskelapp og direkte på tøyet. Perfekt til hjemmestrikkede klær, sokker, halser og ull som ikke har vaskelapp. Festes ved høy temperatur og silikonpapir mellom.</p>
+  </div>
+</div>
+<div class="card mb-4 box-shadow">
+  <div class="card-header">
+	<h4 class="my-0 font-weight-normal">Vasketemperatur</h4>
+  </div>
+  <div class="card-body">
+   <p>Disse strykemerkene festes til klærne ved høy temperatur og smeltes ned i tøyfibrene. Navnelappene tåler kokvask og hard bruk. Lappene fjernes fra tøyet ved å varme opp lappen (husk silikonpapir) og pirke dem av.</p>
+
+  </div>
+</div>
+<div class="card mb-4 box-shadow">
+  <div class="card-header">
+	<h4 class="my-0 font-weight-normal">Norsk produksjon</h4>
+  </div>
+  <div class="card-body">  
+<p>Vi produserer alle navnelapper i Norge og er opptatt av rask levering rett hjem i din postkasse. Normalt er det 1 dags produksjonstid og 2-3 dagers leveringstid. Det er alltid gratis frakt på navnelapper.</p>
+  </div>
+</div>
+</div>
+</div>
+				
+				
+	<div class="container">
+			<div metal:use-macro="../../${templates}/common.html/footer" />
+		</div>
+
+</div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-body">
+		  <div class="row">
+			 <div class="col-md-12 text-center">
+				<h3>Dine varer er lagt i handlekurven.</h3>
+			 </div>
+			 
+			  <div class="col-md-12 text-center">
+					<a href="/" class="reload btn btn-success">Fortsett å handle</a>
+						<a href="/cart" class="btn btn-success">Til handlevogn</a>
+					 </div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</div>
+<script type="text/javascript" src="/js/merkelapp_new.js"></script>
+<script type="text/javascript" src="/js/imgareaselect.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+<script type="text/javascript">
+	 var clipart = '';
+var ownimage = '';
+var treshhold = 100;
+var imageselection = Object();
+var projectid = ${projectid};
+var gravity = 'center'; 
+var category = 'Dyr';
+var backgroundcat = '';
+var backgroundfile = '';
+var totalprice = ${cart/totalprice};
+var staticroot = "/";
+var type = 'merkelapp';
+var disabled = true;
+var colormode = 'bw';
+var alertmessage = 'false';
+	
+	/*<![CDATA[*/
+	$(function(){
+		$('.nav-link kategorier').on('click', function(){
+			$('.navbar-collapse').collapse('hide');
+		});
+		
+	
+		
+		  $('#toggle-clipart').bootstrapToggle({
+			on: 'På',
+			off: 'Av'
+		  });
+		  
+		 
+		  
+	});
+	
+	/*]]>*/	
+</script>
+</body>
+</html>

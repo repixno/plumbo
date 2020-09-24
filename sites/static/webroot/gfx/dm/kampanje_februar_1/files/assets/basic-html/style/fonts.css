@@ -1,0 +1,775 @@
+﻿
+        .font1 {
+        font-size: 35.0px;
+        font-family: "ITCKabelStd";
+        color: #FAFD18 ;
+        opacity: 1 ;
+        }
+        .font1 a {
+        text-decoration: none;
+        color: #FAFD18;
+        }
+        .font1 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font1 a:visited {
+        color: #900060;
+        }
+      
+        .font2 {
+        font-size: 8px;
+        font-family: "TimesNewRomanPSMT";
+        color: #FFFFFF ;
+        opacity: 1 ;
+        }
+        .font2 a {
+        text-decoration: none;
+        color: #FFFFFF;
+        }
+        .font2 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font2 a:visited {
+        color: #900060;
+        }
+      
+        .font3 {
+        font-size: 21.4px;
+        font-family: "ITCKabelStd";
+        color: #FFFFFF ;
+        opacity: 1 ;
+        }
+        .font3 a {
+        text-decoration: none;
+        color: #FFFFFF;
+        }
+        .font3 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font3 a:visited {
+        color: #900060;
+        }
+      
+        .font4 {
+        font-size: 20px;
+        font-family: "Ariston";
+        color: #FFFFFF ;
+        opacity: 1 ;
+        }
+        .font4 a {
+        text-decoration: none;
+        color: #FFFFFF;
+        }
+        .font4 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font4 a:visited {
+        color: #900060;
+        }
+      
+        .font5 {
+        font-size: 18px;
+        font-family: "ITCKabelStd";
+        color: #FFFFFF ;
+        opacity: 1 ;
+        }
+        .font5 a {
+        text-decoration: none;
+        color: #FFFFFF;
+        }
+        .font5 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font5 a:visited {
+        color: #900060;
+        }
+      
+        .font6 {
+        font-size: 20px;
+        font-family: "ITCKabelStd";
+        color: #FFFFFF ;
+        opacity: 1 ;
+        }
+        .font6 a {
+        text-decoration: none;
+        color: #FFFFFF;
+        }
+        .font6 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font6 a:visited {
+        color: #900060;
+        }
+      
+        .font7 {
+        font-size: 8.3px;
+        font-family: "Gotham";
+        color: #FFFFFF ;
+        opacity: 1 ;
+        }
+        .font7 a {
+        text-decoration: none;
+        color: #FFFFFF;
+        }
+        .font7 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font7 a:visited {
+        color: #900060;
+        }
+      
+        .font8 {
+        font-size: 13.8px;
+        font-family: "Gotham";
+        color: #FFFFFF ;
+        opacity: 1 ;
+        }
+        .font8 a {
+        text-decoration: none;
+        color: #FFFFFF;
+        }
+        .font8 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font8 a:visited {
+        color: #900060;
+        }
+      
+        .font9 {
+        font-size: 16px;
+        font-family: "Gotham";
+        color: #FFFFFF ;
+        opacity: 1 ;
+        }
+        .font9 a {
+        text-decoration: none;
+        color: #FFFFFF;
+        }
+        .font9 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font9 a:visited {
+        color: #900060;
+        }
+      
+        .font10 {
+        font-size: 38px;
+        font-family: "Ariston";
+        color: #F90E23 ;
+        opacity: 1 ;
+        }
+        .font10 a {
+        text-decoration: none;
+        color: #F90E23;
+        }
+        .font10 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font10 a:visited {
+        color: #900060;
+        }
+      
+        .font11 {
+        font-size: 12px;
+        font-family: "ITCKabelStd";
+        color: #F90E23 ;
+        opacity: 1 ;
+        }
+        .font11 a {
+        text-decoration: none;
+        color: #F90E23;
+        }
+        .font11 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font11 a:visited {
+        color: #900060;
+        }
+      
+        .font12 {
+        font-size: 10px;
+        font-family: "ITCKabelStd";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font12 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font12 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font12 a:visited {
+        color: #900060;
+        }
+      
+        .font13 {
+        font-size: 19px;
+        font-family: "Ariston";
+        color: #F90E23 ;
+        opacity: 1 ;
+        }
+        .font13 a {
+        text-decoration: none;
+        color: #F90E23;
+        }
+        .font13 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font13 a:visited {
+        color: #900060;
+        }
+      
+        .font14 {
+        font-size: 15px;
+        font-family: "Ariston";
+        color: #F90E23 ;
+        opacity: 1 ;
+        }
+        .font14 a {
+        text-decoration: none;
+        color: #F90E23;
+        }
+        .font14 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font14 a:visited {
+        color: #900060;
+        }
+      
+        .font15 {
+        font-size: 16.2px;
+        font-family: "BrightYoungThings";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font15 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font15 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font15 a:visited {
+        color: #900060;
+        }
+      
+        .font16 {
+        font-size: 30.1px;
+        font-family: "ITCKabelStd";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font16 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font16 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font16 a:visited {
+        color: #900060;
+        }
+      
+        .font17 {
+        font-size: 37.3px;
+        font-family: "Ariston";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font17 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font17 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font17 a:visited {
+        color: #900060;
+        }
+      
+        .font18 {
+        font-size: 12px;
+        font-family: "ITCKabelStd";
+        color: #FFFFFF ;
+        opacity: 1 ;
+        }
+        .font18 a {
+        text-decoration: none;
+        color: #FFFFFF;
+        }
+        .font18 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font18 a:visited {
+        color: #900060;
+        }
+      
+        .font19 {
+        font-size: 10px;
+        font-family: "ITCKabelStd";
+        color: #FFFFFF ;
+        opacity: 1 ;
+        }
+        .font19 a {
+        text-decoration: none;
+        color: #FFFFFF;
+        }
+        .font19 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font19 a:visited {
+        color: #900060;
+        }
+      
+        .font20 {
+        font-size: 16px;
+        font-family: "GreatVibes";
+        color: #FAFD18 ;
+        opacity: 1 ;
+        }
+        .font20 a {
+        text-decoration: none;
+        color: #FAFD18;
+        }
+        .font20 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font20 a:visited {
+        color: #900060;
+        }
+      
+        .font21 {
+        font-size: 11px;
+        font-family: "Modern";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font21 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font21 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font21 a:visited {
+        color: #900060;
+        }
+      
+        .font22 {
+        font-size: 18px;
+        font-family: "Arial";
+        color: #FFFFFF ;
+        opacity: 1 ;
+        }
+        .font22 a {
+        text-decoration: none;
+        color: #FFFFFF;
+        }
+        .font22 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font22 a:visited {
+        color: #900060;
+        }
+      
+        .font23 {
+        font-size: 13.4px;
+        font-family: "ITCKabelStd";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font23 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font23 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font23 a:visited {
+        color: #900060;
+        }
+      
+        .font24 {
+        font-size: 17.8px;
+        font-family: "ITCKabelStd";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font24 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font24 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font24 a:visited {
+        color: #900060;
+        }
+      
+        .font25 {
+        font-size: 10px;
+        font-family: "ITCKabelStd";
+        color: #F90E23 ;
+        opacity: 1 ;
+        }
+        .font25 a {
+        text-decoration: none;
+        color: #F90E23;
+        }
+        .font25 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font25 a:visited {
+        color: #900060;
+        }
+      
+        .font26 {
+        font-size: 9.4px;
+        font-family: "ITCKabelStd";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font26 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font26 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font26 a:visited {
+        color: #900060;
+        }
+      
+        .font27 {
+        font-size: 13.8px;
+        font-family: "ITCKabelStd";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font27 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font27 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font27 a:visited {
+        color: #900060;
+        }
+      
+        .font28 {
+        font-size: 14px;
+        font-family: "ITCKabelStd";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font28 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font28 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font28 a:visited {
+        color: #900060;
+        }
+      
+        .font29 {
+        font-size: 3.7px;
+        font-family: "ITCKabelStd";
+        color: #FFFFFF ;
+        opacity: 1 ;
+        }
+        .font29 a {
+        text-decoration: none;
+        color: #FFFFFF;
+        }
+        .font29 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font29 a:visited {
+        color: #900060;
+        }
+      
+        .font30 {
+        font-size: 4.4px;
+        font-family: "ITCKabelStd";
+        color: #FFFFFF ;
+        opacity: 1 ;
+        }
+        .font30 a {
+        text-decoration: none;
+        color: #FFFFFF;
+        }
+        .font30 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font30 a:visited {
+        color: #900060;
+        }
+      
+        .font31 {
+        font-size: 5.5px;
+        font-family: "ITCKabelStd";
+        color: #F90E23 ;
+        opacity: 1 ;
+        }
+        .font31 a {
+        text-decoration: none;
+        color: #F90E23;
+        }
+        .font31 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font31 a:visited {
+        color: #900060;
+        }
+      
+        .font32 {
+        font-size: 4.2px;
+        font-family: "ITCKabelStd";
+        color: #F90E23 ;
+        opacity: 1 ;
+        }
+        .font32 a {
+        text-decoration: none;
+        color: #F90E23;
+        }
+        .font32 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font32 a:visited {
+        color: #900060;
+        }
+      
+        .font33 {
+        font-size: 7.4px;
+        font-family: "ITCKabelStd";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font33 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font33 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font33 a:visited {
+        color: #900060;
+        }
+      
+        .font34 {
+        font-size: 22px;
+        font-family: "ITCKabelStd";
+        color: #D6001E ;
+        opacity: 1 ;
+        }
+        .font34 a {
+        text-decoration: none;
+        color: #D6001E;
+        }
+        .font34 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font34 a:visited {
+        color: #900060;
+        }
+      
+        .font35 {
+        font-size: 8px;
+        font-family: "ITCKabelStd";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font35 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font35 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font35 a:visited {
+        color: #900060;
+        }
+      
+        .font36 {
+        font-size: 6px;
+        font-family: "ITCKabelStd";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font36 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font36 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font36 a:visited {
+        color: #900060;
+        }
+      
+        .font37 {
+        font-size: 2.7px;
+        font-family: "HelveticaNeue";
+        color: #010F18 ;
+        opacity: 1 ;
+        }
+        .font37 a {
+        text-decoration: none;
+        color: #010F18;
+        }
+        .font37 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font37 a:visited {
+        color: #900060;
+        }
+      
+        .font38 {
+        font-size: 15.2px;
+        font-family: "HelveticaNeue";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font38 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font38 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font38 a:visited {
+        color: #900060;
+        }
+      
+        .font39 {
+        font-size: 8.2px;
+        font-family: "HelveticaNeue";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font39 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font39 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font39 a:visited {
+        color: #900060;
+        }
+      
+        .font40 {
+        font-size: 5.8px;
+        font-family: "HelveticaNeue";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font40 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font40 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font40 a:visited {
+        color: #900060;
+        }
+      
+        .font41 {
+        font-size: 3.8px;
+        font-family: "HelveticaNeue";
+        color: #000000 ;
+        opacity: 1 ;
+        }
+        .font41 a {
+        text-decoration: none;
+        color: #000000;
+        }
+        .font41 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font41 a:visited {
+        color: #900060;
+        }
+      
+        .font42 {
+        font-size: 3.3px;
+        font-family: "HelveticaNeue";
+        color: #4E6F90 ;
+        opacity: 1 ;
+        }
+        .font42 a {
+        text-decoration: none;
+        color: #4E6F90;
+        }
+        .font42 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font42 a:visited {
+        color: #900060;
+        }
+      
+        .font43 {
+        font-size: 4.2px;
+        font-family: "HelveticaNeue";
+        color: #4E6F90 ;
+        opacity: 1 ;
+        }
+        .font43 a {
+        text-decoration: none;
+        color: #4E6F90;
+        }
+        .font43 a:hover {
+        text-decoration: none;
+        background-color: rgba(63,199,255,0.5);
+        }
+        .font43 a:visited {
+        color: #900060;
+        }
+      

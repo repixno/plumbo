@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Manual orders</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Fovea Orders Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+                <div>
+                     <tal:block tal:condition="exists:orders">
+                        <table>
+                        <tr>
+                            <td>Orderid</td>
+							<td>Eforderid</td>
+                            <td>downloaded</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr tal:repeat="order orders">
+                            <td tal:content="order/foveaid">
+                                ....
+                            </td>
+							 <td >
+                                <a href="javascript:window.open('http://susanne.eurofoto.no/adm_view_orderform_new.php?ordrenr=${order/eforderid}','_blank', 'scrollbars=1,resizable=1,height=800,width=700');">${order/eforderid}</a>
+                            </td>
+                            <td tal:content="order/downloaded">
+                                
+                            </td>
+                            <td>
+                               <a class="button" href="/order/fovea/send/${order/id}">SEND</a>
+                            </td>
+							<td>
+                               <a class="button" href="/order/fovea/delete/${order/id}">SLETT</a>
+							</td>
+                        </tr>
+                        </table>
+                    </tal:block>
+                </div>
+		
+
+   </div>
+</body>
+</html>

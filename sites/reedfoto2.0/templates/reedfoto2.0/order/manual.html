@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<tal metal:use-macro="../../${templates}/common.html/head" />
+<title i18n:translate="">Dashboard - Admin Manual orders</title>
+
+
+<style type="text/css">
+   A:link {text-decoration: none;}
+   A:visited {text-decoration: none}
+   A:active {text-decoration: none}
+   A:hover {text-decoration: underline;}
+   
+   h3{
+      margin-bottom: 0px;
+   }
+   
+   textarea {
+      width: 390px;
+      height: 50px;
+      padding: 5px;
+    }
+    
+   #content {
+      float: left;
+      margin-right: 10px;
+      width: 900px;
+   }
+
+</style>
+</head>
+
+<body>
+	<div id="container" class="container prepend-top">
+	 
+	 <div class="span-4">
+	    <h1 class="site-logo"><a href="/" title="Go back to frontpage" i18n:attributes="title">Reedfoto</a></h1>
+	 </div>
+	 <div class="span-20 last">
+	    <h2>Reedfoto Orders Admin</h2>
+		<h4><a href="/partner/reedfoto/manual">Registrer ny ordre</a> | <a href="/partner/reedfoto/manual/filelist/">Filliste</a></h4>
+	 </div>
+
+      <div class="span-24 last"><h3>Registrering av manuelle ordrer</h3></div>		
+		<div id="content" class="span-24" style="border: 1px solid #ccc; padding: 20px;">
+
+		<h3>Kunde:</h3>
+		
+		<tal:block tal:condition="not:exists:userdata">
+		<table>
+		 <tr>
+		    <td>
+		       <form method="POST">
+		          UID:<input type="text" name="search" value="941275"/>
+		          <INPUT type="submit" value="SØK"/>
+		       </form>
+		    </td>
+		 </tr>
+		 <tr>
+		 
+		 </tr>
+		
+		
+		</table>
+		 </tal:block>
+		  <tal:block tal:condition="exists:userdata">
+		  
+		  <form method="post" enctype="multipart/form-data" action="/partner/reedfoto/manual/confirm">
+		  
+   		  <table>
+   		  <tr>
+      		  <td>
+      		    UID:
+      		  </td>
+      		  <td>
+      		    <input type="text" value="${userdata/userid}" name="userid"/>
+      		  </td>
+   		  </tr>
+   		  <tr>
+      		  <td>
+      		    Name:
+      		  </td>
+      		  <td>
+      		    <input type="text" value="${userdata/fullname}" name="fullname"/>
+      		  </td>
+   		  </tr>
+   		  <tr>
+      		  <td>
+      		    address:
+      		  </td>
+      		  <td>
+      		    <input type="text" value="${userdata/address}" name="address"/>
+      		    <input type="text" value="${userdata/zipcode}" name="zipcode"/>
+      		    <input type="text" value="${userdata/city}" name="city"/>
+      		  </td>
+   		  </tr>
+   		  </table>
+   		  
+   		  
+   		   <div class="span-19" style="border: 1px solid #ccc; padding: 5px 20px 5px 20px; margin-bottom: 20px;">
+   		    
+   		    Lokal ordre blir hentet<input type="hidden" name="delivery" value="local"/>
+   		   </div>
+		  <div class="span-19">
+		     <h3>Papirkvalitet og justering:</h3>
+		  </div>
+   		  
+   		  <div class="span-19" style="border: 1px solid #ccc; padding: 5px 20px 0px 20px; margin-bottom: 20px;">
+   		  <table>
+		     
+   		    <tr>
+   		       <td>
+   		          Justering:
+         		    <select name="article[productionmethod][]">
+			   <option value="352">Ingen Justering</option>
+            		    <option value="351">Automatisk</option>
+            		    <option value="350">Manuell Justering</option>
+         		    </select>
+   		       </td>
+   		       <td>
+   		          Papirtype:
+         		    <select name="article[papertype][]">
+			    <option value="11">Fujifilm Professional matt</option>
+            		    <option value="10">Fujifilm Supreme</option>
+            		    <option value="12">Fujifilm Professional</option>
+         		    </select>
+   		       </td>
+   		    </tr>
+   		  </table>
+         </div>
+   		  <div class="span-19">
+		     <h3>Velg bilder:</h3>
+		  </div>
+   		  <div id="articlelist" class="span-19 lastarticle" style="border: 1px solid #ccc; padding: 20px; margin-bottom: 2px;">
+   		 
+      		  Artikkel: 
+      		  <select name="article[prints][]">
+      		    <tal:block tal:repeat="article articles">
+			<tal:block tal:condition="conditionalmatch:article/artnr,439,1">
+			   <option selected="selected" value="${article/artnr}">${article/title}</option>
+			</tal:block>
+			<tal:block tal:condition="not:conditionalmatch:article/artnr,439,1">
+			   <option value="${article/artnr}">${article/title}</option>
+			</tal:block>
+      		       
+      		    </tal:block>
+      		  </select>
+      		  Antall: <input type="text" size="4" name="quantity[]" value="1" />&nbsp;
+      		  <select name="fit-in[]">
+		     <option value="true">Fit-in</option>
+		     <option value="false">Fill-in</option>
+      		  </select>
+      		  Sti: <input type="text" name="folder[]" size="45" class="test" id="folderpath"/> <a href="#" class="button" id="choose_folder">Velg folder</a>
+   		  </div>
+   		  <div class="span-20 right"><input type="button" value="Ny Artikkel" id="add_article" /></div>
+   		  
+   		  <div class="span-20 right">
+   		  
+   		  <table>
+   		    <tr>
+   		       <td style="text-align:left; padding: 15px;">
+   		       <h3>Kommentar:</h3>
+   		       <textarea name="comment" rows="3"></textarea>
+   		       </td>
+   		       <td>
+   		          Last opp bilder til konto?
+   		          <input type="checkbox" name="uploadimages" value="upload" />
+   		       </td>
+   		       <td style="text-align:right; padding: 15px;"  width="125"> 
+   		       <input style="padding: 10px" type="submit" value="Bekreft ordren!" />
+   		       </td>
+   		    </tr>
+   		  </table>
+   		  </div>
+   		  
+		  </form>
+		  </tal:block>
+		 
+		 
+		</div>
+		
+		<!--<tal:block metal:use-macro="../common.html/content-menu" />-->
+		<div id="footer" />
+	</div>
+	
+	<div class="span-16 hide" id="folderpopup">
+	
+	</div>
+	
+	
+	
+	
+	<SCRIPT>
+	var kake = '';
+	
+	$('document').ready( function(){
+	   
+	     $("#removeline").live('click', function(){
+	        
+	        $(this).parent().remove();
+	        
+	        return false;
+	     });
+	   
+	     $('#add_article').live( 'click', function(){
+	        
+	        var article = $('#articlelist').html();
+	        
+	        $('.lastarticle').last().after( '<div id="articlelist" class="span-19 lastarticle" style="border: 1px solid #ccc; padding: 20px; margin-bottom: 2px;">' + article + '<a href="#" id="removeline">fjern</a></div>' );
+	        $('#articlelist').removeClass( 'lastarticle');
+	        return false;
+	        
+	     });
+	   
+   	   $('#choose_folder').live( 'click',  function(){
+   	      
+   	       $(this).parent().find('#folderpath').addClass("active_orderfolder");
+   	       content = $('#folderpopup');
+   	       content.html( '<div style="width:480px"><h4>Velg folder fra man_ord</h4></div>' );
+   	       var first = 1;
+   	       findfolder( '/home/reedfoto/man_ord', content, first );
+   	       $('#choose_folder').attr('disabled', 'disabled');
+   	       $("#folderpopup").dialog({ height: 530, width: 530, modal: true });
+   	       $('#folderpopup').dialog('open');
+   	       
+   	       return false;
+   	   });
+   	   
+   	   $('#folder').live("click",  function(){
+   	     
+   	      if( !$(this).hasClass('open') ){
+   	        findfolder( $(this).attr('href'), $(this)  );
+   	      }
+   	     
+   	      return false;
+   	      
+   	   });
+   	   
+   	   $('#orderfolder').live("click",  function(){
+   	      
+   	      $('.active_orderfolder').val( $(this).attr( 'href') );
+   	      $('.active_orderfolder').removeClass("active_orderfolder");
+   	      
+   	      $("#folderpopup").html('');
+   	      $("#folderpopup").dialog( "close" );
+   	      
+   	      return false;
+   	   });
+
+	   });
+  
+  	   function findfolder( folder, kake, first ){
+         pathArray=new Array(1); 
+         $.post('/partner/reedfoto/get/', {
+         	folder: folder,
+         	quantity: 1
+            }, function(data) {	
+               for( x in data.folders ){
+                     var myString =  data.folders[x]['folder']; 
+                     var myArray = myString.split('/');
+                  if( first == 1 ){
+                     kake.append( '<dt><a href="' + data.folders[x]['folder'] + '" id="folder">' + myArray[myArray.length-1] +  '</a></dt>'  );
+                  }
+                  else if( data.folders[x]['last'] == false ){
+                     
+                     console.log( myArray[myArray.length-1] );
+                     kake.parent().append( '<dd><a href="' + data.folders[x]['folder'] + '" id="folder">' + myArray[myArray.length-1] +  '</a></dd>'  );
+                  }else{
+                      kake.parent().append( '<dd>--<b>' + myArray[myArray.length-1] + '</b><i>Totalt ' + data.folders[x]['filecount'] + ' filer</i> <a href="' + data.folders[x]['folder'] + '" class="button" id="orderfolder"> velg</a></dd>'  );
+                  }
+                  kake.addClass( 'open' );
+                  //console.log( data.folders[x] );
+               }
+               //console.log( data );
+               
+         }, 'json');
+         
+         return false;
+      };
+      
+	
+	</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+
+<head>
+	  <title>Mix Tema</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+	
+<!--<link rel="stylesheet" href="/css/bestillmerkelapp.css" type="text/css" media="screen, projection" />-->
+	
+
+	
+	
+	<style>
+		
+
+
+	</style>
+	
+</head>
+
+<body>
+	<div metal:use-macro="../../${templates}/common.html/top" />
+  
+  <div class="container">
+  
+      <div class="row">   
+<section class="mb-4">
+
+    <!--Section heading-->
+    <h2 class="h1-responsive font-weight-bold text-center my-4">Kontakt oss</h2>
+    <!--Section description-->
+    <p class="text-center w-responsive mx-auto mb-5">Vi svarer gjerne på dine spørsmål! Ta kontakt med oss på chat, send en mail, ta en telefon eller ta bruk kontaktskjemaet.</p>
+
+    <div class="row">
+
+        <!--Grid column-->
+        <div class="col-md-9 mb-md-0 mb-5">
+            <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+
+                <!--Grid row-->
+                <div class="row">
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <input type="text" id="name" name="name" class="form-control"/>
+                            <label for="name" class="">Ditt navn</label>
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <input type="text" id="email" name="email" class="form-control"/>
+                            <label for="email" class="">Din epost</label>
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+
+                <!--Grid row-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form mb-0">
+                            <input type="text" id="subject" name="subject" class="form-control"/>
+                            <label for="subject" class="">Emne</label>
+                        </div>
+                    </div>
+                </div>
+                <!--Grid row-->
+
+                <!--Grid row-->
+                <div class="row">
+
+                    <!--Grid column-->
+                    <div class="col-md-12">
+
+                        <div class="md-form">
+                            <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+                            <label for="message">Din melding til oss</label>
+                        </div>
+
+                    </div>
+                </div>
+                <!--Grid row-->
+
+            </form>
+
+            <div class="text-center text-md-left">
+                <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>
+            </div>
+            <div class="status"></div>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-3 text-center">
+            
+ 
+
+
+  </div>
+         </div>
+  
+</section>
+<!--Section: Contact v.2-->
+
+ </div>
+
+
+
+
+</div>
+<div metal:use-macro="../../${templates}/common.html/footer" />
+
+
+</body>
+</html>

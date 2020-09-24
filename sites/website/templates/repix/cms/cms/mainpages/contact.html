@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Feedback</tal:block>
+<style type="text/css">input.my-url {
+	display: none
+}
+
+.openinhours table{
+	
+	font-size: 18px;
+}
+
+
+.kontaktskjema{
+	font-size: 22px;
+	
+}
+
+input{
+	
+	font-size: 22px;
+}
+.form-control{
+	    font-size: 21px;
+		color: #000000;
+		height: 44px;
+	
+}
+
+</style>
+</head>
+
+<body>
+<div metal:use-macro="../../../${templates}/common.html/top" />
+<div class="container">
+<div class="col-md-12">
+	<div class="row">
+
+
+
+	<div class="col-md-7 openinhours">
+		
+		
+		<div class="col-md-4">
+		<h2 class="yanoneregular">Kontakt oss</h2>
+		<span class="glyphicon glyphicon-earphone kontaktikoner" aria-hidden="true"></span>
+		<h4>Telefon: 57863500</h4>
+		<span class="glyphicon glyphicon-envelope kontaktikoner" aria-hidden="true"></span>
+		<h4>E-post: repix@foto.no</h4>
+	</div>
+
+
+
+<div class="col-md-4 openinhours">
+
+
+
+		<h2 class="yanoneregular">Åpningstider</h2>
+		<br/>
+		<table>
+			<tr>
+				<th>Mandag:</th>
+				<td>09:00 - 15:00</td>
+			</tr>
+			<tr>
+				<th>Tirsdag:</th>
+				<td>09:00 - 15:00</td>
+			</tr>
+			<tr>
+				<th>Onsdag:</th>
+				<td>09:00 - 15:00</td>
+			</tr>
+			<tr>
+				<th>Torsdag:</th>
+				<td>09:00 - 15:00</td>
+			</tr>
+			<tr>
+				<th>Fredag:</th>
+				<td>09:00 - 15:00</td>
+			</tr>
+			<tr>
+				<th>Lørdag:</th>
+				<td>STENGT</td>
+			</tr>
+			<tr>
+				<th>Søndag</th>
+				<td>STENGT</td>
+			</tr>
+		</table>
+	</div>
+
+
+
+
+
+	</div>
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+
+	<div class="col-md-4 kontaktskjema">
+
+		<h2 class="yanoneregular">Kontaktskjema</h2>
+		<p>Vi tar kontakt tilbake så fort vi kan</p>
+		<form action="/contact/support"  id="contact" method="post">
+			<input type="text" name="my_url" class="my-url form-control" value="" />
+			<div>
+				<label for="email" i18n:translate="">E-mail</label><br/>
+				<input type="text" class="required title form-control" name="email" id="email" tal:attributes="value session/username|default" /><br/>
+				<label for="name" i18n:translate="">Name</label><br/>
+				<input type="text" class="title required form-control" name="name" id="name" /><br/>
+			</div>
+			<div>
+				<label for="reason" i18n:translate="">Reason for contacting us</label><br/>
+				<select name="reason" id="reason" class="required form-control">
+											<option value="" selected="selected">--<tal:block i18n:translate="">Select An Option</tal:block>--</option>
+											<option value="error" i18n:translate="">Error on page</option>
+											<option value="suggestion" i18n:translate="">Suggestion</option>
+											<option value="orders" i18n:translate="">Orders</option>
+											<option value="products" i18n:translate="">Products</option>
+											<option value="faktura" i18n:translate="">Invoice</option>
+											<option value="reklamasjon" i18n:translate="">Complaint</option>
+											<option value="annet" i18n:translate="">Other</option>
+										</select>
+				<div class="hide orderid">
+					<label for="orderid" i18n:translate="">Ordrenr.</label><br/>
+					<input type="text" class="title form-control" name="orderid" id="orderid" /><br/>
+				</div>
+				<br/>
+				<label>Emne:</label><br/>
+				<input class="title required form-control" type="text" name="subject" id="subject" />
+			</div>
+			<div>
+				<label for="message" i18n:translate="">Message</label><br/>
+				<textarea class="required form-control" name="message" id="message"></textarea><br/>
+			</div>
+			<button type="submit" i18n:translate="">Submit</button>
+		</form>
+
+	</div>
+
+
+
+	</div>
+
+   </div>
+</div>
+
+<script language="JavaScript">
+$(document).ready( function() {
+   
+   
+   $('#reason').change(function(){
+      if(this.value == 'orders' || this.value == 'reklamasjon' || this.value == 'faktura'){
+         $('.orderid').show('slow');
+      }
+      else{
+         $('.orderid').hide('slow');
+      }
+   });
+   
+   $.validator.messages.required = '<tal:block i18n:translate="">This field is required.</tal:block>';  
+   
+   $('#contact').validate({
+     rules: {
+       email: {
+         required: true,
+         email: true,
+       }
+     },
+     messages:{
+        email:{
+           required: '<tal:block i18n:translate="">Please provide an email address.</tal:block>',
+           email: '<tal:block i18n:translate="">Please provide a valid email address.</tal:block>'
+        },
+        reason : '<tal:block i18n:translate="">Please choose an option.</tal:block>',
+     }
+   });
+   
+   $('#email').focus();
+});
+</script>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

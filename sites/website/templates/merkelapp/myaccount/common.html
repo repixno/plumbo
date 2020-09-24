@@ -1,0 +1,18 @@
+<!-- My Account Menu -->
+<div metal:define-macro="menu" id="leftmenu">
+	<div id="myaccount-menu">
+		<ul>
+			<li class="" tal:attributes="class conditionalmatch:menuitem,dashboard,current">
+				<a href="/myaccount" i18n:attributes="title" i18n:translate="" title="Summary of your account">Dashboard</a>
+			</li>
+			<li class="" tal:attributes="class conditionalmatch:menuitem,settings,current">
+				<a href="/myaccount/settings" i18n:attributes="title" i18n:translate="" title="Settings, preferences etc.">My settings</a>
+			</li>
+
+		</ul>
+	</div>
+	
+	
+
+	
+</div>

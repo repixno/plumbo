@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <div metal:use-macro="common.html/head" />
+   <script type="text/javascript" src="/js/jquery.tools.min.js"></script>
+   <script type="text/javascript" src="/js/jquery.magnifier.0.2.js"></script>
+</head>
+<body>
+   <div class="container">
+      <form action="/corrections/edit/${correctionid}/1" method="post" id="commentform" enctype="multipart/form-data">
+         <input type="hidden" name="pageid" id="pageid" value="" />
+         <textarea id="comment" name="comment" style="height: 100px; width: 288px;"></textarea><br/>
+         <input type="file" name="uploadfile" />
+         <input type="hidden" id="x" name="x" value="" />
+         <input type="hidden" id="y" name="y" value="" /><br/>
+         <button type="submit" i18n:translate="">Save</button>
+      </form>
+      <tal:block tal:condition="exists:pagecommentid">
+         <script type="text/javascript">
+   
+               parent.pageCommentCallback(${pagecommentid});
+   
+         </script>
+      </tal:block>
+      
+      <script type="text/javascript">
+         $('#commentform').submit(function() {
+            $('#pageid').attr('value',parent.currentpageid);
+            $('#x').val(parent.x);
+            $('#y').val(parent.y);
+         });
+      </script>
+   </div>
+</body>
+</html>

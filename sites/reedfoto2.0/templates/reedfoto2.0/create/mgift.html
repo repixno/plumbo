@@ -1,0 +1,601 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle">
+		<tal:block i18n:translate="">Create gift</tal:block> - <tal:block tal:content="selected/product/title" />
+	</tal:block>
+	
+	
+	<link rel="stylesheet" href="${static:css/gift.css}?${version}" type="text/css" media="screen, projection" />
+
+	
+		<style type="text/css">
+
+		.add_text {
+			height: 250px;
+		}
+		@font-face {
+			font-family: "ArBerkley";
+			src: url('/fonts/ARBERKLEY.ttf');
+			/*src: url('/fonts/andbasr-webfont.eot?#iefix') format('embedded-opentype'),
+				 url('/fonts/andbasr-webfont.woff') format('woff'),
+				 url('/fonts/andbasr-webfont.ttf') format('truetype'),
+				 url('/fonts/andbasr-webfont.svg#andika_basicregular') format('svg');*/
+			font-weight: normal;
+			font-style: normal;
+		}
+		
+		@font-face {
+			font-family: "billabong";
+			src: url('/fonts/Billabong.ttf');
+			font-weight: normal;
+			font-style: normal;
+		}
+		
+		@font-face {
+			font-family: "lucida";
+			src: url('/fonts/LHANDW.TTF');
+			font-weight: normal;
+			font-style: normal;
+		}
+		#ar-berkley-label{
+			font-family: ArBerkley;
+		}
+		#billabong-label{
+			font-family: billabong;
+		}
+		#lucida-label{
+			font-family: lucida;
+		}
+        #portraitalert{
+            position: absolute;
+            background-color: #333;
+            padding: auto auto;
+            margin: 0 !important;
+            z-index: 10000;
+            display: none;
+            color: #fff;
+        }
+        #portraitalert .loadingInfo{
+            text-align: center;
+            margin-top: 300px;
+        }
+        
+        #sidebar{
+            z-index: 9000;
+            background: #fff;
+        }
+        @media only screen and (max-device-width: 1024px) and (orientation:portrait) {
+            
+            #portraitalert{
+                display: block;
+            }
+        }
+        
+	  </style>
+</head>
+
+<body>
+    
+    <div id="portraitalert" style="opacity: 1; margin: 0px; width: 100%; height: 100%;">
+		<div class="loadingInfo">
+			<h3>Snu telefonen for å bruke editoren.</h3>
+		</div>
+	</div>
+	
+	<div metal:use-macro="../../common/loader.html/fullscreen" />
+	
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<div class="container create-gift">
+
+   
+	<div class="row" id="gift-editor">
+	
+		<input type="hidden" value="${selected/product/id}" name="productid" id="productid"/>
+		<input type="hidden" value="${selected/productoptionid}" name="productoptionid" id="productoptionid"/>
+
+	
+		<tal:block tal:repeat="page selected/template/pages">
+			
+			<div class="row row-offcanvas row-offcanvas-right page" tal:condition="equal:repeat/page/number,1">
+				<div class="col-xs-12 col-sm-8">
+					 <p class="pull-right visible-xs" style="position: absolute; right: 30px; z-index: 1501">
+                        <button type="button" class="btn btn-primary form-control btn-xs" data-toggle="offcanvas">Produkt tilpassing</button>
+                        <button class="btn btn-primary opencart pull-right visible-xs" style="position: absolute; top: 55px; right: -15px;" id="" i18n:translate="">Add to cart</button> 
+                    </p>
+					<div class="functions col-md-12 last">
+						<div class="col-md-12 hidden-xs">
+							<h2 class="bottom " tal:condition="exists:selected/product/title">
+								<tal:block tal:content="selected/product/title" tal:condition="selected/product/title"/>
+								<a href="${request/referer}" class="back normalize" i18n:translate="">Go back</a>
+							</h2>
+							<div id="ie6-loader-container"></div>
+						</div>
+						<div class="col-md-12 buttons form-inline">
+							<button class="btn btn-primary form-control zoom-in" i18n:translate="">Zoom in</button>
+							<button class="btn btn-primary  form-control zoom-out" i18n:translate="">Zoom out</button>
+							<input type="range" class="zoom-range form-control" />
+							<button class="btn btn-primary  form-control reset">Reset</button>
+						</div>
+					</div>
+					<div class="col-md-12 last info">
+						<span class="top quiet" i18n:translate="">Click and drag your image to move it around.</span>
+                        
+					</div>
+					
+					
+					<input type="hidden" id="initMalpageid" name="malpageid" value="${page/malpageid}" tal:condition="exists:page"/>
+					<input type="hidden" id="initMalid" name="malid" value="${selected/template/id}" tal:condition="exists:page"/>
+					<input type="hidden" id="websize_x" name="malid" value="${page/websize_x}" tal:condition="exists:page"/>
+					<input type="hidden" id="websize_y" name="malid" value="${page/websize_y}" tal:condition="exists:page"/>
+					
+					
+					<div class="col-md-12" id="gift-editor-wrapper">
+						
+						<div tal:condition="equal:selected/productoption/urlname,brodering" class="bordering-preview">
+							
+							<img id="borderingpreview" src="http://marie.eurofoto.no/create/gift/broderingpreview"/>
+							
+						</div>
+						
+						<div class="template" id="template-wrapper">
+						
+						<div id="helper">&nbsp;</div>
+						
+						<tal:block condition="page/fullsize_src">
+							<img id="template" class="highrestemplate" 
+								src="${static:}images/gifttemplates/thumbs/width/${page/websize_x}/${page/fullsize_src}" 
+							/>
+						</tal:block>
+						
+						<tal:block condition="not:page/fullsize_src">
+							<img id="template" class="highrestemplate" 
+								src="${static:}images/gifttemplatesweb/thumbs/blankbox/${page/websize_x}x${page/websize_y}/${selected/template/id}.png" 
+							/>
+						</tal:block>
+						
+
+						<!-- finds other template if not set -->
+						<tal:block condition="not:page/fullsize_src">
+							<tal:block tal:repeat="gifttemplate collections/gifttemplates">
+								<tal:block tal:condition="equal:repeat/gifttemplate/number,1" tal:repeat="page gifttemplate/pages">
+									<input type="hidden" id="initMalid" name="malid" value="${gifttemplate/id}" tal:condition="exists:gifttemplate"/>
+									<tal:block tal:condition="equal:repeat/page/number,1">
+										<tal:block tal:condition="page/fullsize_src">
+											<img id="template" class="highrestemplate" 
+												src="${static:}images/gifttemplates/thumbs/width/630/${page/fullsize_src}" alt="template"
+											/>
+											<input type="hidden" id="initMalid" name="malid" value="${page/websize_x}" />
+											<input type="hidden" id="initMalid" name="malid" value="${page/websize_y}" />
+											<input type="hidden" id="initMalid" name="malid" value="${gifttemplate/id}" />
+											<input type="hidden" id="initMalpageid" name="malpageid" value="${page/malpageid}" />
+										</tal:block>
+										<tal:block tal:condition="not:page/fullsize_src">
+											<img id="template" 
+												class="highrestemplate" 
+												src="${static:}gfx/404/no_template.png" alt="no template"
+											/>
+										</tal:block>
+									</tal:block>
+								</tal:block>
+							</tal:block>
+						</tal:block>
+						<div id="image-wrapper">
+							<tal:block tal:condition="selected/imageid">
+								<img id="image"	src="/images/stream/image/${selected/image/id}/630/400" alt="?"/>
+								<input type="hidden" id="selected-image" value="${selected/imageid}" />
+							</tal:block>
+							<tal:block tal:condition="not:selected/imageid">
+								<img id="image" class="noimage" alt="no image" src="/layout_grafikk/pixblank.gif" />
+								<input type="hidden" id="selected-image" value="0" />
+							</tal:block>
+						</div>
+						</div>
+						
+						<div class="span-16 last prepend-top" tal:condition="equal:selected/productoption/urlname,brodering" >
+							
+							<i>
+								Dette feltet viser hele området for plassering av bilde på håndkleet,
+							det er ikke nødvendig å fylle hele feltet, vi trykker bildet i den bredde som du velger.
+							</i>
+						
+						</div>
+					</div>
+					
+					<div class="display-none">
+						<!-- Article about how to do this 04c79f9a-fc81-4276-994c-42328ece2208 -->
+					</div>
+					
+				
+				
+				<!-- store the values -->
+				<input type="hidden" id="original-template-width" class="coordinate" value="${page/fullsize_x}"/>
+				<input type="hidden" id="original-template-height" class="coordinate" value="${page/fullsize_y}"/>
+				<input type="hidden" id="original-pos-x" class="coordinate" value="${page/fullsize_pos_x}"/>
+				<input type="hidden" id="original-pos-y" class="coordinate" value="${page/fullsize_pos_y}"/>
+				<input type="hidden" id="original-pos-dx" class="coordinate" value="${page/fullsize_pos_dx}"/>
+				<input type="hidden" id="original-pos-dy" class="coordinate" value="${page/fullsize_pos_dy}"/>
+				</div>
+				
+				<div class="col-xs-8 col-sm-4 sidebar-offcanvas" id="sidebar">
+					
+                    
+                    
+                     <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#photo" aria-controls="photo" role="tab" data-toggle="tab" i18n:translate="">Choose photo</a>
+                        </li>
+                        <li role="presentation"><a href="#choose-template" aria-controls="choose-template" role="tab" data-toggle="tab" i18n:translate="">Choose template</a></li>
+                        <li role="presentation"><a href="#choose-text" aria-controls="choose-text" role="tab" data-toggle="tab" >Velg tekst</a></li>
+                        <li role="presentation"><a href="#choose-clipart" aria-controls="choose-clipart" role="tab" data-toggle="tab" >Velg clipart</a></li>
+                    </ul>
+                    
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active functions" id="photo">
+						
+							<div class="row span4 text-left" style="margin-left: 0px;">
+								<h4 class="hidden-phone">1: Last opp bilder</h4>
+								<div class="btn btn-primary fileinput-button" style="position: relative">
+									<span>Velg bilde</span>
+									<!-- The file input field used as target for the file upload widget -->
+									<input id="fileupload" type="file" name="files[]"  data-url="/api/1.0/upload/stabburet" accept="image/jpeg"  />
+								</div>
+							</div>
+							<div id="progress" class="progress" style="display: none;">
+								<div class="progress-bar progress-bar-success"></div>
+							</div>
+							<div id="upload-queue" style="padding:5px 0px;">
+								
+							</div>
+							<h4 i18n:translate="">Click on the image you want to use.</h4>
+							<div id="transfer-status" class="display-none small quiet">
+								<p class="right">
+									<a href="#" class="abort negative display-none" id="transfer-stop" i18n:translate="">Cancel upload</a> 
+								</p>
+
+								<span id="uplspeed" style="float: right;">0 KB/s</span>
+								<div id="progressbar-total" style="height: 25px"></div>
+								<div id="upload-queue">
+									<div id="upload-master" style="display:none;">
+										<img style="max-width: 96px;" src="${static:gfx/gui/ajax-loader-big.gif}" alt="" />
+									</div>
+								
+									<div>
+										<div class="progressbar" style="height: 10px"></div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="photos">
+							
+								<tal:block tal:condition="session/loggedin">
+									<label for="select-album" i18n:translate="">Choose album</label>
+									<select id="select-album">
+								      <optgroup label="My albums" tal:condition="gt:albums/length,0" i18n:attributes="label">
+							         <tal:block tal:repeat="album albums">
+								         <option value="${album/id}" tal:condition="exists:album/title">
+									        <tal:block tal:content="shorten:album/title;18" tal:condition="album/title" />
+								         </option>
+							         </tal:block>
+						           </optgroup>
+						           <optgroup label="My Friends Albums" tal:condition="gt:sharedAlbums/length,0" i18n:attributes="label">
+							        <tal:block tal:repeat="sharedalbum sharedAlbums">
+								        <option value="${sharedalbum/id}" tal:condition="exists:sharedalbum/title">
+									       <tal:block tal:content="shorten:sharedalbum/title;18" tal:condition="sharedalbum/title" />
+								        </option>
+							        </tal:block>
+						           </optgroup>
+									</select>
+									<div id="btnUpload"></div>
+								</tal:block>
+								
+								<tal:block tal:condition="not:session/loggedin">
+
+									<div class="prepend-top center append-bottom" style="margin-left: 50px">
+										<div id="btnUpload"></div>
+									</div>
+									<h5 i18n:translate="">Sign in to get photos from your account</h5>
+									<tal:block metal:use-macro="../common.html/quicklogin" />
+								
+								</tal:block>
+								
+								<div id="album-images">
+									
+								</div>
+							</div>
+						</div>
+
+						
+						<tal:block tal:condition="equal:selected/productoption/urlname,brodering">
+							<h3 id="accodrian-brodering"><a href="#choose-brodering">Velg Brodering</a></h3>
+							<div class="functions" id="choose-brodering">
+	
+								<div class="span-6">
+									<label for="nametype">Tekst</label><br/>
+									<input class="namefield" name="name" type="text" id="name" placeholder="Maks 28 tegn" maxlength="28"/>
+								</div>
+								<div class="span-6">
+									<div class="strong">Velg skrifttype</div>
+									<div class="fontpreview">
+										<input type="radio" name="font" value="ar-berkley" id="ar-berkley" checked="checked"/><label for="ar-berkley" id="ar-berkley-label" class="selectedborder">Ar Berkley</label>
+										<input type="radio" name="font" value="billabong" id="billabong" /><label for="billabong" id="billabong-label">Billabong</label>
+										<input type="radio" name="font" value="lucida" id="lucida" /><label for="lucida" id="lucida-label">Lucida</label>
+									</div>
+								</div>
+								<div class="span-6 right prepend-top">
+									<button>Oppdater</button>
+								</div>
+							</div>
+						</tal:block>
+
+						<tal:block tal:condition="not:equal:selected/productoption/urlname,brodering">
+							<div role="tabpanel" class="tab-pane functions" id="choose-template">
+								<div>
+									<tal:block tal:repeat="gifttemplate collections/gifttemplates">
+										<div class="template-thumb">
+											
+											<a tal:attributes="href string:/create/gift/${selected/productid}/${selected/productoptionid}/${gifttemplate/id}/${selected/image/id}">
+												<tal:block tal:repeat="page gifttemplate/pages">
+													<tal:block tal:condition="equal:repeat/page/number,1">
+													
+														<input 
+															type="hidden" class="websize_x" name="malid" value="${page/websize_x}" 
+															tal:condition="exists:page"/>
+														<input 
+															type="hidden" class="websize_y" name="malid" value="${page/websize_y}" 
+															tal:condition="exists:page"
+														/>
+														
+														<tal:block tal:condition="page/fullsize_src">
+															<img 
+																src="${static:}images/gifttemplates/thumbs/squareaspect/50/${page/fullsize_src}" 
+																width="50" height="50"
+																id="malid_${gifttemplate/id}" alt="eurofoto" class="mal"
+															/>
+															<script type="text/javascript">
+																$('#malid_${gifttemplate/id}').data('websize_x', '${page/websize_x}');
+																$('#malid_${gifttemplate/id}').data('websize_y', '${page/websize_y}');
+																$('#malid_${gifttemplate/id}').data('fullsize_pos_x', '${page/fullsize_pos_x}');
+																$('#malid_${gifttemplate/id}').data('fullsize_pos_y', '${page/fullsize_pos_y}');
+																$('#malid_${gifttemplate/id}').data('fullsize_pos_dx', '${page/fullsize_pos_dx}');
+																$('#malid_${gifttemplate/id}').data('fullsize_pos_dy', '${page/fullsize_pos_dy}');
+																$('#malid_${gifttemplate/id}').data('fullsize_x', '${page/fullsize_x}');
+																$('#malid_${gifttemplate/id}').data('fullsize_y', '${page/fullsize_y}');	
+																
+															</script>
+															<input type="hidden" class="malid" name="malid" value="${gifttemplate/id}" />
+															<input type="hidden" class="malpageid" name="malpageid" value="${page/malpageid}" />
+														</tal:block>
+														
+														<tal:block tal:condition="not:page/fullsize_src">
+															<div class="empty-template-thumb">
+															<img 
+																src="${static:}images/gifttemplatesweb/thumbs/blankbox/50x50/${selected/template/id}.png" 
+																width="50" height="50"
+																id="malid_${gifttemplate/id}"
+															/>
+															</div>
+														</tal:block>
+														
+														<input type="hidden" class="malid" name="malid" value="${gifttemplate/id}" />
+														<input type="hidden" class="malpageid" name="malpageid" value="${page/malpageid}" />
+														
+													</tal:block>
+												</tal:block>
+											</a>
+											<a class="highres display-none" href="${static:}images/gifttemplates/thumbs/width/630/${page/fullsize_src}"></a>
+										</div>
+									</tal:block>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane functions add_text" id="choose-text">
+							<div class="functions" >
+								<div id="text-align">
+									<input checked="checked" type="radio" id="text-align-left" class="text-align left" name="text-align" value="left"/>
+									<label i18n:translate="">Left</label>
+		
+									<input type="radio" id="text-align-center" class="text-align center" name="text-align" value="center" />
+									<label i18n:translate="">Center</label>
+									
+									<input type="radio" id="text-align-right" class="text-align right" name="text-align" value="right" />
+									<label i18n:translate="">Right</label>
+								</div>
+								<div>
+									<select id="fontselect" name="fontselect">
+										<option value="arial">Arial</option>
+										<option value="ariblk">Arial Black</option>
+										<option value="shelly_script_andante">Andante</option>
+										<option value="itc_clover">Clover</option>
+										<option value="comic">Comic Sans</option>
+										<option value="frabk">Franklin</option>
+										<option value="georgia">Georgia</option>
+										<option value="harrington">Harrington</option>
+										<option value="linotype_feltpen">Linotype</option>
+										<option value="verdana">Verdana</option>
+										<option value="vivaldi">Vivaldi</option>
+										<option value="present">Present</option>
+										<option value="itc_jaft">ITC Jaft</option>
+									</select>
+									
+									<br/>
+									<label for="new-text" i18n:translate="">Write text here:</label><br/>
+									<!---<input type="text" id="new-text" rows="3" cols="10" class="span-4"></input>-->
+									<TEXTAREA id="new-text" style="height:100px;" class="span-6"></TEXTAREA>
+									
+									<input id="new-text-color" class="iColorPicker" value="#000000" type="text"/>
+									<a class="button blue" id="add-text" i18n:translate="">Add text</a>
+								</div>
+							</div>
+							</div>
+							<div role="tabpanel" class="tab-pane functions functions" id="choose-clipart">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    
+                                    <select id="clipartgroup-selector">
+                                        <tal:block tal:repeat="clipartgroup collections/clipart">
+                                            <option tal:condition="clipartgroup/name" tal:content="clipartgroup/name" tal:attributes="value clipartgroup/id"></option>
+                                        </tal:block>
+                                    </select>    
+                                    </div>
+                                    <div id="clipart-selector">
+                                        <tal:block tal:repeat="clipartgroup collections/clipart">
+                                            
+                                            <div id="clipartcollection_id_${clipartgroup/id}" class="clipartcollection" 
+                                                tal:condition="lte:repeat/clipartgroup/number,1">
+                                                <h3 tal:content="clipartgroup/name" tal:condition="clipartgroup/name"></h3>
+                                                <tal:block tal:repeat="item clipartgroup/items">
+                                                    <div class="clipartitem-container" id="clipartitem-container_${item/id}">
+                                                        <img class="clipartitem" alt="${item/id}" 
+                                                            src="${static:}images/clipart/thumbs/width/50/${item/id}.png" id="clipartitem_${item/id}"
+                                                        />
+                                                        
+                                                    </div>
+                                                </tal:block>
+                                            </div>
+        
+                                            <div id="clipartcollection_id_${clipartgroup/id}" class="clipartcollection display-none" 
+                                                tal:condition="gt:repeat/clipartgroup/number,1">
+                                                <h3 tal:content="clipartgroup/name"  tal:condition="clipartgroup/name"></h3>
+                                                <tal:block tal:repeat="item clipartgroup/items">
+                                                    <div class="clipartitem-container" id="clipartitem-container_${item/id}">
+                                                        <img class="clipartitem" 
+                                                            src="" 
+                                                            title="${static:}images/clipart/thumbs/width/50/${item/id}.png" id="clipartitem_${item/id}"
+                                                        />
+                                                    </div>
+                                                </tal:block>
+                                            </div>
+        
+                                        </tal:block>
+                                    </div>
+                                </div>
+							</div>
+						</tal:block>
+					</div> <!-- end accordion -->
+					<div class="col-md-12 cartfunctions" style="position: relative; z-index: 1502">
+						<div class="box">
+						
+							<h4 i18n:translate="">Choose quantity</h4>
+							
+							<div class="prepend-top append-bottom">
+								<input type="checkbox" name="red-eye" id="red-eye"/>
+								<label for="red-eye">
+									<tal:block i18n:translate="">Please remove red eyes for me.</tal:block>
+									<span class="quiet small">(Kr <span id="redeye-price"></span>)</span>
+								</label>
+							</div>
+							
+							<div class="right">
+								Kr <span class="price" id="gift-price"><tal:block tal:content="formatprice:selected/productoption/prices/0/price"/></span>
+								<label for="gift-quantity"></label>
+								<input type="text" class="quantity" id="gift-quantity" value="1"/>
+								<button class="call-to-action" id="add-gift-to-cart" i18n:translate="">Add to cart</button>
+							</div>
+						</div>
+					</div>
+				</div> <!-- end left side -->
+			
+			</div>
+		</tal:block>
+	</div>
+	<hr class="space clearfix clear"/>
+</div>
+		
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<script src="${static:}js/jqupload/js/jquery.iframe-transport.js?${version}"></script>
+<!-- The basic File Upload plugin -->
+<script src="${static:}js/jqupload/js/jquery.fileupload.js?${version}"></script>
+<script type="text/javascript">
+var ajaxLoader = '<tal:block tal:content="static:gfx/gui/ajax-loader.gif" />';
+var bigajaxLoader = '<tal:block tal:content="static:gfx/gui/ajax-loader-big.gif" />';
+var bigajaxLoaderGray = '${static:gfx/gui/ajax-loader-gray.gif}';
+var noImagesText = '<tal:block i18n:translate="">No images</tal:block>';
+var deleteText = '<tal:block i18n:translate="">Delete</tal:block>';
+var staticurl = '${static:}';
+var maxHeight = 250;
+var maxtemplatewidt = 450;
+var productoptionid = ${selected/productoptionid};
+var websize_x = '${page/websize_x}';
+var websize_y = '${page/websize_y}';
+var staticsite = "${static:}";
+
+
+$( function(){
+	
+    
+    $('.opencart').on( 'click', function(){
+        
+        $('.cartfunctions').dialog( { title: 'Legg til handlevogn' });
+            
+        
+        });
+    
+	 $('[data-toggle="offcanvas"]').click(function () {
+        $('.row-offcanvas').toggleClass('active');
+      });
+	
+	$('input[name="font"]').on( 'change' , function(){
+		var thisvalue = $(this).val()
+		$('.fontpreview label' ).removeClass('selectedborder');
+		$( "#" +  thisvalue + "-label" ).addClass('selectedborder');
+		changebrodering();
+	});
+	
+	$('.namefield').on( 'change' , function(){
+		changebrodering();
+	})
+	
+	$('#borderingpreview').on( 'click', function(){
+		
+		$( "#accordion" ).accordion({ active: 1 });
+		});
+	
+	});
+
+	function changebrodering(){
+		var font = $('input[name="font"]:checked').val();
+		var usertext = $('.namefield').val();
+		$('#borderingpreview').attr( 'src' , '/create/gift/broderingpreview/'+ font + '/' + usertext );
+		
+	}
+
+</script>
+
+
+
+
+<script src="${static:js/iColorPicker.js}?${version}" type="text/javascript"></script>
+<script src="${static:js/jquery.panzoom.min.js}?${version}" type="text/javascript"></script>
+<script src="${static:js/gift.v2.min.js}?${version}" type="text/javascript"></script>
+<script src="${static:}js/jqupload/js/jquery.iframe-transport.js?${version}"></script>
+<!-- The basic File Upload plugin -->
+<script src="${static:}js/jqupload/js/jquery.fileupload.js?${version}"></script>
+<!-- Google Code for Gavegenerator - steg 2 Conversion Page -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1070265469;
+var google_conversion_language = "no";
+var google_conversion_format = "2";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "WBXuCKXBxAEQ_eir_gM";
+var google_conversion_value = 0;
+//-->
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1070265469/?label=WBXuCKXBxAEQ_eir_gM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+</body>
+</html>

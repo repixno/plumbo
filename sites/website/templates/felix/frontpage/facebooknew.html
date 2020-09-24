@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+        
+		<title>Felix Ketchup</title>
+        <meta name="descritption" content="Vill du också ha en personlig ketchupflaska?
+		Klicka här och gör din egen etikett med text och bild. Vi skickar hem den till dig utan extra kostnad. Glöm inte att ange #sagdetmedketchup när du delar den på Facebook!
+"/>
+        
+        <meta property="og:title" content="Säg det med ketchup!" />
+        <meta property="og:description" content="Vill du också ha en personlig ketchupflaska?
+		Klicka här och gör din egen etikett med text och bild. Vi skickar hem den till dig utan extra kostnad. Glöm inte att ange #sagdetmedketchup när du delar den på Facebook!
+" />
+        <meta property="og:image" content="http://sagdetmedketchup.eurofoto.se/skapa/ThumbSharenew/${id}/${id}.jpg" />
+		
+		
+		<style>
+			.thumbetikett1{
+                position: absolute;
+                top: 194px;
+				left: 64px;
+				width: 126px;
+            }
+			.thumbetikett {
+				position: absolute;
+				top: 228px;
+				left: 59px;
+			}
+			.thumboverlay{
+                position: relative;
+                z-index: 2;
+            }
+			
+			@media (min-width: 992px){
+				.sharetext h3{
+					  position: relative;
+						left: 84px;
+						top: 50px;
+				}
+			}
+			
+			@media ( max-width: 992px ){
+				h3{
+					font-size: 20px;
+				}
+			}
+		</style>
+
+    </head>
+    
+    <body>
+
+        <div class="container center">
+
+			<div class="row">
+                <div class="col-md-12 text-center">
+                    <img src="${static:}css/portals/felix/gfx/logo.jpg" alt="FELIX"/>
+                </div>
+            </div>
+			<div class="row">
+				
+				<div class="col-md-12 hidden-xs">
+					<img class="img-responsive" src="/felix/fbheader.png" />
+				</div>
+				
+				<div class="col-md-6 col-md-push-6">
+				<img class="img-responsive" src="/skapa/ThumbSharenew/${id}/${id}.jpg"/>
+			
+				
+				<!--	
+				
+				
+				
+				<div class="col-md-4 col-md-pull-7">
+                    <img class="thumbetikett" src="/skapa/ThumbShare/${id}/${id}.jpg"/>
+                    <img class="thumboverlay" src="/felix/flaske125.png"/>
+                </div>
+					
+					
+					<img src="http://felixbeta.eurofoto.se/skapa/ThumbShare/${id}/${id}.jpg" title="Felix" alt="felix"/>-->
+				</div>
+				
+				<div class="sharetext col-md-6 col-md-pull-6">
+					<h3>Vill du också ha en personlig etikett?<br/>
+						Här kan du göra din egen etikett med text och bild <a href="http://www.felix.se/sagdetmedketchup/" style="text-decoration: underline">www.felix.se/sagdetmedketchup</a> <br/><br/>
+Vi skickar hem den till dig utan kostnad. Glöm inte att dela din etikett på Facebook och ange #sagdetmedketchup
+<br/><br/>
+Lycka till!
+</h3>
+				</div>
+				
+
+			</div>
+            
+            
+            <div>
+
+            </div>
+
+        </div>
+
+</body>
+</html>

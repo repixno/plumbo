@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#EE7204;}
+	.st1{display:none;}
+	.st2{display:inline;fill:#020202;}
+	.st3{fill:#020202;}
+	.st4{display:inline;}
+	.st5{fill:none;stroke:#000000;stroke-width:0.3;}
+	.st6{display:inline;fill:none;}
+	.st7{font-family:'MyriadPro-Bold';}
+	.st8{font-size:18px;}
+</style>
+<g id="Layer_1_1_">
+	<circle class="st0" cx="10" cy="10" r="10"/>
+</g>
+<g id="Logg_inn_user" class="st1">
+	<path class="st2" d="M15.4,10.6c-0.6-1.5-3.8-1.5-3.8-1.5c1.7-0.5,1.6-3.2,1.6-3.2c0-3.5-3.2-3.5-3.2-3.5s-3.2,0-3.2,3.5
+		c0,0-0.1,2.7,1.6,3.2c0,0-3.2,0-3.8,1.5c0,0-0.8,1.7-0.3,4.7H10h5.7C16.1,12.3,15.4,10.6,15.4,10.6z"/>
+</g>
+<g id="Register_user">
+	<g>
+		<rect x="3.8" y="4.8" class="st3" width="12.3" height="2.3"/>
+		<rect x="3.8" y="8.6" class="st3" width="12.3" height="2.3"/>
+		<rect x="3.8" y="12.3" class="st3" width="12.3" height="2.3"/>
+	</g>
+</g>
+<g id="Shopcart" class="st1">
+	<g class="st4">
+		<line class="st5" x1="4.6" y1="-48" x2="4.6" y2="-12"/>
+		<line class="st5" x1="-49.4" y1="6" x2="-13.4" y2="6"/>
+		<line class="st5" x1="-49.4" y1="11.7" x2="-13.4" y2="11.7"/>
+		<line class="st5" x1="4.6" y1="65.7" x2="4.6" y2="29.7"/>
+		<line class="st5" x1="15.9" y1="-48" x2="15.9" y2="-12"/>
+		<line class="st5" x1="69.9" y1="6" x2="33.9" y2="6"/>
+		<line class="st5" x1="69.9" y1="11.7" x2="33.9" y2="11.7"/>
+		<line class="st5" x1="15.9" y1="65.7" x2="15.9" y2="29.7"/>
+	</g>
+	<g class="st4">
+		<polygon class="st3" points="5,6 5.6,8.9 6.2,11.7 10.3,11.7 14.4,11.7 15.3,8.9 16.3,6 10.6,6 		"/>
+		<circle class="st3" cx="7.7" cy="13.9" r="1.6"/>
+		<circle class="st3" cx="13" cy="13.9" r="1.6"/>
+		<path class="st3" d="M5.9,5.6C5.9,6.8,6,6,5.4,6H4.2C3.9,6,3.7,5.8,3.7,5.6l0,0c0-0.3,0.2-0.5,0.5-0.5h1.2
+			C5.7,5.1,5.9,5.3,5.9,5.6L5.9,5.6z"/>
+	</g>
+</g>
+<g id="Layer_5" class="st1">
+	<g class="st4">
+		<ellipse cx="10" cy="8.7" rx="6.6" ry="5.2"/>
+		<path d="M10.6,13.7c0,0,0.7,1.8,4.5,1.8c0,0-2.1-1.7-1.6-3.2L10.6,13.7z"/>
+	</g>
+</g>
+<g id="Layer_6" class="st1">
+	<rect x="5.2" y="3" class="st6" width="9.7" height="14.1"/>
+	<text transform="matrix(1 0 0 1 6.0166 15.7324)" class="st4 st7 st8">?</text>
+</g>
+</svg>

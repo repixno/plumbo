@@ -1,0 +1,81 @@
+/*
+ * Frontpage 
+ ***************************************/
+
+/*.frontpageMenu { background-color: #fefefe; padding: 1em; -moz-border-radius: 5px; border: 1px solid #ccc;}*/
+.frontpageMenu a { margin: 0; padding: 1em; display: block; text-decoration: none; color: #666; border-bottom: 1px solid #ccc; }
+
+.frontpageMenu a.last { border-bottom: none;}
+.frontpageMenu a:hover { color: #000 !important; background-color: #efefef}
+.frontpageMenu a:hover span { color: #000 !important }
+.frontpageMenu a span.h4 { font-size: 1.2em; font-weight: bold; color: #333; margin: 0; padding: 0; display: block; }
+.frontpageMenu a span { color: #666; font-size: .8em }
+
+
+div.with_button { position: relative; padding-bottom: 2em; } /* make room for the button */
+div.with_button a.button, div.with_button button { position: absolute; bottom: 10px; right: 10px }
+
+.frontpage .with_button { height: 15em }
+
+.frontpage .box.new {
+	background: #fff url(backgrounds/new.png) scroll no-repeat top right;
+}
+
+.medium-frontpage-article {
+	background-position: bottom left;
+	background-repeat: no-repeat;
+	position: relative;
+} 
+/* the ones in the top */
+.main-articles .medium-frontpage-article {
+	height: 150px;
+} 
+
+.frontpage-bottom {
+	background-image: url(/gfx/backgrounds/frontpage-gradient.jpg);
+	background-position: top;
+	background-repeat: repeat-x;
+	border-top: 1px solid #ccc;
+	padding-bottom: 2em;
+	padding-top: 2em;
+	margin-top: 2em;
+}
+
+.medium-frontpage-article button, 
+.medium-frontpage-article a.button {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+} 
+.medium-frontpage-article .box {
+	position: relative;
+	overflow: hidden:
+	height: 17em;
+} 
+
+.mini-frontpage-article { position: relative; }
+.mini-frontpage-article .box { position: relative; height: 16em; }
+.mini-frontpage-article p, .mini-frontpage-article a, .mini-frontpage-article ul *, .mini-frontpage-article ol *,.mini-frontpage-article p * { z-index: 500; position: relative }
+.mini-frontpage-article img.bottom-right { position: absolute; bottom: 10px; right: 10px; z-index: 100;}
+
+
+.medium-frontpage-article .box .button { border:none } 
+
+.frontpage .medium-frontpage-article.order-prints {
+	background-image:url(backgrounds/frontpage/order-prints.jpg);
+} 
+.frontpage .medium-frontpage-article.photo-books {
+	background-image:url(backgrounds/frontpage/photo-books.jpg);
+} 
+.frontpage .medium-frontpage-article.calendars {
+	background-image:url(backgrounds/frontpage/calendars.jpg);
+} 
+.frontpage .medium-frontpage-article.photo-gifts {
+	background-image:url(backgrounds/frontpage/photo-gifts.jpg);
+} 
+.frontpage .medium-frontpage-article.greeting-cards {
+	background-image:url(backgrounds/frontpage/greeting-cards.jpg);
+} 
+.frontpage .medium-frontpage-article.enlargements {
+	background-image:url(backgrounds/frontpage/enlargements.jpg) ;
+}

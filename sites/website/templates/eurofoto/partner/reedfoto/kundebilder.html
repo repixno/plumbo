@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head metal:use-macro="../../../${templates}/common.html/head">
+
+</head>
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+	<!-- use if menu is needed -->
+	<div tal:define="global menuitem string:orders" metal:use-macro="./common.html/menu" />
+
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div id="content">
+            
+            <div>
+                <strong>${identifier/identifier}</strong><br/>
+                ${identifier/fname} ${identifier/ename} ${identifier/address},  ${identifier/zip} ${identifier/city}
+            </div> 
+    
+
+        <span tal:repeat="thumb thumbnails">
+			
+			<img src="${thumb}" />
+		</span>
+    
+    </div>
+
+
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

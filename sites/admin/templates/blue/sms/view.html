@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">SMS - Eurofoto Admin</title>
+<tal:block metal:use-macro="../common.html/css" />
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		<tal:block metal:use-macro="../common.html/languages" />
+		<div id="content">
+			<div id="box">
+				
+			   <h3>View/Edit SMS</h3>
+				<form action="/sms/save/${sms/id}" method="POST" >
+   			   <table width="100%">
+   			   <tal:block tal:condition="exists:sms/id">
+   			      <tr>
+                     <th><label i18n:translate="">Id</label></th>
+   			         <td>
+   					    <tal:block tal:content="sms/id" />
+   			         </td>
+   			      </tr>
+   			   </tal:block>
+   		      <tr>
+                  <th><label i18n:translate="">Message</label></th>
+   			      <td>
+   					   <textarea name="message" id="message" type="textarea" cols="20" rows="5" ><tal:block tal:content="sms/message" i18n:translate=""/></textarea>
+   			      </td>
+   			   </tr>
+   			   <tr>
+                  <th><label i18n:translate="">Price</label></th>
+   			      <td>
+   			         <input name="price" id="price" type="text" value="${sms/price}" />
+   			         <input name="id" id="id" type="hidden" value="${sms/id}" />
+   			      </td>
+   			      <td>
+   			         Må oppgis i hele kroner. Eks: 0 (gratis), 1 eller 2.
+   			      </td>
+   			   </tr>
+   			   <tr>
+   			      <td colspan="2">
+                     <input type="submit" value="Save" i18n:attributes="value"/><br />
+   			      </td>
+   			   </tr>
+   			   <tr>
+   			      <td colspan="2">
+                     <a href="/sms">Main</a>
+   			      </td>
+   			   </tr>
+   			   </table>
+   			</form>
+			   
+				
+			</div>
+		</div>
+	</div>
+	<div id="footer"></div>
+</body>
+</html>

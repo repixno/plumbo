@@ -1,0 +1,798 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<tal:block tal:define="global dontShowCart" />
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Checkout</tal:block>
+
+	<style type="text/css">
+	h2{font-size: 2em; margin-bottom: 0em;}
+	h3 { color:#000000; margin-top: 5px; margin-left: 3px; }
+		h4{margin-top: 6px;margin-left: 4px;font-weight: bold;}
+		textarea { width: 300px }
+		#fancy_div {
+			overflow-y: scroll;
+		}
+		form label.inputError {
+			display: inline-block;
+			background: none;
+			margin: 0;
+			padding: 0;
+			margin-left: 1em;
+		}
+		.round-corners-heading { 
+		   height:30px;
+		   color:#000000;
+		   background: #eeeeee;
+		}
+		p {
+         margin: 0 0 0em;
+         margin-top: 0px;
+         margin-right: 0px;
+         margin-bottom: 0em;
+         margin-left: 0px;
+      }
+		.gradientdiv {
+		   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ececec', endColorstr='#e1e1e1'); /* for IE */
+         background: -webkit-gradient(linear, left top, left bottom, from(#ececec), to(#e1e1e1));  /*for webkit browsers */
+        background: -moz-linear-gradient(top,  #ececec,  #e1e1e1);   /*for firefox 3.6+ */ 
+		}
+		.large{
+         font-size: 1em;
+         font-weight: bold;
+		}
+		.deliveryoption {
+			cursor: pointer;
+		}
+		
+		table td, table th {
+			border-left: 1px solid #eee;
+			border-bottom: 1px solid #eee;
+			padding: 2px;
+		}
+        
+        #store-methods-wrapper input[type="text"], #store-methods-wrapper select, textarea, .quantity, .userreg input{
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            font-size: 15px;
+            background-color: white;
+            border: 1px solid #a6a6a6;
+            border-radius: 3px;
+            color: #595959;
+            font-weight: 600;
+            line-height: 19px;
+            margin: 0;
+            padding: 5px;
+            position: relative;
+        }
+		
+        input.text-1 {
+            width: 66px !important;
+          }
+        input.text-3 {
+            width: 147px !important;
+          }
+          label.error{
+            display: block;
+            text-align: left;
+            width: 200px;
+          }
+		.info-text{
+			padding: 15px 0 3px 0;
+			font-weight: bold;
+		}
+		h4{
+			font-size: 15px;
+			background: #fff;
+			color: #434343;
+			display: inline-block;
+			margin-top: 0;
+			padding-right: 16px;
+			position: relative;
+			z-index: 1;
+			margin: 5px 0;
+		}
+		
+		button, .button{
+			margin: 10px 0
+		}
+		
+		#loader-overlay{
+			opacity: 0.8;
+			margin: 0;
+			width: 100%;
+			height: 100%;
+			
+		}
+		
+	</style>
+</head>
+
+<body>
+   	<div id="loader-overlay">
+		<div class="loadingInfo">
+			<img src="${static:gfx/gui/ajax-loader-gray.gif}" /><br/>
+			<br/>
+			<h3 i18n:translate="">Loading, please wait.</h3>
+			<p>
+				<tal:block  i18n:translate="">
+				If you waited too long, try refreshing the page.
+				</tal:block>
+				<a href="." class="refresh" i18n:translate="">Refresh</a>
+			</p>
+		</div>
+	</div>
+	<div class="container order-prints">
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	<div class="span-19 ui-tabs ui-widget ui-widget-content ui-corner-all">
+		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+			<li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active">
+				<a href="#">For privatkunder</a>
+			</li>
+			<li class="ui-state-default ui-corner-top">
+				<a href="/kasse/bedrift">For firmakunder</a>
+			</li>
+		</ul>
+	
+	<div class="span-19">
+				<tal:block tal:condition="not:session/loggedin">
+				<form action="/register/check/" method="post" id="contact-and-delivery-info">
+				<div class="span-19 last">
+                    <h3>Før du sjekker ut ordren trenger vi litt informasjon fra deg.</h3>
+					<div class="span-10 userreg">
+                            <div>
+                                <h4>Fyll inn din epostadresse under</h4>
+                                <input id="contact-email" name="cemail" type="text" class="text required email" placeholder="E-post" value="${session/username}" /><br/><a class="button nextstep blue" href="#">Neste steg</a>
+                            </div>
+                            
+                            <script type="text/javascript">
+                                $(document).ready( function() {
+									
+									
+									$("#contact-email").keydown(function (e) {
+										if (e.keyCode == 13) {
+										  $('#contact-email').blur();
+										}
+									  });
+									
+                                    $('#contact-email').on('blur', function(){
+                                        $(this).after( ajaxLoader );
+                                        $('#checkout-login-button').remove();
+                                        
+                                        $.get('/api/1.0/user/registered', {newEmail: $(this).attr('value')}, function(response) {
+                                            
+                                            if (response == 'true') {
+                                                // removes required from login
+                                                $('#password-container').hide('fast');
+                                                $('#password', '#password-container').removeClass('required')
+                                                $('#checkout-login-button').remove();
+                                                $('#password-new-user', '#new-user-container').addClass('required');
+                                                $('#repeat-password', '#new-user-container').addClass('required');
+                                                $('#eula', '#new-user-container').addClass('required');
+                                                $('#new-user-container').show('fast', function() {
+                                                   $( '#password-new-user' ).trigger( 'focus' );
+                                                });
+                                                $('#delivery-address').show('fast');
+												$('.nextstep').remove();
+                                            }
+                                            else if(response == '"registered"' ){
+                                                $('#delivery-address').hide('fast');
+                                                $('#password', '#password-container').after('<br/><button id="checkout-login-button" class="button blue"><tal:block i18n:translate="">Login</tal:block></button>');
+                                                // removes required from the dom when user changes his mind
+                                                $('#new-user-password', '#new-user-container').removeClass('required');
+                                                $('#repeat-password', '#new-user-container').removeClass('required');
+                                                $('#eula', '#new-user-container').removeClass('required');
+        
+                                                $('#new-user-container').hide('fast');
+                                                $('#password', '#password-container').addClass('required')
+                                                $('#password-container').show('fast', function() {
+                                                    $('#password').trigger('focus');
+                                                });
+												$('.nextstep').remove();
+                                            }
+											$('.loader').remove();
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <div class="hide" id="password-container">
+                                <p class="red" i18n:translate="">You are already registered, please provide password.</p>
+                                <label for="password" i18n:translate="">Password</label> <br/>
+                                <input id="password" name="password" type="password" class="password text"  /><br/>
+                                <div id="forgot-password" class="right span-8 last">
+                                    <a href="/login/forgot-password" class="small" i18n:translate="">Forgot password?</a>
+                                </div>
+                                <hr class="space"/>
+                            </div>
+                            
+                            <div class="hide" id="new-user-container">
+									<p class="red" i18n:translate="">This e-mail is not registered. Please choose a password so you can log in later.</p>
+									<label for="password-new-user" i18n:translate="">Password</label> <br/>
+									<input id="password-new-user" name="password" type="password" class="password text" placeholder="passord" /><br/>
+									<label for="repeat-password" i18n:translate="">Repeat password</label> <br/>
+									<input id="repeat-password" name="password2" type="password" class="password text" placeholder="gjennta passord"/>
+									<div>
+										<input type="checkbox" id="newsletter" class="newsletter ignore" name="newsletter" checked="checked"/> 
+										<label for="newsletter" i18n:translate="">Yes, I want to receive newsletters</label>
+									</div>
+									<div>
+										<input type="checkbox" id="eula" class="required eula" name="eula"/> 
+										<label for="eula">
+											<tal:block i18n:translate="">Yes, I accept the</tal:block> 
+											<a href="#terms-and-conditions" class="open-terms-and-conditions" i18n:translate="">terms and conditions</a>
+										</label>
+									</div>
+									<button class="button blue" i18n:translate="" id="registeruser">Register</button>
+					
+                            
+                                <div id="terms-and-conditions" class="popup hide">
+                                    <tal:block tal:content="structure cms:body:80f507f6-69c5-4a4e-9714-b2656514cb31" />
+                                </div>
+                            </div>
+					</div>
+				</div>
+                </form>
+			</tal:block>
+    <!-- order summary -->
+    <tal:block tal:condition="session/loggedin">
+    <div class="span-19 last">
+   		<tal:block metal:use-macro="common.html/order-summary-new" />
+	</div>
+	<!-- NEW Delivery and payment methods -->		
+	<div id="delivery-and-payment-methods" class="hide span-15 last" title="Delivery method" i18n:attributes="title">
+	<tal:block tal:condition="not:exists:serviceproduct">
+	<tal:block tal:condition="exists:deliveryoptions">
+	  <div class="span-15" id="delivery-methods-wrapper" style="margin-bottom: 30px;">
+		 <tal:block tal:repeat="deliverymethod deliveryoptions">
+	  <div class="span-15 " style="border-bottom: 1px dotted grey; padding: 3px;">
+		 <div class="span-5">
+		 <tal:block tal:condition="exists:storedeliveryrefid">
+		   <tal:block tal:condition="equal:deliverymethod/artnr,storedeliveryrefid,1">
+			<input id="storeon" tal:condition="exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}"/> 
+			<input id="storeon" tal:condition="not:exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" /> 
+			<tal:block tal:define="global deliveryoptionid string:storeon" />
+		 </tal:block>
+		 <tal:block tal:condition="not:equal:deliverymethod/artnr,storedeliveryrefid,1">
+			<input class="storeoff" id="deliverymethod-${deliverymethod/refid}" tal:condition="exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" checked="1" /> 
+			<input class="storeoff" id="deliverymethod-${deliverymethod/refid}" tal:condition="not:exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" /> 
+			<tal:block tal:define="global deliveryoptionid string:deliverymethod-${deliverymethod/refid}" />
+		 </tal:block>
+		 </tal:block>
+		 <tal:block tal:condition="not:exists:storedeliveryrefid">
+			<input class="storeoff" id="deliverymethod-${deliverymethod/refid}" tal:condition="exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" checked="1" /> 
+			<input class="storeoff" id="deliverymethod-${deliverymethod/refid}" tal:condition="not:exists:deliverymethod/isPreset" type="radio" name="delivery-method" value="${deliverymethod/refid}" /> 
+			<tal:block tal:define="global deliveryoptionid string:deliverymethod-${deliverymethod/refid}" />
+		 </tal:block>
+			<label class="deliveryoption large" for="${deliveryoptionid}">
+				<tal:block tal:content="deliverymethod/title"></tal:block> 
+				<tal:block tal:condition="conditionalmatch:deliverymethod/title,A-post,1">
+					 <span class="quiet small" tal:content="cms:ingress:c06236e7-c496-49a9-9324-b29ecf06c48a"></span>
+				</tal:block>
+				<tal:block tal:condition="conditionalmatch:deliverymethod/title,Servicepakke,1">
+					 <span class="quiet small" tal:content="cms:ingress:3e6c5e80-dac2-4346-9039-bd20944ba366"></span>
+				</tal:block>
+				<tal:block tal:condition="conditionalmatch:deliverymethod/title,Dør til dør,1">
+					 <span class="quiet small" tal:content="cms:ingress:f515d742-143f-4556-8bcb-b4bbd8f30aa1"></span>
+				</tal:block>
+			</label>
+			
+	  </div>
+			
+	  <div class="span-3">
+		 <span class="large">
+					kr 
+					<span class="price hide" id="deliveryprice_${deliverymethod/refid}" tal:content="deliverymethod/price"></span>
+					<span tal:content="formatprice:deliverymethod/price"></span>
+				</span>
+	  </div>
+			
+	  <div class="span-7 last" style="display: block; margin-top:8px;">
+			<tal:block tal:condition="conditionalmatch:deliverymethod/title,A-post,1">
+				<tal:block class="quiet" tal:content="structure cms:body:c06236e7-c496-49a9-9324-b29ecf06c48a"></tal:block>
+			</tal:block>
+			<tal:block tal:condition="conditionalmatch:deliverymethod/title,Servicepakke,1">
+				<tal:block class="quiet" tal:content="structure cms:body:3e6c5e80-dac2-4346-9039-bd20944ba366"></tal:block>
+			</tal:block>
+			<tal:block tal:condition="conditionalmatch:deliverymethod/title,Dør til dør,1">
+				<tal:block class="quiet" tal:content="structure cms:body:f515d742-143f-4556-8bcb-b4bbd8f30aa1"></tal:block>
+			</tal:block>
+		  <tal:block tal:condition="conditionalmatch:deliverymethod/title,Hente i butikk,1">
+				<tal:block class="quiet" tal:content="structure cms:body:49e212e0-6aa5-4d25-9d28-77e87ebdccee"></tal:block>
+			</tal:block>
+		  <tal:block tal:condition="conditionalmatch:deliverymethod/title,Hente hos Japan Photo,1">
+				<tal:block class="quiet" tal:content="structure cms:body:49e212e0-6aa5-4d25-9d28-77e87ebdccee"></tal:block>
+			</tal:block>
+	  </div> 
+	</div>	
+   		</tal:block>
+   			
+   			</div>
+   			</tal:block>
+   			</tal:block>
+		</div>
+		
+		   
+    
+    <div class="span-19 last">
+			   <div class="span-19 last">
+               <div class="span-19 last" id="klarna-methods-wrapper">
+					<div tal:condition="exists:snippet" tal:content="structure snippet"></div>
+			   </div>
+               </div>
+               <div class="span-19-last hide" id="store-methods-wrapper">
+                <h3>Levering og betaling i butikk</h3>
+                <div>
+                    <form method="post" action="/checkout/confirm/" id="contact-and-delivery-info">
+                    <div class="span-19 last">
+                    <label for="stores">Velg Fotobutikk</label><br/>
+                    <tal:block tal:condition="exists:storedeliveryrefid">
+                        <div id="stores" tal:condition="equal:deliverymethod/artnr,storedeliveryrefid,1">
+                             <!--<label>Velg butikk: </label>-->
+                              <select id="storedelivery" name="delivertostore" class="select">
+                              <option disabled="disabled" value="" selected="selected">Velg Fotobutikk</option>
+                                 <tal:block tal:repeat="chain storechains">
+                                    <optgroup label="${chain/chain}">
+                                    <tal:block tal:repeat="store chain/stores">
+                                       <option value="${store/store/id}">${store/store/name}:
+                                       ${store/store/address}</option>
+                                    </tal:block>
+                                    </optgroup>
+                                 </tal:block>
+                              </select>
+                              </div>
+                    </tal:block>
+                    <input type="hidden" name="payment-method" value="431" id="payment_3080"/>
+                  </div> 
+                    <div id="delivery-address">
+                    <!--3 -->
+                      <div>
+                        <label for="phone" i18n:translate="">Mobile number:</label><br/>
+                        <input id="phone" name="phone" type="text" class="text required text-3" tal:attributes="value user/mobile|default" value=""/>
+                        
+                        <button id="phonelookup" class="hide" i18n:translate="">Get address</button>
+                      </div>
+                        <!--PHONE END -->
+    
+                        <div>
+                            <label for="contact-name" i18n:translate="">Name:</label> <br/>
+                            <input id="contact-name" name="cname" type="text" class="text required name" value="${user/fullname}"/>
+                        </div>
+        
+                        <div>
+                            <label for="contact-address" i18n:translate="">Address:</label><br/>
+                            <input id="contact-address" type="text" name="caddress" value="${user/address}" class="text required"/>
+                        </div>
+                        <div>
+                            <div class="span-2">
+                                <label for="contact-zipcode" i18n:translate="">ZIP code:</label> <br/>
+                                <input id="contact-zipcode" name="czipcode" type="text" class="text required text-1" value="${user/zipcode}"/>
+                            </div>
+                            <div class="span-4">
+                                <label for="contact-city" i18n:translate="">City:</label> <br/>
+                                 <input id="contact-city" name="ccity" type="text" class="text required text-3" value="${user/city}"/>
+                            </div>
+                        
+                            <div class="span-6 last">
+                                <label for="contact-country" i18n:translate="">Country:</label> <br/>
+                                
+                                <select id="contact-country" name="ccountry" style="width: 120px">
+                                <optgroup label="Common" i18n:attributes="label">
+                                    <option value="NO" i18n:translate="" selected="selected">Norway</option>	
+                                </optgroup>
+                                <optgroup label="All" i18:attributes="label">
+                                    <tal:block tal:repeat="country countries">
+                                    <option tal:condition="equal:user/country,country/iso,1" value="${country/iso}" tal:content="country/name|default" selected="true"></option>
+                                    <option tal:condition="not:equal:user/country,country/iso" value="${country/iso}" tal:content="country/name|default"></option>
+                                    </tal:block>
+                                    
+                                </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span-17 right">
+						<input type="hidden" name="delivery-method" value="484" />
+                        <button class="blue large submit last" type="submit" style="margin-right:0;" i18n:translate="">Next step</button>
+                    </div>
+                    </form>
+                </div>
+   			</div>
+				</div>
+		<!--</form>-->
+	</tal:block>
+    </div>
+			   
+    </div>
+	<div class="span-5 last center" style="width: 180px">
+	
+			<div>
+				<h3 class="info-header">Handle trygt hos<br/> Eurofoto</h3>
+				<div class="info-text">Faktura og delbetaling</div>
+				<div>
+					<img src="https://cdn.klarna.com/1.0/shared/image/generic/logo/nb_no/basic/blue-black.png?width=121&eid=2990" alt="Klarna"/>
+				</div>
+				
+			</div>
+			<div>
+				<div class="info-text">Kortbetaling</div>
+				<div>
+					<img src="//c.static.eurofoto.no/cms/images/visa_mastercard.png" alt=""/>
+				</div>
+				
+			</div>			
+	</div>
+    </div>
+	
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<script type="text/javascript" src="${static:js/klarnacheckout.js}?${version}"></script>
+<script type="text/javascript">
+    var loggedin = ${session/loggedin};
+	
+	$(document).ready( function(){
+		
+		//$('#loader-overlay').width( $(window).width() ).height( $(window).height() );
+		
+		$('a.remove').on('click', function(){
+
+			var $this = $(this);
+			var url = $(this).attr('href');
+
+			var id = $this.parent().parent().attr('id');
+			
+			$.ajax({
+					url: url,
+				}).done(function( msg ) {
+				
+					if( $this.parent().parent().hasClass('connected-from-prev') ){
+						$this.parent().parent().fadeOut('slow', function(item){
+								$this.parent().parent().remove()
+								updateTotal();
+								});
+					}else{
+						var ref = $this.parent().parent().attr('reference');
+						
+						if( ref ){
+							$('[reference="' + ref + '"]').fadeOut('slow', function(item){
+								$('[reference="' + ref + '"]').remove()
+								updateTotal();
+							});
+						}
+						else{
+							$this.parent().parent().fadeOut('slow', function(item){
+								$this.parent().parent().remove()
+								updateTotal();
+							});
+						}
+					}
+				
+				});
+			
+			
+			return false;
+			})
+		
+		
+		$(window).load( function() {
+			$('#loader-overlay').fadeOut('slow', function() {
+				updateTotalNoklarna();
+				$(this).hide();
+			})
+		});
+		$('.refresh').click( function() {
+			window.location.reload();
+			return false;
+		});
+		$('#registeruser').on('click', function(){
+			
+			$('#loader-overlay').fadeIn('fast', function() {
+				$(this).show();
+			})
+			
+			});
+		
+        $('#checkout-login-button').live('click',  function() {
+            $(this).after( ajaxLoader );
+            $('.inputError').remove();
+            $.ajax({
+            	url: '/api/1.0/user/login',
+            	type: 'post',
+            	dataType: 'json',
+            	data: {
+            		username: $('#contact-email').attr('value'),
+            		password: $('#password').attr('value')
+            	},
+            	success: function(msg) {
+    
+            		if( msg.result != false) {
+            		   window.location = '/kasse'
+            		   //location.reload();
+            		} else {
+            			$('.loader').remove();
+            			$('#checkout-login-button').after('<label class="inputError" i18n:translate="">Wrong password</label>');
+            			return false;
+            		}
+            	},
+            	error: function(msg) {
+            		$('#password').next('.loader').remove();
+            		alert('error: ' + msg);
+            	}
+        	});
+		
+            return false;	
+        });
+    
+        var deliveryid = "${cart/deliverytype/refid}";
+        
+        if( deliveryid == 484 ){
+            $('#store-methods-wrapper').show();
+            $('#klarna-methods-wrapper').hide();
+        }
+        
+        $('input[name="delivery-method"]').each( function(){			
+            //console.log(deliveryid);
+            if( $(this).val() == deliveryid ){
+                $(this).attr('checked', 'checked' );
+            }
+        });
+
+		
+		
+		$('#comment').on('blur', function(){
+			
+			
+			
+			$.post('/api/1.0/checkout/setcomment', {
+				'comment' :  $(this).val()
+				},
+				function(data){
+					//console.log( data )
+					
+					
+				},'json');
+			
+			});
+		
+		
+		$('#changedelivery').on( 'click', function(){
+			$('#delivery-and-payment-methods').dialog({
+				width:670,
+				modal: true,
+				height: 400,
+				buttons:[
+					{
+					  text: "Ok",
+					  icons: {
+						primary: "ui-icon-heart"
+					  },
+					  click: function() {
+						$( this ).dialog( "close" );
+					  }
+					}
+				  ],
+                open: function(){
+                      
+                },
+				beforeClose: function( event, ui ) {
+					$('.storealert').remove();
+					if( $('#storeon').prop('checked') ){
+						$('.deliveryrow img').attr('src', '${static:}gfx/gui/jpbutikk.jpg');
+                        $('#store-methods-wrapper').show();
+                        $('#klarna-methods-wrapper').hide();
+                        return true;
+					}else{
+						$('.deliveryrow img').attr('src', 'http://www.posten.no/_public/themes/posten/images/logo.png?jcb=1402863866');
+                        $('#store-methods-wrapper').hide();
+                        $('#klarna-methods-wrapper').show();
+						return true;
+					}
+					
+					
+					
+					
+				}
+				})
+		
+		});
+		
+		$('.open-terms-and-conditions').click( function(){
+				$('#terms-and-conditions').dialog({
+						width: 1024,
+						modal: true,
+						height: 600,
+						title: "Sluttbrukervilkår for Eurofoto",
+						buttons: {
+								"LUKK": function() {
+										$( this ).dialog( "close" );
+								}
+						}
+						
+						});
+				
+				return false;
+				});
+		
+        
+        	$('form#contact-and-delivery-info').validate({
+                    rules: {
+                        cname: {
+                            required: true,
+                            fullname: true
+                        },
+                        cemail: {
+                            required: true,
+                            email: true
+                        },
+                        czipcode: {
+                            required: true,
+                            minlength: 4
+                        },
+                        ccity: {
+                            required: true
+                        },
+                        caddress: {
+                            required: true
+                        },
+                        'repeat-password': {
+                            equalTo: '#password-new-user'
+                        },
+                        delivertostore:{
+                            //required: "#storeon:checked"
+                            required: true
+                        },
+                        phone:{
+                        required : true,
+                        digits : true,
+                        minlength : 8
+                        }
+                    },
+                    messages: {
+                        cname: {
+                            required: "<tal:block i18n:translate="">Required</tal:block>",
+                            fullname: "<tal:block i18n:translate="">Please enter your first name and surname.</tal:block>"
+                        },
+                        cemail: {
+                            required: "<tal:block i18n:translate="">Required</tal:block>",
+                            email: "<tal:block i18n:translate="">Your email address must be in the format of name@domain.com</tal:block>"
+                        },
+                        czipcode: {
+                            required: "<tal:block i18n:translate="">Required</tal:block>",	
+                            minlength: "<tal:block i18n:translate="">Please enter at least 4 digits</tal:block>"	
+                        },
+                        ccity: {
+                            required: "<tal:block i18n:translate="">Required</tal:block>"	
+                        },
+                        caddress: {
+                            required: "<tal:block i18n:translate="">Required</tal:block>"	
+                        },
+                        'repeat-password': {
+                            equalTo: "<tal:block i18n:translate="">Oops, your passwords don't match. </tal:block>"
+                        },
+                        eula: {
+                            required: "<tal:block i18n:translate="">You have to read and accept the terms and conditions</tal:block>"
+                        },
+                        delivertostore:{
+                           required: "Du må velge en butikk!"
+                        },
+                        phone:{
+                           required: "Du må oppgi et telefonummer",
+                           number: "Du må oppgi et gyldig mobilnummer"
+                        }
+                    }
+                });
+		});
+   
+   
+		$('input.quantity').bind('change', function() {
+			/*window._klarnaCheckout(function (api) {
+				api.suspend();
+			});*/
+		
+			var quantity = $(this).val();
+			
+			/*<![CDATA[*/
+			if( !parseInt(quantity, 10)  || parseInt(quantity, 10) < 1 ){
+				$(this).val(1);
+				quantity = 1;
+			}
+			/*]]>*/
+			
+			var id = $(this).parent().parent().attr('id');
+			var price;
+			var item = this;
+			var prodno = $(this).parent().parent().find('.removeItem a').attr('name');
+			var reference = $(this).parent().parent().find('.removeItem input[name="referenceid"]').val();
+			
+			$(this).parent().next().prepend('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader1"/>');
+			$(this).parent().next().next().prepend('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader2"/>');
+			$('#total-price').before('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader3"/>');
+			
+			$.post('/api/1.0/prices/get', {
+				productoptionid: id,
+				quantity: quantity
+			}, function(data) {
+				$(item).parent().parent().find('.unitprice').text( formatPrice(data.price) );
+				$(item).parent().parent().find('.price').text( formatPrice( parseFloat(quantity) * parseFloat(data.price) ) );
+				
+				
+				$( '[id="'  + id + '"]' ).each( function(){
+					
+					var thisquantity = $(this).find('.quantity').val();
+					var ref = $(this).attr('reference');
+					
+					//$('[reference="' + ref +'"]').each( function(){
+						
+						
+						var varnishunitprice = $('[reference="' + ref +'"] .varnishunitprice').text();
+						var upgradeunitprice = $('[reference="' + ref +'"] .updateunitprice').text();
+						
+						
+						if(varnishunitprice ){
+							$('[reference="' + ref +'"] .varnishprice').text(formatPrice( parseFloat( varnishunitprice  ) * thisquantity ));
+						}
+						if(upgradeunitprice ){
+							$('[reference="' + ref +'"] .upgradeprice').text(formatPrice( parseFloat(  upgradeunitprice )  * 1 ));
+						}
+						
+						
+						//})
+				});
+				
+				
+				var totalPrice = 0;
+				
+				$('.price', '#cart').each( function(i, item) {
+					totalPrice += parseFloat( $(item).text().replace(',','.') );
+				});
+				$('.total-price').text( formatPrice(totalPrice) );
+				
+				$('#loader1, #loader2, #loader3').remove();
+				
+			}, 'json');
+			
+			
+			$.post('/api/1.0/checkout/set', {
+				'prodno' : prodno,
+				'quantity':quantity,
+				'reference': reference
+				},
+				function(){
+					window._klarnaCheckout(function (api) {
+						api.resume();
+					});		
+				},'json');
+			
+			
+			
+			return false;
+		});
+	
+</script>
+<!-- Google Code for Utsjekk påstartet Conversion Page -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1070265469;
+var google_conversion_language = "no";
+var google_conversion_format = "2";
+var google_conversion_color = "333333";
+var google_conversion_label = "JcKPCJ3CxAEQ_eir_gM";
+var google_conversion_value = 0;
+//-->
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1070265469/?label=JcKPCJ3CxAEQ_eir_gM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+</body>
+</html>

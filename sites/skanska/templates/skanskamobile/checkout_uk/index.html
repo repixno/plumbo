@@ -1,0 +1,491 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+	<div metal:use-macro="../common.html/head" />
+    <tal:block metal:use-macro="../common.html/stylesheet" />
+	
+	
+	<style>
+	    ul#products {
+			margin: 1em 0; padding: 0;
+	    }		
+	    ul.sizes { margin: 0; padding: 0}	
+	    ul#products li, ul.sizes li { 
+			list-style-type: none;
+			/*width: 150px;*/
+			padding: 0px 0 5px 0;
+			margin: 0;
+			float: left;
+	    }
+	    ul#products input {
+			width: 1em;
+	    }
+	    label{
+			color:#002945;
+			font-size: 1.3em;
+			line-height: 1.1em;
+			font-family: skanska;
+	    }
+		label.notice{
+			padding: 10px 2px 1px 2px;
+			font-size: 1.1em;
+			color: #002945;
+		}
+	    .span2{ width: 120px !important;}
+	    .button,.btn-skanska{
+			border: none;
+			background-color: #0094d3;
+			display: inline-block;
+			padding: 5px 8px 2px 10px;
+			color: #fff;
+			text-decoration: none;
+			font-weight: bold;
+			font-size: 2em;
+			line-height: 1;
+			border-radius: 5px;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+			-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+			-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+			text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+			border-bottom: 1px solid rgba(0,0,0,0.25);
+			position: relative;
+			cursor: pointer;
+	    }
+	    a.button:hover{
+			text-decoration: none !important;
+	    }
+	    input.quantity, input.valg{
+			font-size: 1.5em;
+			height: 1.3em;
+			margin-bottom: 8px;
+	    }
+	    ul#products input, input.quantity {
+			width: 1em;
+	    }
+	   
+	    label.error{
+			position: relative;
+			top: -8px;
+			left: 12px;
+			font-size: 0.8em;
+			color: #e83023;
+			font-family: skanska;
+			margin: 0px;
+			width: 220px;
+			text-align: left;
+	    }
+	    [class*="span"] {
+			position: relative;
+	    }
+		.toptext{
+			color: #002945;
+			font-family: skanska;
+			font-size: 2.2em;
+			line-height: 1.2em;
+		}
+		.infobutton{
+				padding: 2px 7px 0px 7px;
+				font-family: 'skanska';
+				font-size: 0.8em;
+				border-radius: 8px;
+				-moz-border-radius: 8px;
+				-webkit-border-radius: 8px;
+		}
+		.ui-widget-content a {
+			color: #000;
+			text-decoration: underline;
+		}
+		input.span7{
+			width: 440px;
+		}
+		
+		
+		h3{
+			font-size: 1.2em;
+			
+			
+		}
+		
+		
+		
+		/*av på knapp nyhetsbrev Repix*/
+			/*av på knapp nyhetsbrev Repix*/
+.switch {
+  position: relative;
+  /*display: inline-block;*/
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #dc3545;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #28a745;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #28a745;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 15px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+
+
+
+
+	</style>
+	
+	<div metal:use-macro="../common.html/javascript" />
+	<script src="/js/checkout_uk.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    </head>
+    
+    <body>
+		
+		
+	<tal:block metal:define-macro="show-image">
+	    <tal:block tal:condition="exists:product/images" tal:repeat="image product/images">
+		 <a href="http://static.repix.no/images/products/thumbs/height/500/${image/url}" class="fancybox" title="${product/ingress}">
+		       <img src="http://static.repix.no/images/products/thumbs/height/100/${image/url}" title="${product/title}" height="100" tal:condition="equal:repeat/image/number,1" />
+	       </a>
+	    </tal:block>
+	</tal:block>
+	
+        <div class="text-right header" style="float: left;">
+		<!--	<div class="span text-left">
+				<button id="start-over" class="yellow">Forrige</button>
+			</div>
+			<div class="span text-center">
+				<h2 style="font-size: 23px;" >Kontaktinformasjon</h2>
+			</div>
+			<div class="span text-right">
+				<button id="add-to-cart" class="yellow">Neste</button>
+			</div>-->
+        </div>
+        <div class="container">
+
+<div class="row">
+		<p class="col-md-10 text-center toptext"><br/>
+			<br/>Your sticker is finish! <br/> Enter your name and address:
+		</p>
+</div>
+		<div class="row">
+			<form method="post" action="/stickers/checkout_uk/confirm/" id="contact-and-delivery-info">
+				<div class="text-left" style="padding:0 0 30px 50px;">
+			<div class="row" tal:condition="session/loggedin">
+				<div class="">
+				<label for="contact-email">E-mail</label>
+				</div>
+				<div class="span6">
+				<input id="contact-email" name="cemail" type="text" class="span5 required email valg" value="${session/username}" />
+				</div>
+			</div>
+			<div tal:condition="not:session/loggedin" class="row">
+				<div class="">
+				<label for="contact-email">E-mail</label>
+				</div>
+				<div class="span6">
+				<input id="contact-email" name="cemail" type="text" class="span7 text required email valg" value="" />
+				</div>
+			</div>
+			<div class="hide" id="password-container">
+				<p class="red" i18n:translate="">You are already registered, please provide password.</p>
+				<div class="row">
+					<div class="">
+						<label for="password" i18n:translate="">Password</label>
+					</div>
+					<div class="span6">
+					<input id="password" name="password" type="password" class="span4 password text valg"  />
+					</div>
+				</div>
+				<div class="row">
+					<div id="forgot-password" class="right span-8 last">
+					<a href="/login/forgot-password" class="small " i18n:translate="">Forgot password?</a>
+					</div>
+				</div>
+				
+			</div>
+			<div class="hide" id="new-user-container">
+				<p style="color:#e83023; font-weight: bold" i18n:translate="">This e-mail is not registered. Please choose a password so you can log in later.</p>
+				<div class="row">
+					<div class="" style="width: 182px">
+						<label for="password-new-user">Passord</label>
+					</div>
+					<div class="span2">
+					<input id="password-new-user" name="password-new-user" type="password" class="password text"  />
+					</div>
+				</div>
+				<div class="row">
+					<div class="" style="width: 182px">
+						<label for="repeat-password" i18n:translate="">Repeat password</label>
+					</div>
+					<div class="span2">
+					<input id="repeat-password" name="repeat-password" type="password" class="password text"  />
+					</div>
+				</div>
+			</div>
+			<div id="delivery-address">
+				<div class="row">
+				<div class="">
+					<label for="contact-name">Firstname / Lastname:</label>
+				</div>
+				<div class="span6">
+					<input id="contact-name" name="cname" type="text" class="text required name span7 valg" value="${user/fullname}"/>
+				</div>
+				</div>
+				<div class="row">
+				<div class="">
+					<label for="contact-address">Privateaddress:</label>
+				</div>
+				<div class="span6">
+					<input id="contact-address" name="caddress"  type="text" class="text required name span7 valg" value="${user/address}"/>
+					<!--<textarea id="contact-address" name="caddress" style="height: 50px;" tal:content="user/address" class="required span7 valg" cols="30" rows="6"/>-->
+				</div>
+				</div>
+				<div class="row">
+				<div class="span" style="margin-left: 0px">
+					<div>
+					<label for="contact-zipcode">ZIP code:</label>
+					</div>
+					<div class="span">
+					<input id="contact-zipcode" name="czipcode" type="text" class="text required span2 valg" value="${user/zipcode}"/>
+					</div>
+				</div>
+				<div div="span">
+					<div class="">
+					<label for="contact-city" >City:</label>
+					</div>
+					<div class="span">
+					<input id="contact-city" name="ccity" type="text" class="text required span4 valg" value="${user/city}"/>
+					</div> 
+				</div>
+	
+				</div>
+				<div class="row">
+				<div class="">
+					<label for="phone" >Phone:</label>
+				</div>
+				<div class="span6">
+					<input id="phone" name="phone" type="text" class="text required span4 valg" tal:attributes="value user/mobile|default" value=""/>
+				</div> 
+				</div>
+			</div>
+			
+			</div>
+				
+			<div class="text-left" style="padding:0 0 30px 50px;">
+				<table>
+					
+					
+					
+					
+					
+					
+					<!--Vilkår-->
+					<tr>
+						<td><input type="checkbox" id="eula" class="required" name="eula"/></td>
+						<td><label class="notice" for="eula">Yes, I accept terms and conditions  <a id="rulesbutton" href="#">(read terms and conditions here)</a></label></td>
+						
+					</tr>
+					
+					
+		
+					
+					<br/>
+					
+					
+					<!--Nyhetsbrev Orkla-->
+					<tr>
+						<td><input type="checkbox" id="orklastats" name="orklastats" /></td>
+						<td>
+							<label class="notice" for="orklastats"><strong>Newsletter:</strong><br/> Do you want to get exclusive offers and information about products from  <a href="https://www.cewe.no/  " style="color:#0278c9; font-weight: bold !important;" target="_blank">CEWE </a>?<br/> Sign up for our newsletter, and you are among the first to receive this. <a href="#" id="informasjonbutton" style=" text-decoration: underline; "><br/><strong> More information</strong></a></label>
+		   
+		    </td>
+					</tr>
+					
+											
+				</table>
+	
+	<div class="row">
+		
+		
+		
+
+		
+		<br/>
+		
+			<div class="row">
+		
+	  <div class="span4 text-left">
+				<button id="start-over" class="btn btn-skanska">BACK</button>
+			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<div class="span4 text-right">
+				<button id="add-to-cart" class="btn btn-skanska">NEXT</button>
+			</div>
+   </div>
+	
+	
+	   </div>
+		
+		
+				
+			</div>
+			</form>
+		</div>
+        </div>
+        <div metal:use-macro="../common.html/footer" />
+	
+	<div id="dialog" style="display: none;">
+	    <img id="image" src=""/>
+	</div>
+	
+	<div id="dialog-confirm" title="Start på nytt?" style="display: none; height:110px">
+	    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Du er i ferd med å slette ditt lokk og begynne på et nytt.<br/>
+	    Er du sikker på at du ønsker dette?</p>
+	</div>
+	
+	<div id="newsletterinfo" class="hide" title="Nyhetsbrev fra Orkla">
+		Vi vil sende deg tips om nyheter og andre kampanjer fra Orkla.<br/>Stabburet Leverpostei er en del av Orkla, som også har andre kjente merkevarer som Stabbur-Makrell, Lano, Blenda, Pierre Robert, FunLight, Toro og Grandiosa. (Se full oversikt på <a href="http://orkla.no" >Orkla.no</a>.)<br/>Du kan når som helst melde deg av denne tjenesten.
+	</div>
+	
+	
+	<div id="stabburtinfo" class="hide" title="Nyhetsbrev fra Stabburet Leverpostei">
+		Vi vil sende deg tips om nyheter fra Stabburet Leverpostei, informasjon om kosthold og kampanjer.<br/>
+Du kan når som helst melde deg av denne tjenesten.
+	</div>
+	
+	
+	
+	
+    <script>
+	/*<![CDATA[*/
+	
+	
+	//ny checkbox
+		$(document).ready(function() {
+    $('#orklaannonse').change(function() {
+        $('#orkla3part').toggle();
+    });
+});
+			//ny checkbox slutt
+	
+	
+	
+		//ny checkbox
+		$(document).ready(function() {
+    $('#orklatilpasninger').change(function() {
+        $('#newsletter-orkla').toggle();
+    });
+});
+			//ny checkbox slutt		
+			
+			
+			
+	$(document).ready(function() {
+	    
+		$('.orklainfo').on( 'click', function(){
+			
+			$('#newsletterinfo').dialog({
+				width: 400,
+				'buttons' : {
+					'Lukk': function(){ $(this).dialog('close') }
+				},
+				});
+			
+				return false;
+			});
+		
+		
+		$('.stabburtinfo').on( 'click' , function(){
+			
+			$('#stabburtinfo').dialog({
+				width: 400,
+				'buttons' : {
+					'Lukk': function(){ $(this).dialog('close') }
+				},
+				
+				});
+			
+			return false;
+		
+			});
+		
+	   $('#add-to-cart').on( 'click', function(){
+			$('#contact-and-delivery-info').submit();
+		});
+	    
+	    $('.fancybox').click( function(){
+		
+		var src = $(this).attr( 'href' );
+		$('#image').attr( 'src', src );
+		
+		$('#dialog').dialog({
+		    modal: true,
+		    resizable: false,
+		    draggable: false
+		});
+		return false;
+	    });
+	    
+	    $('#start-over').on( 'click', function(){
+		   window.location =  '/stickers';
+		    return false;
+		});
+		
+	});
+	/*]]>*/
+    </script>
+</body>
+</html>

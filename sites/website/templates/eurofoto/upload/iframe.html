@@ -1,0 +1,62 @@
+<html>
+<head>
+	<title i18n:translate="">Upload file</title>
+	<link rel="stylesheet" href="${static:css/portals/eurofoto/screen.css}?${version}" type="text/css" media="screen, projection"/> 
+	<link rel="stylesheet" href="${static:css/portals/eurofoto/print.css}?${version}" type="text/css" media="print"/> 
+	<tal:block tal:replace="structure string:<!--[if lt IE 8]>" />
+
+	<link rel="stylesheet" href="${static:css/portals/eurofoto/ie.css}?${version}" type="text/css" media="screen, projection" />
+	<tal:block tal:replace="structure string:<![endif]-->" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+	<style type="text/css">
+		body {
+			background-image: none;
+			background-color: transparent;
+			margin: 0 !important;
+		}
+	</style>
+</head>
+<body>
+
+	<form method="post" action="/upload/iframe/${albumid}/${callback}" enctype="multipart/form-data">
+		<input type="file" name="image" id="inlineUpload" accept="image/jpeg"/><br />
+		<button type="submit" class="" i18n:translate="">Start upload</button>
+	</form>
+	
+	<script type="text/javascript">
+	
+	
+	$(document).ready( function() {
+	   
+      $("#inlineUpload").change(function() {
+          var val = $(this).val();
+          switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
+              case 'jpg':
+              case 'jpeg':
+                  //alert("an image");
+                  break;
+              default:
+                  $(this).val('');
+                  // error message here
+                  alert("Du kan kun laste opp JPEG bilder.");
+                  break;
+          }
+      });
+	   
+		if( !$.browser.webkit ) {
+			$('#inlineUpload').css({
+				'margin-left'	: 	'-60px',
+				'position'		:	'relative',
+				'border'		:	'none'
+			})
+		} 
+	});
+	</script>
+	
+   <script language="JavaScript" tal:condition="exists:imageid">
+      parent.${callback}( '${imageid}', ${structure imagejson} );
+   </script>
+   
+</body>
+</html>

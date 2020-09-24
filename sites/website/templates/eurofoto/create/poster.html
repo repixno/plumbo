@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Poster</tal:block>
+</head>
+
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<!-- if no menu is used use id="widecontent" -->
+	<div class="span-20 last">
+		<br class="clear clearfix" />
+		<!-- put the content here -->	
+		<h2 i18n:translate="">Create new poster</h2>
+
+		<form method="post" action="/create/poster/create">
+			<label for="photobooktitle" i18n:translate="">Poster title:</label> 
+			<input type="text" class="text" name="title" id="calendartitle"/>
+			<button type="submit" name="submit" id="submit">Create poster</button>
+		</form>
+		
+	</div>
+</div>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+</body>
+</html>

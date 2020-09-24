@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="${i18n/country}">
+<head>
+	<tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" />
+	<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/head" />
+	<style type="text/css">
+		li.deleted { opacity: .5 }
+	</style>
+</head>
+<body>
+	
+<div class="container">
+	<div metal:use-macro="${templateroot}/${templates}/common.html/top" />	
+</div>
+
+
+<div id="account">
+
+	<div class="container">
+	
+		<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/account-menu" />
+		
+		<h2>Orders</h2>
+		<p class="quiet small">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam sit amet elit vitae arcu interdum ullamcorper. Nullam ultrices, nisi quis scelerisque convallis, augue neque tempor enim, et mattis justo nibh eu elit. Quisque ultrices gravida pede. Mauris accumsan vulputate tellus. Phasellus condimentum bibendum dolor. Mauris sed ipsum. Phasellus in diam. Nam sapien ligula, consectetuer id, hendrerit in, cursus sed, leo. Nam tincidunt rhoncus urna. Aliquam id massa ut nibh bibendum imperdiet. Curabitur neque mauris, porta vel, lacinia quis, placerat ultrices, orci.</p>
+
+		<div class="span-15">
+			<h3>Order history</h3>
+			<div class="account-content-box">
+				<ul class="accordion-list height-25">
+					<tal:block tal:repeat="order orders">
+					
+						<li class="${conditionalmatch:order/status/isdeleted,ok,deleted}">
+							<div class="left" style="float :left">
+								<strong>${order/id}</strong>
+								<span>${formatdate:order/date}</span>
+							</div>
+							<div class="right" style="float:right">
+								<span tal:condition="order/status/isdeleted" class="red">Deleted</span>
+								<span tal:condition="order/status/isreceived">Received</span>
+								<span tal:condition="order/status/isproduction">Production</span>
+								<span tal:condition="order/status/isproduced">Produced</span>
+							</div>
+							
+						</li>
+					</tal:block>
+				</ul>
+			</div>
+		
+		</div>
+		
+		<div class="span-9 last">
+			<h3>Under production</h3>
+			<div class="account-content-box">
+				<ul class="accordion-list height-25">
+					<tal:block tal:repeat="order orders">
+						<tal:block tal:condition="not:order/status/isproduced">
+							<li tal:condition="order/status/isreceived">
+								<strong>${order/id}</strong>
+								<span>${formatdate:order/date}</span>
+								<div class="right">
+									<span tal:condition="order/status/isdeleted" class="red">Deleted</span>
+									<span tal:condition="order/status/isreceived">Received</span>
+									<span tal:condition="order/status/isproduction">Production</span>
+									<span tal:condition="order/status/isproduced">Produced</span>
+								</div>
+							</li>
+						</tal:block>
+					</tal:block>
+				</ul>
+			</div>
+		</div>
+	
+	</div>
+
+</div>
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="${templateroot}/${templates}/common.html/footer" />
+		<div metal:use-macro="${templateroot}/${templates}/account/common.html/footer" />
+	</div>
+</div>	
+
+</body>
+</html>

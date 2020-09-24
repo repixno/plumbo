@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Login</tal:block>
+</head>
+
+
+<body>
+<div metal:use-macro="../../${templates}/common.html/top" />
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h4>Vi har funnet følgende bilder tilknyttet din bildekode: ${identifiervalue}</h4>
+			<p>
+			 Velg bildet du ønsker å bestille
+			</p>
+		</div>
+  </div>
+	<div class="row">
+		<div class="col-md-2 col-xs-4"  style="margin-bottom: 5px" tal:repeat="image thumbnails">
+			<a href="${image/link}"><img  style="width: 100%; border: solid 2px #ccc" src="${image/thumb}" /></a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 col-xs-12"  style="margin-bottom: 5px" tal:repeat="thumb gruppebilde">
+			<img  style="width: 100%; border: solid 2px #ccc" src="${thumb}" />
+		</div>
+	</div>
+	
+	
+	<div class="col-md-12">
+		<tal:block tal:content="structure cms:body:aaf0e426-46f5-42eb-8af5-8094088f0084" />
+	</div>
+
+	<div class="span-24 last center">
+		<h2><tal:block tal:content="cms:ingress:aaf0e426-46f5-42eb-8af5-8094088f0084" /></h2>
+	</div>
+
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+   <tal metal:use-macro="common.html/head" />
+</head>
+
+
+<body>
+
+
+<div metal:use-macro="../../${templates}/common.html/top" />
+
+<div id="container_content">
+
+   <div class="container">
+         <tal:block metal:use-macro="./common.html/top-header" />
+         
+         <div class="span-16">
+         <div class="span 16 last">
+         
+            <a href="/bestilling/fargelapp"><div class="editor-header inactiv"><span i18n:translate="">FARGELAPP</span><img src="${static:gfx/merkelapp/icons/menyknapper_fargelapp.png}"/></div></a>
+            <a href="/bestilling/merkelapp" ><div class="editor-header inactiv"><span i18n:translate="">MERKELAPP</span><span><img src="${static:gfx/merkelapp/icons/menyknapper_merkelapp.png}"/></span></div></a>
+            <div class="editor-header active" style=""><span i18n:translate="">STEMPEL</span></div>
+        </div>
+        <div class="editorbox span-16 last">
+         <div class="span-9">
+            <div  style="height:446px; padding: 0em;">
+               <form id="edit">
+               <div class="content222">
+			      
+			      <div class="tabscontent">
+
+                  <div id="tabs">
+                  	<ul>
+                  		<li><a id="tab-text" href="#tabs-1" i18n:translate="">Text</a></li>
+                  		<li><a id="tab-clipart" href="#tabs-2" i18n:translate="">Clipart</a></li>
+                  		
+                  	</ul>
+                  	<div id="tabs-1">
+			  	        <p><strong i18n:translate="">Create your label:</strong></p>
+                    <label><span i18n:translate="">Line</span> 1:</label>
+                    <input type="text" name="line1" maxlength="18"/><br />
+                    <label><span i18n:translate="">Line</span> 2:</label>
+                    <input type="text" name="line2" maxlength="18"/>
+                <div>
+                   <table>
+                     <tr>
+                        <td>
+                            <p i18n:translate="">Font-type:</p>
+                            <select name="font-type" style="width:135px;">
+                               <option value="arial">Arial</option>
+                               <option value="comic">Comic Sans</option>
+                               <option value="verdana">Verdana</option>       
+                            </select>
+                        </td>
+                        <td>
+                           <p i18n:translate="">Text Alignment:</p>
+                           <span class="radio" id="left" style="background-position-x: -7px;  background-position-y: -7px;"></span>
+                           <span class="radio" id="center" style="background-position-x: -37px;  background-position-y: -37px;"></span>
+                           <span class="radio" id="right" style="background-position-x: -7px;  background-position-y: -67px;"></span>
+                        </td>
+                  </tr>
+                </table>
+                <div class="span-7 last right">
+                  <a id="removetext" class="button">
+                     <span i18n:translate="">Remove text</span><span><img src="${static:gfx/merkelapp/icons/icondelete.png}"/></span>
+                  </a>
+                </div>
+                
+			      </div>
+                  </div>
+                  	<div id="tabs-2">
+                  	    <div>
+                  	    <div i18n:translate="">Trykk på motiv for å velge.</div>
+                  	    <div id="clipart"></div>
+                  	    <div>
+                  	    <span i18n:translate="">Choose category</span>:
+                          <select id="select_clipart">
+                  	        <OPTION value="Dyr" selected="true" i18n:translate="">Animals</OPTION>
+                  	        <OPTION value="Sport" i18n:translate="">Sport</OPTION>
+                  	        <OPTION value="Smile ansikt" i18n:translate="">Emoticons</OPTION>
+                  	        <OPTION value="Maskiner" i18n:translate="">Machines</OPTION>
+                  	        <OPTION value="Leker" i18n:translate="">Toys</OPTION>
+                  	        <OPTION value="Stjernetegn" i18n:translate="">Zodiac</OPTION>
+                  	        <OPTION value="Diverse" i18n:translate="">Miscellaneous</OPTION>
+                  	    </select>
+                  	    </div>
+                  	    </div>
+                         
+                         
+                         <div class="span-7 last right">
+
+                  	    
+                         
+                         </div>
+                         <div class="span-7 last right">
+
+                           <a id="removeclipart" class="button"><span>Fjern Motiv</span><span><img src="${static:gfx/merkelapp/icons/icondelete.png}"/></span></a> 
+                         </div>
+                         
+                  	</div>
+                  </div>
+
+               </div><!-- End demo -->
+			      </div>
+			      <div class="span-8 last right">
+			         <br/>
+			         <span style="padding: 20px;">
+			            <a id="removeall" class="button" href="#"><span i18n:translate="">Reset</span><span><img src="${static:gfx/merkelapp/icons/iconreset.png}"/></span></a> 
+			            <a id="update" class="button" href="#"><span i18n:translate="">Update</span><span><img src="${static:gfx/merkelapp/icons/iconupdate.png}"/></span></a>
+			         </span>
+			      </div>
+			      
+			      </form>
+            </div>
+         </div>
+         <div class="span-7 last">
+            <div style="height:446px; padding: 0em;">
+            <div i18n:translate="">Preview:</div>
+            <div style="padding: 0em 1.5em 1.5em 1.5em;">
+               <div >
+                  <p><strong i18n:translate="">Stempel</strong> <span i18n:translate="">size</span>: 36x12mm</p>
+                  <div id="stempel" >
+                     <img id="preview" class="stempel" src="${static:cms/images/stempel.jpg}" />
+                  </div>
+               </div>
+               <table style="width:280px; margin-bottom:25px;">
+                  <tbody>
+                     <tr tal:repeat="select selected">
+                        <td style="width:20px; padding-top:10px;">
+                           <input tal:condition="repeat/select/start" type="radio" name="choose_product" checked="checked" value="${select/productoptionid}"/>
+                           <input tal:condition="repeat/select/index" type="radio" name="choose_product" value="${select/productoptionid}"/>
+                        </td>
+                        <td style="width: 130px" tal:content="select/product/title">
+                           ''
+                        </td>
+                        <td>
+                           Pris: ${select/productoption/prices/0/price}
+                        </td>
+                     </tr>
+                  </tbody>
+              </table>
+              <div class="span-6 last right">
+                     <a href="#" id="addtocart" class="button oppdater">
+                        <span i18n:translate="">Legg i handlekurv</span><span><img src="${static:gfx/merkelapp/icons/iconcart.png}"/></span>
+                     </a>
+              </div>
+             </div>
+            </div>
+         </div>
+         </div>
+         </div>
+	 <div><img src="${static:gfx/merkelapp/icons/line.gif}" style="position: absolute;top: 205px;left: 355px;" /></div>
+         <tal:block metal:use-macro="../../${templates}/bestilling/common.html/shoppingcart" />
+         <tal:block metal:use-macro="../../${templates}/bestilling/common.html/bottom" />
+   </div>
+
+</div>
+<div class="footer">
+   <div class="container">
+      <div metal:use-macro="../../${templates}/common.html/footer" />
+   </div>
+</div>
+
+<SCRIPT type="text/javascript">
+   var clipart = '';
+   var ownimage = '';
+   var treshhold = 50;
+   var imageselection = Object();
+   var projectid = ${projectid};
+   var gravity = 'center'; 
+   var category = 'Dyr';
+   var backgroundcat = '';
+   var backgroundfile = '';
+   var totalprice = ${cart/totalprice};
+   var staticroot = "${static:}";
+   var type = 'stempel';
+   var disabled = true;
+   var colormode = 'bw';
+   var alertmessage = 'false';
+
+   
+</SCRIPT>
+<script type="text/javascript" src="${static:js/stempel.min.js}?${version}"></script>
+
+
+
+
+
+</body>
+</html>

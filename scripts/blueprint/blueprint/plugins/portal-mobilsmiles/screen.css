@@ -1,0 +1,550 @@
+
+
+
+
+    /********CSS til logoen til smiles on tiles********/
+
+h1.logo
+{
+position: relative;
+top:16px;
+left: 13px;
+width: 233px;
+height: 93px;
+background: #fff url(gfx/logo.jpg) no-repeat;
+}
+
+h1.logo a {
+display: block;
+height: inherit;
+text-indent: -9999px;
+}
+
+
+/*****slutt på CSS til logo*****/
+
+
+
+    /*******CSS til menylinja********/
+
+/*dette er den blålogo linja som menyane ligg inni*/
+.meny{
+height: 40px;
+margin-top: 11px;
+background: #fff url(gfx/meny.jpg);
+background-repeat:repeat-x;
+
+}
+
+.login
+{
+position: absolute;
+right: 0px;
+bottom: 0px;   
+} 
+
+/*menylinje*/
+
+.test li{
+display: inline;      
+}
+
+/*navna på hovudmenylinkane*/
+.test li a  {
+color: #446986;
+background-color: transparent;
+text-decoration: none;
+position: relative;
+top:5px;
+margin: 15px;
+}
+
+/*boks som bytter farge når musa går over*/
+.test a:hover {
+color:white;
+background-color:#43a7bf;
+}
+
+
+
+/*Overskriftene på menypunkta*/	  
+.container h1{
+position: relative;
+font-family: janda romantic;
+color: #749db5;
+font-size: 23px;
+top: 23px;
+}
+
+
+.overskriftnyhetsbokser{
+    position: relative;
+font-family: janda romantic;
+color: #749db5;
+font-size: 47px;
+top: 47px;
+right: 69px;
+
+    
+    
+}
+
+
+/***************CSS til slideren*******************/
+
+#presentation {
+position: relative;
+height: 362px;
+width: 970px;
+overflow: hidden;
+top: 0px;
+}
+
+#presentation #presentation-menu ul {
+margin: 0;
+padding: 0;
+position: relative;
+top: 66px;
+left: 20px;
+width: 110px;
+z-index: 100;
+padding-bottom: 12px;
+}
+
+#presentation #presentation-menu ul li {
+list-style-type: none;
+display: block;
+background: #fff url(gfx/knapp.jpg) no-repeat;
+
+}
+
+#presentation #presentation-menu ul li  {
+text-decoration: none;
+font-size: 15px;
+color: #383838;
+display: block;
+padding: 15px;
+margin: 15px;
+
+}
+
+
+#presentation #presentation-menu
+{
+position: relative;
+margin-top: -38px;
+
+}
+
+#presentation #presentation-menu div.selected {
+position: absolute;
+width: 58px;
+height: 52px;
+top: -19px;
+border: none;
+z-index: 400;
+top: 0px;
+margin: 15px;
+background: #fff url(gfx/knappselected.jpg) no-repeat;
+}
+
+#presentation #presentation-menu ul li.selected { 
+z-index: 450; 
+position: relative;
+background: transparent !important;
+
+}
+
+
+
+#presentation #presentation-menu ul li.selected a:hover {
+background: none !important;
+color: #000;
+}
+
+#presentation .article {
+cursor: hand;
+cursor: pointer;
+padding-top: 20px;
+height: 410px;
+
+position: absolute;
+top: 0px;
+left: 0;
+z-index: 50;
+}
+/******************Presentasjon slutt********************/
+
+/***************bestillingsknapp CSS************/
+
+
+
+
+
+
+
+				button, .button{
+					border:3px solid #529EA8;
+					-webkit-border-radius: 3px;
+					-moz-border-radius: 3px;
+					border-radius: 3px;
+					font-size:12px;
+					font-family:arial, helvetica, sans-serif;
+					padding: 5px 8px 5px 8px;
+					text-decoration:none;
+					display:inline-block;
+					font-weight:bold; color: #222;
+					background-color: #cef8ff; background-image: -webkit-gradient(linear, left top, left bottom, from(#b2e3e8), to(#7fe0f8));
+					background-image: -webkit-linear-gradient(top, #b2e3e8, #62c2d8);
+					background-image: -moz-linear-gradient(top, #b2e3e8, #62c2d8);
+					background-image: -ms-linear-gradient(top, #b2e3e8, #62c2d8);
+					background-image: -o-linear-gradient(top, #b2e3e8, #62c2d8);
+					background-image: linear-gradient(to bottom, #b2e3e8, #62c2d8);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#b2e3e8, endColorstr=#62c2d8);
+				}
+				
+				button:hover, .button:hover{
+					/*text-shadow: -1px -1px 0 #fff;*/
+					background-color: #9bf1ff; background-image: -webkit-gradient(linear, left top, left bottom, from(#9bf1ff), to(#4fd4f5));
+					background-image: -webkit-linear-gradient(top, #9bf1ff, #4fd4f5);
+					background-image: -moz-linear-gradient(top, #9bf1ff, #4fd4f5);
+					background-image: -ms-linear-gradient(top, #9bf1ff, #4fd4f5);
+					background-image: -o-linear-gradient(top, #9bf1ff, #4fd4f5);
+					background-image: linear-gradient(to bottom, #9bf1ff, #4fd4f5);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#9bf1ff, endColorstr=#4fd4f5);
+				}
+				
+				button:active, .button:active{
+					font-size:11px;
+				}
+				
+				/*plassering av ikon til knappane*/
+				
+	/*
+	#icons li.ui-state-default.ui-corner-all.ui-state-hover{
+	   background-image:  url (//smilesontiles.eurofoto.no/smilesontiles/css/coustom-theme/images/ui-icons_749db5_256x240.png
+	
+	}
+	
+				
+/*#cart-toggle{
+     background-image: url( //smilesontiles.eurofoto.no/gfx/handlevogn.png);
+				    background-size:110px 40px;
+				    background-repeat:no-repeat;
+				    background-position: -1px;
+				    text-align: right;
+				    
+
+
+/*bestill knapp til slideren*/
+
+/* .sliderbutton{
+position: relative;
+width: 107px;
+height: 27px;
+margin-left: 56;
+bottom: 35px;
+font-family: LaoUI;
+color: #0a395e;
+background: #fff url(gfx/button.jpg);
+border: hidden;
+padding-bottom: 3px;   
+}
+*/
+
+
+
+/*Tekst til boksane, skal blir artikkel
+
+.tekst{
+font-family: LaoUI;
+color: #0a395e;
+}
+
+*/
+
+/***********CSS til Nyhetsboksane: Bilder på badet ditt og Vis hvem du egentlig er***************/
+
+
+/*Boksene: Bilder på badet ditt og Vis hvem du egentlig er*/
+.nyhetboks{
+position: relative;
+top: 0px;
+height: 281px;
+width: 568px;
+padding-bottom: 1px;
+}
+
+/*Teksen inne i boksane; bilder på badet ditt og Vis hvem du egentlig er*/
+.nyhetboks p{
+height: 12px;
+padding-top: 57px;
+width: 250px;
+font-family:LaoUI;
+font-size: 15px;
+}
+
+
+/*CSS til boksane; bilder på badet ditt og Vis hvem du egentlig er*/
+.nyhetboks div.nyhetinnhold{
+margin-left: 53px;
+padding-top: 23px;
+width: 250px;
+}
+
+/*CSS til overskriftene til boksane; bilder på badet ditt og Vis hvem du egentlig er*/
+
+.nyhetboks h3{
+color: #075F75;
+font-family: janda romantic;
+font-size: 23px;
+
+}
+
+
+/*
+.bestillingsknapp{
+position: relative;
+width: 107px;
+height: 27px;
+left: 10px;
+top: 69px;
+font-family: LaoUI;
+color: #0a395e;
+background: #fff url(gfx/button.jpg);
+border: hidden;
+padding-bottom: 3px;
+cursor:hand;
+
+
+}
+*/
+
+
+
+
+/*Facebookboksen*/
+
+.fb-like-box
+{
+
+position: relative;
+top:-30px;
+}
+
+
+
+/*Bestillingsknapp til boksane Nyhet og Vis hvem du egentlig er*/
+.bestilknappslider
+{
+position: relative;
+right: 74px;
+width: 107px;
+top: 148px;
+height: 27px;
+margin-left: 21px;
+margin-top: 6px;
+bottom: 35px;
+font-family: LaoUI;
+color: #0a395e;
+background: #fff url(gfx/button.jpg);
+border: hidden;
+padding-bottom: 3px;
+cursor: hand;
+}
+*/
+
+
+.overskrifttekst{
+
+position: absolute;
+font-family: LaoUI;
+font-style: italic;
+color: #749db5;
+margin-top: 63px;
+font-size: 20px;
+width: 350px;
+left: 179px;
+}
+
+
+
+.overskrift{
+color: #075F75;
+font-family: janda romantic;
+font-size: 60px;
+position: relative;
+right: 83px;
+}
+
+
+
+
+
+ 
+#loader-overlay {
+position: absolute;
+background-color: #333;
+padding: auto auto;
+margin: 0 !important;
+z-index: 10000;
+}
+
+
+/*Artikkel overskkritene kjem på lik plass*/
+
+.cms-article-title{
+position: relative;
+text-align: center;
+top: 300px;
+padding-top: 35px;
+padding-bottom: 10px;
+}
+
+/*css til kontaks oss menypunktet*/
+.innfelt{
+
+position: relative;
+text-align: center;
+top: -3px;
+width: 305px;
+height: 300px;
+left: 327px;
+border: ridge;
+border-width: 4px;
+border-color: #98cef0;
+border-radius: 29px;
+padding-top: 48px;
+background-color: #eaf5f9;
+margin-bottom: 10px;
+
+}
+
+/*Artikklen om oss*/
+
+.omoss{
+width: 563px;
+position: relative;
+top: 2px;
+left:230px;
+height: 200px;
+}
+
+
+.bildeomoss{
+
+
+position: relative;
+right: 100px;
+border: groove;
+border-color: #cae1fa;
+border-radius: 6px;
+}
+
+
+
+/*Artikklen Råd og Tips start*/
+.tipsbilde{
+
+position: relative;
+right: 100px;
+border: groove;
+border-color: #cae1fa;
+border-radius: 6px;
+
+}
+
+.tips{
+width: 690px;
+position: absolute;
+text-align: center;
+top: 281px;
+left:334px;
+}
+
+
+
+/*Artikklen Råd og Tips slutt*/
+
+
+
+/*Fotteren på sida*/
+.footer
+{    
+background-color: #98cef0;
+height: 90px;
+text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+/*CSS til galleiet*/
+
+/**************** fancybox *******************/
+
+
+#move-images-dialog .albums, #delete-images-dialog .selected-images {height:250px;overflow:scroll;overflow-x:hidden}
+.albumlist .thumbnail{width:24px;height:24px;overflow:hidden;float:left;margin-right:12px}
+.albumlist .thumbnail img{border:0;width:30px;outline:none}
+.oneline {display:inline-block}
+#content textarea { height: 60px }
+div.imagecontainer {height: 150px;text-align: center;}
+#fancybox-left-ico {
+left: 20px;
+}
+#fancybox-right-ico {
+right: 20px;
+left: auto;
+}
+
+
+
+
+#fancybox-loading {position:fixed;top:50%;left:50%;height:40px;width:40px;margin-top:-20px;margin-left:-20px;cursor:pointer;overflow:hidden;z-index:1104;display:none;}
+* html #fancybox-loading {position:absolute;margin-top:0;}
+#fancybox-loading div {position:absolute;top:0;left:0;width:40px;height:480px;background-image:url('grafikk/fancybox.png');}
+#fancybox-overlay {position:fixed;top:0;left:0;bottom:0;right:0;background:#000;z-index:1100;display:none;}
+* html #fancybox-overlay {position:absolute;width:100%;}
+#fancybox-tmp {padding:0;margin:0;border:0;overflow:auto;display:none;}
+#fancybox-wrap {position:absolute;top:0;left:0;margin:0;padding:20px;z-index:1101;display:none;}
+#fancybox-outer {position:relative;width:100%;height:100%;background:#FFF;}
+#fancybox-inner {position:absolute;top:0;left:0;width:1px;height:1px;padding:0;margin:0;outline:none;overflow:hidden;}
+#fancybox-hide-sel-frame {position:absolute;top:0;left:0;width:100%;height:100%;background:transparent;}
+#fancybox-close {position:absolute;top:-15px;right:-15px;width:30px;height:30px;background-image:url('grafikk/fancybox.png');background-position:-40px 0px;cursor:pointer;z-index:1103;display:none;}
+#fancybox_error {color:#444;font:normal 12px/20px Arial;padding:7px;margin:0;}
+#fancybox-content {height:auto;width:auto;padding:0;margin:0;}
+#fancybox-img {width:100%;height:100%;padding:0;margin:0;border:none;outline:none;line-height:0;vertical-align:top;-ms-interpolation-mode:bicubic;}
+#fancybox-frame {position:relative;width:100%;height:100%;border:none;display:block;}
+#fancybox-title {position:absolute;bottom:0;left:0;font-family:Arial;font-size:12px;z-index:1102;}
+.fancybox-title-inside {padding:10px 0;text-align:center;color:#333;}
+.fancybox-title-outside {padding-top:5px;color:#FFF;text-align:center;font-weight:bold;}
+.fancybox-title-over {color:#FFF;text-align:left;}
+#fancybox-title-over {padding:10px;background-image:url('grafikk/fancy_title_over.png');display:block;}
+#fancybox-title-wrap {display:inline-block;}
+#fancybox-title-wrap span {height:32px;float:left;}
+#fancybox-title-left {padding-left:15px;background-image:url('grafikk/fancybox.png');background-position:-40px -90px;background-repeat:no-repeat;}
+#fancybox-title-main {font-weight:bold;line-height:29px;background-image:url('grafikk/fancybox-x.png');background-position:0px -40px;color:#FFF;}
+#fancybox-title-right {padding-left:15px;background-image:url('grafikk/fancybox.png');background-position:-55px -90px;background-repeat:no-repeat;}
+#fancybox-left, #fancybox-right {position:absolute;bottom:0px;height:100%;width:35%;cursor:pointer;outline:none;background-image:url('grafikk/blank.gif');z-index:1102;display:none;}
+#fancybox-left {left:0px;}
+#fancybox-right {right:0px;}
+#fancybox-left-ico, #fancybox-right-ico {position:absolute;top:50%;left:-9999px;width:30px;height:30px;margin-top:-15px;cursor:pointer;z-index:1102;display:block;}
+#fancybox-left-ico {background-image:url('grafikk/fancybox.png');background-position:-40px -30px;}
+#fancybox-right-ico {background-image:url('grafikk/fancybox.png');background-position:-40px -60px;}
+#fancybox-left:hover, #fancybox-right:hover {visibility:visible;}
+#fancybox-left:hover span {left:20px;}
+#fancybox-right:hover span {left:auto;right:20px;}
+.fancy-bg {position:absolute;padding:0;margin:0;border:0;width:20px;height:20px;z-index:1001;}
+#fancy-bg-n {top:-20px;left:0;width:100%;background-image:url('grafikk/fancybox-x.png');}
+#fancy-bg-ne {top:-20px;right:-20px;background-image:url('grafikk/fancybox.png');background-position:-40px -162px;}
+#fancy-bg-e {top:0;right:-20px;height:100%;background-image:url('grafikk/fancybox-y.png');background-position:-20px 0px;}
+#fancy-bg-se {bottom:-20px;right:-20px;background-image:url('grafikk/fancybox.png');background-position:-40px -182px;}
+#fancy-bg-s {bottom:-20px;left:0;width:100%;background-image:url('grafikk/fancybox-x.png');background-position:0px -20px;}
+#fancy-bg-sw {bottom:-20px;left:-20px;background-image:url('grafikk/fancybox.png');background-position:-40px -142px;}
+#fancy-bg-w {top:0;left:-20px;height:100%;background-image:url('grafikk/fancybox-y.png');}
+#fancy-bg-nw {top:-20px;left:-20px;background-image:url('grafikk/fancybox.png');background-position:-40px -122px;}

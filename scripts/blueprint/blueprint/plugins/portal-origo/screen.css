@@ -1,0 +1,191 @@
+/* Button colors
+-------------------------------------------------- */
+
+
+
+body div a.button.changequantity, 
+body div button.changequantity { 
+   padding: 1px 5px 3px 5px;
+   margin:0 2px;
+}
+
+button:active, 
+a.button:active,button:focus, 
+a.button:focus { outline: none;}
+
+button { margin: 0; padding: 0; line-height: 1em; border: none; }
+
+a.button.negative { color: #fff !important; }
+
+a.button, button, button.ui-state-default {
+   border: none;
+   background-color: #222;
+   display: inline-block;
+   padding: 5px 10px 6px 10px;
+   color: #fff;
+   text-decoration: none;
+   font-weight: bold;
+   line-height: 1;
+   border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+   /*border-bottom: 1px solid rgba(0,0,0,0.25);*/
+   text-shadow: #333 1px 1px 1px;
+   position: relative;
+   cursor: pointer;
+   background: #ccc url(http://media1.origo.no/images/buttons/normal_button_bg_grey.png) repeat-x scroll middle left;
+   font-family: Helvetica, Arial, sans-serif;
+}
+
+a.button.large, button.large, a.button.extra-large, button.extra-large {
+	background-image: url(http://media1.origo.no/images/buttons/big_button_bg_grey.png);
+}
+
+a.button:hover, button:hover {
+	background-color: #444;
+	text-decoration: underline;
+}
+
+html > body button:active { background-color: #000000; -webkit-box-shadow: none; margin-top: 0px; border: none; }
+a.button:active { background-color: #000000; -webkit-box-shadow: none; border: none; margin-top: 0px; outline: none;}
+a.button.disabled, button.disabled, button[disabled="disabled"] { background-color: #eee; color: #ccc; cursor: default;}
+
+/* Button sizes
+-------------------------------------------------- */
+a.button.extrasmall, button.extrasmall { font-size: 11px; margin: 0; padding: 2px;}
+a.button.small, button.small { font-size: 11px; margin: 0;}
+a.button.medium, button.medium { font-size: 13px;}
+a.button.large, button.large { font-size: 14px; padding: 8px 14px 9px 14px; margin: 0}
+a.button.extra-large, button.extra-large { font-size: 18px; padding: 8px 14px 9px 14px; margin: 0}
+
+/* Global buttons colors
+-------------------------------------------------- */
+button.lightgray, a.button.lightgray { background-color: #eee; color: #333}
+button.lightgray:hover, a.button.lightgray:hover { background-color: #ccc; }
+
+/* play Button */
+a.playButton_60x60 { display: block; background: transparent url(backgrounds/play_60x60.png) no-repeat center; width: 60px; height: 60px; text-indent: -9000px;} 
+a.playButton_60x60:hover { background-image: url(backgrounds/play_60x60_hover.png)}
+
+
+button.blue, a.button.blue, button.ui-state-focus { background-color: #0068b4; color: #fff; }
+button.blue:hover, a.button.blue:hover, button.ui-state-focus:hover { background-color: #003366; color: #fff;}
+
+button.negative, a.button.negative, button.red, a.button.red  { background-color: #990000; }
+button.negative:hover, a.button.negative:hover, button.red:hover, a.button.red:hover  { background-color: #660000 }
+
+button.positive, a.button.positive, button.green, a.button.green  { background-color: #669933 }
+button.positive:hover, a.button.positive:hover, button.green:hover, a.button.green:hover  { background-color: #006600 }
+
+button.orange, a.button.orange  { background-color: #ff6600 }
+button.orange:hover, a.button.orange:hover  { background-color: #993300 }
+
+button.yellow, a.button.yellow { background-color: #FED100; color: #111 }
+button.call-to-action:hover, a.button.call-to-action:hover, button.yellow:hover, a.button.yellow:hover { background-color: #cc9900 }
+button.call-to-action.disabled, a.call-to-action.disabled { background-color: #ffffcc; color: #aaa; }
+
+button.call-to-action, a.button.call-to-action {
+	color: #fff;
+	text-shadow: #97a110 1px 1px 1px;
+	background-image: url("http://media1.origo.no/images/buttons/big_button_bg_green.png");
+}
+
+button {
+	font-size: 1.1em;
+}
+
+
+
+#origo-header {
+	background-color: #333;
+	height: 30px;
+}
+
+
+#site-logo {
+	display: block;
+	height: 80px;
+	width: 400px;
+	text-indent: -9999px;
+	background: #fff url(gfx/origo-eurofoto-logo.jpg) no-repeat top left;
+}
+
+#origo-header .login span {
+	font-weight: normal;
+}
+
+#origo-header .login {
+	height: 27px;
+	margin: 0;
+	padding: 5px;
+	padding-right: 1em;
+	clear: none;
+	float: right;
+	color: #ccc;
+	font-weight: bold;
+}
+#origo-header .login a {
+	color: #fefefe;
+	text-decoration: none;
+}
+
+.box {
+	border: 1px solid #eee;
+	background-color: #fafafa;
+}
+
+#main-menu {
+	font-size: 2em;
+}
+
+#main-menu a {
+	color: #333;
+	text-decoration: none;
+	display: inline-block;
+	padding: .5em;
+	margin: 5px 0 0 .5em;
+}
+#main-menu a:hover {
+	background-color: #fafafa;
+	color: #000;
+	text-decoration: underline;
+}
+#origo-header .logo {
+	float: left;
+	display: block;
+	height: 27px;
+	width: 106px;
+	text-indent: -9999px;
+	background: transparent url(http://media3.origo.no/images/global_menu_logo_left_dark.png) no-repeat 0px 0px;
+}
+
+
+ul.image-list {
+	margin: 0 0 1em 0; padding: 0;
+}
+ul.image-list li {
+	list-style-type: none;
+	border-bottom: 1px solid #ccc;
+	padding: .5em 0;
+}
+ul.image-list li:last-child {
+	border-bottom: none;
+}
+
+#footer {
+	padding-top: 2em;
+	min-height: 5em;
+	margin-top: 1em;
+}
+
+.footer {
+	margin-top: 2em;
+	background-color: #333;
+	color: #ddd;
+	min-height: 4em;
+}
+
+.footer a {
+	color: #fff;
+	text-decoration: none;
+}
+
+input.quantity, input.order-print-quantity { width: 30px; border: 1px solid #bbb; padding: 4px; margin: 1px; }

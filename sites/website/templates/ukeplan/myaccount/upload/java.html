@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+	<tal metal:use-macro="../../../${templates}/common.html/head" />
+	
+	<script type="text/javascript" src="${static:js/aurigma/iuembed.js}?${version}"></script>
+	<script type="text/javascript" src="${static:js/aurigma/iuembed.InstallationProgress.js}?${version}"></script>
+   <script type="text/javascript" src="/streams/i18n/iuembed/${i18n/language}.js?${version}"></script>
+	
+	<style type="text/css">
+		.ScreenStyle {background-color:#ffffff;font-family:verdana;font-size:11px;padding:10px;text-align:center}
+		form {padding: 0; margin: 0; clear:both; float: none;}
+	</style>
+	
+</head>
+<body>
+<div metal:use-macro="../../../${templates}/common.html/top" />
+	<div class="container">
+
+	<tal:block tal:define="global nosubmenurendering">1</tal:block>
+	
+	
+	<tal:block tal:define="global menuitem string:upload" metal:use-macro="../common.html/menu" />
+   
+	<div id="span-20 last">
+		
+		<div class="span-20 last">
+			<h2 i18n:translate="" class="hide">Order prints</h2>
+			<h3 class="quiet" i18n:translate="">Transfer photos from your computer</h3>
+		</div>
+		
+		<!--<a href="${request/referer}" class="backToProject" i18n:translate="">Go back to project</a>-->
+		<div class="span-20 last">
+		
+		<div class="box" tal:condition="not:session/loggedin" >
+			<div class="span-11">
+				<h4 i18n:translate="">You are not logged in.</h4>
+				<p i18n:translate="">You can still transfer images and order prints, but they will not be stored in your account for later use.</p>
+			</div>
+			<div class="span-12 last center prepend-top">
+				<div class="prepend-top">
+				
+				<div class="hide" id="hidden-login-box">
+						<form action="/login/" method="post" id="quicklogin">
+							<div>
+								<label for="email" i18n:translate="">E-mail:</label><br/>
+								<input type="text" class="text" name="email" value="" />
+							</div>	
+							<div>
+								<label for="pasword" i18n:translate="">Password:</label><br/>
+								<input type="password" class="text" name="password" value="" />
+							</div>
+							<div>
+								<input type="checkbox" id="rememberme" /> 
+								<label for="rememberme" i18n:translate="">Remember me next time.</label>
+							</div>	
+							<div class="prepend-top">
+						 		<button class="blue" type="submit" i18n:translate="">Log in</button>
+							</div>
+							<div class="prepend-top">
+								<tal:block i18n:translate="">Not a user?</tal:block> <a href="/register/" i18n:translate="">Register now</a> 
+							</div>
+							<input type="hidden" name="referer" value="/order-prints/transfer-photos/java/"/>
+						</form>
+					</div>
+					
+					<script type="text/javascript">
+						$(document).ready( function() {
+							$('#show-login').click( function() {
+								$(this).parent().parent().find('.hideable').hide();
+								$('#hidden-login-box').slideDown('fast');
+								$(this).remove();
+								$('#register-link').remove();
+								return false;
+							})
+						})
+					</script>
+				
+					<a href="/login/" class="button" i18n:translate="" id="show-login">Login to store your photos online</a>
+					<div id="register-link">
+						<tal:block i18n:translate="">Not a user?</tal:block> <a href="/register/" i18n:translate="">Register</a>
+					</div>
+					
+				</div>
+			</div>
+			<div class="clear clearfix" />
+		</div>
+		
+		
+		<div class="box">
+			<tal:block tal:condition="session/loggedin">
+			<h4 i18n:translate="">Choose album to transfer the images to.</h4>
+			<form method="post" action="/order-prints/transfer-photos/java" id="selectalbum">
+			<div class="span-9">
+			<div class="radioLabel selected">
+				<label i18n:translate="">Upload to existing album:</label>
+				<select name="uploadaid" id="uploadaid">
+					<tal:block tal:repeat="album albums">
+						<option tal:condition="equal:album/id,selected,true" selected="1" value="${album/id}">${album/title}</option>
+						<option tal:condition="not:equal:album/id,selected,true" value="${album/id}">${album/title}</option>
+					</tal:block>
+				</select>
+				<button type="submit" class="button" i18n:translate="">Choose</button>
+			</div>
+			</div>
+			<div class="span-9">
+				<label for="new-album" i18n:translate="">Create new album:</label><br/>
+				<input type="text" id="new-album-title" tal:attributes="value formatdatetime:request/date/full" class="text span-5"/>
+				<button class="create-album" id="create-new-album" i18n:translate="">Create album</button>
+			</div>
+			
+			</form>
+			<div class="clear" />
+			</tal:block>
+			<!--<h4>Drag images to "drop images here" and press "transfer now" when you are ready.</h4>-->
+      <script language="javascript">
+      
+      var iu = new ImageUploaderWriter("ImageUploader", 760, 650);
+      
+      // If you do not want to use ActiveX or Java version, set the appropriate
+      // property to false.
+      iu.activeXControlEnabled = true;
+      iu.javaAppletEnabled = true;
+      iu.javaAppletCached = true;
+      
+      iu.activeXControlCodeBase = "http://static.eurofoto.no/js/aurigma/ImageUploader6.cab";
+      iu.javaAppletCodeBase="http://static.eurofoto.no/js/aurigma/";
+      
+      <tal:block metal:use-macro="${templateroot}/common/uploader.html/license-key" />
+      
+      // Config behaviour
+      iu.showNonemptyResponse = "off";
+      
+      iu.addParam( "FilesPerOnePackageCount", "1" );
+      iu.addParam("AutoRecoverMaxTriesCount", "5");
+      iu.addParam("AutoRecoverTimeOut", "5000");
+
+      iu.addParam( "FileMask", "*.jpeg;*.jpg" );
+      iu.addParam( "UploadSourceFile", "true" );
+      iu.addParam( "AllowLargePreview", "true" );
+                                
+      iu.addParam( "ShowDebugWindow", "false" );
+
+      //Configure appearance.
+      iu.addParam( "BackgroundColor","#F6F6F6" );
+      iu.addParam( "PaneLayout", "ThreePanes" );
+      iu.addParam( "TreePaneWidth", "200" );
+      iu.addParam( "FolderPaneHeight","200" );
+
+      iu.addParam( "AllowRotate", "false" );
+      iu.addParam( "BackgroundColor", "#ccccff" );
+      iu.addParam( "FolderPaneShowDescriptions", "false" );
+      iu.addParam( "UploadPaneShowDescriptions", "false" );
+      iu.addParam( "ButtonSendText", "Send" );
+
+      //Configure thumbnail settings.
+      iu.addParam( "UploadThumbnail1FitMode", "Fit" );
+      iu.addParam( "UploadThumbnail1Width", "100" );
+      iu.addParam( "UploadThumbnail1Height", "100" );
+      iu.addParam( "UploadThumbnail1JpegQuality", "70" );
+      iu.addParam( "PreviewThumbnailActiveSelectionColor","#ff0000" );
+      iu.addParam( "PreviewThumbnailBorderColor","#000000" );
+
+      //Configure URL files are uploaded to.
+      iu.addParam( "Action", "/upload/receive/SourceFile_1?sessionid=${session/sessionid}" );
+      
+      //Configure URL where to redirect after upload.
+      iu.addParam( "RedirectUrl", '/order-prints/choose-quantity/' );
+      
+      iu.addParam( "ShowUploadListButtons", "true" );
+      iu.addParam( "BackgroundColor","#efefef" );
+      
+      // ...Other params... changed 15.08.2008 by til
+      iu.addParam( "TimeOut", "300000" );
+      
+      // ... initialize params as described in the next topic ...
+      //Create installation progress.
+      var ip = new InstallationProgressExtender(iu);
+      ip.setProgressImageUrl("${static:js/aurigma/InstallationProgress.gif}");
+      ip.setProgressCssClass("ScreenStyle");
+      ip.setInstructionsCssClass("ScreenStyle");
+      
+		lang = "en";
+		no_resources.addParams( iu );
+      
+      // As soon as you call this method, all necessary HTML code is inserted
+      // into the page on the current position. Alternatively, you can 
+      // get the string with appropriate HTML code using the getHtml method,
+      // and write it to the necessary position manually (maybe with some modifications).  
+      iu.writeHtml();
+      </script>
+
+      </div>
+      </div>
+
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<div>
+
+	<h1>test</h1>
+	<tal:block tal:condition="exists:selected">
+		<h2>jeg fant jeg fant</h2>
+	</tal:block>
+	
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready( function() {
+	var ajaxLoader = '<img src="${static:gfx/gui/ajax-loader.gif}" />';
+
+	$('.radioLabel').radioLabel();
+
+	if ( $('option[value=${selected}]', '#uploadaid') ) {
+		$('option[value=${selected}]', '#uploadaid').trigger('change');
+		$('#selectalbum').submit();
+	}
+	  
+	$('#create-new-album').click( function() {
+
+		$(this).after(ajaxLoader);
+
+		var albumtitle = $('#new-album-title').val();
+		var self = $(this);
+
+			$.post('/api/1.0/album/create/', {
+				'title': albumtitle
+			}, function(data) {
+				if( data.result ) {
+					$('#uploadaid option').attr('selected', 'selected').removeAttr('selected')
+					$('#uploadaid').append('<option selected="selected" value="'+data.album.id+'">'+data.album.title+'</option>');
+					$('#uploadaid').trigger('change');
+				} else {
+					alert( 'An error occured when creating your album :( Please try again later!' );
+				}
+			}, 'json');
+		return false;
+	});
+
+	$('#uploadaid').change(function() {
+		$('#selectalbum').submit();
+	});
+
+	$('.backToProject').click( function() {
+		history.go(-1);
+		return false;
+	});
+});
+//]]>
+</script>
+</body>
+</html>

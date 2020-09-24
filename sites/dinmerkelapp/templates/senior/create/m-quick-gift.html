@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle">
+		<tal:block i18n:translate="">Create gift</tal:block> - <tal:block tal:content="selected/product/title" />
+	</tal:block>
+	
+	
+	<style type="text/css">
+	
+		.gifttemplate {
+			/*height: 160px;*/
+			padding: 10px 0;
+			border-bottom: 1px solid #ccc;
+			cursor: pointer;
+			
+		}
+		.gifttemplate:hover {		
+			background-color: #eee;
+		}
+		
+		.choose-template .template-thumb{
+			display: block;
+			float: left;
+			margin: 10px;
+			background-repeat: no-repeat;
+			background-position: top left;
+			border: 7px solid white;
+			outline: 1px solid #ccc;
+		}
+		
+		.choose-template .template-thumb img {
+			max-height: 80px;
+		}
+		
+		.fixed-height {
+			height: 500px;
+			overflow: auto;
+			overflow-x: hidden;
+		}
+		
+		#loader-overlay {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			opacity: 0.8;
+			background-color: #333;
+			padding: auto auto;
+			margin: 0;
+			z-index: 10000;
+		}
+		
+		.loadingInfo {
+			text-align: center;
+			margin-top: 300px;
+		}
+		
+		.loadingInfo * {
+			display: inline;
+			color: #fff;
+			
+		}
+		
+		#album-images img {
+			margin: 10px;
+			max-height: 80px;
+		}
+	
+	
+		.fileinput-button input {
+			position: absolute;
+			top: 0;
+			right: 0;
+			margin: 0;
+			opacity: 0;
+			-ms-filter: 'alpha(opacity=0)';
+			font-size: 20px;
+			direction: ltr;
+			cursor: pointer;
+		}
+	</style>
+	
+</head>
+<body>
+	<div id="loader-overlay">
+		<div class="loadingInfo">
+			<img src="${static:gfx/gui/ajax-loader-gray.gif}" /><br/>
+			<br/>
+			<h3 i18n:translate="">Loading, please wait.</h3>
+			<p>
+				<tal:block  i18n:translate="">
+				If you waited too long, try refreshing the page.
+				</tal:block>
+				<a href="." class="refresh" i18n:translate="">Refresh</a>
+			</p>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#loader-overlay')
+			.css('opacity', '0.8')
+			.css('margin','0')
+			.width( $(window).width() )
+			.height( $(window).height() );
+
+		$(document).ready( function() {
+			$(window).load( function() {
+				$('#loader-overlay').fadeOut('slow', function() {
+					$(this).remove();
+				})
+			});
+			$('.refresh').click( function() {
+				window.location.reload();
+				return false;
+			});
+		});
+	</script>
+	
+	<div metal:use-macro="../../${templates}/common.html/top" />
+			<div id="seniorpage-main">
+			<aside id="seniorpage-hero" class="js-fullheight">
+	<div class="container create-gift">
+		
+		<div class="row">
+		
+	<div class="col-md-12" id="gift-editor">
+		
+		
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+		  <li role="presentation" class="active"><a href="#choose-photo" aria-controls="choose-photo" role="tab" data-toggle="tab">1. Velg bilde</a></li>
+		  <li role="presentation"><a href="#choose-template" aria-controls="choose-template" role="tab" data-toggle="tab">2. Velg mal</a></li>
+		</ul>
+		
+		<div  class="tab-content">
+			<div  role="tabpanel" class="tab-pane active colborder choose-photo" id="choose-photo">
+				<div class="fixed-height">
+					<div class="row span4 text-left" style="margin-left: 0px;">
+						<h4 class="hidden-phone">1: Last opp bilder</h4>
+						<div class="btn btn-primary fileinput-button" style="position: relative">
+							<span>Velg bilde</span>
+							<!-- The file input field used as target for the file upload widget -->
+							<input id="fileupload" type="file" name="files[]"  data-url="/api/1.0/upload/stabburet" accept="image/jpeg"  />
+						</div>
+					</div>
+					<div id="progress" class="progress" style="display: none;">
+						<div class="progress-bar progress-bar-success"></div>
+					</div>
+					<div id="upload-queue" style="padding:5px 0px;">
+						
+					</div>
+					
+					<div class="photos prepend-top">
+						<h4 i18n:translate="">Click on the image you want to use.</h4>
+						<tal:block tal:condition="session/loggedin">
+							<label for="select-album" i18n:translate="">Choose album</label>
+							<select id="select-album">
+							   <optgroup label="My albums" tal:condition="gt:albums/length,0" i18n:attributes="label">
+								  <tal:block tal:repeat="album albums">
+									 <option value="${album/id}" tal:condition="exists:album/title">
+										<tal:block tal:content="shorten:album/title;18" tal:condition="album/title" />
+									</option>
+								</tal:block>
+							  </optgroup>
+							  <optgroup label="My Friends Albums" tal:condition="gt:sharedAlbums/length,0" i18n:attributes="label">
+								  <tal:block tal:repeat="sharedalbum sharedAlbums">
+									 <option value="${sharedalbum/id}" tal:condition="exists:sharedalbum/title">
+										<tal:block tal:content="shorten:sharedalbum/title;18" tal:condition="sharedalbum/title" />
+									</option>
+								</tal:block>
+							  </optgroup>
+							</select>
+							<div id="btnUpload" style="float:right"></div>
+						</tal:block>
+						
+						<tal:block tal:condition="not:session/loggedin">
+	
+							<div class="prepend-top center append-bottom" style="margin-left: 50px">
+								<div id="btnUpload"></div>
+							</div>
+							<h5 i18n:translate="">Sign in to get photos from your account</h5>
+							<tal:block metal:use-macro="../common.html/quicklogin" />
+						
+						</tal:block>
+						
+						<div id="album-images">
+	
+						</div>
+					</div>
+				</div>
+			</div>
+			<div  role="tabpanel" class="tab-pane choose-template" id="choose-template">
+			<h3 i18n:translate="">2. Choose template</h3>
+			<div class="col-md-12">
+				<div class="">
+					<div id="choose-template" class="col-md-12">
+						<tal:block tal:repeat="gifttemplate collections/gifttemplates">
+							<div class="gifttemplate col-md-4 col-sm-6">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="col-md-12">
+											<h4 tal:content="gifttemplate/title|default"></h4>
+										</div>
+										<div class="col-md-6 col-xs-6">
+											<p class="bottom top quiet small hidden-xs" i18n:translate="">Quick preview</p>
+											<div class="template-thumb">
+												<tal:block tal:repeat="page gifttemplate/pages">
+													<tal:block tal:condition="equal:repeat/page/number,1">
+														<tal:block tal:condition="page/fullsize_src">
+															<img 
+																src="${static:}images/gifttemplates/thumbs/width/130/${page/fullsize_src}" 
+																id="malid_${gifttemplate/id}" alt="eurofoto"
+															/>
+															<input type="hidden" class="malid" name="malid" value="${gifttemplate/id}" />
+															<input type="hidden" class="malpageid" name="malpageid" value="${page/malpageid}" />
+														</tal:block>
+														<tal:block tal:condition="not:page/fullsize_src">
+															<div class="empty-template-thumb">
+																<img 
+																	src="${static:}images/gifttemplatesweb/thumbs/blankbox/100x100/${selected/template/id}.png" 
+																	width="100" height="100"
+																	id="malid_${gifttemplate/id}"
+																/>
+															</div>
+														</tal:block>
+													</tal:block>
+												</tal:block>
+											</div>
+										</div>
+										<div class="col-md-3 hidden-xs">
+		
+											<p class="bottom top quiet small" i18n:translate="" tal:condition="gifttemplate/images/medium">Example</p>
+											<img src="" tal:attributes="src gifttemplate/images/medium|default" height="100" tal:condition="gifttemplate/images/medium"/>
+											<tal:block tal:condition="not:gifttemplate/images/medium">&nbsp;</tal:block>
+										</div>
+										<div class="col-md-3 prepend-top col-xs-6">
+											<a 
+												tal:attributes="href string:/create/gift/${selected/productid}/${selected/productoptionid}/${gifttemplate/id}/" 
+												class="button large call-to-action" i18n:translate="">Choose</a>
+										</div>
+								</div>
+							</div>
+							</div>
+						</tal:block>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		</div>
+	
+	</div>
+</div>
+	</aside>
+	</div>
+		
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+<script src="${static:}js/jqupload/js/jquery.iframe-transport.js?${version}"></script>
+<!-- The basic File Upload plugin -->
+<script src="${static:}js/jqupload/js/jquery.fileupload.js?${version}"></script>
+<script type="text/javascript">
+var ajaxLoader = '<tal:block tal:content="static:gfx/gui/ajax-loader.gif" />';
+var bigajaxLoader = '<tal:block tal:content="static:gfx/gui/ajax-loader-big.gif" />';
+var noImagesText = '<tal:block i18n:translate="">No images</tal:block>';
+var staticurl = '${static:}';
+var selectImage ='<tal:block i18n:translate="">Please select an image</tal:block>';
+var maxHeight = 450;
+
+//<![CDATA[
+	$(document).ready( function() {
+	
+		var selectedImageId;
+		
+		
+		
+		$('button#velgbilde').on( 'click',  function(){
+				$('#choosefile').click();
+				return false;
+			});
+				
+			$('input#choosefile').on( 'change',  function(){
+				$('#lastoppbilde').click();
+				return false;
+			});
+			
+		$('#fileupload').fileupload({
+			replaceFileInput: false,
+			dataType: "json",        
+			datatype:"json",
+			xhrFields: {withCredentials: true},
+			acceptFileTypes: /(\.|\/)(jpe?g|tif)$/i,
+			add: function (e, data) {
+				
+				//console.log(e);
+				//console.log(data);
+				
+				data.context = $('<p id="uploading" style="position: absolute; left: 20px;"/>').text('Uploading...').appendTo($('.progress-bar'));
+				data.submit();
+				$('.progress').show();
+				$('.progress .progress-bar-success').css(
+					'width',
+					0 + '%'
+				);
+				
+			},
+			done: function (e, data) {
+				
+				//console.log(data.result.files);
+				
+				$('#uploading').remove();
+				
+				$.each(data.result.files, function (index, file) {
+					
+					//console.log( index  );
+					//console.log( file  );
+					var image = '<img class="imagethumb" id="' + file.id + '"src="' + file.thumbnailUrl +'" style="height: 75px"  />';
+					$('#upload-queue').append( image );
+					selectedImageId = $(this).attr('id');
+					var backgroundImage = this
+					$('#choose-template .template-thumb').css('background-image', 'url('+ file.thumbnailUrl +')' );
+					$('img#' + file.id ).css( 'border-color', "#0199d8" );
+					
+					$('.progress').hide();
+					
+			
+				});
+			},
+			progressall: function (e, data) {
+				var progress = parseInt(data.loaded / data.total * 100, 10);
+				$('.progress .progress-bar-success').css(
+					'width',
+					progress + '%'
+				);
+			}
+		});
+		
+		
+		// loads the selected album
+		$('#select-album').on('change', function() {
+			$('#album-images').empty();
+			$('#album-images').append('<div class="loader center prepend-top"><img src="'+bigajaxLoader+'" title="loading" /></div>');
+			
+			$.getJSON('/api/1.0/album/images/forpurchase/' + $(this).val(),
+				function(data) {
+					if( data.result ) {
+						$.each(data.images, function(i, item) {
+							$('#album-images').append('<img src="'+item.thumbnail+'" title="'+item.title+'" id="'+item.id+'" />');
+						});
+						$('.loader', '#album-images').remove();
+						$('#album-images img:first-child').trigger('click');
+					} else {
+						$('#album-images').empty();
+						$('#album-images').append('<h3 class="prepend-top center">'+noImagesText+'</h3>');
+					}	
+				}
+			);
+		});
+		
+		$('#select-album').trigger('change');
+
+		$('.gifttemplate a.button').click( function() {
+			if( !selectedImageId ) {
+				alert(selectImage);
+				return false;
+			}
+			document.location.href = $(this).attr('href') + selectedImageId;
+			return false;
+		});
+		$('.gifttemplate').click( function() {
+			if( !selectedImageId ) {
+				alert(selectImage);
+				return false;
+			}
+			document.location.href = $(this).find('a.button').attr('href') + selectedImageId;
+			return false;
+		});
+
+		
+		// inserts the image to the editor when clicked
+		$(document).on('click','#album-images img',  function() {
+			// remembers the image id
+			selectedImageId = $(this).attr('id');
+			var backgroundImage = this
+			$('#choose-template .template-thumb').css('background-image', 'url('+ $(this).attr('src') +')' );
+		});
+		
+		$(document).on('click', '#upload-queue img', function() {
+			// remembers the image id
+			selectedImageId = $(this).attr('id');
+			var backgroundImage = this
+			$('#choose-template .template-thumb').css('background-image', 'url('+ $(this).attr('src') +')' );
+		});		
+		
+	// gets the url from imageID for old ef25 urls
+	function getImage(imageid) {
+		var height = 400;
+		var width = 630;
+		return '/show_image_stream.php?bid='+imageid+'&dx='+width+'&dy='+height;
+	}
+});
+//]]>
+</script>
+
+</body>
+</html>

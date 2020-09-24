@@ -1,0 +1,102 @@
+
+/* 	Colors
+ *
+ *	dark blue: 		#005697
+ *	bright blue: 	#00a1e2
+**/
+
+body { padding-top: 40px }
+a { color: #005697 }
+
+.left { text-align: left }
+.center { text-align: center }
+.right { text-align: right }
+
+ul.reset { margin: 0; padding: 0;}
+
+.produktliste .readmore { display: block; margin-top: 1em }
+
+
+
+a.button.call-to-action, button.call-to-action {	background-color: #00a1e2 }
+a.button.call-to-action:hover, button.call-to-action:hover {	background-color: #005697 }
+
+
+/* top */
+
+#header { margin-bottom: 2em;}
+
+#topsmallnavigation {}
+#topsmallnavigation ul { height: 1em}
+#topsmallnavigation ul li { height: 1em; list-style: none; float: right; }
+#topsmallnavigation ul li a { font-size: 1em; text-decoration: none; float: right; margin: 0 1em 0 0; padding: 0 1em 0 0; border-right: 1px solid #ccc }
+#topsmallnavigation ul li:first-child a { border: none} /* floating left, so remove first border (last) */
+
+#mainnavigation {}
+#mainnavigation ul { height: 3em;}
+#mainnavigation ul li { height: 3em; float: left; list-style: none}
+#mainnavigation ul li a { font-size: 1em; color: #000; text-decoration: none; font-weight: bold; margin-right: 2em; float: left; padding: .5em 1em }
+#mainnavigation ul li:first-child a { margin-left: 0;}
+#mainnavigation ul li a:hover { color: #005697; background-color: #efefef }
+#mainnavigation ul li a span { color: #ccc; display: block; font-weight: normal; font-size: .9em}
+#mainnavigation ul li a:hover span { color: #666 }
+
+
+ul.submenu { height: 2em; padding: 0; margin: 0 }
+ul.submenu li { float: left; list-style: none; margin-right: 1em}
+ul.submenu li a{ float: left; display: block}
+
+
+
+/* frontpage */
+#frontpage-big {
+	width: 100%;
+	padding: 30px 0;
+	background: #00a2e3 url(gfx/frontpage-big-back.gif) repeat-x scroll bottom center;
+	color: #fff;
+}
+
+#frontpage-big h1 { color: #fff !important}
+
+#frontpage-big ul {
+	font-size: 1.5em;
+	color: #fff !important
+}
+
+#footer {
+	width: 100%;
+	min-height: 100px;
+	margin-top: 3em;
+	padding-top: 2em;
+	border-top: 1px solid #ccc;
+}
+
+#footer h3, #footer address, #footer dt {
+	color: #666;
+
+}
+#footer li {
+	color: #ccc;
+	list-style-type: square;
+}
+
+#footer a {
+	color: #666;
+	text-decoration: none;
+}
+#footer a:hover {
+	color: #000;
+}
+
+
+form label { font-weight: bold !important }
+
+
+div.productinfo {
+	margin-top: 100px
+}
+
+
+/* button colors */
+a.button.white, button.white { background-color: #fff; color: #00a1e2 !important }
+a.button.white:hover, button.white:hover { background-color: #ccc !important  }

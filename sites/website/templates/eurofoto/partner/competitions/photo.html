@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Search</tal:block>
+</head>
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	
+	<div id="container" class="container">
+	
+		<div id="content">
+	
+			<div id="box">	
+			   <h3>Competition admin for:  ${competition/title}</h3>
+			   
+			   Show: <a class="show" href="#">All</a> | <a class="show" href="#approved">Approved</a> | <a class="show" href="#pending">Pending</a>
+			   <form method="post" action="/partner/competitions/photo/edit">
+			   <div>
+		      <input type="submit" value="Approve" id="approved_button" name="submit_data"/>
+		      <input type="submit" value="Revoke"  id="revoke_button" name="submit_data"/>
+		      </div>
+			   <table id="entries" width="100%">
+		      <tr>
+		          <th>#</th>
+		          <th>Image</th>
+               <th>Image title</th>
+               <th>Description</th>
+               <th>User info</th>
+               <th>Status</th>
+               <th>
+			       <input type="checkbox" id="check_approved"/>
+			       <input type="checkbox" id="check_pending"/> 
+			       <input type="checkbox" id="check_all"/>   
+                Select All
+               </th>
+		      </tr>
+			   <tr tal:repeat="entry entries" class="${conditionalmatch:entry/approved,1,approved,pending}">
+			   
+			      <td>${entry/image/id}</td>
+			      <td><a href="${entry/image/urls/private}">
+			            <img src="${entry/image/thumbnail}" />
+			           </a> 
+			      </td>
+			      <td>${entry/image/title}</td>
+			      <td>${entry/image/description}</td>
+			      <td>
+			         <table id="fielddata" >
+			            <tr>
+			               <td>name</td>
+			               <td tal:content="entry/fielddata/fullname"/> 
+			            </tr>
+			            <tr>
+			               <td>email</td>
+			               <td tal:content="entry/fielddata/email"/> 
+			            </tr>
+			            <tr>
+			               <td>Phone</td>
+			               <td tal:content="entry/fielddata/phone"/> 
+			            </tr>
+			         </table>
+			      
+			      </td>
+			      <td>
+			      
+			        <div class="status" tal:condition="entry/approved">APPROVED!</div>
+			        <div class="status" tal:condition="not:entry/approved">PENDING!</div>
+			      
+			      </td>
+			      <td>
+			      <div class="status" tal:condition="entry/approved">
+			         <input type='checkbox' class="status" name='imageids_approved[]' value='${entry/image/id}' />
+			      </div>
+			      <div class="status" tal:condition="not:entry/approved">
+			         <input type='checkbox' class="status" name='imageids_pending[]' value='${entry/image/id}' />
+			      </div>  
+			      
+			      </td>
+			   </tr>
+			   </table>
+			   </form>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<script language="JavaScript">
+   $(document).ready( function() {
+      $('#entries tr.approved').hide();
+      $("#check_approved").hide();
+      $("#check_all").hide();
+
+      $("#revoke_button").hide();
+      $('a.show').click( function() {
+         var onlyclasses = $(this).attr('href').split('#')[1];
+         switch( onlyclasses ) {
+            
+            case 'approved':
+               $('#entries tr.pending').hide();
+               $('#entries tr.approved').show();
+               $("#approved_button").hide();
+               $("#revoke_button").show();
+               $("#check_approved").show();
+               $("#check_all").hide();
+               $("#check_pending").hide();
+               break;
+               
+            case 'pending':
+               $('#entries tr.pending').show();
+               $('#entries tr.approved').hide();
+               $("#approved_button").show();
+               $("#check_approved").hide();
+               $("#check_all").hide();
+               $("#check_pending").show();
+               break;
+            
+            default:
+               $('#entries tr').show();
+               $("#approved_button").show();
+               $("#revoke_button").show();
+               $("#check_approved").hide();
+               $("#check_all").show();
+               $("#check_pending").hide();
+               break;
+            
+         }
+      });
+      
+      $("#check_pending").click(function(){
+      
+         $("INPUT[name='imageids_pending[]']").each(function(){
+            if (this.checked == false) {
+            this.checked = true;
+            } else {
+            this.checked = false;
+            }
+         });
+      });
+      $("#check_approved").click(function(){
+         $("INPUT[name='imageids_approved[]']").each(function(){
+            if (this.checked == false) {
+            this.checked = true;
+            } else {
+            this.checked = false;
+            }
+         });
+      });
+      $("#check_all").click(function(){
+      
+         $("INPUT[name='imageids_approved[]']").each(function(){
+            if (this.checked == false) {
+            this.checked = true;
+            } else {
+            this.checked = false;
+            }
+         });
+         $("INPUT[name='imageids_pending[]']").each(function(){
+            if (this.checked == false) {
+            this.checked = true;
+            } else {
+            this.checked = false;
+            }
+         });
+         
+      });
+   });
+
+</script>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

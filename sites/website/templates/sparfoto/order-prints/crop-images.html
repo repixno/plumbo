@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Order prints - Choose quantity</tal:block>
+	<style type="text/css">
+		table#prices { text-align: center; color: #ccc; border: none; }
+		table#prices td, table#prices th { padding: 0; margin: 0; text-align:center }
+		table#prices th { font-weight: normal; color: #666 }
+		table#prices tr.category th { color: #000; font-size: 1.1em; padding-top: 1em }
+		table#prices thead th, table#prices thead td, table#prices thead tr {
+			background: none;
+		}
+		table#prices td.added { background-color: #ccff66; color: #408000 }
+		.standard-prints .standard {
+			display: block;
+		}
+		.standard-prints .notstandard {
+			display: none;
+		}
+		
+		
+	    /*
+       * imgAreaSelect style to be used with deprecated options
+       */
+      
+      .imgareaselect-border1, .imgareaselect-border2,
+      .imgareaselect-border3, .imgareaselect-border4 {
+          opacity: 0.5;
+          filter: alpha(opacity=50);
+      }
+      
+      .imgareaselect-border1 {
+      	border: solid 1px #FFF;
+      }
+      
+      .imgareaselect-border2 {
+      	border: dashed 0px #fff;
+      }
+      
+      
+      .imgareaselect-handle {
+          background-color: #000;
+          border: solid 1px #FFF;
+          opacity: 0.5;
+          filter: alpha(opacity=50);
+      }
+      
+      .imgareaselect-outer {
+          background-color: #000;
+          opacity: 0.6;
+          filter: alpha(opacity=60);
+      }
+      
+      .imgareaselect-selection {
+      	background-color: #000;
+      	opacity: 0;
+      	filter: alpha(opacity=0);
+      }
+      
+      div.frame {
+         background: black;
+         padding: 0.5em;
+         border: solid 2px #FFF;
+      }
+      
+      .gallery-handle {
+          background-color: #000;
+          opacity: 0.5;
+          filter: alpha(opacity=50);
+      }
+      
+      .todo{
+         border: solid 2px red; 
+      }
+      .done{
+         border: solid 2px green; 
+      }
+      
+	  
+
+
+	  
+	  
+	  
+	</style>
+	
+
+</head>
+
+
+<body>
+
+	<div metal:use-macro="../../common/loader.html/fullscreen" />
+
+	<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+	<div id="widecontent">
+
+		<div class="span-24 last">
+		 <ul class="step-by-step-new">
+				<li class="completed">
+					<a href="/order-prints/" title="">
+						<strong tal:content="cms:title:c3e83ff3-1b74-499f-9d2c-578177d4f036">Step 1: Find your photos</strong>
+					</a>
+				</li>
+				<li class="completed">
+					<a href="/order-prints/transfer-photos/" title="" tal:condition="not:session/loggedin">
+						<strong tal:content="cms:title:0e90d43c-ebf2-4c79-83d5-b3f950bdae0e">Step 2: Transfer photos</strong>
+					</a>
+					<a href="/order-prints/choose-photos/" title="" tal:condition="session/loggedin">
+						<strong tal:content="cms:title:3ccf650d-5437-4e54-9940-b04c0aab2163">Step 2: Choose photos</strong>
+					</a>
+					
+				</li>
+				<li class="completed">
+					<a title="">
+						<strong tal:content="cms:title:6b897e85-a541-4a72-8905-e5ecb59b8968">Step 3: Choose quantity</strong>
+					</a>
+				</li>
+			   <li  class="current">
+					<a title="">
+						<strong tal:content="cms:title:1fe8b6fd-690f-4a9f-b8e0-f45634bbf50d">4: Tilpass bilder</strong>
+					</a>
+				</li>
+				<li class="last">
+					<a title="">
+						<strong tal:content="cms:title:3dfbbdeb-678f-4594-8aab-171ea6d8f6fd">Step 5: Accessories</strong>
+					</a>
+				</li>
+			</ul>
+		</div>	
+
+	   <hr class="space" />
+      <div class="span-23 box last"> 
+         <div class="span-19 last">
+            <h3 tal:content="cms:title:1fe8b6fd-690f-4a9f-b8e0-f45634bbf50d">4. Tilpass bilder</h3>
+            <span tal:content="cms:ingress:1fe8b6fd-690f-4a9f-b8e0-f45634bbf50d">Crop it</span>
+         </div>
+         <div class="span-4 last"> <a id="next-step" class="button yellow large" href="/order-prints/accessories/">Neste steg</a></div>
+      </div>
+
+		
+      <div class="box span-23 last">
+         <div class="span-5" style="height:500px; overflow: auto;">
+            <div class="thumblist center">
+               <div><strong>Bilder som bør beskjæres.</strong></div>
+               <tal:block tal:repeat="images printorder/0/imageobjects">
+                  <tal:block tal:condition="exists:images/cropratio" >  
+                     <tal:block tal:repeat="cropimage images/cropratio">
+                        <div class="append-bottom">
+                           <div class="hide">${cropimage/article}</div>
+                           <div id="imagecount" class="hide"></div>
+                           <div class="hide" id="orginalwidth">${images/x}</div>
+                           <a id="${images/id}" class="imagethumbnail" alt="${cropimage/article}" href="${images/screensize}">
+                              <img class="thumbnail todo" id="${images/id}-${cropimage/article}" src="${images/thumbnail}"/>
+                           </a>
+                        </div>
+                     </tal:block>
+                  </tal:block>
+               </tal:block>
+            </div>
+         </div>
+         <div class="span-18 last">
+            <div class="span-4">
+               <a href="#" id="portrait" class="button">Stående</a>
+               <a href="#" id="landscape" class="button">Liggende</a> 
+               &nbsp;
+            </div>
+			
+			
+            <div class="span-8"><label>Hele bildet( Bildet vil få hvite kanter)</label>
+			<input id="fit-in" type="checkbox"/>
+			
+			
+			</div> 
+            <div class="span-6 last">
+               <strong>Printstørrelse<span id="crop-size-info"></span></strong>&nbsp; Bilde<span id="imagecount-cropbox">1</span> av <span id="totalimages"></span>
+               <tal:block i18n:translate="">&nbsp; Quality</tal:block>: <span class="quality"></span><span> <a href="#" title="kvalitet" class="qualityinfo">?</a></span>
+            </div>
+         </div>
+         <div class="span-18 center last cropContainer">
+            <hr/>
+            <div class="left" style="margin-top: -10px;">
+               <ul>
+                  <li>Klikk og dra i hjørnene på rammen for å endre størrelse</li>
+                  <li>Klikk og dra på det merkede området for å flytte utsnittet</li>
+               </ul>
+            </div>
+            <img src="" id="cropbox"/>
+         </div>	
+      </div>
+	</div>
+</div>
+
+<div class="hide" id="qualityinfoDialogWindow"> 
+   Kvaliteten er beregnet ut fra bredden i pixler og høyden i pixler på orginalfilen, i forhold til størrelsen den vil bli printet på. Dette er kun en pekepinn på hvordan kvaliteten vil bli på det ferdige produktet.
+</div>
+<div class="hide" id="docrop"> 
+   <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;"></span><span tal:content="structure cms:body:5e0bb6b7-5fa8-4260-a032-57e63db3ec7b"></span>
+   
+   </div>
+
+
+<div class="footer">
+   <div class="container">
+      <div metal:use-macro="../../${templates}/common.html/footer" />
+   </div>
+</div>
+<SCRIPT type="text/javascript" src="${static:}js/efCropImage.min.js?${version}"></SCRIPT>
+</body>
+</html>

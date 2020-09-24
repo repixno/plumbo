@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+	<script type="text/javascript" src="${static:js/jquery.eurofoto-1.0.js}"></script> 
+
+</head>
+
+
+<body>
+<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<div id="content">
+		<div class="span-6">
+			<h3 i18n:translate="">
+				Remote capture
+			</h3>
+		</div>
+		<div class="span-18 last">
+			
+		    <input id="captureurl" type="text" class="text span-18 last" value="http://www.google.com" />
+		    <button id="capturebutton" class="button blue large" i18n:translate="">Capture</button>
+		    <img id="capturingspinner" class="hide" src="${static:gfx/admin/img/simpletree/spinner.gif}" alt="Capturing..." title="Capturing" />
+		    
+		</div>
+
+	</div> <!-- end content -->
+	
+</div>
+
+<script language="JavaScript">
+   $(document).ready( function() {
+      $('#capturebutton').click( function() {
+         url = $('#captureurl').val();
+         $('#capturingspinner').show();
+         $.ef( 'services.remotecapture.website', {
+            'url': url
+         }, function( response ) {
+            if( response.result ) {
+               
+               window.location.href = response.image.urls.private;
+               
+            } else {
+               
+               $('#capturingspinner').hide();
+               alert( response.message );
+               
+            }
+         });
+      });
+   });
+</script>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

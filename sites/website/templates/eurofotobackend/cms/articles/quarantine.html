@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title"/>
+	
+	<style type="text/css">
+		.ingress {
+			font-size: 1.1em;
+			color: #333;
+		}
+		.storage{
+		    padding-top: 20px;
+		}
+	</style>
+	<tal:block tal:condition="session/isadmin">
+		<style type="text/css">
+		.cms-article-title:hover, .cms-article-ingress:hover, .cms-article-body:hover {
+			background-color: #eee !important;
+		}
+
+		</style>
+	</tal:block>
+</head>
+
+
+<body>
+	
+	<tal:block metal:use-macro="../../../${templates}/common.html/top" />
+	<div class="container">
+		
+		<div class="col-md-2 hidden-xs left-menu">
+                <div metal:use-macro="../../../${templates}/common.html/leftmenu" />
+            </div>
+		
+		<div class="col-md-10">
+			
+		
+
+	<div class="col-md-12">
+		<ul metal:use-macro="../cms.html/menu-current" />
+	</div>
+
+	<div class="col-md-12">
+		
+		
+		<div class="col-sm-9">
+			<tal:block tal:condition="exists:items" tal:repeat="item items">
+				<h2 tal:content="item/title" class="cms-article-title">Item title</h2>
+				<p class="ingress cms-article-ingress" tal:content="item/ingress"></p>
+				
+				
+				<hr />
+				
+				<div class="cms-article-body">
+					<tal:block tal:content="structure item/body" />
+				</div>
+				
+				<tal:block tal:condition="session/isadmin">
+					<script type="text/javascript">
+						$('.cms-article-title, .cms-article-ingress, .cms-article-body').dblclick( function() {
+							window.open('${request/adminroot}content/articles/${item/id}');
+						});
+					</script>
+				</tal:block>
+				
+			</tal:block>
+		</div>
+		
+		<div class="col-sm-3">
+			<tal:block condition="session/loggedin">
+				<div class="span-6 last storage">
+					<div id="buy-storage">
+								<h3 i18n:translate="">Buy secure storage</h3>
+								
+						   <p class="bottom">
+						   <tal:block i18n:translate="">You have a total of </tal:block>
+						   <span class="quarantined_images"  /> <tal:block i18n:translate=""> images in quarantine. </tal:block>
+						   </p>
+								<br/>
+								
+								<div id="buy-secure-storage">
+									<form action="/cart/additembyproductoptionid/" method="post">
+									<div>
+										<input type="radio" name="productoptionid" id="buy-secure-storage-6months" value="1365" class="subscription"/><label for="buy-secure-storage-6months" i18n:translate="">6 months</label>
+									</div>
+									<div>
+										<input type="radio" name="productoptionid" id="buy-secure-storage-12months" value="1366" class="subscription" checked="checked"/><label for="buy-secure-storage-12months" i18n:translate="">12 months</label>
+									</div>
+									<div>
+										<button class="add-subscription-to-cart" i18n:translate="">Buy</button>
+									</div>
+									</form>
+								</div>
+								<br />
+								<script type="text/javascript">
+									$(document).ready( function() {
+										$('#buy-secure-storage button.add-subscription-to-cart').click( function() {
+											<tal:block tal:condition="cart/items">
+												
+									   messageDialog('<tal:block i18n:translate="">Buy secure storage</tal:block>','<tal:block i18n:translate="">You have items in your cart. You get 12 months free subscription when you check out the cart. Please empty the cart if you dont want to buy anything.</tal:block>','<tal:block i18n:translate="">Close</tal:block>'); 
+			
+									   return false;
+												
+											</tal:block>
+											var subscriptionId = $('#buy-secure-storage input.subscription:checked').val();
+											document.location.href = '/cart/additembyproductoptionid/' + subscriptionId + '/';
+											return false;
+										});
+									});
+								</script>
+			
+				</div>
+				
+				<div id="have-storage">
+					 <h3 class="" i18n:translate="">Secure storage</h3>
+					 
+					 <p class="bottom">
+					 <tal:block i18n:translate="">Your photos are securely stored until</tal:block><br/>
+					 <span class="have-storage-to"  />
+					 </p>
+					 <p class="quiet small">(<tal:block i18n:translate="">It started</tal:block> <span class="have-storage-from" />)</p>
+				
+				</div>
+				</div>
+			</tal:block>
+						
+		</div>
+
+
+	</div>
+	</div>
+
+</div>
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>	
+</div>
+<script type="text/javascript">
+$(document).ready( function() {
+	$('a.fancybox').fancybox();
+
+	$.post('/api/1.0/user/subscription', function( data ) {
+	   
+	   if( data.message == 'yes' ){
+	      console.log( data );
+	      $('#buy-storage').hide();
+	      $('.have-storage-to').text(data.stop)
+	      $('.have-storage-from').text(data.start)
+	      
+	   }else{
+	      console.log( data );
+	      $('#have-storage').hide()
+	      $('.quarantined_images').text(data.quarantined_images);
+	   }
+
+       
+       
+   },'json');
+	
+	
+});
+</script>
+</body>
+</html>

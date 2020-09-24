@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+	<meta name="description" content="Vi printer dine digital bilder og gir deg norges beste fotobok. Med sikker lagring er bildene dine lagret trygt hos oss. Vi har også et stort utvalg av fotogaver, takkekort, kalendere og julekort m.m."/>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<script src="http://www.google.com/jsapi"></script>
+	<link rel="stylesheet" href="//static.eurofoto.no/css/portals/vg/screen.css?3.1059" type="text/css" media="screen, projection"/>
+	<link rel="stylesheet" href="//static.eurofoto.no/css/portals/vg/print.css?3.1059" type="text/css" media="print"/> 
+	<!--[if lt IE 8]>
+	<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/vg/ie.css?3.03" type="text/css" media="screen, projection" />
+	<![endif]-->
+		<script type="text/javascript" src="//static.eurofoto.no/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="//static.eurofoto.no/js/jquery.eurofoto-1.0.js"></script> <!-- Eurofoto API 1.0 -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+	<script type="text/javascript" src="//static.eurofoto.no/js/i18n/ui.datepicker-no.js"></script>
+	<script type="text/javascript" src="//static.eurofoto.no/js/flowplayer-3.1.1.min.js"></script>
+	<script type="text/javascript" src="//static.eurofoto.no/js/eurofoto.min.js?3.1059"></script>
+	<script type="text/javascript" src="//static.eurofoto.no/js/jquery.fancybox-1.3.0.pack.js"></script>
+	<title>
+		VG Fotoalbum 	</title>
+	<meta name="google-site-verification" content="delaVpAJILX8OrYJxMDThsz0nwI2jR9IYQkoI0PDmKY"/> 
+		
+	<style type="text/css">
+		.campaign {
+			height: 320px;
+			width: 270px;
+			position: relative;
+		}
+		.campaign a.button {
+			position: absolute;
+			bottom: 5px;
+			right: 5px;
+		}
+		
+		#campaign h3.ui-accordion-header a {
+			font-weight: normal;
+			font-size: 1.3em;
+		}	
+		
+      #presentation {
+         position: relative;
+         height: 305px;
+         background-color: #fefefe;
+         -webkit-border-radius: 9px;
+         -moz-border-radius: 9px;
+         border-radius: 9px;
+         border: 1px solid #ccc;
+         overflow: hidden;
+      }
+		
+      #presentation #presentation-menu ul {
+         margin: 0;
+         padding: 0;
+         position: relative;
+         top: 15px;
+         left: 20px;
+         width: 178px;
+         -webkit-border-radius: 9px;
+         -moz-border-radius: 9px;
+         border-radius: 9px;
+         -webkit-box-shadow: 1px 1px 5px rgba(20,20,20,0.6);
+         -moz-box-shadow: 1px 1px 5px rgba(20,20,20,0.6);
+         box-shadow: 1px 1px 5px rgba(20,20,20,0.6);
+         background-color: #eee;
+         background-color: rgba(240,240,240, 0.5);
+         z-index: 100;
+         background: #eeeeee; /* old browsers */
+         background: -moz-linear-gradient(top, rgba(252,252,252,0.9) 0%, rgba(210,210,210,0.9) 100%); /* firefox */
+         /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(100%,#D2D2D2)); /* webkit */
+         background: -webkit-gradient(
+            linear, 
+            left top, 
+            left bottom, 
+            from(rgba(252,252,252,0.9)), 
+            to(rgba(210,210,210,0.9)) 
+         );
+         
+         padding-bottom: 12px;
+      }
+		
+		#presentation #presentation-menu ul li {
+         list-style-type: none;
+         display: block;
+		}
+		
+		#presentation #presentation-menu ul li a {
+		    background-color: transparent;
+		    text-decoration: none;
+		    font-size: 15px;
+		    color: #383838;
+		    display: block;
+		    padding: 7px 20px 7px 15px;
+		    border-bottom: 1px solid #e8e8e9;
+		    border-top: 1px solid #f5f4f5;
+		    border-top: 1px solid rgba(240,240,240,0.5);
+		    border-bottom: 1px solid rgba(150,150,150,0.3);
+      }
+		#presentation ul li:first-child a { border-top: 0;
+         -webkit-border-top-left-radius: 9px;
+         -webkit-border-top-right-radius: 9px;
+         -moz-border-radius-topleft: 9px;
+         -moz-border-radius-topright: 9px;
+         border-top-left-radius: 9px;
+         border-top-right-radius: 9px;
+      }
+		#presentation ul li:last-child a { border-bottom: 0;
+         -webkit-border-bottom-right-radius: 9px;
+         -webkit-border-bottom-left-radius: 9px;
+         -moz-border-radius-bottomright: 9px;
+         -moz-border-radius-bottomleft: 9px;
+         border-bottom-right-radius: 9px;
+         border-bottom-left-radius: 9px;
+		}
+		
+      #presentation ul li a:hover {
+         background-color: #e4e4e4;
+         color: #000;
+         background: -moz-linear-gradient(top, #EEE 0%, #D2D2D2 100%); /* firefox */
+         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#EEE), color-stop(100%,#D2D2D2)); /* webkit */
+      }
+
+      #presentation #presentation-menu { position: relative }
+      
+      #presentation #presentation-menu div.selected {
+         padding-top: 10px;
+         position: absolute;
+         width: 217px;
+         height: 37px;
+         border: none;
+         left: -7px;
+         background: transparent url(http://test.static.eurofoto.no/gfx/portals/fotoclick/arrow-frontpage_fotoclick.png) no-repeat top left;
+         z-index: 400;
+         top: 0px;
+      }
+      
+      #presentation #presentation-menu ul li.selected { 
+         z-index: 450; 
+         position: relative;
+      }
+      
+      #presentation #presentation-menu ul li.selected a {
+         color: #fff;
+         font-weight: bold;
+         border-color: transparent;
+         z-index: 500; 
+         position: relative;
+         outline: none !important;
+      }
+      #presentation #presentation-menu ul li.selected a:hover {
+         background: none !important;
+         background-color: transparent !important;
+         color: #fff;
+      }
+      
+      #presentation .article {
+         cursor: hand;
+         cursor: pointer;
+         padding-top: 20px;
+         height: 285px;
+         position: absolute;
+         top: 0;
+         left: 0;
+         z-index: 50;
+         -webkit-border-radius: 9px;
+         -moz-border-radius: 9px;
+         border-radius: 9px;
+      }
+      
+      #presentation .article h2 {
+         font-size: 3.5em;
+      }
+      
+      #presentation .article a.button.bottom { position: absolute; bottom: 20px }
+      #presentation .article a.button.top { position: absolute; top: 20px }
+      #presentation .article a.button.left { left: 20px }
+      #presentation .article a.button.right { right: 20px }
+      
+      .wirebox { margin-bottom: 1em }
+      
+	</style>
+	
+   <!--[if lte IE 8]>
+	<style type="text/css">
+		#presentation ul {
+         display: block;
+         border: 1px solid #ccc;
+         z-index: 6000;
+
+      }
+      #presentation div#presentation-menu {
+         border: none;
+         z-index: 5000;
+         width: 220px;
+      }
+	</style>
+	<![endif]-->
+</head>
+
+
+<body>
+		<script type="text/javascript">
+		 var t;
+		 var stopped = false;
+		 var prevArticle;
+		 var currentArticle;
+
+	   function changeMenuItem() {
+		  if( !stopped) {
+			 if( $('#presentation ul li:last-child').hasClass('selected') ) {
+				$('#presentation ul li:first a').trigger('click');
+			 } else {
+				$('#presentation ul li.selected').next().find('a').trigger('click');
+			 }
+		  }
+	   }
+		 
+	   function startInterval() {
+		  t = setInterval( 'changeMenuItem()', 10000 );
+	   }
+	   
+	   $('.article.first').css('z-index', 55);
+
+		  $(document).ready( function() {
+			 
+		  $('#presentation ul li a').bind('click', function() {
+			 
+			 var item = this;
+		  
+			 if( $(this).parent().hasClass('selected') ) {
+				stopped = true;
+				window.location.href = $('#' + $(item).attr('rel') ).find('a').attr('href');
+			 } else {
+				$('#presentation div.article').not('.current').hide();
+				var position = $(item).position().top - 4;
+				$('#presentation div.selected').animate({ top : position }, 1000);
+				$('#presentation ul li.selected').removeClass('selected');
+				$(this).parent().addClass('selected'); // ie can't handle animation here
+				currentArticle = $('#' + $(item).attr('rel') );
+				$(currentArticle).hide().css('z-index', 60 ).addClass('current');
+				$(currentArticle).fadeIn(2000);
+				$(prevArticle).removeClass('current').css('z-index', 55);
+				prevArticle = currentArticle;
+			 }
+
+			 return false;
+		  });
+		  
+		  $('#presentation .article').click( function() {
+			 window.location.href = $('a.button', this).attr('href');
+		  });
+		  
+		  $('#presentation ul li:first-child a').trigger('click');
+		  
+		  startInterval();
+		  
+		  $('#presentation').mouseenter( function() { 
+			 stopped = true;
+		  }).mouseleave( function() { 
+			 stopped = false;
+		  });
+		  
+		  
+		  
+	   });
+		</script>
+	<div class="container">
+
+		<div id="header" class="last">	
+
+	<div class="vg-menu-container span-24 last append-bottom prepend-top">
+	<ul class="vgMenu sf-js-enabled sf-shadow">
+		<li id="vg-frontpage">
+			<a title="Nyheter" href="http://www.vg.no/"><strong>VG fremside</strong></a>
+		</li>
+		<li class="nyheter">
+			<a title="nyheter" href="http://www.vg.no/nyheter/">Nyheter</a>
+		</li>
+		<li class="sport">
+			<a title="" href="http://www.vg.no/sport/">Sport</a>
+		</li>
+		<li class="fotball">
+			<a title="" href="http://www.vg.no/sport/fotball/">Fotball</a>
+				</li>
+		<li class="rampelys">
+			<a title="" href="http://www.vg.no/rampelys">Rampelys</a>
+		</li>
+		<li class="reise">
+			<a title="" href="http://www.vg.no/reise/">Reise</a>
+		</li>
+		<li class="pentno">
+			<a title="Været time for time og langtidsvarsel på pent.no" href="http://www.pent.no">Vær</a>
+		</li>
+		<li class="nyttig hide">
+			<a title="" href="#">Nytte</a>
+		</li>
+		<li class="tvguide">
+			<a title="" href="http://www.vg.no/tv-guide/">TV-guide</a>
+		</li>
+		<li class="diskusjon hide">
+			<a title="" href="#">Leserne</a>
+		</li>
+		<li class="goy last hide">
+			<a title="" href="#">Gøy</a>
+		</li>
+	</ul>
+</div>
+
+<div>
+<H1>Viktig melding til brukere av VG fototjeneste!</H1>
+
+<p>
+<b>Fra og med 1.juli 2015 avsluttes samarbeidet mellom VG og Eurofoto om den nettbaserte fototjenesten foto.vg.no.</b>
+</p>
+<p>
+Du som kunde kan for tiden fremover få tilgang til dine bilder og hele produktsortimentet ved å benytte <a href="http://www.eurofoto.no">eurofoto.no</a>.<br />
+Brukernavn og passord er det samme som du har benyttet tidligere. 
+</p>
+<p>
+	<a href="http://www.eurofoto.no" class="button blue large">Klikk her for å logge inn</a>
+</p>
+<p>
+Dersom du har spørsmål knyttet til tjenesten eller din brukerkonto, er du velkommen til å kontakte vårt kundesenter på 57 88 35 00.
+</p>
+</div>	
+</div>	
+</div>	
+	
+</body>
+</html>

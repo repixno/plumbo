@@ -1,0 +1,138 @@
+.cropFrame {
+	overflow : hidden;
+	position : relative;
+    display: inline-block;
+}
+
+.cropImage {
+	position : absolute;
+	top      : 0;
+	left     : 0;
+	cursor   : move;
+	max-width: none;
+}
+
+.cropControls {
+	background : #000;
+	width      : 100%;
+	height     : 46px;
+	position   : absolute;
+	z-index    : 100;
+	top     	: -48px;
+	left       : 0;
+	opacity    : 0;
+	filter     : alpha(opacity=0);
+	transition : opacity .25s linear;
+	-moz-transition    : opacity .25s linear;
+	-webkit-transition : opacity .25s linear;
+
+    t-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.cropControls div{
+	color: #fff;
+	} 
+
+.cropFrame.hover .cropControls {
+	opacity    : .95;
+	filter     : alpha(opacity=95);
+}
+
+.cropControls span {
+	display   : block;
+	float     : left;
+	color     : #fff;
+	font-size : 11px;
+	margin    : 7px 0 0 5px;
+}
+
+.cropZoomIn,
+.cropZoomOut,
+.rotateLeft,
+.rotateRight,
+.openimagebox,
+.bw{
+	display         : block;
+	float           : left;
+	margin          : 4px 0 0 4px;
+	padding         : 0;
+	background      : #fff;
+    border: 1px solid #000;
+	color           : #000;
+	border-radius   : 4px;
+	width           : 20%;
+	height          : 18px;
+	line-height     : 18px;
+	font-size       : 24px;
+	text-align      : center;
+	text-decoration : none;
+	cursor          : pointer;
+}
+
+.openimagebox,
+.bw{
+	width           : 40%;
+	height			: 18px;
+	font-size       : 18px;
+}
+
+.openimagebox::after,
+.openimagebox .after {
+	content : "";
+	display : block;
+	text-align:center;
+}
+.bw::after,
+.bw .after {
+	content : "Sort/hvit";
+	display : block;
+	text-align:center;
+}
+
+.rotateLeft::after,
+.rotateLeft .after {
+	content : "\21B6";
+	display : block;
+	text-align:center;
+}
+
+.rotateRight::after,
+.rotateRight .after {
+	content : "\21B7";
+	display : block;
+	text-align:center;
+}
+
+.cropZoomIn::after,
+.cropZoomIn .after {
+	content : "+";
+	display : block;
+	text-align:center;
+}
+
+.cropZoomOut::after,
+.cropZoomOut .after {
+	content        : "-";
+	display        : block;
+	text-align:center;
+}
+
+/*IE8*/
+.cropZoomIn:after,
+.cropZoomIn .after {
+	content : "+";
+	display : block;
+	text-align:center;
+}
+/*IE8*/
+.cropZoomOut:after,
+.cropZoomOut .after {
+	content        : "-";
+	display        : block;
+	text-align:center;
+}

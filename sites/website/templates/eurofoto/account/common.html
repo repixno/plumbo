@@ -1,0 +1,635 @@
+<tal:block metal:define-macro="account-menu">
+	<div class="container" id="account-menu">
+		<ul>
+			<li>
+				<a href="/account/overview#account">
+					<span class="sprite"/>
+					<tal:block i18n:translate="">Overview</tal:block>
+				</a>
+			</li>
+			<li><a href="/account/albums#account"><span class="sprite albums"/><tal:block i18n:translate="">Albums</tal:block></a></li>
+			<li><a href="/account/settings#account"><span class="sprite setting"/><tal:block i18n:translate="">Settings</tal:block></a></li>
+			<li><a href="/account/projects#account"><span class="sprite projects"/><tal:block i18n:translate="">Projects</tal:block></a></li>
+			<li><a href="/account/orders#account"><span class="sprite orders"/><tal:block i18n:translate="">Orders</tal:block></a></li>
+			<li><a href="/account/friends#account"><span class="sprite friends"/><tal:block i18n:translate="">Friends & family</tal:block></a></li>
+			<li><a href="/account/upload#account"><span class="sprite transfer"/><tal:block i18n:translate="">Transfer images</tal:block></a></li>
+		</ul>
+		<div class="search span-4 last hide">
+			<form action="/account/search" method="get">
+				<input type="text" class="text text-3" name="q"/>
+			</form>
+		</div>
+	</div>
+</tal:block>
+
+<tal:block metal:define-macro="head">
+	<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+	<!-- <script type="text/javascript" src="${static:js/account.js}"></script> -->
+	
+	
+	
+	<script type="text/javascript" src="${static:js/jquery.tipTip.minified.js}"></script>
+	<script type="text/javascript" src="${static:js/jquery.eurofoto-1.0.js}"></script>
+	<script type="text/javascript" src="${static:js/jquery.jcryption-1.0.1.js}"></script>
+	<script type="text/javascript" src="${static:js/jquery.contextMenu.js}"></script>
+	<script type="text/javascript" src="${static:js/jquery.rotate.1-1.js}"></script>
+	
+	<script type="text/javascript" src="/js/account.js?debug=1"></script>
+	
+	<!-- <script type="text/javascript" src="${static:js/jquery.fancybox-1.3.1.js}"></script> -->
+	
+	<link rel="stylesheet" href="/stylesheet/account/screen.css" media="screen, projection"/>
+	<link rel="stylesheet" href="/blueprint/plugins/tiptip/screen.css" media="screen, projection"/>
+	
+	  <!--[if lt IE8]>
+    <script type="text/javascript" 
+     src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+
+    <style>
+     .chromeFrameInstallDefaultStyle {
+       width: 100%; /* default is 800px */
+       border: 5px solid blue;
+     }
+    </style>
+
+    <div id="prompt">
+     You dont have google chrome
+    </div>
+ 
+    <script>
+     // The conditional ensures that this code will only execute in IE,
+     // Therefore we can use the IE-specific attachEvent without worry
+     window.attachEvent("onload", function() {
+       CFInstall.check({
+         mode: "inline", // the default
+         node: "prompt"
+       });
+     });
+    </script>
+  <![endif]-->
+	
+
+	<!--[if lt IE 8]>
+		<link rel="stylesheet" href="/stylesheet/account/ie.css" type="text/css" media="screen, projection" />
+	<![endif]-->
+	
+	
+	
+
+</tal:block>
+
+<!-- MENU WHEN SHOWING ALL ALBUMS -->
+<tal:block metal:define-macro="albums-menu">
+	<div class="account-accordion">
+		<h3 class="selected"><span class="sprite albums"/><tal:block i18n:translate="">Order prints</tal:block></h3>	
+		<ul class="account-content-box selected accordion-list">
+			<li><a href="#" title="" class="print-all-albums"		id="printAllAlbums" i18n:translate="">Print all albums</a></li>
+			<li><a href="#" title="" class="print-selected-albums"	id="printSelectedAlbums" i18n:translate="">Print selected albums</a></li>
+		</ul>
+		<h3><span class="sprite edit"/><tal:block i18n:translate="">Edit</tal:block></h3>	
+		<ul class="account-content-box accordion-list">
+			<li><a href="#" title="" class="delete-selected-albums"	id="deleteSelectedAlbums" i18n:translate="">Delete selected albums</a></li>
+			<li><a href="#" title="" class="merge-selected-albums"	id="mergeSelectedAlbums" i18n:translate="">Merge selected albums</a></li>
+		</ul>
+		<h3><span class="sprite create"/><tal:block i18n:translate="">Start project</tal:block></h3>	
+		<ul class="account-content-box accordion-list">
+			<li><a href="#" title="" class="create-new-album"		id="createNewAlbum" i18n:translate="">New album</a></li>
+			<li><a href="#" title="" class="create-photo-book"		id="createPhotoBook" i18n:translate="">Photo book</a></li>
+			<li><a href="#" title="" class="create-calendar"		id="createCalendar" i18n:translate="">Calendar</a></li>
+			<li><a href="#" title="" class="create-gift"			id="createGift" i18n:translate="">Gift</a></li>
+			<li><a href="#" title="" class="create-poster"			id="createPoster" i18n:translate="">Poster</a></li>
+			<li><a href="#" title="" class="create-greeting-card"	id="createGreetingCard" i18n:translate="">Greeting card</a></li>
+		</ul>
+		<!--<h3><span class="sprite share"/><tal:block i18n:translate="">Share one album</tal:block></h3>	
+		<ul class="account-content-box accordion-list">
+			<li><a href="#" title="" class="share-selected-album"	id="shareSelectedAlbums" i18n:translate="">Share album</a></li>
+			<li><a href="#" title="" class="get-secret-link"		id="getSecretLinkForSelectedAlbum" i18n:translate="">Get secret link</a></li>
+			<li><a href="#" title="" class="insert-in-blog"			id="insertSelectedAlbumInBlog" i18n:translate="">Insert in blog</a></li>
+		</ul>-->
+		<h3><span class="sprite transfer"/><tal:block i18n:translate="">Transfer photos</tal:block></h3>	
+		<ul class="account-content-box accordion-list">
+			<li><a href="#" title="" class="upload-from-computer" 	id="uploadFromComputer" i18n:translate="">Upload from computer</a></li>
+			<li><a href="#" title="" class="transfer-with-mail" 	id="transferWithEmail" i18n:translate="">Transfer with email</a></li>
+			<li><a href="#" title="" class="import-from-othersite" 	id="importFromOtherSite" i18n:translate="">Import from other site</a></li>
+		</ul>
+	</div>
+</tal:block>
+
+
+<!-- MENU WHEN SHOWING ONE ALBUM -->
+<tal:block metal:define-macro="album-menu">
+	<div class="account-accordion">
+		<h3 class="selected"><span class="sprite albums"/><tal:block i18n:translate="">Order prints</tal:block></h3>	
+		<ul class="account-content-box selected  accordion-list">
+			<li><a href="#" title="" class="print-album"			id="printCurrentAlbum" i18n:translate="">Order this album</a></li>
+			<li><a href="#" title="" class="print-selected-photos"	id="printSelectedImages" i18n:translate="">Selected images</a></li>
+		</ul>
+		<h3><span class="sprite edit"/><tal:block i18n:translate="">Edit</tal:block></h3>	
+		<ul class="account-content-box accordion-list">
+			<li><a href="#" title="" class="delete-selected-images"	id="deleteSelectedImages" i18n:translate="">Delete selected images</a></li>
+			<li><a href="#" title="" class="delete-current-album"	id="deleteCurrentAlbum" i18n:translate="">Delete this album</a></li>
+			<li><a href="#" title="" class="move-selected-images"	id="moveSelectedImages" i18n:translate="">Move selected images</a></li>
+			<li><a href="#" title="" class="preferences"			id="albumPreferences" i18n:translate="">Preferences</a></li>
+		</ul>
+		<h3><span class="sprite create"/><tal:block i18n:translate="">Create project</tal:block></h3>	
+		<ul class="account-content-box accordion-list">
+			<li><a href="#" title="" class="create-photo-book"		id="createPhotoBook-fromAlbum" i18n:translate="">Photo book</a></li>
+			<li><a href="#" title="" class="create-calendar"		id="createCalendar-fromAlbum" i18n:translate="">Calendar</a></li>
+			<li><a href="#" title="" class="create-gift"			id="createGift-fromAlbum" i18n:translate="">Gift</a></li>
+			<li><a href="#" title="" class="create-poster"			id="createPoster-fromAlbum" i18n:translate="">Poster</a></li>
+			<li><a href="#" title="" class="create-collage"			id="createCollage-fromAlbum" i18n:translate="">Collage</a></li>
+		</ul>
+		<h3><span class="sprite share"/><tal:block i18n:translate="">Share</tal:block></h3>	
+		<ul class="account-content-box accordion-list">
+			<li><a href="#" title="" class="share-current-album"	id="shareCurrentAlbum" i18n:translate="">Share album</a></li>
+			<li><a href="#" title="" class="get-secret-link"		id="getSecretAlbumLink" i18n:translate="">Get secret link</a></li>
+			<li><a href="#" title="" class="insert-album-in-web"	id="insertAlbumInBlog" i18n:translate="">Insert in blog</a></li>
+		</ul>
+		<h3><span class="sprite transfer"/><tal:block i18n:translate="">Transfer images</tal:block></h3>	
+		<ul class="account-content-box accordion-list">
+			<li><a href="#" title="" class="upload-from-computer" 	id="uploadFromComputere-fromAlbum" i18n:translate="">Upload from computer</a></li>
+			<li><a href="#" title="" class="transfer-with-mail" 	id="transferWithEmail-fromAlbum" i18n:translate="">Transfer with email</a></li>
+			<li><a href="#" title="" class="import-from-othersite" 	id="importFromOtherSite-fromAlbum" i18n:translate="">Import from other site</a></li>
+		</ul>
+		<h3><span class="sprite misc"/><tal:block i18n:translate="">Misc</tal:block></h3>	
+		<ul class="account-content-box accordion-list">
+			<li><a href="/account/slideshow/${album/id}" title="" class="slideshow" 				id="slideshow" i18n:translate="">Slideshow</a></li>
+			<li><a href="#" title="" class="download-current-album" id="downloadCurrentAlbum" i18n:translate="">Download this album</a></li>
+		</ul>
+	</div>
+</tal:block>
+
+<!-- MENU WHEN SHOWING ONE IMAGE -->
+<tal:block metal:define-macro="image-menu">
+	<div class="image-navigation account-accordion">
+		<a href="#account" class="button prev">Prev</a>
+		<a href="#account" class="button next">Next</a>
+	</div>
+	<div class="account-accordion">
+		<h3 class="selected"><span class="sprite albums"/>Order prints</h3>	
+		<ul class="account-content-box selected  accordion-list">
+			<li><a href="#" title="" class="order-current-album"	id="printCurrentAlbum-fromImage">Order this album</a></li>
+			<li><a href="#" title="" class="order-selected-photo"	id="printCurrentImage">This image</a></li>
+		</ul>
+		<h3><span class="sprite edit"/>Edit</h3>	
+		<ul class="account-content-box accordion-list">
+			<li><a href="#" title="" class="delete-selcted-images"	id="deleteCurrentImage">Delete this image</a></li>
+			<li><a href="#" title="" class="move-selected-images"	id="moveCurrentImage">Move this image</a></li>
+			<li><a href="#" title="" class="image-preferences"		id="imagePreferences">Preferences</a></li>
+		</ul>
+		<h3><span class="sprite create"/>Create</h3>	
+		<ul class="account-content-box accordion-list">
+			<li><a href="#" title="" class="create-photo-book"		id="createPhotoBook-fromImage">Photo book</a></li>
+			<li><a href="#" title="" class="create-calendar"		id="createCalendar-fromImage">Calendar</a></li>
+			<li><a href="#" title="" class="create-gift"			id="createGift-fromImage">Gift</a></li>
+			<li><a href="#" title="" class="create-poster"			id="createPoster-fromImage">Poster</a></li>
+			<li><a href="#" title="" class="create-collage"			id="createCollage-fromImage">Collage</a></li>
+		</ul>
+		<h3><span class="sprite share"/>Share</h3>	
+		<ul class="account-content-box accordion-list">
+			<li><a href="#" title="" class="share-current-image"	id="shareCurrentAlbumFromImage">Share album</a></li>
+			<li><a href="#" title="" class="share-current-image"	id="shareCurrentImageWithMail">Share with email</a></li>
+			<li><a href="#" title="" class="get-secret-link"		id="getSecretLink-fromImage">Get secret link</a></li>
+			<li><a href="#" title="" class="insert-image-in-web"	id="insertImageInBlog">Insert in blog</a></li>
+		</ul>
+		<h3><span class="sprite share"/>Transfer images</h3>	
+		<ul class="account-content-box accordion-list">
+			<li><a href="#" title="" class="upload-from-computer" 	id="uploadFromComputer-fromImage">Upload from computer</a></li>
+			<li><a href="#" title="" class="transfer-with-mail" 	id="uploadFromComputer-fromImage">Transfer with email</a></li>
+			<li><a href="#" title="" class="import-from-othersite" 	id="importFromOtherSite-fromImage">Import from other site</a></li>
+		</ul>
+		<h3><span class="sprite share"/>Misc</h3>	
+		<ul class="account-content-box accordion-list">
+			<li><a href="#" title="" class="slideshow" 				id="slideshow-fromImage">Slideshow</a></li>
+			<li><a href="#" title="" class="download-current-album" id="downloadCurrentAlbum-fromImage">Download this album</a></li>
+			<li><a href="#" title="" class="download-current-image" id="downloadCurrentImage">Download this album</a></li>
+		</ul>
+	</div>
+</tal:block>
+
+<tal:block metal:define-macro="footer">
+
+	<div id="imageCollection" class="span-11 last hide">
+		<div class="span-7">
+		<h4 class="top bottom" i18n:translate="">Image collection</h4>
+		<p>
+			<strong i18n:translate="">Album</strong>
+			<span class="albums">?</span>
+			<strong i18n:translate="">Single images</strong>
+			<span class="images">?</span>
+			<strong title="Including images in albums" i18n:translate="">Total images</strong>
+			<span title="Including images in albums" class="total-images">?</span>
+
+		</p>
+		</div>
+
+		<div class="span-4 last right prepend-top">
+			<!--<a class="button blue addSelected">Add selected</a>-->
+			<a class="button red empty" i18n:translate="">Empty</a>
+			<a class="button green show" i18n:translate="">Show</a>
+		</div>
+		
+	</div>
+
+	<script type="text/javascript" tal:condition="exists:album">
+		var orgAlbum = {
+			id: '${album/id}',
+			title: '${album/title}'
+		};
+	</script>
+	
+
+	<script type="text/javascript">
+		var inlineLoader = '<img src="${static:gfx/gui/ajax-loader.gif}" alt="Loading" i18n:attributes="alt" class="loader inlineLoader" height="16" width="16"/>';
+		var bigLoaderWhiteOnBlack = '<img src="${static:gfx/gui/ajax-loader-big-white-on-black.gif}" alt="Loading" i18n:attributes="alt" class="loader" height="32" width="32"/>';
+		
+		var loader = '<div class="loader"><img src="${static:gfx/gui/ajax-loader.gif}" alt="Loading" i18n:attributes="alt"/></div>';
+		var bigLoader = '<div class="loader"><img src="${static:gfx/gui/ajax-loader-big.gif}" alt="Loading" i18n:attributes="alt" class="loader"/></div>';
+		var slideshowpro = '${static:flash/slideshowpro.swf}';
+		var hostname = '${request/hostname}';
+		
+		// button strings
+		var texts = new Object();
+		 	texts.activeSecretLink = '<tal:block i18n:translate="">Activate secret link to show this</tal:block>';
+			texts.deleteThisImage = '<tal:block i18n:translate="">Delete this image</tal:block>';
+			texts.save = '<tal:block i18n:translate="">Save</tal:block>';
+			texts.cancel = '<tal:block i18n:translate="">Cancel</tal:block>';
+			texts.addToCollection = '<tal:block i18n:translate="">Add to collection</tal:block>';
+			texts.deleteText = '<tal:block i18n:translate="">Delete</tal:block>';
+			texts.moveImage = '<tal:block i18n:translate="">Move image</tal:block>';
+			texts.moveImages = '<tal:block i18n:translate="">Move images</tal:block>';
+			texts.merge = '<tal:block i18n:translate="">Merge images</tal:block>';
+			texts.generateNew = '<tal:block i18n:translate="">Generate new</tal:block>';
+			texts.sendMail = '<tal:block i18n:translate="">Send mail</tal:block>';
+			texts.openMail = '<tal:block i18n:translate="">Open mail</tal:block>';
+			texts.downloadVcard = '<tal:block i18n:translate="">Download VCard</tal:block>';
+
+
+		// Double click
+		<tal:block tal:condition="exists:userpreferences/dblclick">
+			<tal:block tal:condition="equal:userpreferences/dblclick,true">
+				var userDblClick = true;
+			</tal:block>
+			<tal:block tal:condition="not:equal:userpreferences/dblclick,true">
+				var userDblClick = false;
+			</tal:block>
+		</tal:block>		
+		
+		
+		$(document).ready( function() {
+			// Skimmer
+			<tal:block tal:condition="exists:userpreferences/skimmer">
+				<tal:block tal:condition="equal:userpreferences/skimmer,true">
+					$('#show-albums #main-content a.album').newSkimmer();
+				</tal:block>
+			</tal:block>
+			
+			// Max width
+			<tal:block tal:condition="exists:userpreferences/accountMaxWidth">
+				<tal:block tal:condition="equal:userpreferences/accountMaxWidth,true">
+					$('#account .canHazMaxWidth').removeClass('container');
+				</tal:block>
+			</tal:block>
+		});
+		
+
+	</script>
+	
+</tal:block>
+
+<tal:block metal:define-macro="albums">
+
+	<ul class="albums medium" tal:condition="">
+		<tal:block tal:repeat="album albums">
+			<tal:block metal:use-macro="album" />
+		</tal:block>
+	</ul>
+	
+	<!-- default -->
+	<tal:block tal:condition="not:exists:userpreferences/album-list-appearance">
+		<ul class="albums medium thumbnails">
+			<tal:block tal:repeat="album albums">
+				<li class="albumPreview" rel="${album/id}" id="albumid_${album/id}">
+					<tal:block metal:use-macro="skimmer" />
+					<tal:block metal:use-macro="albumdata" />
+				</li>
+			</tal:block>
+		</ul>
+	</tal:block>
+	
+	
+	<tal:block tal:condition="exists:userpreferences/album-list-appearance">
+		
+		<!-- Thumbnails -->
+		<tal:block tal:condition="equal:userpreferences/album-list-appearance,thumbnails">
+			<ul class="albums medium thumbnails">
+				<tal:block tal:repeat="album albums">
+					<li class="albumPreview" rel="${album/id}" id="albumid_${album/id}">
+						<tal:block metal:use-macro="skimmer" />
+						<tal:block metal:use-macro="albumdata" />
+					</li>
+				</tal:block>
+			</ul>
+			<br class="clear clearfix" />
+		</tal:block>
+
+		<!-- List -->
+		<tal:block tal:condition="equal:userpreferences/album-list-appearance,list">
+			<ul class="albums medium list">
+				<tal:block tal:repeat="album albums">
+					<li class="${conditionalmatch:repeat/album/odd,true,odd}" rel="${album/id}" id="albumid_${album/id}">
+						<input type="checkbox" />
+						<a href="${album/url}">${album/title}</a>
+					</li>
+				</tal:block>
+			</ul>
+		</tal:block>		
+
+		<!-- Details -->
+		<tal:block tal:condition="equal:userpreferences/album-list-appearance,details">
+			<ul class="albums medium details">
+				<tal:block tal:repeat="album albums">
+					<li class="" rel="${album/id}" id="albumid_${album/id}">
+						<div class="span-4">
+							<img src="${album/thumbnailurl}" />
+							<dl>
+								<dt>Year</dt>
+								<dd>${album/owner/preferences/year}</dd>
+								<dt>Quantity of images</dt>
+								<dd>${album/numimages}</dd>
+								<dt>Views</dt>
+								<dd>${album/numviews}</dd>								
+							</dl>
+						</div>
+						<div>
+							<div>
+								<p class="created">${formatdate:album/created}</p>
+								<h3 class="top">${album/title}</h3>
+							</div>
+							<div>
+								<div class="maininfo">
+									<p>${album/descriptionraw}</p>
+								</div>
+								<div class="functions">
+									<a class="button">Share</a>
+									<a class="button">Delete</a>
+									<a class="button">Open</a>
+								</div>
+							</div>
+							<table class="prepend-top hide">
+								<tr><th>Shared</th><td>${album/isshared}</td></tr>
+								<tr><th>Public link</th><td>${album/sharingurl}</td></tr>
+								<tr><th>gallery link</th><td>${album/galleryurl}</td></tr>
+								<tal:block tal:condition="album/isshared">
+									<tr><th>Shared with link</th><td>${album/shared/link}</td></tr>
+									<tr><th>Using password</th><td>${album/shared/password}</td></tr>
+									<tr><th>Public</th><td>${album/shared/public}</td></tr>
+									<tr><th>Groups</th><td>${album/shared/groups}</td></tr>
+									<tr><th>Friends</th><td>${album/shared/friends}</td></tr>
+								</tal:block>
+								<tr><th>Others can purchase</th><td>${album/owner/preferences/purchase}</td></tr>
+								<tr><th>Others can download</th><td>${album/owner/preferences/download}</td></tr>
+							</table>
+						</div>
+						<hr class="clear clearfix" />
+					</li>
+				</tal:block>
+			</ul>
+		</tal:block>		
+	</tal:block>
+</tal:block>
+
+<tal:block metal:define-macro="albums-by-year">
+	<tal:block tal:repeat="year years">
+		<div class="albumYearCollection" rel="${year/year}">
+			<h2 class="year" title="Click to select or deselect all the albums in this year.">
+				<span class="year">${year/year} </span>
+				<small class="quiet">(<span class="quantity">${year/albums/length}</span> albums)</small>
+			</h2>
+			<div class="account-content-box">
+				<tal:block tal:define="global albums year/albums" />
+				<tal:block metal:use-macro="albums" tal:condition="exists:albums"/>
+			</div>
+		</div>
+	</tal:block>
+</tal:block>
+
+<tal:block metal:define-macro="albumdata">
+	<script type="text/javascript">
+		$('#albumid_${album/id}').data('id', '${album/id}');
+		$('#albumid_${album/id}').data('title', '${album/title}');
+		$('#albumid_${album/id}').data('numimages', '${album/numimages}');
+		$('#albumid_${album/id}').data('thumbnail', '${album/thumbnailurl}');
+	</script>
+</tal:block>
+
+
+<!-- SKIMMER -->
+<tal:block metal:define-macro="skimmer">
+	<div class="skimmer">
+
+		<input class="checkbox hide" type="checkbox" id="checkbox_${album/id}" />
+		
+		<a href="/account/albums/album/#${album/id}/${album/urlname}" title="${album/title}" class="album">
+			
+			<img src="${album/thumbnailurl}" alt="${album/title}" tal:condition="album/thumbnailurl" />
+			<img src="${static:images/static/thumbs/width/95/gfx/404/no_images.jpg}" tal:condition="not:album/thumbnailurl" alt="No preview image" i18n:attributes="alt"/>
+		</a>
+
+		<tal:block tal:condition="exists:userpreferences/skimmer">
+			<tal:block tal:condition="equal:userpreferences/skimmer,true">
+				<ul class="hide skimmerthumbnails" tal:condition="exists:album/defaultthumbnails">
+					<li tal:repeat="thumb album/defaultthumbnails">
+					
+						<tal:block tal:condition="thumb/thumbnail">
+							<a href="${thumb/thumbnail}" alt="${thumb/title}" class="landscape" tal:condition="gte:thumb/x,thumb/y,1"/>
+							<a href="${thumb/thumbnail}" alt="${thumb/title}" class="portrait" tal:condition="lt:thumb/x,thumb/y,1"/>
+						</tal:block>
+						
+						<a href="${static:images/static/thumbs/width/95/gfx/404/no_images.jpg}" class="landscape" alt="${thumb/title}" tal:condition="not:thumb/thumbnail" />
+						
+					</li>
+				</ul>
+			</tal:block>
+		</tal:block>
+
+		<div class="hide">
+			<tal:block metal:use-macro="facts" />
+		</div>
+	</div>
+
+</tal:block>
+
+<tal:block metal:define-macro="facts">
+
+	<div class="facts">
+		<h3 class="bottom title" tal:content="album/title"><tal:block i18n:translate="">This album has no title.</tal:block></h3>
+		<p class="top bottom" tal:content="album/descriptionraw" tal:condition="album/descriptionraw"></p>			
+		<table class="prepend-top">
+			<tr><th>Id</th><td>${album/id}</td></tr>
+			<tr><th>Created</th><td>${formatdate:album/created}</td></tr>
+			<tr><th>Views</th><td>${album/numviews}</td></tr>
+			<tr><th>Images</th><td class="numimages">${album/numimages}</td></tr>
+			<tr><th>Year</th><td>${album/owner/preferences/year}</td></tr>
+		</table>
+		
+		<div class="center" tal:condition="exists:userpreferences/dblclick">
+			<p tal:condition="equal:userpreferences/dblclick,true">Double click to open, and right click to open context menu</p>
+		</div>
+	</div>
+
+</tal:block>
+
+<tal:block metal:define-macro="album-accordion">
+	<div class="account-content-header">
+		<h3 class="">Albums</h3>
+	</div>
+	<div class="account-content-box accordion menu">
+		<div class="top">
+			<div class="smallbuttons">
+				<a class="open-menu" href="#choose-albumlist">My albums <span class="dropdown"/></a>
+				<a class="open-menu sorting" href="#sort-albumlist"> <span class="icon">Sorting</span> <span class="dropdown" /></a>
+			</div>
+			
+			<div class="functions albums hide span-4" id="choose-albumlist">
+				<div class="span-4 last">
+					<ul>
+						<li><a href="#my-albums">My Albums</a></li>
+						<li><a href="#friends-albums">Friends albums</a></li>
+						<li><a href="#my-shared-albums">My Shared albums</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="functions sort hide span-4" id="sort-albumlist">
+				<ul>
+					<li><a href="#sort-album-by-year-descending">Year</a></li>
+				</ul>
+				<hr/>
+				<ul>
+					<li><a href="#sort-album-by-title-ascending">Name (ascending)</a></li>
+					<li><a href="#sort-album-by-title-descending">Name (descending)</a></li>
+				</ul>
+				<hr/>
+				<ul>
+					<li><a href="#sort-album-by-date-ascending">Date (ascending)</a></li>
+					<li><a href="#sort-album-by-date-descending">Date (descending)</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="account-content-box accordion scrollable" id="album-accordion-container">
+		<div class="loader">
+			<img src="${static:gfx/gui/ajax-loader-big.gif}" class="loader" />
+		</div>
+		<ul id="album-accordion-list" class="accordion-list" />
+	</div>
+		<div class="right">
+			<a href="#new-album" class="function small" i18n:translate="">Create new album</a>
+		</div>
+
+</tal:block>
+
+<!-- Context menus -->
+
+<tal:block metal:define-macro="albumContextMenu"> <!-- Album -->
+	<ul id="albumContextMenu" class="contextMenu">
+		<li class="open">
+			<a href="#open" i18n:translate="">Open album</a>
+		</li>
+		<li class="addToCollection">
+			<a href="#addToCollection" i18n:translate="">Add to collection</a>
+		</li>
+		<li class="select separator">
+			<a href="#select" i18n:translate="">Select / deselect</a>
+		</li>
+		<li class="photofunia">
+			<a href="#edit" i18n:translate="">Preferences</a>
+		</li>
+		<li class="share">
+			<a href="#share" i18n:translate="">Share album</a>
+		</li>
+		<li class="download">
+			<a href="#download" i18n:translate="">Download</a>
+		</li>
+		<li class="delete separator">
+			<a href="#delete" i18n:translate="">Delete</a>
+		</li>
+	</ul>
+</tal:block>
+
+<tal:block metal:define-macro="imageContextMenu"> <!-- Image -->
+	<ul id="imageContextMenu" class="contextMenu">
+		<li class="open">
+			<a href="#open" i18n:translate="">Open image</a>
+		</li>
+		<li class="addToCollection">
+			<a href="#addToCollection" i18n:translate="">Add to collection</a>
+		</li>
+
+		<li class="edit separator">
+			<a href="#photofunia" i18n:translate="">Photofun</a>
+		</li>
+		
+		<li class="edit separator">
+			<a href="#effect" i18n:translate="">Effect</a>
+		</li>
+		
+		<li class="postToBlog separator">
+			<a href="#postToBlog" i18n:translate="">Post to blog</a>
+		</li>
+
+		<li class="download">
+			<a href="#downloadImage" i18n:translate="">Download</a>
+		</li>
+		<li class="rotate clockwise seperator">
+			<a href="#rotate-image-clockwise" i18n:translate="">Rotate clockwise</a>
+		</li>
+		<li class="rotate counterclockwise">
+			<a href="#rotate-image-counterclockwise" i18n:translate="">Rotate counterclockwise</a>
+		</li>
+
+		<li class="select separator">
+			<a href="#select" i18n:translate="">Select / Deselect</a>
+		</li>
+		<li class="move">
+			<a href="#move" i18n:translate="">Move</a>
+		</li>
+		
+		<li class="delete separator">
+			<a href="#delete" i18n:translate="">Delete</a>
+		</li>
+		<li class="quit separator">
+			<a href="#setDefaultImage" i18n:translate="">Set as default image</a>
+		</li>
+	</ul>
+</tal:block>
+
+<tal:block metal:define-macro="oneImageContextMenu"> <!-- One image -->
+	<ul id="imageContextMenu" class="contextMenu">
+		<li class="open">
+			<a href="#open" i18n:translate="">Open image</a>
+		</li>
+		<li class="addToCollection">
+			<a href="#addToCollection" i18n:translate="">Add to collection</a>
+		</li>
+
+		<li class="edit separator">
+			<a href="#photofunia" i18n:translate="">Photofun</a>
+		</li>
+		<li class="download">
+			<a href="#downloadImage" i18n:translate="">Download</a>
+		</li>
+
+		<li class="move">
+			<a href="#move" i18n:translate="">Move</a>
+		</li>
+		
+		<li class="delete separator">
+			<a href="#delete" i18n:translate="">Delete</a>
+		</li>
+		<li class="quit separator">
+			<a href="#setDefaultImage" i18n:translate="">Set as default image</a>
+		</li>
+	</ul>
+</tal:block>

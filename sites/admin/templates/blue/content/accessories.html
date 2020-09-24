@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Template</title>
+<tal:block metal:use-macro="../common.html/css" />
+<script type="text/javascript" src="/js/admin.js"></script>
+<style type="text/css">
+	a.red { color: #c00 }
+</style>
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+
+		<tal:block metal:use-macro="../common.html/languages" />
+			
+		<div id="content" class="span-20">
+			
+			<div class="span-10">
+				<h3>
+					<tal:block i18n:translate="">Product Accessories</tal:block>
+				</h3>
+				
+				<tal:block tal:repeat="accessory accessories/products">
+				<h4 class="bottom">
+					<tal:block  tal:content="accessory/product/title">Product title</tal:block>
+					<small class="quiet functions">
+						<a href="/content/products/${accessory/product/id}" i18n:translate="">Edit product</a>
+						<a href="http://eurofoto.no${accessory/product/url}" i18n:translate="">Open product</a>
+					</small>
+				</h4>
+				<ol class="quiet">
+					<li tal:repeat="entity accessory/options">
+						<tal:block tal:condition="entity/product">
+   					   <tal:block tal:content="entity/product/title" />
+						</tal:block>
+						<tal:block tal:condition="not:entity/product" i18n:translate="">
+						   No accessory selected
+						</tal:block>
+						(
+   						<span tal:condition="entity/minquantity"><abbr title="greater than or equal">&ge;</abbr>${entity/minquantity}</span>
+   						<span tal:condition="entity/maxquantity"><abbr title="less than or equal">&le;</abbr>${entity/maxquantity}</span>
+   						<span tal:condition="entity/onlyoption">${entity/onlyoption/title}</span>
+						)
+						<span class="small functions">
+							<a href="/content/products/${entity/product/id}" i18n:translate="">Edit product</a> | 
+							<a href="/content/accessories/${entity/id}/" i18n:translate="">Edit</a> |
+							<a href="http://eurofoto.no${entity/product/url}" i18n:translate="">Open product</a> |
+							<a href="/content/accessories/delete/${entity/id}/" i18n:translate="" class="red">Delete</a>
+						</span>
+					</li>
+				</ol>
+				</tal:block>
+				<a class="button large" href="/content/accessories/0" i18n:translate="">+ New Accessory</a>
+			</div>
+			
+			<div class="span-10 last">
+				<h3>
+					<tal:block i18n:translate="">Common Accessories</tal:block>
+				</h3>
+				
+				<ol class="">
+					<li tal:repeat="entity accessories/common">
+						<tal:block tal:condition="entity/product">
+							<tal:block tal:content="entity/product/title" />
+						</tal:block>
+						<tal:block tal:condition="not:entity/product" i18n:translate="">
+						   No accessory selected
+						</tal:block>
+						<span class="small functions">
+							<a href="/content/products/${entity/product/id}" i18n:translate="">Edit product</a> | 
+							<a href="/content/accessories/${entity/id}/" i18n:translate="">Edit</a> |
+							<a href="http://eurofoto.no${entity/product/url}" i18n:translate="">Open product</a> |
+							<a class="red" href="/content/accessories/delete/${entity/id}/" i18n:translate="">Delete</a>
+						</span>
+					</li>
+				</ol>
+				
+				<a class="button large" href="/content/accessories/0" i18n:translate="">+ New Accessory</a>
+			
+			</div>
+		</div>
+		
+		<tal:block metal:use-macro="common.html/content-menu" />
+		<div id="footer" />
+	</div>
+	<script type="text/javascript">
+		$(document).ready( function() {
+			
+			$('.functions').css('opacity', 0.4);
+			
+			$('.functions').hover( function() {
+				$(this).animate({'opacity': 1}, 'fast');
+			}, function() {
+				$(this).animate({'opacity': 0.4}, 'fast');
+			});
+		
+		});
+	</script>
+</body>
+</html>

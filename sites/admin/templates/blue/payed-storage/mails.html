@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Payed Storage</title>
+<tal:block metal:use-macro="../common.html/css" />
+<script type="text/javascript" src="/js/admin.js"></script>
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+
+		<tal:block metal:use-macro="../common.html/languages" />
+			
+		<div id="content" class="span-20">
+			
+				<div class="span-10">
+				<h3>
+					<tal:block i18n:translate="">Mails</tal:block>
+				</h3>
+				<table style="width:800px;">
+				  <tr>
+				     <th>
+				        #id
+				     </th>
+				     <th>
+				        Sender
+				     </th>
+				     <th>
+				        Subject
+				     </th>
+				     <th>
+				        <nobr>Promotion text</nobr>
+				     </th>
+				     <th>
+				        template
+				     </th>
+				     <th>
+				     </th>
+				  </tr>
+				  <tal:block tal:condition="exists:mails">
+				  <tr tal:repeat="mail mails">
+				     <td tal:content="mail/id">...</td>
+				     <td tal:content="mail/sender">...</td>
+				     <td tal:content="mail/subject">...</td>
+				     <td tal:content="mail/promotion_text">...</td>
+				     <td tal:content="mail/template">...</td>
+				     <td>
+				        <a href="/payed-storage/mail/${mail/id}/">Edit</a>
+				     </td>
+				  </tr>
+				  </tal:block>
+				</table>
+				<br />
+				<a href="/payed-storage">Back</a>
+				<!--<a class="button large" href="/content/products/0">+ New product</a>-->
+			</div>
+		</div>
+		
+		<!--<tal:block metal:use-macro="../common.html/content-menu" />-->
+		<div id="footer" />
+	</div>
+</body>
+</html>

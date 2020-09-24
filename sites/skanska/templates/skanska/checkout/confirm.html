@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <div metal:use-macro="../common.html/head" />
+        <div metal:use-macro="../common.html/javascript" />
+        <style>
+            
+		.kjopforsiden {
+			position: absolute;
+			top: -5px;
+			left: 20px;
+		}
+
+		html body table thead th {
+			color: #FFF;
+			background: #0278c9;
+			border: none;
+		}
+
+		table {
+			border: 1px solid #eee;
+			width: 100%;
+		}
+
+		table tr {
+			border-collapse: collapse;
+		}
+
+		table tr.connected-from-prev {
+			border-top: none;
+		}
+
+		table tr.connected-from-prev td {
+			border-top: none;
+		}
+
+		table td,
+		table th {
+			border-left: 1px solid #eee;
+			border-bottom: 1px solid #eee;
+			padding: 0.2em 5px;
+			text-transform: uppercase;
+		}
+
+		table th {
+			border-left: none;
+			text-align: left;
+			padding-left: 5px;
+		}
+
+		table tfoot td {
+			border: none;
+		}
+
+		td.status {
+			border-left: none;
+		}
+
+		div.box {
+			background-color: #f6f6f6;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			-moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
+			box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+			-webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+			-moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+		}
+
+		.box {
+			padding: 1em;
+			margin: 1.5em;
+			background: #0278c9;
+		}
+
+		.confirminfo {
+			padding-top: 2em;
+		}
+
+		td {
+			color: #002945;
+			font-family: skanska;
+		}
+
+            
+        </style>
+    </head>
+    
+
+    <body>
+        <tal:block metal:use-macro="/../common.html/header" />
+                <div class="container">
+  <div class="content">
+	
+        <div class="col-md-12 last confirminfo" style="">
+			<h3 i18n:translate="">Please confirm that your order is correct.</h3>
+		</div>
+        <!--<form action="/checkout/complete/" method="post">-->
+                <form action="/checkout/execute/" method="post">
+	
+		<div class="col-md-12" style="margin-bottom: 35px">
+		<table tal:condition="cart/deliveryinfo" style="background: #fff">
+		    <thead>
+		     <tr>
+			<th>
+			   Leveringsadresse
+			</th>
+		     </tr>
+		    </thead>
+		    <tbody>
+		     <tr>
+			<td style="text-align: left;"> 
+			   ${cart/deliveryinfo/name}<br/>
+				    ${cart/deliveryinfo/address}<br/>
+				    ${cart/deliveryinfo/zipcode} ${cart/deliveryinfo/city}<br/>
+			</td>
+		     </tr>
+		    
+		    </tbody>
+		</table>
+			
+            <table tal:condition="cart/items" style="background: #fff">
+			<thead>
+				<tr>
+					<th i18n:translate="">Product</th>
+					<th></th>
+					<th i18n:translate="">Quantity</th>
+					<th i18n:translate="">Price</th>
+					<th i18n:translate="">Sum</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+
+				
+				<!-- Gifts -->
+				<tal:block tal:condition="exists: cart/items/gifts">
+					<tal:block tal:repeat="products cart/items/gifts">
+						<tal:block tal:repeat="gift products">
+						<tr>
+							<td>
+								<tal:block tal:content="gift/product/title">Product</tal:block>
+							</td>
+							<td>
+								
+							</td>
+							<td>
+								<span tal:content="gift/quantity"/> 
+							</td>
+							<td class="unitprice" tal:content="formatprice:gift/unitprice">Price</td>
+							<td class="price" tal:content="formatprice:gift/price">Sum</td>
+						</tr>
+						
+			         <tal:block tal:condition="exists:gift/redeyeremoval">
+						<tr>
+							<td colspan="2" tal:content="gift/redeyeremoval/product/title"></td>
+							<td tal:content="gift/redeyeremoval/quantity"></td>
+							<td class="unitprice" tal:content="formatprice:gift/redeyeremoval/price"></td>
+							<td class="price" tal:content="formatprice:gift/redeyeremoval/price"></td>
+						</tr>
+						</tal:block>
+						
+						<tal:block tal:condition="exists:gift/varnish">
+						<tr>
+							<td colspan="2" tal:content="gift/varnish/product/title"></td>
+							<td tal:content="gift/varnish/quantity"></td>
+							<td class="unitprice" tal:content="formatprice:gift/varnish/unitprice"></td>
+							<td class="price" tal:content="formatprice:gift/varnish/price"></td>
+						</tr>
+						</tal:block>
+						
+						<tal:block tal:condition="exists:gift/upgrade">
+						<tr>
+							<td colspan="2" tal:content="gift/upgrade/product/title"></td>
+							<td tal:content="gift/upgrade/quantity"></td>
+							<td class="unitprice" tal:content="formatprice:gift/upgrade/unitprice"></td>
+							<td class="price" tal:content="formatprice:gift/upgrade/price"></td>
+						</tr>
+						</tal:block>
+						
+						<tal:block tal:condition="exists:gift/license">
+						<tr tal:repeat="license gift/license">
+							<td>
+								<tal:block tal:condition="exists:license/product/title" tal:content="license/product/title">License</tal:block>
+							</td>
+							<td>
+								&nbsp;
+							</td>
+							<td>
+								<span class="quiet">1</span>
+							</td>
+							<!--<td class="unitprice" tal:content="formatprice:license/unitfee">Price</td>
+							<td class="price" tal:content="formatprice:license/totalfee">Sum</td>-->
+							<td class="removeItem">
+								&nbsp;
+							</td>
+						</tr>
+						</tal:block>
+						
+						</tal:block>
+					</tal:block>
+				</tal:block>
+				
+				
+				<!-- delivery and payment -->
+				<tal:block tal:condition="exists: cart/deliverytype">
+					
+				</tal:block>
+				
+				<tal:block tal:condition="exists: cart/paymenttype">
+					<tr tal:condition="exists: showpayment">
+						<td i18n:translate="">Payment method</td>
+						<td tal:content="cart/paymenttype/title"></td>
+						<td></td>
+						<td></td>
+						<td class="price" tal:content="formatprice:cart/paymenttype/price"></td>
+					</tr>
+				</tal:block>
+
+				
+				<!-- discount -->
+				<tal:block tal:condition="exists: cart/discount">
+					<tr class="discount" tal:condition="exists:cart/discount/final" tal:repeat="rebate cart/discount/final">
+						<td>
+							<span class="quiet" tal:content="cart/discount/info/name"></span><br />
+							<span tal:content="rebate/product/title"></span>
+						</td>
+						<td>
+						</td>
+						<td>
+							<span tal:content="rebate/quantity">1</span><br />
+						</td>
+						<td class="unitprice">-<tal:block tal:content="formatprice:rebate/unitdiscount" /></td>
+						<td class="price">-<tal:block tal:content="formatprice:rebate/totaldiscount" /></td>
+					</tr>
+				</tal:block>
+				
+				<!-- credits -->
+				<tal:block tal:condition="exists: cart/credits">
+				  <tal:block tal:condition="exists:cart/credits" tal:repeat="credit cart/credits">
+					<tr class="discount" tal:condition="exists:credit/usedquantity">
+						<td>
+							<span class="quiet" tal:content="credit/usertitle|default"><tal:block i18n:translate="">Free</tal:block></span><br />
+							<span tal:content="credit/product/title"></span>
+						</td>
+						<td>
+						</td>
+						<td>
+						   <span tal:content="credit/usedquantity">1</span><br />
+						</td>
+						<td class="unitprice"></td>
+						<td class="price">-<tal:block tal:content="formatprice:credit/usedprice" /></td>
+					</tr>
+				  </tal:block>
+				</tal:block>
+				
+				<!-- giftcard -->
+				<tal:block tal:condition="exists:cart/giftcard">
+				  <tal:block tal:condition="exists:cart/giftcard/usedvalue">
+					<tr class="discount" tal:condition="exists:cart/giftcard/usedvalue">
+						<td>
+							<span class="quiet" tal:content="cart/giftcard/description|default"><tal:block i18n:translate="">Giftcard</tal:block></span><br />
+							<span class="quiet">Rest value is </span><span class="quiet" tal:content="cart/giftcard/value"></span>
+						</td>
+						<td>
+						</td>
+						<td>
+						   <span>1</span><br />
+						</td>
+						<td class="unitprice"></td>
+						<td class="price">-<tal:block tal:content="formatprice:cart/giftcard/usedvalue" /></td>
+					</tr>
+				  </tal:block>
+				</tal:block>
+
+				<tr>
+					<td colspan="4" class="right">
+						<tal:block i18n:translate="">Total price</tal:block> 
+					</td>
+					<td class="total-price large">kr <span tal:content="formatprice:cart/totalprice" id="total-price">?</span></td>
+				</tr>
+			</tbody>
+		</table>
+
+	    </div>
+		<div class="col-med-10" style="">
+		  
+			
+			<div class="col-md-5 pull-right">
+			    <!--<a class="btn btn-stabburet" href="/stickers/checkout/bestilling/">Endre bestilling</a>-->
+			    <button class="btn btn-skanska" type="submit">Fullfør</button>
+			</div>
+		    
+		</div>
+		
+		<br/>
+	    </form>
+	</div>
+	</div>
+			
+<div metal:use-macro="../common.html/footer2" />
+
+<script type="text/javascript">
+
+		$(document).ready( function() {
+			
+		   $( '.call-to-action' ).click( function() {
+		      
+		      $('#loader-overlay')
+			   .css('opacity', '0.8')
+			   .css('margin','0')
+			   .css( 'visibility', 'visible' )
+			   .width( $(window).width() )
+			   .height( $(window).height() );
+			   
+		   });
+		   
+		   $('.refresh').click( function() {
+				window.location.reload();
+				return false;
+			});
+		   
+		});
+</script>
+
+
+</body>
+</html>

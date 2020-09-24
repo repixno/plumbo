@@ -1,0 +1,616 @@
+
+.dansklogo{
+  
+  margin-left: 10px;
+  
+}
+
+
+.text-center {
+  padding-top: 20px;
+}
+.col-xs-12 {
+  background-color: #fff;
+}
+#sidebar {
+  height: 100%;
+  padding-right: 0;
+  padding-top: 20px;
+}
+#sidebar .nav {
+  width: 95%;
+}
+#sidebar li {
+  border:0 #f2f2f2 solid;
+  border-bottom-width:1px;
+}
+
+/* collapsed sidebar styles */
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+  }
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%;
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -55%;
+  }
+  .row-offcanvas-right.active {
+    right: 50%;
+  }
+  .row-offcanvas-left.active {
+    left: 50%;
+  }
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 63%;
+  }
+  #sidebar {
+    padding-top:0;
+  }
+}
+
+
+
+
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 16px;
+  background: #fff;
+  background-size: 100%;
+}
+a{
+  color: #777;
+  text-decoration: none;
+}
+h2{
+  font-weight: bold;
+}
+
+.oldprice{
+  text-decoration: line-through;
+  color: #ccc;
+}
+
+
+input[type=radio], input[type=checkbox] {
+  margin: 5px 5px 0px 0px;
+  line-height: normal;
+}
+
+.mainlogo{
+  position: relative;
+  bottom: 15px;
+}
+
+.frontpage-box .col-md-3 {
+    cursor:pointer;
+}
+
+.changequantity{
+  padding: 5px 10px 4px 10px;
+  position: relative;
+  bottom: 2px;
+  font-weight: bold;
+}
+.quantity{
+  text-align: center;
+  width: 40px;
+}
+.hidden{
+  display: none;
+}
+.footer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.footer hr{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 0;
+  border-top: 1px solid #eee;
+}
+
+
+.right{
+  text-align: right !important;
+}
+.center{
+  text-align: center !important;
+}
+.prepend-top { margin-top:20px; }
+.btn-default:hover, .btn-standard:hover{
+  background: #474747;
+  color:#fff;
+}
+.btn-default, .btn-standard{
+  background: #313031;
+  color: #fff;
+   border-radius: 0px;
+}
+.btn-lg, .btn-group-lg>.btn {
+  padding: 2px 14px;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.33;
+  border-radius: 0px;
+  min-width: 140px;
+  text-transform: uppercase;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  background-color: transparent;
+}
+.jumbotron .btn {
+  padding: 14px 24px;
+  font-size: 21px;
+}
+
+.navbar-default {
+  background-color: #f2f2f2;
+  border-color: #e7e7e7;
+}
+
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border-top: solid 1px #ced4d4;
+  border-bottom: solid 1px #ced4d4;
+  border-left: none;
+  border-right: none;
+}
+
+.frontpagemain{
+  margin-right: -15px;
+  margin-left: 0px;
+  margin-bottom: 15px;
+}
+.header-top-right{
+  position: absolute;
+  right: 15px;
+  top: -10px;
+  width: 440px;
+  text-align: right;
+}
+
+label[for="maskit"]{
+  display: inline;
+}
+
+/* Customize the nav-justified links to be fill the entire space of the .navbar */
+
+.nav-justified {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+}
+.nav-justified > li > a {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 0;
+  font-weight: bold;
+  color: #777;
+  text-align: center;
+  background-color: #e5e5e5; /* Old browsers */
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#e5e5e5));
+  background-image: -webkit-linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%);
+  background-image:      -o-linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(top), color-stop(0%, #f5f5f5), to(#e5e5e5));
+  background-image:         linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+  background-repeat: repeat-x; /* Repeat the gradient */
+  border-bottom: 1px solid #d5d5d5;
+}
+.nav-justified > .active > a,
+.nav-justified > .active > a:hover,
+.nav-justified > .active > a:focus {
+  background-color: #ddd;
+  background-image: none;
+  -webkit-box-shadow: inset 0 3px 7px rgba(0,0,0,.15);
+          box-shadow: inset 0 3px 7px rgba(0,0,0,.15);
+}
+.nav-justified > li:first-child > a {
+  border-radius: 0px 0px 0 0;
+}
+.nav-justified > li:last-child > a {
+  border-bottom: 0;
+  border-radius: 0 0 0px 0px;
+}
+.productpage  .col-sm-3, .mainproductbox .productbody{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.productpage h2{
+  background: #f2f2f2;
+  padding: 4px 0 4px 20px;
+  margin-top: 50px;
+  text-transform: uppercase;
+}
+
+.productinfo .content{
+  background: #f2f2f2;
+}
+.productinfo .imagebox{
+  float: left;
+}
+.productinfo .description{
+  margin: 5px;
+}
+
+
+.productbox .productbody,.mainproductbox .header {
+    border: solid 1px #e7e7e7;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 5px 15px 15px 15px;
+}
+
+.productbox .header, .mainproductbox .header{
+    background: #f2f2f2;
+    border-top: solid 1px #e7e7e7;
+    border-bottom: solid 1px #e7e7e7;
+    padding: 5px 5px 5px 5px;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+
+div.galleri-insp{
+  position: relative;
+  width: 80%;
+  height: 140px;
+  background: #f2f2f2;
+  padding: 15px;
+  font-size: 1.2em;
+}
+div.galleri-insp a{
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+}
+
+
+div.editorbox{
+  border: solid 1px #ccc;
+  padding: 15px 0 15px 15px;
+  background-image: url("gfx/editorbackground.jpg");
+  background-color: #cccccc;
+  min-height: 650px;
+  min-width: 735px;
+}
+
+@media (min-width: 768px) {  
+  #associatedproducts p{
+    min-height: 66px;
+  }
+  #associatedproducts .productbody{
+    min-height: 370px;
+  }
+  
+  .productbody .bottom{
+     min-height: 40px;
+  }
+  
+  .nav-justified {
+    max-height: 52px;
+  }
+  .nav-justified > li > a {
+    border-right: 1px solid #d5d5d5;
+    border-left: 1px solid #fff;
+  }
+  .nav-justified > li:first-child > a {
+    border-left: 0;
+    border-radius: 0px 0 0 0px;
+  }
+  .nav-justified > li:last-child > a {
+    border-right: 0;
+    border-radius: 0 0px 0px 0;
+  }
+}
+  .navbar-nav-main>li>a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    margin-top: 10px;
+    border-right: solid 1px #999;
+    font-size: 18px;
+  }
+  
+  .navbar-nav-main>li:last-child>a {
+    border-right: none;
+  } 
+  
+  .frontpage-top-left{
+    background: #f4f4f4;
+  }
+  .frontpage-top-left>ul>li>a{
+    color: #000;
+    font-weight: bold;
+  }
+  .frontpage-top-left>ul>li{
+    padding-top: 5px;
+  }
+  
+  .frontpage-top-left ul{
+    list-style-image: url(gfx/menubullet.png);
+    position: relative;
+    right: 20px;
+  }
+  
+  .frontpage-box .header{
+    color: #fff;
+    padding: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+  .frontpage-box>div{ margin-bottom: 10px;}
+  .frontpage-box p{padding: 5px 5px 0 10px; min-height: 160px;}
+  .frontpage-box img{ width: 100%; }
+  .frontpage-box>.green>.header{background: #b8c4b7;}
+  .frontpage-box>.green>.main{background: #dbe1db;}
+  .frontpage-box>.orange>.header{background: #f3bca0;}
+  .frontpage-box>.orange>.main{background: #f9ddd0;}
+  .frontpage-box>.blue>.header{background: #94a8b6;}
+  .frontpage-box>.blue>.main{background: #c9d3da;}
+  .frontpage-box>.grey>.header{background: #bcbcbc;}
+  .frontpage-box>.grey>.main{background: #dddddd;}
+  
+  .sitat{
+    font-family: 'Just Another Hand', cursive;
+    font-size: 1.6em;
+  }
+  .messagebox{
+      border: solid 1px #ccc;
+      padding: 10px;
+      width: 100%;
+      
+  }
+  .messagebox div{
+      margin: 5px;
+  }
+  
+  .messagebox label{
+      vertical-align: top;
+  }
+  
+  .messagebox label{
+      width: 20%;
+  }
+  .messagebox input{
+      width: 75%;
+  }
+  .messagebox textarea{
+      width: 75%;
+  }
+  
+  .logininfo span{
+    margin-left: 5px;
+  }
+  
+  #shopping-cart{
+    border:solid 2px #c8c7c8;
+    padding: 8px 15px 0px 15px;
+  }
+  #shopping-cart p{
+    margin: 5px 35px 15px 5px;
+  }
+  .productpage div.productbox{
+    border: solid 1px #c8c7c8; 
+  }
+  div.productbox h5{
+    font-size: 17px;
+  }
+  
+  .productcategories {
+    margin-bottom: 50px;
+  }
+  
+  @media screen and (min-width: 993px) {
+    
+    .productpage div.productbox{
+      width: 19%;
+      min-height: 320px;
+      margin-right: 10px;
+    }
+    
+    .productcategories div.productbox{
+      width: 20%;
+      padding-right: 0px;
+      padding-left: 0px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    div.productbox .bottom{
+      min-height: 40px;
+
+    }
+    
+    div.productbox:last-child {
+      margin-right: 0px;
+    }
+    
+    div.mainproductbox{
+      min-height: 430px;
+    }
+    
+  }
+  
+  @media screen and (max-width: 767px) {
+
+    div.editorbox {
+    min-height: 480px;
+    min-width: 600px;
+    }
+    
+    .navbar-nav-main>li>a {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      margin-top: 10px;
+      border-right: solid 1px #999;
+      font-size: 18px!important;
+    }
+    
+    .frontpagemain{
+      margin-top: 14px;
+    }
+    
+    .payoff{
+      font-family: 'Just Another Hand', cursive;
+      font-size: 1.6em;
+      position: absolute;
+      top: 41px;
+      left: 13px;
+      z-index: 200;
+    }
+    
+    .newsletter{
+      text-align: center;
+    }
+    .newsletter input{
+      margin-bottom: 10px;
+      width: 90%;
+    }
+    .newsletter form{
+      text-align: center;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .row{
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+    div.pructinfoboxes{
+      margin-top: 40px;
+    }
+    div.pructinfoboxes > div{
+      min-height: 120px;
+    }
+    div.pructinfoboxes > .col-md-1{
+      width: 30%;
+      padding-right: 20px;
+      float: left;
+    }
+    div.pructinfoboxes > .col-md-2,div.pructinfoboxes > .col-md-4{
+      width: 70%;
+      padding-right: 20px;
+      float: left;
+    }
+    .galleri-insp{
+      width: 100%!important;
+    }
+   .navbar-default {
+      position: absolute;
+      z-index: 100;
+      top: 0px;
+      width: 100%;
+    }
+    .frontpage-box p {
+    padding: 5px 5px 0 10px;
+    min-height: 60px;
+    }
+    .container{
+      padding: 0;
+      margin-top: 40px;
+    }
+    div.productbox{
+        width: 100%;
+        margin-left: 0px;
+        text-align: center;
+        padding-bottom: 10px;
+        padding-top: 5px;
+        margin-bottom: 10px;
+        border: solid 1px #ccc;
+    }
+    .rotating{
+      position: relative;
+      height: 196px;
+    }
+    .sitat{
+      font-size: 1.4em;
+    }
+      
+  }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+      div.productbox{
+          width: 50%;
+          min-height: 310px;
+          margin-left: 0px;
+      }
+      .navbar-nav{
+        margin: 0px -20px!important;
+      }
+      .navbar-nav>li>a{
+        padding: 5px 5px!important;
+        font-size: 14px!important;
+      }
+  }
+  
+  @media screen and (max-width: 992px) {
+      .navbar-nav>li>a {
+        font-size: 15px;
+      }
+      .header-top-right{
+        position: relative;
+        margin-left: 15px;
+        width: 100%;
+      }
+      
+  }
+  
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */  
+  .masthead,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .newsletter input{
+    width: 30%;
+  }
+  .frontpage-top-left{
+    min-height: 416px
+  }
+
+  .frontpage-box .col-md-3{
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+  ul.navbar-right>li>a {
+    padding: 8px 0 0 8px ; 
+  }
+  
+  .navbar {
+    border-radius: 0px;
+  }
+  
+  .rotating{
+      position: relative;
+      height: 116px;
+    }
+}

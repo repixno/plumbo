@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+   <head>
+	  <tal metal:use-macro="../../${templates}/common.html/head" />
+     <tal:block metal:use-macro="./common.html/scripts" />
+	  <tal:block metal:use-macro="./common.html/css" />
+     <STYLE type="text/css">
+      
+      .editorcontainer{
+         background-color:#000;
+         position: relative;
+         border: solid 1px;
+         height: 500px;
+         width: 650px;
+      }
+
+      .imageplaceholder{
+         position: relative;
+         background-color:${ukeplantemplates/1/backgroundcolor};
+         border: solid 1px;
+         float: left;
+         overflow: hidden;
+         margin-left: 2px;
+      }
+      .gridplaceholder{
+         position: absolute;
+         background-color:${ukeplantemplates/1/backgroundcolor};
+         width: 617px;
+         float: left;
+         overflow: hidden;
+         margin-left: 0px;
+         left: 44px; 
+         top: 168px;
+      }
+
+      table.grid{
+         float:left;
+         border-top-width: 0px;
+         border-right-width: 0px;
+         border-bottom-width: 1px;
+         border-left-width: 0px;
+      	border-style: solid;
+      	border-color: gray;
+      	background-color: black;
+      	margin-bottom: 0em;
+      }
+      
+      table.grid td {
+      	border-top-width: 1px;
+         border-right-width: 1px;
+         border-bottom-width: 0px;
+         border-left-width: 1px;
+      	border-style: solid;
+      	border-color: gray;
+      	background-color: ${ukeplantemplates/1/backgroundcolor};
+      	
+      }
+      div.textplaceholder{
+         position: absolute;
+         left:0px;
+         width: 36px;
+         top: 167px;
+      }
+      
+      img.imagetext{
+         position: relative;
+         width:0px;
+         top: 1px;
+         left: -1px;
+         z-index: 200;
+      
+      }
+      div.edittext, div.edittoptext{
+         padding: 5px;
+         position: absolute;
+         background-color: ${ukeplantemplates/1/backgroundcolor};
+         top: 1px;
+         left: 1px;
+         z-index: 2210;
+      }
+     </STYLE>
+   
+   </head>
+
+
+<body>
+<div metal:use-macro="../../${templates}/common.html/top" />
+	<div class="container main" style="height: 1300px">
+
+	
+	<div class="span-24 last "><strong>${selected/product/title}</strong></div>
+	
+	<div class="span-5"> <strong style="color:#CB1C61">Layout:</strong><br/>
+	  <!--<p><a href="#" class="button" id="new_column">Ny kolonne</a></p>
+	  <p><a href="#" class="button" id="remove_column">Slett kolonne</a></p>-->
+
+	  <form id="order_ukeplan">
+	  
+	     <tal:block metal:use-macro="./common.html/column-options" />
+	     <br/>
+       <tal:block metal:use-macro="./common.html/image-options" /><br/>
+        <strong style="color:#CB1C61">Tekst:</strong><br/>
+         <input type="checkbox" name="names" value="names"/><label i18n:translate="">Name over each column:</label><br />
+        
+         <div class="textchoices hide">
+	    <select class="hide" name="text-color" id="text-color">
+	       <option value="${ukeplantemplates/1/textcolor}" >${ukeplantemplates/1/textcolor}</option>
+	    </select>
+            <label for="namefonts">Velg Font:</label>
+            <tal:block metal:use-macro="./common.html/font-options" />
+         
+         </div>
+        <br/>
+	     
+	     <input type="hidden" value="${selected/product/id}" name="productid" id="productid" />
+	     <input type="hidden" value="${selected/productoptionid}" name="productoptionid" id="productoptionid" />
+	     
+	     <strong style="color:#CB1C61" i18n:translate="">Grid:</strong><br/>
+	     <input type="checkbox" name="clipart" value="dinner"/>Middagskolonne<br/> 
+	
+	     <input type="hidden" name="color" id="color" value="${ukeplantemplates/1/textcolor}" />
+
+        <input type="hidden" name="day-color" id="day-color" value="${ukeplantemplates/1/textcolor}" />
+        <input type="hidden" name="day-color-background" id="day-color-background" value="${ukeplantemplates/1/backgroundcolor}" />
+         
+         <p/>
+         
+	     <input type="hidden" value="1" name="quantity" id="quantity" />
+	     <input type="hidden" name="project_id"  value="" id="project_id" />
+	     <div id="produksjonsvalg">
+   	     <strong>Produksjonsvalg:</strong><br/>
+   	     <input type="checkbox" name="maskit" id="maskit" value="true"/><label for="maskit" i18n:translate="">I want to use a graphic designer</label>
+   	     <span class="quiet small">(Kr <span id="maskit-price"></span>) </span><a href='' class="maskittip help">info</a>
+	     </div>
+	     <p class="right">
+	     <br/>
+	        <button i18n:translate="" class="large">Legg i handlekurv</button>
+	     </p>
+	     
+ 
+	  </form>
+	</div>
+	
+	<div class="span-19 last" >
+   	  <div class="span-19 last">
+   	     <div class="editorcontainer">
+   	        <div class="imageandtextplaceholder">
+   	              <div class="imagecontainer">
+   	                 <div class="imageplaceholder center lastholder"></div>
+   	              </div>
+   	           <div class="namescontainer"/>
+   	        </div>
+   	        <div class="textplaceholder">
+
+   	        </div>
+   	        <div class="gridplaceholder">
+   	        <div>
+   	        <TABLE class="grid current-grid" height="500px">
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	        
+   	        
+   	        </TABLE>
+   	        
+   	        </div>
+   	        <!--<div class="logo right"><img src="http://eurofoto.no/images/attachments/thumbs/height/10/2867/logo.png"/></div>-->
+   	        
+   	        </div>
+   	     </div>
+   	     
+   	  </div>
+   	
+	</div>
+
+   <tal:block metal:use-macro="./common.html/imagecropbox" />
+	</div>
+	
+	<div id="imageselect" class="selectimage hide">
+		<div class='span-5'>
+		<p>
+		 <strong>Hent tidligere opplastet bilde:</strong> 
+		 <tal:block tal:condition="session/loggedin">
+         <a class="small center button choose-image" href="#" i18n:translate="">Get image</a>
+         </tal:block>
+         <tal:block tal:condition="not:session/loggedin">
+         <a class="button center" id="openLoginDialog" href="/login/" i18n:translate="">Login and get image from your account</a>
+         </tal:block>				
+      </p>
+       <p>
+         <strong>Hent bilde fra din datamaskin:</strong>
+         <iframe class="uploadframe" src="/upload/iframe/0/inlineImageUploadCallback" height="60" width="220" scrolling="no"/>
+         <div class="hide iOs">
+         <a href="/myaccount/upload?ref=L2NyZWF0ZS9lbmxhcmdlbWVudHM=" i18n:translate="" class="button large green" id="transfer_photos">Transfer photos</a><p/>
+         <div class="quiet" id="appinfo"><tal:block i18n:translate="">You need</tal:block> <a href="http://itunes.apple.com/us/app/aurigma-up/id432611633">Arigma Up</a> <tal:block i18n:translate="">to be able to upload images from your iPad/iPhone</tal:block><p/></div>
+         </div>
+      </p>
+		</div>
+		<div class="span-5">
+		<p><strong>Rediger bilde</strong> 
+		<button class="button" id="cropbutton" type="button" disabled="disabled">Rediger bildet</button></p>
+		<p>
+		
+		 <!--<a class="button" href="#" id="clipart">Middagskolonne</a>-->
+		</p>
+		
+		
+		</div>
+
+	
+	</div>
+	<div id="imagePicker" title="Choose image" i18n:attributes="title" class="hide">
+   <div class="span-23 last">
+      <div class="span-6 column">
+         <h4 i18n:translate="">Choose album</h4><ul id="imagePickerAlbums" class="accordion-list albums"/>
+      </div>
+      <div class="span-17 column last">
+         <h4 i18n:translate="">Choose image</h4><ul id="imagePickerImages" class="accordion-list images"/>
+      </div>
+      </div>
+   </div>
+   <div id="loginDialog"  title="Login" i18n:attributes="title" class="hide">
+		<form action="/login/" method="post" id="login" class="reset">
+			<div class="clear">
+				<div>
+					<label for="email" i18n:translate="">Email</label><br />
+					<input type="text" class="title lowercase span-8" name="email" value=""/>
+				</div>
+			</div>
+			
+			<div class="clear">
+				<label for="pasword" i18n:translate="">Password</label><br />
+				<input type="password" class="title span-8" name="password" value="" style="margin-bottom:0"/>
+				<p class="clear top bottom">
+					<a href="/login/forgot-password/" i18n:translate="">Forgot password?</a>
+				</p>
+			</div>
+			
+			<div class="clear">
+				<input type="checkbox" id="autologin" name="autologin" /> 
+				<label for="autologin" i18n:translate="">Remember me next time</label>
+			</div>
+
+			<input type="hidden" name="referer" value="/${request/execpath}" />
+		</form>
+   </div>
+
+   
+   
+   <!--Help files -->
+   <!-- Backgrunn id 2867 -->
+   <div id="tip" class="hide" tal:content="structure cms:body:ddcbe2e0-b51f-4362-aa43-00b925123824" />
+   <!-- qualitytip id 2868-->
+   <div id="qualitytip" class="hide" tal:content="structure cms:body:d57b3af4-5c9b-40bf-91fd-0e015e59b89e" />
+   <!-- maskittip id 2873 -->
+   <div id="maskittip" class="hide" tal:content="structure cms:body:6c879a35-475a-4140-9ccd-be9ffe35a6e3" />
+   
+   <tal:block metal:use-macro="./common.html/confirmtip" />
+   
+
+<script type="text/javascript">
+   var portal = "${portal}";
+   var selectedcropbox = '';
+   var loader = '<img src="${static:gfx/gui/ajax-loader.gif}" class="loader" />';
+   var imagePickerLoaded = false;
+   var editorcontainer_width = 700;
+   var imagelayout = 'each';
+   var numberofcolumns = 4;
+   var imagefield_each = ${ukeplantemplates/1/imagefield_height};
+   var textimageheight = 20;
+   var clipartcolumn = false;
+   var toptext = "       Sett inn tekst       ";
+   var imageholderwidth = 0;
+   var gridholder = 0;
+   var bottommargin = 400;
+   var templatefile = '${selected/template/pages/0/fullsize_src}';
+   var backgroundcolor = '${ukeplantemplates/1/backgroundcolor}';
+   var originalimage = Object();
+   var numberofdays = 7;
+   var rotate = -90;
+   var gridarray = ['<tal:block i18n:translate="">Monday</tal:block>', '<tal:block i18n:translate="">Tuesday</tal:block>', '<tal:block i18n:translate="">Wednesday</tal:block>', '<tal:block i18n:translate="">Thursday</tal:block>', '<tal:block i18n:translate="">Friday</tal:block>', '<tal:block i18n:translate="">Saturday</tal:block>', '<tal:block i18n:translate="">Sunday</tal:block>'];
+   var accepttxt = '<tal:block i18n:translate="">Accept</tal:block>';
+   var canceltxt = '<tal:block i18n:translate="">Cancel</tal:block>';
+   
+   malArray = new Object();
+   malArray.mal_id = ${ukeplantemplates/1/id};
+   malArray.mal_width = ${ukeplantemplates/1/mal_width};
+   malArray.mal_height = ${ukeplantemplates/1/mal_height};
+   malArray.imagefield_height = imagefield_each;
+   malArray.imagefield_width = ${ukeplantemplates/1/imagefield_width};
+   malArray.imagefield_x = ${ukeplantemplates/1/imagefield_x};
+   malArray.imagefield_y = ${ukeplantemplates/1/imagefield_y};
+   malArray.imagefield_space = ${ukeplantemplates/1/imagefield_space};
+   malArray.prodno = ${selected/productoption/prodno};
+   var ratio = malArray.mal_width / editorcontainer_width;
+   
+   var imagefield_one  = ( ( malArray.mal_height - malArray.imagefield_x - bottommargin )  * 25) / 100;
+   //var gridheight = parseInt((malArray.mal_height - malArray.imagefield_height - ( malArray.imagefield_x * 2 )) / ratio ) - 40;
+   var gridheight = ( (malArray.mal_height - malArray.imagefield_height - malArray.imagefield_x  - bottommargin ) / ratio );
+   
+   if( portal == "VP-001" ){ 
+      var velgbilde = "${static:}gfx/portals/ukeplan/images/velgbilde${ukeplantemplates/1/velgbilde}_se.jpg";
+   }
+   else if( portal == "UP-DK" ){ 
+      var velgbilde = "${static:}gfx/portals/ukeplan/images/velgbilde${ukeplantemplates/1/velgbilde}_dk.jpg";
+   }
+   else{
+      var velgbilde = "${static:}gfx/portals/ukeplan/images/velgbilde${ukeplantemplates/1/velgbilde}.jpg";
+   }
+
+   var middagsbestikk = "${static:gfx/portals/ukeplan/clipart/middagsbestikk2.png}";
+   var acceptbutton = "<tal:block i18n:translate="">I accept</tal:block>";
+   var cancelbutton = "<tal:block i18n:translate="">Cancel</tal:block>";
+   var updatetextbutton = "<tal:block i18n:translate="">Update text</tal:block>";
+     
+</script>
+	
+	
+</body>
+</html>

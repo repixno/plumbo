@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">My photos</tal:block>
+
+</head>
+<body>
+<div class="container">
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+	<!--<div tal:define="global menuitem string:albums" metal:use-macro="../common.html/menu" />-->
+
+	<h2 i18n:translate="" class="center">My photos</h2>
+	
+	<div class="hide">
+		<a href="/myaccount/newalbum" i18n:translate="" class="new-album button large green">+ New album</a>
+	</div>
+	
+	<div id="content">
+		<tal:block metal:define-macro="inbox">
+		<tal:block tal:repeat="album albums">
+			<tal:block tal:condition="album">
+			<tal:block tal:condition="equal:repeat/album/number,1">
+			<tal:block tal:condition="equal:album/id,0">
+			<tal:block tal:condition="gt:album/numimages,0">
+			<div class="span-16 last">
+				<div class="box span-15 last inbox">
+					<div class="span-5">
+						<a href="">
+							<img src="${static:gfx/gui/inbox_160px.png}" width="160" height="111" id="inbox-image"/>
+						</a>
+					</div>
+					<div class="span-10 last">
+						<h3 i18n:translate="">You have <span i18n:name="numberofimages" tal:replace="album/numimages"/> images in your inbox</h3>
+						<p  i18n:translate="">You should move these images to an album</p>
+
+						<a href="${album/albumurl}" i18n:translate="">Go to your inbox</a>
+					</div>
+					<div class="span-15 clear clearfix last"></div>
+				</div>
+			</div>
+			</tal:block>
+			</tal:block>
+			</tal:block>
+			</tal:block>
+		</tal:block>
+		</tal:block>
+
+		<!--<tal:block metal:use-macro="inbox" />-->
+
+		<ul class="albums">
+			<tal:block tal:repeat="album albums">
+				<li id="sortid_${album/id}" tal:condition="album">
+					<a class="image" tal:attributes="href album/albumurl" title="${album/title} ({album/quantity})">
+						<img tal:attributes="src album/thumbnailurl; alt album/title" class="thumb" src="" tal:condition="album/thumbnailurl"/>
+						<img src="${static:gfx/404/not_found_80px.jpg}"class="thumb" tal:condition="not:album/thumbnailurl" alt="not found"/>
+					</a>
+					<a class="title"  tal:attributes="href album/albumurl" title="${album/title} ({album/quantity})" tal:content="shorten:album/title;15"></a>
+				</li>
+			</tal:block>
+		</ul>
+	</div>
+</div>
+<div class="footer">
+	<div class="container">
+		<!--<div metal:use-macro="../../../${templates}/common.html/footer" />-->
+	</div>
+</div>
+</body>
+</html>

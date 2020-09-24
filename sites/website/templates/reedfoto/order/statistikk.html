@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Manual orders</title>
+<tal metal:use-macro="../../${templates}/common.html/head" />
+
+<style>
+	
+	thead{
+		background: #eee;
+	}
+</style>
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		 <div class="span-4">
+			<h1 class="site-logo"><a href="/" title="Go back to frontpage" i18n:attributes="title">Reedfoto</a></h1>
+		</div>
+		<div class="span-20 last">
+			<h2>Reedfoto Orders Admin</h2>
+		</div>
+		
+		
+		<div class="span-24 last"><h3>Filliste</h3></div>
+         <h4><a href="/partner/reedfoto/manual">Registrer ny ordre</a> | <a href="/partner/reedfoto/manual/filelist/">Filliste</a></h4>
+
+		 <div id="" class="span-24" style="border: 1px solid #ccc; padding: 5px;">
+
+		 
+		
+		</div>
+   </div>
+    
+    <div style="background: #fff; padding: 50px;">
+    <table>
+            
+        <thead >
+            <tr>
+                <td>Dato:</td>
+                <tal:block tal:repeat="a artnr">
+                    <td tal:content="a">
+                
+                    </td>
+                </tal:block>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr tal:repeat="o orders">
+                <td tal:content="repeat/o/key">
+                    
+                </td>
+                <td tal:repeat="a o">
+                    <tal:block tal:condition="exists:a/0/count">${a/0/count}</tal:block>
+                    <tal:block tal:condition="not:exists:a/0/count"></tal:block>
+                </td>
+            </tr>
+            
+        </tbody>
+        
+        
+     </table>
+    </div>
+</body>
+</html>

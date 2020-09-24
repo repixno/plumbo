@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    
+    <tal metal:use-macro="../../${templates}/common.html/head" />
+	<script src="/css/bootstrap/js/carousel-swipe.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css' />
+	
+	
+	<style type="text/css">
+		
+		@media (max-width: 375px) {
+			
+			.col-xs-6{
+				width: 100% !important;
+			}
+			
+			.articles p {
+				padding: 0 0 0 0px;
+				width: 312px;
+			}
+			
+		}
+		
+	</style>
+</head>
+
+<body>
+    <div metal:use-macro="../../${templates}/common.html/top" />
+
+    <!-- Page Content -->
+    <div class="container maincontent">
+	
+        <div class="row">
+		<div class="col-md-12">
+			<div class="col-md-8 hidden-xs">
+				<div class="presentation">
+					<div class="articles">
+						<tal:block tal:content="structure cms:body:c957d009-4708-495e-a861-62356e5a3aa4"></tal:block>
+					</div> 
+				</div>
+            </div>
+			<div class="col-md-4 col-xs-12">
+		       <div style="height: 305px">
+		       <!-- ID 3275  -->
+		          
+				  <div class="presentation" style="background: url('//static.repix.no/cms/images/fotobeta_reedfoto_no_sidebanner_992px.jpg') scroll left bottom white; height: 305px;">
+						<div class="articles col-xs-12">
+							<h2>FINN DITT</h2>
+							<h3 style="">BILDE</h3>
+							<p>frå fotograferinga</p>
+						</div>
+						<div class="col-xs-12" style="position: absolute; bottom: 36px; padding: 15px;">
+							<div>
+								Skriv <strong>bilde-id</strong> for å finne dine bilder.
+							</div>
+							<form class="form-inline" action="/fetchalbum/barcode/" method="post">
+								<input name="identifier" class="form-control" type="text" value="" />
+								<button class="btn btn-primary" type="submit">Hent bilder</button>
+							</form>
+						</div>
+				  </div>
+		       </div>
+		    </div>
+		</div>
+		</div>
+		<hr class="visible-xs-block"/>
+		<div class="row top-15">
+
+            <div class="col-md-12">
+					<tal:block tal:repeat="menuitem menucontent:09886f48-6568-4807-b4f3-8b87f47d5b9e,maincontent">
+						<div  class="col-xs-6 col-lg-4 col-md-4">
+							<div class="thumbnail" data-id="${menuitem/id}">
+								<tal:block tal:content="structure menuitem/body|default" />
+								<tal:block tal:condition="session/isadmin">
+									<a href="#" class="display-none editarticle glyphicon glyphicon-pencil"></a>
+								</tal:block>
+						    </div>
+						</div>
+					</tal:block>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <div metal:use-macro="../../${templates}/common.html/footer" />
+    <!-- /.container -->
+
+<tal:block tal:condition="session/isadmin">
+	<script>
+		
+		$( function(){
+			
+			$("#carousel-example-generic").carousel()
+
+			$('.item').first().addClass('active');
+			
+			
+			$('.thumbnail, .top').on( 'mouseover', function(){
+					$(this).find('.editarticle').show();
+				}).on('mouseleave', function(){
+					
+					$(this).find('.editarticle').hide();
+				
+				});
+			
+			$(document).on( 'click', '.editarticle', function(){
+				
+				console.log("wtf");
+				
+				var url = 'http://admin.repix.no/content/articles/' + $(this).parent().data('id');
+				
+				var win = window.open(url, '_blank');
+				win.focus();
+				
+				});
+			
+				return false;
+			
+			});
+		
+	</script>
+</tal:block>
+
+</body>
+
+</html>

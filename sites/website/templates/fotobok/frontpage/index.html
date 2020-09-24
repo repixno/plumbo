@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<tal:block tal:define="global dontShowCart" />
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Frontpage</tal:block>
+</head>
+<body>
+
+	<tal:block metal:use-macro="../common.html/top" />
+
+
+	<hr />
+	<div id="frontpage-main">
+		<div class="container">
+			<h2>Norges enkleste fotobok</h2>
+			<div class="span-5 prepend-19 last">
+				<a class="button extra-large white" href="/create/photobook/create/891">Prøv nå!</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container prepend-top">
+	
+		<div class="span-15 colborder">
+			<h2>Hva er en fotobok og hvordan kan jeg lage en?</h2>
+		</div>
+		<div class="span-8 last">
+			<h2>Se videoer</h2>
+		</div>
+	
+	</div>	
+
+</body>
+</html>

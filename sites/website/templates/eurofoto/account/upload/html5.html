@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="${i18n/country}">
+<head>
+	<tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" />
+	<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/head" />
+</head>
+<body id="">
+	
+<div class="container">
+	<div metal:use-macro="${templateroot}/${templates}/common.html/top" />	
+</div>
+
+<div id="account">
+
+	<div class="container">
+		<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/account-menu" />
+	</div>
+
+	<div class="container account-wrapper" id="html5-upload">
+	
+	
+	<h2>Upload files with new technology</h2>
+	
+	<label>Select album</label>
+	<select id="uploadAlbums"></select>
+	
+	<span id="selectedAlbumInfo">No album is selected</span>
+	
+	<div id="dropzone" class="account-content-box" style="border-style: dotted">
+		<h3 class="center prepend-top append-bottom">Drop files here</h3>
+	</div>
+	
+	
+	<!--
+		'${batchid}',
+		'${session/sessionid}',
+		'${strJPEGImages}',
+		'${strUpload}'
+	-->
+
+	</div>
+</div>
+<script src="http://code.google.com/apis/gears/gears_init.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+	
+	var uploadScript = '/flash_upload.php?noerror=1';
+	var batchid = '${batchid}';
+	var sessionid = '${session/sessionid}';
+	
+	
+	
+	function uploadSelectAlbum( batchid, albumid, albumtitle, redirecturl ) {
+
+		$.post( '/api/1.0/upload/selectalbum', {
+			'batchid': batchid,
+			'albumid': albumid,
+			'albumtitle': albumtitle
+		},
+		function() {
+			if( typeof( redirecturl ) == 'function' ) {
+				redirecturl( batchid, albumid, albumtitle );
+			} else if( redirecturl ) {
+				window.location = redirecturl;
+			}
+			
+			$('#selectedAlbumInfo').html( '<strong>SELECTED ALBUM:</strong> <strong>batchid:</strong> ' + batchid + '  <strong>albumid:</strong> ' +  albumid + '  <strong>albumtitle:</strong> ' + albumtitle );
+			
+		});
+
+   return false;
+   
+	}
+	
+
+	$(function() {
+	
+	
+		var response = $.ef( 'albums.enum', {
+			'sortby'	:	'title',
+			'sorttype'	:	'ascending',
+		} );
+		
+		if( response.result ) {
+			$(response.albums).each( function(i, album) {
+				$('#uploadAlbums').append('<option value="'+album.id+'">' + album.title + '</option>');
+			})
+			
+			$('#uploadAlbums').change( function(i, item) {
+				uploadSelectAlbum( batchid, $('#uploadAlbums').val(), $('#uploadAlbums option:selected').text() );
+			});
+		
+		}
+		
+		/* Cannot use $.bind() since jQuery does not normalize native events. */
+		$('#dropzone')
+			.get(0)
+			.addEventListener('drop', upload, false);
+		$('#dropzone')
+			.get(0)
+			.addEventListener('dragenter', function(event) { 
+				$('#dropzone').css("background-color", "#ffc"); 
+		}, false);
+		
+		$('#dropzone')
+			.get(0)
+			.addEventListener('dragexit', function(event) { 
+				$('#dropzone').css("background-color", "#fff"); 
+			}, false);
+		$('#dropzone')
+			.get(0)
+			.addEventListener('dragover', function(event) { 
+				event.preventDefault(); 
+		}, false);
+
+		//<![CDATA[
+		function upload(event) {
+
+			if( event.dataTransfer.files.length > 5 ) {
+				event.preventDefault(); 
+				alert('to many files');
+				return false;
+			}
+			
+			var data = event.dataTransfer;
+
+			var boundary = '------multipartformboundary' + (new Date).getTime();
+			var dashdash = '--';
+			var crlf     = '\r\n';
+
+			/* Build RFC2388 string. */
+			var builder = '';
+
+			builder += dashdash;
+			builder += boundary;
+			builder += crlf;
+
+			var xhr = new XMLHttpRequest();
+			
+			// add batchid to post
+
+			builder += 'Content-Disposition: form-data; name="batchid"';
+			builder += crlf;	
+			builder += crlf;	
+			builder += batchid;
+			builder += crlf;	
+			builder += dashdash;
+			builder += boundary;
+			builder += crlf;	
+			
+			// add sessionid to post
+	
+			builder += 'Content-Disposition: form-data; name="sessionid"';
+			builder += crlf;	
+			builder += crlf;	
+			builder += sessionid;
+			builder += crlf;	
+			builder += dashdash;
+			builder += boundary;
+			builder += crlf;	
+			
+			/* For each dropped file. */
+
+			for ( var i = 0; i < data.files.length; i++ ) {
+				var file = data.files[i];
+
+				/* Generate headers. */
+				builder += 'Content-Disposition: form-data; name="Filedata[]"';
+				if (file.fileName) {
+					builder += '; filename="' + file.fileName + '"';
+				}
+				builder += crlf;
+
+				builder += 'Content-Type: application/octet-stream';
+				builder += crlf;
+				builder += crlf; 
+
+				/* Append binary data. */
+				builder += file.getAsBinary();
+				builder += crlf;
+
+				/* Write boundary. */
+				builder += dashdash;
+				builder += boundary;
+				builder += crlf;
+			}
+
+
+			/* Mark end of the request. */
+			builder += dashdash;
+			builder += boundary;
+			builder += dashdash;
+			builder += crlf;
+
+			xhr.open("POST", uploadScript, true);
+			xhr.setRequestHeader('content-type', 'multipart/form-data; boundary=' + boundary);
+			xhr.sendAsBinary(builder);        
+
+			xhr.onload = function(event) { 
+			/* If we got an error display it. */
+			if (xhr.responseText) {
+				alert(xhr.responseText);
+			}
+			//$("#dropzone").load("list.php?random=" +  (new Date).getTime());
+		};
+		//]]>		
+		/* Prevent FireFox opening the dragged file. */
+		event.stopPropagation();
+		
+		return false;
+	}
+});
+
+</script>
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="${templateroot}/${templates}/common.html/footer" />
+		<div metal:use-macro="${templateroot}/${templates}/account/common.html/footer" />
+	</div>
+</div>	
+
+</body>
+</html>

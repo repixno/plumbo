@@ -1,0 +1,154 @@
+	<tal:block metal:define-macro="prints">
+		<tr>
+			<td data-th="Product">
+				<div class="row">
+					<div class="col-sm-2 hidden-xs">
+						<tal:block tal:condition="exists: print/product/images">
+							<tal:block tal:repeat="image print/product/images">
+								<tal:block tal:condition="equal:repeat/image/number,1">
+									<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" title="" class="img-responsive" />
+								</tal:block>
+							</tal:block>
+						</tal:block>
+					</div>
+					<div class="col-sm-10">
+						<h4 class="nomargin"><tal:block tal:condition="exists:print/product/title" tal:content="print/product/title">Product</tal:block></h4>
+					</div>
+				</div>
+			</td>
+			<td data-th="Price" tal:content="formatprice:print/unitprice" class="unitprice">$1.99</td>
+			<td data-th="Quantity" style="text-align: center;">
+				<span class="quiet" tal:content="print/quantity"></span>
+				<a href="/order-prints/choose-quantity/each-print/edit" i18n:translate="">Change</a>
+				<!--<input type="number" class="form-control text-center" value="1" />-->
+			</td>
+			<td data-th="Subtotal" class="text-center price" tal:content="formatprice:print/price">1.99</td>
+			<td class="actions" data-th="">
+                <!--<a class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></a>-->
+				<a href="/cart/remove/${print/prodno}" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></a>
+                
+			</td>
+		</tr>
+		
+		<tal:block tal:condition="exists:print/license">
+			<tr tal:repeat="license print/license">
+				<td data-th="Product">
+					<div class="row">
+						<div class="col-sm-2 hidden-xs">&nbsp;</div>
+						<div class="col-sm-10">
+							<h5 class="nomargin" tal:condition="exists:license/product/title" tal:content="license/product/title">Product 1</h5>
+						</div>
+					</div>
+				</td>
+				<td data-th="Price" tal:content="formatprice:license/unitfee" class="unitprice">$1.99</td>
+				<td data-th="Quantity" style="text-align: center">
+					<span class="quiet" tal:content="license/quantity">1</span>
+				</td>
+				<td data-th="Subtotal" class="price text-center" tal:content="formatprice:license/totalfee" >Sum</td>
+				<td class="removeItem">
+					&nbsp;
+				</td>
+			</tr>
+		</tal:block>
+	</tal:block>
+	
+	<tal:block metal:define-macro="goods">
+		<tr>
+			<td data-th="Product">
+				<div class="row">
+					<div class="col-sm-2 hidden-xs">
+						<tal:block tal:condition="exists: goods/product/images">
+							<tal:block tal:repeat="image goods/product/images">
+								<tal:block tal:condition="equal:repeat/image/number,1">
+									<img tal:condition="image/url" src="${static:}images/products/thumbs/square/50/${image/url}" title="" class="img-responsive" />
+								</tal:block>
+							</tal:block>
+						</tal:block>
+					</div>
+					<div class="col-sm-10">
+						<h4 class="nomargin"><tal:block tal:condition="exists:goods/product/title" tal:content="goods/product/title">Product</tal:block></h4>
+					</div>
+				</div>
+			</td>
+			<td data-th="Price" tal:content="formatprice:goods/unitprice" class="unitprice">$1.99</td>
+			<td data-th="Quantity" style="text-align: center;">
+				<input type="text" value="1" class="quantity" name="goods[${goods/prodno}]" 
+									maxlength="4" tal:attributes="value goods/quantity"/> 
+			</td>
+			<td data-th="Subtotal" class="text-center price" tal:content="formatprice:goods/price">1.99</td>
+			<td class="actions" data-th="">
+				<a href="#" class="btn btn-info btn-sm update-price-link"><i class="fa fa-refresh"></i></a>
+				<a href="/cart/remove/${goods/prodno}" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></a>								
+			</td>
+		</tr>
+	</tal:block>
+	
+	<tal:block metal:define-macro="gifts">
+		<tr id="${gift/optionid}">
+			<td data-th="Product">
+				<div class="col-sm-2 hidden-xs">
+					<tal:block tal:condition="exists:gift/product/images">
+						<tal:block tal:repeat="image gift/product/images">
+							<tal:block tal:condition="equal:repeat/image/number,1">
+								<img class="img-responsive" tal:condition="image/url" src="/images/products/thumbs/square/50/${image/url}" title="" />
+							</tal:block>
+						</tal:block>
+					</tal:block>
+				</div>
+				<div class="col-md-10">
+					<h4><tal:block tal:condition="exists:gift/product/title" tal:content="gift/product/title">Product</tal:block></h4>
+					<tal:block tal:condition="gift/product/option">
+						<tal:block tal:condition="not:equal:gift/product/option/title,Standard">
+						<span class="quiet">, <tal:block tal:content="gift/currentproductoption/title" /></span>
+						</tal:block>
+						<tal:block  tal:condition="exists:gift/attributes/bw">
+							<tal:block tal:condition="not:equal:gift/attributes/bw,false">
+								( Sort/hvitt )
+							</tal:block>
+							<tal:block tal:condition="equal:gift/attributes/bw,false">
+								( Fargebilder )
+							</tal:block>
+						</tal:block>
+						
+					</tal:block>
+				</div>
+
+			</td>
+			<td data-th="Price" tal:content="formatprice:gift/unitprice" class="unitprice">$1.99</td>
+			<td class="quantity-cell quantity-editable" data-th="Quantity" style="text-align: center;">
+				<input 
+					type="text" value="1" class="quantity" name="gifts[${gift/prodno}][${gift/referenceid}]" 
+					maxlength="4" tal:attributes="value gift/quantity"/> 
+			</td>
+			<td data-th="Subtotal" class="price text-center" tal:content="formatprice:gift/price">Sum</td>
+			<td class="actions removeItem" data-th="">
+				<a class="btn btn-info btn-sm update-price-link" href="#"><i class="fa fa-refresh"></i></a>
+				<a href="/cart/remove/${gift/prodno}/${gift/referenceid}" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></a>
+				<input type="hidden" value="${gift/referenceid}" name="referenceid" />
+			</td>
+		</tr>
+		
+		<tal:block tal:condition="exists:gift/license">
+            <tal:block tal:repeat="license gift/license">
+                <tr id="${gift/optionid}_license">
+                    <td data-th="Product">
+                        <div class="row">
+                            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+                            <div class="col-sm-10">
+                                <h5 class="nomargin" tal:condition="exists:license/product/title" tal:content="license/product/title">Product 1</h5>
+                            </div>
+                        </div>
+                    </td>
+                    <td data-th="Price" tal:content="formatprice:license/unitfee" class="unitprice">$1.99</td>
+                    <td data-th="Quantity" style="text-align: center">
+                        <span class="quiet" tal:content="license/quantity">1</span>
+                    </td>
+                    <td data-th="Subtotal" class="price text-center" tal:content="formatprice:license/totalfee" >Sum</td>
+                    <td class="removeItem">
+                        &nbsp;
+                    </td>
+                </tr>
+            </tal:block>
+		</tal:block>
+	
+	</tal:block>

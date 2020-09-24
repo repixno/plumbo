@@ -1,0 +1,113 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Statistics - Eurofoto Admin</title>
+<!-- tal:block metal:use-macro="../../common.html/css" /-->
+<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/screen.css?3.0995" type="text/css" media="screen, projection"/> 
+	<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/print.css?3.0995" type="text/css" media="print"/> 
+	<!-- get the portal-id and insert it under--> 
+	<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/custom.css?3.0995" type="text/css" media="screen, projection"/> 
+	<!--[if lt IE 8]>
+		<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/admin/ie.css" type="text/css" media="screen, projection" />
+		<link rel="stylesheet" type="text/css" href="/css/ie-sucks.css" />
+	<![endif]--> 
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script> 
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script> 
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script> 
+	<script type="text/javascript" src="http://c.static.eurofoto.no/js/i18n/ui.datepicker-no.js"></script> 
+	<script type="text/javascript" src="http://b.static.eurofoto.no/js/flowplayer-3.1.1.min.js"></script> 
+	<script type="text/javascript" src="http://b.static.eurofoto.no/js/jquery.autocomplete.pack.js"></script> 
+	<script type="text/javascript" src="/js/jquery.tablesorter.min.js"></script> 
+	<script type="text/javascript" src="http://c.static.eurofoto.no/js/eurofoto.min.js?3.0995"></script> 
+<script type="text/javascript" src="/js/admin.js"></script> 
+<style type="text/css"> 
+ 
+	h3 a {
+		display: block;
+		padding: 0.2em;
+		color: #000;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	
+	h3 a:hover {
+		color: #09c;
+	}
+ 
+</style> 
+<script tal:condition="exists:language" type="text/javascript" tal:content="structure string:var LANGUAGE = '${language}';">var LANGUAGE = 'en_US';</script>
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>APressen Produktsalgsrapport</h2>
+		</div>
+      
+		<div class="container">
+		   
+		   <h3>Rapporteringsperiode</h3>
+		   <table><tr><td>
+		    ${periodstart} - ${periodend}
+		   </td></tr></table>
+         
+		   <br /><br />
+		   
+		   <h3>Produkter i rapporten</h3>
+		   <table>
+		   <thead>
+		   <tr>
+		     <th>ProdNo</th>
+		     <th>Beskrivelse</th>
+		     <th>Volum i NOK</th>
+		   </tr>
+		   </thead>
+		   <tbody>
+		   <tr tal:repeat="prodno output/prodnos">
+		     <th>${prodno/prodno}</th>
+		     <td>${prodno/title}</td>
+		     <td>${formatprice:prodno/sum}</td>
+		   </tr>
+		   </tbody>
+		   <tfoot>
+		     <th>SUM</th>
+		     <th></th>
+		     <th>${output/total}</th>
+		   </tfoot>
+		   </table>
+		
+		   <br /><br />
+		   
+         <h3>Salgstall</h3>
+		   <table>
+         <thead>
+         <tr>
+            <th>DATO</th>
+            <th tal:repeat="prodno output/prodnos" title="${prodno/title}">${prodno/prodno}</th>
+            <th>SUM</th>
+         </tr>
+         </thead>
+         <tbody>
+         <tr tal:repeat="date output/dates">
+            <td>${date/date}</td>
+            <td tal:repeat="sum date/prodnos"><tal:block tal:condition="equal:sum,-">-</tal:block><tal:block tal:condition="not:equal:sum,-">${formatprice:sum}</tal:block></td>
+            <th><tal:block tal:condition="equal:date/sum,-">-</tal:block><tal:block tal:condition="not:equal:date/sum,-">${formatprice:date/sum}</tal:block></th>
+         </tr>
+         </tbody>
+         <tfoot>
+         <tr>
+            <th>SUM</th>
+            <th tal:repeat="prodno output/prodnos" title="${prodno/title}">${formatprice:prodno/sum}</th>
+            <th>${formatprice:output/total}</th>
+         </tr>
+         </tfoot>
+         </table>
+			
+		</div>
+		<div id="footer"></div>
+		
+	</div>
+</body>
+</html>

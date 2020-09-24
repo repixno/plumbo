@@ -1,0 +1,11 @@
+<html>
+<head><title>Menu File Upload Form</title></head>
+<body>
+<form method="post" enctype="multipart/form-data" action="/menu/upload/${menuid}" id="form">
+   <input type="file" name="image" onchange="document.getElementById('form').submit();"/>
+</form>
+<script language="JavaScript" tal:condition="exists:imageuuid">
+   parent.setImageUUID( '${imageuuid}' );
+</script>
+</body>
+</html>

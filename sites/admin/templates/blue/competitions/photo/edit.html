@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Competition - Eurofot Admin</title>
+<tal:block metal:use-macro="../../common.html/css" />
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>Eurofoto Competition Admin</h2>
+			<tal:block metal:use-macro="../../common.html/topmenu" />
+		</div>
+		<tal:block metal:use-macro="../../common.html/languages" />
+		<div id="content">
+			<div id="box">
+			  <h3>Competitions</h3>	
+			  <div><a class="button" href="/competitions/photo/">Back</a></div>
+			 <form method="post" action="/${request/execpath}">
+			   <div>
+					<label for="userid">User ID</label><br/>
+					<input type="text" class="title" name="competition[userid]" id="userid" value="" tal:attributes="value competitiondata/userid|default" />
+				</div>				
+			   <div>
+					<label for="uploadaid">Uploaded Albumid</label><br/>
+					<input type="text" class="title" name="competition[uploadaid]" id="uploadaid" value="" tal:attributes="value competitiondata/uploadaid|default" />
+				</div>				
+			   <div>
+					<label for="approvedaid">Approved Albumid</label><br/>
+					<input type="text" class="title" name="competition[approvedaid]" id="approvedaid" value="" tal:attributes="value competitiondata/approvedaid|default" />
+				</div>				
+				<div>
+					<label for="title" i18n:translate="">Title</label><br/>
+					<input type="text" class="title" name="competition[title]" id="uploadaid" value="" tal:attributes="value competitiondata/title|default" />
+				</div>
+				<div>
+					<label for="urlname" i18n:translate="">Shortname (URL)</label><br/>
+					<input type="text" class="title" name="competition[urlname]" id="urlname" value="" tal:attributes="value competitiondata/urlname|default" />
+				</div>
+			   <div>Template: ${competitiondata/template}</div>
+			   <div>
+					<label for="description" i18n:translate="">Description</label><br/>
+					<textarea name="competition[description]" id="description" tal:content="competitiondata/description|default"></textarea>
+				</div>
+				<div>
+			   <label for="oncompleted" i18n:translate="">Confirmation message</label><br/>
+					<textarea name="competition[oncompleted]" id="oncompleted" tal:content="competitiondata/oncompleted|default"></textarea>
+				</div>
+			   <button type="submit" i18n:translate="">Submit</button>
+			</form>
+			</div>
+		</div>
+	</div>
+	<div id="footer"></div>
+</body>
+</html>

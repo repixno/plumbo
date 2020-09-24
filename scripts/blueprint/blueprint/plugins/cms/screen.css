@@ -1,0 +1,30 @@
+img.normal-cms-photo {
+   border: 10px solid rgb(255, 255, 255); 
+   float: right; 
+   outline-color: rgb(204, 204, 204); 
+   outline-style: solid; 
+   outline-width: 1px; 
+   margin: 10px;
+}
+
+.cms-article-body img {
+	margin: 10px;
+}
+
+/* products */
+
+
+.product-main-page .has-button {
+	position: relative;
+	height: 15em;
+}
+
+.product-category .has-button {
+	position: relative;
+	height: 10em;
+}
+.product-main-page .has-button a.button, .product-category .has-button a.button {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}

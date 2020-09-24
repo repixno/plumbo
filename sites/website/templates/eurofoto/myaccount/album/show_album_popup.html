@@ -1,0 +1,15 @@
+<h3>Choose photos to order</h3>
+<h4>Album: <tal:block tal:content="album/name | default" /></h4>
+<form>
+<ul class="imagelist clearfix">
+	<li tal:repeat="image images">
+		<div class="imagecontainer thumb">
+			<a href="${image/privateurl}" title="${image/title}" class="thumb" rel="">
+				<img src="" alt="" tal:attributes="src image/thumbnail; alt image/title" class="thumb_90px" />
+			</a>
+			<br />
+			<input type="checkbox" id="${image/id}" />
+		</div>
+	</li>
+</ul>
+</form>

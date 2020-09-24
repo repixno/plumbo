@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="${i18n/country}">
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Login</tal:block>
+	<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
+</head>
+<body>
+
+
+<div id="home">
+
+	<div class="toolbar">
+		<a class="button" href="#about">About</a>
+		<h1>Login</h1>
+		<a class="button" id="login_button" href="#">Login</a>		
+	</div>
+
+	<div class="error" tal:condition="exists:error" i18n:translate="">Your email or password was incorrect!</div>
+	
+	<form action="/login/" method="post">
+		<ul class="edit rounded">
+			<li><input type="text" name="email" placeholder="Your e-mail" id="login_email"  tal:attributes="value email|default"/></li>
+			<li><input type="password" name="password" placeholder="Your password" tal:attributes="value password|default"  /></li>
+			<li>Remember me <span class="toggle"><input type="checkbox" name="autologin"/></span></li>
+		</ul>
+		
+		<button type="submit" name="Login">
+			<tal:block i18n:translate="" >Login</tal:block>
+		</button>
+		
+		<div class="rounded">
+			<tal:block i18n:translate="">Not a user?</tal:block> <a href="/register/" i18n:translate="">Register now</a> 
+		</div>
+
+		<input type="hidden" name="referer" tal:attributes="value referer|default" />
+		
+	</form>
+		
+</div>
+	
+<div id="about">
+	<h2>test</h2>
+</div>
+
+
+	
+<script type="text/javascript">
+	var pleaseProvideEmail = "<tal:block i18n:translate="">You need to provide e-mail, so you can log in.</tal:block>";
+	var pleaseProvidePassword = "<tal:block i18n:translate="">Please fill inn password</tal:block>";
+	
+	$(document).ready(function(){
+	
+		$('#login_button').bind('tap', function() {
+			$('#login-form').submit()
+		});
+		
+		$('#login form').validate({
+		errorClass: "inputError",
+		rules: {
+			'email': {
+				required: true,
+				email: true
+			},
+			'password': {
+				required: true
+			}
+		},
+		messages: {
+			'email': {
+				required: "<tal:block i18n:translate="">Please enter a e-mail adress.</tal:block>",
+				email: "<tal:block i18n:translate="">Please provide a valid e-mail adress.</tal:block>"
+			},
+			'newEmail': {
+				required: pleaseProvideEmail,
+				email: "<tal:block i18n:translate="">Please provide a valid e-mail adress.</tal:block>"
+			},
+			'password': {
+				required: pleaseProvidePassword
+			}
+		}
+	});
+
+   });
+</script>
+
+<script type="text/javascript" tal:condition="not:exists:error">
+   $('input:first', '#login').focus();
+</script>
+<script type="text/javascript" tal:condition="exists:error">
+   $('input[name=password]', '#login').focus();
+</script>
+
+</body>
+</html>

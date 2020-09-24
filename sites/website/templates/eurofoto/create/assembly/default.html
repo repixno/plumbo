@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Create</tal:block>
+	<style type="text/css">
+	
+	form { padding: 0; margin: 0}
+	
+      .assembly-items img.thumb {
+         cursor: pointer;
+         height: 150px;
+         width: 150px;
+         
+      }
+      
+      label {
+         cursor: pointer;
+      }
+      
+      label.strong {
+      	font-weight: bold !important;
+      	font-size: 1.3em;
+      }
+      
+      .assembly-section {
+      	padding: 7px;
+      	border: 1px solid #efefef;
+      	background-color: #fff;
+      	border-radius: 5px;
+      	-moz-border-radius: 5px;
+      	-webkit-border-radius: 5px;
+      	
+      }
+      .assembly-section.selected {
+      	border-color: #aaa;
+      	background-color: #eeeeee;
+      }
+      
+   </style>
+</head>
+
+<body>
+	<div class="container">
+
+   	<div metal:use-macro="../../../${templates}/common.html/top" />
+   	
+   	<!-- if no menu is used use id="widecontent" -->
+   	<div class="span-24 last">
+   		<!--<h2 tal:content="header | default">project</h2>
+		<div class="description" tal:condition="exists:description" tal:content="description"></div>-->
+		
+		<tal:block tal:content="structure cms:body:df1023cc-8551-4e7c-9cd7-33a0941f330d" />
+		
+		
+		<form method="post" action="/create/assembly/setup/${projectkey}">
+			<input type="hidden" name="type" value="${type}" />
+			<input type="hidden" name="productid" value="${productid}" />
+			<input type="hidden" name="productoptionid" value="${productoptionid}" />
+			<input type="hidden" name="projectkey" value="${projectkey}" />
+			<input type="hidden" name="headerxml" value="${headerpages};${headerxml}" />
+			<input type="hidden" name="footerxml" value="${footerpages};${footerxml}" />
+			<input type="hidden" name="minpages" value="${minpages}" />
+
+			<div class="span-24 last">
+				<h2>Velg tittel på boken</h2>
+				<p class="large quiet">
+					<input type="text" id="projecttitle" class="title span-12 large" name="projecttitle" value="Skriv inn navn på din bok" tal:attributes="value title|default" />
+				</p>
+				
+				<h2 class="bottom">Velg tiår du vil bruke i boken</h2>
+				<p class="large quiet top">Kryss av eller på de tiårene/malene du vil bruke i din bok. Noen tiår har flere valgmuligheter. Lykke til :)</p>
+
+				<div class="assembly-section span-4 append-bottom" tal:repeat="section sections">
+					<tal:block tal:repeat="filler section/fillers">
+						<input type="hidden" name="sections[${section/id}][fillers][]" value="${filler/pages};${filler/xml}" />
+					</tal:block>
+					
+					<input type="checkbox" id="section-${section/id}" name="sections[${section/id}][selected]" value="1" tal:condition="not:section/selected" />
+					<input type="checkbox" id="section-${section/id}" name="sections[${section/id}][selected]" value="1" tal:condition="section/selected" checked="1" />
+					
+					<label class="strong" for="section-${section/id}">${section/title}</label>
+	
+	
+					<div class="assembly-items" id="section-${section/id}">
+						<div tal:condition="exists:section/description" tal:content="section/description"></div>
+						<tal:block tal:repeat="option section/options">
+							<tal:block tal:condition="equal:repeat/option/index,0">
+								<a href="/create/assembly/images/${projectkey}/${option/icon}" target="_blank" id="link-${section/id}" class="thumb">
+									<img class="thumb" src="/create/assembly/images/${projectkey}/${option/icon}" id="image-${section/id}" />
+								</a>
+							</tal:block>
+							
+							<tal:block tal:condition="gt:repeat/option/length,1">
+								<div>
+								<input type="radio" id="option-${option/id}" name="sections[${section/id}][option]" value="${option/pages};${option/xml}" tal:condition="not:option/selected" />
+								<input type="radio" id="option-${option/id}" name="sections[${section/id}][option]" value="${option/pages};${option/xml}" tal:condition="option/selected" checked="1" />
+								<img class="hide" id="thumb-${option/id}" src="/create/assembly/images/${projectkey}/${option/icon}" />	
+								<label for="option-${option/id}">${option/title}</label>
+								</div>
+							</tal:block>
+							
+							<tal:block tal:condition="equal:repeat/option/length,1">
+								<input type="hidden" id="option-${option/id}" name="sections[${section/id}][option]" value="${option/pages};${option/xml}" tal:condition="not:option/selected" />
+								<input type="hidden" id="option-${option/id}" name="sections[${section/id}][option]" value="${option/pages};${option/xml}" tal:condition="option/selected" checked="1" />
+								<img class="hide" id="thumb-${option/id}" src="/create/assembly/images/${projectkey}/${option/icon}" />	
+							</tal:block>
+							
+						</tal:block>
+					</div>
+				</div>
+				<hr />
+				<div class="span-5 last right">
+					<button type="submit" class="button blue large">Gå videre til bok</button>
+				</div>
+				
+			</div>
+		</form>
+	</div>
+</div>
+   
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+   	</div>
+</div>
+   
+   <script type="text/javascript">
+   //<![CDATA[
+   
+   	$(document).ready( function() {
+
+      $('#projecttitle').select();
+      $('#projecttitle').focus();
+      
+      $('.assembly-section input[type=checkbox]').change( function() {
+      
+      	if( $(this).is(':checked') ) {
+      		$(this).parent().addClass('selected');
+      	} else {
+      		$(this).parent().removeClass('selected');
+      	}
+      
+      
+      });
+      
+      $('.assembly-section input[type=checkbox]').trigger('change');
+      
+      $('.assembly-items input').click( function(){
+         var optionid = $(this).attr('id').split('-')[1];
+         var sectionid = $(this).parent().parent().attr('id').split('-')[1];
+         $('#image-'+sectionid).attr( 'src', $('#thumb-'+optionid).attr('src') );
+         $('#link-'+sectionid).attr( 'href', $('#thumb-'+optionid).attr('src') );
+      });
+      
+      $('div.assembly-items a.thumb').fancybox();
+      
+   	});
+      
+   //]]>
+   </script>
+   
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+   <meta name="Description" content="${menuitem/article/ingress}"/>
+   <link rel="canonical" href="http://www.eurofoto.no/produkter/cewe-fotobok/nedlasting" />
+	<tal metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title"/>
+	<script type="text/javascript" src="${static:js/flowplayer-3.1.4.min.js}"></script>
+	<script type="text/javascript" src="${static:js/jquery.tools.min.js}"></script>
+	<style type="text/css">
+      .photobook-top {
+        height: 208px;
+        
+        <tal:block tal:condition="exists:menuitem/article/attachments/background">
+        background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+        </tal:block>
+        
+        background-repeat:no-repeat;
+      }
+      .photobook-top p{ font-size: 14px }
+      
+      ul li {
+         list-style-image: url(http://cs.photoprintit.de/web/84000018/images/dflt_list.gif);
+      }
+      
+      table {
+         border: 0px;
+      }
+      
+      table td, table th {
+         border-bottom: 0px;
+         border-left: 0px;
+         padding: 1px;
+         vertical-align: top;
+      }
+		
+	</style>
+</head>
+<body>
+   <div class="container product-category ">
+      <div metal:use-macro="../../../${templates}/common.html/top" />
+      <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/top-navigation" />
+      <div class="span-4">
+         <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/menu-current" />
+      </div>
+   
+      <div class="span-20 last product-category">
+   
+         <div class="span-20 last photobook-top top">
+            <div class="content hide">
+               <h1>${menuitem/article/title}</h1>
+            </div>
+            <!--<a class="blue button extra-large bottom left" href="#quick-start">Kom igang nå!</a>-->
+      </div>
+      
+      <div class="span-20 last">
+         <div class="span-20 last prepend-top">
+            <!-- id: 2150 Infoboks -->
+            <div tal:content="structure cms:body:24018c02-cc6e-421d-b82d-b73507df15d9"/>
+            
+           
+         </div>
+         <div class="span-10 last prepend-top">
+            <!-- id: 2148 Systemkrav -->
+            <div tal:content="structure cms:body:d56eef78-c4d4-4608-96fc-45399ddd0e4a" />
+         </div>
+         <div class="span-10 prepend-top">
+            <!-- id: 2149 Nedlasting -->
+            <div tal:content="structure cms:body:fbefb236-6a5a-4b3d-b867-7f9b23d0f2f5" />
+         </div>
+
+      </div>
+      
+      <hr class="space" />
+   </div>
+   </div>
+   
+   
+   
+   <div class="footer">
+      <div class="container">
+         <div metal:use-macro="../../../${templates}/common.html/footer" />
+      </div>	
+   </div>
+   
+   
+   <SCRIPT type="text/javascript">
+      $(document).ready( function() {
+          
+         var os = $.client.os;
+
+         switch(os){
+            case 'Windows':
+                $('#download').text("Last ned");
+                $('#download').attr('href', 'http://dls.photoprintit.de/download/Data/22185/hps/setup_Eurofoto_Fotoservice.exe');
+            break;
+            case 'Mac':
+                 $('#download').text("Last ned programvare for Mac.");
+                $('#download').attr('href', 'http://dls.photoprintit.de/download/Data/22185/hps/setup_Eurofoto_Fotoservice.zip');
+            break;
+            case 'Linux':
+                $('#download').text("Last ned programvare for Linux.");
+                $('#download').attr('href', 'http://dls.photoprintit.de/download/Data/22185/hps/setup_Eurofoto_Fotoservice.tgz');
+            break;
+         }
+         
+         
+      });
+   
+   </SCRIPT>
+</body>
+</html>

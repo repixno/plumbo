@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>Felix Ketchup</title>
+</head>
+<body>
+<div>
+    <strong>Hej <tal:block tal:replace="deliveryinfo/name"/>,</strong>
+</div>
+<div>
+    <p>
+        Tack för din order. Vi kommer att trycka din ketchupetikett och skicka hem den till dig inom 4 veckor. 
+    </p>
+    <p>
+      Bifogat ser du dina kunduppgifter. Var vänlig och kontrollera dem direkt. Skulle något vara fel, var vänlig svara på detta mail, med korrigeringar.   
+    </p>
+    <p>
+      Order nr:	<tal:block tal:replace="orderid"/>
+    </p>
+</div>
+<hr/>
+<div>
+    <strong>Leveransadress:</strong><br/>
+    <table>
+        <tr>
+            <td>Namn:</td>
+            <td tal:content="deliveryinfo/name">Namn:</td>
+        </tr>
+        <tr>
+            <td>Adress:</td>
+            <td tal:content="deliveryinfo/address">Adress:</td>
+        </tr>
+        <tr>
+            <td>Postadress:</td>
+            <td><span tal:content="deliveryinfo/zipcode" /> <span tal:content="deliveryinfo/city" /></td>
+        </tr>
+    </table>
+</div>
+
+<br/>
+<br/>
+<br/>
+<div>
+<strong>Med vänliga hälsningar,<br/>Felix</strong>
+
+<br/><br/><br/>
+Felix Ketchup / Japan Photo<br/>
+031-619445<br/>
+bildshop@japanphoto.se<br/>
+<a href="http://www.felix.se">http://www.felix.se</a><br/>
+<a href="http://www.japanphoto.se">http://www.japanphoto.se</a><br/>
+</div>
+</body>
+</html>

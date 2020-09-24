@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+   <style type="text/css">
+      .accessories-top {
+        height: 301px;
+        
+        <tal:block tal:condition="exists:menuitem/article/attachments/background">
+        background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+        </tal:block>
+        
+        background-repeat:no-repeat;
+      }
+      .accessories-top p{ font-size: 14px }
+      
+      
+      	
+		div.productinfo p {
+			margin-bottom: 0;
+		}
+		
+		span.price { font-size: 16px !important }
+		body .container span.price.oldprice { margin: 0; padding: 0; font-size: 10px !important;}
+		span.price.newprice { margin: 0; padding: 0; font-size: 14px !important;}
+		
+		.functions { position: relative; text-align: left !important;}
+		
+		.functions .links { position: absolute; bottom: 0; right: 0; text-align: right; }
+		
+		div.starOfferPercentContainer {
+		height: 70px;
+		width: 70px;
+		float: right;
+		}
+		
+   </style>
+</head>
+
+
+<tal:block metal:define-macro="show-product">
+	<div class="span-2 productimage">
+		<tal:block metaltal:use-macro="${templateroot}/eurofoto/cms/cms.html/starOfferPercent" />
+		<tal:block metaltal:use-macro="${templateroot}/eurofoto/cms/cms.html/newProductStar" />
+		<tal:block tal:define="global customsize string:70" />
+		<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/one-product-photo-custom-size" />
+	</div>
+	<div class="span-8 last productinfo">
+		<h3 tal:content="item/title"></h3>
+		<p tal:content="item/ingress"></p>
+		<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/more-info-link" />
+	</div>
+	<div class="span-8 last prepend-2 functions">
+		<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" />
+		<div class="links">
+			
+			<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/buy-product-link" />
+		</div>
+	</div>
+</tal:block>
+
+
+<body>
+	<div class="container">
+
+		<div metal:use-macro="../../../${templates}/common.html/top"></div>
+		
+		<div metal:use-macro="../cms.html/top-navigation" />
+
+		<div id="leftmenu">
+			<div metal:use-macro="../cms.html/menu-current" />
+		</div>
+
+		<div class="span-20 last product-category">
+         <div class="span-20 last accessories-top top"/>
+	
+         <div class="span-20 last">
+         	<div class="content">
+					<h1>${menuitem/article/title}</h1>
+					<p tal:content="structure menuitem/article/body|default"></p>
+				</div>
+      		<tal:block tal:repeat="item items">
+      			<tal:block  tal:condition="equal:item/type,product">
+      				<div class="span-9 colborder append-bottom" tal:condition="not:mod:repeat/item/number,2">
+      					<div class="span-2 productimage">
+      						<tal:block tal:define="global customsize string:70" />
+      						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/one-product-photo-custom-size" />
+      					</div>
+      					<div class="span-7 last productinfo">
+      						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/starOfferPercentFloatRight" />
+      						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/newProductStarFloatRight" />
+      
+      						<h3 tal:content="item/title"></h3>
+      						<p>${item/ingress} <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/more-info-link" />
+      </p>
+      					</div>
+      					<div class="span-7 last prepend-2 functions">
+      						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" />
+      						<div class="links">
+      							<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/buy-product-link" />
+      						</div>
+      					</div>
+      				</div>
+      				<div class="span-10 append-bottom last" tal:condition="mod:repeat/item/number,2">
+      					<div class="span-2 productimage">
+      						<tal:block tal:define="global customsize string:70" />
+      						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/one-product-photo-custom-size" />
+      					</div>
+      					<div class="span-8 last productinfo">
+      						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/starOfferPercentFloatRight" />
+      						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/newProductStarFloatRight" />
+      						<h3 tal:content="item/title"></h3>
+      						<p>${item/ingress} <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/more-info-link" /></p>
+      					</div>
+      					<div class="span-8 last prepend-2 functions">
+      						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" />
+      						<div class="links">
+      							<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/buy-product-link" />
+      						</div>
+      					</div>
+      				</div>
+      				<hr tal:condition="mod:repeat/item/number,2" />
+      			</tal:block>
+      		</tal:block>
+
+			</div>
+		</div>
+	</div> <!-- end container -->
+	<div class="footer">
+		<div class="container">
+			<div metal:use-macro="../../../${templates}/common.html/footer" />
+		</div>
+	</div>
+</body>
+</html>

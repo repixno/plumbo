@@ -1,0 +1,13 @@
+@font-face {
+	font-family: 'KidprintMTStd-Bold';
+	src: url("http://www.stabburetleverpostei.no/stabburet/fonts/kidprint_bold.woff");
+	/**src: local('☺'), url('${static:css/portals/stabburet/web/fonts/kidprint_bold.woff}') format('woff'),url('${static:css/portals/stabburet/web/fonts/kidprint_bold.ttf}') format('truetype'),;**/
+	font-weight: bold;
+	font-style: bold;
+}
+@font-face {
+	font-family: 'Populaire';
+	src: url("http://www.stabburetleverpostei.no/stabburet/fonts/Populaire.otf");
+	font-weight: bold;
+	font-style: bold;
+}

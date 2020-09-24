@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Smilfoto</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Smilfoto faktura</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		
+        <div class="span-24 last">
+            
+            
+            <form method="post" action="">
+                
+                <input type="text" name="strekkode" />
+                <input type="submit"/>
+                
+            </form>
+            
+            
+            <tal:block tal:condition="exists:ordrenr">
+                
+                <script>
+                    window.open('/order/smilfoto/printfaktura/${ordrenr}', '_blank', 'toolbar=0,location=0,menubar=0' )
+                    //location.href = "/order/smilfoto";
+                </script>
+                
+            </tal:block>
+            
+        </div>
+        </div>
+    
+    <script>
+        
+        $( function(){
+            
+           
+           
+           $("input[name=strekkode]").focus(); 
+            
+            
+            
+        });
+        
+        
+    </script>
+</body>
+</html>

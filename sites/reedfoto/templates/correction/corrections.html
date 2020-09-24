@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<div metal:use-macro="common.html/head" />
+</head>
+<body>
+<div metal:use-macro="common.html/header" />
+<div id="content" class="container">
+   <h2 i18n:translate="">Your corrections</h2>
+   <div class="span-20">
+      <tal:block tal:repeat="correction corrections">
+         <tal:block tal:condition="exists:correction/id">
+            <tal:block tal:condition="exists:correction/title">
+	            <div class="correction span-1 heavyshadow">
+        	    	   <span class="correctionstatus" i18n:translate="correction/state"></span>
+    	        	   <h4 class="correctiontitle"><a href="/corrections/edit/${correction/id}">${correction/title}</a></h4>
+	            </div>
+            </tal:block>
+            
+            <tal:block tal:condition="not:exists:correction/title">
+               <div class="correction span-1 heavyshadow">
+                  <span class="correctionstatus" i18n:translate="correction/state"></span>
+                  <h4 class="correctiontitle"><a href="/corrections/edit/${correction/id}" i18n:translate="">No title</a></h4>
+               </div>   
+            </tal:block>
+         </tal:block>
+      </tal:block>
+   </div>
+</div>
+<script>
+   $('.correction').click( function() {
+      document.location.href = $(this).find('a').attr('href');
+   });
+</script>
+<div metal:use-macro="common.html/footer" /> 
+</body>
+</html>

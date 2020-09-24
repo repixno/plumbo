@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<tal:block tal:define="global dontShowCart" />
+
+<head>
+<title>Gratis Navnelapper fra Dinmerkelapp</title>	
+<div metal:use-macro="../../${templates}/common.html/head" />
+
+	<style type="text/css">
+		
+		
+		.error{
+			color: red;
+			font-weight: bold;
+		}
+
+
+
+
+
+	</style>
+	<script src="/js/repix.js"></script>
+
+	
+	<script src="/js/common.js"></script>
+	<script src="/js/validategratis.js"></script>
+</head>
+
+<body>
+ <div metal:use-macro="../../${templates}/common.html/top" />
+	<div class="container">
+
+
+	<form method="post" class="" action="/utsjekk/confirm/" id="contact-and-delivery-info">
+			<div class="row">
+		<div class="col-12">
+
+			
+	
+					<br/>
+			<div class="mx-auto row">
+		<h4 i18n:translate="" class="mx-auto strong">GRATIS NAVNELAPPER</h4>
+		<br/>
+</div>
+					<br/>
+		<div class="form-row col-12 mb-5">
+
+		<div class="col-12 mb-5">
+						<input type="checkbox" id="newsletter" class="required newsletter" name="newsletter"/> 
+						<strong for="newsletter">
+							<tal:block i18n:translate="">Ja jeg godkjenner vilkår</tal:block> <a style="color: #95c1d8 !important;"  i18n:translate=""></a>
+								<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Vilkår</button>
+						</strong>
+						
+			
+			</div>
+		
+		
+	
+			
+						<div class="col-xs-6">
+
+		
+					<strong for="contact-email" >E-post:</strong>
+					<input id="contact-email" name="cemail" type="text" class="text required email form-control" value="${session/username}" />
+					
+			
+
+								</div>
+			
+		
+		
+		
+		
+		<div class="col-xs-3 text-right mt-4">
+					<!--<tal:block metal:use-macro="common.html/order-summary" />-->
+						<div class="text-right ">
+							<!--<button class="btn btn-sucsess" onclick="window.location.href='/kasse'">Continue</button>-->
+							<button class="btn btn-success mb-3 call-to-action" i18n:translate="" type="submit" style="margin-right:0;">
+								Next step
+							</button>
+				
+						</div>
+				</div>
+		
+		
+		</div>
+			
+
+
+		
+		
+	
+	
+		
+		 
+		 
+		 
+		
+		
+	
+		<!--</form>-->
+				</div>
+		
+		
+
+		 
+		  
+		  
+	
+		 
+		 </div>
+		    </form>
+	
+
+
+
+
+	
+	
+	
+
+
+
+	 <!-- order summary -->
+   
+			   
+ 	<div metal:use-macro="../../${templates}/common.html/footer" />
+    
+				
+					<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" style="color:red;" class="close ml-1" data-dismiss="modal">&times;</button>
+								<br/>
+        <h4 class="modal-title text-center">GRATIS NAVNELAPPER</h4>
+      </div>
+      <div class="modal-body">
+        
+								    <p>Vi vil at du skal teste oss og våre navnelapper som kan brukes på både tøy og ting.</p>
+
+<p>For å få tilsendt gratis navnelapper må du melde deg på nyhetsbrev fra Dinmerkelapp.no / REPIX AS.</p>
+<p>Det er ingen kjøpsforpliktelser eller bindinger og du kan når som helst melde deg av mottak av informasjon gjennom link nederst i nyhetsbrevet.</p>
+<p>Tilbudet gjelder 1 gang pr. kunde/registrert e-postadresse.</p>
+<p>Vi forbeholder oss retten til å holde tilbake bestillinger ved misbruk av tilbudet.</p>
+<p>For generelle vilkår ved bruk av dinmerkelapp.no les VILKÅR</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Lukk</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+	</div>
+
+<!--<script type="text/javascript" src="/static/js/checkout.js"></script>-->
+<script type="text/javascript" src="${static:gfx/portals/ukeplan/scripts/checkout.js}"></script>
+<script type="text/javascript" src="${static:gfx/portals/ukeplan/scripts/jquery.validate.min.js"></script>
+<script type="text/javascript">
+	
+	
+
+
+
+
+
+
+
+	$(document).ready( function(){
+		
+		$('.open-terms-and-conditions').click( function(){
+				$('#terms-and-conditions').dialog({
+						width: 1024,
+						modal: true,
+						height: 600,
+						title: "Sluttbrukervilkår for Dinmerkelapp",
+						buttons: {
+								"LUKK": function() {
+										$( this ).dialog( "close" );
+								}
+						}
+						
+						});
+				
+				return false;
+				});
+		
+		/*<![CDATA[*/
+		if( $('#contact-name').val() && $('#contact-name').val().length == 0 ){
+				$('#phonelookup').show();
+		}
+		
+		$('#phonelookup').click( function(){
+			
+			$.get("/api/1.0/user/phonelookup/", { phonenumber: $('#phone').val() },
+				function(data){
+				
+				     var result = jQuery.parseJSON( data.result  );
+				     
+				     var middlename = '';
+				     if( result[0].MiddleName && result[0].MiddleName != 'null' ){
+					     var middlename = ' ' + result[0].MiddleName;
+				     }
+				     $('#contact-name').val( result[0].FirstName + middlename + ' ' + result[0].LastName );
+				     //$('#lastname').val( result[0].LastName );
+				     $('#contact-address').val( result[0].Address );
+				     $('#contact-zipcode').val( result[0].ZipCode );
+				     $('#contact-city').val( result[0].City );
+				}, 'json');
+			
+			return false;
+		});
+		
+		
+		$('#delivery-methods-wrapper input:checked').eq(0).click();
+		
+		/*]]>*/
+		});
+   
+   
+	$('form#contact-and-delivery-info').validate({
+		 errorPlacement: function (error, element) {
+			error.appendTo( element.parent() );
+		  },
+		rules: {
+			cname: {
+				required: true,
+				fullname: true
+			},
+			cemail: {
+				required: true,
+				email: true
+			},
+			czipcode: {
+				required: true,
+				minlength: 4
+			},
+			ccity: {
+				required: true
+			},
+			caddress: {
+				required: true
+			},
+			caddress2: {
+				required: false
+			},
+			eula: {
+				required : true
+			},
+			'repeat-password': {
+				equalTo: '#password-new-user'
+			},
+				delivertostore:{
+				required: false
+			},
+				phone:{
+				required : true,
+				digits : true,
+				minlength : 8
+			}
+		},
+		messages: {
+			cname: {
+				required: "<tal:block i18n:translate="">Required</tal:block>",
+				fullname: "<tal:block i18n:translate="">Please enter your first name and surname.</tal:block>"
+			},
+			cemail: {
+				required: "<tal:block i18n:translate="">Påkrevd felt</tal:block>",
+				email: "<tal:block i18n:translate="">Your email address must be in the format of name@domain.com</tal:block>"
+			},
+			czipcode: {
+				required: "<tal:block i18n:translate="">Required</tal:block>",	
+				minlength: "<tal:block i18n:translate="">Please enter at least 4 digits</tal:block>"	
+			},
+			ccity: {
+				required: "<tal:block i18n:translate="">Required</tal:block>"	
+			},
+			caddress: {
+				required: "<tal:block i18n:translate="">Required</tal:block>"	
+			},
+			caddress2: {
+				required: "<tal:block i18n:translate="">Required</tal:block>"	
+			},
+			'repeat-password': {
+				equalTo: "<tal:block i18n:translate="">Oops, your passwords don't match. </tal:block>"
+			},
+			eula: {
+				required: "<tal:block i18n:translate="">Du må godkjenne vilkår</tal:block>"
+			},
+			
+			phone:{
+			   required: "Påkrevd",
+			   number: "Påkrevd"
+			}
+		}
+	});
+	
+</script>
+<!-- Google Code for Utsjekk påstartet Conversion Page -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1070265469;
+var google_conversion_language = "no";
+var google_conversion_format = "2";
+var google_conversion_color = "333333";
+var google_conversion_label = "JcKPCJ3CxAEQ_eir_gM";
+var google_conversion_value = 0;
+//-->
+</script>
+<script type="text/javascript" src="https://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="https://www.googleadservices.com/pagead/conversion/1070265469/?label=JcKPCJ3CxAEQ_eir_gM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+</body>
+</html>

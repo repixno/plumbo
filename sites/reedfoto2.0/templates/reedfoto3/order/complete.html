@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <tal metal:use-macro="../../${templates}/common.html/head" />
+    <style media="all" type="text/css">
+        .price{
+            /*position: absolute;
+            bottom: 10px;
+            right: 0px;*/
+        }
+        .productinfo{
+            position: relative;
+			margin-top: 15px;
+        }
+		
+		.pakketable td{
+			padding: 1px;
+		}
+		.productimage{
+			box-shadow: 3px 3px 1px #999;
+		}
+        
+        * {box-sizing:border-box}
+
+
+    .slideshow-container, .slideshow-container-group {
+        position: relative;
+        width: 100%
+    }
+    .slides-element, .slides-element-group{
+				margin: 5px auto;
+        display: none;
+        /*width: 250px;*/
+    }
+    
+        
+    </style>
+  </head>
+  <body>
+    <tal metal:use-macro="../../${templates}/common.html/header" />
+    
+    <div class="container">
+        
+        <h1>Vi har mottatt din ordre!</h1>
+				<p>
+				Din ordre er no registrert på ordrenr: ${orderid}, og du vil snart motta en ordrebekreftelse på epost.
+				<br />
+				<br />
+				Har du spørsmål kan du kontakte oss på post@reedfoto.no<br/>
+				<br />
+				<!--
+				<form>
+				Ønsker du at andre skal kunne bestiller, kan du legge til mobilnummer her:<br/>
+				<input name="newnumber"> <button>Send</button>
+				</form>
+				-->
+				<a href="http://www.reedfoto.no">Reed Foto AS</a>
+				</p>
+				
+				
+				<p>
+				
+				</p>
+    </div>
+  </body>
+</html>

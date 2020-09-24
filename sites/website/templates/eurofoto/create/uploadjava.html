@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+	
+	<script type="text/javascript" src="${static:js/aurigma/iuembed.js}"></script>
+	<script type="text/javascript" src="${static:js/aurigma/iuembed.InstallationProgress.js}"></script>
+   
+	<style type="text/css">
+		.ScreenStyle {background-color:#ffffff;font-family:verdana;font-size:11px;padding:10px;text-align:center}
+		select {margin:0 0;}
+	</style>
+	
+</head>
+<body>
+
+	<div class="container">
+
+	<tal:block tal:define="global nosubmenurendering">1</tal:block>
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<div id="widecontent">
+		
+		<div class="span-13">
+			<h2 i18n:translate="" class="hide">Order prints</h2>
+			<h3 class="quiet" i18n:translate="">Transfer photos from your computer</h3>
+		</div>
+				
+		<div class="span-10 right last">
+		 <a href="${request/referer}" id="backToProject" class="button green large" i18n:translate="">Go back to project</a>	
+		</div>	
+		
+		<hr class="space" />
+      
+      <tal:block tal:condition="session/loggedin">
+      <div class="box" style="min-height:110px;">
+      <div style="float: right;"><tal:block i18n:translate="">Do you have problems uploading?</tal:block> <a href="/create/upload/flash"><tal:block i18n:translate="">Try our alternative uploader</tal:block></a></div>
+      <h4 i18n:translate="">Choose album to transfer the images to.</h4>
+      <form method="post" action="/create/upload" id="selectalbum">
+      <div class="span-9">
+      	<div class="radioLabel selected" style="min-height:60px;">
+      		<label i18n:translate="">Upload to existing album:</label>
+      		<select name="uploadid" id="uploadid">
+      			<tal:block tal:repeat="album albums">
+      				<option tal:condition="equal:album/id,selected,true" selected="1" value="${album/id}">${album/title}</option>
+      				<option tal:condition="not:equal:album/id,selected,true" value="${album/id}">${album/title}</option>
+      			</tal:block>
+      		</select>
+      		<!--<button type="submit" class="button" id="choose-album" i18n:translate="">Choose</button>-->
+      	</div>
+      </div>
+	  
+      <div class="span-10">
+         <div class="radioLabel selected" style="min-height:60px;">
+         	<label for="new-album" i18n:translate="">Create new album:</label><br/>
+         	<input type="text" id="new-album-title" tal:attributes="value formatdatetime:request/date/full" class="text span-5" />&nbsp;
+         	<button class="create-album" id="create-new-album" i18n:translate="">Create album</button>
+         </div>
+		</div>
+		
+		</form>
+      </div>
+      </tal:block>
+
+      <tal:block tal:condition="not:session/loggedin">
+      <div class="box" style="min-height:20px;">
+      <div style="float: right;"><tal:block i18n:translate="">Do you have problems uploading?</tal:block> <a href="flash/"><tal:block i18n:translate="">Try our alternative uploader</tal:block></a></div>
+      </div>
+      </tal:block>
+					
+      <hr class="space" />		
+      
+      <script language="javascript">
+      
+      <tal:block metal:use-macro="${templateroot}/common/uploader.html/uploader-localization" />
+      
+      var iu = new ImageUploaderWriter("ImageUploader", 950, 650);
+      
+      iu.activeXControlEnabled = true;
+      iu.javaAppletEnabled = true;
+      iu.javaAppletCached = true;
+     
+      iu.activeXControlCodeBase = "http://static.eurofoto.no/js/aurigma/ImageUploader6.cab";
+      iu.javaAppletCodeBase="http://static.eurofoto.no/js/aurigma/";
+   
+      <tal:block metal:use-macro="${templateroot}/common/uploader.html/license-key" />
+      
+      iu.showNonemptyResponse = "off";
+      
+      iu.addParam( "FilesPerOnePackageCount", "1" );
+      iu.addParam("AutoRecoverMaxTriesCount", "5");
+      iu.addParam("AutoRecoverTimeOut", "5000");
+      
+      iu.addParam( "FileMask", "*.jpeg;*.jpg" );
+      iu.addParam( "UploadSourceFile", "true" );
+      iu.addParam( "AllowLargePreview", "true" );
+                                
+      iu.addParam( "ShowDebugWindow", "false" );
+
+      iu.addParam( "BackgroundColor","#ffffff" );
+      iu.addParam( "PaneLayout", "ThreePanes" );
+      iu.addParam( "TreePaneWidth", "150" );
+      iu.addParam( "FolderPaneHeight","300" );
+
+      iu.addParam( "AllowRotate", "false" );
+      iu.addParam( "BackgroundColor", "#ccccff" );
+      iu.addParam( "FolderPaneShowDescriptions", "false" );
+      iu.addParam( "UploadPaneShowDescriptions", "false" );
+      iu.addParam( "ButtonSendText", "<tal:block i18n:translate="">Upload</tal:block>" );
+
+      iu.addParam( "UploadThumbnail1FitMode", "Fit" );
+      iu.addParam( "UploadThumbnail1Width", "100" );
+      iu.addParam( "UploadThumbnail1Height", "100" );
+      iu.addParam( "UploadThumbnail1JpegQuality", "70" );
+      iu.addParam( "PreviewThumbnailActiveSelectionColor","#ff0000" );
+      iu.addParam( "PreviewThumbnailBorderColor","#000000" );
+
+      iu.addParam( "Action", "/upload/receive/SourceFile_1?sessionid=${session/sessionid}" );
+      
+      <tal:block tal:condition="exists:redirecturl">
+      iu.addParam( "RedirectUrl", '${redirecturl}' );
+      </tal:block>
+      
+      iu.addParam( "ShowUploadListButtons", "true" );
+      iu.addParam( "BackgroundColor","#ffffff" );
+      
+      iu.addParam( "TimeOut", "300000" );
+
+      var ip = new InstallationProgressExtender(iu);        
+          
+      ip.setCommonHtml(CommonHtml);
+      ip.setProgressHtml(ProgressHtml);
+      ip.setJavaProgressHtml(ProgressHtml);
+      ip.setBeforeIE6XPSP2ProgressHtml(BeforeIE6XPSP2ProgressHtml);
+      ip.setIE6XPSP2ProgressHtml(IE6XPSP2ProgressHtml);
+      ip.setIE7ProgressHtml(IE6XPSP2ProgressHtml);
+      ip.setIE8ProgressHtml(IE6XPSP2ProgressHtml);
+      ip.setCommonInstallJavaHtml(CommonInstallJavaHtml);
+      ip.setBeforeIE6XPSP2InstructionsHtml(BeforeIE6XPSP2InstructionsHtml);
+      ip.setIE6XPSP2InstructionsHtml(IE6XPSP2InstructionsHtml);
+      ip.setIE7InstructionsHtml(IE7InstructionsHtml);
+      ip.setIE8InstructionsHtml(IE7InstructionsHtml);
+      ip.setUpdateInstructions(UpdateInstructions);
+      ip.setBeforeIE6XPSP2InstallJavaHtml(BeforeIE6XPSP2InstallJavaHtml);
+      ip.setIE6XPSP2InstallJavaHtml(IE6XPSP2InstallJavaHtml);
+      ip.setIE7InstallJavaHtml(IE7InstallJavaHtml);    
+      ip.setIE8InstallJavaHtml(ip.getIE7InstallJavaHtml());
+      ip.setMacInstallJavaHtml(MacInstallJavaHtml);
+      ip.setMiscBrowsersInstallJavaHtml(MiscBrowsersInstallJavaHtml);     
+      
+      ip.setProgressImageUrl("${static:gfx/gui/ajax-loader.gif}");
+
+      ip.setInstructionsCssClass('InstallationScreenStyle');        
+      ip.setProgressCssClass("ScreenStyle");
+      ip.setInstructionsCssClass("ScreenStyle");
+      
+      lang = "en";
+      en_resources.addParams( iu );
+      
+      iu.writeHtml();
+         
+      </script>
+		
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	$(function() {
+	   
+	   $('.radioLabel').radioLabel();		
+			  
+   	$('#create-new-album').click( function() {
+   
+   		//$(this).after(ajaxLoader);
+   
+   		var albumtitle = $('#new-album-title').val();
+   		var self = $(this);
+   
+   			$.post('/api/1.0/album/create/', {
+   				'title': albumtitle
+   			}, function(data) {
+   				if( data.result ) {
+   					$('#uploadid option').attr('selected', 'selected').removeAttr('selected')
+   					$('#uploadid').append('<option selected="selected" value="'+data.album.id+'">'+data.album.title+'</option>');
+   					$('#uploadid').trigger('change');
+   				} else {
+   					alert( createalbumerror );
+   				}
+   			}, 'json'
+   		);
+   		return false;
+   	});
+	  
+   	$('#uploadid').change( function() {
+   
+   		//$(this).after(ajaxLoader);
+   
+   		var albumid = $('#uploadid').val();
+   		var self = $(this);
+         
+         $.post('/api/1.0/upload/setcurrentalbum/', {
+         	'albumid': albumid
+         	}, function(data) {
+               if( data.result ) {
+                  //alert(data.result);
+         		} else {
+         			alert( choosealbumerror );
+         		}
+         	}, 'json'
+         );
+         
+   		return false;
+   		
+   	});
+   	
+   	$('#choose-album').click( function() {
+   
+   		//$(this).after(ajaxLoader);
+   
+   		var albumid = $('#uploadid').val();
+   		var self = $(this);
+   
+         $.post('/api/1.0/upload/setcurrentalbum/', {
+         	'albumid': albumid
+         	}, function(data) {
+               if( data.result ) {
+                  //alert(data.result);
+         		} else {
+         			alert( choosealbumerror );
+         		}
+         	}, 'json'
+         );
+         
+   		return false;
+   		
+   	});
+         
+		$('#backToProject').click( function() {
+			history.go(-1);
+			return false;
+		});
+	});
+	
+	
+	
+//]]>
+</script>
+</body>
+</html>

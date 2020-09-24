@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head metal:use-macro="../common.html/head" />
+
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="../common.html/top" />
+
+	<div metal:use-macro="../common.html/left-menu" />
+	
+	<div id="content">
+		<h2>My Account</h2>
+   
+		Navn: <span tal:replace="session/fullname">navn mangler</span><br />
+		E-post: <a tal:attributes="href string:mailto:${session/username}" tal:content="session/username">namn@domene.no</a>
+   
+		<h3>Your last 10 images:</h3>
+			<script type="text/javascript">
+	$(function() {
+		$(".selectable").selectable();
+	});
+	</script>
+
+		<ul class="selectable">
+			<li>
+				<div class="imagecontainer thumb" tal:repeat="image images">
+					<a href="" tal:attributes="href image/url; title image/title">
+						<img src="" alt="" tal:attributes="src image/thumbnail; alt image/title" />
+					</a>
+			</div>
+			</li>
+	   	</ul>
+	</div>
+		
+	<div metal:use-macro="../common.html/right-menu" />
+
+	<div metal:use-macro="../common.html/footer" />
+	
+</div>
+
+</body>
+</html>

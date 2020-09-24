@@ -1,0 +1,311 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="robots" content="noindex,nofollow"/>
+
+        <link href="/css/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
+		<!--<link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />-->
+        <link href="/css/web/css/redmond/jquery-ui.css" rel="stylesheet" />
+		<div metal:use-macro="../common.html/javascript" />
+		<link href="/css/web/css/editor.css" rel="stylesheet" media="screen" />
+<title>Skanska </title>
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
+		<style>
+		
+	    .bestillknapp{
+		
+		left: 700px;
+		cursor:pointer;
+		    margin-bottom: 70px;
+	    }
+
+		.teksttillokk{
+
+		color: #1077a5;
+    font-family: 'Arial';
+    font-size: 26px;
+
+
+		}
+
+
+
+
+
+		</style>
+
+			<!--cookie
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#edeff5",
+      "text": "#838391"
+    },
+    "button": {
+      "background": "transparent",
+      "text": "#4b81e8",
+      "border": "#4b81e8"
+    }
+  },
+  "content": {
+    "message": "Denne websiden bruker informasjonskapsler (cookies)",
+    "dismiss": "Ok",
+    "link": "Les mer"
+  }
+})});
+</script>
+Cookie Slutt-->
+
+
+
+
+    </head>
+
+     <body>
+	
+	
+		
+		
+			<div class="col-md-12 header">
+				<div class=" col-md-5">
+					<h3 class="text-center" style="color: #002945;">Skanska bildeopplaster</h3>
+				</div>
+			</div>
+		
+
+        <div class="container">
+            <div class="row">
+		<!--editor-->
+	
+		<div class="col-md-12">
+			
+			<br/>
+			<div class="col-md-12">
+			<h3 class="text-center" style="color: #002945">Come safe home!</h3>
+			<p class="text-center" style="color:#002945; font-size: 1.7em;">Create your own sticker for your helmet</p>
+			<br/>
+			</div>
+			<!--image functions -->
+			    <div class="col-md-12">
+					<div class="col-md-12">
+					    <div class="row text-center" style="margin-left: 0px; margin-bottom: 50px;">
+							<h4 class="hidden-phone text-center">1. Upload photo</h4>
+							<button class="btn btn-skanska fileinput-button" style=" width:150px;">
+								<span>Choose photo</span>
+								<!-- The file input field used as target for the file upload widget -->
+								<input id="fileupload" type="file" name="files[]"  data-url="/api/1.0/upload/skanska" accept="image/jpeg"  />
+							</button>
+					    </div>
+				    </div>
+					
+				<div class="row">
+				  <!--  <div class="desktoplabel span2">
+					
+				    </div>-->
+					
+					
+					<div class="row">
+				    <div class="col-md-12 text-center">
+				
+				    
+				
+				<h4>2. Adjust photo</h4>
+				 <div id="progress" class="progress ">
+	<div class="progress-bar progress-bar-success"></div>
+	</div>
+					<div class="col-md-12 text-center knapper" >
+						<div class="scroll hide" id="imagelist">&nbsp;</div>
+		    <div class="text-center">
+				
+				<canvas id="c" width="400" height="480">
+				</canvas>
+				
+				 <div class="col-md-12 text-center">
+						<span class="button zoom" id="zooml" />
+						<span class="button zoom" id="zooms" />
+						<span class="button move" id="left" />
+						<span class="button move" id="up" />
+						<span class="button move" id="down" />
+						<span class="button move" id="right" />
+						<span class="button rotate" id="rotateright" />
+						<span class="button rotate" id="rotateleft" />
+				    </div>
+				
+					
+			</div>
+			
+		<div class="col-md-6 text-center" >
+			
+
+		   
+		
+			</div>
+					
+					</div>
+					</div>
+					
+					
+						</div>
+					
+					
+		
+				   <!-- <div class="hidden-phone desktoplabel span2">
+					
+				    </div>-->
+				   
+			
+			    </div>
+			</div>
+			    <div >
+				    <img />
+			    </div>
+			
+
+			<!-- order section  -->
+			<div class="col-md-12">
+			
+			    <div class="row order">
+				
+				<div class="bestillknapp"><button class="btn btn-skanska2" >Next</button></div>
+			    </div>
+			
+		    </div>
+
+	    </div>
+
+	    </div>
+        </div>
+      <div metal:use-macro="../common.html/footeruk" />
+
+	<script src="/js/jquery.iframe-transport.js"></script>
+	<!-- The basic File Upload plugin -->
+	<script src="/js/jquery.fileupload.js"></script>
+
+
+	<script src="/js/fabric/dist/fabric_with_gestures.js" />
+	<script src="/js/editor_uk.js" />
+
+
+
+	<script>
+
+		var malimage = "/css/mal/150_omriss_400x480.png";
+		var blankimage = "/css/mal/bk_400x480.jpg";
+		var scale = 0.05;
+		$( function(){
+
+			
+
+			$('button#velgbilde').on( 'click',  function(){
+				$('#choosefile').click();
+				return false;
+			});
+
+			$('input#choosefile').on( 'change',  function(){
+				$('#lastoppbilde').click();
+				return false;
+			});
+
+			showloader();
+
+			 $(window).load( hideloader );
+
+
+			$('#facebook').on( 'click', function(){
+			    showloader( );
+			    shareThumb( 'facebook' );
+			    return false;
+			});
+
+			$('.bestillknapp img' ).mouseover( function(){
+                            $(this).attr( 'src', '/css/web/images/bestillknapp-hover.png' );
+                        });
+			$('.bestillknapp img').mouseout( function(){
+                            $(this).attr( 'src', '/css/web/images/bestillknapp.png' );
+                        })
+			$('.bestillknapp img').mousedown( function(){
+                            $(this).attr( 'src', '/css/web/images/bestillknapp.png' );
+                            //window.location.href = '/stabburet/editor';
+
+                        });
+			$('.bestillknapp img').mouseup( function(){
+                            $(this).attr( 'src', '/css/web/images/bestillknapp.png' );
+							//showloader();
+                        });
+
+			$(document).on( 'mousedown', '.button' , function(){
+			    $(this).css( 'background-image' , 'url(/css/web/images/controlsdown.jpg)' );
+			});
+
+			$(document).on( 'mouseup', '.button' , function(){
+			    $(this).css( 'background-image' , '' );
+			});
+
+
+			$('#fileupload').fileupload({
+				replaceFileInput: false,
+				dataType: "json",
+				datatype:"json",
+				xhrFields: {withCredentials: true},
+				acceptFileTypes: /(\.|\/)(jpe?g|tif)$/i,
+				add: function (e, data) {
+
+					//console.log(e);
+					//console.log(data);
+
+					data.context = $('<p id="uploading" style="position: absolute; left: 20px;"/>').text(' Laster opp ...').appendTo($('.progress-bar'));
+					data.submit();
+
+				},
+				done: function (e, data) {
+
+					//console.log(data.result.files);
+
+					$('#uploading').remove();
+
+					$.each(data.result.files, function (index, file) {
+
+						//console.log( index  );
+						//console.log( file  );
+						var image = '<img class="imagethumb" id="' + file.id + '"src="' + file.thumbnailUrl +'" style="height: 75px"  />';
+						$('#imagelist').append( image );
+						ChangeImageSrc( file.id );
+						$('img#' + file.id ).css( 'border-color', "#1077a5" );
+
+					});
+				},
+				progressall: function (e, data) {
+					var progress = parseInt(data.loaded / data.total * 100, 10);
+					$('.progress .progress-bar-success').css(
+						'width',
+						progress + '%'
+					);
+				}
+			});
+
+
+
+
+
+
+
+		});
+
+		
+
+
+		var $idown;
+
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,819 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="/css/web/css/bootstrap.css" rel="stylesheet" media="screen" />
+       <!-- <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />-->
+        <link href="/css/web/css/redmond/jquery-ui.min.css" rel="stylesheet" />
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+	
+        <style type="text/css">
+			
+			
+			
+			
+			.page {
+  padding: 15px 0 0;
+}
+
+.bmd-modalButton {
+  display: block;
+  margin: 15px auto;
+  padding: 5px 15px;
+}
+
+.close-button {
+  overflow: hidden;
+}
+
+.bmd-modalContent {
+  box-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+  
+.bmd-modalContent .close {
+  font-size: 30px;
+  line-height: 30px;
+  padding: 7px 4px 7px 13px;
+  text-shadow: none;
+  opacity: .7;
+  color:#fff;
+}
+
+.bmd-modalContent .close span {
+  display: block;
+}
+
+.bmd-modalContent .close:hover,
+.bmd-modalContent .close:focus {
+  opacity: 1;
+  outline: none;
+}
+
+.bmd-modalContent iframe {
+  display: block;
+  margin: 0 auto;
+}
+
+
+
+
+
+			
+			 @font-face {
+                        font-family: "skanska";
+                        src: url('/skanska/SkanskaSansPro-Regular.ttf');
+                        /*src: url('/fonts/andbasr-webfont.eot?#iefix') format('embedded-opentype'),
+                                 url('/fonts/andbasr-webfont.woff') format('woff'),
+                                 url('/fonts/andbasr-webfont.ttf') format('truetype'),
+                                 url('/fonts/andbasr-webfont.svg#andika_basicregular') format('svg');*/
+                        font-weight: normal;
+                        font-style: normal;
+                }
+				
+				
+           .btn-skanska {
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #0078c9;
+    background-image: -moz-linear-gradient(top, #0092cf, #0078aa);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0092cf), to(#0078aa));
+    background-image: -webkit-linear-gradient(top, #0092cf, #0078aa);
+    background-image: -o-linear-gradient(top, #0092cf, #0078aa);
+    background-image: linear-gradient(to bottom, #0092cf, #0078aa);
+    background-repeat: repeat-x;
+    border-color: #0078aa #0078aa #0092cf;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0092cf', endColorstr='#0078aa', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+
+.error{
+			color: red;
+		}
+		
+		
+		.spacer{
+			margin-bottom: 20px;
+		
+		}
+
+
+        </style>
+
+	<div metal:use-macro="../common.html/javascript" />
+	<script src="/js/checkout_uk.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    </head>
+
+    <body>
+	<tal:block metal:define-macro="show-image">
+	    <tal:block tal:condition="exists:product/images" tal:repeat="image product/images">
+		 <a href="https://static.repix.no/images/products/thumbs/height/500/${image/url}" class="fancybox" title="${product/ingress}">
+		       <img src="https://static.repix.no/images/products/thumbs/height/100/${image/url}" title="${product/title}" height="100" tal:condition="equal:repeat/image/number,1" />
+	       </a>
+	    </tal:block>
+	 </tal:block>
+
+<!--
+        <div class="row text-center hidden-phone header">
+	    <img  src="${static:css/portals/stabburet/web/images/preheader.png}" alt="LAG LOKK MED DITT BILDE"/>
+        </div>-->
+ <tal:block metal:use-macro="../common.html/header" />
+        <div class="container">
+			
+			
+            <!-- Main hero unit for a primary marketing message or call to action -->
+            <div class="content">
+                <div class="col-md-12">
+
+			<div class="col-md-6">
+			   
+			<img  src="/css/web/images/gratulerer_stickers.png" alt=""/>
+			    
+			   
+			</div>
+			 <div class="col-md-6">
+				<img src="/bestill/streamthumb/${lokk/thumbid}"/>
+			    </div>
+
+			
+		</div>
+
+            
+            <div style="margin: 5px 0 25px 0 ">
+		<img src="/css/web/images/blueline.png" />
+	    </div>
+			
+				
+			
+			
+			
+	    <form method="post" action="/stickers/shipping/confirm/" id="contact-and-delivery-info">
+            <div class="col-md-12 form-group">
+				
+				
+	
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<div class="col-md-5">
+					
+					
+					
+					
+					
+					
+				
+				
+				
+			<div tal:condition="session/loggedin">
+				
+				<label for="contact-email" i18n:translate="">E-mail</label>
+				
+				<input id="cemail-display" name="cemail-display" type="text" class="form-control required email" value="${session/username}"
+					tal:attributes="disabled conditionalmatch:session/username,disabled,disabled,disabled"/>
+				<input type="hidden" name="cemail" value="${session/username}"  />
+			</div>
+			<div tal:condition="not:session/loggedin">
+			 
+			 
+			
+			  <div class="col-md-12 form-group">
+				
+				<label for="contact-email">E-mail</label>
+				
+				
+				<input id="contact-email" name="cemail" type="text" class="form-control text required email" value="" />
+				</div>
+			 
+			</div>
+
+		<div id="delivery-address">
+			
+			
+		   <div class="col-md-12 form-group">
+			    <label for="contact-name">Firstname / Lastname:</label>
+			
+			    <input id="contact-name" name="cname" type="text" class="text required name form-control" value="${user/fullname}"/>
+		   </div>
+		     
+		  
+		  
+		  
+		  
+		  
+		  <div class="col-md-12 form-group">
+			    <label for="contact-address">Privateaddress:</label>
+		
+		
+			    <textarea id="contact-address" name="caddress" style="height: 50px;" tal:content="user/address" class="required form-control" cols="30" rows="6"/>
+		  </div>
+		     
+		  
+		  
+		  
+		  <div class="col-md-12 form-group">
+		 
+			    <label for="contact-zipcode">ZIP code:</label>
+		
+			
+			    <input id="contact-zipcode" name="czipcode" type="text" class="text required form-control" value="${user/zipcode}"/>
+			   </div>
+		 
+			
+			
+			 <div class="col-md-12 form-group">
+				 <label for="phone" >City:</label>
+			    <input id="contact-city" name="ccity" type="text" class="text required form-control" value="${user/city}"/>
+			    <input type="hidden" id="contact-country" name="ccountry" value="NO"/>
+			 </div>
+		   
+			
+		   <div class="col-md-12 form-group">
+			    <label for="phone" >Phone:</label>
+		
+		
+			    <input id="phone" name="phone" type="text" class="text required form-control" tal:attributes="value user/mobile|default" value=""/>
+		   </div>
+			
+			
+			<!--<div class="span2">
+				<label>Kjønn</label>
+			</div>
+			<div class="span2">
+				<select name="kjonn">
+					<option disabled="disabled" selected="selected">Velg</option>
+					<option value="M">Mann</option>
+					<option value="K">Kvinne</option>
+				</select>
+			</div>-->
+			
+		   </div>
+		</div>
+				
+				
+				
+				
+				
+								<div class="col-md-7">
+				
+				
+					<div class=" justering">
+		<input type="checkbox" id="eula" class="required" name="eula" />
+	
+	<div class="">
+		<label class="notice" for="eula"><strong>I AGREE TERMS AND CONDITIONS:</strong>  <a href="#" id="rulesbutton"><button type="button" class="btn btn-skanska" data-toggle="modal" data-target="#myModal2">TERMS AND CONDITIONS</button><br/>
+			
+			<!-- Trigger the modal with a button -->
+
+<div class="spacer"></div>
+<!-- Modal -->
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title text-center">Vilkår for bruk</h2>
+      </div>
+      <div class="modal-body">
+        
+		<h4 class="text-center">Velkommen til Skanskas nettsted. Disse vilkårene gjelder for nettstedet, og vi ber deg om å lese dem grundig.</h4>
+		<br/>
+		<p style="font-style: italic;">
+
+Vilkårene inneholder informasjon om hvordan du kan bruke innholdet på nettstedet, hvordan vi behandler personopplysningene dine og hvilke informasjonskapsler som brukes på nettstedet. «Skanska», «oss» eller «vi» henviser til Skanska Norge AS (som leverer dette nettstedet) eller andre bedrifter i Skanska-gruppen. Skanskas nettsted, og disse vilkårene, er utarbeidet i samsvar med norsk lov.
+		</p>
+<h3 class="text-center">Opphavsrett og andre immaterielle rettigheter</h3>
+
+<h3 class="text-center"> Informasjon om opphavsrett og varemerker</h3>
+<p style="font-style: italic;">
+Alle rettigheter til innholdet på nettstedet, for eksempel tekst, grafikk, logoer, bilder, filmklipp, lydfiler og programmer, tilhører Skanska eller tredjepart og er underlagt norsk og internasjonal lov om opphavsrett. Med enerett.
+Innholdet på nettstedet leveres som en tjeneste og skal kun brukes i samsvar med vilkårene nedenfor. Når du laster ned materiale fra nettstedet, godtar du vilkårene.
+Uautorisert bruk eller distribusjon av innholdet fra nettstedet kan utgjøre brudd på opphavsrett eller andre norske eller internasjonale lover og kan føre til rettslige skritt.
+</p>
+<h3 class="text-center">Bruk av Skanskas varemerker</h3>
+<p style="font-style: italic;">
+Skanskas varemerker og merkevarer skal kun brukes i samsvar med disse vilkårene eller som følge av skriftlig godkjenning fra Skanska. Bruk av Skanskas varemerker i forbindelse med reklame og markedsføring av Skanskas produkter og tjenester krever skriftlig godkjenning.
+</p>
+<h3 class="text-center">Ansvarsfraskrivelse</h3>
+<p style="font-style: italic;">
+Informasjonen på nettstedet er generell og skal ikke brukes som eneste beslutningsgrunnlag i viktige saker. Vi arbeider kontinuerlig for å sikre at nettstedet er nøyaktig, fullstendig og oppdatert, men det finnes alltid en risiko for at for eksempel skrivefeil, ekstern påvirkning og tekniske problemer fører til villedende informasjon. Det betyr at Skanska ikke kan garantere at informasjonen alltid er korrekt, fullstendig og oppdatert, og Skanska kan heller ikke holdes ansvarlig for dette.
+Hvis Skanska lenker til eksterne nettsteder, er lenkene kun ment for å hjelpe brukeren. Skanska kan ikke holdes ansvarlig for innholdet på slike nettsteder.
+</p>
+<h3 class="text-center">Materiale fra brukere</h3>
+<p style="font-style: italic;">
+Alt materiale og kommunikasjon som overføres til, eller som legges ut på nettstedet i forbindelse med at du bruker funksjoner på nettstedet, anses som ikke-konfidensielt. Skanska har rett til å bruke slikt materiale til både kommersielle og ikke-kommersielle formål.
+Når du bruker nettstedet, skal du ikke overføre materiale eller informasjon som er ulovlig, som kan oppfattes som støtende, som inneholder markedsføring eller som på andre måter kan bli oppfattet som upassende. Slikt innhold fjernes fra nettstedet, og vi forbeholder oss retten til å avslutte tjenester som du har brukt på nettstedet.
+Hvis materiale og kommunikasjon som sendes til oss via nettstedet, inneholder personopplysninger, gjelder informasjonen i avsnittet Behandling av personopplysninger.
+</p>
+<h3 class="text-center">Diverse</h3>
+<p style="font-style: italic;">
+Skanska kan når som helst endre disse vilkårene, velge å vise eller fjerne innlegg og innhold på nettstedet eller å legge ned nettstedet. Hvis vilkårene endres, legges det ut en ny versjon på nettstedet. Du bør derfor holde deg oppdatert på dette.
+</p>
+<h3 class="text-center">Behandling av personopplysninger</h3>
+Innledning
+<p style="font-style: italic;">
+Personvern er viktig for oss, og vi arbeider alltid for å sikre god beskyttelse ved all behandling av personopplysninger. I EU/EØS gjelder personvernforordningen fra mai 2018[1].
+I samsvar med gjeldende personopplysningslov har Skanska Norge AS eller bedriften som er oppgitt som behandlingsansvarlig, ansvaret for behandlingen av dine personopplysninger, som beskrevet nedenfor. Hvis du har spørsmål om denne informasjonen, eller hvis du ønsker å benytte deg av dine rettigheter, kan du kontakte Skanska, som beskrevet nedenfor.
+Innsamling og behandling av personopplysninger
+Begrepet «personopplysninger» brukes om informasjon som kan henvise til deg som enkeltperson, enten direkte eller indirekte. Eksempler på slike opplysninger er navn, bilde, personnummer, kontaktinformasjon, deltakelse i konkurranser, valg, adferd eller IP-adresser. Behandling av personopplysninger henviser til alle handlinger hvor vi, eller tredjepart som arbeider på vegne av oss, bruker personopplysninger, for eksempel innsamling, registrering og lagring.
+Personopplysninger skal kun behandles i forbindelse med konkrete og eksplisitt angitte formål. De kan ikke behandles for andre formål enn de ble samlet inn for.
+I Skanska behandler vi personopplysninger som du har gitt oss i forbindelse med henvendelser og avtaler fra/med deg, samt for å gi deg informasjon og levere tjenester som følge av slike henvendelser og avtaler.
+Personopplysninger behandles også i forbindelse med statistikk, slik at vi skal kunne finne ut hvordan brukere bruker nettstedet og analysere søkeadferd, samt for å kunne vise innhold som er tilpasset deg. Slike opplysninger behandles kun i aggregert form eller i en slik form at du ikke kan identifiseres. Opplysningene behandles også indirekte i forbindelse med utvikling, testing og administrasjon av IT-systemene som driver nettstedet vårt.
+Når du bruker funksjoner på nettstedet som lar deg legge inn informasjon eller annet materiale, kan slik informasjon også inneholde personopplysninger.
+</p>
+
+<h3 class="text-center">Juridisk grunnlag for behandling og lagringsperiode</h3>
+<p style="font-style: italic;">
+Skanska behandler personopplysningene dine når det er nødvendig for at vi skal kunne oppfylle vår avtale med deg, samt når vi har andre legitime interesser for å behandle dem, for eksempel når vi markedsfører oss til de som bruker nettstedet vårt eller i forbindelse med videreutvikling av nettstedet eller produktene og tjenestene våre. Hvis vi behandler personopplysningene dine for et formål som lovverket krever samtykke til, vil vi innhente samtykke fra deg før behandlingen påbegynnes.
+Opplysningene som vi samler inn, som beskrevet tidligere, slettes når formålet for behandlingen er oppfylt.
+</p>
+
+<h3 class="text-center">Personvern</h3>
+<p style="font-style: italic;">
+Skanska beskytter personopplysningene dine med strenge sikkerhetstiltak, og vi har iverksatt egnede tekniske og organisatoriske sikkerhetstiltak for å beskytte personopplysningene mot uautorisert tilgang, endringer, formidling og ødeleggelse.
+</p>
+
+<h3 class="text-center">Begrensninger for utlevering av personopplysninger</h3>
+<p style="font-style: italic;">
+Vi kan engasjere eksterne partnere til å utføre oppgaver på vegne av oss, for eksempel for å levere IT-tjenester eller bistå med markedsføring, administrering av pressemeldinger, dataanalyser og statistikk. Utførelsen av disse tjenestene kan innebære at våre partnere, både i og utenfor EU/EØS, får tilgang til personopplysningene dine. Bedrifter som behandler personopplysninger på vegne av oss, må alltid inngå en databehandleravtale med oss slik at vi kan sikre at personopplysningene dine forblir beskyttet også hos partnerne våre.
+Det er iverksatt konkrete sikkerhetstiltak for partnere utenfor EU/EØS, for eksempel i form av en avtale om dataoverføring, som inneholder de standardiserte klausulene for dataoverføring fra EU-kommisjonen. Disse er tilgjengelige på EU-kommisjonens nettsted.
+Skanska kan også utlevere personopplysningene dine til tredjepart, for eksempel Politiet eller andre offentlige myndigheter, i forbindelse med etterforskning eller hvis vi på andre måter er pålagt å utlevere slike opplysninger på grunn av lovverk eller avgjørelser fra offentlige myndigheter. 
+Skanska utleverer aldri dine personopplysninger på andre måter enn som beskrevet i dette avsnittet.
+</p>
+
+<h3 class="text-center">Kontaktinformasjon</h3>
+<p style="font-style: italic;">
+Skanska Norge AS er behandlingsansvarlig for behandling av personopplysningene dine. Hvis du har spørsmål om hvordan vi behandler personopplysningene dine, eller hvis du ønsker informasjon om, og kontaktinformasjon til personvernombud eller den som har ansvaret for personopplysninger i andre bedrifter i Skanska-gruppen, kan du kontakte oss per e-post eller post.
+</p>
+<br/>
+
+	<a href="mailto:shared@skanska.no">Data Protection Manager: shared@skanska.no </a>
+<p>Skanska Norge AS</p>
+<p>Postboks 1175, Sentrum</p>
+<p>0107 Oslo</p>
+	
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-skanska" data-dismiss="modal">Lukk</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+			</a></label>
+	
+</div>
+		
+	
+		<!-- Artikkel 2875-->
+	
+		    <div class="text-left">
+			<input type="checkbox" id="orklastats" name="orklastats" />
+		    </div>
+		    <div class="col-md-12">
+			<label class="notice" for="orklastats"><strong>Newsletter from CEWE:</strong> <br/></label>
+		    </div>
+		
+
+
+															
+
+
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-skanska" data-toggle="modal" data-target="#myModal">More information</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content" style="width: 961px; height: 550px; text-align: center;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body bakgrunn" style="background:url(/images/popup.jpg); width: 950px; height: 345px;">
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-skanska" data-dismiss="modal">Lukk</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+  
+	
+	
+		<br/>
+
+	<br/>
+
+
+		<div class="row text-right" style="height:52px;">
+		    <a  href="#" id="add-to-cart" class="btn btn-skanska" style="position: absolute; bottom: 0; right: 0">NEXT</a>
+		    <!--<img id="add-to-cart" tyle="position: absolute; bottom: 0; right: 0"  src="${static:css/portals/stabburet/web/images/send.png}" />-->
+		</div>
+
+
+
+	    </div>
+		 </div>
+								
+								
+            </div>
+	   
+	
+	
+	
+		<!-- Artikkel 2875-->
+
+
+	</form>
+</div>
+	</div>	
+		
+		
+        <div metal:use-macro="../common.html/footer2" />
+
+	<div id="dialog" title="&nbsp;" style="display: none;">
+	    <img id="image" src=""/>
+	</div>
+	<div id="dialog-confirm" title="Start på nytt?" style="display: none; height:110px">
+	    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Du er i ferd med å slette ditt lokk og begynne på et nytt.<br/>
+	    Er du sikker på at du ønsker dette?</p>
+	</div>
+
+
+
+	<tal:block tal:condition="exists:cart/items/gifts/7307">
+	   <div class="skirts">
+		<tal:block tal:repeat="item cart/items/gifts/7307">
+		    <span id="${item/optionid}" val="${item/quantity}" />
+		</tal:block>
+	    </div>
+	</tal:block>
+
+
+    <script>
+
+
+
+//ny checkbox
+		$(document).ready(function() {
+    $('#orklaannonse').change(function() {
+        $('#orkla3part').toggle();
+    });
+});
+			//ny checkbox slutt
+	
+	
+	
+		//ny checkbox
+		$(document).ready(function() {
+    $('#orklatilpasninger').change(function() {
+        $('#newsletter-orkla').toggle();
+    });
+});
+			//ny checkbox slutt		
+			
+
+
+	/*<![CDATA[*/
+	$(document).ready(function() {
+	    var totalskirts = 0;
+	    
+		$('#contact-email').on( 'change', function(){
+			$(this).val( $(this).val().replace(/\s/g, ''));
+			});
+
+		$('#antallbarn').on( 'change', function(){
+
+			$('.alder').empty();
+
+				var antall = $(this).val();
+
+				for (i = 0; i < antall; i++) {
+					console.log(i);
+
+					$('.alder').append("<label class=\"notice\">Alder :<select class=\"span1\">" +
+									   "<option>1</option>" +
+									   "<option>2</option>" +
+									   "<option>3</option>" +
+									   "<option>4</option>" +
+									   "<option>5</option>" +
+									   "<option>6</option>" +
+									   "</select></label>");
+				}
+
+			});
+
+	     $('.skirts span').each( function(){
+		    totalskirts += parseInt( $(this).attr('val') );
+		    $( '#option'  + $(this).attr('id')  ).attr( 'value',  $(this).attr('val') );
+		    $('.product-quantity').text( totalskirts );
+		});
+
+
+	    $('.fancybox').click( function(){
+		var src = $(this).attr( 'href' );
+		$('#image').attr( 'src', src );
+
+		$('#dialog').dialog({
+		    modal: true,
+		    resizable: false,
+		    draggable: false
+		});
+		return false;
+	    });
+
+
+	    $('#startover').on( 'click', function(){
+		    $( "#dialog-confirm" ).dialog({
+			resizable: false,
+			height:200,
+			modal: true,
+			buttons: {
+			  "Start på nytt": function() {
+			    window.location =  '/bestill/editor/startover';
+			  },
+			  Cancel: function() {
+			     $( this ).dialog( "close" );
+			  }
+			}
+		    });
+
+		    return false;
+		});
+
+
+	$('input.quantity').before('<a href="#" class="button changequantity large">-</a>').prev().click( function() {
+	    if ( parseInt( $(this).next().attr('value') ) <= 0) { return false };
+	    $(this).next().attr('value', parseInt( $(this).next().attr('value') ) - 1);
+	    $(this).next().trigger('change');
+	    return false;
+	});
+	$('input.quantity').after('<a href="#" class="button changequantity large">+</a>').next().click( function() {
+	    $(this).prev().attr('value', parseInt( $(this).prev().attr('value') ) + 1);
+	    $(this).prev().trigger('change');
+	    return false;
+	});
+
+	$('#add-to-cart').on('click', function() {
+		   //$(this).attr('disabled','disabled').before($('<img src="http://static.repix.no/gfx/gui/ajax-loader.gif" />'));
+			if( $('#contact-and-delivery-info').valid() ){
+			    $('#products li').each( function(i, item) {
+
+				/*
+				    if( $('input.quantity', item ).val() > -1 || $(item).hasClass('more-options') ) {
+					if( orderGift( $(item).data('id'), $(item).data('optionid'),  $(item).data('prodno'), $('input.quantity', item).val(), $(item).data('lokkid') ) ) {
+					    addedToCart = true;
+					}
+				    }
+				*/
+
+
+
+				if ( $(item).hasClass('gift') && $(item).hasClass('one-option') ) {
+
+				    if( orderGift( $(item).data('id'), $(item).data('optionid'),  $(item).data('prodno'), $('input.quantity', item).val(), $(item).data('lokkid') ) ) {
+					    addedToCart = true;
+				    }
+
+				} else if ( $(item).hasClass('gift') && $(item).hasClass('more-options') ) {
+
+					var optionsContainer = $('a.open-options', item).attr('href');
+					$('tr', optionsContainer).each( function(i, option) {
+
+						if( $('input', option).val() > -1) {
+
+							if( orderGift( $(option).data('id'), $(option).data('optionid'), $(option).data('prodno'), $('input.quantity', option).val() ,$(item).data('lokkid') ) ) {
+								addedToCart = true;
+							}
+						}
+					});
+				}
+
+
+			    //$('#contact-and-delivery-info').submit();
+			    });
+			}
+			$('#contact-and-delivery-info').submit();
+			//window.location.href = '/checkout/confirm';
+			return false;
+		});
+
+
+	});
+
+	function orderGift( id, optionid, prodno, quantity, lokkid ) {
+	    var finished = false;
+	    var malid;
+	    var malpageid;
+	    var ratio;
+	    var x = 0;
+	    var y = 0;
+	    var malarray = new Array();
+
+	    switch( optionid ){
+		case '3327': //magnet
+		    malid 	= '2695';
+		    malpageid 	= '6171';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '402';
+		    dy		= '402';
+		break;
+	
+	
+case '5500': //Popsocket
+		    malid 	= '3141';
+		    malpageid 	= '7184';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '224';
+		    dy		= '224';
+		break;
+		
+	    }
+
+	    x = x / ratio;
+	    y = y / ratio;
+
+	    var pages = new Array();
+	    pages.push();
+	    pages[0] = new Object();
+	    pages[0].malid = malid;
+	    pages[0].malpageid = malpageid;
+	    pages[0].giftQuantity = quantity;
+	    pages[0].productoptionid = optionid;
+	    pages[0].productid = id;
+	    pages[0].size = "small";
+	    pages[0].lokkid = lokkid;
+	    pages[0].prodno = prodno;
+	    /*pages[0].editor_x = tmplx / ratio;
+	    pages[0].editor_y = tmply / ratio;
+	    pages[0].image = new Object()
+	    pages[0].image.x = (-crop.x1 + x ) * ratio;
+	    pages[0].image.y = (-crop.y1 + y ) * ratio;
+	    pages[0].image.dx = crop.imagewidth * ratio;
+	    pages[0].image.dy = crop.imageheight * ratio;
+	    //pages[0].image.dx = 1068.0619047619048;//$('#image').width() * ratioWidth;
+	    //pages[0].image.dy = 728.4705882352941; //$('#image').height() * ratioHeight;
+	    pages[0].image.bid = imageid;
+	    pages[0].texts = new Array();
+	    pages[0].cliparts = new Array();*/
+	    /*if( quantity > 0 ){
+		console.log( pages );
+	    }*/
+
+
+	    $.ajax({
+		    type: 'POST',
+		    url: '/bestill/save',
+		    async: false,
+		    data: {
+			    'pages'	: JSON.stringify( pages )
+		    },
+		    complete: function(msg) {
+			    addedToCart = true;
+			    finished = true;
+		    },
+		    success: function(msg) {
+			    addedToCart = true;
+			    finished = true;
+		    },
+		    error: function(msg) {
+			    alert('error' + msg);
+		    }
+	    });
+
+	    return finished;
+	}
+
+
+	$('.open-options').click( function() {
+
+			var id = $(this).attr('href');
+			var item = $(this).parent();
+			var quantity = 0;
+
+			//$(id).dialog('open');
+			$(id).dialog({
+				'resizable'	:	'false',
+				'width': '250'
+			});
+			return false;
+		});
+
+	$('input', '.product-options').bind('change', function() {
+			var container = $(this).attr('rel');
+			var totalQuantity = 0;
+			$(this).parent().parent().parent().find('input').each( function(i, item) {
+				totalQuantity = totalQuantity + parseInt( $(item).val() );
+			});
+			$('.product-quantity', container).text( totalQuantity );
+		});
+
+	/*]]>*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(function($) {
+    
+    $.fn.bmdIframe = function( options ) {
+        var self = this;
+        var settings = $.extend({
+            classBtn: '.bmd-modalButton',
+            defaultW: 640,
+            defaultH: 360
+        }, options );
+      
+        $(settings.classBtn).on('click', function(e) {
+          var allowFullscreen = $(this).attr('data-bmdVideoFullscreen') || false;
+          
+          var dataVideo = {
+            'src': $(this).attr('data-bmdSrc'),
+            'height': $(this).attr('data-bmdHeight') || settings.defaultH,
+            'width': $(this).attr('data-bmdWidth') || settings.defaultW
+          };
+          
+          if ( allowFullscreen ) dataVideo.allowfullscreen = "";
+          
+          // stampiamo i nostri dati nell'iframe
+          $(self).find("iframe").attr(dataVideo);
+        });
+      
+        // se si chiude la modale resettiamo i dati dell'iframe per impedire ad un video di continuare a riprodursi anche quando la modale è chiusa
+        this.on('hidden.bs.modal', function(){
+          $(this).find('iframe').html("").attr("src", "");
+        });
+      
+        return this;
+    };
+  
+})(jQuery);
+
+
+
+
+jQuery(document).ready(function(){
+  jQuery("#myModal").bmdIframe();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

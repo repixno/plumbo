@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="${i18n/country}">
+<head>
+	<tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" />
+	<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/head" />
+</head>
+<body>
+	
+<div class="container">
+	<div metal:use-macro="${templateroot}/${templates}/common.html/top" />	
+</div>
+
+
+<div id="account">
+
+	<div class="container">
+	
+		<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/account-menu" />
+	
+		<div class="span-15">
+			<h3>Headline</h3>
+			<div class="account-content-box">
+				<h4>.account-content-box</h4>
+			</div>
+		
+		</div>
+		
+		<div class="span-9 last">
+			<h3>Headline</h3>	
+			<div class="account-content-box">
+				<h4>.account-content-box</h4>	
+			</div>
+		</div>
+	
+	</div>
+
+</div>
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="${templateroot}/${templates}/common.html/footer" />
+		<div metal:use-macro="${templateroot}/${templates}/account/common.html/footer" />
+	</div>
+</div>	
+
+</body>
+</html>

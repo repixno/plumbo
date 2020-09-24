@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin statistikk</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<!--<h2>Eurofoto Smilfoto Orders Admin</h2>-->
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		
+		<div class="span-24 last">
+                    <form method="GET" style="margin: 5px; padding: 5px; background-color: lightgrey;">
+                 
+                        <label for="from">FRA:</label>
+                        <input type="text" name="from" value="${from}"/>
+                        <label for="to">TIL:</label>
+                        <input type="text" name="to" value="${to}"/>
+                        <input type="submit" value="Enter"/>
+                    </form>
+                </div>
+                
+                <div class="right" style="width:940px;">
+         	
+			   <a href="/stabburet/stats2018/xls?from=${from}&to=${to}" i18n:translate="">Download as .XLS</a>
+			 
+         	</div>
+		<div class="span-24 last"><h3>Bestilte Stabburet</h3>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+								    <th>
+                                    Antall
+                                </th>  
+									 
+								 <th>
+                                    Ordrenr
+                                </th>
+                                <th>
+                                    Navn
+                                </th>
+								<th>
+                                    Adresse
+                                </th>
+								<th>
+                                    Postnr
+                                </th>
+								<th>
+                                    Sted
+                                </th>
+								<th>
+                                    Mobil
+                                </th>
+								<th>
+                                    Epost
+                                </th>
+                                
+								<th>
+                                    Nyhetsbrev samtykke Orkla 2017
+                                </th>
+                                <th>
+                                  newsletter JP 2017
+                                </th>
+								
+								<th>
+                                   3 part orkla 2017 
+                                </th>
+								
+								<th>
+                                 statistikk markedsføring orkla 2017
+                                </th>
+								
+								
+                                <th>
+                                    Nyhetsbrev samtykke Orkla 2018
+                                </th>
+                                <th>
+                                    Tilpassninger 2018
+                                </th>
+								
+								<th>
+                                    Annonser 2018
+                                </th>
+								
+								<th>
+                                  Repix Nyhetsbrev 2018
+                                </th>
+								<th>
+                                  Kunde registrert
+                                </th>
+								<th>
+                                    Enhets
+                                </th>
+								<th>
+                                    Tidspunkt
+                                </th>
+								<th>
+                                    Malid
+                                </th>
+								<th>
+                                    Tekst til produkt
+                                </th>
+								<th>
+                                    Produkt
+                                </th>
+								
+								
+                            </tr>
+                        </thead>
+                        <tbody tal:condition="exists:stats">
+						<tr tal:repeat="order stats">
+							     <td tal:content="repeat/order/key">
+								
+							</td>
+						<td tal:content="order/ordrenr" />
+						<td tal:content="order/namn" />
+						<td tal:content="order/adresse1" />
+						<td tal:content="order/postnr" />
+						<td tal:content="order/sted" />
+						<td tal:content="order/mphone" />
+						<td tal:content="order/epost" />
+                        <td tal:content="order/newsletter" />
+						<td tal:content="order/newsletter_others" />
+							<td tal:content="order/newsletter_others_2" />
+						<td tal:content="order/newsletter_others_3" />
+						<td tal:content="order/newsletter_orkla" />
+						<td tal:content="order/stabburet_tilpassninger" />
+							<td tal:content="order/stabburet_annonser" />
+						<td tal:content="order/newsletter_repix" />
+                        
+                        <td tal:content="order/registrert" />
+						<td tal:content="order/source" />
+						<td tal:content="order/tidspunkt" />
+						<td tal:content="order/malid" />
+						<td tal:content="order/text" />
+						<td tal:content="order/tekst" />
+						</tr>
+                        </tbody>
+                        
+                        
+                        
+                    </table>
+                    
+                    
+		 
+		
+		</div>
+        </div>
+    
+    
+</body>
+</html>

@@ -1,0 +1,175 @@
+
+<tal:block metal:define-macro="license-key">
+iu.addParam( "LicenseKey","71068-20000-03B1D-0A95C-68C88;72068-20000-E6368-317AF-0C281;71068-10000-66E0C-025EE-5D2E3;72068-10000-2D013-52827-1DEB6;72068-10000-F56A9-7DAD5-B86A9;71068-10000-A4692-D2FF9-020A1;71068-10000-31B20-CB189-F63FA;72068-10000-89DF4-7EEDA-44949;71068-10000-46063-0FAA0-EF4C8;72068-10000-14A50-D8C3F-34EFC;71068-20000-DC060-0F768-F07AF;72068-20000-C87ED-40710-2728F;72068-10000-7C255-4914F-B30AF" );
+</tal:block>
+
+<tal:block metal:define-macro="uploader-localization">
+ 		
+         en_resources = {
+             addParams: IULocalization.addParams,
+         
+             Language: "English",
+         
+             ImageUploaderWriter: {
+                 //REVIEW
+                 instructionsCommon: "<p><tal:block i18n:translate="">Image Uploader ActiveX control is necessary to upload your files quickly and easily. You will be able to select multiple images in user-friendly interface instead of clumsy input fields with Browse button.Installation will take up to few minutes, please be patient. To install Image Uploader, </tal:block>",
+                 //REVIEW
+                 instructionsNotWinXPSP2: "<tal:block i18n:translate="">please reload the page and click the Yes button when you see the control installation dialog.</tal:block>",
+                 //REVIEW
+                 instructionsWinXPSP2: "<tal:block i18n:translate="">please click on the Information Bar and select Install ActiveX Control from the dropdown menu. After page reload click Install when you see the control installation dialog.</tal:block>",
+                 //REVIEW
+                 instructionsVista: "<tal:block i18n:translate="">please click on the Information Bar and select Install ActiveX Control from the dropdown menu. After page reload click Continue and then Install when you see the control installation dialog.</tal:block>",
+                 instructionsCommon2: "</p>"
+             },
+         
+             ImageUploader: {
+                 AddFolderDialogButtonCancelText: "<tal:block i18n:translate="">Cancel</tal:block>",
+                 AddFolderDialogButtonSkipAllText: "<tal:block i18n:translate="">Skip All</tal:block>",
+                 AddFolderDialogButtonSkipText: "<tal:block i18n:translate="">Skip</tal:block>",
+                 AddFolderDialogTitleText: "<tal:block i18n:translate="">Adding folder...</tal:block>",
+                 AuthenticationRequestBasicText: "<tal:block i18n:translate="">[Name] requires authentication.</tal:block>",
+                 AuthenticationRequestButtonCancelText: "<tal:block i18n:translate="">Cancel</tal:block>",
+                 AuthenticationRequestButtonOkText: "<tal:block i18n:translate="">OK</tal:block>",
+                 AuthenticationRequestDomainText: "<tal:block i18n:translate="">Domain:</tal:block>",
+                 AuthenticationRequestLoginText: "<tal:block i18n:translate="">Login:</tal:block>",
+                 AuthenticationRequestNtlmText: "<tal:block i18n:translate="">[Name] requires authentication.</tal:block>",
+                 AuthenticationRequestPasswordText: "<tal:block i18n:translate="">Password:</tal:block>",
+                 ButtonAddAllToUploadListText: "<tal:block i18n:translate="">Add all</tal:block>",
+                 ButtonAddFilesText: "<tal:block i18n:translate="">Add Files...</tal:block>",
+                 ButtonAddFoldersText: "<tal:block i18n:translate="">Add Folders...</tal:block>",
+                 ButtonAddToUploadListText: "<tal:block i18n:translate="">Add</tal:block>",
+         
+                 ButtonAdvancedDetailsCancelText: "<tal:block i18n:translate="">Cancel</tal:block>",
+         
+                 ButtonCheckAllText: "<tal:block i18n:translate="">Check All</tal:block>",
+
+                 ButtonDeleteFilesText: "<tal:block i18n:translate=""></tal:block>", //"Delete Files"
+                 ButtonDeselectAllText: "<tal:block i18n:translate="">Deselect All</tal:block>",
+                 ButtonPasteText: "<tal:block i18n:translate=""></tal:block>", //"Paste"
+                 ButtonRemoveAllFromUploadListText: "<tal:block i18n:translate="">Remove All</tal:block>",
+                 ButtonRemoveFromUploadListText: "<tal:block i18n:translate="">Remove</tal:block>",
+                 ButtonSelectAllText: "<tal:block i18n:translate="">Select All</tal:block>",
+                 ButtonSendText: "<tal:block i18n:translate="">Send</tal:block>",
+         
+                 ButtonStopText: "<tal:block i18n:translate=""></tal:block>",
+
+                 ButtonUncheckAllText: "<tal:block i18n:translate="">Uncheck All</tal:block>",
+         
+                 CmykImagesAreNotAllowedText: "<tal:block i18n:translate="">File is CMYK</tal:block>",
+                 DescriptionEditorButtonCancelText: "<tal:block i18n:translate="">Cancel</tal:block>",
+                 DescriptionEditorButtonOkText: "<tal:block i18n:translate="">OK</tal:block>",
+         
+                 DeleteFilesDialogTitleText: "<tal:block i18n:translate="">Confirm File Delete</tal:block>",
+         
+                 DeleteSelectedFilesDialogMessageText: "<tal:block i18n:translate="">Are you sure you want to permanently delete selected items?</tal:block>",
+         
+                 DeleteUploadedFilesDialogMessageText: "<tal:block i18n:translate="">Are you sure you want to permanently delete uploaded items?</tal:block>",
+                 DimensionsAreTooLargeText: "<tal:block i18n:translate="">Image is too large</tal:block>",
+                 DimensionsAreTooSmallText: "<tal:block i18n:translate="">Image is too small</tal:block>",
+                 DropFilesHereText: "<tal:block i18n:translate="">Drop files here</tal:block>",
+                 EditDescriptionText: "<tal:block i18n:translate="">Edit description...</tal:block>",
+         
+                 ErrorDeletingFilesDialogMessageText: "<tal:block i18n:translate="">Could not delete [Name]</tal:block>",
+                 FileIsTooLargeText: "<tal:block i18n:translate="">File is too large</tal:block>",
+                 FileIsTooSmallText: "<tal:block i18n:translate="">File is too small</tal:block>",
+                 HoursText: "<tal:block i18n:translate="">hours</tal:block>",
+                 IncludeSubfoldersText: "<tal:block i18n:translate="">Include subfolders</tal:block>",
+                 KilobytesText: "<tal:block i18n:translate="">kilobytes</tal:block>",
+                 LargePreviewGeneratingPreviewText: "<tal:block i18n:translate="">Generating preview...</tal:block>",
+                 LargePreviewIconTooltipText: "<tal:block i18n:translate="">Preview Thumbnail</tal:block>",
+                 LargePreviewNoPreviewAvailableText: "<tal:block i18n:translate="">No preview available.</tal:block>",
+                 ListColumnFileNameText: "<tal:block i18n:translate="">Name</tal:block>",
+                 ListColumnFileSizeText: "<tal:block i18n:translate="">Size</tal:block>",
+                 ListColumnFileTypeText: "<tal:block i18n:translate="">Type</tal:block>",
+                 ListColumnLastModifiedText: "<tal:block i18n:translate="">Modified</tal:block>",
+                 ListKilobytesText: "<tal:block i18n:translate="">KB</tal:block>",
+                 LoadingFilesText: "<tal:block i18n:translate="">Loading files...</tal:block>",
+                 MegabytesText: "<tal:block i18n:translate="">megabytes</tal:block>",
+                 MenuAddAllToUploadListText: "<tal:block i18n:translate="">Add All to Upload List</tal:block>",
+                 MenuAddToUploadListText: "<tal:block i18n:translate="">Add to Upload List</tal:block>",
+                 MenuArrangeByModifiedText: "<tal:block i18n:translate="">Modified</tal:block>",
+                 MenuArrangeByNameText: "<tal:block i18n:translate="">Name</tal:block>",
+                 MenuArrangeByPathText: "<tal:block i18n:translate="">Path</tal:block>",
+                 MenuArrangeBySizeText: "<tal:block i18n:translate="">Size</tal:block>",
+                 MenuArrangeByText: "<tal:block i18n:translate="">Arrange Icons By</tal:block>",
+                 MenuArrangeByTypeText: "<tal:block i18n:translate="">Type</tal:block>",
+                 MenuArrangeByUnsortedText: "<tal:block i18n:translate="">Unsorted</tal:block>",
+                 MenuDeselectAllText: "<tal:block i18n:translate="">Deselect All</tal:block>",
+                 MenuDetailsText: "<tal:block i18n:translate="">Details</tal:block>",
+                 MenuIconsText: "<tal:block i18n:translate="">Icons</tal:block>",
+                 MenuInvertSelectionText: "<tal:block i18n:translate="">Invert Selection</tal:block>",
+                 MenuListText: "<tal:block i18n:translate="">List</tal:block>",
+                 MenuRefreshText: "<tal:block i18n:translate="">Refresh</tal:block>",
+                 MenuRemoveAllFromUploadListText: "<tal:block i18n:translate="">Remove All from Upload List</tal:block>",
+                 MenuRemoveFromUploadListText: "<tal:block i18n:translate="">Remove from Upload List</tal:block>",
+                 MenuSelectAllText: "<tal:block i18n:translate="">Select All</tal:block>",
+                 MenuThumbnailsText: "<tal:block i18n:translate="">Thumbnails</tal:block>",
+                 MessageBoxTitleText: "<tal:block i18n:translate="">Image Uploader</tal:block>",
+                 MessageCannotConnectToInternetText: "<tal:block i18n:translate="">The attempt to connect to the Internet has failed.</tal:block>",
+                 MessageCmykImagesAreNotAllowedText: "<tal:block i18n:translate="">CMYK images are not allowed</tal:block>",
+                 MessageDimensionsAreTooLargeText: "<tal:block i18n:translate="">The image [Name] cannot be selected. This image dimensions ([OriginalImageWidth]x[OriginalImageHeight]) are too large. The image should be smaller than [MaxImageWidth]x[MaxImageHeight].</tal:block>",
+                 MessageDimensionsAreTooSmallText: "<tal:block i18n:translate="">The image [Name] cannot be selected. This image dimensions ([OriginalImageWidth]x[OriginalImageHeight]) are too small. The image should be larger than [MinImageWidth]x[MinImageHeight].</tal:block>",
+                 MessageFileSizeIsTooSmallText: "<tal:block i18n:translate="">The file [Name] cannot be selected. This file size is smaller than the limit ([Limit] KB).</tal:block>",
+                 MessageMaxFileCountExceededText: "<tal:block i18n:translate="">The file [Name] cannot be selected. Amount of files exceeds the limit ([Limit] files).</tal:block>",
+                 MessageMaxFileSizeExceededText: "<tal:block i18n:translate="">The file [Name] cannot be selected. This file size exceeds the limit ([Limit] KB).</tal:block>",
+                 MessageMaxTotalFileSizeExceededText: "<tal:block i18n:translate="">The file [Name] cannot be selected. Total upload data size exceeds the limit ([Limit] KB).</tal:block>",
+                 MessageNoInternetSessionWasEstablishedText: "<tal:block i18n:translate="">No Internet session was established.</tal:block>",
+                 MessageNoResponseFromServerText: "<tal:block i18n:translate="">No response from server.</tal:block>",
+                 MessageRetryOpenFolderText: "<tal:block i18n:translate="">Last visited folder is not available. It is possible it is located on a removable media. Insert the media and click Retry button or click Cancel button to continue.</tal:block>",
+                 MessageServerNotFoundText: "<tal:block i18n:translate="">The server or proxy [Name] not found.</tal:block>",
+                 MessageSwitchAnotherFolderWarningText: "<tal:block i18n:translate="">You are about to switch to another folder. This will discard selection from selected files.\n\nTo proceed and lose selection click OK.\nTo keep the selection and stay in the current folder, click Cancel.</tal:block>",
+                 MessageUnexpectedErrorText: "<tal:block i18n:translate="">Image Uploader encountered some problem. If you see this message, contact web master.</tal:block>",
+                 MessageUploadCancelledText: "<tal:block i18n:translate="">Upload is cancelled.</tal:block>",
+                 MessageUploadCompleteText: "<tal:block i18n:translate="">Upload complete.</tal:block>",
+                 MessageUploadFailedText: "<tal:block i18n:translate="">Upload failed (the connection was interrupted).</tal:block>",
+                 MessageUserSpecifiedTimeoutHasExpiredText: "<tal:block i18n:translate="">User-specified timeout has expired.</tal:block>",
+                 MinutesText: "<tal:block i18n:translate="">minutes</tal:block>",
+                 ProgressDialogCancelButtonText: "<tal:block i18n:translate="">Cancel</tal:block>",
+                 ProgressDialogCloseButtonText: "<tal:block i18n:translate="">Close</tal:block>",
+                 ProgressDialogCloseWhenUploadCompletesText: "<tal:block i18n:translate="">Close this dialog box when upload completes</tal:block>",
+                 ProgressDialogEstimatedTimeText: "<tal:block i18n:translate="">Estimated time: [Current] of [Total]</tal:block>",
+                 ProgressDialogPreparingDataText: "<tal:block i18n:translate="">Preparing data...</tal:block>",
+                 ProgressDialogSentText: "<tal:block i18n:translate="">Sent: [Current] of [Total]</tal:block>",
+                 ProgressDialogTitleText: "<tal:block i18n:translate="">Upload Files</tal:block>",
+                 ProgressDialogWaitingForResponseFromServerText: "<tal:block i18n:translate="">Waiting for response from server...</tal:block>",
+                 ProgressDialogWaitingForRetryText: "<tal:block i18n:translate="">Waiting for retry...</tal:block>",
+                 RemoveIconTooltipText: "<tal:block i18n:translate="">Remove</tal:block>",
+                 RotateIconClockwiseTooltipText: "<tal:block i18n:translate="">Rotate Clockwise</tal:block>",
+                 RotateIconCounterclockwiseTooltipText: "<tal:block i18n:translate="">Rotate Counterclockwise</tal:block>",
+                 SecondsText: "<tal:block i18n:translate="">seconds</tal:block>",
+                 UnixFileSystemRootText: "<tal:block i18n:translate="">Filesystem</tal:block>",
+                 UnixHomeDirectoryText: "<tal:block i18n:translate="">Home directory</tal:block>"
+             }
+
+         }
+         
+         var CommonHtml = '<tal:block tal:content="structure translatehtml:" />';
+         
+         var ProgressHtml = '<tal:block tal:content="structure translatehtml:<p><img src=\'{0}\' /><br />Loading Image Uploader...</p>" />';
+         
+         var IE6XPSP2ProgressHtml = '<tal:block tal:content="structure translatehtml:<p>Please wait until the control will be loaded.</p>" />';
+         
+         var BeforeIE6XPSP2ProgressHtml = '<tal:block tal:content="structure translatehtml:<p>To install Image Uploader, please wait until the control will be loaded and click the <strong>Yes</strong> button when you see the installation dialog.</p>" />';
+         
+         var CommonInstallJavaHtml = '<tal:block tal:content="structure translatehtml:<p>You need to install Java for running Image Uploader.</p>" />';
+         
+         var BeforeIE6XPSP2InstructionsHtml = '<tal:block tal:content="structure translatehtml:<p>To install Image Uploader, please reload the page and click the <strong>Yes</strong> button when you see the control installation dialog. If you don\'t see installation dialog please check your security settings.</p>" />';
+         
+         var IE6XPSP2InstructionsHtml = '<tal:block tal:content="structure translatehtml:<p>To install Image Uploader, please wait until the control will be loaded and click the <strong>Information Bar</strong> and select <strong>Install ActiveX Control</strong> from the dropdown menu. After page reload click <strong>Install</strong> when you see the control installation dialog. If you don\'t see Information Bar, please try to reload the page and/or check your security settings.</p>" />';
+         
+         var IE7InstructionsHtml = '<tal:block tal:content="structure translatehtml:<p>To install Image Uploader, please wait until the control will be loaded and click the <strong>Information Bar</strong> and select <strong>Install ActiveX Control</strong> or <strong>Run ActiveX Control</strong> from the dropdown menu.</p><p>Then either click <strong>Run</strong> or after page reload click <strong>Install</strong> when you see the control installation dialog. If you don\'t see Information Bar, please try to reload the page and/or check your security settings.</p>" />';
+         
+         var UpdateInstructions = '<tal:block tal:content="structure translatehtml:You need to update Image Uploader ActiveX control. Click <strong>Install</strong> or <strong>Run</strong> button when you see the control installation dialog. If you don\'t see installation dialog, please try to reload the page." />';
+         
+         var BeforeIE6XPSP2InstallJavaHtml = '<tal:block tal:content="structure translatehtml:<p>To install Java, please click on the <strong>Yes</strong> button when you see the control installation dialog. If you don\'t see Information Bar, please try to reload the page and/or check your security settings.</p>" />';
+         
+         var IE6XPSP2InstallJavaHtml = '<tal:block tal:content="structure translatehtml:<p>To install Java, please click on the <strong>Information Bar</strong> and select <strong>Install ActiveX Control</strong> from the dropdown menu. After page reload click <strong>Install</strong> when you see the control installation dialog. If you don\'t see Information Bar, please try to reload the page and/or check your security settings.</p>" />';
+         
+         var IE7InstallJavaHtml = '<tal:block tal:content="structure translatehtml:<p>To install Java, please click on the <strong>Information Bar</strong> and select <strong>Install ActiveX Control</strong> or <strong>Run ActiveX Control</strong> from the dropdown menu.</p><p>Then either click <strong>Run</strong> from the dropdown menu. After page reload click <strong>Install </strong> when you see the control installation dialog. If you don\'t see Information Bar, please try to reload the page and/or check your security settings.</p>" />'
+         
+         var MacInstallJavaHtml = '<tal:block tal:content="structure translatehtml:<p>Use the <a href=\'http\://support.apple.com/kb/HT1338\'>Software Update</a> feature (available on the Apple menu) to check that you have the most up-to-date version of Java for your Mac.</p>" />';
+         
+         var MiscBrowsersInstallJavaHtml = '<tal:block tal:content="structure translatehtml:<p>Please <a href=\'http://www.java.com/en/download/\'>download</a> and install Java.</p>" />';
+         
+</tal:block>
+

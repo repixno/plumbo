@@ -1,0 +1,231 @@
+<html>
+<head>
+
+   <!-- Globals used depending on portal -->
+	<tal:block tal:define="global baseurl string:http://www.eurofoto.no" />
+	<tal:block tal:define="global topimage string:ef_topp.jpg" />
+	<tal:block tal:define="global color string:#3E9DD9" />
+	<tal:block tal:define="global myaccountsettings string:http://www.eurofoto.no/myaccount/settings" />
+	<tal:block tal:define="global enduseragreement string:http://www.eurofoto.no/hjelp/sluttbrukervilkar/" />
+	
+	<!-- Eurofoto -->
+	<tal:block tal:condition="equal:portal,EF-997"><tal:block tal:define="global baseurl string:http://www.eurofoto.no" /></tal:block>
+	<tal:block tal:condition="equal:portal,EF-997"><tal:block tal:define="global topimage string:ef_topp.jpg" /></tal:block>
+	<tal:block tal:condition="equal:portal,EF-997"><tal:block tal:define="global color string:#3E9DD9" /></tal:block>
+	<tal:block tal:condition="equal:portal,EF-997"><tal:block tal:define="global myaccountsettings string:http://eurofoto.no/myaccount/settings" /></tal:block>
+	<tal:block tal:condition="equal:portal,EF-997"><tal:block tal:define="global enduseragreement string:http://www.eurofoto.no/hjelp/sluttbrukervilkar/" /></tal:block>
+	
+	<!-- VG -->
+	<tal:block tal:condition="equal:portal,VG-997"><tal:block tal:define="global baseurl string:http://foto.vg.no" /></tal:block>
+	<tal:block tal:condition="equal:portal,VG-997"><tal:block tal:define="global topimage string:vg_topp.jpg" /></tal:block>
+	<tal:block tal:condition="equal:portal,VG-997"><tal:block tal:define="global color string:#E11325" /></tal:block>
+	<tal:block tal:condition="equal:portal,VG-997"><tal:block tal:define="global myaccountsettings string:http://foto.vg.no/myaccount/settings" /></tal:block>
+	<tal:block tal:condition="equal:portal,VG-997"><tal:block tal:define="global enduseragreement string:http://foto.vg.no/hjelp/sluttbrukervilkar/" /></tal:block>
+	
+	<!-- VG Ny -->
+	<tal:block tal:condition="equal:portal,EF-VG"><tal:block tal:define="global baseurl string:http://foto.vg.no" /></tal:block>
+	<tal:block tal:condition="equal:portal,EF-VG"><tal:block tal:define="global topimage string:vg_topp.jpg" /></tal:block>
+	<tal:block tal:condition="equal:portal,EF-VG"><tal:block tal:define="global color string:#E11325" /></tal:block>
+	<tal:block tal:condition="equal:portal,EF-VG"><tal:block tal:define="global myaccountsettings string:http://foto.vg.no/myaccount/settings" /></tal:block>
+	<tal:block tal:condition="equal:portal,EF-VG"><tal:block tal:define="global enduseragreement string:http://foto.vg.no/hjelp/sluttbrukervilkar/" /></tal:block>
+	
+	<!-- SOLNO -->
+	<tal:block tal:condition="equal:portal,SN-997"><tal:block tal:define="global baseurl string:http://photobook.sol.no" /></tal:block>
+	<tal:block tal:condition="equal:portal,SN-997"><tal:block tal:define="global topimage string:sol_topp.jpg" /></tal:block>
+	<tal:block tal:condition="equal:portal,SN-997"><tal:block tal:define="global color string:#C6D6DE" /></tal:block>
+	<tal:block tal:condition="equal:portal,SN-997"><tal:block tal:define="global myaccountsettings string:http://photobook.sol.no/myaccount/settings" /></tal:block>
+	<tal:block tal:condition="equal:portal,SN-997"><tal:block tal:define="global enduseragreement string:http://photobook.sol.no/hjelp/sluttbrukervilkar/" /></tal:block>
+	
+	<!-- Aftenposten -->
+	<tal:block tal:condition="equal:portal,AM-997"><tal:block tal:define="global baseurl string:http://foto.aftenposten.no" /></tal:block>
+	<tal:block tal:condition="equal:portal,AM-997"><tal:block tal:define="global topimage string:aftenposten_topp.jpg" /></tal:block>
+	<tal:block tal:condition="equal:portal,AM-997"><tal:block tal:define="global color string:#347ECF" /></tal:block>
+	<tal:block tal:condition="equal:portal,AM-997"><tal:block tal:define="global myaccountsettings string:http://foto.aftenposten.no/myaccount/settings" /></tal:block>
+	<tal:block tal:condition="equal:portal,AM-997"><tal:block tal:define="global enduseragreement string:http://foto.aftenposten.no/hjelp/sluttbrukervilkar/" /></tal:block>
+	
+	<tal:block tal:define="global utmsource string:subscription_quarantine_${portal}_${utmdate}" />
+
+	<title>Infobrev</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<base href="${baseurl}" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="expires" CONTENT="0" />
+	<meta http-equiv="Cache-control" content="no-cache" />
+</head>
+<body bgcolor="#fff" style="background: #eee; font-family: 'Trebuchet MS'; margin: 0; padding: 0">
+	
+	<table width="600" border="0" cellspacing="0" cellpadding="0" style="border: 1px solid ${color}; background: #ffffff" align="center">
+
+		
+
+		<!-- top -->
+
+		<tr>
+			<td>
+				<a href="${baseurl}?utm_campaign=viktiginfo&utm_source=${utmsource}&utm_medium=email">
+					<img src="http://www.eurofoto.no/nyhetsbrev/grafikk/${topimage}" alt="Eurofoto infobrev" width="600" border="0" />
+				</a>
+				<!--<h4 style="text-align: right; margin-top: -40px; height: 40px; padding-right: 2em; font-size: 18px; font-family: 'Trebuchet MS', sans-serif; font-weight: normal;">
+					Viktig informasjon
+				</h4>
+				<span style="color: black; font-weight: bold; margin-left: 10px;font-family: 'Trebuchet MS', sans-serif; ">
+
+					Hei <tal:block tal:replace="name" />
+				</span>
+				<br />
+				<center>				
+					<h1 style="font-weight: bold; text-align: center; font-size: 24px;font-family: 'Trebuchet MS', sans-serif; ">
+						Sletting av karantenesatte <br /> bilder starter <tal:block tal:replace="expiredate" />
+					</h1>
+
+					<p style="margin: 1em; color: #333; font-size: 14px; line-height: 1.5em; text-align: center; margin: 1em 5em 2em 5em;font-family: 'Trebuchet MS', sans-serif; ">
+						
+						Vi viser til våre brukervilkår gjeldende fra 1.1.2009 og tidligere sendte varsel om utilgjengeligjøring av bilder.
+					</p>
+
+					<p style="margin: 1em; color: #333; font-size: 14px; line-height: 1.5em; text-align: center; margin: 1em 5em 2em 5em;font-family: 'Trebuchet MS', sans-serif; ">
+						
+					</p>
+					<p style="margin: 1em; color: #333; font-size: 14px; line-height: 1.5em; text-align: center; margin: 1em 5em 2em 5em;font-family: 'Trebuchet MS', sans-serif; ">
+						
+					</p>
+						
+					
+				</center>
+            -->
+				<center>
+				    <h1>Varsel sletting av bilder!</h1>				
+					<h4 style="font-weight: bold; text-align: center; font-size: 24px;font-family: 'Trebuchet MS', sans-serif; ">
+						Frist for forlengelse <br /> av bildelagring er <tal:block tal:replace="expiredate" />
+					</h4>
+
+					<p style="margin: 1em; color: #333; font-size: 14px; line-height: 1.5em; text-align: center; margin: 1em 5em 2em 5em;font-family: 'Trebuchet MS', sans-serif; ">
+						
+						Vi viser til våre <a href="${enduseragreement}?utm_campaign=viktiginfo&utm_source=${utmsource}&utm_medium=email">brukervilkår</a> gjeldende fra 1.1.2009.
+					</p>
+
+					<p style="margin: 1em; color: #333; font-size: 14px; line-height: 1.5em; text-align: center; margin: 1em 5em 2em 5em;font-family: 'Trebuchet MS', sans-serif; ">
+						
+					</p>
+					<p style="margin: 1em; color: #333; font-size: 14px; line-height: 1.5em; text-align: center; margin: 1em 5em 2em 5em;font-family: 'Trebuchet MS', sans-serif; ">
+						
+					</p>
+						
+					
+				</center>
+				<div style="padding-right: 200px; padding-bottom: 130px; background: #fff">
+					
+					<h3 style="font-size: 13px; color: #000; font-weight: bold; margin: 2em 1em .2em 1em;font-family: 'Trebuchet MS', sans-serif; ">
+						
+					</h3>
+
+					<p style="margin: 1em; color: #333; font-size: 13px; line-height: 1.3em; margin: auto 1em; font-family: 'Trebuchet MS', sans-serif; ">
+					   Hei <tal:block tal:replace="name" />
+						Du mottar denne eposten fordi du har <strong tal:content="numpics">30</strong> bilder i karantene hos Eurofoto eller en av våre partnere. 
+						Karanteneperioden er nå straks utløpt og bildene vil bli permanent slettet. Varselet gjelder konto med brukernavn: <strong tal:content="email">email@host.com</strong> 
+					</p>
+					<br />
+					<p style="margin: 1em; color: #333; font-size: 13px; line-height: 1.3em; margin: auto 1em; font-family: 'Trebuchet MS', sans-serif; ">
+						Dersom du vill unngå at bildene blir permanent slettet må du innen <strong tal:content="expiredate">XXENDDATEXX</strong> følge oppskriften nedenfor og skaffe deg sikker on-line lagring. 
+					</p>
+
+				</div>
+				<div style="text-align: right; margin-top: -220px">
+					<img src="http://www.eurofoto.no/nyhetsbrev/grafikk/20081212_lagring.gif" style="display: inline" />
+				</div>
+				
+				<h3 style="font-size: 13px; color: #000; font-weight: bold; margin: 2em 1em .2em 1em; font-family: 'Trebuchet MS', sans-serif; ">
+					Slik får du sikker lagring hos Eurofoto 
+				</h3>
+				<p style="margin: 1em; color: #333; font-size: 13px; line-height: 1.3em; margin: auto 1em; font-family: 'Trebuchet MS', sans-serif; ">
+
+					Alle bilder som lastes opp til Eurofoto blir lagret gratis i 90 dager. For å ha bildene lagret hos Eurofoto Datasafe lenger enn dette kan du enten: 
+				</p>
+				<!--
+				<ul style="line-height: 1.5em; font-size: 12px; color: #444">
+					<li>
+						<strong style="color: #000">Gjøre en handel via våre nettsider.</strong> <br />
+						<tal:block tal:replace="promotiontext" />
+                  
+						Se våre gode januar-, morsdags- og Valentintilbud.
+					</li>
+
+					<li>
+						<strong style="color: #000">
+							Gå inn på
+							<a href="${myaccountsettings}?utm_campaign=viktiginfo&utm_source=${utmsource}&utm_medium=email" style="color: #0078D6">
+								"Min fotokonto"
+							</a> 
+							og betale lagringsavgiften på kr 15,- per mnd.
+						</strong> <br />
+
+						Du kan betale med kredittkort for henholdsvis 6 eller 12 måneder. 
+					</li>
+				</ul>-->
+				<ul style="line-height: 1.5em; font-size: 12px; color: #444">
+					<li>
+						<strong style="color: #000">Gjøre et kjøp via våre <a href="${baseurl}?utm_campaign=viktiginfo&utm_source=${utmsource}&utm_medium=email">nettsider</a>. Alle kunder som handler får automatisk<br /> 12 måneder gratis lagring</strong> <br />
+						<tal:block tal:replace="promotiontext" /><br />
+						Se <a href="${baseurl}ukens-tilbud?utm_campaign=viktiginfo&utm_source=${utmsource}&utm_medium=email">Ukens tilbud</a>
+					</li>
+
+					<li>
+						<strong style="color: #000">
+							Gå inn på
+							<a href="${myaccountsettings}?utm_campaign=viktiginfo&utm_source=${utmsource}&utm_medium=email" style="color: #0078D6">
+								"Min fotokonto"
+							</a> 
+							og betale lagringsavgiften på kr 15,- per mnd.
+						</strong> <br />
+
+						Du kan betale med kredittkort for henholdsvis 6 eller 12 måneder. 
+					</li>
+				</ul>
+				<h3 style="font-size: 13px; color: #000; font-weight: bold; margin: 2em 1em .2em 1em;font-family: 'Trebuchet MS', sans-serif; ">
+					Om sikker lagring hos Eurofoto Datasafe
+				</h3>
+				<p style="margin: 1em; color: #333; font-size: 13px; line-height: 1.3em; margin: auto 1em; font-family: 'Trebuchet MS', sans-serif;">
+					Eurofoto tilbyr i samarbeid med Datasafe sikker lagring av dine digitale bilder. Med sikker lagring vil du alltid ha tilgang til en ekstra backup av dine bilder, tilgjengelig 24 timer i døgnet over hele verden. Minnene er bevart til tross for brann, tyveri og datakrasj. 
+				</p>
+
+				<a href="http://ikt-norge.no/prosjekter/obs-lagring/" title="OBS - Online Backup - Sikker lagring">
+					<img src="http://www.eurofoto.no/grafikk/obs_114px.gif" width="114" height="110" alt="OBS - Online Backup - Sikker lagring" style="float: left; margin: 25px; display: block; width: 114px; height: 110px" border=""/>
+				</a>
+
+				<h3 style="font-size: 13px; color: #000; font-weight: bold; margin: 2em 1em .2em 1em;font-family: 'Trebuchet MS', sans-serif; ">
+					Eurofoto først ute med ”Sikker lagring” – stempel fra Forbrukerrådet
+					
+				</h3>
+
+				<p style="margin: 1em; color: #333; font-size: 13px; line-height: 1.3em; margin: auto 1em; font-family: 'Trebuchet MS', sans-serif;">
+					Forbrukerrådet, Fotorådet og  IKT-Norge har utarbeidet en norm for sikker lagring av bilder på nett. Eurofoto har deltatt aktivt i dette arbeidet som pilotbedrift, og er først ute med å tilfredsstille de strenge kravene som normen stiller.
+					<br />
+					<br />
+					<a href="http://ikt-norge.no/prosjekter/obs-lagring/" style="color: #0078D6">Les mer om normen på IKT-Norge sine sider</a>
+					<br />
+				</p>
+				
+				<p style="margin: 1em; color: #333; font-size: 13px; line-height: 1.3em; font-family: 'Trebuchet MS', sans-serif;">
+					Du som kunde skal føle deg trygg på at Eurofoto fortsatt vil gi deg markedets beste bildetjeneste. 
+				</p>
+
+				
+				<p style="margin: 1em; color: #333; font-size: 13px; line-height: 1.3em; margin: 1em 1em; font-family: 'Trebuchet MS', sans-serif; ">
+					Se våre <a href="${enduseragreement}&utm_campaign=viktiginfo&utm_source=${utmsource}&utm_medium=email" style="color: #0078D6">oppdaterte brukervilkår</a>, gjeldende fra 1. januar 2009. <br />
+					<br />
+					<br />
+					Vennlig hilsen Eurofoto AS<br />
+					<img src="http://www.eurofoto.no/nyhetsbrev/grafikk/signatur_rolf.jpg" alt="Rolf Kjetil Egge" /><br />
+
+					Rolf Kjetil Egge, Daglig leder
+				</p>
+				<p style="font-family: 'Trebuchet MS', Verdana, Arial; font-size: 10px; margin: 0; padding: 10px; font-family: 'Trebuchet MS', sans-serif; ">
+					Sendt <tal:block tal:replace="senddate" /><br />
+					Du mottar denne informasjonen fordi du har registrert deg hos eurofoto.no, eller en av våre partnere.<br />
+				</p>
+			</td>
+		</tr>
+
+	</table>
+</body>
+</html>

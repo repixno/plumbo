@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Producteditor</tal:block>
+	<script src="${static:}js/producteditor/stempel/fabric.js"></script>
+	<script src="${static:}js/producteditor/newimage.js"></script>
+	<script src="${static:}js/producteditor/fontloader.js"></script>
+    <!--<script src="http://fabricjs.com/lib/fabric.js"></script>-->
+    <script src="http://b.static.repix.no/js/jquery.upload-1.0.2.js?3.103"></script>
+	<script src="${static:}js/producteditor/lib/jquery.imgareaselect/scripts/jquery.imgareaselect.min.js"></script>
+	<script src="${static:}js/producteditor/lib/centering_guidelines.js"></script>
+	<script src="${static:}js/producteditor/lib/aligning_guidelines.js"></script>
+	<script src="${static:}js/producteditor/lib/fileupload/jquery.iframe-transport.js"></script>
+	<script src="${static:}js/producteditor/lib/fileupload/jquery.fileupload.js"></script>
+	<script src="${static:}js/producteditor/lib/fileupload/jquery.ui.widget.js"></script>
+	
+
+
+	
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Damion"/>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Dynalight"/>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Caudex"/>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Comfortaa"/>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Esteban"/>
+	<link rel="stylesheet" type="text/css" href="${static:}css/producteditor/main.css"/>
+    <style type="text/css">
+		
+		.stempelcolor{
+			float:left;
+			width: 25px;
+			height: 25px;
+			border: 1px solid #ccc;
+			margin: 0px 2px;
+			cursor: pointer;
+		}
+		
+		.selectedcolor{
+			border: 3px solid #ccc;
+		}
+		
+		.skaler a{
+			font-size: 40px;
+			text-decoration: none !important;
+		}
+		.redcolor{background-color: #ed1c24;}
+		.bluecolor{background-color: #2559a8;}
+		.greencolor{background-color: #00a650;}
+		.blackcolor{background-color: #000000;}
+		
+    </style>
+    
+        
+</head>
+<body>
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	
+	<div class="container">
+		
+	
+	<div id="previewcontainer" class="previewcontainer" style="margin-top: 30px; visibility: hidden">
+		<input type="hidden" id="templateid" value="${templateid}"/>
+		<ul class="">
+			<tal:block tal:repeat="malpage malpages">
+				<li>
+					<a href="#" class="malpage preview-${malpage/malpageid}" id="${malpage/malpageid}"><img alt="${malpage/malpageid}" src="${malpage/thumbnail}"/></a>
+				</li>
+			</tal:block>
+		</ul>
+	</div>
+	<div class="editorcontainer row">
+      	
+		<div  class="col-md-12 form-inline" style="text-align: right">
+			
+			<!--<button class="ui-state-default" id="zoomout">Zoom Out</button>
+			<button class="ui-state-default" id="zoomin">Zoom Inn</button>
+			<button class="ui-state-default" id="zoomreset">Reset</button>-->
+			<div class="col-md-2">
+				<label>Farge:</label> 
+			</div>
+			<div class="col-md-2">
+				<div class="stempelcolor redcolor" data-color="#ed1c24"/>
+				<div class="stempelcolor bluecolor" data-color="#2559a8"/>
+				<div class="stempelcolor greencolor" data-color="#00a650"/>
+				<div class="stempelcolor blackcolor selectedcolor" data-color="#000000"/>
+			</div>
+			
+			<select id="editorzoom" class="form-control">
+				<option value="0.5">100%</option>
+				<option value="1">200%</option>
+			</select>
+			
+			<button class="ui-state-default" id="undo">Undo</button>
+			<button class="ui-state-default" id="redo">Redo</button>
+			<!--
+			<button class="ui-state-default" id="delete_image">Delete</button>
+			<button class="ui-state-default" id="load">Load</button>
+			<button class="ui-state-default" id=G"move-front">Flytt fram</button>
+			<button class="ui-state-default" id="movebackward">Flytt bakover</button>-->
+			
+		</div>
+		<div class="col-md-12">
+			<div class="col-md-12 canvascontainer" style="text-align: center; background: #ccc">	
+				<div id="wrap1" class="top-15" style="margin-left: auto; margin-right: auto; height: 200px">
+					<canvas id="c1"></canvas>
+				</div>	
+			</div>
+			<div class="col-md-12 top-5 form-inline">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="col-md-2">
+							<button class="button btn btn-primary" id="new_text">Ny text</button>
+						</div>
+						<div class="col-md-10">
+							<div style="">
+
+								<input id="fileupload" type="file" name="files[]" data-url="/api/1.0/upload/jqupload/" multiple="true" />
+								<div id="progress">
+									<div class="bar" style="width: 0%;"></div>
+								</div>
+							</div>
+						
+							<div id="imagelist"></div>
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+			<div class="col-md-12 top-5">
+				
+				<div class="col-md-4">
+					<ul class="list-group layers">
+						
+					</ul>
+				</div>
+
+					<div class="col-md-8" id="tabs-text" style="padding:0em 0em">						
+						<div class="panel panel-default" id="text-options-container" style="display: none">
+							<!--<div class="panel-heading">Rediger Element</div>-->
+							<div class="panel-body">
+								<form class="form-inline" id="text-options">
+									<div class="col-md-12" style="">
+										
+										<div style="float: left">
+											<div class="form-group">
+												<div class="input-group">
+												  <a href="#" id="smallerfont" class="btn input-group-addon">-A</a>
+													<input type="text" class="form-control" id="fontsize" value="100"  style="width: 50px;"/>
+												  <a href="#" id="largerfont"  class="btn input-group-addon">+A</a>
+												</div>
+											</div>
+										</div>
+										
+										<div style="float: left">
+										
+										<!--<label for="gravity">Tekstjustering:</label>-->
+										
+										<a href="#" class="textalign active btn btn-default fa fa-align-left" id="left" style=""></a>
+										<a href="#" class="textalign btn btn-default fa fa-align-center" id="center" style=""></a>
+										<a href="#" class="textalign btn btn-default fa fa-align-right" id="right" style=""></a>
+										<input id="gravity" name="gravity" type="hidden" value="left"/>
+										
+										<a href="#" class="textweight btn btn-default fa fa-underline" id="underline" data-underline=""></a>
+										<a href="#" class="textweight btn btn-default fa fa-bold" id="bold" data-bold=""></a>
+										<a href="#" class="textweight btn btn-default fa fa-italic" id="italic" data-italic=""></a>
+										<!--<input id="textweight" name="textweight" type="hidden" value="normal"/>-->
+										
+										</div>
+										
+										<div style="float: left; margin-left: 10px;" name="font-list" id="font-list"/>
+										
+									</div>
+									<div class="col-md-6" style="padding:1em 2em">
+										<label for="text">Tekst</label>
+										<textarea class="form-control textarea" id="text" style="font-size: 20px; width:100%; height: 80px;"></textarea>
+										<a href="#" class="btn btn-primary" id="addtext">Oppdater text</a>
+										<button type="button" id="delete_image">Delete</button>
+									</div>
+									
+									<div class="col-md-6">
+										<table class="skaler top-15">
+											<tr>
+												<td><a href="#" class="fa" aria-hidden=""></a></td>
+												<td><a href="#" class="fa fa-toggle-up move" data-direction="up" aria-hidden="true"></a></td>
+												<td><a href="#" class="fa" aria-hidden=""></a></td>
+											</tr>
+											<tr>
+												<td><a href="#" class="fa fa-toggle-left move" data-direction="left"  aria-hidden="true"></a></td>
+												<td><a href="#" class="fa fa-dot-circle-o centerselected" aria-hidden="true"></a></td>
+												<td><a href="#" class="fa fa-toggle-right move" data-direction="right" aria-hidden="true"></a></td>
+											</tr>
+											<tr>
+												<td><a href="#" class="fa" aria-hidden=""></a></td>
+												<td><a href="#" class="fa fa-toggle-down move" data-direction="down" aria-hidden="true"></a></td>
+												<td><a href="#" class="fa" aria-hidden=""></a></td>
+											</tr>
+										</table>
+									</div>
+									
+								</form>
+							</div>
+						</div>
+						
+						
+						<div class="panel panel-default" id="text-options-container" style="display: none">
+							
+							<div class="panel-body">
+								<label for="fileupload">Last opp bilde: </label><input class="form-control " id="fileupload" type="file" name="files[]" data-url="/api/1.0/upload/jqupload/" multiple="true" />
+								<div id="progress">
+									<div class="bar" style="width: 0%;"></div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+			</div>
+		
+			<div class="col-md-12">
+				<div class="panel panel-default">
+				<div id="new_text_container">
+							
+						</div>
+				
+				
+				<div id="tabs-1">
+					
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="span">
+			<div class="col-md-12" style="text-align: right; padding: 20px;">
+				<a id="save" class="btn btn-default" href="#">Save</a>
+			</div>
+			
+			
+		</div>
+   </div>
+	
+   
+   
+   </div>
+   
+   <div class="" style="display: none;" id="imagemenu">
+		<div id="block"></div>	
+		<h5 class="editormenuheader">Edit Image</h5>
+		<ul class="editormenu">
+			<li class=""><a href="#" id="delete_image">Delete</a></li>
+			<li class=""><a href="#" id="crop">Crop</a></li>
+			<li class=""><a href="#" id="move-front">Flytt fram</a></li>
+			<li class=""><a href="#" id="movebackward">Flytt bakover</a></li>
+			<!--<li><button type="button" id="zoominimage">Zoom in</button></li>
+			<li><button type="button" id="zoomoutimage">Zoom out</button></li>
+			<li>
+				<button type="button" id="moveleft">&#8592;</button>
+				<button type="button" id="moveup">&#8593;</button>
+				<button type="button" id="movedown">&#8595;</button>
+				<button type="button" id="moveright">&#8594;</button>
+			</li>-->
+			<li class="">
+				<a href="#" id="addframe">Ramme</a> 
+			</li>
+		</ul>
+	</div>
+   <div style="display: none;" id="imagemenu2">	
+        <button type="button" id="delete_image">Delete</button>
+		<button type="button"  id="crop">Crop</button>
+		<button type="button"  id="move-front">Flytt fram</button>
+		<button type="button"  id="movebackward">Flytt bakover</button>
+		<!--<button type="button" id="zoominimage">Zoom in</button>
+		<button type="button" id="zoomoutimage">Zoom out</button>
+		<button type="button" id="moveleft">&#8592;</button>
+		<button type="button" id="moveup">&#8593;</button>
+		<button type="button" id="movedown">&#8595;</button>
+		<button type="button" id="moveright">&#8594;</button>-->
+   </div>
+   <div class="center"  style="display:none" id="cropwindow"> 
+	<div><img id="cropimage" width="470" src=""/></div>
+	<div class="center" style="width:470px; padding:20px">
+		<button id="closecrop">OK</button>
+	</div>
+   </div>
+    
+   <script type="text/javascript" src="${static:}js/producteditor/stempel/core.js" />
+   <script type="text/javascript" src="${static:}js/producteditor/stempel/main.js" />
+   <script type="text/javascript" src="${static:}js/producteditor/lib/jquery.loadpage.js" />
+<script type="text/javascript">/*<![CDATA[*/
+		
+    /*]]>*/
+    </script>
+
+</body>
+</html>

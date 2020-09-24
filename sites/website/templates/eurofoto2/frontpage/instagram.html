@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <style type="text/css">
+            
+            
+            body{
+                margin: 0px;
+                text-align: center;
+                color: #333;
+                font-family: 'Source Sans Pro', sans-serif;
+                font-size: 14px;
+                line-height: 1.42857143;
+            }
+            a{
+                color: #fff;
+                text-decoration: none;
+            }
+            
+            .instalink{
+                display: block;
+            }
+            
+            .captionbackground{
+                position: absolute;
+                width: 100%;
+                height: 75px;
+                bottom: 0px;
+                background: #fff;
+                opacity: 0.8;
+            }
+            
+            .caption{
+                position: absolute;
+                z-index: 20;
+                width: 100%;
+                height: 75px;
+                bottom: 0px;
+                color: #333;
+                vertical-align: middle;
+            }
+            .caption a{
+                position: relative;
+                height: 75px;
+                color: #333;
+                padding: 20px 0px 0px 0px;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        
+    </head>
+    <body>
+        
+        <div class="thumbnail" data-id="instagram">
+            <a class="instalink" href="#" target="_blank"> <img class="instaimg" alt="" src="#" /> </a>
+            <div class="captionbackground">
+                
+            </div>
+            <div class="caption" style="text-align: left; padding-left: 15px">
+                <br />
+                <a href="https://instagram.com/eurofotoas/" target="_blank">
+                <div style="float: left; padding-right: 5px">
+                    <img src="/tmp/Instagram-Icon.png" style="vertical-align: tex-top;" /> 
+                </div>
+                <div style="float: left; position: relative; bottom: 6px; left: 5px;">
+                    Følg oss på Instagram<br/>
+                    <span style="font-size: 0.8em">@eurofotoas #eurofotoas </span>
+                </div>
+                </a>
+            </div>
+		</div>
+        
+        
+        <script src="${static:}js/jquery-1.11.3.min.js"></script>
+        
+        <script>
+            var images = Array();
+            $(function(){
+            
+                var i = 0;
+                
+                
+                <tal:block tal:repeat="image images">
+                    images.push( { 'src': '${image/thumb/url}', 'link' : '${image/link}' });
+                </tal:block>
+                
+                $('.thumbnail .instaimg').attr( 'src', images[i]['src'] );
+                $('.instalink').attr( 'href', images[i]['link'] );
+                
+                var imagecounts = images.length;
+                var refreshIntervalId = setInterval( function(){
+                        i++;
+                        
+                        if( i == imagecounts){
+                            i = 0;
+                        }
+                        play( i, 5000 );
+                    }, 5000 );
+            
+            });
+            
+                        
+                        
+            function play( i  , speed ) {
+                
+                //$('.thumbnail img').attr( 'src', images[i]['src'] );
+                $('.instalink').attr( 'href', images[i]['link'] );
+                
+                
+                $('.thumbnail .instaimg').fadeOut( 150, function() {
+                    $('.thumbnail .instaimg').attr( 'src', images[i]['src'] );
+                    $('.thumbnail .instaimg').fadeIn(200);
+                });
+                
+            }
+
+            
+        </script>
+    </body>
+</html>

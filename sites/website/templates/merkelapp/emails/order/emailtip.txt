@@ -1,0 +1,13 @@
+<tal:block>
+<tal:block tal:content="cms:ingress:24c844a6-bef8-4adf-9ca3-e3b61160e94f">Din merkelapp</tal:block>
+
+
+<tal:block>
+Mvh
+Dinmerkelapp.no
+(+47) 57 88 35 00
+post@dinmerkelapp.no
+http://www.dinmerkelapp.no
+https://www.facebook.com/Dinmerkelapp
+</tal:block>
+</tal:block>

@@ -1,0 +1,234 @@
+// Body
+$body-bg: #fff;
+$bg-dark:#ffffff;
+
+@font-face {
+	font-family: dmfont;
+	src: url('/fonts/Comfortaa-Regular.ttf');
+	// src: url('/fonts/FiraSans-Regular.ttf');
+	// src: url('/fonts/FiraSans-Regular.ttf');
+	font-weight: regular;
+	font-style: regular;
+}
+
+body {
+	font-family: 'dmfont' !important;
+	font-size: 1.0rem !important;
+
+}
+
+// Typography
+$font-family-sans-serif: 'Nunito',
+sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Colors
+$blue: #3A5563;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #4CAF50;
+$teal: #20c997;
+$cyan: #17a2b8;
+$white: #fff;
+$gray: #bdbdbd;
+$gray-dark: #343a40;
+$primary: #3A5563;
+$secondary: #CACACA;
+$success: #CC3817;
+$info: #17a2b8;
+$info: #343434;
+$warning: #dc3545;
+$danger: #17a2b8;
+$light: #ececec;
+$dark: #304C66;
+$main-color: $blue;
+
+//=====  Navbar  =====
+$active-bg-color: darken($main-color, 10%);
+
+.page-footer a:hover {
+	color: #cc3817 !important;
+}
+
+.topnavlinks a:hover {
+	color: #cc3817 !important;
+}
+
+.page-footer {
+	background-color: $blue;
+	color: $white;
+}
+
+.page-footer a {
+	background-color: $blue;
+	color: $white;
+}
+
+.bg-light {
+	background-color: $blue;
+}
+
+.card-header {
+	background-color: $blue !important;
+	color: $white !important;
+	border-color: $blue !important;
+}
+
+.navbar-nav>li.nav-item>a.nav-link {
+	text-decoration: none;
+	font-weight: bold;
+	color: #000000;
+	font-size: 20px !important;
+}
+
+.navbar-nav>li.nav-item.active>a.nav-link {
+	text-decoration: none;
+	color: $success;
+}
+
+.button {
+	background-color: $green;
+	/* Green */
+	border: none;
+	color: $white;
+	padding: 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
+
+
+.button5 {
+	border-radius: 15px;
+	background-color: $green !important;
+}
+
+.navbar-toggler .line {
+
+	background-color: $white;
+}
+
+.carttext {
+	color: $white;
+}
+
+/* change the background color */
+.navbar-custom {
+	background-color: #ffffff;
+}
+
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+	color: #F827F6;
+	padding: 0.8rem 1rem;
+}
+
+/* change the link color and add padding for height */
+.navbar-custom .navbar-nav .nav-link {
+	color: red;
+	padding: 1rem 1rem;
+}
+
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+	color: #ffffff;
+	background-color: #ee4400;
+	/* add background-color to active links */
+}
+
+.navbar-custom {
+	background-color: #ff5500;
+}
+
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+	color: rgba(255, 255, 255, .8);
+}
+
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+	color: red;
+}
+
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+	color: #ffffff;
+}
+
+/* for dropdown only - change the color of droodown */
+.navbar-custom .dropdown-menu {
+	background-color: #ff5500;
+}
+
+.navbar-custom .dropdown-item {
+	color: #ffffff;
+}
+
+.navbar-custom .dropdown-item:hover,
+.navbar-custom .dropdown-item:focus {
+	color: #333333;
+	background-color: rgba(255, 255, 255, .5);
+}
+
+/* top meny slide til venstre */
+.offcanvas-header {
+	display: none;
+}
+
+@media (max-width: 992px) {
+	.offcanvas-header {
+		display: block;
+	}
+
+	.togg {
+		position: fixed;
+		top: 0px;
+		bottom: 0;
+		left: 100%;
+		width: 100%;
+		padding-right: 1rem;
+		padding-left: 1rem;
+		overflow-y: auto;
+		z-index: 10000;
+		visibility: hidden;
+		background-color: white;
+		transition: visibility .2s ease-in-out, -webkit-transform .2s ease-in-out;
+	}
+
+	.togg.show {
+		visibility: visible;
+		transform: translateX(-100%);
+	}
+
+	.navbar-nav>li.nav-item>a.nav-link {
+		text-decoration: none;
+		font-weight: bold;
+		color: #000000;
+		font-size: 17px !important;
+	}
+
+}
+
+@media screen and (min-width:1000px) {
+	.menuborder {
+		border-bottom: 1px solid #000000;
+	}
+	
+	
+	.marginspacer{
+		margin-left: 1rem !important;
+		margin-right: 1rem !important;
+	}
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head metal:use-macro="../../../${templates}/common.html/head">
+
+</head>
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+	<!-- use if menu is needed -->
+	<div tal:define="global menuitem string:orders" metal:use-macro="./common.html/menu" />
+
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div id="content">
+
+        <form method="post"> 
+            <input type="text" name="q" />
+            <input type="submit" value="Søk"/>
+        </form>
+        
+        
+        <tal:block tal:condition="exists:kunde">
+
+            <table>
+                <thead>
+                    <tr>
+                        <td>
+                            Epost
+                        </td>
+                        <td>
+                            Navn
+                        </td>
+                        <td>
+                            Adresse
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                   <tr tal:repeat="ku kunde">
+                        <td>${ku/brukarnamn}</td>
+                        <td>${ku/namn}</td>
+                        <td>${ku/adresse1}, ${ku/postnr} ${ku/stad}</td>
+                        <td><a href="/partner/reedfoto/orders/${ku/uid}">Sjå ordre</a></td>
+                    </tr> 
+                </tbody>
+                
+            </table>       
+            
+            
+        </tal:block>
+    
+    </div>
+
+
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<!--<meta name="description" content="${menuitem/article/ingress}" tal:condition="exists:menuitem/article/ingress"/>-->
+	
+	<style type="text/css">
+		.price {
+			font-weight: bold;
+			font-size: 1.4em;
+			padding-right: .5em;
+		}
+
+	
+	  ul.cleanlist { padding: 0; margin: 150px 10px 10px 10px; font-size: 10px }
+	  
+	  ul.cleanlist li { list-style-type: none !important; display: block; height: 1.5em; clear: both;}
+	  ul.cleanlist li a.product-title { float: left; margin-top: 5px }
+	  ul.cleanlist li .info { float: right; }
+	  ul.cleanlist a.product-title { font-weight: bold }
+	  ul.cleanlist a.button { padding: 5px !important; margin-top: 2px }
+	  
+	  
+	  div.cards h2 { margin-top: 10px; margin-left: 10px}
+	  div.borderbox { border: 1px solid #dbdbdb}
+	  
+	  
+	  div.card15x15, div.card10x18 { margin: 10px; margin-top: 215px; color :#fff }
+	  div.card15x15 h4, div.card10x18 h4 { font-weight: bold !important; margin-bottom: 2px }
+	  div div.card15x15 { color: #000 }
+	  
+	  div.card10x18 a, div.christmasnew a  { color: #fff; }
+	  div.card10x18 h4 a { font-weight: bold}
+	  div.card15x15 h4 a { color: #000; font-weight: bold}
+	  
+	  /* stupid hack for offer-price */
+	  div span.price br { display: none !important; }
+	  div span.price span.oldprice { display: none !important }
+	  div.christmascards .card10x18 span.newprice { color: #fff !important}
+	  
+	  .girl_side_xmas {
+         background-image: url(${static:gfx/gui/girl_side_xmas_right.png});
+         margin-left: 727px;
+         width: 200px;
+         height: 300px;
+         margin-bottom: -305px;
+      }
+      
+      .card-top {
+        height: 274px;
+        <tal:block tal:condition="exists:menuitem/article/attachments/background">
+         background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+        
+        </tal:block>
+        
+        background-repeat:no-repeat;
+      }
+      .card-top p{ font-size: 14px }
+
+      button.negative:hover, a.button.negative:hover, button.red:hover, a.button.red:hover, .ui-dialog.negative .ui-dialog-buttonpane button:first-child:hover {
+         background-color: #cc3333 !important;
+      }
+      
+	</style>
+	
+</head>
+
+
+<body>
+<!-- Start buy product link -->
+   <tal:block metal:define-macro="buy-product-link-xmas">
+   	<tal:block tal:condition="exists:item">
+   		<tal:block tal:condition="gt:item/options/length,1">
+   			<div class="hide options" title="Choose option" id="show_options_${item/id}" i18n:attributes="title">
+               <ul>
+                  <tal:block tal:repeat="option item/options">
+                     <tal:block tal:condition="equal:option/type,mediaclip">
+                        <li>
+                           <a href="${option/purchaseurl}">${option/title}</a>
+                        </li>
+                     </tal:block>
+                  </tal:block>
+               </ul>
+            </div>
+  
+            <tal:block tal:condition="equal:item/option/type,mediaclip">
+               <a href="${item/option/purchaseurl}" class="button red large open_option_${item/id}" id="open_option_${item/id}" i18n:translate="">Buy</a>
+            </tal:block>
+            
+            <script type="text/javascript">
+               $(document).ready( function() {
+                  
+                  $('.open_option_${item/id}').click(function() {
+                     $('#show_options_${item/id}').dialog({
+                        'modal'  :  true,
+                        'resizable': false
+                     });
+   
+                     $('#show_options_${item/id}').dialog("open");
+                     return false;
+                  });
+               });
+            </script>
+         </tal:block>
+   
+         <tal:block tal:condition="equal:item/options/length,1">
+            <tal:block tal:condition="equal:item/option/type,mediaclip">
+               <a href="${item/option/purchaseurl}" class="button red large" >Lag julekort</a>
+            </tal:block>
+         </tal:block>
+      </tal:block>
+   </tal:block>
+<!-- END buy product link -->
+	<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+
+	
+	<tal:block define:section="doublecards, Double cards" />
+
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div class="span-24 last">
+		<div metal:use-macro="../cms.html/breadcrumbs" />
+		 <div class="span-24 last card-top top append-bottom">
+
+			</div>
+		
+		<div class="span-20 last" style="height: 1250px; background: #fff url(http://c.static.eurofoto.no/cms/images/plakat3.jpg) no-repeat top left; background-size:790px 1250px;">
+		   <div class="girl_side_xmas"></div>
+			<div class="prepend-top prepend-1 span-15 append-3 last">
+						<h3 tal:content="menuitem/article/title">Julekort</h3>
+						<tal:block tal:content="structure menuitem/article/body" />
+			</div>
+			<tal:block tal:repeat="item items">
+			<div class="span-6 append-bottom" style="border-left: 1px solid #e7e7e7; padding-right: 20px;">
+				<!-- product 4 -->
+						<tal:block tal:condition="equal:item/type,product">
+						<div class="span-7 last center">
+							<tal:block metal:use-macro="first-image-310px" />
+						</div>
+						<div class="center">
+							<h3 tal:content="item/title">Julekort title</h3>
+							<p class="hide" tal:content="item/ingress"></p>
+						</div>
+						<div class="right">
+							<span class="price">
+								<tal:block i18n:translate="">from kr</tal:block> <tal:block tal:content="formatprice:item/option/price" />
+							</span>
+							<br />
+							<a href="${item/url}" class="button" i18n:translate="">Show product</a>
+							<tal:block metal:use-macro="buy-product-link-xmas" />
+						</div>
+					</tal:block>
+			</div>
+			</tal:block>
+		</div>
+
+	</div>
+</div>
+
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>	
+</div>
+
+
+<tal:block metal:define-macro="first-image-310px">
+	<tal:block tal:condition="exists:item/images">
+		<tal:block tal:repeat="image item/images" tal:condition="item/images">
+			<tal:block tal:condition="equal:repeat/image/number,1">
+				<tal:block tal:define="global staticurl" tal:content="static:" />
+				<a href="${item/url}" title="${item/title}">
+					<img src="${staticurl}images/products/thumbs/square/160/${image/url}" 
+						widht="310" height="160" alt="${item/title}" tal:condition="image/url" 
+					/>
+				</a>
+				<img src="${static:gfx/404/not_found_50px.jpg}" 
+					class="left" alt="Product photo missing." tal:condition="not:image/url" 
+					
+				/> 
+			</tal:block>
+		</tal:block>
+	</tal:block>
+	<tal:block tal:condition="not:item/images"><span class="quiet small">No image</span></tal:block>
+</tal:block>
+
+<tal:block metal:define-macro="first-image">
+	<tal:block tal:condition="exists:item/images">
+		<tal:block tal:repeat="image item/images" tal:condition="item/images">
+			<tal:block tal:condition="equal:repeat/image/number,1">
+				<tal:block tal:define="global staticurl" tal:content="static:" />
+				<a href="${item/url}" title="${item/title}">
+					<img src="${staticurl}images/products/thumbs/square/50/${image/url}" 
+						widht="50" height="50" class="left" alt="${item/title}" tal:condition="image/url" 
+					/>
+				</a>
+				<img src="${static:gfx/404/not_found_50px.jpg}" 
+					class="left" alt="Product photo missing." tal:condition="not:image/url" 
+					
+				/> 
+			</tal:block>
+		</tal:block>
+	</tal:block>
+	<tal:block tal:condition="not:item/images"><span class="quiet small">No image</span></tal:block>
+</tal:block>
+
+
+
+</body>
+</html>

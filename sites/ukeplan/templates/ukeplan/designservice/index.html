@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    
+    <tal metal:use-macro="../../${templates}/common.html/head" />
+	<script src="${static:}css/bootstrap/js/carousel-swipe.js"></script>
+    <style>
+        .container.editorcontainer{
+            background-color: #276c81;
+        }
+        
+        label{
+            color: #ffffff;
+            
+        }
+        
+           strong{
+            color: #ffffff;
+            
+        }
+        
+		
+		.textContainer {
+    vertical-align: middle;
+
+}
+		
+		
+        
+</style>
+</head>
+
+<body>
+	
+	
+
+
+<div class="container">
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	<div class="row">
+		<div class="col-md-12 col-xs-12 col-lg-12">
+
+			<div class="cms-article-body">
+
+				<div class="md-4 col-xs-4 col-lg-4">
+
+					<h2>Design Service</h2>
+
+					<h4>Trenger du hjelp? Vil du ha noe helt spesielt? En grafisk designer kan hjelpe deg!</h4>
+
+					<div tal:content="structure cms:body:326912ed-0c95-4aa6-ba31-427f5829ea71"></div>
+				</div>
+				<div class="md-8 col-xs-8 col-lg-8">
+					<img style="width:100%" src="//static.repix.no/images/attachments/thumbs/height/500/3863/produktside-designserv3.jpg" />
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+
+    
+
+	<tal:block metal:use-macro="../common.html/footer" />
+
+</body>
+
+</html>

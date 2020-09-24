@@ -1,0 +1,616 @@
+<!-- HEAD -->
+<head metal:define-macro="head" tal:omit-tag="">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<tal:block metal:use-macro="blueprint" />
+	<title>
+		Framkallning av bilder, CEWE FOTOBOK, och digitalkameror och tillbehör  - Japan Photo Sverige - Japan Photo Sverige<tal:block tal:condition="exists:pagetitle" tal:content="pagetitle" />
+	</title>
+	<meta tal:condition="exists:google" name="google-site-verification" content="${google/google-site-verification}" /> 
+	<tal:block tal:condition="exists:item/customjs">
+	  <tal:block tal:content="structure item/customjs" />
+	</tal:block>
+	
+	<tal:block tal:condition="exists:item/customcss">
+	  <tal:block tal:content="structure item/customcss" />
+	</tal:block>
+	
+	
+	<style type="text/css">
+		
+		#header a#logo {
+			background: url(https://ourproductimages.com/x/x/scale/p/japanphotoxxlse/cops/images/84000018/jp_logo2.png) no-repeat;
+			width: 231px;
+			height: 51px;
+			display: block;
+			margin: -4px 0 0 -10px;
+		}
+		body {
+			background: #fff url("${static:gfx/backgrounds/bg_studentskylt.png}")repeat-x left top;;
+			font-family: arial, helvetica, tahoma, verdana !important;
+		}
+
+		#footer {
+			background: transparent url(https://ourproductimages.com/x/x/scale/p/japanphotoxxlse/cops/images/hw/footer_bg.png) repeat-x bottom left;
+			height: 150px;
+			position: absolute;
+			z-index: -200;
+			width: 100%;
+			right: 0;
+			margin-top: 24px;
+			display: block !important;
+			overflow: hidden;
+			clear: both;
+			padding-right: 0;
+			float: left;
+			text-align: center;
+		}
+		#global-menu {
+			padding-right: 17px;
+		}
+	</style>
+</head>
+
+<tal:block metal:define-macro="blueprint">
+	<script src="http://www.google.com/jsapi"></script>
+	<link rel="stylesheet" href="${static:css/portals/fotokalenderne/screen.css}?${version}" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="${static:css/portals/fotokalenderne/print.css}?${version}" type="text/css" media="print" /> 
+	<!--[if lt IE 8]>
+	<link rel="stylesheet" href="http://static.eurofoto.no/css/portals/fotokalenderne/ie.css?3.03" type="text/css" media="screen, projection" />
+	<![endif]-->
+	<tal:block metal:use-macro="javascript" />
+</tal:block>
+
+<tal:block metal:define-macro="javascript">
+	
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+	
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+	<script type="text/javascript" src="${static:js/i18n/ui.datepicker-no.js}"></script>
+	<script type="text/javascript" src="${static:js/flowplayer-3.1.1.min.js}"></script>
+	<script type="text/javascript" src="${static:js/eurofoto.min.js}?${version}"></script>
+	<script type="text/javascript" src="${static:js/jquery.eurofoto-1.0.js}"></script>
+	<script type="text/javascript" src="${static:js/jquery.fancybox-1.3.0.pack.js}"></script>
+	
+</tal:block>
+
+<tal:block metal:define-macro="sifr">
+	<script src="${static:js/sifr.js}?${version}" type="text/javascript"></script>
+	<script src="${static:js/sifr-vg.js}?${version}" type="text/javascript"></script>
+</tal:block>
+
+<!-- top-header -->
+<div metal:define-macro="top" id="headercontainer" class="last">	
+	<!--	<hr class="space" />
+	<div class="span-7">
+		<h1 class="">
+			<a href="/" title="Go back to frontpage" i18n:attributes="title">
+			Fotokalendere.no
+			</a>
+		</h1>
+	</div>
+	<div class="span-17 last">
+		<div metal:use-macro="top-small-navigation" />
+		<div metal:use-macro="main-navigation" />
+	</div>
+	
+	-->
+	<div class="container">
+		<div id="header" class="append-bottom">
+			<tal:block tal:condition="exists:userpreferences/takkekort_redirect">
+				<a id="logo" href="${userpreferences/takkekort_redirect}" tal:condition="userpreferences/takkekort_redirect"><span>Japan Photo Takkekort 123</span></a> 
+				<a id="logo" href="http://www.japanphoto.se" tal:condition="not:userpreferences/takkekort_redirect"><span>Japan Photo Takkekort</span></a> 
+			</tal:block>
+			<tal:block tal:condition="not:exists:userpreferences/takkekort_redirect">
+				<a id="logo" href="http://www.japanphoto.se"><span>Japan Photo Studentplakat</span></a> 
+			</tal:block>
+			
+			<div id="global-menu" class="nav"> 
+				<ul> 
+					<li><a href="http://www.japanphoto.se">Hem</a></li> 
+					<li><a href="/frontpage">Studentplakat</a></li> 
+				</ul> 
+			</div>
+			<div id="toolbar"> 
+				<div metal:use-macro="shopping-cart" />
+			</div> 
+		</div>
+	</div> 
+</div>
+
+<!-- main-navigation add class "active" to the active anchor-->
+<div metal:define-macro="main-navigation" id="main-navigation">
+	<h1>Japanphoto</h1>
+</div>
+
+<div metal:define-macro="shopping-cart">
+	<tal:block tal:condition="exists:cart">
+		<tal:block tal:condition="cart/totalitems">
+			<tal:block tal:condition="not: exists: dontShowCart">
+				<div id="shoppingcart">
+					<a href="/cart/">
+						<strong>Handlekurv:</strong> <tal:block tal:content="cart/totalitems">?</tal:block> produkter for tilsammen kr <tal:block tal:content="formatprice:cart/totalprice" />
+					</a>
+				</div> 
+			</tal:block>
+		</tal:block>
+		<tal:block tal:condition="not:cart/totalitems">
+			<div id="shoppingcart">
+				<a href="/cart/">
+					<strong>Handlekurv:</strong> Ingen produkter
+				</a>
+			</div> 
+		</tal:block>
+	</tal:block>
+	<tal:block tal:condition="not:exists:cart">
+		<div id="shoppingcart">
+			<a href="/cart/">
+				<strong>Handlekurv:</strong> Ingen produkter
+			</a>
+		</div> 
+	</tal:block>
+</div>
+
+
+<!-- breadcrumbs -->
+<div metal:define-macro="breadcrumbs" id="breadcrumbs">
+	<ul>
+		<li><a href="" i18n:translate=""></a></li>
+		<li class="active" i18n:translate=""></li>
+	</ul>
+</div>
+
+<!-- LEFT MENU (span-4) -->
+<div metal:define-macro="left-menu" id="leftmenu">
+	<p i18n:translate=""></p>
+</div>
+
+<!-- RIGHT MENU (span-4) -->
+<div metal:define-macro="right-menu" id="rightmenu" class="last">
+	<p i18n:translate=""></p>
+</div>
+
+<!-- RIGHT ALBUM MENU (span-4) -->
+<div metal:define-macro="right-album-menu" id="rightalbummenu" class="last">
+	<ul id="right-album-menu">
+		<li>
+		</li>
+	</ul>
+</div>
+
+<!-- FOOTER -->
+<tal:block metal:define-macro="footer">
+	<div id="footer">
+		<!-- custom footer start -->
+		<div id="footerJPNO" style="position:relative; left:0px; top:100px">
+			<div id="footerDivLeft">
+				<div id="footerCompanyName">
+					Japan Photo Sverige AB © 2013
+				</div>
+				<div id="footerContactInfo">
+					Telefon 031-619445 | E-post: <a href="mailto:kundservice@japanphoto.se">kundservice@japanphoto.se</a>   
+				</div>
+			</div>
+		</div><!-- custom footer end -->
+</div>
+</tal:block>
+
+<!-- quick login -->
+<tal:block metal:define-macro="quicklogin">
+<form action="/login/" method="post"  id="quicklogin">
+	<div>
+		<label for="email" i18n:translate="">E-mail:</label><br/>
+		<input type="text" class="text lowercase" name="email" value="" />
+	</div>	
+	<div>
+		<label for="pasword" i18n:translate="">Password:</label><br/>
+		<input type="password" class="text" name="password" value="" />
+	</div>
+	<div>
+		<input type="checkbox" id="rememberme" /> 
+		<label for="rememberme" i18n:translate="">Remember me next time.</label>
+	</div>	
+	<div class="right prepend-top">
+		<a href="/register/" i18n:translate="">Register</a> &nbsp;
+ 		<button class="" type="submit" i18n:translate="">Log in</button>
+	</div>
+	<input type="hidden" name="referer" value="/${request/execpath}"/>
+</form>
+</tal:block>
+
+<!-- get Satisfaction -->
+<tal:block metal:define-macro="get-satisfaction">
+</tal:block>
+
+<!-- Google Analytics  -->
+<tal:block metal:define-macro="google-analytics">
+   <tal:block tal:condition="exists:google">
+	<script type="text/javascript">
+	//<![CDATA[
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	//]]>
+	</script>
+	<script type="text/javascript">
+		try{
+		var pageTracker = _gat._getTracker("${google/analytics}");
+			<tal:block tal:condition="not:session/loggedin">
+				pageTracker._setVar('unregistered');
+			</tal:block>
+			<tal:block tal:condition="session/loggedin">
+				pageTracker._setVar('member');
+			</tal:block>
+			// remove this later since it zeros the bounce rate tracking
+			pageTracker._trackEvent('Performance', 'Execution time', 'xml', Math.round( ${statistics/exectime} * 10 )/10 );
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+	</tal:block>
+</tal:block>
+
+<!-- sharing button -->
+<tal:block metal:define-macro="share-button">
+<!-- ADDTHIS BUTTON BEGIN -->
+<script type="text/javascript">
+var addthis_config = {
+	username: "eurofoto",
+	services_compact: 'facebook, email, twitter, digg, delicious, favorites, friendfeed, google, linkedin, live,  more',
+	services_exclude: 'print',
+	ui_language: "no"
+
+}
+</script>
+
+<a href="http://www.addthis.com/bookmark.php" 
+    class="addthis_button"
+    style="text-decoration:none;">
+        <img src="http://s7.addthis.com/static/btn/sm-plus.gif" 
+    width="16" height="16" border="0" alt="Share" /> <span i18n:translate="">Share</span></a>
+    
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js"></script>
+<!-- ADDTHIS BUTTON END -->
+</tal:block>
+
+<tal:block metal:define-macro="pagination">
+	
+	<a class="button">First</a>
+	<a class="button">Previous</a>
+	
+	<a href="">1</a><a href="">2</a><a href="">3</a>...<a href="">4</a><a href="" class="current">(5)</a><a href="">6</a><a href="">7</a><a href="">8</a><a href="">9</a><a href="">10</a><a href="">11</a><a href="">12</a>...<a href="">50</a><a href="">51</a><a href="">52</a>
+	
+	<a class="button">Last</a>
+	
+</tal:block>
+
+<tal:block metal:define-macro="register-style">
+<style media="screen" type="text/css">
+	  div#fancy_div {
+	     overflow: scroll;
+	     overflow-x: hidden;
+	     background-color: #fff;
+	     color: #111;
+	  }
+	  
+	  
+	  body div form label { display: block; clear: both; text-align: left}
+	  form input { padding: 5px; }
+	  
+	  div form textarea { height: 94px }
+	  
+	  form label.inputError, form label.inputError {
+	  	background: none !important;
+	  	padding: 0 !important;
+	  	margin: 0 !important;
+	  }
+	  
+	  form div.checkboxes label, form div.checkboxes input {
+	  	display: inline;
+	  	margin-left: 0px;
+	  }
+	  form div.checkboxes input { margin-left: 3px }
+	  
+	  form label.red {
+	  	color: #c00;
+	  }
+	  
+	</style>
+</tal:block>
+
+
+<tal:block metal:define-macro="register">
+	<form action="" method="post" id="register">
+		<div class="span-8">
+			<div class="span-8 last">
+				<label for="email" i18n:translate="">Email</label>
+				<input type="text" class="span-7 required email" name="email" value="" id="email"/>
+			</div>			
+			<div class="span-8 last">
+				<label for="pasword" i18n:translate="">Password</label>
+				<input type="password" class="span-7 required password" name="password" id="password"/>
+			</div>
+			<div class="span-8 last append-bottom">
+				<label for="repeatpassword" i18n:translate="">Repeat password</label>
+				<input type="password" class="span-7 required repeatpassword" name="repeatpassword" id="repeatpassword"/>
+			</div>
+		</div>
+		<div class="span-8 last">
+			<div class="span-8 last">
+				<label for="fullname" i18n:translate="">Full name</label>
+				<input type="text" class="span-7 required fullname" name="fullname" value="" id="fullname"/>
+			</div>
+			<div class="span-8 last">
+				<label for="address1" i18n:translate="">Address</label>
+				<input class="text span-7 required address" name="address1" id="address1" />
+			</div>
+			<div class="span-8 last">
+				<div class="span-2">
+					<label for="zipcode" i18n:translate="">ZIP</label>
+					<input type="text" class="required zipcode" name="zipcode" value="" id="zipcode" style="width: 60px"/>
+				</div>
+				<div class="span-6 last">
+					<label for="city" i18n:translate="">City</label>
+					<input type="text" class="span-5 required city" name="city" tal:attributes="value city|default" value="" id="city"/>
+				</div>
+			</div>
+			<div class="span-8 last">
+				<label for="phone"i18n:translate="">Phone</label>
+				<input type="text" class="span-7 phone required number" name="phone" tal:attributes="value phone|default" value="" id="phone"/>
+			</div>
+			<div class="span-8 last checkboxes prepend-top">
+				<input type="checkbox" id="eula" class="required eula" name="eula"/> 
+				<label for="eula">
+					<tal:block i18n:translate="">Yes, I accept the</tal:block> <a href="${url:/about/terms-and-conditions/}" id="open-terms-and-conditions" i18n:translate="">Terms and conditions</a>
+				</label>
+			</div>
+			<div class="span-8 last checkboxes">
+				<input type="checkbox" id="newsletter" class="newsletter ignore" name="newsletter" checked="checked" /> 
+				<label for="newsletter" i18n:translate="">Yes, I want to receive newsletters</label>
+			</div>				
+			<div class="span-8 last">
+				<p class="right">
+					<button type="submit" class="button blue large submit" i18n:translate="">
+						 Next
+					</button>
+				</p>
+			</div>			
+			<div id="terms-and-conditions">
+				<tal:block tal:content="structure cms:body:80f507f6-69c5-4a4e-9714-b2656514cb31" />
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function() {  
+			
+				$('form#register').validate({
+					errorClass: "inputError",
+					errorPlacement: function(error, element) {
+			     		error.appendTo( element.parent("div") );
+			     		//$(element).parent().find('label').addClass('red')	
+			   	},
+					rules: {
+						email:{
+							required: true,
+							email: true
+						},
+						password: {
+							required: true,
+							maxlength: '15',
+							minlength: '5'
+							
+						},
+						repeatpassword: {
+							equalTo: '#password'
+						}
+					},
+					messages: {
+						required: "<tal:block i18n:translate="">This field is required.</tal:block>",
+						newEmail: {
+							required: '<tal:block i18n:translate="">You need to provide a valid e-mail address to log in.</tal:block>',
+							email: '<tal:block i18n:translate="">Please provide a valid email address.</tal:block>',
+							remote: jQuery.format('<tal:block i18n:translate="">{0} is already registered. Is this you? If so, try logging in.</tal:block><a href="/login/" i18n:translate="">Go to login</a>')
+						},
+						password: {
+							required: "<tal:block i18n:translate="">Please enter password.</tal:block>",
+							maxlength: jQuery.format('<tal:block i18n:translate="">Your password cannot be longer than {0} characters.</tal:block>'),
+							minlength: jQuery.format('<tal:block i18n:translate="">Your password should be longer than {0} characters.</tal:block>')
+						},
+						repeatpasword: {
+							required: "<tal:block i18n:translate="">Please enter password</tal:block>",
+							equalTo: "<tal:block i18n:translate="">Oops, the passwords don't match.</tal:block>"
+						},
+						eula: {
+							required: "<tal:block i18n:translate="">You have to read and accept the terms and conditions</tal:block>"
+						}
+					},
+					success: "valid",
+					submitHandler: function() { 
+					   
+					   if( $('form#register input[name=newsletter]').attr('checked')){
+					      var newsletter = 'true';
+					   }
+					   else{
+					      var newsletter = 'false';
+					   }
+					   
+						var response = $.ef( '3rdparty.takkekort.signup', {
+							'username'		:	$('form#register input[name=email]').val(),
+							'password'		:	$('form#register input[name=password]').val(),
+							'fullname'		:	$('form#register input[name=fullname]').val(),
+							'address1'		:	$('form#register input[name=address1]').val(),
+							'city'			:	$('form#register input[name=city]').val(),
+							'zipcode'		:	$('form#register input[name=zipcode]').val(),
+							'phone'			:	$('form#register input[name=phone]').val(),
+							'newsletter'   :  newsletter
+						});
+						
+						if( response.result ) {
+							window.location.href = '${nextStep}';
+						} else {
+							alert('error' + response.message );
+							console.log( response );
+						}
+						return false;
+					}
+				});
+				
+				$('#terms-and-conditions').addClass('hide');
+				
+				$('#terms-and-conditions').css('background-color', '#fff');
+				
+				$('#open-terms-and-conditions').click( function() {
+					$('#terms-and-conditions').removeClass('hide').dialog({
+						width: 700,
+						height: 500,
+						buttons: {
+							'Ok': function() {
+								$(this).dialog('destroy')
+							}
+						},
+						close: function() {
+							$(this).dialog('destroy')
+						}
+					});
+					return false;
+				});
+			});
+		</script>
+	</form>
+	<br class="clear clearfix" />
+
+</tal:block>
+<div metal:define-macro="associatedproducts">
+	<tal:block tal:repeat="product associatedproducts">
+		<div class="span-14" id="associatedproducts">
+			<div class="span-2 productimage">
+				<tal:block tal:condition="product/images">
+					<tal:block tal:repeat="image product/images">
+						<tal:block tal:condition="equal:repeat/image/number,1">
+							<tal:block tal:define="global staticurl" tal:content="static:" />
+							<a href="${staticurl}images/products/thumbs/square/500/${image/url}" title="${product/title}" class="fancybox">
+								<img src="${staticurl}images/products/thumbs/square/50/${image/url}" 
+								widht="50" height="50" class="left" alt="${product/title}" tal:condition="image/url" />
+							</a>
+							<img src="${static:gfx/404/not_found_50px.jpg}" 
+							class="left" alt="Product photo missing." tal:condition="not:image/url" 
+							style="border: 10px solid #fff; "
+							/> 
+						</tal:block>
+					</tal:block>
+				</tal:block>
+				<tal:block tal:condition="not:product/images"><span class="quiet small">No image</span></tal:block>
+			</div>
+			
+			<div class="span-6">
+				<h4 class="bottom" tal:content="product/title|default"></h4>
+				<p tal:content="product/ingress|default"></p>
+			</div>
+			
+			
+			<div class="span-6 right last">
+				<div class="span-6 last right" tal:condition="product/option/price">
+					
+					<tal:block tal:condition="gt:product/options/length,1">
+					
+					<label for="options${product/id}" i18n:translate="">Alternatives:</label>
+					<select name="option" id="options${product/id}">
+						<tal:block tal:repeat="option product/options">
+							<option value="${option/id}" title="${option/prodno}">${option/title}</option>
+						</tal:block>
+					</select>
+					</tal:block>
+					Kr <span class="price" tal:content="formatprice:product/option/price" />
+				</div>
+				
+				<label for="quantity${product/id}" i18n:translate="">Quantity:</label> 
+				
+				<tal:block tal:condition="exists:product/interval">
+				  <input class="quantity" value="${product/interval}" type="text" id="quantity${product/id}"/>
+				</tal:block>
+				<tal:block tal:condition="not:exists:product/interval">
+				  <input class="quantity" value="1" type="text" id="quantity${product/id}"/>
+				</tal:block>
+				<a class="button add-to-cart many-options" i18n:translate="" tal:condition="gt:product/options/length,1">Add to cart</a>
+				<tal:block tal:condition="equal:product/options/length,1">
+					<input name="defaultoption-prodno" value="${product/option/prodno}" type="hidden" />
+					<a class="button add-to-cart one-option" i18n:translate="" ref="${product/option/prodno}">Add to cart</a>
+				</tal:block>
+				
+			</div>
+			<hr />
+		</div>
+	</tal:block>
+	<script type="text/javascript">
+		$(document).ready( function() {
+		
+			$('.fancybox').fancybox();
+		
+			$('#associatedproducts [name=option]').change( function() {
+
+				var price = $(this).parent().find('span.price');
+				var id = $(this).val();
+				var quantity = $(this).parent().find('input.quantity').val();
+				
+				$.ajax({
+					url: '/api/1.0/prices/get',
+					type: 'post',
+					dataType: 'json', 
+					data: {
+						productoptionid: id,
+						quantity: 25
+					},
+					success: function(data) {
+						$(price).text( data.price );
+						$(price).effect('highlight');
+					},
+					error: function(data) {
+						pageTracker._trackEvent('Error', 'Add to cart', 'Accessories', id);
+						pageTracker._trackPageview();
+						alert('<tal:block i18n:translate="">Sorry, somehting bad happend</tal:block>');
+					}
+					
+				});
+			});
+			
+			$('#associatedproducts .button.add-to-cart').live('click', function() {
+			
+				$('#cart-total-price, #total-price').after('<img src="${static:gfx/gui/ajax-loader.gif}" class="ajax-loader"/>');
+				$(this).after('<img src="${static:gfx/gui/ajax-loader.gif}" class="ajax-loader"/>');
+			
+				var prodno = $(this).parent().find('input[name=defaultoption-prodno]').val();
+			
+				if( $(this).hasClass('many-options') ) {
+					prodno = $(this).parent().find('select option:selected').attr('title');
+				}
+
+				var quantity = $(this).parent().find('input.quantity').val();
+				
+				var item = this;
+			
+				$.ajax({
+					url: '/api/1.0/cart/add',
+					dataType: 'json',
+					type: 'post',
+					data: {
+						prodno: prodno,
+						quantity: quantity
+					},
+					success: function(data) {
+						$('#cart-total-price, #total-price').text( formatPrice(data.totalprice) );
+						$('#cart-total-items').text( data.totalitems );
+						$('#shopping-cart').effect('highlight',{}, 'slow');
+						$('.ajax-loader').remove();
+						$(item).parent().parent().css('opacity', 0.4);
+					}, 
+					error: function(data) {
+						pageTracker._trackEvent('Error', 'Add to cart', 'Accessories', prodno);
+						pageTracker._trackPageview();
+						alert('<tal:block i18n:translate="">Sorry, somehting bad happend</tal:block>');
+					}
+				});
+			
+				return false;
+			});
+		});
+	</script>
+</div>
+
+

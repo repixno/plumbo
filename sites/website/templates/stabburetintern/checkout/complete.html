@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <div metal:use-macro="../common.html/head" />
+        <div metal:use-macro="../common.html/javascript" />
+	
+	<div metal:use-macro="../common.html/stylesheet" />
+	
+	<style type="text/css">
+		
+		p{
+			font-size: 1.2em;
+			color: #0094d3
+		}
+		
+	</style>
+
+    </head>
+    
+    <body>
+        <div class="row text-center hidden-phone header">
+	    <img  src="${static:css/portals/stabburet/web/images/preheader.png}" alt="LAG LOKK MED DITT BILDE"/>
+        </div>
+        <div class="container">
+            <!-- Main hero unit for a primary marketing message or call to action -->
+            
+
+            <!-- Example row of columns -->
+            <div>
+				<div class="span7">
+					<div class="prepend-top append-bottom">
+						<h3 style="color: #ef321b" >Takk for bestillingen!</h3>
+						<p><strong>Ordrenummer:  ${orderid}</strong></p>
+						<p i18n:translate="">
+							An order confirmation has been sent to your email address. If you have any questions or feedback, don't hesitate to contact us!
+						</p>
+						<p>Husk ordrenummeret ved konktakt med kundeservice</p>
+
+			
+					</div>
+		
+					<tal:block tal:condition="exists:kelkoo">
+						<img src="http://tbs.tradedoubler.com/report?organization=${kelkoo/org_id}&event=${kelkoo/event}&orderNumber=${kelkoo/orderNumber}&orderValue=${kelkoo/orderValue}&currency=${kelkoo/currency}" />
+					</tal:block>
+				</div>
+				<div class="span4">
+					<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fstabburetleverpostei&amp;width&amp;height=590&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=true&amp;show_border=true&amp;appId=131362673683184" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:590px;background: #fff" allowTransparency="true"></iframe>
+				</div>
+			</div>
+
+        </div>
+	
+        <div metal:use-macro="../common.html/footer" />
+
+
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Login - Eurofot Admin</title>
+<tal:block metal:use-macro="../common.html/css" />
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		<tal:block metal:use-macro="../common.html/languages" />
+		<div id="content">
+			<div id="box">
+				<h3 id="adduser">Welcome to Eurofoto Admin</h3>
+				<form id="form" action="..." method="post">
+					<input type="hidden" name="referer" tal:attributes="value referer" />
+					<fieldset id="personal">
+						<legend>LOGIN DETAILS</legend>
+						<label for="email">E-mail: </label> <br/
+						<input name="email" id="email" type="text" tabindex="1" class="title"/>
+						<br />
+						<label for="password">Password: </label><br/>
+						<input name="password" id="password" type="password" tabindex="2" class="title"/>
+						<br />
+						<p>
+							<input name="autologin" id="autologin" type="checkbox" value="1" tabindex="35" />
+							<label for="autologin">Remember me</label>
+						</p>
+						<button id="button2" type="reset">
+							Reset
+						</button>
+						<button id="button1" type="submit" class="blue large">
+							Login
+						</button> 
+
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="footer"></div>
+</body>
+</html>

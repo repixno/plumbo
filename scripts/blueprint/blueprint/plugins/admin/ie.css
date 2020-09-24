@@ -1,0 +1,29 @@
+/* magiske ting som får z-index til å fungere */
+* html #main-navigation { height: 1% }
+.toplists li a { height: 1%;}
+#shopping-cart { filter: alpha(opacity = 80) }
+input.large { padding-bottom: 10px; }
+
+/* buttons plugin */
+button,a.button { 
+	/* border: 5px solid red;  lets keep it in ie7
+	background-image: none !important;
+	*/
+}
+button:hover,a.button:hover { color: #fff;}
+button:active,a.button:active { color: #fff; }
+
+/*button { padding-left: 0; }*/
+button span { margin-left: -15px; }
+button.small span { margin-left: -15px; }
+button.medium span {	margin-left: -20px; }
+button.large span { margin-left: -35px; }
+
+
+
+ss_sprite { display: inline-block !important; height: 18px; width: 18px; border:1px solid red !important;}
+
+/*jCrop */
+.jcExample { margin: 3.5em 10% 2em 10%; }
+
+img, div,a { behavior: url(css/iepngfix.htc) }

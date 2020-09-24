@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dashboard - Admin Template</title>
+<tal:block metal:use-macro="common.html/css" />
+<script src="http://www.google.com/jsapi?key=ABQIAAAA1XbMiDxx_BTCY2_FkPh06RRaGTYH6UMl8mADNa0YKuWNNa8VNxQEerTAUcfkyrr6OwBovxn7TDAH5Q"></script>
+<script type="text/javascript" src="/js/prototype.js"></script>
+<script type="text/javascript" src="/js/admin.js"></script>
+<script type="text/javascript">
+   google.load("language", "1");
+</script>
+<script tal:condition="exists:language" type="text/javascript" tal:content="structure string:var LANGUAGE = '${language}';">var LANGUAGE = 'en_US';</script>
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="common.html/topmenu" />
+		</div>
+
+		<tal:block metal:use-macro="common.html/languages" />
+
+		<div id="wrapper">
+			<div id="content">
+				<div id="box">
+					<h3>
+						<span tal:content="header|default">404 Not Found</span>
+					</h3>
+					<span tal:content="structure content|default"></span>
+				</div>
+			</div>
+		</div>
+		<div id="footer"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <tal metal:use-macro="../../${templates}/common.html/head" />
+
+  </head>
+  <body>
+    <tal metal:use-macro="../../${templates}/common.html/header" />
+    
+    <main role="main">
+        <section class="jumbotron text-center">
+          <div class="container">
+            <h1 class="jumbotron-heading">Album example</h1>
+            <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+            <p>
+              <a href="#" class="btn btn-primary my-2">Main call to action</a>
+              <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+            </p>
+          </div>
+        </section>
+      
+        <div class="album py-5 bg-light">
+          <div class="container">
+      
+            <div class="row">
+                <tal:block tal:repeat="menuitem menucontent:09886f48-6568-4807-b4f3-8b87f47d5b9e,maincontent">
+                    <div class="col-md-4">
+                      <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                          <tal:block tal:content="structure menuitem/body|default" />
+                        </div>
+                      </div>
+                    </div>
+                </tal:block>
+            </div>
+          </div>
+        </div>
+      
+      </main>
+    
+    <tal metal:use-macro="../../${templates}/common.html/scripts" />
+    <tal metal:use-macro="../../${templates}/common.html/footer" />
+  </body>
+
+</html>

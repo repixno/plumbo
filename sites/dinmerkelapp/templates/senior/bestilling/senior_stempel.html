@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+
+<head>
+		<title>Stempel Seniorlappen</title>
+<tal metal:use-macro="../../${templates}/common.html/head" />
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link rel="stylesheet" href="/js/bootstrap.colorpickersliders.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="../seniorlappen/css/bestilling_senior.css" type="text/css" media="screen, projection" />
+	
+
+	
+	<style>
+		#header ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		#header li {
+			float: left;
+			border: 1px solid #bbb;
+			border-bottom-width: 0;
+			margin: 0;
+		}
+
+		
+
+		#header #selected {
+			border-color: black;
+		}
+
+		#header #selected a {
+			position: relative;
+			top: 1px;
+			background: white;
+			color: black;
+			font-weight: bold;
+		}
+
+		#content {
+			border: 1px solid black;
+			clear: both;
+			padding: 0 1em;
+		}
+
+		h1 {
+			margin: 0;
+			padding: 0 0 1em 0;
+		}	
+	   
+
+.editorcontainer{
+	
+	margin-top: 40px;
+}
+	</style>
+	
+</head>
+
+<body>
+
+
+<div metal:use-macro="../../${templates}/common.html/top" />
+
+
+	<div id="seniorpage-main">
+			<aside id="seniorpage-hero" class="js-fullheight">
+	<div class="row">
+		<div class="col-md-12">
+			
+			<div class="col-md-12">
+				<h3 style="text-align: center;">STEMPEL</h3>
+				<form id="edit">
+				<div class="row">
+					<div class="col-md-4 form-horizontal">
+						
+							<div class="form-group ">
+								<label for="line1" class="col-sm-3 control-label visible-lg"><span i18n:translate="">LINJE 1:</span> </label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" name="line1" id="line1" maxlength="18" placeholder="Feks Fornavn"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label visible-lg"><span i18n:translate="">LINJE 2:</span></label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" name="line2" maxlength="18" placeholder="Feks Etternavn"/>
+								</div>
+							</div>	
+					</div>
+					
+			
+					<!--Fonter-->
+				<div class="col-md-2">
+					
+	<!--Teksttyper-->
+						<div class="justeringer2">
+							
+					
+							<button class="alignment btn active" id="left" >
+								<span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+							</button>
+							<button class="alignment btn" id="center">
+								<span class="glyphicon glyphicon-align-center"  aria-hidden="true"></span>
+							</button>
+							<button class="alignment btn" id="right">
+								<span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>
+							</button>
+				
+						</div>
+				<!-- Font typer-->
+				<div class="justeringer2">
+						<label for="font-type">
+							<strong i18n:translate="">Font-type:</strong>
+						</label>
+						<select class="form-control" name="font-type" style="width:135px;">
+								<option value="arial">Arial</option>
+								<option value="comic">Comic Sans</option>
+								<option value="verdana">Verdana</option>
+						
+								<option value="present">Present</option>
+						</select>
+						
+						</div>
+						
+					</div>
+
+				<!--Preview-->
+					
+					<div class="col-md-5">
+						<div class="previewcontainer">
+						
+						  <div id="sticker">
+							 <img id="preview" class="sticker " src="/gfx/merkelapp_308.png" />
+							
+						  </div>
+						</div>
+	<div id="status">
+		<a id="removeall" href="#"><img style=" padding: 5px; border-radius: 4px; margin-left: 54px;" src="/tmp/icondelete.png" height="30" width="30" />Slett</a>
+	
+
+		<a id="update" href="#"><img style=" padding: 5px; border-radius: 4px; margin-left: 50px;" src="/tmp/iconrefresh.png" height="30" width="30" />Oppdater</a>
+	</div>
+					</div>
+				</div>
+				
+				
+							<div class="row">
+				<div class="col-md-6">
+						<!-- Nav tabs -->
+						<p>
+							<!--<strong i18n:translate="">Motiv</strong>-->
+						</p>
+				
+                        <div>
+
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+						  <li role="presentation" class="active"><a href="#senior" aria-controls="senior" role="tab" data-toggle="tab">Cliparts</a></li>
+						   	   <li role="presentation"><a href="#Diverse" aria-controls="Diverse" role="tab" data-toggle="tab">Cliparts2</a></li>
+						</ul>
+					  
+						<!-- Tab panes -->
+						<div class="tab-content">
+						  <div role="tabpanel" class="clips tab-pane active" id="senior"></div>
+						     <div role="tabpanel" class="clips tab-pane" id="Diverse"></div>
+						</div>
+					  
+					  </div>
+                     
+							
+							<div id="clipart"></div>
+
+					  </div>
+
+					
+					<div class="col-md-6 justeringer">
+			<tal metal:use-macro="common.html/productlist" />
+			
+		
+		
+		</div>	
+										
+				</div>
+				
+				</form>	
+			</div>
+
+		</div>
+		
+   
+	</div>
+	
+
+	
+</aside>
+</div>
+
+
+
+
+<SCRIPT type="text/javascript">
+   var clipart = '';
+   var ownimage = '';
+   var treshhold = 100;
+   var imageselection = Object();
+   var projectid = ${projectid};
+   var gravity = 'left'; 
+   var category = 'senior';
+   var backgroundcat = '';
+   var backgroundfile = '';
+   var totalprice = ${cart/totalprice};
+   var staticroot = "${static:}";
+   var type = 'merkelapp';
+   var disabled = true;
+   var colormode = 'bw';
+   var alertmessage = 'false';
+
+
+   
+</SCRIPT>
+<script type="text/javascript" src="/js/seniorlappen/stempel_senior.js"></script>
+
+
+<script src="/js/tinycolor.js"></script>
+<script src="/js/bootstrap.colorpickersliders.js"></script>
+<script type="text/javascript">/*<![CDATA[*/
+
+	
+	
+		$( function(){
+			
+				updatetotal();
+				$( document ).scroll(function(ret) {
+					if( $(document).width() < 768 ){
+						var offsety = ret.currentTarget.body.scrollTop;
+						if( offsety < 51 ){
+							$('.previewcontainer').css('top', ( 51 - offsety ) + 'px');
+						}
+						else{
+							$('.previewcontainer').css('top', '0px');
+						}
+					
+					}
+				  });
+			
+		
+			
+			});
+		
+			// Get the modal
+var modal = document.getElementById('myModal');
+var modal = document.getElementById('produktinfomodal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("infobutton");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+			
+/*]]>*/	
+</script>
+
+
+
+
+</body>
+
+</html>

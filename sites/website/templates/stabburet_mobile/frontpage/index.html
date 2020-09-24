@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <div metal:use-macro="../common.html/head" />
+        <div metal:use-macro="../common.html/stylesheet" />
+	<div metal:use-macro="../common.html/javascript" />
+	<style type="text/css">
+	    .pil{
+		display: block;
+		position: absolute;
+		top: -70px;
+		left: 360px;
+	    }
+	    .container{
+		position: relative;
+	    }
+	    
+	</style>
+    </head>
+    
+    <body>
+        <div class="text-center header">
+	    <img  src="${static:css/portals/stabburet/mobile/images/header.jpg}" alt="LAG LOKK MED DITT BILDE"/>
+        </div>
+        <div class="container center">
+            <!-- Main hero unit for a primary marketing message or call to action -->
+	    <div>
+		<a href="/stabburet/bekreft" >
+		    <img src="${static:css/portals/stabburet/mobile/images/lokkmedjente.jpg}"  width="400px"/>
+		</a>
+	    </div>
+	    <div class="pil">
+		<img src="${static:css/portals/stabburet/mobile/images/pil.png}" />
+	    </div>
+	    <div>
+		<a href="/bestill" >
+		    <img src="${static:css/portals/stabburet/mobile/images/indexinfo.jpg}" />
+		</a>
+		
+	    </div>
+	    <div>
+		<a href="/bestill" class="btn btn-stabburet">Gå videre</a>
+	    </div>
+
+
+        </div>
+	
+        <div metal:use-macro="../common.html/footer" />
+        <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+
+</body>
+</html>

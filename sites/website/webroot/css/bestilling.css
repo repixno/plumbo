@@ -1,0 +1,56 @@
+label{
+    /*font-size: 1.2em*/
+}
+.selectedclip, .selectedbackground{
+    background-color: #ff6666;
+    border: 1px solid #ca0000;
+}
+
+.tab-pane{
+    border: 1px solid #ddd;
+    border-top: 0px;
+    border-radius: 4px;
+    padding: 5px;
+    min-height: 142px;
+}
+#imageloader{
+    position: absolute;
+    top: 0px;
+    padding: auto auto;
+    margin: 0;
+    z-index: 10000;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+ }
+ #imageloader img{
+    margin: 55px auto;
+    display:block;
+ }
+
+
+@media (max-width: 768px){
+    
+    .previewcontainer{
+        position: fixed;
+        top: 51px;
+        left: 0px;
+        z-index: 3;
+        background: #fff;
+        width: 100%;
+        text-align: center;
+    }
+    .content{
+        margin-top: 90px;
+    }
+}
+
+.clipartselect {
+    background-color: #ade3ff;
+    padding: 5px 0 0 10px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+#update,#removeall  {
+    background-color: #ADE3FF;
+}

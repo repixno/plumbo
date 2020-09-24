@@ -1,0 +1,911 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle">
+		Leverpostei - <tal:block tal:content="selected/product/title" />
+	</tal:block>
+	
+	
+	<link rel="stylesheet" href="${static:css/gift.css}?${version}" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="${static:css/jquery/stabburet-theme/jquery-ui-1.8.20.custom.css}?${version}" type="text/css" />
+
+	
+		<style type="text/css">
+      .functions *, #accordion * {
+         z-index: 1;
+      }
+		.add_text {
+			height: 250px;
+		}
+		a {color:#000;text-decoration:underline;}
+		h4 {
+         font-size: 1.2em;
+         line-height: 1.25;
+         margin-bottom: 0.25em;
+      }
+		body {
+         //font-family:"Comic Sans MS", cursive, sans-serif;
+         font-family:Tahoma, Arial, Helvetica, sans-serif;
+         background-image: none;
+         padding-top: 300;
+         margin: 0;
+         line-height: 24px;
+         font-size: 100%;
+         background-color: #ffdd00;
+         -webkit-background-size: 3000px 5px;
+         background-image: url(http://test.static.eurofoto.no/gfx/stabburet/background2.jpg);
+         background-repeat: repeat;
+         background-position: top;
+         background-attachment: scroll;
+         }
+		
+		
+	   .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+         color: #222;
+         text-decoration: none;
+       }
+		.header{
+         margin-top: 1px;  
+         
+		} 
+		.header img{
+		   position: relative;
+		   left: -70px;
+		}
+		#gift-editor {
+		    background-color: #fff;
+		    padding: 10px;
+		    -webkit-border-radius: 9px;
+          -moz-border-radius: 9px;
+          border-radius: 9px;
+          border: 1px solid #CCC;
+		}
+		
+		.ui-widget{
+         //font-family: "Comic Sans MS", cursive, sans-serif;
+         font-family: Tahoma, Arial, Helvetica, sans-serif;
+         font-size: 1em;
+      }
+		.ui-widget-content {
+         border: 1px solid #FFF;
+         background: #FD0;
+         color: #000;
+      }
+		.ui-widget-content a, .ui-widget-content h4{
+         color: #000;
+      }
+		.ui-widget-header {
+         border: 3px solid #FFF;
+         background: #ea2d23;
+         color: white;
+         font-weight: bold;
+      }
+		img.set-title{
+		 position:relative;
+		 top: -25px;
+		
+		}
+		div.box {
+         padding: 0.5em 1.5em 1.5em 1.5em;
+         margin-bottom: 1.5em;
+         background: #FD0;
+      }
+		
+		#intro table{
+         border: none;
+         padding: 0.1em;
+		}
+		#intro table thead th{
+		   background: none;
+         border: none;
+		}
+		#intro table td, #intro table th {
+		   border-left: none;
+         border-bottom: none;
+         padding: 0.1em;
+		}
+		#intro input{
+		    width: 6em;
+          margin-right: 2em;
+		}
+		#intro button {
+         background: #ffc000;
+         width: 8em;
+         padding: 0.8em;
+         margin-bottom: 2em;
+      }
+		#intro .error{
+         padding: 0em 2em 0em 0em;
+		}
+		.error {
+         background: white;
+         color:red;
+         border-color: #ffc000;
+      }
+	  </style>
+</head>
+
+<body>
+	<!--
+	<div metal:use-macro="../../common/loader.html/fullscreen" />
+	-->
+	
+
+	<div class="container create-gift">
+
+   <div class="header">
+   <img src="${static:gfx/stabburet/header.png}"/>
+	</div>
+
+	<div class="span-24 last"  id="gift-editor">
+	
+		<input type="hidden" value="${selected/product/id}" name="productid" id="productid"/>
+		<input type="hidden" value="${selected/productoptionid}" name="productoptionid" id="productoptionid"/>
+
+	
+		<tal:block tal:repeat="page selected/template/pages">
+			
+			<div class="span-24 last page" tal:condition="equal:repeat/page/number,1">
+			
+			<div class="span-22 last box" style="width:900px">
+				  <div class="span-23 last">
+				      <img class="set-title" src="${static:gfx/stabburet/SIZE.png}"/>
+				  </div>
+				  <div>
+				     <input type="checkbox" name="liten_boks" value="malid_2553" id="choose-size-small" checked="checked"/><label class="mal">Jeg vil ha lokk til Stabburet Leverpostei 100 gr boks.</label><br/>
+				     <input type="checkbox" name="stor_boks" value="malid_2552" id="choose-size-large"/><label class="mal">Jeg vil ha lokk til Stabburet leverpostei 200 gr boks / Stabburet Fersk Leverpostei</label>
+				  </div>
+
+
+			</div>
+				<div class="span-16">
+					
+					<div class="functions span-10 last">
+						<div class="span-11">
+							<!--<h2 class="bottom" tal:condition="exists:selected/product/title">
+								<tal:block tal:content="selected/product/title" tal:condition="selected/product/title"/>
+							</h2>-->
+							<p class="top hide" id="template-title">Stor leverposteiboks(75mm)</p>
+							<div id="ie6-loader-container"></div>
+						</div>
+
+					</div>
+					<div class="span-6 last right">
+
+							
+					</div>
+					<div class="span-16 last info">
+						
+					</div>
+					
+					
+					<input type="hidden" id="initMalpageid" name="malpageid" value="${page/malpageid}" tal:condition="exists:page"/>
+					<input type="hidden" id="initMalid" name="malid" value="${selected/template/id}" tal:condition="exists:page"/>
+					<input type="hidden" id="websize_x" name="malid" value="${page/websize_x}" tal:condition="exists:page"/>
+					<input type="hidden" id="websize_y" name="malid" value="${page/websize_y}" tal:condition="exists:page"/>
+					
+					
+					<div class="span-16 last" id="gift-editor-wrapper">
+						
+						<div class="template" id="template-wrapper">
+						
+						<div id="helper">&nbsp;</div>
+						
+						<tal:block condition="page/fullsize_src">
+							<img id="template" class="highrestemplate" 
+								src="${static:}images/gifttemplates/thumbs/width/${page/websize_x}/${page/fullsize_src}" 
+							/>
+						</tal:block>
+						
+						<tal:block condition="not:page/fullsize_src">
+							<img id="template" class="highrestemplate" 
+								src="${static:}images/gifttemplatesweb/thumbs/blankbox/${page/websize_x}x${page/websize_y}/${selected/template/id}.png" 
+							/>
+						</tal:block>
+						
+
+						<!-- finds other template if not set -->
+						<tal:block condition="not:page/fullsize_src">
+							<tal:block tal:repeat="gifttemplate collections/gifttemplates">
+								<tal:block tal:condition="equal:repeat/gifttemplate/number,1" tal:repeat="page gifttemplate/pages">
+									<input type="hidden" id="initMalid" name="malid" value="${gifttemplate/id}" tal:condition="exists:gifttemplate"/>
+									<tal:block tal:condition="equal:repeat/page/number,1">
+										<tal:block tal:condition="page/fullsize_src">
+											<img id="template" class="highrestemplate" 
+												src="${static:}images/gifttemplates/thumbs/width/630/${page/fullsize_src}" alt="template"
+											/>
+											<input type="hidden" id="initMalid" name="malid" value="${page/websize_x}" />
+											<input type="hidden" id="initMalid" name="malid" value="${page/websize_y}" />
+											<input type="hidden" id="initMalid" name="malid" value="${gifttemplate/id}" />
+											<input type="hidden" id="initMalpageid" name="malpageid" value="${page/malpageid}" />
+										</tal:block>
+										<tal:block tal:condition="not:page/fullsize_src">
+											<img id="template" 
+												class="highrestemplate" 
+												src="${static:}gfx/404/no_template.png" alt="no template"
+											/>
+										</tal:block>
+									</tal:block>
+								</tal:block>
+							</tal:block>
+						</tal:block>
+						<div id="image-wrapper">
+							<tal:block tal:condition="selected/imageid">
+								<img id="image"	src="/images/stream/image/${selected/image/id}/630/400" alt="?"/>
+								<input type="hidden" id="selected-image" value="${selected/imageid}" />
+							</tal:block>
+							<tal:block tal:condition="not:selected/imageid">
+								<img id="image" class="noimage" alt="no image" src="/layout_grafikk/pixblank.gif" />
+								<input type="hidden" id="selected-image" value="0" />
+							</tal:block>
+						</div>
+						</div>
+					</div>
+					
+					<div class="hide">
+						<!-- Article about how to do this 04c79f9a-fc81-4276-994c-42328ece2208 -->
+					</div>
+					
+				</div>
+				
+				<!-- store the values -->
+				<input type="hidden" id="original-template-width" class="coordinate" value="${page/fullsize_x}"/>
+				<input type="hidden" id="original-template-height" class="coordinate" value="${page/fullsize_y}"/>
+				<input type="hidden" id="original-pos-x" class="coordinate" value="${page/fullsize_pos_x}"/>
+				<input type="hidden" id="original-pos-y" class="coordinate" value="${page/fullsize_pos_y}"/>
+   			<input type="hidden" id="original-pos-dx" class="coordinate" value="${page/fullsize_pos_dx}"/>
+				<input type="hidden" id="original-pos-dy" class="coordinate" value="${page/fullsize_pos_dy}"/>
+
+				
+				<div class="span-8 last">
+					
+				 
+				<div class="box set hide" style="height: 50px">
+				  <div class="span-8 last">
+				      <img class="set-title" src="${static:gfx/stabburet/SIZE.png}"/>
+				  </div>
+				 
+						<div class="functions span-8 last" style="position: relative; top: -18px" id="choose-template">
+				        <div>
+						      <tal:block tal:repeat="gifttemplate collections/gifttemplates">
+							     <div class="template-thumb">
+										
+									<a tal:attributes="href string:/create/gift/${selected/productid}/${selected/productoptionid}/${gifttemplate/id}/${selected/image/id}">
+								    <tal:block tal:repeat="page gifttemplate/pages">
+									   <tal:block tal:condition="equal:repeat/page/number,1">		
+   										<input 
+   											type="hidden" class="websize_x" name="malid" value="${page/websize_x}" 
+   											tal:condition="exists:page"/>
+   										<input 
+    											type="hidden" class="websize_y" name="malid" value="${page/websize_y}" 
+   											tal:condition="exists:page"
+   										/>
+													
+											<tal:block tal:condition="page/fullsize_src">
+		
+											<tal:block tal:condition="equal:page/malpageid,6029">
+											<span class="mal" id="malid_${gifttemplate/id}">STOR</span>
+											</tal:block>
+											<tal:block tal:condition="equal:page/malpageid,6030">
+											 <span class="mal" id="malid_${gifttemplate/id}">LITEN</span>
+											</tal:block>
+														
+														
+											<!--<a href="#" class="mal" id="malid_${gifttemplate/id}">${page/malpageid}</a>-->
+														
+														<script type="text/javascript">
+															$('#malid_${gifttemplate/id}').data('websize_x', '${page/websize_x}');
+															$('#malid_${gifttemplate/id}').data('websize_y', '${page/websize_y}');
+															$('#malid_${gifttemplate/id}').data('fullsize_pos_x', '${page/fullsize_pos_x}');
+															$('#malid_${gifttemplate/id}').data('fullsize_pos_y', '${page/fullsize_pos_y}');
+															$('#malid_${gifttemplate/id}').data('fullsize_pos_dx', '${page/fullsize_pos_dx}');
+															$('#malid_${gifttemplate/id}').data('fullsize_pos_dy', '${page/fullsize_pos_dy}');
+															$('#malid_${gifttemplate/id}').data('fullsize_x', '${page/fullsize_x}');
+															$('#malid_${gifttemplate/id}').data('fullsize_y', '${page/fullsize_y}');	
+															
+														</script>
+														<input type="hidden" class="malid" name="malid" value="${gifttemplate/id}" />
+														<input type="hidden" class="malpageid" name="malpageid" value="${page/malpageid}" />
+										  </tal:block>
+													
+										  <tal:block tal:condition="not:page/fullsize_src">
+														<div class="empty-template-thumb">
+														<img 
+															src="${static:}images/gifttemplatesweb/thumbs/blankbox/50x50/${selected/template/id}.png" 
+															width="50" height="50"
+															id="malid_${gifttemplate/id}"
+														/>
+												</div>
+											</tal:block>
+													
+													<input type="hidden" class="malid" name="malid" value="${gifttemplate/id}" />
+													<input type="hidden" class="malpageid" name="malpageid" value="${page/malpageid}" />
+													
+												</tal:block>
+											</tal:block>
+										</a>
+										<a class="highres hide" href="${static:}images/gifttemplates/thumbs/width/630/${page/fullsize_src}"></a>
+									</div>
+								</tal:block>
+							</div>
+						</div>
+						
+						
+				  </div>
+				     
+				
+					<div class="box set">
+					
+						
+						<div class="functions">
+						   <img class="set-title" src="${static:gfx/stabburet/lastopp.png}"/>
+						
+							<form method="post" action="/flash_upload.php?noerror=1" id="transfer-manual" enctype="multipart/form-data">
+								<input type="file" id="filedata" name="Filedata" onchange="$('#transfer-manual').submit();" />
+								<input type="hidden" id="batchid" name="batchid" value="${batchid}" />
+							</form>
+							<tal:block tal:define="global strUpload" i18n:translate="">Get from PC</tal:block>
+							<tal:block tal:define="global strJPEGImages" i18n:translate="">JPEG Images</tal:block>
+							<script type="text/javascript">
+							//<![CDATA[
+							$(document).ready( function() {
+								initUpload('${batchid}','${session/sessionid}','${strJPEGImages}','${strUpload}','#next-action' ,'#transfer-status, #total-loader-spinner','#show-on-finish');
+							});
+							//]]>
+							</script>
+							<span i18n:translate="">Click on the image you want to use.</span><br/>
+							<div id="transfer-status" class="hide small quiet">
+								<p class="right">
+									<a href="#" class="abort negative hide" id="transfer-stop" i18n:translate="">Cancel upload</a> 
+								</p>
+
+								<span id="uplspeed" style="float: right;">0 KB/s</span>
+								<div id="progressbar-total" style="height: 25px"></div>
+								<div id="upload-queue">
+									<div id="upload-master" style="display:none;">
+										<img style="max-width: 96px;" src="${static:gfx/gui/ajax-loader-big.gif}" alt="" />
+									</div>
+								
+									<div>
+										<div class="progressbar" style="height: 10px"></div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+
+
+					</div> <!-- end accordion -->
+					
+					<div class="span-8 last">
+	              <div class="box">
+						   <img class="set-title" src="${static:gfx/stabburet/zoom.png}"/>
+						   <div>
+						      <button id="zoom-out" i18n:translate="">Zoom out</button> <button id="zoom-in" i18n:translate="">Zoom in</button>
+						   </div>
+						   <div class="quiet" i18n:translate="">
+						      Click and drag your image to move it around.
+						   </div>
+						   
+				     </div>
+					</div>
+					<div class="span-8 last">
+						<div class="box">
+						
+
+							
+							<div class="prepend-top append-bottom hide">
+								<input type="checkbox" name="red-eye" id="red-eye"/>
+								<label for="red-eye">
+									<tal:block i18n:translate="">Please remove red eyes for me.</tal:block>
+									<span class="quiet small">(Kr <span id="redeye-price"></span>)</span>
+								</label>
+							</div>
+							
+							<div class="right">
+								<label for="gift-quantity"></label>
+								<input type="text" class="hide" id="gift-quantity" value="1"/>
+								<button style="background-color: #ec3617;border: 3px solid #FFF;font-size:1.5em; padding:0.5em;" id="add-gift-to-cart-stabburet" i18n:translate="">Send order</button>
+							</div>
+						</div>
+					</div>
+					
+					<div class="span-8 last">
+					 <div class="box">
+					    <strong>Kundeservice:</strong><br/>
+					    Telefon: 57 88 35 00<br/>
+					    Epost: post@eurofoto.no<br/>
+					    Se reglene <a id="rules2" href="#">her</a>.
+					    
+					 </div>
+					
+					</div>
+				</div> <!-- end left side -->
+			</div>
+		</tal:block>
+	</div>
+	<hr class="space clearfix clear"/>
+</div>
+		
+
+<div id="delivery" class="hide">
+<form action="/stabburet/complete"  id="deliveryaddress" method="post">
+	<div>
+		<label for="contact-email" i18n:translate="">E-mail</label> <br/>
+		<input id="contact-email" name="cemail" type="text" class="text required email" value="" />
+	</div>
+   <div id="delivery-address">
+   			   <!--3 -->
+     <div>
+   	<label for="phone" i18n:translate="">Mobile number:</label><br/>
+   	<input id="phone" name="phone" type="text" class="text required text-3"  value=""/>
+     </div>
+   <!--PHONE END -->
+   
+   	<div>
+   		<label for="contact-name" i18n:translate="">Name:</label> <br/>
+   		<input id="contact-name" name="cname" type="text" class="text required name" />
+   	</div>
+   
+   	<div>
+   		<label for="contact-address" i18n:translate="">Address:</label><br/>
+   		<textarea id="contact-address" name="caddress" style="height: 50px;"  class="required" cols="30" rows="6"/>
+   	</div>
+   	<div>
+   		<div class="span-3">
+   			<label for="contact-zipcode" i18n:translate="">ZIP code:</label> <br/>
+   			<input id="contact-zipcode" name="czipcode" type="text" class="text required text-2"/>
+   		</div>
+   		<div class="span-5">
+   			<label for="contact-city" i18n:translate="">City:</label> <br/>
+   			 <input id="contact-city" name="ccity" type="text" class="text required text-4" />
+   		</div>
+   	
+   		<div class="span-4 last">
+            &nbsp;
+   		</div>
+   	</div>
+   </div>
+   <div class="span-14 last">
+      <div>
+         <input type="hidden" value="" name="message"/>
+         <input type="checkbox" name="eula" class="required"/>
+         <label for="eula">Ja, jeg godkjenner <a href="#" id="rules" >Reglene</a>.</label>
+      </div>
+      <div>
+         <input type="checkbox" id="newsletter" class="newsletter ignore" name="newsletter"/> 
+		   <label for="newsletter" >Ja, jeg vil gjerne motta supergode tilbud, rabattkoder og nyhetsbrev fra Japan Photo.</label>
+      </div>
+   </div>
+   <div class="span-14 last right">
+
+   <button style="background-color: #ec3617;border: 3px solid #FFF;font-size:1.5em; padding:0.5em;" id="confirm_stabburet" >Bekreft</button>
+   </div>
+</form>
+
+</div>
+
+<div id="intro">
+
+<img style="margin-bottom: 0px; margin-left: -20px;" src="${static:gfx/stabburet/intro-1.jpg}"/>
+
+
+<tal:block tal:condition="exists:overmaxorders">
+
+   <p>Beklager, det er ikke mulig å bestille mer enn 5 lokk med ditt eget bilde.</p>
+
+</tal:block>
+<tal:block tal:condition="not:exists:overmaxorders">
+<form id="intro-form" method="post">
+<table>
+   <THEAD>
+      <tr>
+         <th><img src="${static:gfx/stabburet/dato.png}"/></th>
+         <th><img src="${static:gfx/stabburet/kommune.png}"/></th>
+         <th><img src="${static:gfx/stabburet/butikk.png}"/></th>
+      </tr>   
+   </THEAD>
+   <TBODY>
+      <tr>
+         <td>
+             <select id="purchasedate" name="purchasedate" class="required">
+               <option value="default" disabled="true" selected="true">Velg Måned:</option>
+               <option>August 2012</option>
+               <option>September 2012</option>
+               <option>Oktober 2012</option>
+               <option>November 2012</option>
+               
+             </select>
+         
+         </td>
+         <td><input type="text" name="kommune" class="required"/></td>
+         <td>
+               <select name="store" class="required">
+                  <option value="default" disabled="true" selected="true">Velg Butikk:</option>
+                  <option>Rema 1000</option>
+                  <option>Bunnpris</option>
+                  <option>Kiwi</option>
+                  <option>Meny</option>
+                  <option>Joker</option>
+                  <option>Spar/Eurospar</option>
+                  <option>Ultra/Centra</option>
+                  <option>Rimi</option>
+                  <option>Ica</option>
+                  <option>Coop Mega</option>
+                  <option>Coop Obs!</option>
+                  <option>Coop Prix</option>
+                  <option>Coop Extra</option>
+                  <option>Coop Marked</option>
+                  <option>Annet</option>
+               </select>
+         </td>
+      </tr>
+      <tr>
+           <td>&nbsp;</td>
+           <td style="padding: 0em;font-size: .8em;">(EKS:ASKER)</td>
+           <td>&nbsp;</td>
+      </tr>
+   </TBODY>
+</table>
+
+<center><button type="submit" id="confirm-intro" style="background-color: #ec3617;border: 3px solid #FFF;font-size:1.5em; padding:0.5em;">Fortsett</button></center>
+</form>
+</tal:block>
+</div>
+
+<div class="footer container">
+<img style="position: relative; left: -20px;" src="http://test.static.eurofoto.no/gfx/stabburet/footer.jpg"/>
+</div>
+
+ <div id="terms-and-conditions" class="popup hide" style="overflow:auto;">
+	<h4 tal:content="cms:title:bdfae130-4c73-4c7c-98eb-c0a769bddec2"></h4>
+	<p class="large" tal:content="cms:ingress:bdfae130-4c73-4c7c-98eb-c0a769bddec2"></p>
+	<tal:block tal:content="structure cms:body:bdfae130-4c73-4c7c-98eb-c0a769bddec2" />
+</div>
+<script type="text/javascript">
+var ajaxLoader = '<tal:block tal:content="static:gfx/gui/ajax-loader.gif" />';
+var bigajaxLoader = '<tal:block tal:content="static:gfx/gui/ajax-loader-big.gif" />';
+var bigajaxLoaderGray = '${static:gfx/gui/ajax-loader-gray.gif}';
+var noImagesText = '<tal:block i18n:translate="">No images</tal:block>';
+var deleteText = '<tal:block i18n:translate="">Delete</tal:block>';
+var staticurl = '${static:}';
+var maxHeight = 450;
+var productoptionid = ${selected/productoptionid};
+var websize_x = '${page/websize_x}';
+var websize_y = '${page/websize_y}';
+//<![CDATA[	
+
+jQuery.validator.addMethod("fullname", function(value, element) { 
+		return value.split(' ').length > 1; 
+}, "Please provide first name and last name");
+
+ $.validator.addMethod("valueNotEquals", function(value, element, arg){
+  return arg != value;
+ }, "<br/>Påkrevd!");
+  $.validator.addMethod("valueNotEqualsdate", function(value, element, arg){
+  return arg != value;
+ }, "<br/>Påkrevd!");
+
+//]]>
+
+   $(document).ready( function(){
+
+      $('#intro').dialog( {
+         modal: true,
+         width : 530,
+         position: top,
+         draggable: false,
+         resizable: false
+         
+      });
+      
+      $(".ui-dialog").css('top', '40px');
+      $(".ui-dialog-titlebar").hide();
+      
+      
+      $('form#intro-form').submit( function(){
+         
+         if( $('form#intro-form').valid() ){
+         
+            $("input[name=message]").val( "date:" + $("select[name=purchasedate]").val() + ",kommune:" + $("input[name=kommune]").val() + ',store:' + $("select[name=store] option:selected").text() );
+
+            $('#intro').dialog("close");
+            return false;
+         }
+         return false;
+         
+      });
+      
+      
+      $('form#intro-form').validate({
+            rules: {
+			      purchasedate: {
+				     required: true,
+				     valueNotEqualsdate: "default"
+			      },
+               store:{
+                  required: true,
+                  valueNotEquals: "default"
+               } 
+            },
+            messages:{ 
+               purchasedate :{
+                  required:'<br/>Påkrevd!'
+               },           
+               kommune :{
+                  required:'Påkrevd'
+               },
+               store :{
+                  required:'Påkrevd',
+                  min:     'Velg butikk'
+               }
+            }
+         });
+      
+      
+      
+      
+      $('#choose-size-large').change( function(){
+         
+         if( $('#choose-size-small').attr( 'checked') == false ){
+            $('#choose-size-large').attr( 'checked' , true );
+            return false;
+         }
+         
+         $('#malid_2552').click();
+         $('#choose-size-small').removeAttr( 'checked' );
+         return false;
+      });
+      
+      $('#choose-size-small').change( function(){
+         if( $('#choose-size-large').attr( 'checked') == false ){
+            $('#choose-size-small').attr( 'checked' , true );
+            return false;
+         }
+         $('#malid_2553').click();
+         $('#choose-size-large').removeAttr( 'checked' );
+         return false;
+      });
+      
+      $('#rules2').click( function(){
+         $('#terms-and-conditions').animate({scrollTop:0}, 'fast');
+         $( '#terms-and-conditions' ).dialog( {
+            title: "Regler",
+            width: 1000,
+            height: 700,
+            position: top,
+            buttons: {
+               Ok :function() { $(this).dialog("close"); }
+            }
+            
+         } );
+         return false;
+      });
+      
+      $('#rules').click( function(){
+         $('#terms-and-conditions').animate({scrollTop:0}, 'fast');
+         $( '#terms-and-conditions' ).dialog( {
+            title: "Regler",
+            width: 1000,
+            height: 700,
+            position: top,
+            buttons: {
+               Ok :function() { $(this).dialog("close"); }
+            }
+            
+         } );
+         return false;
+      });
+      
+      $('form#deliveryaddress').validate( {
+         		rules: {
+         			cname: {
+         				required: true,
+         				fullname: true
+         			},
+         			eula: {
+         			   required: true,
+         			   minlength: 1
+         			},
+         			cemail: {
+         				required: true,
+         				email: true,
+         				remote: '/api/1.0/gift/stabburet_check'
+         			},
+         			czipcode: {
+         				required: true,
+         				minlength: 4
+         			},
+         			ccity: {
+         				required: true
+         			},
+         			caddress: {
+         				required: true
+         			},
+         			phone:{
+                     required : true,
+                     digits : true,
+                     minlength : 8
+         			}
+         		},
+         		messages: {
+         			cname: {
+         				required: "<tal:block i18n:translate="">Required</tal:block>",
+         				fullname: "<tal:block i18n:translate="">Please enter your first name and surname.</tal:block>"
+         			},
+         			cemail: {
+         				required: "<tal:block i18n:translate="">Required</tal:block>",
+         				email: "<tal:block i18n:translate="">Your email address must be in the format of name@domain.com</tal:block>",
+         				remote: "Beklager, det er ikke mulig å bestille mer enn 5 lokk med ditt eget bilde."
+         			},
+         			czipcode: {
+         				required: "<tal:block i18n:translate="">Required</tal:block>",	
+         				minlength: "<tal:block i18n:translate="">Please enter at least 4 digits</tal:block>"	
+         			},
+         			ccity: {
+         				required: "<tal:block i18n:translate="">Required</tal:block>"	
+         			},
+         			caddress: {
+         				required: "<tal:block i18n:translate="">Required</tal:block>"	
+         			},
+         			eula: {
+         				required: "<tal:block i18n:translate="">You have to read and accept the terms and conditions</tal:block>"
+         			},
+         			phone:{
+         			   required: "Du må oppgi et telefonummer",
+         			   number: "Du må oppgi et gyldig mobilnummer"
+         			}
+         		}         
+      });
+      
+      /*$('#confirm_stabburet').click( function(){
+         
+         if(  $('form#deliveryaddress').valid() ){
+           save_stabburet();
+         }else{
+            return false;
+         }
+           
+      });*/
+      
+ 
+      
+      $('#add-gift-to-cart-stabburet').click( function() {
+         
+         if( $('#image').hasClass('noimage') ){
+            alert( "Du må velge et bilde før du kan gå videre! " );
+            return false;
+         }
+
+         save_stabburet();
+         
+         $('#delivery').dialog({
+            'zIndex' : 100000,
+            'width'  : 600,
+            'modal'  : true,
+            'title'  : 'Leveringsadresse'
+            
+            
+         });
+         return false;
+         //save_stabburet();
+      
+      
+      });
+      
+      
+      
+   });
+
+	//Save the current setup
+	function save_stabburet() {
+	  
+		var ratioWidth = $('#original-template-width').attr('value') / $('#template').width();
+		var ratioHeight = $('#original-template-height').attr('value') / $('#template').height();
+		var position = $('#image').position();
+		
+		var pages = new Array();
+		
+		pages.push();
+		
+		pages[0] = new Object();
+		
+		pages[0].malid = $('#template').data('malid');
+		pages[0].malpageid = $('#template').data('malpageid');
+		pages[0].giftQuantity = $('#gift-quantity').attr('value');
+		pages[0].productoptionid = $('#productoptionid').attr('value');
+		pages[0].productid = $('#productid').attr('value');
+		pages[0].size = "small";
+		pages[0].editor_x = $('#template-wrapper').width();
+		pages[0].editor_y = $('#template-wrapper').height();
+		
+		if ( $('#red-eye').is(':checked') ) {
+			pages[0].redeye = 'true';
+		}
+		
+		
+		pages[0].image = new Object()
+		pages[0].image.x = position.left * ratioWidth;
+		pages[0].image.y = position.top * ratioHeight;
+		pages[0].image.dx = $('#image').width() * ratioWidth;
+		pages[0].image.dy = $('#image').height() * ratioHeight;
+		pages[0].image.bid = $('#selected-image').attr('value');
+		
+		pages[0].texts = new Array();
+		
+		$('.textholder').each( function(i) {
+		
+			var position = $(this).position();
+			var text = new Object();
+			
+			text.text = Base64.encode( $(this).data('text') );
+			text.font = $(this).data('font');
+			text.color = $(this).data('color');
+			text.gravity = $(this).data('gravity');
+			text.zindex = $(this).data('zindex');
+			
+			text.x = position.left * ratioWidth;
+			text.y = position.top * ratioHeight;
+			text.dx = $(this).width() * ratioWidth;
+			text.dy = $(this).height() * ratioHeight;
+			
+			pages[0].texts.push(text);
+			
+		});
+		
+		pages[0].cliparts = new Array();
+		
+		$('.currentclipartholder').each( function(i) {
+			
+			var position = $(this).position();
+			var clipart = new Object();
+			
+			clipart.id = $(this).data('id');
+			clipart.x = position.left * ratioWidth;
+			clipart.y = position.top * ratioWidth;
+			clipart.dx = $('.currentclipart', this).width() * ratioWidth;
+			clipart.dy = $('.currentclipart', this).height() * ratioHeight;
+			clipart.zindex = $(this).data('zindex');
+			
+			pages[0].cliparts.push(clipart);
+		});
+		
+		
+		$.ajax({
+			type: 'POST',
+			url: '/stabburet/save',
+			dataType: 'JSON',
+			data: { pages: $.toJSON(pages) },
+			success: function(msg) {
+				//document.location.href = '/checkout';
+				return false;
+			},
+			complete: function(msg) {
+				//document.location.href = '/cart/';
+				//return false;
+			},
+			error: function(msg) {
+				alert('error');
+			}
+		});
+		
+		
+	}
+</script>
+
+<!--[if lt IE 7]>
+<script type="text/javascript" src="http://static.eurofoto.no/js/jquery.pngFix.pack.js?1"></script>
+<![endif]-->
+
+
+<script src="${static:js/iColorPicker.js}?${version}" type="text/javascript"></script>
+<script src="${static:js/gift.js}?${version}" type="text/javascript"></script>
+<script src="${static:}js/uploadhandlers.js?${version}" type="text/javascript"></script>
+<script src="${static:js/jquery.uploadify.v2.0.3.min.js}" type="text/javascript"></script>
+<!-- Google Code for Gavegenerator - steg 2 Conversion Page -->
+
+</body>
+</html>

@@ -1,0 +1,925 @@
+/* SHO INFO ON IMAGE */
+
+
+
+.infoOnImage .ui-accordion .ui-accordion-header {
+	color: #333;
+	font-size: 1.1em;
+	background: none;
+	border: none;
+	border-top: 1px solid #ccc;
+	padding: 8px 27px;
+}
+.infoOnImage .ui-accordion .ui-accordion-header:last-child {
+	border-bottom: 1px solid #ccc;
+}
+
+.infoOnImage .ui-accordion .ui-accordion-content {
+	border: none;
+	padding: none;
+}
+
+.infoOnImage .ui-accordion {
+	height: 270px;
+}
+
+
+
+a.disabled {
+	opacity: .5;
+}
+
+#account a {
+	text-decoration: none;
+}
+
+.account-content-box {
+	border: 1px solid #ccc;
+	background-color: #fff;
+	border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius:5px; -o-border-radius:5px; -ms-border-radius:5px;
+	padding: 5px;
+	margin-bottom: 1em;
+}
+.account-content-box.scrollable {
+	border-radius: 5px ; -moz-border-radius:  5px 0 0 5px ; -webkit-border-radius:5px; -o-border-radius:5px; -ms-border-radius:5px;
+}
+
+.account-content-box.disabled {
+	opacity: .4;
+}
+
+a.button.white {
+	background-color: white;
+}
+
+
+.account-content-box form { margin: 0; padding: 0 }
+
+.account-content-box-functions { clear: both;  }
+.account-content-box-functions h2, .account-content-box-functions h3, .account-content-box-functions h4 {
+	float: left;
+} 
+.account-content-box-functions .functions {
+	display: block;
+	float: right;
+}
+
+.account-content-box.accordion { padding: 0}
+
+ul.account-content-box {
+	margin: 0;
+	margin-bottom: 1em;
+	
+}
+ul.account-content-box li { list-style-type: none}
+
+#account {
+	border-top: 1px solid #ccc;
+	padding-top: 1em;
+	background-color: #f7f7f7;
+}
+
+#account h3, #account h4 {
+	margin-top: 1em;
+	margin-bottom: .5em;
+} 
+#account #album-accordion h3{
+	margin-top: 0;
+	padding-top: 0
+}
+
+#album-accordion-list h3 {
+	margin: 0;
+	padding: 10px !important;
+	background-color: #ddd;
+	color: #333;
+	text-align: center;
+	/* webkit */ background: -webkit-gradient(linear,left top,left bottom,from(#ddd),to(#fefefe));
+	/* mozilla */background: -moz-linear-gradient(100% 100% 90deg,#fefefe,#ddd);
+
+}
+
+#album-accordion-container {
+   width:148px;
+}
+
+#account h3.editable {
+	margin-top: 0 !important;
+	margin-bottom: .2em !important;
+	/*padding: .5em 0 .2em 0; */
+	
+}
+
+#account .editable:hover {
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	background-color: #f6f7ca;
+}
+
+.account-wrapper {width: 100%}
+.account-container {padding: 0 10px}
+.account-wrapper.container {width: 950px}
+.account-wrapper.container .account-container {padding: 0}
+
+
+#main-content {
+	float: none;
+}
+
+
+.account-content-box .functions hr {
+	margin: 0;
+}
+
+.account-content-box .functions a.negative {
+	color: #c00;
+}
+
+.account-content-box .top a {
+	color: #000;
+}
+
+.account-content-box .functions .album-functions {
+	margin-left: 1em;
+	margin-bottom: 1em;
+}
+
+.account-content-box .functions .album-functions ul{
+	margin: 0; padding: 0;
+	
+}
+
+
+.smallbuttons a:first-child {
+-webkit-border-top-left-radius: 5px;
+-moz-border-radius-topleft: 5px;
+border-top-left-radius: 5px;
+}
+
+.account-content-box.menu .smallbuttons a span.icon {
+	background: transparent url(gfx/small-buttons-icons.png) no-repeat top left; 
+	display: inline-block;
+}
+.account-content-box.menu .smallbuttons a.sorting span.icon {
+	background-position: 0 -6px;
+	width: 16px;
+	height: 17px;
+	text-indent: -9999px;
+}
+
+.account-content-box.menu .smallbuttons a.slideshow span.icon {
+	width: 16px;
+	height: 15px;
+	float: left;
+	margin-top: 2px;
+	margin-right: 5px;
+	background-position: 0 -23px ;
+}
+
+.account-content-box.menu .smallbuttons a span.dropdown {
+	background: transparent url(gfx/small-buttons-icons.png) no-repeat top left; 
+	width: 9px;
+	height: 5px;
+	display: inline-block;
+	margin-top: 5px;
+	margin-left: 3px;
+}
+
+
+.account-content-box.menu .smallbuttons a:hover span.dropdown {
+	background-position: -16px 0;
+}
+
+
+
+.account-content-box.menu .smallbuttons a:hover {
+	background-position-x: -16px;
+}
+
+
+
+.account-content-box .functions {
+	background-color: #fff;
+	position: absolute;
+	top: 3em;
+	padding-top: 1em;
+	left: 0;
+	z-index: 20000;
+	-webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
+	-moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
+	box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
+}
+
+.account-content-box .top {
+
+-webkit-border-top-left-radius: 5px;
+-webkit-border-top-right-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright: 5px;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+
+}
+
+.account-content-box .top .open-functions {
+-webkit-border-top-left-radius: 5px;
+-moz-border-radius-topleft: 5px;
+border-top-left-radius: 5px;
+}
+
+
+.account-content-box .functions li {
+	list-style-type: none;
+}
+.account-content-box .functions li a {
+	display: block;
+	color: #666;
+	padding: .5em;
+}
+
+.account-content-box .functions li a:focus {
+	/* webkit */ background: -webkit-gradient(linear,left top,left bottom,from(#0094da),to(#0066c1));
+	/* mozilla */background: -moz-linear-gradient(100% 100% 90deg,#0066c1,#0094da);
+
+}
+
+.account-content-box .functions a.delete:hover {
+	background-color: #ffb3b5;
+	color: #c00;
+}
+
+.account-content-box .functions a:hover {
+	background-color: #eee;
+	color: #000;
+}
+
+#account .account-content-box.scrollable {
+	height: 450px;
+	overflow-y: scroll;
+	border-top: none;
+	-webkit-border-top-left-radius: 0px;
+	-webkit-border-top-right-radius: 0px;
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.account-content-header {
+	height: 37px;
+}
+
+.account-content-box.menu { 
+	height: 65px;
+	padding: 0;
+	margin-bottom: 0;
+	
+-webkit-border-bottom-right-radius: 0px;
+-webkit-border-bottom-left-radius: 0px;
+-moz-border-radius-bottomright: 0px;
+-moz-border-radius-bottomleft: 0px;
+border-bottom-right-radius: 0px;
+border-bottom-left-radius: 0px;
+	
+
+}
+
+.account-content-box.menu.accordion { 
+	height: 35px;
+}
+
+.account-content-box div.top {
+	padding: 0;
+	position: relative;
+	height: 37px;
+	background: #e3e3e3 url(gfx/light-gray-to-white-16px.gif) repeat-x scroll top;
+}
+
+.account-content-box div.top .smallbuttons, #album-menu .buttons  {
+	height: 37px;
+}
+
+.account-content-box div.top .buttons a {
+	display: block;
+	float: right;
+	height: 22px;
+	padding: 7px 15px;
+	margin: 0;
+	font-size: 14px;
+	font-weight: bold;
+	border-left: 1px solid #fff ;
+	border-right: 1px solid #ddd;
+	color: #fff;
+	text-shadow: -1px -1px -1px rgba(0,0,0,0.2);
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+.open-menu.sorting {
+	max-width: 25px;
+	overflow: hidden;
+	padding-right: 0;
+
+}
+
+#choose-albumlist-heading {
+	max-width: 80px;
+	overflow: hidden;
+}
+
+
+.account-content-box div.top .buttons a.order-prints-from-current-album {
+
+-webkit-border-top-right-radius: 5px;
+-moz-border-radius-topright: 5px;
+border-top-right-radius: 5px;
+	
+	border-right: none;
+	border-left: 1px solid #65ac66;
+	border-bottom: 1px solid #1b681b;
+	background-color: #1b681b;
+	/* webkit-css3 */ background: -webkit-gradient(linear,left top,left bottom,from(#289b29),to(#1b681b));
+	/* mozilla-css3 */background: -moz-linear-gradient(100% 100% 90deg,#1b681b,#289b29);
+}
+#album-menu.account-content-box div.top .buttons a.order-prints-from-current-album:hover {
+	border-left: 1px solid #528950;
+	border-bottom: 1px solid #0e370f;
+	background-color: #165516;
+	/* webkit-css3 */ background: -webkit-gradient(linear,left top,left bottom,from(#228429),to(#124612));
+	/* mozilla-css3 */background: -moz-linear-gradient(100% 100% 90deg,#124612,#228429);
+
+}
+
+#album-menu.account-content-box div.top .buttons a.share-album {
+	background-color: #e4b329;
+	border-right: 1px solid #967a1c;
+	border-left:  1px solid #d3bd83;
+	border-bottom:1px solid #95761b;
+	/* webkit-css3 */ background: -webkit-gradient(linear,left top,left bottom,from(#e4b329),to(#a6821e));
+	/* mozilla-css3 */background: -moz-linear-gradient(100% 100% 90deg,#a6821e,#e4b329);
+}
+
+#album-menu.account-content-box div.top .buttons a.share-album:hover {
+	background-color: #c39923;
+	border-right: 1px solid #7a6317;
+	border-left:  1px solid #b7a472;
+	border-bottom:1px solid #7e6417;
+	/* webkit-css3 */ background: -webkit-gradient(linear,left top,left bottom,from(#c79c24),to(#94741b));
+	/* mozilla-css3 */background: -moz-linear-gradient(100% 100% 90deg,#94741b,#c79c24);
+}
+
+
+#album-menu.account-content-box div.top .buttons a.create-photobook-from-album {
+	background-color: #0086c4;
+	border-right: 1px solid #0c6892;
+	border-left:  1px solid #73b6d5;
+	border-bottom: 1px solid #005881;
+	/* webkit-css3 */ background: -webkit-gradient(linear,left top,left bottom,from(#0086c4),to(#00628f));
+	/* mozilla-css3 */background: -moz-linear-gradient(100% 100% 90deg,#00628f,#0086c4);
+}
+
+#album-menu.account-content-box div.top .buttons a.create-photobook-from-album:hover {
+	background-color: #0074a9;
+	border-right: 1px solid #0a5578;
+	border-left:  1px solid #69a6c2;
+	border-bottom: 1px solid #004b6e;
+	/* webkit-css3 */ background: -webkit-gradient(linear,left top,left bottom,from(#0076ad),to(#004e72));
+	/* mozilla-css3 */background: -moz-linear-gradient(100% 100% 90deg,#004e72,#0076ad);
+}
+
+#album-menu.account-content-box div.top .buttons a.create-blog-from-album {
+	background-color: #ed00b2;
+	border-right: 1px solid #a3007a;
+	border-left:  1px solid #c44da6;
+	border-bottom:1px solid #8c0068;
+	/* webkit-css3 */ background: -webkit-gradient(linear,left top,left bottom,from(#ed00b2),to(#9b0075));
+	/* mozilla-css3 */background: -moz-linear-gradient(100% 100% 90deg,#9b0075,#ed00b2);
+}
+
+#album-menu.account-content-box div.top .buttons a.create-blog-from-album:hover {
+	background-color: #cd009a;
+	border-right: 1px solid #8f006b;
+	border-left:  1px solid #ae4493;
+	border-bottom:1px solid #80005f;
+	/* webkit-css3 */ background: -webkit-gradient(linear,left top,left bottom,from(#d4009f),to(#840064));
+	/* mozilla-css3 */background: -moz-linear-gradient(100% 100% 90deg,#840064,#d4009f);
+}
+
+.account-content-box div.top .smallbuttons a {
+	display: block;
+	float: left;
+	height: 17px;
+	padding: 10px;
+	margin: 0;
+	font-size: 12px;
+	border-left: 1px solid #fff ;
+	border-right: 1px solid #ddd;
+}
+
+.account-content-box div.top .smallbuttons a:first-child {
+	border-left: none;
+}
+.account-content-box div.top .smallbuttons a:last-child {
+	border-right: none;
+}
+
+.account-content-box div.top .smallbuttons a:hover {
+	background-color: #0066c1;
+	/* webkit */ background: -webkit-gradient(linear,left top,left bottom,from(#0094da),to(#0066c1));
+	/* mozilla */background: -moz-linear-gradient(100% 100% 90deg,#0066c1,#0094da);
+	color: white;
+} 
+
+.account-content-box #slider {
+	margin-top: 10px;
+	float: right; 
+}
+
+#album-content {
+	position: relative;
+}
+
+#ie-overlay {
+	display: none;
+}
+
+#albumLoadingContainer {
+	padding-top: 10%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #fff;
+	background-color: rgba(255,255,255,0.8);
+	text-align: center;
+}
+
+#progressbarContainer {
+	display: inline-block;
+	width: 500px;
+	font-weight: bold;
+}
+
+#progressbar.animated {
+	-webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+	-moz-box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+	box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+
+}
+
+#progressbar.animated .ui-progressbar-value {
+	background-image: url(gfx/animated-progressbar.gif);
+}
+
+
+#show-album #album-menu .left {  float: left }
+#show-album #album-menu .right {  float: right }
+
+
+
+#myaccount {
+	margin: 20px;
+	padding: 15px;
+	background-color: #efefef;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+#myaccount-top-menu {
+	margin: 5px 20px;
+	padding: 5px 15px;
+	background-color: #efefef;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+
+
+#tiptip_content .facts h3{
+	color: #fff;
+	font-weight: bold;
+}
+
+#tiptip_content .facts table { border: none; margin-bottom: none; }
+tiptip_content .facts tr { border-bottom: 1px solid #ccc}
+#tiptip_content .facts th { padding-right: 2em;}
+#tiptip_content .facts th, #tiptip_content .facts td { padding: 0.2em; border: none; border-bottom: 1px solid #444}
+#tiptip_content .facts tr:last-child th, #tiptip_content .facts tr:last-child td { border: none}
+#tiptip_content .facts td { text-align: right}
+
+#account-albums ul.albums { margin: 0; padding: 0}
+#account-albums ul.albums li.albumPreview { margin: 0; padding: 5px }
+
+#show-album #album-accordion { float: left !important; min-height: 20em }
+#show-album #main-content { float: none }
+#show-albums #albums-menu  { float: right !important}
+
+#account-albums .album-content-menu {
+	padding: 1em 0;
+	width: 100%;
+}
+
+#album-images{ margin: 0 }
+
+#album-images li {
+	display: block;
+	margin: 0 10px 10px 0;
+	width: 150px;
+	height: 100px;
+}
+
+#album-images li a {
+	display: block;
+	overflow: hidden;
+	text-align: center;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+
+#album-images li a img { 
+	display: inline-block;
+	max-height: 90%;
+	max-width: 90%;
+	-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+	-moz-box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+}
+#album-images li a.landscape img { width: 100% }
+#album-images li a.portrait img { height: 90% }
+#album-images li a span.title { display: block; color: #aaa; font-size: 10px}
+#album-images li a:hover span.title { color: #000 }
+
+
+#imageContainer .imageBox {
+	text-align: center;
+}
+#imageContainer .imageBox #bigImage {
+	max-width: 575px;
+}
+
+/* Big */
+#account-albums ul.albums.big li.albumPreview {	height: 137px;	width: 137px }
+#account-albums ul.albums.big li.albumPreview .skimmer { width:130px; height:130px }
+
+/* Medium */
+#account-albums ul.albums.medium li.albumPreview {	height: 95px;	width: 95px }
+#account-albums ul.albums.medium li.albumPreview .skimmer { width:90px; height:90px }
+
+/* Small */
+#account-albums ul.albums.small li.albumPreview {	height: 57px;	width: 57px; margin: 2px }
+#account-albums ul.albums.small li.albumPreview .skimmer { width:53px; height:53px }
+
+
+/*skimmer*/
+#account-albums ul.albums.thumbnails li .skimmer a.album { height: 100% }
+#account-albums ul.albums.thumbnails li .skimmer a.album {
+	background-repeat: no-repeat !important;
+	background-position-x: center;
+	background-position-y: center;
+	background-clip: border;
+	background-origin: border;
+	display: block;
+}
+
+
+#account-albums ul.albums li.albumPreview .skimmer a.album.portrait { 
+	background-size: auto 100%;
+	-o-background-size:auto 100%; -webkit-background-size:auto 100%; -khtml-background-size:auto 100%; 
+}
+#account-albums ul.albums li.albumPreview .skimmer a.album.landscape { 
+	-o-background-size:100% auto;  -webkit-background-size:100% auto; -khtml-background-size:100% auto; 
+}
+
+.skimmer, .skimmer *  {
+	border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius:5px; -o-border-radius:5px; -ms-border-radius:5px;
+}
+
+.skimmer  {
+	position: relative;
+	z-index: 100;
+}
+
+.skimmer input.checkbox {
+	position: absolute;
+	bottom: 3px;
+	left: 3px;
+	top: auto !important;
+	z-index: 1000;
+	border: 1px solid red;
+}
+
+
+
+h2.year {
+	cursor: pointer;
+}
+
+
+/* List view albumlist */
+
+#account #main-content .albums.list li { height: 2.5em; border-bottom: 1px solid #ccc;padding-top: .5em; padding-left: 1em }
+#account #main-content .albums.list li:hover { background-color: #eee !important}
+#account #main-content .albums.list li.odd { background-color: #edf8ff }
+#account #main-content .albums.list li input { float: left; }
+#account #main-content .albums.list li a { padding-top: .2em; padding-left: 1em; text-decoration: none; font-weight: bold; display: block;  color: #333; float: left;}
+#account #main-content .albums.list li:last-child { border-bottom: none }
+
+
+
+/* Details view albumlist */
+#account #main-content .albums.details p.created { float: right; text-align: right }
+#account #main-content .albums.details li div.functions { float: right; border: 1px solid red;}
+#account #main-content .albums.details dl { }
+#account #main-content .albums.details dl dt { float: left; }
+#account #main-content .albums.details dl dd { float: right; clear: right; }
+
+/* selected thumb */
+	/* albums */
+#show-albums #main-content .albums li.selected div.skimmer {
+	border: 2px solid #0068B4;
+	box-shadow: 1px 1px 5px rgba(0,152,219,1);
+	-webkit-box-shadow: 1px 1px 5px rgba(0,152,219,1);
+	-moz-box-shadow: 1px 1px 5px rgba(0,152,219,1);
+	background-color: #0068B4;
+}
+#show-albums #main-content .albums li.selected div.skimmer a { opacity: .5 }
+
+	/* images */
+	
+	#main-content #album-images li.selected { 
+		background-color: #0068B4;
+	}
+	
+	#main-content #album-images li.selected img {
+		opacity: .5;
+		border: 2px solid #0068B4;
+		box-shadow: 1px 1px 5px rgba(0,152,219,1);
+		-webkit-box-shadow: 1px 1px 5px rgba(0,152,219,1);
+		-moz-box-shadow: 1px 1px 5px rgba(0,152,219,1);
+	}
+	
+
+
+/* jqueryUI */
+.ui-selectable-helper {
+	border: 1px solid #0098DB !important;
+	background-color: rgba(0,152,219,0.3) !important; 	
+}
+#account .ui-slider .ui-slider-handle {
+	border: none;
+	background: transparent url(gfx/slider-handle.png) no-repeat center right;
+	height: 19px; width: 19px;
+	margin-top: -2px;
+} 
+#account .ui-slider-handle.ui-state-hover { background-position: center center }
+#account .ui-slider-handle.ui-state-active { background-position: center left; outline: none !important; }
+#account .ui-slider-handle { outline: none !important;}
+#account .ui-slider {
+	height: 6px;
+	border: none;
+	background: transparent url(gfx/slider-bar.png) repeat-x !important;
+	background-position: 2px -12px !important;
+}
+#account .ui-slider-range-min {
+	height: 6px;
+	background: transparent url(gfx/slider-bar.png) repeat-x !important;
+	background-position: 2px -6px;
+}
+
+/* ACCOUNT ACCORDION */
+
+ul.accordion-list { display: block }
+.account-accordion ul.selected { display: block }
+#account .account-accordion h3 { 
+	cursor: pointer; margin: 0; padding: .5em;
+	padding: .7em 0 .7em 0;
+	margin: 0;
+}
+#account .account-accordion h3.selected { border-bottom: none }
+
+.account-accordion h3:hover { 
+	/*background-color: #eee;
+	background: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#eee));
+	background: -moz-linear-gradient(100% 100% 90deg,#fff, #eee);*/
+
+}
+
+#account-menu ul { float: left; font-size: 1.2em; margin: 0; padding: 0;}
+#account-menu ul li:first-child { margin-left: 0}
+#account-menu ul li { float: left; list-style-type: none}
+#account-menu li a { 
+	float: left; display: block; padding: .5em 1em; text-decoration: none; color: #333; 
+	border-left: 1px solid #fff; border-right: 1px solid #ddd 
+}
+#account-menu li:first-child a { border-left: none }
+#account-menu li:last-child a { border-right: none }
+#account-menu li a:hover { background-color: #ececec; color: #000}
+#account-menu .search { float: right !important;}
+#account-menu .search button { float: right;}
+
+
+/* album accordion */
+ul.accordion-list { margin:0; padding: 0; overflow-y: auto }
+ul.accordion-list .scroll-20 { max-height: 20em }
+ul.accordion-list .noscroll { max-height: inherit }
+ul.accordion-list li { list-style: none; border-bottom: 1px solid #ccc; height: 2.15em; cursor: pointer}
+ul.accordion-list li small { 
+	opacity: .2; float: right; display : block; margin: .5em 1em;
+}
+ul.accordion-list li:hover small { 
+	opacity: 1;
+}
+
+.ui-dialog ul.accordion-list li {
+	padding-top: .5em;
+}
+
+ul.accordion-list li small a { display: inline }
+ul.accordion-list li small a:hover { text-decoration: underline }
+ul.accordion-list li small a:hover { cursor: pointer}
+ul.accordion-list li small a.edit { color: #0068B4  }
+ul.accordion-list li small a.remove { color: #c00 }
+ul.accordion-list li small a.add { color: #0068B4 }
+
+
+ul.accordion-list li a { 
+	display: block; padding: .5em 0 1em 1em;
+	text-decoration: none; color: #333; font-size: .9em; overflow: hidden; height: .9em
+}
+ul.accordion-list li:first-child a { border-top: none; }	
+ul.accordion-list li:last-child { border-bottom: none; }	
+ul.accordion-list li:hover {  background-color: #efefef}
+
+ul.accordion-list li.selected { 
+	color: #fff; 
+	font-weight: bold;
+	background-color: #0066c1;
+	border-top: 1px solid #0094da;
+	border-bottom: 1px solid #0066c1;
+	/* webkit */ background: -webkit-gradient(linear,left top,left bottom,from(#0094da),to(#0066c1));
+	/* mozilla */background: -moz-linear-gradient(100% 100% 90deg,#0066c1,#0094da);
+}
+ul.accordion-list li.selected a { color: #fff;  }
+ul.accordion-list li.selected a, ul.accordion-list li.selected a:focus,ul.accordion-list li.selected a:active { outline: none !important }
+ul.accordion-list li.selected small { font-weight: normal; color: #fff; opacity: 1 }
+
+ul.accordion-list li a small {
+	display: block; float: right; height: 1em; color: #aaa; margin-right: .5em;
+}
+
+
+#account .loader {  margin: 1.5em auto; text-align: center}
+.inlineLoader { margin: 0 !important }
+.account-content-box #album-images li {
+	list-style-type: none;
+	float: left;
+}
+
+/* image */
+.bigImage {
+	max-width: 580px;
+	max-height: 420px;
+}
+
+.footer { margin-top: 0 !important}
+
+#selectHelper {
+	border: 1px solid red;	
+}
+.height-5  { height:  5em} .height-5.max  { height: inherit; max-height:  5em} .height-5.min  { height: inherit; min-height:  5em}
+.height-10 { height: 10em} .height-10.max { height: inherit; max-height: 10em} .height-10.min { height: inherit; min-height: 10em}
+.height-15 { height: 15em} .height-15.max { height: inherit; max-height: 15em} .height-15.min { height: inherit; min-height: 15em}
+.height-20 { height: 20em} .height-20.max { height: inherit; max-height: 20em} .height-20.min { height: inherit; min-height: 20em}
+.height-25 { height: 25em} .height-25.max { height: inherit; max-height: 25em} .height-25.min { height: inherit; min-height: 25em}
+
+
+ul.thumbs { margin: 0; padding: 0}
+ul.thumbs li { float: left; list-style-type: none }
+#photofuniaContainer ul.thumbs li img { cursor: pointer }
+#photofuniaContainer ul li { margin: 0 5px 5px 0 }
+#photofuniaContainer img.original { margin: 0 10px 10px 0; float: left;  }
+
+.sprite {
+	background: transparent url(gfx/sprites/account.png) left top;
+	height: 24px;
+	width: 24px;
+	display: inline-block;
+	margin-right: 7px;
+	float: left;
+}
+.sprite.albums { background-position: -24px 0 }
+.sprite.setting, .sprite.edit { background-position: -48px 0 }
+.sprite.projects, .sprite.create { background-position: 0 -24px }
+.sprite.orders { background-position: -96px 0 }
+.sprite.friends { background-position: -216px 0 }
+.sprite.addFriends { background-position: -216px 0 }
+.sprite.groups { background-position: -216px 0 }
+.sprite.share { background-position: -72px -120px }
+.sprite.transfer { background-position: -24px -120px }
+.sprite.misc { background-position: -72px -120px }
+
+
+
+#shareAlbumDialog { overflow: hidden }
+
+
+
+/* Generic context menu styles */
+.contextMenu {
+	border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius:5px; -o-border-radius:5px; -ms-border-radius:5px;
+	box-shadow: 2px 2px 7px rgba(0,0,0,0.7); -webkit-box-shadow: 2px 2px 7px rgba(0,0,0,0.7);	-moz-box-shadow: 2px 2px 7px rgba(0,0,0,0.7);
+	position: absolute;
+	width: 180px;
+	z-index: 99999;
+	border: solid 1px #ccc;
+	background: #eee;
+	padding: 0px;
+	margin: 0px;
+	display: none;
+}
+
+.contextMenu li {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.contextMenu a {
+	color: #333;
+	text-decoration: none;
+	display: block;
+	line-height: 20px;
+	height: 20px;
+	background-position: 6px center;
+	background-repeat: no-repeat;
+	outline: none;
+	padding: 1px 5px;
+	padding-left: 28px;
+}
+
+.contextMenu li.hover a {
+	border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius:5px; -o-border-radius:5px; -ms-border-radius:5px;
+	color: #fff;
+	background-color: #3399FF;
+}
+
+.contextMenu li.disabled a {
+	color: #aaa;
+	cursor: default;
+}
+
+.contextMenu li.hover.disabled a {
+	background-color: transparent;
+}
+
+.contextMenu li.separator {
+	border-top: solid 1px #ccc;
+}
+
+.imageActoinDialog .red { color: #c00 }
+.imageActoinDialog img { float: left; margin: 0 10px 10px 0 }
+
+
+
+.ui-transfer {
+	border: 2px solid red !important;
+	display: block;
+	
+}
+
+#imageCollection.hide { display: block !important; bottom: -100px }
+#imageCollection {
+	display: block;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	height: 3em;
+	border: 1px solid #666;
+	background-color: #ccc;
+	background: rgb(0, 0, 0);
+	background: rgba(0, 0, 0, 0.6);
+	padding: 10px;
+	color: #fff;
+	border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius:5px; -o-border-radius:5px; -ms-border-radius:5px;
+}
+#imageCollection h4 { color: #fff };
+#imageCollection .dropzone { border: #666 dashed 2px; padding: .5em; background-color: #fff; text-align: center}
+#imageCollection div { opacity: 1; position: relative }
+
+#mergeSelectedAlbumsDialog { display: none; }
+#deleteSelectedAlbumsDialog { display: none; }
+#newAlbumDialog { display: none; }
+#deleteAlbumDialog { display: none; }
+#insertInBlogDialog { display: none; }
+#secretLinkDialog { display: none; }
+#transferImagesByEmailDialog { display: none; }
+#transferImagesDialog { display: none; }
+
+#exif-info table { border: none; font-size: .9em }
+#exif-info table th, #exif-info table td { padding: 0 }
+
+#transfer-status { overflow: auto; height: 200px; }

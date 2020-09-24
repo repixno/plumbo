@@ -1,0 +1,681 @@
+
+/**************************CSS til logoen til smiles on tiles*******************************/
+
+h1.site-logo{
+	display: block;
+	width: 237px;
+	height: 102px;
+	text-indent: -9999px;
+	background: transparent url('gfx/logo_jul_web.png') no-repeat 0 0;
+	margin-top: 4px;
+	margin-left: 9px;
+	margin-bottom: -0.4em;
+}
+h1.site-logo a {
+	display: block;
+	height: inherit;
+}
+
+.header{
+	margin-bottom: 10px;
+}
+
+
+ h3 {
+	font-size: 1.5em;
+	line-height: 1;
+	margin-bottom: 1em;
+}
+
+
+h3.overskriftnyhetsbokser {
+font-size: 32px;
+line-height: 2;
+/* margin-bottom: 0em; */
+font-family: inherit;
+color: #749db5;
+	
+}
+
+body {font-size:75%;color:#222;background:#fff url('http://eurofoto.no/css/gfx/nyjulebakgrunn.jpg') no-repeat;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;} 
+
+
+/***************************************SLUTT CSS LOGO**************************************/
+
+#myaccount-menu {list-style:none;}
+#myaccount-menu ul {margin:0;list-style:none;}
+#myaccount-menu li:first-child {border-top:1px solid #eee;}
+#myaccount-menu li {list-style:none;text-align:left;font-size:1em;color:#666;border-bottom:1px solid #eee;}
+#myaccount-menu li a {padding:.3em 1em;display:block;text-decoration:none;color:#666;}
+#myaccount-menu a:hover {background-color:#eee;color:#000;}
+#myaccount-menu li.current > a {background-color:#41a5be;color:#fff;font-weight:bold;}
+#myaccount-menu li a:active, #myaccount-menu li a:focus {background-color:#ccc !important;color:#000 !important
+;}
+#myaccount-menu li.current ul {background:transparent
+;}
+#myaccount-menu li.current ul li {margin-left:1em
+;}
+#myaccount-menu li.current ul li a {font-size:.9em
+;}
+#myaccount-menu li.current ul li a:hover {color:#0098DB
+;}
+#myaccount-menu li.current ul li.current > a {color:#0098DB;font-weight:bold;background-color:transparent;}
+#myaccount-menu li.current ul li.current ul {border-left:none
+;}
+#myaccount-menu li.current ul li.current ul li {border:none;margin-left:1em
+;}
+#myaccount-menu li.current ul li.current ul li a {padding:0 !important;}
+#myaccount-menu li.current ul li.current ul li:last-child {border:none
+;}
+#myaccount-menu li.current ul li.current ul li.current > a {color:#0098DB;font-weight:normal;}
+#myaccount-menu li.current ul li.current ul li a {font-size:.9em
+;}
+#myaccount-menu li.current ul li.current ul li a:hover {color:#0098DB
+;}
+
+/* images */
+ul.imagelist li {list-style-type:none;}
+div.imagecontainer {height:170px;text-align:center;}
+div.imagecontainer.small {width:70px;height:70px;}
+div.imagecontainer a {display:block;}
+div.imagecontainer a.ui-selected img {border-color:red
+;}
+div.imagecontainer a:hover img {outline-color:#0098DB;}
+div.imagecontainer a label {display:block;}
+div.imagecontainer a img {border:3px solid #fff;outline:1px solid #ccc;}
+div.imagecontainer span.name {display:block;margin:0 15px
+;}
+div.imagecontainer .left-top-corner-hover {position:absolute;top:0;left:0;background-color:#333;opacity:.8;-moz-border-radius-bottomright:10px;width:25px;}
+.bigimage {display:inline-block;border:8px solid #fff;box-shadow:1px 2px 15px rgba(0,0,0,0.3);-webkit-box-shadow:1px 2px 15px rgba(0,0,0,0.3);-moz-box-shadow:1px 2px 15px rgba(0,0,0,0.3);}
+img.todays-photo.thumb {border:8px solid #fff;box-shadow:1px 2px 15px rgba(0,0,0,0.3);-webkit-box-shadow:1px 2px 15px rgba(0,0,0,0.3);-moz-box-shadow:1px 2px 15px rgba(0,0,0,0.3);}
+div.imagecontainer.squareThumb {height:75px;width:75px;overflow:hidden;}
+img.thumb_110px {max-height:110px;max-width:110px
+;}
+img.thumb_100px {max-height:100px;max-width:100px
+;}
+img.thumb_90px {max-height:90px;max-width:90px
+;}
+img.thumb_80px {max-height:80px;max-width:80px
+;}
+img.thumb_70px {max-height:70px;max-width:70px
+;}
+img.thumb_60px {max-height:60px;max-width:60px
+;}
+img.thumb_50px {max-height:50px;max-width:50px
+;}
+img.small, img.thumb_50px {max-height:50px;max-width:50px
+;}
+ul.albums {list-style-type:none
+;}
+li.albumPreview {list-style-type:none
+;}
+div.albumcontainer {display:table;float:left
+;}
+div.albumcontainer a {display:table-cell;vertical-align:middle;text-align:center;}
+div.albumcontainer.large {width:160px;height:130px;background:#fff url('/gfx/backgrounds/folder_160px.gif') no-repeat;padding:25px 0 0 5px;}
+div.albumcontainer.large .thumb {max-width:110px;max-height:80px;}
+div.albumcontainer.medium {width:150px;height:90px;background:#fff url('/gfx/backgrounds/folder_135px.gif') no-repeat;padding:25px 0 0 5px;display:table;float:left;}
+div.albumcontainer img.thumb {border:3px solid #fff;outline:1px solid #666;}
+div.albumcontainer.medium .thumb {max-width:65px;max-height:70px;}
+.albumlist {margin:0;padding:0;}
+.albumlist li {padding:10px 0;list-style:none;border-bottom:1px solid #ccc;}
+.albumlist li:hover {background-color:#eee;}
+.albumlist li.selected {background-color:#fcc;}
+.albumlist img {max-height:60px;max-width:80px;border:4px solid #fff;outline:1px solid #ddd;}
+.albumlist dl {font-size:.8em;}
+.albumlist .holder {height:100%;}
+.albumlist div.checkboxholdercontainer {display:table;height:100%;vertical-align:middle;float:left;}
+.albumlist div.checkboxholder {height:100%;display:table-cell;vertical-align:middle;}
+.albumlist .holder {min-height:70px;}
+.albumlist .last .functions {margin-right:10px;}
+.albumlist h3 {margin-bottom:0;}
+.albumlist p.description {font-size:.9em;color:#666;margin:0;padding:0;}
+.albumlist dd {color:#666;margin-left:0;}
+ul#albums {margin:0;list-style-type:none;}
+.albumPreview {width:85px;height:120px;margin:10px 20px 3px 20px;padding:0;float:left;text-align:center;overflow:hidden;font-size:.8em;}
+.order-prints .albumPreview {width:105px;height:150px;margin:10px 5px 3px 5px;}
+.order-prints .albumPreview .skimmer {height:100px;width:100px;}
+.albumPreview a {display:block;}
+.albumPreview.placeholder {background-color:#eee;}
+.albumPreview div.center {font-weight:bold;padding-top:3px;margin-right:50px;width:100%;}
+#albums .albumPreview.sortable {border:3px dashed #ccc;margin:7px 17px 0 17px;}
+.skimmer {background-position:center center;padding:0;margin:1px;border:1px solid #ccc;background-repeat:no-repeat;width:75px;height:75px;display:block;overflow:hidden;box-shadow:1px 1px 5px rgba(0,0,0,0.3);-webkit-box-shadow:1px 1px 5px rgba(0,0,0,0.3);-moz-box-shadow:1px 1px 5px rgba(0,0,0,0.3);border-radius:9px;-moz-border-radius:9px;-webkit-border-radius:9px;cursor:hand;cursor:pointer;}
+.skimmer.selected {margin:0;border:2px solid #0098DB;box-shadow-color:2px 2px 5px rgba(0,152,219,0.7);-webkit-box-shadow:2px 2px 5px rgba(0,152,219,0.7);-moz-box-shadow:2px 2px 5px rgba(0,152,219,0.7);}
+.showimage .exif dt {color:#ccc;}
+.showimage .exif dd {margin-left:0;}
+
+/*****************************CSS MEDYLINJE******************************************/
+
+/*dette er den blålogo linja som menyane ligg inni*/
+.meny{
+    height: 30px;
+    margin-top: 11px;
+    background: #fff url(gfx/meny.jpg);
+    background-repeat:repeat-x;
+	text-align: center;
+}
+
+.login
+{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;   
+} 
+
+/*menylinje*/
+
+.test li{
+    display: table-cell;
+	height: 30px;
+	min-width: 20px;
+	vertical-align: middle;
+}
+.test li:hover{
+	background-color:#43a7bf!important;
+	color:white;
+	font-weight: bold;
+}
+
+/*navna på hovudmenylinkane*/
+.test li a  {
+    color: #446986;
+	font-weight: bold;
+    background-color: transparent;
+    text-decoration: none;
+    position: relative;
+    margin: 15px;
+}
+
+/*boks som bytter farge når musa går over*/
+.test a:hover {
+    
+    /*background-color:#43a7bf;*/
+}
+
+
+
+/*Overskriftene på menypunkta*/	  
+.container h1, .album-title{
+    font-family: janda romantic;
+    color: #749db5;
+    font-size: 24px;
+}
+
+/*Overskriftene på menypunkta*/	  
+h1.cms-article-title{
+    position: relative;
+    font-family: inherit;
+    color: #749db5;
+    font-size: 25px;
+}
+
+/*Overskriftene på menypunkta*/	  
+h2.cms-article-title{
+    position: relative;
+    font-family: inherit;
+    color: #749db5;
+    font-size: 25px;
+}
+
+
+
+/*Overskriftene på menypunkta*/	  
+.container h2, .album-title{
+   font-family: inherit;
+    color: #749db5;
+    font-size: 25px;
+
+
+
+.overskriftnyhetsbokser{
+    position: relative;
+    font-family: janda romantic;
+    color: #749db5;
+    font-size: 47px;
+    top: 47px;
+    right: 5px;
+}
+
+/***************************************SLUTT CSS MENYLINJE**************************************/
+
+/***************************************SLIDER CSS********************************************/
+
+#presentation {
+    position: relative;
+    height: 370px;
+    width: 970px;
+    overflow: hidden;
+    top: 0px;
+}
+
+#presentation #presentation-menu ul {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 66px;
+    left: 20px;
+    width: 110px;
+    z-index: 100;
+    padding-bottom: 12px;
+}
+
+#presentation #presentation-menu ul li {
+    list-style-type: none;
+    display: block;
+    background: #fff url(gfx/knapp.jpg) no-repeat;
+
+}
+
+#presentation #presentation-menu ul li  {
+    text-decoration: none;
+    font-size: 15px;
+    color: #383838;
+    display: block;
+    padding: 15px;
+    margin: 15px;
+
+}
+
+
+#presentation #presentation-menu
+{
+    position: relative;
+    margin-top: -38px;
+
+}
+
+#presentation #presentation-menu div.selected {
+    position: absolute;
+    width: 58px;
+    height: 52px;
+    top: -19px;
+    border: none;
+    z-index: 400;
+    top: 0px;
+    margin: 15px;
+    background: #fff url(gfx/knappselected.jpg) no-repeat;
+}
+
+#presentation #presentation-menu ul li.selected { 
+    z-index: 450; 
+    position: relative;
+    background: transparent !important;
+
+}
+
+
+#presentation #presentation-menu ul li.selected a:hover {
+    background: none !important;
+    color: #000;
+}
+
+#presentation .article {
+    cursor: hand;
+    cursor: pointer;
+    padding-top: 20px;
+    height: 343px;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    z-index: 50;
+}
+
+#presentation .article a.button.bottom {
+	position: absolute;
+	bottom: 70px;
+}
+/***************************************SLUTT CSS SLIDER**************************************/
+
+/***************************************CSS KNAPPER**************************************/
+
+button, .button{
+    border: 1px solid #3196ae;
+    background: #77cbdd url(images/ui-bg_glass_60_77cbdd_1x400.png) 50% 50% repeat-x;
+    font-weight: bold;
+    color: #446986;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-family: LaoUI;
+    padding: .4em 1em .4em 1em;
+    text-decoration:none;
+    display:inline-block;
+    position: relative;
+    line-height: normal;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+    overflow: visible;
+	box-shadow: 2px 2px 2px #eee;
+}
+
+button:hover, .button:hover{
+	 background: #77cbdd url(images/ui-bg_glass_hover_1x400.png) 50% 50% repeat-x;
+    /*text-shadow: -1px -1px 0 #fff;
+		background-color: #9bf1ff; background-image: -webkit-gradient(linear, left top, left bottom, from(#9bf1ff), to(#4fd4f5));
+		background-image: -webkit-linear-gradient(top, #9bf1ff, #4fd4f5);
+		background-image: -moz-linear-gradient(top, #9bf1ff, #4fd4f5);
+		background-image: -ms-linear-gradient(top, #9bf1ff, #4fd4f5);
+		background-image: -o-linear-gradient(top, #9bf1ff, #4fd4f5);
+		background-image: linear-gradient(to bottom, #9bf1ff, #4fd4f5);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#9bf1ff, endColorstr=#4fd4f5);
+	*/}
+
+button:active, .button:active{
+	box-shadow: 1px 1px 1px #eee;
+    /*font-size:11px;*/
+}
+
+
+
+/*Posisjoneringa av Bestillingsknappen til slideren*/
+
+button.sliderbutton{
+    position: relative;
+    height: 31px;
+    top:78px;
+    right: 62px;
+    font-family: LaoUI;
+}
+
+/*Posisjoneringa av nyhersbanner knappane*/
+button.nyhetsbanner{
+    position: relative;
+    height: 31px;
+    top:77px;
+}
+
+
+
+/***************************************SLUTT CSS KNAPPER**************************************/
+    
+    
+}
+.egentligboks{
+    position: relative;
+    top: 0px;
+    height: 281px;
+    width: 568px;
+    padding-bottom: 1px;
+}
+
+
+.bilder_pa_badet{
+    position: relative;
+    top: 0px;
+    height: 297px;
+    margin-bottom: 15px;
+    width: 604px;
+    padding-bottom: 1px;
+    left: 7px;
+}
+
+
+.nyhetboks div.nyhetinnhold{
+    margin-left: 53px;
+    padding-top: 23px;
+    width: 250px;
+}
+
+
+/***********CSS til Nyhetsboksane: Bilder på badet ditt og Vis hvem du egentlig er***************/
+
+
+/*Boksene: Bilder på badet ditt og Vis hvem du egentlig er*/
+.nyhetboks{
+    position: relative;
+    top: 0px;
+    height: 296px;
+    left: 7px;
+    width: 604px;
+    margin-bottom: 15px;
+}
+
+/*Teksen inne i boksane; bilder på badet ditt og Vis hvem du egentlig er*/
+.nyhetboks p{
+    height: 12px;
+    padding-top: 57px;
+    width: 250px;
+    font-family:LaoUI;
+    font-size: 15px;
+}
+
+
+.bilder_pa_badet p{
+    height: 12px;
+    padding-top: 57px;
+    width: 250px;
+    font-family:LaoUI;
+    font-size: 15px;
+}
+
+
+/*CSS til boksane; bilder på badet ditt og Vis hvem du egentlig er*/
+.bilder_pa_badet div.nyhetinnhold{
+    margin-left: 53px;
+    padding-top: 23px;
+    width: 250px;
+}
+
+/*CSS til overskriftene til boksane; bilder på badet ditt og Vis hvem du egentlig er*/
+
+.nyhetboks h3{
+    color: #075F75;
+    font-family: janda romantic;
+    font-size: 23px;
+
+}
+
+/***************************************CSS FACEBOOK WINDGET**************************************/
+
+
+
+
+/********************SLUTT CSS FACEBOOK WIDGET*******************************************************************/
+
+
+/********************CSS til artikklane*******************************************************/
+p.overskrifttekst{
+    position: relative;
+    top:0px;
+    right: 5px;
+    font-family: LaoUI;
+    font-style: italic;
+    font-size: 22px;
+    color: #749db5;
+
+}
+
+.overskrift{
+    color: #075F75;
+    font-family: janda romantic;
+    font-size: 60px;
+    position: relative;
+    right: 83px;
+}
+
+#loader-overlay {
+    position: absolute;
+    background-color: #333;
+    padding: auto auto;
+    margin: 0 !important;
+    z-index: 10000;
+}
+#loader-overlay .loadingInfo {
+	text-align:center;margin-top:300px;
+	}
+#loader-overlay .loadingInfo * {
+	display:inline;color:#fff;
+	}
+
+
+.tipsoverskrift h3{
+    
+    font-family: janda romantic;
+    color: #eaf5f9;
+    position: relative;
+    
+}
+
+/*********************KONTAKT OSS MENYPUNKT***********************************************/
+.innfelt{
+    
+  
+    padding-top: 26px;
+    margin-bottom: 37px;
+  
+
+}
+
+.innfelt h1{
+    
+    font-family: inherit;
+    color: #43a6bd;
+    letter-spacing: 3px;
+}
+
+
+/*********************SLUTT KONTAKT OSS MENYPUNKT***********************************************/
+
+/*Artikklen Råd og Tips start*/
+.tipsbilde{
+    position: relative;
+    right: 100px;
+
+}
+
+.tips{
+    width: 690px;
+    position: absolute;
+    text-align: center;
+    top: 281px;
+    left:334px;
+}
+
+
+
+	    
+/***************************CSS til artikklane slutt****************************************/
+
+
+/***************************CSS til Footeren på sida****************************************/
+
+
+/*Fotteren på sida*/
+.footer{    
+    background-color: #98cef0;
+    height: 130px;
+    width: 100%;
+    text-align: center;
+    position:relative;
+    bottom:0px;
+    
+   
+}
+
+
+
+
+
+/*overskrift til artikklane bilder på badet og vis hvem du egentlig er*/	    
+.nyhetinnhold h1{
+	   position: relative;
+	   top:30px; 
+	}
+	
+	p.partnere{
+    
+    padding-top: 30px;
+}
+
+
+.footer.container{
+      position:relative;
+    bottom:0px;
+    
+}
+
+/***************************SLUTT CSS til Footeren på sida***********************************/
+
+
+
+
+/*********************************FANCYBOX************************************************/
+
+
+#move-images-dialog .albums, #delete-images-dialog .selected-images {height:250px;overflow:scroll;overflow-x:hidden}
+.albumlist .thumbnail{width:24px;height:24px;overflow:hidden;float:left;margin-right:12px}
+.albumlist .thumbnail img{border:0;width:30px;outline:none}
+.oneline {display:inline-block}
+#content textarea { height: 60px }
+div.imagecontainer {height: 150px;text-align: center;}
+#fancybox-left-ico {
+left: 20px;
+}
+
+#fancybox-right-ico {
+    right: 20px;
+    left: auto;
+}
+
+
+#fancybox-loading {position:fixed;top:50%;left:50%;height:40px;width:40px;margin-top:-20px;margin-left:-20px;cursor:pointer;overflow:hidden;z-index:1104;display:none;}
+* html #fancybox-loading {position:absolute;margin-top:0;}
+#fancybox-loading div {position:absolute;top:0;left:0;width:40px;height:480px;background-image:url('grafikk/fancybox.png');}
+#fancybox-overlay {position:fixed;top:0;left:0;bottom:0;right:0;background:#000;z-index:1100;display:none;}
+* html #fancybox-overlay {position:absolute;width:100%;}
+#fancybox-tmp {padding:0;margin:0;border:0;overflow:auto;display:none;}
+#fancybox-wrap {position:absolute;top:0;left:0;margin:0;padding:20px;z-index:1101;display:none;}
+#fancybox-outer {position:relative;width:100%;height:100%;background:#FFF;}
+#fancybox-inner {position:absolute;top:0;left:0;width:1px;height:1px;padding:0;margin:0;outline:none;overflow:hidden;}
+#fancybox-hide-sel-frame {position:absolute;top:0;left:0;width:100%;height:100%;background:transparent;}
+#fancybox-close {position:absolute;top:-15px;right:-15px;width:30px;height:30px;background-image:url('grafikk/fancybox.png');background-position:-40px 0px;cursor:pointer;z-index:1103;display:none;}
+#fancybox_error {color:#444;font:normal 12px/20px Arial;padding:7px;margin:0;}
+#fancybox-content {height:auto;width:auto;padding:0;margin:0;}
+#fancybox-img {width:100%;height:100%;padding:0;margin:0;border:none;outline:none;line-height:0;vertical-align:top;-ms-interpolation-mode:bicubic;}
+#fancybox-frame {position:relative;width:100%;height:100%;border:none;display:block;}
+#fancybox-title {position:absolute;bottom:0;left:0;font-family:Arial;font-size:12px;z-index:1102;}
+.fancybox-title-inside {padding:10px 0;text-align:center;color:#333;}
+.fancybox-title-outside {padding-top:5px;color:#FFF;text-align:center;font-weight:bold;}
+.fancybox-title-over {color:#FFF;text-align:left;}
+#fancybox-title-over {padding:10px;background-image:url('grafikk/fancy_title_over.png');display:block;}
+#fancybox-title-wrap {display:inline-block;}
+#fancybox-title-wrap span {height:32px;float:left;}
+#fancybox-title-left {padding-left:15px;background-image:url('grafikk/fancybox.png');background-position:-40px -90px;background-repeat:no-repeat;}
+#fancybox-title-main {font-weight:bold;line-height:29px;background-image:url('grafikk/fancybox-x.png');background-position:0px -40px;color:#FFF;}
+#fancybox-title-right {padding-left:15px;background-image:url('grafikk/fancybox.png');background-position:-55px -90px;background-repeat:no-repeat;}
+#fancybox-left, #fancybox-right {position:absolute;bottom:0px;height:100%;width:35%;cursor:pointer;outline:none;background-image:url('grafikk/blank.gif');z-index:1102;display:none;}
+#fancybox-left {left:0px;}
+#fancybox-right {right:0px;}
+#fancybox-left-ico, #fancybox-right-ico {position:absolute;top:50%;left:-9999px;width:30px;height:30px;margin-top:-15px;cursor:pointer;z-index:1102;display:block;}
+#fancybox-left-ico {background-image:url('grafikk/fancybox.png');background-position:-40px -30px;}
+#fancybox-right-ico {background-image:url('grafikk/fancybox.png');background-position:-40px -60px;}
+#fancybox-left:hover, #fancybox-right:hover {visibility:visible;}
+#fancybox-left:hover span {left:20px;}
+#fancybox-right:hover span {left:auto;right:20px;}
+.fancy-bg {position:absolute;padding:0;margin:0;border:0;width:20px;height:20px;z-index:1001;}
+#fancy-bg-n {top:-20px;left:0;width:100%;background-image:url('grafikk/fancybox-x.png');}
+#fancy-bg-ne {top:-20px;right:-20px;background-image:url('grafikk/fancybox.png');background-position:-40px -162px;}
+#fancy-bg-e {top:0;right:-20px;height:100%;background-image:url('grafikk/fancybox-y.png');background-position:-20px 0px;}
+#fancy-bg-se {bottom:-20px;right:-20px;background-image:url('grafikk/fancybox.png');background-position:-40px -182px;}
+#fancy-bg-s {bottom:-20px;left:0;width:100%;background-image:url('grafikk/fancybox-x.png');background-position:0px -20px;}
+#fancy-bg-sw {bottom:-20px;left:-20px;background-image:url('grafikk/fancybox.png');background-position:-40px -142px;}
+#fancy-bg-w {top:0;left:-20px;height:100%;background-image:url('grafikk/fancybox-y.png');}
+#fancy-bg-nw {top:-20px;left:-20px;background-image:url('grafikk/fancybox.png');background-position:-40px -122px;}
+
+
+
+
+
+
+/*********************************SLUTT FANCYBOX CSS****************************************/
+
+.dashboard .albumPreview {
+margin: 0;
+height: inherit;
+display: inherit;
+border-color: #41a5be;
+text-align: center;
+}
+
+
+

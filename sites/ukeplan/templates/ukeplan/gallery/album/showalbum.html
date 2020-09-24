@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<link rel="alternate" type="application/rss+xml" title="" id="gallery" tal:condition="exists: mediarss" href="${mediarss}" />
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle">${album/title}</tal:block>
+	
+	<!-- Fotorama -->
+	<link href="/js/fotorama/fotorama.css" rel="stylesheet" />
+	<script src="/js/fotorama/fotorama.js"></script>
+  
+  
+	<style type="text/css">
+	  
+	  .fotorama__wrap{
+		  margin: auto;
+	  }
+	  .fotorama__img{
+		 
+	  }
+	</style>
+	
+</head>
+
+
+<body>
+
+<div class="container">
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	
+	
+	<div id="">
+		<!--
+		<h2 class="bottom oneline">
+			<span class="title quiet album-title" id="${album/id}" tal:content="album/title | default" />
+		</h2>
+		<p class="description quiet top" tal:content="album/descriptionraw|default"></p>-->
+		
+		
+		<div class="fotorama center"
+			 data-nav="thumbs"
+			 data-thumbmargin="15"
+			 data-width="1000"
+			 data-maxwidth="100%"
+			 data-ratio="16/9"
+			 data-shadows="true"
+			 data-allowfullscreen="true">
+			<tal:block tal:repeat="image images">
+				<a href="${image/fullsize}/1000/1000/${image/title}" data-thumb="${image/thumbnail}" data-caption="${image/description}"></a>
+			</tal:block>
+		</div>
+		
+
+	</div>
+	
+	<tal:block tal:content="structure cms:body:c741f4e1-80fc-4e94-82f2-54f090c00b11"></tal:block>
+</div>
+
+<script type="text/javascript">
+	/*<![CDATA[*/
+		
+	
+	/*]]>*/
+</script>
+
+</body>
+</html>

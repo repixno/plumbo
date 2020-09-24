@@ -1,0 +1,529 @@
+# refer to http://www.yaml.org/spec/1.1/ for clarification on YAML collections
+eurofoto:
+  path: /var/www/repix/sites/static/webroot/css/portals/eurofoto
+  plugins:
+    - common
+    - images
+    - jqueryui
+    - jcrop
+    - forms
+    - sprites
+    - buttons
+    - link_icons
+    - frontpage
+    - portal-eurofoto
+    - friends
+    - google-site-search
+    - uploadify
+    - sitemap
+    - cms
+    - jquerytools
+    - errors
+    - fancybox
+    
+  semantic_classes:
+    "#footer, #header, #widecontent": ".span-24, div.span-24, last"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+    
+smilesontiles:
+  path: /var/www/repix/sites/static/webroot/css/portals/smilesontiles
+  plugins:
+    - portal-smilesontiles
+    - jquery-smilesontiles
+   
+  semantic_classes:
+    "#footer, #header, #widecontent": ".span-24, div.span-24, last"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+
+portal-customer-blog:
+  path: /var/www/repix/sites/static/webroot/css/portals/customer-blog
+  plugins:
+    - common
+    - images
+    - jqueryui
+    - jcrop
+    - forms
+    - buttons
+    - jquerytools
+    - errors
+    - fancybox
+    - portal-customer-blog
+    
+eurofoto_iphone:
+  path: /var/www/repix/sites/static/webroot/css/portals/eurofoto_iphone
+  plugins:
+    - fancybox
+    - jqueryui
+    - sprites
+    - buttons
+    - link_icons
+    - portal-eurofoto-iphone
+  
+  custom_layout:
+     column_count: 16
+     column_width: 17
+     gutter_width: 3
+    
+  semantic_classes:
+    "#footer, #header, #widecontent": ".span-24, div.span-24, last"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+    
+    
+vg:
+  path: /var/www/repix/sites/static/webroot/css/portals/vg
+  plugins:
+    - common
+    - fancybox
+    - images
+    - jqueryui
+    - forms
+    - sprites
+    - buttons
+    - frontpage
+    - portal-vg
+    - jquerytools
+    - errors
+    - jcrop
+  semantic_classes:
+    "#footer, #header": ".span-24, div.span-24"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+    "#container": ".container"
+    
+aftenposten:
+  path: /var/www/repix/sites/static/webroot/css/portals/aftenposten
+  plugins:
+    - common
+    - fancybox
+    - images
+    - jqueryui
+    - forms
+    - sprites
+    - buttons
+    - frontpage
+    - portal-aftenposten
+    - jquerytools
+    - errors
+    - jcrop
+  semantic_classes:
+    "#footer, #header": ".span-24, div.span-24"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+    "#container": ".container"
+    
+if:
+  path: /var/www/repix/sites/static/webroot/css/portals/if
+  plugins:
+    - common
+    - fancybox
+    - images
+    - jqueryui
+    - forms
+    - sprites
+    - buttons
+    - frontpage
+    - portal-vg
+    - jquerytools
+  semantic_classes:
+    "#footer, #header": ".span-24, div.span-24"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+    "#container": ".container"
+
+
+sol:
+  path: /var/www/repix/sites/static/webroot/css/portals/sol
+  plugins:
+    - common
+    - fancybox
+    - images
+    - jqueryui
+    - forms
+    - sprites
+    - buttons
+    - frontpage
+    - portal-sol
+    - jquerytools
+    - errors
+    - jcrop
+  semantic_classes:
+    "#footer, #header": ".span-24, div.span-24"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+    "#container": ".container"
+    
+
+dnt:
+  path: /var/www/repix/sites/static/webroot/css/portals/dnt
+  plugins:
+    - common
+    - fancybox
+    - images
+    - jqueryui
+    - jcrop
+    - forms
+    - buttons
+    - sprites
+    - frontpage
+    - link_icons
+    - portal-dnt
+    - friends
+    - uploadify
+    - sitemap
+    - cms
+    - jquerytools
+    - errors
+  semantic_classes:
+    "#footer, #header, #widecontent": ".span-24, div.span-24, last"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+
+viover60:
+  path: /var/www/repix/sites/static/webroot/css/portals/viover60
+  plugins:
+    - common
+    - fancybox
+    - images
+    - jqueryui
+    - jcrop
+    - forms
+    - buttons
+    - sprites
+    - frontpage
+    - link_icons
+    - portal-viover60
+    - friends
+    - uploadify
+    - sitemap
+    - cms
+    - jquerytools
+    - errors
+  semantic_classes:
+    "#footer, #header, #widecontent": ".span-24, div.span-24, last"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+
+origo:
+  path: /var/www/repix/sites/static/webroot/css/portals/origo
+  plugins:
+    - common
+    - fancybox
+    - images
+    - forms
+    - jqueryui
+    - link_icons
+    - portal-origo
+    - friends
+    - uploadify
+    - sitemap
+    - jquerytools
+    - errors
+  semantic_classes:
+    "#footer, #header, #widecontent": ".span-24, div.span-24, last"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+
+
+ckeditor:
+  path: /var/www/repix/sites/static/webroot/css/ckeditor
+  plugins:
+    - ckeditor
+    - images
+    - forms
+    - buttons
+    - sprites
+    - link_icons
+    - cms
+    - errors
+    - common
+
+admin:
+  path: /var/www/repix/sites/static/webroot/css/portals/admin
+  plugins:
+    - jqueryui
+    - jcrop
+    - forms
+    - sprites
+    - buttons
+    - link-icons
+    - admin
+    - errors
+  semantic_classes:
+    "#footer, #header, #widecontent": ".span-24, div.span-24, last"
+    "#content": ".span-20, div.span-20"
+    "#sidebar": ".span-4 last, div.span-4 last"
+
+AirUploader:
+   path: "/var/www/repix/other/Eurofoto Uploader (air)/css"
+   screen.css:
+      -screen.css
+   plugins:
+      - images
+      - buttons
+
+fotobok:
+  path: /var/www/repix/sites/static/webroot/css/portals/fotobok
+  plugins:
+    - fancybox
+    - images
+    - jqueryui
+    - forms
+    - sprites
+    - buttons
+    - link_icons
+    - uploadify
+    - cms
+    - jquerytools
+    - portal-fotobok
+  semantic_classes:
+    "#footer, #header, #widecontent": ".span-24 last"
+    
+reedfoto-old:
+  path: /var/www/repix/sites/reedfoto/webroot/css
+  plugins: 
+    - fancybox
+    - buttons
+    - jqueryui-reedfoto
+    - reedfoto
+    - errors
+    - common
+    - forms
+    - sprites
+  semantic_classes:
+    "#footer, #header, #content": ".container"
+
+
+
+intelesms:
+  path: /var/www/repix/sites/intelesms/webroot/css
+  plugins: 
+    - link-icons
+    - fancybox
+    - buttons
+    - intelesms
+    - jquerytools
+    - errors
+    - sitemap
+    - forms
+    - common
+    
+fotokalenderne:
+  path: /var/www/repix/sites/static/webroot/css/portals/fotokalenderne
+  plugins:
+    - common
+    - images
+    - jqueryui
+    - jcrop
+    - forms
+    - sprites
+    - buttons
+    - link_icons
+    - uploadify
+    - jquerytools
+    - errors
+    - fancybox
+    - japan-photo-basic
+    - japan-photo-fotokalenderne
+    
+  semantic_classes:
+    "#footer, #widecontent": ".span-24, div.span-24, last"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+    
+takkekort:
+  path: /var/www/repix/sites/static/webroot/css/portals/takkekort
+  plugins:
+    - common
+    - images
+    - jqueryui
+    - jcrop
+    - forms
+    - sprites
+    - buttons
+    - link_icons
+    - uploadify
+    - jquerytools
+    - errors
+    - fancybox
+    - japan-photo-basic
+    - japan-photo-takkekort
+    
+  semantic_classes:
+    "#footer, #widecontent": ".span-24, div.span-24, last"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+    
+    
+apressen:
+  path: /var/www/repix/sites/static/webroot/css/portals/apressen
+  plugins:
+    - common
+    - images
+    - jqueryui
+    - jcrop
+    - forms
+    - sprites
+    - buttons
+    - link_icons
+    - uploadify
+    - jquerytools
+    - errors
+    - fancybox
+    - apressen
+    
+  semantic_classes:
+    "#footer, #widecontent": ".span-24, div.span-24, last"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+    
+modelday:
+  path: /var/www/repix/sites/static/webroot/css/portals/modelday
+  plugins:
+    - common
+    - images
+    - jqueryui
+    - jcrop
+    - forms
+    - sprites
+    - buttons
+    - link_icons
+    - frontpage
+    - portal-modelday
+    - friends
+    - google-site-search
+    - uploadify
+    - sitemap
+    - cms
+    - jquerytools
+    - errors
+    - fancybox
+    
+  semantic_classes:
+    "#footer, #header, #widecontent": ".span-24, div.span-24, last"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+    
+fotoclick:
+  path: /var/www/repix/sites/static/webroot/css/portals/fotoclick
+  plugins:
+    - common
+    - images
+    - jqueryui
+    - jcrop
+    - forms
+    - sprites
+    - buttons
+    - link_icons
+    - frontpage
+    - portal-fotoclick
+    - friends
+    - google-site-search
+    - uploadify
+    - sitemap
+    - cms
+    - jquerytools
+    - errors
+    - fancybox
+    
+  semantic_classes:
+    "#footer, #header, #widecontent": ".span-24, div.span-24, last"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+    
+    
+ukeplan:
+  path: /var/www/repix/sites/static/webroot/css/portals/ukeplan
+  plugins:
+    - portal-ukeplan
+    - common
+    - images
+    - jquery-blitzer
+    - jcrop
+    - forms
+    - sprites
+    - buttons
+    - link_icons
+    - friends
+    - uploadify
+    - cms
+    - jquerytools
+    - errors
+    - fancybox
+    
+  semantic_classes:
+    "#footer, #header, #widecontent": ".span-24, div.span-24, last"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+    
+    
+reedfoto:
+  path: /var/www/repix/sites/static/webroot/css/portals/reedfoto
+  plugins:
+    - common
+    - images
+    - jqueryui
+    - jcrop
+    - forms
+    - sprites
+    - buttons
+    - link_icons
+    - frontpage
+    - portal-reedfoto
+    - friends
+    - google-site-search
+    - uploadify
+    - sitemap
+    - cms
+    - jquerytools
+    - errors
+    - fancybox
+    
+  semantic_classes:
+    "#footer, #header, #widecontent": ".span-24, div.span-24, last"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"
+    
+merkelapp:
+  path: /var/www/repix/sites/static/webroot/css/portals/merkelapp
+  plugins:
+    - portal-merkelapp
+    - common
+    - images
+    - jquery-blitzer
+    - jcrop
+    - forms
+    - sprites
+    - buttons
+    - link_icons
+    - friends
+    - uploadify
+    - cms
+    - jquerytools
+    - errors
+    - fancybox
+    
+  semantic_classes:
+    "#footer, #header, #widecontent": ".span-24, div.span-24, last"
+    "#content": ".span-16, div.span-16"
+    "#leftmenu": ".span-4, div.span-4"
+    "#rightmenu": ".span-4 last, div.span-4 last"

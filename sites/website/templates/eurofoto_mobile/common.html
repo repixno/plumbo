@@ -1,0 +1,91 @@
+<!-- HEAD -->
+<head metal:define-macro="head">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<tal metal:use-macro="blueprint" tal:omit-tag="" />
+	<title>Eurofoto.no - Minner for livet</title>
+</head>
+
+<!-- BLUEPRINT CSS Framework and portal-spesific CSS -->
+
+<tal metal:define-macro="blueprint" tal:omit-tag="">
+
+	<link rel="apple-touch-icon" href="http://static.eurofoto.no/images/eurofoto_iphone_icon.png"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="viewport" content="width=device-width, user-scalable=no" />
+	<meta name="format-detection" content="telephone=no" />
+
+	<link media="only screen and (device-width: 320px)" href="http://static.eurofoto.no/css/portals/eurofoto/iphone_320.css" type= "text/css" rel="stylesheet"/>
+	
+	<link media="only screen and (device-width: 480px)" href="http://static.eurofoto.no/css/portals/eurofoto/iphone_480.css" type= "text/css" rel="stylesheet"/>
+<!--	<link rel="stylesheet" href="http://static.eurofoto.no/css/blueprint/print.css" type="text/css" media="print" />  -->
+</tal>
+
+<script metal:define-macro="jqueryui" tal:omit-tag="">
+		<script type="text/javascript" src="http://static.eurofoto.no/js/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="http://static.eurofoto.no/js/jquery-ui-1.7.1.custom.min.js"></script>
+		<script type="text/javascript" src="http://static.eurofoto.no/js/i18n/ui.datepicker-no.js"></script>		
+</script>
+
+<!-- top-header -->
+<div metal:define-macro="top" id="header" class="last">	
+	<!-- site-title -->
+	<h1 class="site-logo">Eurofoto.no - Minner for livet</h1>
+	<div metal:use-macro="top-small-navigation" />
+	<div metal:use-macro="main-navigation" />
+	<form metal:use-macro="top-search" />
+</div>
+
+<!-- top-small-navigation -->
+<div metal:define-macro="top-small-navigation" id="topsmallnavigation" class="span-22 last clear">
+	<ul class="clear">
+		<li class="login"><a href="/login/">Login</a></li>
+		<li class="logout"><a href="/logout/">Logout</a></li>
+		<li><a href="/register/" class="last">Register</a></li>
+	</ul>
+</div>
+
+<!-- main-navigation add class "active" to the active anchor-->
+<div metal:define-macro="main-navigation" id="main-navigation">
+	<ul>
+		<li>
+			<a href="/products/" class="products">Products</a>
+		</li>
+		<li>
+			<a href="/myaccount/" class="my-account">My Account</a>
+		</li>		
+		<li class="">
+			<a href="/order-prints/" class="order-prints last">Order prints</a>
+		</li>
+	</ul>
+	
+</div>
+
+<!-- top-search -->
+<form metal:define-macro="top-search" id="topsearch" action="/search">
+	<input type="text" value="Search for products and services" />
+	<input type="submit" class="hide" value="Search" />
+</form>
+
+
+<!-- LEFT MENU (span-4) -->
+<div metal:define-macro="left-menu" id="leftmenu">
+	<p>Left menu</p>
+</div>
+
+<!-- RIGHT MENU (span-4) -->
+<div metal:define-macro="right-menu" id="rightmenu" class="last">
+	<p>Left menu</p>
+</div>
+
+<!-- FOOTER -->
+<div metal:define-macro="footer" id="footer" class="last">
+
+	<ul>
+		<li class="contact"><a href="/contact/">Contact</a></li>		
+		<li><a href="/about/">About eurofoto</a></li>
+		<li><a href="/prices/">Prices</a></li>
+		<li><a href="/sitemap/">Sitemap</a></li>
+	</ul>
+
+	<p class="center">This is the footer</p>
+</div>

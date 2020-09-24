@@ -1,0 +1,410 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+</head>
+
+
+<body>
+
+	<div metal:use-macro="../../common/loader.html/fullscreen" />
+
+	<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+	<div id="widecontent">
+
+		<div class="span-18">
+			<h2 i18n:translate="">Edit order</h2>
+			<h3 class="quiet" i18n:translate="">Choose quantity and format individually for each print</h3>
+		</div>
+	<!--	<div class="span-18 last">
+			<ul class="step-by-step">
+				<li class="completed">
+					<a href="/order-prints/" title="">
+						<strong tal:content="cms:title:c3e83ff3-1b74-499f-9d2c-578177d4f036">Step 1: Find your photos</strong>
+						<span tal:content="cms:ingress:c3e83ff3-1b74-499f-9d2c-578177d4f036">Choose how to transfer them to us.</span>
+					</a>
+				</li>
+				<li class="completed">
+					<a href="/order-prints/transfer-photos/" title="" tal:condition="not:session/loggedin">
+						<strong tal:content="cms:title:0e90d43c-ebf2-4c79-83d5-b3f950bdae0e">Step 2: Transfer photos</strong>
+						<span tal:content="cms:ingress:0e90d43c-ebf2-4c79-83d5-b3f950bdae0e">This may take a while, grab a cup of coffee.</span>
+					</a>
+					<a href="/order-prints/choose-photos/" title="" tal:condition="session/loggedin">
+						<strong tal:content="cms:title:3ccf650d-5437-4e54-9940-b04c0aab2163">Step 2: Choose photos</strong>
+						<span tal:content="cms:ingress:3ccf650d-5437-4e54-9940-b04c0aab2163">Choose photos from your photo account.</span>
+					</a>
+					
+				</li>
+				<li class="current">
+					<a title="">
+						<strong tal:content="cms:title:6b897e85-a541-4a72-8905-e5ecb59b8968">Step 3: Choose quantity</strong>
+						<span tal:content="cms:ingress:6b897e85-a541-4a72-8905-e5ecb59b8968">Choose production method and formats</span>
+					</a>
+				</li>
+				<li class="last">
+					<a title="">
+						<strong tal:content="cms:title:3dfbbdeb-678f-4594-8aab-171ea6d8f6fd">Step 4: Accessories</strong>
+						<span tal:content="cms:ingress:3dfbbdeb-678f-4594-8aab-171ea6d8f6fd">Things you may need.</span>
+					</a>
+				</li>
+			</ul>
+		</div>	-->
+
+		<hr class="space" />
+		
+		<form action="/order-prints/update/" method="post" id="change-each-print">
+			<div class="span-24 last">
+				<h4>
+					<tal:block i18n:translate="">You have choosen</tal:block> 
+					<span class="loud total-num-images" id="total-num-of-images" tal:content="order/numimages">0</span> 
+					<tal:block i18n:translate="">photos</tal:block>
+				</h4>
+			</div>
+			
+			<tal:block tal:condition="not: order/numimages">
+				<h3 i18n:translate="">No photos</h3>
+			</tal:block>
+			
+			<div class="span-17 append-1">
+				<tal:block tal:repeat="image order/imageobjects">
+					<div class="span-17 last">
+						<div class="span-4">
+							<img src="${image/thumbnail}" alt="${image/title}" />
+						</div>
+						<div class="span-13 last">
+							<div class="span-9">
+								<h4 tal:content="image/title"></h4>
+							</div>
+							<div class="span-4 last right">
+								<a href="#" class="remove-print negative" i18n:translate="">Remove</a>
+							</div>
+						
+						<div class="span-6">
+							<h3 class="bottom" i18n:translate="" style="font-family: yanoneregular; color: #ee740b">Standard prints</h3>
+							<tal:block tal:repeat="print prints">
+									<div class="prodno_${print/prodno} standard-prints">
+										
+										<tal:block tal:define="global hasfounditem string:0" />
+										
+										<tal:block tal:repeat="product image/edit">
+											
+											<div class="span-6" tal:condition="equal:print/prodno,product/prodno,1">
+												<input type="text" 
+													class="order-print-quantity quantity prodno_${print/prodno}" 
+													name="orderitem[${print/prodno}][${image/id}]" 
+													id="prodno_${print/prodno}_image_${image/id}" size="3" value="0" 
+													tal:attributes="value product/quantity"
+													title="${print/prodno}"
+												/>
+												
+												<label for="prodno_${print/prodno}_image_${image/id}">
+													<span tal:content="print/title"></span> 
+													<span class="quiet">kr <span class="price prodno_${print/prodno}" tal:content="print/price">0,99</span> pr. stk</span>
+												</label>
+												
+												<span class="totalPriceOfThisItem hide">0</span>
+												
+												<tal:block tal:define="global hasfounditem string:1" />
+											
+											</div>
+											
+										</tal:block>
+										
+										<tal:block tal:condition="not:hasfounditem">
+											
+											<div class="span-6">
+												<input type="text" 
+													class="order-print-quantity quantity prodno_${print/prodno}" 
+													name="orderitem[${print/prodno}][${image/id}]" 
+													id="prodno_${print/prodno}_image_${image/id}" size="3"
+													value="0"
+													title="${print/prodno}"
+												/>
+												
+												<label for="prodno_${print/prodno}_image_${image/id}">
+													<span tal:content="print/title"></span> 
+													<span class="quiet">kr <span class="price prodno_${print/prodno}" tal:content="print/price">0,99</span> pr. stk</span>
+												</label>
+												
+												<span class="totalPriceOfThisItem hide">0</span>
+													
+											</div>
+										
+										</tal:block>
+										
+									</div>
+								
+							</tal:block>
+						</div>
+						
+						<div class="span-6 last">
+							<h3 class="bottom" i18n:translate="" style="font-family: yanoneregular; color: #ee740b">Enlargements</h3>
+							<tal:block tal:repeat="enlargement enlargements">
+								
+								<tal:block tal:define="global hasfounditem string:0" />
+								
+								<tal:block tal:repeat="product image/edit">
+									
+									<div class="prodno_${enlargement/prodno} enlargements" tal:condition="equal:enlargement/prodno,product/prodno,1,">
+										<input 
+											type="text" class="order-print-quantity quantity" size="3" value="0" 
+											name="orderitem[${enlargement/prodno}][${image/id}]" 
+											id="prodno_${enlargement/prodno}_image_${image/id}"
+											title="${enlargement/prodno}"
+											tal:attributes="value product/quantity"
+										/>
+										<label for="prodno_${enlargement/prodno}_image_${image/id}">
+											<tal:block tal:content="enlargement/title"></tal:block> 
+											<span class="quiet">kr <span class="price" tal:content="formatprice:enlargement/price"></span> pr. stk</span>
+										</label>
+										<span class="totalPriceOfThisItem hide"></span>
+										
+										<tal:block tal:define="global hasfounditem string:1" />
+										
+									</div>
+									
+								</tal:block>
+								
+								<tal:block tal:condition="not:hasfounditem">
+									
+									<div class="prodno_${enlargement/prodno} enlargements">
+										<input 
+											type="text" class="order-print-quantity quantity" size="3" value="0" 
+											name="orderitem[${enlargement/prodno}][${image/id}]" 
+											id="prodno_${enlargement/prodno}_image_${image/id}"
+											title="${enlargement/prodno}"
+										/>
+										
+										<label for="prodno_${enlargement/prodno}_image_${image/id}">
+											<tal:block tal:content="enlargement/title"></tal:block> 
+											<span class="quiet">kr <span class="price" tal:content="formatprice:enlargement/price"></span> pr. stk</span>
+										</label>
+										<span class="totalPriceOfThisItem hide"></span>
+									</div>
+									
+								</tal:block>
+							</tal:block>
+						</div>
+					</div>
+					<hr />
+				</div>
+			</tal:block>
+
+			</div>
+			
+			<div class="span-5 last">
+				<div>
+				<!-- white borders -->
+				<tal:block tal:repeat="method productionmethods">
+					<tal:block tal:condition="equal:method/prodno,0465">
+						<div class="white-borders" id="white-borders">
+						<h4 i18n:translate="">White borders?</h4>
+						
+						<tal:block tal:condition="exists:order/productionmethod/prodno">
+						<input type="checkbox" value="${method/prodno}" id="prodno_${method/prodno}" name="white-borders" 
+							tal:condition="equal:order/productionmethod/prodno,465" checked="1"/>
+						
+						<input type="checkbox" value="${method/prodno}" id="prodno_${method/prodno}" name="white-borders" 
+							tal:condition="not:equal:order/productionmethod/prodno,465"/>
+						</tal:block>
+						<tal:block tal:condition="not:exists:order/productionmethod/prodno">
+						<input type="checkbox" value="${method/prodno}" id="prodno_${method/prodno}" name="white-borders" />
+						</tal:block>
+						
+						<label for="prodno_${method/prodno}">
+							<span tal:content="method/title"></span>
+							<span class="quiet" tal:content="method/ingress"></span>
+							<span class="quiet">(+ kr 
+								<span class="price" tal:content="method/price"></span>)
+							</span>
+						</label>
+						</div>
+					</tal:block>
+				</tal:block>
+				</div>
+				<div id="info">
+					<!-- productions methods -->
+					<div class="hide" id="productionmethods" title="Production methods" i18n:attributes="title">
+						
+						<!--<div id="filling-method">
+							<h4 class="prepend-top">
+								<tal:block i18n:translate="">Filling method</tal:block> <!--<a class="normalize" i18n:translate="">read more</a>
+							</h4>
+							<div>
+								<tal:block tal:repeat="method productionmethods">
+									<!-- greaten than one is without white borders 
+									<tal:block tal:condition="not:equal:method/prodno,465">
+									   <tal:block tal:condition="exists:order/productionmethod/prodno">
+										<input type="radio" id="prodno_${method/prodno}" 
+											value="${method/prodno}" name="productionmethod"  
+											tal:attributes="checked conditionalmatch:method/prodno,order/productionmethod/prodno,1,0,1"
+										/>
+										</tal:block>
+										<tal:block tal:condition="not:exists:order/productionmethod/prodno">
+										<input type="radio" id="prodno_${method/prodno}" 
+											value="${method/prodno}" name="productionmethod"  
+										/>
+										</tal:block>
+										
+										<label for="prodno_${method/title}">
+											<span tal:content="method/title"></span>
+											<span class="quiet">(+ kr 
+												<span class="price" tal:content="method/price"></span>)
+											</span>
+										</label>
+										<p class="quiet small top" tal:content="method/ingress"></p>
+									</tal:block>
+								</tal:block>
+							</div>
+						</div>-->
+						<p>&nbsp;</p>
+						<h4>
+							<tal:block i18n:translate="">Paper quality</tal:block> <!--<a class="normalize">read more</a>-->
+						</h4>
+						<p id="paperquality">
+							<tal:block tal:repeat="paper paperquality">
+								<tal:block tal:condition="exists:order/paperquality/prodno">
+								<input type="radio" id="prodno_${paper/prodno}" 
+									name="paperquality" value="${paper/prodno}" 
+									tal:attributes="checked conditionalmatch:paper/prodno,order/paperquality/prodno,1,0,1"
+								/>
+							   </tal:block>
+							   <tal:block tal:condition="not:exists:order/paperquality/prodno">
+								<input type="radio" id="prodno_${paper/prodno}" 
+									name="paperquality" value="${paper/prodno}" 
+								/>
+							   </tal:block>
+								<label for="prodno_${paper/prodno}">
+									<tal:block tal:content="paper/title"></tal:block>
+									<span class="quiet">(+ kr <span class="price" tal:content="paper/price">1,50</span>)</span>
+								</label><br/>
+							</tal:block>
+						</p>
+						
+						<h4>
+							<tal:block i18n:translate="">Light and color correction</tal:block> 
+							<!--<a class="normalize" i18n:translate="" href="">read more</a>-->
+						</h4>
+						<div id="correction">
+							<tal:block tal:repeat="method correctionmethods">
+								<tal:block tal:condition="exists:order/correctionmethod/prodno">
+								<input type="radio" id="prodno_${method/prodno}" 
+									name="correctionmethod" value="${method/prodno}" 
+									tal:attributes="checked conditionalmatch:method/prodno,order/correctionmethod/prodno,1,0,1"
+								/>
+								</tal:block>
+								<tal:block tal:condition="not:exists:order/correctionmethod/prodno">
+								<input type="radio" id="prodno_${method/prodno}" 
+									name="correctionmethod" value="${method/prodno}" 
+								/>
+								</tal:block>
+								<label for="prodno_${method/prodno}">
+									<tal:block tal:content="method/title">Title</tal:block> 
+									<span class="quiet">(+ kr <span class="price" tal:content="method/price">1</span>,-)</span> 
+								</label><br/>
+							</tal:block>
+							<p i18n:translate="" class="quiet">You only pay for each photo you upload. Not each print.</p>
+						</div>
+						
+					</div>
+
+				</div>
+				
+			<!--	<div class="prepend-top append-bottom">
+					<a href="#productionmethods" id="showproductionmethods" i18n:translate="">Show more production methods</a>
+				</div>-->
+				<div class="right" id="total-price-container" style="display:block;">
+					<h3>
+						<tal:block i18n:translate="">Price</tal:block> kr <span id="total-price">
+							<img src="${static:gfx/gui/ajax-loader.gif}" class="loader"/>
+						</span>
+					</h3>
+					<div class="append-bottom">
+						<a href="#" id="update-prices" i18n:translate="">Update price</a>
+					</div>
+				
+					<button class="next large call-to-action" i18n:translate="" type="submit">Oppdater handlevogn</button>
+					
+					
+				</div>
+			</div>
+			
+			<div class="span-4 append-20">
+				<a class="button back" i18n:translate="">Back</a>
+			</div>
+			
+			<div class="hide">
+				<tal:block metal:use-macro="common.html/price-matrix" />
+			</div>
+			
+		</form>
+	</div>
+</div>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready( function() {
+	
+		updatePrices();
+
+		$('input[name=white-borders]').change( function() {
+			$('input[name=productionmethod]').removeAttr('checked');
+		});
+		
+		$('input[name=productionmethod]').change( function() {
+			$('input[name=white-borders]').removeAttr('checked');
+		});
+		
+		$('#update-prices').click( function() {
+			updatePrices();
+			return false;
+		});
+		
+		$('.remove-print', '#change-each-print').click( function() { 
+			$(this).parent().parent().parent().hide('fast', function() {
+				$(this).remove();
+			});
+			updatePrices();
+			return false;
+		});
+		
+		$('#change-each-print input').bind('change', function() {
+			updatePrices();
+		});
+		
+		$('#showproductionmethods').click( function() {
+			$('#productionmethods').toggle('fast');
+			return false;
+		});
+		
+		// show enlargements
+		$(".showallenlargements", '#change-each-print').click( function() {
+			$(this).parent().prev().slideToggle('slow');
+			//$('.white-borders input').trigger('change');
+			return false;
+		});
+		
+		$('#info').scrollTop();
+
+	});
+	
+	function updatePrices() {
+		$('#total-price').after('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader"/>')
+		$.post('/api/1.0/prices/prints/get/', $('#change-each-print').serialize(), function(data) {
+			$('#total-price').text( data.price );
+			$('#total-price').text( $('#total-price').text().replace('.',',') )
+			$('#total-price-container img.loader').hide('slow');
+			$('#loader').remove();
+		}, 'json');
+	}
+</script>
+</body>
+</html>

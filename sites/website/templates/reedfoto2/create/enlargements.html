@@ -1,0 +1,522 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+	<link type="text/css" rel="stylesheet" href="${static:css/enlargements.css}?${version}" />
+	<script type="text/javascript" src="${static:js/enlargements.min.js}?${version}"></script>
+   
+   <style>
+		.startup {
+			top: 195px;
+			left: auto;
+		}
+   </style>
+</head>
+
+
+<body>
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	<div class="container">
+
+	
+	<div class="row" >
+		
+		<div class="col-md-12 roundedBox" id="jau" style="padding: 20px;">
+		<div	class="col-md-4">
+			<div class="row">
+			<div class="col-md-12 col-xs-6">
+				
+				
+					<h3>1.<tal:block i18n:translate="">Choose image</tal:block></h3>
+					<p>
+					   <tal:block tal:condition="session/loggedin">
+					   <a class="small center button choose-image" href="#" i18n:translate="">Get image from your account</a>
+					   </tal:block>
+					   <tal:block tal:condition="not:session/loggedin">
+						  <tal:block metal:use-macro="../common.html/quicklogin" />
+					   </tal:block>				
+					</p>
+					<p>
+					   Hent bilde fra din datamaskin
+						  <div style="position: relative">
+							  <span class="btn btn-primary fileinput-button">
+								  <span>Velg bilde</span>
+									  <!-- The file input field used as target for the file upload widget -->
+									  <input id="fileupload" type="file" name="files[]"  data-url="/api/1.0/upload/gift" accept="image/jpeg"  />
+							  </span>
+						  </div>
+						  <div id="progress" class="progress" style="display: none;">
+							  <div class="progress-bar progress-bar-success"></div>
+						  </div>
+						  <div id="upload-queue" style="padding:5px 0px;">
+							  
+						  </div>
+			  
+					</p>
+				</div>
+			
+			<div class="col-md-12 col-xs-6">
+				<h3>2.<tal:block i18n:translate="">Choose canvas size</tal:block></h3>
+				<div class="form-inline">
+				   <LABEL class="selectlabel">Produkt</LABEL>
+					<SELECT class="form-control" id="printtype">
+						<OPTION selected="selected" id="canvas 2cm" value="2.5">Enkelt bilde 2cm ramme</OPTION>
+						<OPTION id="canvas 4cm" value="4">Enkelt bilde 4cm ramme</OPTION>
+						<OPTION id="canvas Gallery 2x2" value="2x2">Galleri 2x2 4cm ramme</OPTION>
+						<OPTION id="canvas Gallery 1x3" value="1x3">Galleri 1x3 4cm ramme</OPTION>
+					</SELECT>
+				</div>
+				<div class="form-inline top-5 select-2cm select">
+					<!-- Y value -->
+					<LABEL class="selectlabel">Størrelse</LABEL>
+					<SELECT class="form-control selectedsize" id="canvas2cm">
+					   <OPTION value="20x20" id="2233">20x20 cm</OPTION>
+					   <OPTION value="20x30" id="2235">20x30 cm</OPTION>
+					   <OPTION value="20x100" id="3066">20x100 cm</OPTION>
+					   <OPTION value="30x30" id="2237">30x30 cm</OPTION>
+					   <OPTION value="30x40" id="2239" selected="selected">30x40 cm</OPTION>
+					   <OPTION value="30x50" id="2241">30x50 cm</OPTION>
+					   <OPTION value="30x70" id="2243">30x70 cm</OPTION>
+					   <OPTION value="30x80" id="2245">30x80 cm</OPTION>
+					   <OPTION value="30x90" id="2247">30x90 cm</OPTION>
+					   <OPTION value="40x40" id="2249">40x40 cm</OPTION>
+					   <OPTION value="40x50" id="2251">40x50 cm</OPTION>
+					   <OPTION value="40x60" id="2253">40x60 cm</OPTION>
+					   <OPTION value="40x80" id="3835">40x80 cm</OPTION>
+					   <OPTION value="40x90" id="2255">40x90 cm</OPTION>
+					   <OPTION value="50x50" id="2257">50x50 cm</OPTION>
+					   <OPTION value="50x60" id="2259">50x60 cm</OPTION>
+					   <OPTION value="50x70" id="2261">50x70 cm</OPTION>
+					   <OPTION value="50x80" id="3837">50x80 cm</OPTION>
+					   <OPTION value="60x60" id="2263">60x60 cm</OPTION>
+					   <OPTION value="60x90" id="3673">60x90 cm</OPTION>
+					   <OPTION value="70x70" id="2265">70x70 cm</OPTION>
+					   
+					</SELECT>
+				</div>
+				<div class="form-inline top-5 select-4cm select" style="display: none">
+					<!-- 40cm canvas -->
+					<!--bakerste tallet i admin eurofoto som id-->
+					<LABEL class="selectlabel">Størrelse</LABEL>
+					<SELECT class="form-control" id="canvas4cm">
+					   <OPTION value="20x20" id="2169">20x20 cm</OPTION>
+					   <OPTION value="20x30" id="2171">20x30 cm</OPTION>
+					   <OPTION value="30x30" id="2189">30x30 cm</OPTION>
+					   <OPTION value="30x40" id="2191" selected="selected">30x40 cm</OPTION>
+					   <OPTION value="30x50" id="2195">30x50 cm</OPTION>
+					   <OPTION value="30x70" id="2199">30x70 cm</OPTION>
+					   <OPTION value="30x80" id="2201">30x80 cm</OPTION>
+					   <OPTION value="30x90" id="2203">30x90 cm</OPTION>
+					   <OPTION value="30x100" id="2205">30x100 cm</OPTION>
+					   <OPTION value="40x40" id="2193">40x40 cm</OPTION>
+					   <OPTION value="40x50" id="2197">40x50 cm</OPTION>
+					   <OPTION value="40x60" id="2207">40x60 cm</OPTION>
+					   <OPTION value="40x80" id="3831">40x80 cm</OPTION>
+					   <OPTION value="40x90" id="2209">40x90 cm</OPTION>
+					   <OPTION value="40x100" id="2211">40x100 cm</OPTION>
+					   <OPTION value="40x120" id="3821">40x120 cm</OPTION>
+					   <OPTION value="50x50" id="2213">50x50 cm</OPTION>
+					   <OPTION value="50x60" id="2215">50x60 cm</OPTION>
+					   <OPTION value="50x70" id="2217">50x70 cm</OPTION>
+					   <OPTION value="50x80" id="3833">50x80 cm</OPTION>
+					   <OPTION value="50x120" id="3823">50x120cm</OPTION>
+					   <OPTION value="50x150" id="3829">50x150 cm</OPTION>
+					   <OPTION value="60x60" id="2219">60x60 cm</OPTION>
+					   <OPTION value="60x80" id="2223">60x80 cm</OPTION>
+					   <OPTION value="60x90" id="3672">60x90 cm</OPTION>
+					   <OPTION value="60x120" id="3825">60x120 cm</OPTION>
+					   <OPTION value="70x70" id="2221">70x70 cm</OPTION>
+					   <OPTION value="70x90" id="2225">70x90 cm</OPTION>
+					   <OPTION value="70x100" id="2227">70x100 cm</OPTION>
+					   <OPTION value="80x80" id="2229">80x80 cm</OPTION>
+					   <OPTION value="80x120" id="3827">80x120 cm</OPTION>
+					   <OPTION value="100x100" id="2231">100x100 cm</OPTION>
+					   <OPTION value="100x140" id="3839">100x140 cm</OPTION>
+					</SELECT>
+				</div>
+				<div class="top-5 form-inline select-2x2 select" style="display: none">
+				<!-- 3x3 gallery canvas -->
+				<LABEL class="selectlabel">Størrelse</LABEL>
+					<SELECT  class="form-control" id="gallery2x2">
+					   <OPTION value="44x44" id="2279">4 stk. 20x20 cm</OPTION>
+					   <OPTION value="64x64" id="2281">4 stk. 30x30 cm</OPTION>
+					   <OPTION value="84x84" id="2283" selected="selected">4 stk. 40x40 cm</OPTION>
+					   <OPTION value="104x104" id="2285">4 stk. 50x50 cm</OPTION>
+					   <OPTION value="124x124" id="2287">4 stk. 60x60 cm</OPTION>
+					   <OPTION value="144x144" id="2289">4 stk. 70x70 cm</OPTION>
+					</SELECT>
+				</div>
+			<div class="top-5 form-inline select-1x3 select" style="display: none">
+			  <!-- 40cm canvas -->
+				<LABEL class="selectlabel">Størrelse</LABEL>
+					<SELECT  class="form-control" id="gallery1x3">
+					   <OPTION value="30x98" id="2291">3 stk. 30x30 cm</OPTION>
+					   <OPTION value="40x98" id="2293" selected="selected">3 stk. 30x40 cm</OPTION>
+					   <OPTION value="70x98" id="2295">3 stk. 30x70 cm</OPTION>
+					   <OPTION value="80x98" id="2297">3 stk. 30x80 cm</OPTION>
+					   <OPTION value="90x98" id="2299">3 stk. 30x90 cm</OPTION>
+					   <OPTION value="90x128" id="2301">3 stk. 40x90 cm</OPTION>
+					   <OPTION value="100x128" id="2303">3 stk. 40x100 cm</OPTION>
+					</SELECT>
+				</div>
+				<div class="col-md-12">
+					<div class="form-inline row oriantationval">
+						<input type="radio" name="oriantation" value="landscape" id="landscape" checked="checked"/><tal:block i18n:translate="">Landscape</tal:block> 
+						<input type="radio" name="oriantation" value="portrait" id="portrait"/><tal:block i18n:translate="">Portrait format</tal:block> 
+					</div>
+				</div>
+				
+			</div>
+			
+			</div>
+			<div class="col-md-12">
+			
+				
+				<div class="row">
+					<div class="col-md-12 col-xs-6">
+						<div class="prepend-top append-bottom">
+							<input type="checkbox" name="red-eye" id="red-eye"/>
+							<label for="red-eye">
+								<tal:block i18n:translate="">Please remove red eyes for me.</tal:block>
+								<span class="quiet small">(Kr <span id="redeye-price"></span>)</span>
+							</label>
+							<input type="checkbox" name="varnish" id="varnish"/>
+							<label for="varnish">
+								Lakkering av lerret <span class="quiet small">(Kr <span id="varnish-price"></span>)</span> <a href="#" id="varnishinfolink">info</a>
+							</label>
+							<input type="checkbox" name="upgrade" id="upgrade"/>
+							<label for="upgrade">
+								Oppgradering <span class="quiet small">(Kr <span id="upgrade-price"/>)</span><a href="#" id ="upgradeinfolink">info</a>
+							</label>		
+						</div>
+					</div>
+					<div class="col-md-12 col-xs-6">
+						<div class="text-right">
+							<a href="#" id="updateprice">Oppdater pris </a>Kr <span class="price" id="gift-price">0</span>
+							<label for="gift-quantity"></label>
+							<input type="text" class="quantity" id="gift-quantity" value="1"/>
+							<button class="call-to-action disabled" id="add-to-cart" i18n:translate="">Add to cart</button>
+						 </div>
+					</div>
+					
+				</div>
+			 
+			 
+			 
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div>
+   			<div class="col-md-12 center cropContainer">
+   			<div class="col-xs-9">
+				<h3 class="left">3. Velg utsnitt</h3>
+			</div>
+			<div class="col-xs-3">
+				<tal:block i18n:translate="">Quality</tal:block>: <span class="quality"></span><span> <a href="#" title="kvalitet" class="qualityinfo">?</a></span>
+			</div>
+   			   <!--<tal:block tal:condition="not:exists: selected/image/screensize">-->
+   			      <img src="http://d.static.eurofoto.no/gfx/404/no_images.jpg" id="cropbox"/>
+   			   <!--</tal:block>
+   		      <tal:block tal:condition="exists: selected/image/screensize">
+   			      <img src="${selected/image/screensize}" class="selectedimage" id="cropbox"/>
+   			   </tal:block>-->
+   			<div class="col-md-12 text-left prepend-top quiet">
+   				<ul>
+   					<li>Klikk og dra i hjørnene på rammen for å endre størrelse</li>
+   					<li>Klikk og dra på det merkede området for å flytte utsnittet</li>
+   					<li>Det mørke feltet vil komme på siden av rammen</li>
+   				</ul>
+   			</div>
+   		  </div>
+   	  </div>
+   	</div>
+	</div>
+	</div>
+	</div>
+
+	
+<div id="imagePicker" title="Choose image" i18n:attributes="title" class="" style="display: none">
+   <div class="span-23 last">
+      <div class="span-6 column">
+         <h4 i18n:translate="">Choose album</h4><ul id="imagePickerAlbums" class="accordion-list albums"/>
+      </div>
+      <div class="span-17 column last">
+         <h4 i18n:translate="">Choose image</h4><ul id="imagePickerImages" class="accordion-list images"/>
+      </div>
+   </div>
+</div>
+
+<div class="" id="qualityinfoDialogWindow" style="display: none"> 
+   Kvaliteten er beregnet ut fra bredden i pixler og høyden i pixler på orginalfilen, i forhold til størrelsen den vil bli printet på. Dette er kun en pekepinn på hvordan kvaliteten vil bli på det ferdige produktet.
+</div>
+<tal:block tal:condition="exists: selected/image/screensize">
+<div id="preselected" class="" style="display: none">
+   <input type="hidden" id="x1" value="${selected/image/x}"/>
+   <input type="hidden" id="y1" value="${selected/image/y}"/>
+   <input type="hidden" id="bid" value="${selected/image/id}"/>
+</div>
+</tal:block>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<div class="" style="display: none" id="varnishinfo" tal:content="structure cms:body:b27077cc-b1e5-4060-8e45-9dfd83346d5a" />
+<div class="" style="display: none" id="upgradeinfo" tal:content="structure cms:body:44f83088-af50-42f2-a00e-978237e8412c" />
+<script src="${static:}js/jqupload/js/jquery.iframe-transport.js?${version}"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="${static:}js/jqupload/js/jquery.fileupload.js?${version}"></script>
+<script language="Javascript">
+
+var imagePickerLoaded = false;
+var loader = '<img src="${static:gfx/gui/ajax-loader.gif}" class="loader" />';
+
+
+var previewHeight = 0;
+var previewWidth = 0;
+var printHeight = 0;
+var printwidth = 0;
+var currentImage = false;
+var cropOffset = 0;
+var printtype = 0;
+var currentSelection = false;
+var oriantation = "landscape";
+var staticsite = "${static:}";
+
+var isiPad = navigator.userAgent.match(/iPad/i) != null ||  navigator.userAgent.match(/iPhone/i) != null;
+
+if(isiPad){
+   require( staticsite + 'js/jquery.imgareaselect.touch.js');
+}
+else{
+   require( staticsite + 'js/jquery.imgareaselect.min.js');
+}
+
+var currentProductOptionId 	=	0;
+
+//<![CDATA[
+
+$(document).ready( function() {
+		
+		
+		
+	$('button#velgbilde').on( 'click',  function(){
+		$('#choosefile').click();
+		return false;
+	});
+		
+	$('input#choosefile').on( 'change',  function(){
+		$('#lastoppbilde').click();
+		return false;
+	});
+			
+	$('#fileupload').fileupload({
+		replaceFileInput: false,
+		dataType: "json",        
+		datatype:"json",
+		xhrFields: {withCredentials: true},
+		acceptFileTypes: /(\.|\/)(jpe?g|tif)$/i,
+		add: function (e, data) {
+			
+			data.context = $('<p id="uploading" style="position: absolute; left: 20px;"/>').text('Uploading...').appendTo($('.progress-bar'));
+			data.submit();
+			$('.progress').show();
+			$('.progress .progress-bar-success').css(
+				'width',
+				0 + '%'
+			);
+			
+		},
+		done: function (e, data) {
+			
+			//console.log(data.result.files);
+			
+			$('#uploading').remove();
+			
+			$.each(data.result.images, function (index, file) {
+				var image = '<img class="imagethumb" id="' + file.id + '"src="' + file.thumbnail +'" style="height: 75px"  />';
+				var href = $('<a/>', {
+							'href'	:	'#',
+							'click'	: function() {
+								pickUploadedImage( file );
+								return false;
+							}
+						});
+				href.append(image)
+				$('#upload-queue').append( href );
+				selectedImageId = $(this).attr('id');
+				var backgroundImage = this
+				$('#choose-template .template-thumb').css('background-image', 'url('+ file.thumbnail +')' );
+				$('img#' + file.id ).css( 'border-color', "#0199d8" );
+				pickUploadedImage(file);
+				$('.progress').hide();
+				
+		
+			});
+		},
+		progressall: function (e, data) {
+			var progress = parseInt(data.loaded / data.total * 100, 10);
+			$('.progress .progress-bar-success').css(
+				'width',
+				progress + '%'
+			);
+		}
+	});
+	
+	$('.startup').remove();	
+	   
+	$('#varnishinfolink').click( function(){
+		$('#varnishinfo').dialog({
+			modal: true,
+			width: 500,
+			title: "Info!",
+			buttons: {
+				"Lukk": function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});   
+		return false;
+	});
+	$('#upgradeinfolink').click( function(){
+		$('#upgradeinfo').dialog({
+			modal: true,
+			width: 500,
+			title: "Info!",
+			buttons: {
+				"Lukk": function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});   
+		return false;
+	});
+	   
+	   
+	if($('#printtype').val() != '2.5'){
+		change_printsize($('#printtype').val());
+	}
+	   
+	$.post('/api/1.0/prices/get', {
+		productoptionid: 1417,
+		quantity: 1
+		}, function(data) {
+			$('#redeye-price').text( data.price );
+		}, 'json');
+		
+		
+	$.post('/api/1.0/prices/get', {
+		productoptionid: 3042,
+		quantity: 1
+		}, function(data) {
+			$('#varnish-price').text( data.price );
+		}, 'json');
+		
+	// change price on quantity
+	$('.quantity, #red-eye, #varnish , #updateprice, #upgrade' ).bind('change', updateprice );
+      
+
+		
+	$('a.choose-image.button').click( function() {
+		imagePicker();
+		return false;
+	});
+		
+	
+	$('a#openUploadDialog').click( function() {
+		uploadOneImageDialog();
+		return false;
+	});
+
+	$('#giftTemplates a').click( function() {
+		changeTemplate( $(this) );
+		return false;	
+	});
+		
+	$('.qualityinfo').click( function(){
+	   	$('#qualityinfoDialogWindow').dialog({
+			modal: true,
+			width: 500,
+			title: "Info!",
+			buttons: {
+				"Lukk": function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+ 
+	});
+		
+	$('#add-to-cart').click( function() {
+		if( !$(this).hasClass('disabled') ) {
+			save();			
+		} else {
+			alert( stringChoseImage );
+		}	
+		return false;	
+	});
+		   
+		//imageareaselet start		
+		changeSize($('#canvas2cm').val());
+	
+		$('#canvas4cm, #canvas2cm, #gallery2x2, #gallery1x3').change( function(){
+		   $('.selectedsize').removeClass('selectedsize');
+		   $(this).addClass('selectedsize');
+		   changeSize(this.value);
+		});
+		
+		$('#printtype').change( function(){
+		   
+		   change_printsize(this.value);
+
+		});
+		
+		$("input[name='oriantation']").change( function(){
+		    updateOnChange($('#printtype').val());		   
+		});
+		//imageareaselect stop
+		
+	});
+	
+	function updateprice(){
+		   
+		//var quantity = this.value;
+		var quantity = $('#gift-quantity').val();
+			   
+		var attributeprice  = 0
+		var redeyeprice = 0;
+		var varnishprice = 0;
+				
+			if ( $('#red-eye').is(':checked') ){
+			redeyeprice = parseFloat( $('#redeye-price').text() );
+			}
+			if( $('#varnish').is(':checked')){
+			varnishprice = parseFloat( $('#varnish-price').text() );
+			}
+			 
+			attributeprice = redeyeprice + varnishprice;
+				
+		$.post('/api/1.0/prices/get', {
+			productoptionid: currentProductOptionId,
+			quantity: quantity
+			}, function(data){
+				upgradeprice = parseInt( data.price * 0.20 ) ;
+				//upgradeprice = 0 ;
+				//$('#upgrade-price').text( 1.00 );
+				$('#upgrade-price').text( upgradeprice.toFixed(2) );
+				$('#upgrade').val( upgradeprice );
+				if( $('#upgrade').is(':checked')){
+					data.price =  parseInt( data.price ) + upgradeprice ;
+				}
+				var price = ( quantity * data.price ) + attributeprice;
+				$('#gift-price').text( price.toFixed(2) );
+			}, 'json');
+			return false;
+	}
+//]]>
+</script>
+</body>
+</html>

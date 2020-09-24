@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Payed Storage</title>
+<tal:block metal:use-macro="../common.html/css" />
+<script type="text/javascript" src="/js/admin.js"></script>
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+
+		<tal:block metal:use-macro="../common.html/languages" />
+			
+		<div id="content" class="span-20">
+				<div class="span-10">
+				<h3>
+					<tal:block i18n:translate="">Mail</tal:block>
+				</h3>
+				
+				<tal:block tal:condition="exists:sendresult | default">
+				  <div>
+				     <p tal:content="sendresult">...</p>
+				  </div>
+				</tal:block>
+				<br/>
+				
+				<form name="testform" action="/payed-storage/notice/send" method="POST">
+				   <input type="hidden" name="id" value="${batch/id}"/>
+				   <label i18n:translate="">Email to send to ( use ; as divider to send to more than one )</label><br/>
+				   <input type="text" class="text" name="email" value=""/><br />
+				   <label i18n:translate="">Portal template to use in email</label><br/>
+				   <select type="text" name="portal" class="short-text">
+   				<tal:block tal:repeat="portal portals">
+   				   <option value="${portal/code}" tal:content="portal/name">test</option>
+   				 </tal:block>
+   				</select><br />
+					<button type="submit" id="saveAll" class="call-to-action" i18n:translate="">Send</button><br />
+					<a href="/payed-storage/notices">Back</a>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

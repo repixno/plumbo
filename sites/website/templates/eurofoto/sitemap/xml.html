@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>${request/systemroot}</loc>
+	<priority>1</priority>
+</url>
+<url tal:condition="not:equal:i18n/language,nb_NO">
+	<loc>${request/systemroot}/prices</loc>
+	<priority>1</priority>
+</url>
+<url>
+	<loc>${request/systemroot}/sitemap</loc>
+	<priority>1</priority>
+</url>
+
+<url tal:condition="equal:i18n/language,nb_NO">
+	<loc>${request/systemroot}/priser</loc>
+	<priority>1</priority>
+</url>
+<url tal:condition="not:equal:i18n/language,nb_NO">
+	<loc>${request/systemroot}/order-prints</loc>
+	<priority>1</priority>
+</url>
+<url tal:condition="equal:i18n/language,nb_NO">
+	<loc>${request/systemroot}/fremkalle-bilder</loc>
+	<priority>1</priority>
+</url>
+
+<url tal:condition="equal:i18n/language,nb_NO">
+	<loc>${request/systemroot}/fotobok</loc>
+	<priority>1</priority>
+</url>
+<url tal:condition="equal:i18n/language,nb_NO">
+	<loc>${request/systemroot}/lerret</loc>
+	<priority>1</priority>
+</url>
+
+<url tal:condition="equal:i18n/language,nb_NO">
+	<loc>${request/systemroot}/kalender</loc>
+	<priority>1</priority>
+</url>
+
+<url tal:condition="equal:i18n/language,nb_NO">
+	<loc>${request/systemroot}/fotokort</loc>
+	<priority>1</priority>
+</url>
+
+<tal:block tal:repeat="item1 menuitems">
+   <url>
+      <loc>${request/systemroot}${item1/url}</loc>
+      <priority>0.9</priority>
+   </url>
+<tal:block tal:condition="exists:item1/children" tal:repeat="item2 item1/children">
+   <url>
+      <loc>${request/systemroot}${item2/url}</loc>
+      <priority>0.8</priority>
+   </url>
+<tal:block tal:condition="exists:item2/children" tal:repeat="item3 item2/children">
+   <url>
+      <loc>${request/systemroot}${item3/url}</loc>
+      <priority>0.7</priority>
+   </url>
+<tal:block tal:condition="exists:item3/children" tal:repeat="item4 item3/children">
+   <url>
+      <loc>${request/systemroot}${item4/url}</loc>
+   </url>
+<tal:block tal:condition="exists:item4/children" tal:repeat="item5 item4/children">
+   <url>
+      <loc>${request/systemroot}${item5/url}</loc>
+   </url>
+<tal:block tal:condition="exists:item5/children" tal:repeat="item6 item5/children">
+   <url>
+      <loc>${request/systemroot}${item6/url}</loc>
+   </url>
+<tal:block tal:condition="exists:item6/children" tal:repeat="item7 item6/children">
+   <url>
+      <loc>${request/systemroot}${item7/url}</loc>
+   </url>
+</tal:block>
+</tal:block>
+</tal:block>
+</tal:block>
+</tal:block>
+</tal:block>
+</tal:block>
+</urlset>

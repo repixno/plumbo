@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+<head>
+	  <title>Mix Tema</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+	<tal metal:use-macro="common.html/head" />
+	<style>
+.carousel-control:hover,
+.carousel-control:focus {
+	color: #85b435;
+	text-decoration: none;
+	filter: alpha(opacity=90);
+	outline: 0;
+	opacity: .9;
+}
+.carousel-control {
+
+	color: #26aaeb;
+}
+.carousel-control-next,
+.carousel-control-prev {
+	filter: invert(100%);
+}
+
+.carousel .carousel-indicators li {
+	background-color: #fff;
+	background-color: rgba(70, 70, 70, 0.25);
+	bottom: 75%;
+}
+
+.carousel .carousel-indicators .active {
+	background-color: #304c66;
+}
+.carousel-inner .carousel-item {
+	height: 120px;
+	    text-align: center;
+}
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+	margin-bottom: 30px;
+}
+@media (max-width: 768px) {
+	.cloneditem-1 {
+		display: none;
+	}
+	.cloneditem-2 {
+		display: none;
+	}
+	.template img {
+		margin: 0px 30px;
+	}
+}
+@media (min-width: 768px) {
+	.carousel-showthreemoveone {
+		padding: 0 120px;
+	}
+	.template img {
+		margin: 0px 26px;
+	}
+}
+	</style>
+</head>
+
+<body>
+	<div metal:use-macro="../../${templates}/common.html/top" />
+<div class="container">
+ <main role="main">
+
+ 	<form>
+ 		<br />
+ 		<h5>140 Fargelapper TemaMix</h5>
+
+<div class="row">
+	<div class="col-md-3 col-xs-12">
+		<div class="d-md-none small mb-2">
+			<p>Selvklebende merkelapper til klær og utstyr.
+				Tåler vaskemaskin og oppvaskmaskin</p>
+		</div>
+
+		<div class="form-group ">
+			<div class="">
+				<input type="text" class="text form-control" name="line1" id="line1" maxlength="17" placeholder="Linje 1" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="">
+				<input type="text" class="text form-control" name="line2" maxlength="17" placeholder="Linje 2" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="">
+				<input type="text" class="text form-control" name="line3" maxlength="17" placeholder="Linje 3" />
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-5 col-xs-12">
+		<img class="img-fluid" src="/api/1.0/merkelapp/merkelappsett?projectid=test&line1=&line2=&line3=&mal=4" id="preview" />
+	</div>
+	<div class="col-md-4 col-xs-12">
+		<div class="mt-2">
+			<span class="ml-4" tal:content="selected/0/productoption/prices/0/price"></span> kr pr sett
+			<input type="hidden" id="productquantity" class="form-control input-number productquantity" value="1" />
+			<input type="hidden" id="productoptionid" value="${selected/0/productoptionid}" />
+			<button id="addtocart" class="btn btn-success float-center">Legg i handlekurv</button>
+		</div>
+	</div>
+
+</div>
+				<div class="row">
+					<div class="container">
+						<div class="col-md-12">
+							<div class="carousel carousel-showthreemoveone slide mt-3" id="carousel123">
+								<ol class="carousel-indicators">
+									<li data-target="#carousel123" data-slide-to="4" class="active"></li>
+									<li data-target="#carousel123" data-slide-to="1"></li>
+								<li data-target="#carousel123" data-slide-to="2"></li>
+								<li data-target="#carousel123" data-slide-to="3"></li>
+								<li data-target="#carousel123" data-slide-to="0"></li>
+								<li data-target="#carousel123" data-slide-to="5"></li>
+								<li data-target="#carousel123" data-slide-to="6"></li>
+								<li data-target="#carousel123" data-slide-to="7"></li>
+								<li data-target="#carousel123" data-slide-to="8"></li>
+								<li data-target="#carousel123" data-slide-to="9"></li>
+								<li data-target="#carousel123" data-slide-to="10"></li>
+								<li data-target="#carousel123" data-slide-to="11"></li>
+								<li data-target="#carousel123" data-slide-to="12"></li>
+								<li data-target="#carousel123" data-slide-to="13"></li>
+								<li data-target="#carousel123" data-slide-to="14"></li>
+								<li data-target="#carousel123" data-slide-to="15"></li>
+								<li data-target="#carousel123" data-slide-to="16"></li>
+								<li data-target="#carousel123" data-slide-to="17"></li>
+								<li data-target="#carousel123" data-slide-to="18"></li>
+								<li data-target="#carousel123" data-slide-to="19"></li>
+									<li data-target="#carousel123" data-slide-to="20"></li>
+								
+								</ol>
+								<div class="carousel-inner" role="listbox">
+
+									<div class="carousel-item active">
+										<a href="#" class="template" data-mal="4" data-artnr="6297"><img src="/gfx/mix_rotator/4.png" /></a>
+									</div>
+
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="1" data-artnr="6297"><img src="/gfx/mix_rotator/1.png" /></a>
+									</div>
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="2" data-artnr="6297"><img src="/gfx/mix_rotator/2.png" /></a>
+									</div>
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="3" data-artnr="6297"><img src="/gfx/mix_rotator/3.png" /></a>
+									</div>
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="0" data-artnr="6297"><img src="/gfx/mix_rotator/0.png" /></a>
+									</div>
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="5" data-artnr="6297"><img src="/gfx/mix_rotator/5.png" /></a>
+									</div>
+
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="6" data-artnr="6297"><img src="/gfx/mix_rotator/6.png" /></a>
+									</div>
+
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="7" data-artnr="6297"><img src="/gfx/mix_rotator/7.png" /></a>
+									</div>
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="8" data-artnr="6297"><img src="/gfx/mix_rotator/8.png" /></a>
+									</div>
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="9" data-artnr="6297"><img src="/gfx/mix_rotator/9.png" /></a>
+									</div>
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="10" data-artnr="6297"><img src="/gfx/mix_rotator/10.png" /></a>
+									</div>
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="11" data-artnr="6297"><img src="/gfx/mix_rotator/11.png" /></a>
+									</div>
+
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="12" data-artnr="6297"><img src="/gfx/mix_rotator/12.png" /></a>
+									</div>
+
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="13" data-artnr="6297"><img src="/gfx/mix_rotator/13.png" /></a>
+									</div>
+
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="14" data-artnr="6297"><img src="/gfx/mix_rotator/14.png" /></a>
+									</div>
+
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="15" data-artnr="6297"><img src="/gfx/mix_rotator/15.png" /></a>
+									</div>
+
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="16" data-artnr="6297"><img src="/gfx/mix_rotator/16.png" /></a>
+									</div>
+
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="17" data-artnr="6297"><img src="/gfx/mix_rotator/17.png" /></a>
+									</div>
+
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="18" data-artnr="6297"><img src="/gfx/mix_rotator/18.png" /></a>
+									</div>
+
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="19" data-artnr="6297"><img src="/gfx/mix_rotator/19.png" /></a>
+									</div>
+									<div class="carousel-item">
+										<a href="#" class="template" data-mal="20" data-artnr="6297"><img src="/gfx/mix_rotator/20.png" /></a>
+									</div>
+				
+								</div>
+
+								<a class="carousel-control-prev" href="#carousel123" role="button" data-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								</a>
+								<a class="carousel-control-next" href="#carousel123" role="button" data-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								</a>
+								
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+ 	</form>
+
+ </main>
+
+<br/>
+
+    
+				
+					<div class="col-12">
+						<div class="card-deck mb-3 text-center">
+							<div class="card mb-4 box-shadow">
+								<div class="card-header">
+									<h4 class="my-0 font-weight-normal">Fleksible navnelapper</h4>
+								</div>
+								<div class="card-body">
+									<p>Klistremerke navnelapper som kan brukes til både klær, sko og utstyr. Fest lappene godt til vaskelappen i tøyet, vent minst 24 timer til første vask. Kan også festes direkte på tøy som har lav vasketemperatur (ull), men det anbefales strykemerker for permanent merking.</p>
+
+								</div>
+							</div>
+							<div class="card mb-4 box-shadow">
+								<div class="card-header">
+									<h4 class="my-0 font-weight-normal">Vasketemperatur</h4>
+								</div>
+								<div class="card-body">
+									<p>Disse navnelappene kan vaskes i oppvaskmaskin og vaskemaskin på 60 grader. De tåler også tørking i tørketrommel. Ved merking av tøy som vaskes på høyere temperatur anbefales strykemerker for sikker merking.</p>
+
+								</div>
+							</div>
+							<div class="card mb-4 box-shadow">
+								<div class="card-header">
+									<h4 class="my-0 font-weight-normal">Norsk produksjon</h4>
+								</div>
+								<div class="card-body">
+									<p>Vi produserer alle navnelapper i Norge og er opptatt av rask levering rett hjem i din postkasse. Normalt er det 1 dags produksjonstid og 2-3 dagers leveringstid. Det er alltid gratis frakt på navnelapper.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+		<div class="container">
+			<div metal:use-macro="../../${templates}/common.html/footer" />
+		</div>
+
+
+</div>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-body">
+				  <div class="row">
+					 <div class="col-md-12 text-center">
+						<h3>Dine varer er lagt i handlekurven.</h3>
+					 </div>
+					 
+					 <div class="col-md-12 text-center">
+	<a href="/" class="reload btn btn-success">Fortsett å handle</a>
+						<a href="/cart" class="btn btn-success">Til handlevogn</a>
+					 </div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		</div>
+	<!-- The basic File Upload plugin -->
+<script src="${static:}js/jqupload/js/jquery.fileupload.js?${version}"></script>
+<script type="text/javascript" src="/js/merkelappsett.js"></script>
+<script src="/js/bootstrap.colorpickersliders.js"></script>
+<script type="text/javascript">/*<![CDATA[*/
+
+var mal = '4';
+var blank = '';
+var projectid = ${projectid};
+
+
+$(function(){
+  $('#carousel123').carousel({ interval: 8000 });
+  
+  $('#blank').on( 'change', function(){
+		var thischecked =  $(this).prop('checked');
+		if( !thischecked ){
+			blank = 'UB';
+			$('.bglabel').text('Slå på bakgrunn');
+		}
+		else{
+			blank = '';
+			$('.bglabel').text('Slå av bakgrunn');
+		}
+	
+		$('.malinput').val( $('.choose_product').val() + blank );
+	
+		update();
+	});
+  
+  
+  $(document).on( 'click', '.template', function(){
+		mal = $(this).data('mal');
+		console.log(  $(this).data('mal') );
+		console.log(  $(this).data('artnr') );
+		$('.choose_product').val( $(this).data('artnr') );
+		$('.malinput').val( $(this).data('artnr') + blank );
+		$('.producttitle').text('MerkelappMix ' + mal );
+		update();
+		return false;
+	})
+  
+  $('.carousel-showthreemoveone .carousel-item').each(function(){
+    var itemToClone = $(this);
+
+    for (var i=1;i<3;i++) {
+      itemToClone = itemToClone.next();
+      // wrap around if at end of item collection
+      if (!itemToClone.length) {
+        itemToClone = $(this).siblings(':first');
+      }
+      // grab item, clone, add marker class, add to collection
+      itemToClone.children(':first-child').clone()
+        .addClass("cloneditem-"+(i))
+        .appendTo($(this));
+    }
+  });
+  
+  
+  $('.text').on( 'change', function(){
+	
+	console.log("change");
+	update();
+	
+	});
+
+});
+
+
+
+	
+/*]]>*/	
+</script>
+
+
+</body>
+</html>

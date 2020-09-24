@@ -1,0 +1,433 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<div metal:use-macro="common.html/head" />
+	<script type="text/javascript" src="/js/jquery.tools.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.magnifier.0.2.js"></script>
+</head>
+<body>
+
+<div metal:use-macro="common.html/header" />
+<div id="content" class="container">
+
+   <h2 i18n:translate="">Edit</h2>
+
+   <div class="span-8">
+      <h3 id="title" tal:content="correction/title|default">No title</h3>
+   </div>
+   
+   <div class="functions span-15">
+      <input type="text" class="text-3 text" value="" id="searchfield" />
+      <button id="search" i18n:translate="">Search</button>
+      <button id="print" i18n:translate="">Print out</button>
+
+      <button id="save" i18n:translate="">Save</button>
+      <button id="logout" i18n:translate="">Logout</button>
+   </div>
+   
+   <div class="span-24">
+      <tal:block tal:repeat="page pages">
+      	<h4 id="page-title" tal:content="page/title|default" tal:condition="equal:repeat/page/number,1"></h4>
+      </tal:block>
+   </div>
+   
+   <div id="imagebox" class="span-24 last">
+      
+      <div id="searchnavigation">
+         <a href="javascript:;" id="expand" class="ss_sprite ss_application_side_contract"></a>
+         <a href="javascript:;"id="contract"  class="ss_sprite ss_application_side_expand"></a>
+         <div class="heavyshadow hide" id="searchresult">
+         </div>
+      </div> 
+            
+      <a href="" rel="magnify">
+         <img src="/images/largespinner.gif" alt="" />
+      </a> 
+      
+   </div>
+ 
+   <div class="span-24 last scrollable-container">
+   
+      <div class="span-2">
+         <a class="prevPage browse left"></a> 
+      </div>
+      
+      <div class="scrollable span-20" id="page-thumbs">     
+         <div class="items"> 
+         <tal:block tal:repeat="page pages">
+            <img src="/images/pages/${page/id}/small.jpg" id="img_${page/id}" alt="${page/title}"/>
+         </tal:block>
+         </div> 
+      </div> 
+      
+      <div class="span-2 last">
+         <a class="nextPage browse right"></a>
+      </div>
+      
+   </div>
+
+   <div class="span-24" id="listcomments">
+      <h3 i18n:translate="">Comments</h3>
+      <div id="comments" class="span-24"></div>
+      <button id="addcomment" i18n:translate="">Add comment</button> 
+      
+      <div class="span-24 right hide" id="commentdialogbottom">
+         <iframe frameborder="0" border="0" cellspacing="0" scrolling="no" marginwidth="0" marginheight="0" height="180" width="300" id="addcommentiframe" src="/corrections/edit/${correctionid}/1">
+         </iframe>
+         <div style="float: right;"><a href="javascript:;" i18n:translate="" id="closecommentdialogbottom" class="ss_sprite ss_cross"></a></div>
+      </div>
+   
+   </div>
+   <div class="span-24">
+   
+   	 <tal:block tal:condition="not:exists:approved">
+   	 		<div class="notice center">
+   	 			<h5 class="message" i18n:translate="">This correction is not approved</h5>
+   	 			<button id="approve" i18n:translate="">Approve correction</button>
+   	 		</div>
+     </tal:block>
+     <tal:block tal:condition="exists:approved">
+		<div class="success center">
+			<h5 class="message" i18n:translate="">This correction is approved</h5>
+		</div>
+	</tal:block>
+   
+   </div>
+  
+</div>
+
+<div metal:use-macro="common.html/footer" />
+
+<div id="approvedialog" class="hide" i18n:translate="">If you approve this correction, you cannot do any further changes to it</div>
+
+<div id="commentdialog" class="hide">
+   <div class="container">
+      <a href="javascript:;" id="closecommentdialog" i18n:translate="" class="ss_sprite ss_cross"></a><br/>
+      <iframe frameborder="0" border="0" cellspacing="0" scrolling="no" marginwidth="0" marginheight="0" height="180" width="300" id="commentiframe" src="/corrections/edit/${correctionid}/1/1">
+      </iframe>
+   </div>
+</div>
+
+<script type="text/javascript"> 
+
+$('#approvedialog').dialog({
+   autoOpen: false,
+   title: '<tal:block i18n:translate="">Approve correction</tal:block>',
+   width: 300,
+   buttons: {
+      '<tal:block i18n:translate="">Cancel</tal:block>': function() {
+         $(this).dialog( 'close' );
+      },
+      '<tal:block i18n:translate="">OK</tal:block>': function() {
+                           
+         $.post('/api/user/correction/state', {
+            'correctionid': ${correctionid},
+            'state': 'approved'
+         }, function( data ) {   
+            if ( data.result ) {
+               $( '#approve' ).parent().removeClass('notice').addClass('success');
+               $( '.message' ).text( '<tal:block i18n:translate="">This correction is approved</tal:block>' );
+               $( '#approve' ).hide();
+               $( '#approvedialog' ).dialog( 'close' );
+            }
+         },'json');
+         
+      }
+   }
+});
+
+var deletebutton = '<tal:block i18n:translate="">Delete</tal:block>';
+
+//<![CDATA[
+
+var currentpageid = ${currentpageid};
+
+var first = true;
+
+var x = 0;
+
+var y = 0;
+
+$(function() { 
+   
+   $( 'div.scrollable' ).scrollable();
+
+   $( '#expand' ).hide();
+   $( '#contract' ).hide();
+   
+   $( '#img_' + ${currentpageid} ).click();
+   
+});
+
+
+$( '#searchfield' ).keydown( function( event ) {
+   if ( event.keyCode == '13' ) {
+      triggerSearch();
+   }
+});
+
+$( '#commentdialog' ).focus( function() { 
+   var offset = $( '#commentdialog' ).offset();
+   var offsetimagebox = $( '#imagebox' ).offset();
+
+   x = Math.round(offset.top - offsetimagebox.top + ($( '#commentdialog' ).height() / 2));
+   y = Math.round(offset.left - offsetimagebox.left+ ($( '#commentdialog' ).width() / 2));
+});
+
+$( '#search' ).click( function() { 
+   triggerSearch();
+});
+
+$( '#logout' ).click( function() { 
+   document.location.href = '/logout/';
+});
+
+$( '#save' ).click( function() { 
+   document.location.href = '/corrections/';
+});
+
+$( '#closecommentdialog' ).click( function() { 
+   $('#commentdialog').hide();
+});
+
+$( '#closecommentdialogbottom' ).click( function() { 
+   $('#commentdialogbottom').hide();
+});
+
+$( '#approve' ).click( function() { 
+   $('#approvedialog').dialog('open');
+});
+
+$( '#savecomment' ).click( function() { 
+   $('#commentdialog').hide();
+});
+
+$( '#print' ).click( function() { 
+   window.open('/print/' + ${correctionid});
+});
+
+$( '#addcomment' ).click( function() { 
+   $('#commentdialogbottom').show();
+   $.scrollTo('#commentdialogbottom');
+});
+      
+$( '.scrollable .items img' ).click( function() {
+   
+   var pageid = $(this).attr('id' ).split('_')[1];
+   
+   var mediumimg = '/images/pages/' + pageid + '/medium.jpg';
+   var largeimg = '/images/pages/' + pageid + '/large.jpg';
+   
+   var mediumimgobj = new Image();
+   mediumimgobj.src = mediumimg;
+   
+   $( '#imagebox a img' ).attr( 'src', '/images/largespinner.gif' );
+   
+   $(mediumimgobj).load(function () {
+      
+      $( '#imagebox a img' ).attr('src',mediumimgobj.src);
+      
+      if ( first == true ) {
+         
+         $( '#imagebox a[rel*=magnify]' ).attr('href',largeimg);
+         $( '#imagebox a[rel*=magnify]' ).magnify({
+            lensWidth: 200,
+            lensHeight: 200,
+            link: false,
+            showdialog: true,
+            showdialogid: 'commentdialog',
+            delay: 0
+         });
+         
+         first = false;
+         
+      } else {
+         
+         $('#dio-lens img').attr('src',largeimg);
+         
+      }         
+       
+      $('#commentdialogbottom').hide();
+
+      $( '#comments' ).html('');
+   
+      fetchComments( pageid, 0 );
+      
+      $.post('/api/user/page/fetch', {
+         'pageid': pageid
+      }, function( data ) {
+         
+         if ( data.result ) {
+            $( '#page-title' ).text( data.page['title'] );
+         }
+               
+      }, 'json');
+      
+   
+   });
+   
+   currentpageid = pageid;
+   
+} );
+
+$( '#contract' ).click( function() {
+   
+   $('#contract').hide();
+   $('#expand').show();
+   
+   $('#searchresult').hide('blind', { direction: 'horitzonal' }, 500);
+   
+});
+
+$( '#expand' ).click( function() {
+   $('#expand').hide();
+   $('#contract').show();
+   
+   $('#searchresult').show('slide', { direction: 'horitzonal' }, 500);
+});
+
+function triggerSearch() {
+
+   $.post('/api/user/page/search', {
+      'text': $( '#searchfield' ).val(),
+      'correctionid': ${correctionid}
+   }, function( data ) {
+      
+      if ( data.result ) {
+         
+         $( '#img_' + data.pages[0]['id']).click();
+         
+         $( '#searchresult' ).show().html('');
+         
+         for ( var key in data.pages ) {
+            $( '#searchresult' ).append( 
+            data.pages[key]['title'] + ':<br/><a href="javascript:;" id="search_' + data.pages[key]['id'] + '" class="searchhit">'+ 
+            data.pages[key]['text']
+               .replace( 
+                  data.pages[key]['search'], 
+                  '<b><i>' + data.pages[key]['search'] + '</i></b>' 
+               )
+               .replace( 
+                  data.pages[key]['search'].toLowerCase(), 
+                  '<b><i>' + data.pages[key]['search'] + '</i></b>' 
+               ) + 
+               '</a>...<br /><br/>' 
+            );
+         }
+         
+         $('.searchhit').click( function() {
+            
+            var pageid = $(this).attr('id').split('_')[1];
+            
+            $( '#img_' + pageid).click();
+            
+         })
+         
+         var pos = $('#imagebox').offset();  
+         var width = $('#imagebox').width();
+         
+         var navwidth = $('#searchresult').width();
+         
+         $('#expand').hide();
+         $('#contract').show(); 
+         
+      } else {
+         
+         $( '#searchresult' ).html('No hits');
+         
+      }
+   }, 'json' );
+}
+
+function fetchComments( pageid, pagecommentid ) {
+   
+   if ( pagecommentid <= 0) {
+      
+      $( '#comments' ).html('');
+      
+      $('.commentoverlay').remove();
+      
+   }
+   
+   $.post('/api/user/pagecomments/fetch', {
+      'pageid': pageid,
+      'pagecommentid': pagecommentid
+   }, function( data ) {
+      
+      if ( data.result ) {
+         
+         for ( var key in data.comments ) {
+               
+            var comment = data.comments[key]['comment'];
+            
+            if ( !comment ) comment = '';
+            
+            if ( data.comments[key]['type'] == 'file' ) {
+
+               $( '#comments' ).append( 
+                  '<ul><li>' + comment  +
+                  '<a class="deletecomment" id="delete_' + data.comments[key]['id'] + '" href="javascript:;">' + deletebutton  + '</a>' +
+                  '<a class="commentfile" target="_blank" href="/comments/file/' + data.comments[key]['id'] + '/' + data.comments[key]['filename'] + '">' + data.comments[key]['filename'] + '</a></li></ul>'
+               );
+                         
+            } else {
+               
+               $( '#comments' ).append(
+                  '<ul><li>' + comment +
+                  '<a class="deletecomment" id="delete_' + data.comments[key]['id'] + '" href="javascript:;">' + deletebutton + '</a></li></ul>'
+               );
+               
+            }
+            
+            if ( ( data.comments[key]['x'] > 0) || ( data.comments[key]['y'] > 0) ) {
+               
+               if ( data.comments[key]['type'] == 'file' ) {
+                  var div = $('<div id="commentover_' + pagecommentid + '">').html(comment.replace("\n",'<br />') + '<br />' + '<a class="commentfile" target="_blank" href="/comments/file/' + data.comments[key]['id'] + '/' + data.comments[key]['filename'] + '">' + data.comments[key]['filename'] + '</a>');
+                  
+                  div.addClass('commentoverlaylink');
+                  div.addClass('commentoverlay');
+               } else {
+                  var div = $('<div id="commentover_' + pagecommentid + '">').html(comment.replace("\n",'<br />'));
+                  div.addClass('commentoverlay');
+               }
+
+               div.css('position','absolute');
+               $('#imagebox').prepend(div);
+               
+               $('#commentover_' + pagecommentid).css({ top: data.comments[key]['x'], left: data.comments[key]['y'] });  
+               
+            }
+
+         }
+         
+         $('.deletecomment').click( function() {
+            
+            var pagecommentid = $(this).attr('id').split('_')[1];
+            $.post('/api/user/pagecomments/delete', {
+               'pagecommentid': pagecommentid
+            }, function( data ) {
+               fetchComments( currentpageid, 0 );
+            }, 'json' );
+         })
+         
+      }
+      
+   }, 'json' );
+}
+ 
+function pageCommentCallback( pagecommentid, popup ) {
+   
+   fetchComments( currentpageid, pagecommentid );
+
+   $('#commentdialog').hide();
+
+   $('#commentdialogbottom').hide();
+
+}
+
+//]]>
+
+</script>
+</body>
+</html>

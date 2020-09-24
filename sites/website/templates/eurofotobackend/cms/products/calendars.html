@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+
+	
+	<style>
+		.calendar-top {
+			height: 210px;
+			background-image: url(${static:}images/attachments/338/${menuitem/article/attachments/background});
+			background-repeat: no-repeat;
+		}
+	</style>
+
+</head>
+
+
+
+
+<!-- defining sections -->
+
+<!-- top is auto, category title + catagory image -->
+
+<!--<tal:block define:section="wallcalendar, Wall calendars 13 - pages" />--> <!-- static HTML + 1 article + ~3 products-->
+
+<tal:block define:section="wallcalendarnew, Wall calendars - 13 pages Mediaclip" /> <!-- static HTML + 1 article + ~3 products-->
+
+<!--<tal:block define:section="wallcalendar7pages, Wall calendars - 7 pages" />--> <!-- static HTML + 1 article + ~3 products-->
+
+<tal:block define:section="tablecalendar, Table calendar" /><!-- static HTML + prouct -->
+
+<tal:block define:section="postercalendar, Poster calendar" /> <!-- static HTML 1 article + ~2 products-->
+
+
+<body>
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+	<div class="container">
+
+	
+		<div class="row">
+			<div class="col-md-2 hidden-xs left-menu">
+                <div metal:use-macro="../../../${templates}/common.html/leftmenu" />
+            </div>
+		
+			<div class="col-md-10">
+			
+			<div class="col-md-12 product-category" style="position: relative">
+				<div class="verticalLine">&nbsp;</div>
+					<div class="col-md-12 last calendar-top top">
+						<div class="content">
+							<p tal:content="structure menuitem/article/body|default"></p>
+						</div>
+					</div>
+					
+					<div class="col-md-6" style="border-right: solid 1px #ccc">
+						<!--<div class="col-md-12 text-center">
+							
+							<h3><strong>STANDARD FOTOKALENDER</strong></h3>
+							<h5 tal:content="structure cms:body:29653355-dd28-49ea-9654-41dec0d45ed1">
+								Vil du spare tid? Velg blant våre standard fotokalender design og lag din kalender på få minutter.<br/>
+								Alt du behøver gjøre er å velge et design du liker før du plukker ut bildene du ønsker å bruke!
+								Lagres ikke under "Mine prosjekter".
+							</h5>
+						</div>-->
+						<!--<div class="col-md-12">
+								
+								<h2 i18n:translate="" class="bottom prepend-top">Wall calendars - 7 pages</h2>
+								
+								<tal:block tal:repeat="item sections/wallcalendar7pages" tal:condition="exists:sections/wallcalendar7pages">
+									<div class="col-md-12 top-15">
+									<div metal:use-macro="../cms.html/productbox" />
+									</div>
+								</tal:block>
+							</div>-->
+							<!--<div class="col-md-12 products">
+								<h2 i18n:translate="" class="bottom prepend-top">Wall calendars - 13 pages</h2>
+								<tal:block tal:repeat="item sections/wallcalendar" tal:condition="exists:sections/wallcalendar">
+									<div class="col-md-12 top-15">
+										<div class="col-md-6" metal:use-macro="../cms.html/productbox" />
+									</div>
+									
+								</tal:block>
+							</div>-->
+					</div>
+					
+
+					<div class="col-md-12">
+						<div class="col-md-12 text-center">
+							<h3><strong>REDIGERBAR KALENDER</strong></h3>
+							<h5 tal:content="structure cms:body:0ddbd381-05bd-4cc7-9140-f603fe379e9f">
+								Ønsker du å være kreativ? Ved hjelp av vår editor kan du velge et redigerbart design og tilpasse det akkurat slik du ønsker.<br/>
+								Her har du også muligheten til å legge inn tekst og bilder i datofeltene!
+							</h5>
+						</div>
+						<div class="col-md-12  text-center">
+								<h2 i18n:translate="" class="bottom prepend-top">Wall calendars - 13 pages</h2>
+								
+								<tal:block tal:repeat="item sections/wallcalendarnew" tal:condition="exists:sections/wallcalendarnew">
+									<div class="col-md-8 top-15">
+										<div metal:use-macro="../cms.html/productbox" />
+									</div>
+								</tal:block>
+							</div>
+							
+							
+							<div class="col-md-12 text-center top-15">
+								<h2 i18n:translate="" class="bottom prepend-top">Table calendars</h2>
+								
+								<tal:block tal:repeat="item sections/tablecalendar" tal:condition="exists:sections/tablecalendar">
+									<div class="col-md-8 text-center top-15">
+										<div metal:use-macro="../cms.html/productbox" />
+									</div>
+									
+								</tal:block>
+		
+		
+								<div class="col-md-12 text-center">
+									<h2 i18n:translate="" class="bottom top-15">Poster calendars</h2>
+								</div>
+								
+								
+								<tal:block tal:repeat="item sections/postercalendar" tal:condition="exists:sections/postercalendar">
+									<div class="col-md-8 top-15 text-center">
+										<div metal:use-macro="../cms.html/productbox" />
+									</div>
+								</tal:block>
+					</div>
+		
+					
+						</div>
+						
+				</div>
+			</div>
+		</div>
+
+	</div> <!-- end container -->
+
+	<div metal:use-macro="../../../${templates}/common.html/footer" />
+
+</body>
+</html>

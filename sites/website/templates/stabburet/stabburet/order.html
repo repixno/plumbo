@@ -1,0 +1,941 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="${static:css/portals/stabburet/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+       <!-- <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />-->
+        <link href="${static:css/portals/stabburet/web/css/redmond/jquery-ui.min.css}" rel="stylesheet" />
+
+
+
+
+	<div metal:use-macro="../common.html/stylesheet" />
+        <style type="text/css">
+            .kjopforsiden {
+            	position: absolute;
+            	top: -5px;
+            	left: 20px;
+            }
+
+            .span2 {
+            	width: 85px;
+            }
+
+            ul#products {
+            	margin: 1em 0;
+            	padding: 0;
+            }
+
+            ul.sizes {
+            	margin: 0;
+            	padding: 0
+            }
+
+            ul#products li,
+            ul.sizes li {
+            	list-style-type: none;
+            	width: 137px;
+            	padding: 0px 0 5px 0;
+            	margin: 0;
+            	float: left;
+            }
+
+            ul#products input,
+            input.quantity {
+            	width: 1em;
+            }
+
+            .button {
+            	border: none;
+            	background-color: #0094d3;
+            	display: inline-block;
+            	padding: 5px 10px 6px 10px;
+            	color: #fff;
+            	text-decoration: none;
+            	font-weight: bold;
+            	line-height: 1;
+            	border-radius: 5px;
+            	-moz-border-radius: 5px;
+            	-webkit-border-radius: 5px;
+            	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            	text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+            	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+            	position: relative;
+            }
+
+            a.button:hover {
+            	text-decoration: none !important;
+            }
+
+            input.quantity {
+            	margin-bottom: 0px;
+            }
+
+            h4,
+            label {
+            	color: #0094d3;
+            	font-family: 'KidprintMTStd-Bold';
+            	font-size: 2.3em;
+            }
+
+            label {
+            	font-weight: normal;
+            	cursor: default;
+            }
+
+            label.notice {
+            	font-size: 1.3em;
+            	margin-left: 8px;
+            }
+
+            div.desktoplabel {
+            	width: 110px;
+            }
+
+            label.error {
+            	position: relative;
+            	top: -8px;
+            	left: 12px;
+            	font-size: 1em;
+            	color: red;
+            	font-family: arial;
+            	margin: 0px;
+            	width: 220px;
+            	text-align: left;
+            }
+
+            [class*="span"] {
+            	position: relative;
+            }
+
+            .ui-widget-content a {
+            	color: #FFF;
+            }
+
+            .venstre {
+
+            	margin: 0px 0px 0 62px;
+            }
+
+
+            label {
+
+            	color: #000000;
+            }
+
+            body {
+            	background: #ffffff !important;
+
+            }
+
+
+            .orklapersonvern {
+            	font-size: 9px;
+            }
+
+			
+			
+			
+			/*av på knapp nyhetsbrev Repix*/
+.switch {
+  position: relative;
+  /*display: inline-block;*/
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #dc3545;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #28a745;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #28a745;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 15px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+
+
+
+        </style>
+
+	<div metal:use-macro="../common.html/javascript" />
+	<script src="${static:css/portals/stabburet/web/js/checkout.js}"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    </head>
+
+    <body>
+	<tal:block metal:define-macro="show-image">
+	    <tal:block tal:condition="exists:product/images" tal:repeat="image product/images">
+		 <a href="http://static.repix.no/images/products/thumbs/height/500/${image/url}" class="fancybox" title="${product/ingress}">
+		       <img src="http://static.repix.no/images/products/thumbs/height/100/${image/url}" title="${product/title}" height="100" tal:condition="equal:repeat/image/number,1" />
+	       </a>
+	    </tal:block>
+	 </tal:block>
+
+<!--
+        <div class="row text-center hidden-phone header">
+	    <img  src="${static:css/portals/stabburet/web/images/preheader.png}" alt="LAG LOKK MED DITT BILDE"/>
+        </div>-->
+        <div class=" center container">
+            <!-- Main hero unit for a primary marketing message or call to action -->
+            <div style="position: relative">
+                <div class="span-12 last">
+
+			<div class="span12">
+			    <div class="span6">
+				<img  src="${static:css/portals/stabburet/web/images/bestilltekst.jpg}" alt=""/>
+			    </div>
+			    <div>
+				<img src="/bestill/streamthumb/${lokk/thumbid}"/>
+			    </div>
+			</div>
+
+			<!--kopiert fra felix-->
+			<div class="row">
+                        <h3>Del ditt lokk</h3>
+							<button class="btn btn-default" id="sharefacebook"><span><img src="${static:}css/portals/felix/gfx/facebook-icon-small.png"/></span>FACEBOOK</button>
+							<button class="btn btn-default" id="download">LAST NED LOKK</button>
+                    </div>
+			<!-- kopiert frå felix slutt-->
+
+
+
+			<div><h4>Ønsker du flere produkter med ditt bilde kan du bestille det her</h4></div>
+
+			<ul tal:condition="exists:sections/products" id="products">
+				<tal:block tal:repeat="product sections/products">
+				    <li tal:condition="equal:product/option/type,gift" class="gift ${conditionalmatch:product/options/length,1,one-option,more-options}" id="id${product/id}">
+					<div class="span-3 center" style="height: 7em">
+					    <tal:block metal:use-macro="show-image" />
+					</div>
+					<div class="span-4" style="height: 4em">
+						<h5>${product/title}</h5>
+					</div>
+					<tal:block tal:condition="equal:product/options/length,1">
+						<div class="span-4 right">
+
+							<tal:block tal:condition="exists:cart/items/gifts/${product/option/prodno}">
+							    <tal:block tal:repeat="item cart/items/gifts/${product/option/prodno}">
+								<input type="text" class="quantity"  value="${item/quantity}" name="${product/option/prodno}" />
+							    </tal:block>
+							</tal:block>
+							<tal:block tal:condition="not:exists:cart/items/gifts/${product/option/prodno}">
+							<input type="text" class="quantity"  value="0" name="${product/option/prodno}" />
+							</tal:block><br/>
+							<span class="large price">Kr ${product/option/price}</span>
+						</div>
+					</tal:block>
+					<tal:block tal:condition="gt:product/options/length,1">
+						<div class="span-6 right">
+						    <div>  <!--#FFF-->
+							Antall:<span class="product-quantity">0</span><br/>
+							<a href="#open_options_${product/id}" class="open-options" i18n:translate="">Choose sizes</a><br/>
+							<span class="large price">Kr ${product/option/price}</span>
+						    </div>
+							<div class="hide product-options" id="open_options_${product/id}" title="Choose size" i18n:attributes="title">
+								<table class="sizes">
+									<tal:block tal:repeat="option product/options">
+										<tr id="optionid${option/id}">
+										    <td style="text-align: right; padding: 2px 8px 2px 0;">
+											<label>${option/title}</label>
+										    </td>
+										    <td style="text-align: left; padding: 2px 0 2px 0;">
+										    <input type="text" class="quantity"  id="option${option/id}" value="0" name="${product/option/prodno}" rel="#id${product/id}"/>
+										    <script type="text/javascript">
+											    $('#optionid${option/id}').data({
+												    'id'		:'${product/id}',
+												    'optionid'	:	'${option/id}',
+												    'prodno'	:	'${option/prodno}',
+												    'lokkid'		:'${lokk/id}',
+												    'imageid'		:'${lokk/imageid}'
+											    });
+										    </script>
+										    </td>
+										</tr>
+									</tal:block>
+								</table>
+							</div>
+						</div>
+					</tal:block>
+					<script type="text/javascript">
+					    $('#id${product/id}').data({
+						'id'			:	'${product/id}',
+						'optionid'		:	'${product/option/id}',
+						'prodno'		:	'${product/option/prodno}',
+						'lokkid'		: 	'${lokk/id}',
+						'imageid'		:	'${lokk/imageid}'
+					    });
+					</script>
+				    </li>
+				</tal:block>
+			</ul>
+		</div>
+
+            </div>
+            <div style="margin: 5px 0 25px 0 ">
+		<img src="${static:css/portals/stabburet/web/images/blueline.png}" />
+	    </div>
+			
+				
+			
+			
+			
+	    <form method="post" action="/lag-lokk/checkout/confirm/" id="contact-and-delivery-info">
+            <div class="span5 text-left">
+			<div class="row" tal:condition="session/loggedin">
+				<div class="span2">
+				<label for="contact-email" i18n:translate="">E-mail</label>
+				</div>
+				<div class="span3">
+				<input id="cemail-display" name="cemail-display" type="text" class="span4 required email" value="${session/username}"
+					tal:attributes="disabled conditionalmatch:session/username,disabled,disabled,disabled"/>
+				</div>
+				<input type="hidden" name="cemail" value="${session/username}"  />
+			</div>
+			<div tal:condition="not:session/loggedin" class="row">
+				<div class="span2">
+				<label for="contact-email" i18n:translate="">E-mail</label>
+				</div>
+				<div class="span3">
+				<input id="contact-email" name="cemail" type="text" class="span4 text required email" value="" />
+				</div>
+			</div>
+
+		<div id="delivery-address">
+		    <div class="row">
+			<div class="span2">
+			    <label for="contact-name" i18n:translate="">Name:</label>
+			</div>
+			<div class="span3">
+			    <input id="contact-name" name="cname" type="text" class="text required name span4" value="${user/fullname}"/>
+			</div>
+		    </div>
+		    <div class="row">
+			<div class="span2">
+			    <label for="contact-address" i18n:translate="">Address:</label>
+			</div>
+			<div class="span3">
+			    <textarea id="contact-address" name="caddress" style="height: 50px;" tal:content="user/address" class="required span4" cols="30" rows="6"/>
+			</div>
+		    </div>
+		    <div class="row">
+			<div class="span2">
+			    <label for="contact-zipcode" i18n:translate="">ZIP code:</label>
+			</div>
+			<div class="span1">
+			    <input id="contact-zipcode" name="czipcode" type="text" class="text required span1" value="${user/zipcode}"/>
+			</div>
+			<div class="span1">
+			    <label for="contact-city" i18n:translate="">City:</label>
+			</div>
+			<div class="span2">
+			    <input id="contact-city" name="ccity" type="text" class="text required span2" value="${user/city}"/>
+			    <input type="hidden" id="contact-country" name="ccountry" value="NO"/>
+			</div>
+		    </div>
+		    <div class="row">
+			<div class="span2">
+			    <label for="phone" >Telefon:</label>
+			</div>
+			<div class="span3">
+			    <input id="phone" name="phone" type="text" class="text required span4" tal:attributes="value user/mobile|default" value=""/>
+			</div>
+			
+			
+			<div class="span2">
+				<label>Kjønn</label>
+			</div>
+			<div class="span2">
+				<select name="kjonn">
+					<option disabled="disabled" selected="selected">Velg</option>
+					<option value="M">Mann</option>
+					<option value="K">Kvinne</option>
+				</select>
+			</div>
+			
+		    </div>
+		</div>
+            </div>
+	    <div class="span6">
+	
+	
+	
+		<!-- Artikkel 2875-->
+		<div class="row">
+		    <div class="span1 text-right justering">
+			<input type="checkbox" id="eula" class="required" name="eula" />
+		    </div>
+		    <div class="span5 text-left">
+			<label class="notice" for="eula"><strong>JA, JEG GODKJENNER REGLENE:</strong>  <a href="#" id="rulesbutton"><br/>
+			<br/><strong style="font-weight: bold; text-decoration: underline; ">Les kampanjereglene her:</strong></a></label>
+		    </div>
+		</div>
+		
+		
+		<div style="color: #0094d3;">◆</div>	
+	
+		<!-- Artikkel 2875-->
+		<div class="row">
+		    <div class="span1 text-right">
+			<input type="checkbox" id="orklastats" name="orklastats" />
+		    </div>
+		    <div class="span5 text-left">
+			<label class="notice" for="orklastats"><strong>Nyhetsbrev:</strong> Ønsker du å få eksklusive tilbud og informasjon om produkter fra <a href="https://www.orkla.no/legal/no/behandling-av-personopplysninger/  " style="color:red; font-weight: bold !important;" target="_blank">Orkla </a>? Meld deg på nyhetsbrevet vårt, så er du blant de første som får tilsendt dette. <a href="#" id="informasjonbutton" style=" text-decoration: underline; "><br/><strong> Mer informasjon finner du her:</strong></a></label>
+		    </div>
+		</div>
+
+
+																<div style="color: #0094d3;">◆</div>
+
+
+<!--Tilpasninger START-->
+
+<div class="row">
+	<div class="span6 text-left">
+		<tr>
+			<input type="checkbox" name="orklatilpasninger" id="orklatilpasninger" value="0" style="opacity:0;" />
+			<label class="notice" for="orklatilpasninger"><strong>Tilpasninger: </strong> Vi ønsker å gi deg de beste tilbudene og relevant informasjon som er tilpasset deg, basert på kunnskap vi har om deg fra ulike kilder. For å øke kvaliteten på kommunikasjonen vår og kunne gi deg de mest relevante tilbudene, er dette avgjørende. Her finner du 
+			<a style="font-weight: bold; text-decoration: underline;"><br/>Mer informasjon og muligheten til å skru av denne funksjonen.</a></label>
+		</tr>
+
+		<tr>
+			<div id="newsletter-orkla" style="display: none;" >
+				<input type="checkbox" id="newsletter-orkla" name="newsletter-orkla" />
+				<label class="notice" for="newsletter-orkla"> Jeg ønsker generelle nyhetsbrev og tilbud i stedet for tilpassede. <br/><br/>
+				<p>Tilpassede nyhetsbrev og tilbud innebærer at vi kan bruke dine personopplysninger og statistikk for å tilpasse kommunikasjonen vår, slik at den blir mer relevant for deg som mottaker. Dette utgjør en berettiget interesse for Orkla som annonsør, og skjer under forutsetning av god informasjon til deg, betryggende informasjonssikkerhet og gode muligheter for å skru av denne funksjonen.</p>
+				<h4 class="tilpasninger" style="font-size: 20px;">Tilpassede nyhetsbrev og tilbud betyr at vi kan bruke:</h4>
+<ul>
+	<li>Opplysninger du har oppgitt om deg selv og dine preferanser, for eksempel ved påmelding til våre kampanjer, medlemstjenester som PlussTid, eller markedsundersøkelser fra oss.</li>
+	<li>Registrerte klikk i e-poster fra oss, og dine påfølgende handlinger på våre nettsteder.</li>
+	<li>Kjøpshistorikk i nettbutikken til et Orkla-selskap.</li>
+	<li>Informasjon om deg som en tredjepart lovlig har innhentet og delt med oss. Slike opplysninger kan være:
+		<ul>
+			<li>
+				Navn, adresse, kjønn, medlemskap, telefonnummer, fødselsdato, epostadresse, kundeforhold hos organisasjon eller lignende fra såkalte adressemeglere (for eksempel Bring).
+			</li>
+			<li>
+				Min kjøpshistorikk fra aktører i varehandelsbransjen.
+			</li>
+		</ul>
+
+		<li>Statistisk generisk informasjon om preferansene til personer i visse segmenter i befolkningen. Valg av relevant segmentinformasjon skjer ut fra variabler som inntekt, kjønn og bosted.</li>
+	</li>
+</ul>
+				</label>
+			</div>
+		</tr>
+	</div>
+</div>
+<!--Tilpasninger SLUTT-->
+
+												<div style="color: #0094d3;">◆</div>	
+	
+
+			<!--Annonser START-->	
+<div class="row">
+	<div class="span6 text-left">
+		<tr>
+			<input type="checkbox" name="orklaannonse" id="orklaannonse" value="0" style="opacity:0;" />
+			<label class="notice" for="orklaannonse"><strong>Annonser:</strong> For at markedsføringen vår på nett (f.eks. nettaviser eller sosiale medier) skal være mest mulig relevant, ønsker vi å bruke e-postadressen din og opplysninger om din kontakt med oss. Her finner du
+			<a style="font-weight: bold; text-decoration: underline;"><br/>Mer informasjon og muligheten til å skru av denne funksjonen.</a></label>
+		</tr>
+		<tr>
+			<div id="orkla3part" style="display: none;" >
+				<input type="checkbox" id="orkla3part" name="orkla3part" />
+				<label class="notice" for="orkla3part"> Jeg vil skru av bruk av min e-postadresse og opplysninger om min kontakt med Orkla for visning av tilpassede annonser på nett <br/><br/>
+<p>Denne funksjonen innebærer at vi kan bruke din e-postadresse og opplysninger fra din kontakt med oss for å vise annonser på ulike typer nettsteder, som sosiale medier, søkemotorer eller nettaviser. Dette utgjør en berettiget interesse for Orkla som annonsør, og skjer under forutsetning av god informasjon til deg, betryggende informasjonssikkerhet og gode muligheter for å skru av denne funksjonen.
+</p>
+<h4 class="tilpasninger" style="font-size: 20px;">Opplysninger fra din kontakt med oss kan inkludere:</h4>
+
+<ul>
+  <li>Kjøp av produkt</li>
+  <li>Registrerte klikk i e-poster fra oss og dine videre handlinger på våre nettsteder</li>
+  <li>At man har mottatt visse nyhetsbrev</li>
+    <li>Deltagelse i reklamekampanjer fra Orkla</li>
+</ul>
+<p><i>Funksjonen kan for eksempel forløpe på denne måten: La oss si at du har kjøpt en genser fra et Orkla-selskap sin nettbutikk. Deretter kan vi sende din og epostadressene til andre personer som har kjøpt samme genser til en nettavis, og be dem om å vise en annonse til en gruppe personer som, ifølge deres egne opplysninger og analyse, har samme interesser som deg og andre som har kjøpt tilsvarende genser. Dette bygger på en gjetning om at andre personer med lignende interesseprofil kan være interessert i samme produkt. Analysen som gjennomføres hos nettavisen bygger utelukkende på opplysninger de har om sine brukere, og visningen av annonsen skjer kun til personer som har gitt nettavisen sitt samtykke til dette.</i></p>
+				</label>
+			</div>
+		</tr>
+
+	</div>
+</div>
+<br/>
+<!--Annonser SLUTT-->
+
+
+														<div style="color: #0094d3;">◆</div>
+<p class="orklapersonvern">Du kan når som helst kontakte oss for å <strong>sending av nyhetsbrev og skru av funksjoner som er nevnt over</strong> .<br/> Se mer om dette og utfyllende informasjon <a href="https://www.orkla.no/legal/no/personvern/  " style="color:red; font-weight: bold !important;" target="_blank">Orklas behandling av personopplysninger </a>.</p>
+
+
+														<div style="color: #0094d3;">◆</div>
+	
+	
+	
+	
+		<br/>
+<div class="row">
+					
+				
+				
+				
+				
+				<div class="span text-center">
+				<div class="repix" style="margin-bottom: 10px; text-align: left; margin-left: 17px;">
+					
+					
+					 <strong class="notice" style="font-family: 'KidprintMTStd-Bold'; font-size: 1.5em;">JA, JEG VIL MOTTA GODE TILBUD</strong>
+					 <h4 style="    font-family: 'KidprintMTStd-Bold';font-size: 1.3em;">og nyheter fra Dinmerkelapp/Repix AS. <br/>Meld deg på vårt nyhetsbrev og motta eksklusive fordeler.</h4>
+				 <a href="#" id="informasjon3button" style="font-weight: bold; text-decoration: underline; font-family: 'KidprintMTStd-Bold'; font-size: 1.3em; ">Mer informasjon</a>
+			</div>
+	 
+			<label class="switch" style="margin-left: 15px;">
+					  <input type="checkbox"  id="newsletter" name="newsletter" style="margin-left: 25px;" />
+				  <span class="slider round"></span>
+			</label>
+		</div>
+			
+
+
+
+
+				
+			</div>
+	
+
+
+		<div class="row text-right" style="position: relative; height:52px;">
+		    <a  href="#" id="add-to-cart" class="btn btn-stabburet" style="position: absolute; bottom: 0; right: 0">Neste steg</a>
+		    <!--<img id="add-to-cart" tyle="position: absolute; bottom: 0; right: 0"  src="${static:css/portals/stabburet/web/images/send.png}" />-->
+		</div>
+
+
+
+	    </div>
+	</form>
+</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+        <div metal:use-macro="../common.html/footer2" />
+
+	<div id="dialog" title="&nbsp;" style="display: none;">
+	    <img id="image" src=""/>
+	</div>
+	<div id="dialog-confirm" title="Start på nytt?" style="display: none; height:110px">
+	    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Du er i ferd med å slette ditt lokk og begynne på et nytt.<br/>
+	    Er du sikker på at du ønsker dette?</p>
+	</div>
+
+
+
+	<tal:block tal:condition="exists:cart/items/gifts/7307">
+	   <div class="skirts">
+		<tal:block tal:repeat="item cart/items/gifts/7307">
+		    <span id="${item/optionid}" val="${item/quantity}" />
+		</tal:block>
+	    </div>
+	</tal:block>
+
+
+    <script>
+
+
+
+//ny checkbox
+		$(document).ready(function() {
+    $('#orklaannonse').change(function() {
+        $('#orkla3part').toggle();
+    });
+});
+			//ny checkbox slutt
+	
+	
+	
+		//ny checkbox
+		$(document).ready(function() {
+    $('#orklatilpasninger').change(function() {
+        $('#newsletter-orkla').toggle();
+    });
+});
+			//ny checkbox slutt		
+			
+
+
+	/*<![CDATA[*/
+	$(document).ready(function() {
+	    var totalskirts = 0;
+	    
+		$('#contact-email').on( 'change', function(){
+			$(this).val( $(this).val().replace(/\s/g, ''));
+			});
+
+		$('#antallbarn').on( 'change', function(){
+
+			$('.alder').empty();
+
+				var antall = $(this).val();
+
+				for (i = 0; i < antall; i++) {
+					console.log(i);
+
+					$('.alder').append("<label class=\"notice\">Alder :<select class=\"span1\">" +
+									   "<option>1</option>" +
+									   "<option>2</option>" +
+									   "<option>3</option>" +
+									   "<option>4</option>" +
+									   "<option>5</option>" +
+									   "<option>6</option>" +
+									   "</select></label>");
+				}
+
+			});
+
+	     $('.skirts span').each( function(){
+		    totalskirts += parseInt( $(this).attr('val') );
+		    $( '#option'  + $(this).attr('id')  ).attr( 'value',  $(this).attr('val') );
+		    $('.product-quantity').text( totalskirts );
+		});
+
+
+	    $('.fancybox').click( function(){
+		var src = $(this).attr( 'href' );
+		$('#image').attr( 'src', src );
+
+		$('#dialog').dialog({
+		    modal: true,
+		    resizable: false,
+		    draggable: false
+		});
+		return false;
+	    });
+
+
+	    $('#startover').on( 'click', function(){
+		    $( "#dialog-confirm" ).dialog({
+			resizable: false,
+			height:200,
+			modal: true,
+			buttons: {
+			  "Start på nytt": function() {
+			    window.location =  '/bestill/editor/startover';
+			  },
+			  Cancel: function() {
+			     $( this ).dialog( "close" );
+			  }
+			}
+		    });
+
+		    return false;
+		});
+
+
+	$('input.quantity').before('<a href="#" class="button changequantity large">-</a>').prev().click( function() {
+	    if ( parseInt( $(this).next().attr('value') ) <= 0) { return false };
+	    $(this).next().attr('value', parseInt( $(this).next().attr('value') ) - 1);
+	    $(this).next().trigger('change');
+	    return false;
+	});
+	$('input.quantity').after('<a href="#" class="button changequantity large">+</a>').next().click( function() {
+	    $(this).prev().attr('value', parseInt( $(this).prev().attr('value') ) + 1);
+	    $(this).prev().trigger('change');
+	    return false;
+	});
+
+	$('#add-to-cart').on('click', function() {
+		   //$(this).attr('disabled','disabled').before($('<img src="http://static.repix.no/gfx/gui/ajax-loader.gif" />'));
+			if( $('#contact-and-delivery-info').valid() ){
+			    $('#products li').each( function(i, item) {
+
+				/*
+				    if( $('input.quantity', item ).val() > -1 || $(item).hasClass('more-options') ) {
+					if( orderGift( $(item).data('id'), $(item).data('optionid'),  $(item).data('prodno'), $('input.quantity', item).val(), $(item).data('lokkid') ) ) {
+					    addedToCart = true;
+					}
+				    }
+				*/
+
+
+
+				if ( $(item).hasClass('gift') && $(item).hasClass('one-option') ) {
+
+				    if( orderGift( $(item).data('id'), $(item).data('optionid'),  $(item).data('prodno'), $('input.quantity', item).val(), $(item).data('lokkid') ) ) {
+					    addedToCart = true;
+				    }
+
+				} else if ( $(item).hasClass('gift') && $(item).hasClass('more-options') ) {
+
+					var optionsContainer = $('a.open-options', item).attr('href');
+					$('tr', optionsContainer).each( function(i, option) {
+
+						if( $('input', option).val() > -1) {
+
+							if( orderGift( $(option).data('id'), $(option).data('optionid'), $(option).data('prodno'), $('input.quantity', option).val() ,$(item).data('lokkid') ) ) {
+								addedToCart = true;
+							}
+						}
+					});
+				}
+
+
+			    //$('#contact-and-delivery-info').submit();
+			    });
+			}
+			$('#contact-and-delivery-info').submit();
+			//window.location.href = '/checkout/confirm';
+			return false;
+		});
+
+
+	});
+
+	function orderGift( id, optionid, prodno, quantity, lokkid ) {
+	    var finished = false;
+	    var malid;
+	    var malpageid;
+	    var ratio;
+	    var x = 0;
+	    var y = 0;
+	    var malarray = new Array();
+
+	    switch( optionid ){
+		case '3327': //magnet
+		    malid 	= '2695';
+		    malpageid 	= '6171';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '402';
+		    dy		= '402';
+		break;
+		case '3329': //klistremerke
+		    malid 	= '2693';
+		    malpageid 	= '6169';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '439';
+		    dy		= '439';
+		break;
+		case '3325': //nøkkelring
+		    malid 	= '2697';
+		    malpageid 	= '6173';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '384';
+		    dy		= '384';
+		break;
+		case '3323': //matboks
+		    malid 	= '2694';
+		    malpageid 	= '6170';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '443';
+		    dy		= '443';
+		break;
+	
+case '5500': //Popsocket
+		    malid 	= '3141';
+		    malpageid 	= '7184';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '224';
+		    dy		= '224';
+		break;
+		case '3321': //drikkeflaske
+		    malid 	= '2699';
+		    malpageid 	= '6175';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '472';
+		    dy		= '472';
+		break;
+		case '3319': //kopp
+		    malid 	= '2698';
+		    malpageid 	= '6174';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '472';
+		    dy		= '472';
+		break;
+		case '3339':  //2-3
+		case '3340':  //4-6
+		case '3341':  //8-10
+		case '3342':  //12-14
+		case '3335':  //tskjorte S
+		case '3336':  //tskjorte M
+		case '3337':  //tskjorte L
+		case '3338':  //tskjorte XL
+		    malid 	= '2702';
+		    malpageid 	= '6178';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '1300';
+		    dy		= '1300';
+		break;
+	    }
+
+	    x = x / ratio;
+	    y = y / ratio;
+
+	    var pages = new Array();
+	    pages.push();
+	    pages[0] = new Object();
+	    pages[0].malid = malid;
+	    pages[0].malpageid = malpageid;
+	    pages[0].giftQuantity = quantity;
+	    pages[0].productoptionid = optionid;
+	    pages[0].productid = id;
+	    pages[0].size = "small";
+	    pages[0].lokkid = lokkid;
+	    pages[0].prodno = prodno;
+	    /*pages[0].editor_x = tmplx / ratio;
+	    pages[0].editor_y = tmply / ratio;
+	    pages[0].image = new Object()
+	    pages[0].image.x = (-crop.x1 + x ) * ratio;
+	    pages[0].image.y = (-crop.y1 + y ) * ratio;
+	    pages[0].image.dx = crop.imagewidth * ratio;
+	    pages[0].image.dy = crop.imageheight * ratio;
+	    //pages[0].image.dx = 1068.0619047619048;//$('#image').width() * ratioWidth;
+	    //pages[0].image.dy = 728.4705882352941; //$('#image').height() * ratioHeight;
+	    pages[0].image.bid = imageid;
+	    pages[0].texts = new Array();
+	    pages[0].cliparts = new Array();*/
+	    /*if( quantity > 0 ){
+		console.log( pages );
+	    }*/
+
+
+	    $.ajax({
+		    type: 'POST',
+		    url: '/bestill/save',
+		    async: false,
+		    data: {
+			    'pages'	: JSON.stringify( pages )
+		    },
+		    complete: function(msg) {
+			    addedToCart = true;
+			    finished = true;
+		    },
+		    success: function(msg) {
+			    addedToCart = true;
+			    finished = true;
+		    },
+		    error: function(msg) {
+			    alert('error' + msg);
+		    }
+	    });
+
+	    return finished;
+	}
+
+
+	$('.open-options').click( function() {
+
+			var id = $(this).attr('href');
+			var item = $(this).parent();
+			var quantity = 0;
+
+			//$(id).dialog('open');
+			$(id).dialog({
+				'resizable'	:	'false',
+				'width': '250'
+			});
+			return false;
+		});
+
+	$('input', '.product-options').bind('change', function() {
+			var container = $(this).attr('rel');
+			var totalQuantity = 0;
+			$(this).parent().parent().parent().find('input').each( function(i, item) {
+				totalQuantity = totalQuantity + parseInt( $(item).val() );
+			});
+			$('.product-quantity', container).text( totalQuantity );
+		});
+
+	/*]]>*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

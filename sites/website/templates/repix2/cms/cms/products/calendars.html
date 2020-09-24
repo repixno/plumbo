@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+
+	
+	<style>
+		.calendar-top {
+			height: 210px;
+			background-image: url(${static:}images/attachments/338/${menuitem/article/attachments/background});
+			/*background-repeat: no-repeat;*/
+			
+		}
+		
+		
+		h3{
+			font-family: yanoneregular;
+			
+		}
+		h2{
+			
+			font-family: yanoneregular;
+			text-decoration: underline;
+		}
+		
+		h4{
+			
+			font-family: yanoneregular;
+			font-size: 24px;
+		}
+		
+		h5{
+			font-size: 19px;
+		}
+		
+		.price.oldprice {
+			font-size: 21px;
+			
+		}
+		
+		.price.newprice
+		{
+		font-size: 21px;
+			
+		}
+	</style>
+
+</head>
+
+
+
+
+<!-- defining sections -->
+
+<!-- top is auto, category title + catagory image -->
+
+
+
+<tal:block define:section="wallcalendarnew, Wall calendars - 13 pages Mediaclip" /> <!-- static HTML + 1 article + ~3 products-->
+
+<
+
+<tal:block define:section="tablecalendar, Table calendar" /><!-- static HTML + prouct -->
+
+<tal:block define:section="postercalendar, Poster calendar" /> <!-- static HTML 1 article + ~2 products-->
+
+
+<body>
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+	<div class="container">
+
+	
+		<div class="row">
+			<div class="col-md-12">
+			
+			<div class="col-md-12 product-category" style="position: relative">
+			
+					<div class="col-md-12 last calendar-top top">
+						<div class="content">
+							<p tal:content="structure menuitem/article/body|default"></p>
+						</div>
+					</div>
+					
+					
+					</div>
+					
+
+					<div class="col-md-12">
+						<div class="col-md-12 text-center">
+							<h3><strong>REDIGERBAR KALENDER</strong></h3>
+							<h5 tal:content="structure cms:body:0ddbd381-05bd-4cc7-9140-f603fe379e9f">
+								Ønsker du å være kreativ? Ved hjelp av vår editor kan du velge et redigerbart design og tilpasse det akkurat slik du ønsker.<br/>
+								Her har du også muligheten til å legge inn tekst og bilder i datofeltene!
+							</h5>
+						</div>
+						
+						
+						<br/>
+						
+						
+						
+						
+						
+						<div class="col-md-12 text-center">
+								<h2 i18n:translate="" class="bottom prepend-top">Wall calendars - 13 pages</h2>
+								
+								<tal:block tal:repeat="item sections/wallcalendarnew" tal:condition="exists:sections/wallcalendarnew">
+									<div class="col-md-4">
+										<div metal:use-macro="../cms.html/productbox3" />
+									</div>
+								</tal:block>
+							</div>
+						
+							
+							
+									<div class="col-md-12 text-center">
+										<h2 i18n:translate="" class="bottom prepend-top">Table calendars</h2>
+									
+										<tal:block tal:repeat="item sections/tablecalendar" tal:condition="exists:sections/tablecalendar">
+											<div class="col-md-3">
+												<div metal:use-macro="../cms.html/productbox3" />
+											</div>
+									
+										</tal:block>
+		
+		
+								<div class="col-md-12 text-center">
+									<h2 i18n:translate="">Poster calendars</h2>
+								</div>
+								
+								
+								<tal:block tal:repeat="item sections/postercalendar" tal:condition="exists:sections/postercalendar">
+									<div class="col-md-4">
+										<div metal:use-macro="../cms.html/productbox3" />
+									</div>
+								</tal:block>
+					</div>
+		
+					
+						</div>
+						
+				</div>
+			</div>
+		</div>
+
+
+
+	<div metal:use-macro="../../../${templates}/common.html/footer" />
+
+</body>
+</html>

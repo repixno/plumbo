@@ -1,0 +1,202 @@
+<tal:block metal:define-macro="head" tal:omit-tag="">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Studentplakat & Studentskyltar snabbt och enkelt från Japan Photo studentplakat!" />
+	<meta name="Kewords" content="Studentplakat, Studentskylt, Studentbanderoll, Studentnalle, Visselpipa"/>
+    <meta name="author" content="Adele Skjerdal Storøy" />
+	<!--<meta name="description" content="Vem minns inte studentutspringet? Glädjen att ha tagit studenten, och spänningen och nyfikenheten på livet, en ny tid börjar! 
+
+När studenterna äntligen springer ut står släkt och vänner och väntar med pyntade och personliga studentplakat. Nästan alla visar upp en studentskylt med namn och klass på, och med en minnesvärd bild från studentens barndom på plakatet. Ett studentplakat är roligt att titta på, både för studenten, släkt och vänner, men även för alla andra som står där och väntar på en helt annan student. En studentskylt förgyller utspringet - och gör livet lite roligare.
+
+Studentskylten är inte bara ett riktigt bra sätt för att studenten ska hitta släkt och vänner i folkvimlet, utan studentplakatet kommer även att bli ett fint minne för studenten, från en oförglömlig dag!
+
+Traditionen med studentplakat är relativt modern, och har gått från hemsnickrade plakat, till professionellt utskrivna bilder, eller att låta producera en helt färdigt och komplett studentskylt. Det gemensamma idag är att man oftast har en bild från studentens barndom som väcker minnen, namn och klass, och även annat pynt på studentplakatet, runtom bilden på studentplakatet, som exempelvis ballonger och serpentiner.
+
+Vi erbjuder många olika mallar för ditt studentplakat. Välj mellan en studentskylt i stort format med gott om plats för att du ska kunna fästa en studentbild, och skriva namn och annan text runtomkring. Tejpa även fast ballonger och serpentiner för att få ditt studentplakat komplett.
+
+Om du redan har en skylt så kan du komplettera med en studentförstoring av din bild.
+
+Önskar du en helt komplett studentskylt så kan du låta oss producera den med en utskrift av hög kvalitet. Välj mellan många olika mallar, så ordnar vi ett superfint studentplakat som du inte blir besviken på.
+
+Vad ska man då tänka på för att göra ett riktigt personligt studentplakat? Börja med att leta fram en passande bild på studenten. Oavsett om du har en digital bild eller en pappersbild så kan du få den uppförstorad på ditt studentplakat. Välj ut en bild på studenten, som väcker minnen. En rolig bild eller extra söt bild på studenten, förgyller ditt studentplakat och ger din studentskylt det där lilla extra! 
+
+Sedan har du valet att snickra ihop en helt egen skylt, och då bara beställa en studentförstoring på bilden för din skylt. Eller så kan du med fördel låta producera ett helt komplett studentplakat med färdig design, det finns många mallar att välja på för din studentskylt.
+
+Tänk på att vara ute i god tid för att få ditt studentplakat klart i tid. Passa även på att beställa  studentskyltar till flera i familjen och släkten. Kanske med olika bilder, olika design och olika text på plakaten. Kom in i våra butiker eller läs mer här online, för att få inspiration av alla olika mallar för studentskyltar vi har att erbjuda. Du hittar säkert ett studentplakat som passar just din smak!
+
+Hos oss kan du beställa ditt studentplakat online eller i butik. Välj mellan att få din studentskylt skickad med postleverans, eller att hämta det i butik. Oavsett hur du beställer kan du välja mellan lika många mallar för ditt studentplakat, och du kan slutföra designen på din studentskylt med egen text.
+
+När du väl står där och väntar på att just din student ska springa ut, kommer du att känna dig extra stolt när du håller upp din fina och personliga studentskylt! Och tänk vilken härlig känsla för studenten, att få ett minne för livet i form av ett studentplakat som markerar både ett avslut - och en ny början!
+
+PS. Missa inte alla våra fina tillbehör för ett riktigt härligt studentfirande. Du kan komplettera ditt studentplakat med ballonger, nallar, champagneglas och mycket mer! Besök våra butiker för att fynda bland våra tillbehör."/>-->
+    
+    <link rel="shortcut icon" href="/favicon.ico"  />
+
+    <title>Studentplakat & Studentskyltar från CEWE</title>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="/static/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet" />
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="static/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/static/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap/main.css" rel="stylesheet" />
+    <link href="/static/css/template.css" rel="stylesheet" />
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="/static/js/jquery-1.12.0.min.js"></script>
+    <script src="/static/js/jquery-ui.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/common.js"></script>
+    
+</tal:block>
+
+<tal:block metal:define-macro="loader" tal:omit-tag="">
+
+    <div id="loader-overlay">
+		<div class="loadingInfo">
+			<img src="${static:gfx/gui/ajax-loader-gray.gif}" /><br/>
+			<br/>
+			<h3>Laddar, vänligen vänta....</h3><br/>
+			<p>
+				<tal:block  i18n:translate="">
+				If you waited too long, try refreshing the page.
+				</tal:block><br/>
+				<a href="." class="refresh" i18n:translate="">Refresh</a>
+			</p>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		$('#loader-overlay')
+			.css('opacity', '0.8')
+			.css('margin','0')
+			.width( $(window).width() )
+			.height( $(window).height() );
+
+		$(document).ready( function() {
+			$(window).load( function() {
+				$('#loader-overlay').fadeOut('slow', function() {
+					$(this).remove();
+				})
+			});
+			$('.refresh').click( function() {
+				window.location.reload();
+				return false;
+			});
+		});
+	</script>
+
+</tal:block>
+
+<tal:block metal:define-macro="top" tal:omit-tag="">
+
+    
+    <div class="top-header hidden-xs">
+        <div class="container">
+            <div class="col-xs-9 logo">
+                <!--<a class="navbar-brand" href="/"><img class="img-responsive" src="//www.japanphoto.se/wcsstore/CEWEStorefrontAssetStore/Attachment/japan-photo-cewe-fotobok.png"/></a>
+				-->
+				<a class="navbar-brand" href="https://student.cewe.se/"><img class="img-responsive" src="/static/gfx/japan-photo-cewe-fotobok.png"/></a>
+                
+                <span class=""><h1 style="color: #ffffff;">STUDENTPLAKAT</h1></span>
+            </div>
+            <div class="col-md-3 shoppingcart">
+                <ul class="nav navbar-right">
+                <!--<li><a href="/myaccount" ><div i18n:translate="">My page</div></a></li>-->
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-shopping-cart" style="font-size: 16px;"></span>
+                        Varukorg
+                        <span class="caret"></span>
+                        <div>
+                            <tal:block tal:condition="exists: cart">
+                                <tal:block tal:condition="cart/totalitems">
+                                    <span id="cart-total-items" tal:content="cart/totalitems"></span> <tal:block i18n:translate="">products</tal:block> , 
+                                    <span id="cart-total-price" tal:content="formatprice:cart/totalprice"></span> kr
+                                </tal:block>
+                            </tal:block>
+                            <tal:block tal:condition="not:cart/totalitems">
+								<span id="cart-total-items"> 0 </span> <tal:block i18n:translate="">products</tal:block> , 
+								<span id="cart-total-price"> 0 </span> kr
+                            </tal:block>
+                            </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a href="/checkout" id="go-to-checkout" class="" i18n:translate="">Go to checkout</a>
+                      </li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="/cart/?from=main" id="cart-toggle" style="color:black" i18n:translate="">Show cart</a></li>
+                    </ul>
+                  </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default">
+       <div class="container">
+         <div class="navbar-header">
+           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+             <span class="sr-only">Toggle navigation</span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+           </button>
+           <a class="navbar-brand visible-xs" href="#">Studentplakat</a>
+           
+         </div>
+         <div id="navbar" class="navbar-collapse collapse">
+           <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Startsida</a></li>
+            <li><a href="https://support.japanphoto.se/butiker/" target="_blank">Butiker</a></li>
+             <li><a href="https://support.japanphoto.se/" target="_blank">Kundservice</a></li>
+            <li><a href="https://cewe.se/" target="_blank">Cewe.se</a></li>
+            <li class="Produkter">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Produkter <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+				<li><a href="/studentplakat">Storsäljaren</a></li>
+				 <li><a href="/komplett">Gör-det-själv</a></li>
+				  <li><a href="/klassisktplakat">Poster</a></li>
+				<!-- <li><a href="/create/banderoll/">Banderoll</a></li>-->
+                <li><a href="/produkter/tillbehor/">Tillbehör</a></li>
+              </ul>
+            </li>
+          </ul>
+         </div><!--/.navbar-collapse -->
+       </div>
+     </nav>
+
+</tal:block>
+
+<tal:block metal:define-macro="footer" tal:omit-tag="">
+    
+    
+    <div class="footer">
+        <div class="container text-center top-15">
+        <footer>
+            <h5>Aktuella leveranstider: Standardleverans till butik 2 veckor, hemleverans 3 veckor. Expressleverans är endast möjlig till butik, ca 3 arbetsdagar.</h5>
+            <br/>
+          <p class="footertext">
+              CEWE Sverige AB<br/>
+              Org.nr: 556381-1321
+          </p>
+         <!-- <p>
+              Telefon webbutik: 031-619445<br/>
+              kundservice@japanphoto.se
+          </p>-->
+        </footer>
+      </div>
+    </div>
+    
+</tal:block>

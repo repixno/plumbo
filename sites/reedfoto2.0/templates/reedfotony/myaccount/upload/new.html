@@ -1,0 +1,420 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Upload</tal:block>
+<link rel="stylesheet" href="/jqupload/css/style.css" />
+<!-- blueimp Gallery styles -->
+<link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css" />
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="/jqupload/css/jquery.fileupload.css" />
+<link rel="stylesheet" href="/jqupload/css/jquery.fileupload-ui.css" />
+<!-- CSS adjustments for browsers with JavaScript disabled -->
+<noscript><link rel="stylesheet" href="/jqupload/css/jquery.fileupload-noscript.css" /></noscript>
+<noscript><link rel="stylesheet" href="/jqupload/css/jquery.fileupload-ui-noscript.css"/></noscript>
+
+<style type="text/css">
+	body {
+		padding-top: 5px;
+	}
+	.radioLabel.selected {
+		background-color: #fff;
+		border: 1px solid #ddd;
+		-moz-border-radius: 4px;
+		margin: 0 0 10px 0;
+		padding: 15px;
+	}
+	table {
+		border: dashed 1px;
+		width: 100%;
+		margin: 10px 0;
+	}
+	.center{
+		text-align: center;
+		padding: 15px;
+	}
+	.files td{
+		padding: 5px;
+	}
+	.navbar {
+		min-height: 5px;
+		margin-top: 5px;
+		font-size: 14px;
+	}
+</style>
+
+</head>
+<body>
+
+<div metal:use-macro="${templateroot}/${templates}/common.html/top" />
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box">	
+				<tal:block tal:condition="session/loggedin">
+					<h4 i18n:translate="">Choose album to transfer the images to.</h4>
+					<form method="post" action="/myaccount/upload" id="selectalbum">
+						<div class="col-md-6">
+						   <div class="radioLabel selected" style="min-height:60px;">
+							   <label class="" i18n:translate="">Upload to existing album:</label>
+							   <select class="form-control" name="uploadid" id="uploadid">
+								   <tal:block tal:repeat="album albums">
+									   <option tal:condition="equal:album/id,selectedalbumid,true" selected="1" value="${album/id}">${album/title}</option>
+									   <option tal:condition="not:equal:album/id,selectedalbumid,true" value="${album/id}">${album/title}</option>
+								   </tal:block>
+							   </select>
+							   <!--<button type="submit" class="button" id="choose-album" i18n:translate="">Choose</button>-->
+						   </div>
+						</div>
+					 
+						<div class="col-md-6">
+						   <div class="radioLabel selected form-inline" style="min-height:60px">
+							   <label for="new-album" i18n:translate="">Create new album:</label><br/>
+							   <input type="text" id="new-album-title" tal:attributes="value formatdatetime:request/date/full" class="form-control text span-7" />
+							   
+								<span id="create-new-album" class="create-album btn btn-default" role="button" aria-disabled="false">
+									<i class="glyphicon glyphicon-plus"></i>
+									<span class="ui-button-text">
+										<span i18n:translate="">Create album</span>
+									</span>
+								</span>
+						   </div>
+					   </div>
+				   
+				   </form>
+					<div class="clear" />
+				</tal:block>
+				<!-- The file upload form used as target for the file upload widget -->
+				<form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
+					<!-- Redirect browsers with JavaScript disabled to the origin page -->
+					<noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/" /></noscript>
+					<!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+					<div class="row fileupload-buttonbar">
+						<div class="col-lg-10">
+							<!-- The fileinput-button span is used to style the file input field as button -->
+							<span class="btn btn-success fileinput-button">
+								<i class="glyphicon glyphicon-plus"></i>
+								<span i18n:translate="">Add files...</span>
+								<input type="file" name="files[]" multiple="multiple" accept="image/jpeg"/>
+							</span>
+							<button type="submit" class="btn btn-primary start">
+								<i class="glyphicon glyphicon-upload"></i>
+								<span i18n:translate="">Start upload</span>
+							</button>
+							<button type="reset" class="btn btn-warning cancel">
+								<i class="glyphicon glyphicon-ban-circle"></i>
+								<span i18n:translate="">Cancel upload</span>
+							</button>
+							<button type="reset" class="btn btn-primary album">
+								<i class="glyphicon glyphicon-th"></i>
+								<span i18n:translate="">Go to album</span>
+							</button>
+							
+							<input type="checkbox" name="compress" id="compress"/><label for="compress">Komprimer bilder.</label> ( <a id="compinfo" href="#">mer info</a> )
+							
+							<input type="checkbox" class="toggle" />
+							<!-- The global file processing state -->
+							<span class="fileupload-process"></span>
+						</div>
+						<!-- The global progress state -->
+						<div class="col-lg-5 fileupload-progress fade">
+							<!-- The global progress bar -->
+							<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+								<div class="progress-bar progress-bar-success" style="width:0%;"></div>
+							</div>
+							<!-- The extended global progress state -->
+							<div class="progress-extended">&nbsp;</div>
+						</div>
+					</div>
+					<!-- The table listing the files available for upload/download -->
+					<table role="presentation">
+							<tr class="dragfilehere">
+								<td class="center"><h1 style="color: #aaa">Dra bilder hit!</h1></td>
+							</tr>
+							<tbody class="files"></tbody></table>
+				</form>
+				</div>
+			</div>
+	</div>
+    
+</div>
+<div class="display-none compinfobox">
+    Om du velger å komprimere bildene vil det gå raskere og laste opp bildene, men bildene kan bli i en lavere kvalitet enn orginalbildene.<br/>
+    Bildene vil likevel bli i meget god kvalitet for standard print, fotokort og de fleste fotogaver.<br/>
+    Ønsker du bildet produsert på en forstørrelse velger du ikke komprimering.
+</div>
+<div metal:use-macro="${templateroot}/${templates}/common.html/footer" />
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td>
+            <span class="preview"></span>
+        </td>
+        <td>
+            <p class="name">{%=file.name%}</p>
+            <strong class="error text-danger"></strong>
+        </td>
+        <td>
+            <p class="size">Processing...</p>
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+        </td>
+        <td>
+            {% if (!i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary start" disabled="true" >
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Start</span>
+                </button>
+            {% } %}
+            {% if (!i) { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Avbryt</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+/*<![CDATA[*/
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        <td>
+            <span class="preview">
+                {% if (file.thumbnailUrl) { %}
+                    <img src="{%=file.thumbnailUrl%}">
+                {% } %}
+            </span>
+        </td>
+        <td>
+            <p class="name">
+                {% if (file.url) { %}
+                    {%=file.name%}
+                {% } else { %}
+                    <span>{%=file.name%}</span>
+                {% } %}
+            </p>
+            {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+            {% } %}
+        </td>
+        <td>
+            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+        </td>
+        <td>
+            {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" name="delete" value="1" class="toggle" />
+            {% } else { %}
+				<i>Opplasting fullført</i>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+/*]]>*/
+</script>
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="/jqupload/js/vendor/jquery.ui.widget.js"></script>
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="//blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+<!-- blueimp Gallery script -->
+<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="/jqupload/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="/jqupload/js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="/jqupload/js/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="/jqupload/js/jquery.fileupload-image.js"></script>
+<!-- The File Upload audio preview plugin -->
+<script src="/jqupload/js/jquery.fileupload-audio.js"></script>
+<!-- The File Upload video preview plugin -->
+<script src="/jqupload/js/jquery.fileupload-video.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="/jqupload/js/jquery.fileupload-validate.js"></script>
+<!-- The File Upload user interface plugin -->
+<script src="/jqupload/js/jquery.fileupload-ui.js"></script>
+<!-- The main application script 
+<script src="/jqupload/js/main.js"></script>-->
+<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
+<!--[if (gte IE 8)&(lt IE 10)]>
+<script src="/jqupload/js/cors/jquery.xdr-transport.js"></script>
+<![endif]-->
+
+<script type="text/javascript">
+
+var choosealbumerror = '<tal:block i18n:translate="">An error occured when choosing your album. Please try again later!</tal:block>';
+var createalbumerror = '<tal:block i18n:translate="">An error occured when creating your album. Please try again later!</tal:block>';
+
+var filesinque = false;
+var gonext = false;
+
+//<![CDATA[
+$(document).ready( function() {
+	var ajaxLoader = '<img src="${static:gfx/gui/ajax-loader.gif}" />';
+   
+    var uploadurl = "/api/1.0/upload/jqupload";
+	
+	$( '.album' ).on( 'click', function(){
+			var albumid = $('#uploadid').val();
+			window.location.href = "/myaccount/album/" + albumid;
+			return false;
+		} );
+   
+   $("#create-new-album").on( 'mouseover', function(){
+            $(this).addClass("ui-state-hover")
+        }).on( 'mouseout', function(){
+            $(this).removeClass("ui-state-hover")
+        });
+   
+   $('#compinfo').on( 'click' , function(){
+        $('.compinfobox').dialog({
+            'title' : "INFO!",
+            'buttons' : {
+                "ok" : function(){ $(this).dialog('close') }
+                }
+            });
+        
+        return false;
+    })
+   
+   $("input[name='compress']").on( 'change' , function(){
+    
+        if( $(this).is(':checked') ){
+            console.log( "test" );
+            $('#fileupload').fileupload( 'option', { disableImageResize : false, imageMaxWidth: 1795, imageMaxHeight: 1795}  ); 
+        }else{
+            $('#fileupload').fileupload( 'option', 'disableImageResize', 'true'    ); 
+        }
+        
+    
+    })
+   
+    // Initialize the jQuery File Upload widget:
+    $('#fileupload').fileupload({
+        // Uncomment the following to send cross-domain cookies:
+        xhrFields: {withCredentials: true},
+        url: uploadurl,
+        disableImageResize: true,
+        acceptFileTypes: /(\.|\/)(jpe?g|tif)$/i
+    }).on('fileuploadadd', function (e, data) {
+        $('.dragfilehere').hide();
+        filesinque = true;
+    }).on('fileuploaddone', function(e, data){
+        filesinque = false;
+    }).on('fileuploadstopped' , function( e, data ){
+        if( gonext == true ){
+            window.location.href = "/fremkalle-bilder/choose-quantity";
+        }
+    });
+
+	$( '.album' ).on( 'click', function(){
+			var albumid = $('#uploadid').val();
+			window.location.href = "/myaccount/album/" + albumid;
+			return false;
+		} );
+	
+    $( '.cart' ).on( 'click' , function(){
+        
+        if( filesinque == true ){
+            if ( confirm('Du har bilder i kø, vil du laste opp bildene før du går videre?') ) {
+                gonext = true;
+                $('.start').click();
+            } else {
+                //window.location.href = "/fremkalle-bilder/choose-quantity";
+            }
+        }else{
+            window.location.href = "/fremkalle-bilder/choose-quantity";
+        }
+        
+        
+        return false;
+        });
+    
+    
+	
+	$('#uploadid').change( function() {
+
+		//$(this).after(ajaxLoader);
+
+		var albumid = $('#uploadid').val();
+		var self = $(this);
+      
+      $.post('/api/1.0/upload/setcurrentalbum/', {
+      	'albumid': albumid
+      	}, function(data) {
+            if( data.result ) {
+               //alert(data.result);
+      		} else {
+      			alert( choosealbumerror );
+      		}
+      	}, 'json'
+      );
+      
+		return false;
+		
+	});
+	
+	$('#choose-album').click( function() {
+
+		//$(this).after(ajaxLoader);
+
+		var albumid = $('#uploadid').val();
+		var self = $(this);
+
+      $.post('/api/1.0/upload/setcurrentalbum/', {
+      	'albumid': albumid
+      	}, function(data) {
+            if( data.result ) {
+               //alert(data.result);
+      		} else {
+      			alert( choosealbumerror );
+      		}
+      	}, 'json'
+      );
+      
+		return false;
+		
+	});
+	  
+	$('#create-new-album').click( function() {
+
+		//$(this).after(ajaxLoader);
+
+		var albumtitle = $('#new-album-title').val();
+		var self = $(this);
+
+			$.post('/api/1.0/album/create/', {
+				'title': albumtitle
+			}, function(data) {
+				if( data.result ) {
+					$('#uploadid option').attr('selected', 'selected').removeAttr('selected')
+					$('#uploadid').append('<option selected="selected" value="'+data.album.id+'">'+data.album.title+'</option>');
+					$('#uploadid').trigger('change');
+				} else {
+					alert( createalbumerror );
+				}
+			}, 'json'
+		);
+		return false;
+	});
+
+	$('.backToProject').click( function() {
+		history.go(-1);
+		return false;
+	});
+});
+//]]>
+</script>
+</body>
+</html>

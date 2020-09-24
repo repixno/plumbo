@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Feedback</tal:block>
+	
+	<style>
+		
+		.top-15{
+			margin-top: 15px;
+		}
+	</style>
+</head>
+
+<body>
+<div metal:use-macro="../../${templates}/common.html/top" />
+	<div class="container maincontent" style="padding-bottom: 15px;">
+		<div class="col-md-12">
+			<h1 i18n:translate="">Contact</h1>
+		</div>
+		<div class="col-md-3">
+			<div class="col-md-9 pull-right">
+					<h3>Kontaktinfo</h3>	
+					<ul>
+						<li>
+							Reed Foto AS<br />
+							Reed<br />
+							6827 BREIM<br /><br />
+							Org.nr. 995 245 426<br /><br />
+						</li>
+						<li><img src="http://www.reedfoto.no/wp-content/themes/designagency/designagency/images/icon-phone.png" alt="Telefon" align="middle" />&nbsp;&nbsp;57 86 83 33</li>
+						<li><img src="http://www.reedfoto.no/wp-content/themes/designagency/designagency/images/icon-email.png" alt="Epost" align="middle" />&nbsp;&nbsp;<a href="mailto:post@reedfoto.no">post@reedfoto.no</a></li>
+					</ul>
+			</div>
+		</div>
+		<div class="col-md-6 pagedialog" tal:condition="not:exists:sentToEmail">
+			<div clas="clear clearfix"></div>
+			<h3 i18n:translate="">Give us feedback on the service privatly</h3>
+			<form action="/contact/feedback/reedfoto" method="post" class="">
+				<div>
+					<label for="email" i18n:translate="">E-mail</label><br/>
+					<input type="text" class="title form-control" name="email" id="email" tal:attributes="value session/username|default"/>
+				</div>
+				<div>
+					<label for="message" i18n:translate="">Message</label><br/>
+					<textarea name="message" id="message" class="form-control"></textarea>
+				</div>
+				
+				<input type="hidden" name="my_url" />
+				<button type="submit" class="top-15 btn btn-default" i18n:translate="">Submit</button>
+			</form>
+		</div>
+	</div>
+<script language="JavaScript">
+$(document).ready( function() {
+   $('#email').focus();
+});
+</script>
+
+<div metal:use-macro="../../${templates}/common.html/footer" />
+
+</body>
+</html>

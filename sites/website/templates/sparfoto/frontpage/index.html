@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+
+<head>
+	<meta name="description" tal:attributes="content cms:ingress:8dff9664-717e-4d83-a907-5a1cc2118951" />
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+   <SCRIPT type="text/javascript" src="${static:}js/jquery.zrssfeed.min.js"></SCRIPT>  
+	<style type="text/css">
+	
+	
+	div.bannercontent{
+		position: relative;
+		
+	}
+	img.arrow{
+		position: absolute;
+		top: 152px;
+		left: 70px;
+	}
+	div.rotatemenu{
+		border: 1px solid !important;
+		width: 150px;
+		height: 150px;
+		cursor: hand;
+		cursor: pointer; 
+	}
+	.ui-effects-transfer { border: 2px dotted gray; }
+	#banner ,#banner-preloaded{
+		border : 1px solid;
+		text-align: left;
+		margin-top: 0.5em;
+		width: 950px;
+		height: 366px;
+	}
+	#banner-preloaded{
+		position: absolute;
+		top:0px;
+		z-index: -1;
+	}
+	#banner-container{
+		position: relative;
+		margin-top: 0.5em;
+		width: 950px;
+		height: 366px;
+	}
+	
+	.frontpagebox{
+		border: 1px solid;
+		height: 310px;
+		width:310px
+	}
+	.campaign {
+		height: 320px;
+		width: 270px;
+		position: relative;
+	}
+	.campaign a.button {
+		position: absolute;
+		bottom: 5px;
+		right: 5px;
+	}
+	
+	#campaign h3.ui-accordion-header a {
+		font-weight: normal;
+		font-size: 1.3em;
+	}	
+      .wirebox { margin-bottom: 1em }
+
+      .rssHeader{
+         display: none;
+       }
+      .rssBody ul {
+         margin: 0px;
+         padding: 0px;         
+      }
+      .rssBody ul li {
+      	list-style: none;
+      }
+      .rssBody ul li div{
+         font-size: 9px;
+         font-weight: bold;
+      }
+      .rssBody ul li h4{
+         margin-bottom: 3px;
+      }
+      .rssBody ul li h4 a{
+         font-size: 12px;
+      }
+	</style>
+	
+   <!--[if lte IE 8]>
+	<style type="text/css">
+		#presentation ul {
+         display: block;
+         border: 1px solid #ccc;
+         z-index: 6000;
+
+      }
+      #presentation div#presentation-menu {
+         border: none;
+         z-index: 5000;
+         width: 220px;
+      }
+	</style>
+	<![endif]-->
+	
+</head>
+
+
+<body>
+
+	<div class="container">
+
+		<div metal:use-macro="../../${templates}/common.html/top" />
+		
+		<div class="span-24 last bannercontent">
+			
+				<tal:block tal:repeat="menuitem menu:7855e584-04e2-4024-88ad-e197fe748d93,1,1">
+					<tal:block tal:condition="not:equal:repeat/menuitem/number,6">
+					<div id="${repeat/menuitem/number}" class="span-4">
+						<div class="rotatemenu">	
+							<img src="${static:}images/menu/${menuitem/image}" />
+						</div>
+						<tal:block tal:repeat="item menuitem/content" tal:condition="exists:menuitem/content">
+							<div class="hide banner" tal:content="structure item/body|default"></div>
+						</tal:block>
+					</div>
+					</tal:block>
+					<tal:block tal:condition="equal:repeat/menuitem/number,6">
+						<div id="${repeat/menuitem/number}" class="span-4 last">
+							<div class="rotatemenu" >	
+								<img src="${static:}images/menu/${menuitem/image}" />
+							</div>
+							<tal:block tal:repeat="item menuitem/content" tal:condition="exists:menuitem/content">
+								<div class="hide banner" tal:content="structure item/body|default"></div>
+							</tal:block>
+						</div>
+						
+					</tal:block>
+				</tal:block>
+				
+				<img class="arrow" src="http://a.static.eurofoto.no/cms/images/pil.png" />
+				
+				
+				<div id="banner-container" class="span-24 last">
+					<div id="banner" class="span-24 last"></div>
+					<div id="banner-preloaded" class="span-24 last"></div>
+				</div>
+				
+				
+				<script type="text/javascript">/*<![CDATA[*/
+					
+					var interval;
+					var selected = 1;
+					var waitfor = 0;
+					var direction;
+					$(document).ready( function(){
+						var i = 1;
+						$("#banner, #banner-preloaded").html( $( "#1"   ).find('.banner').html() );
+						interval = setInterval( function(){
+							i++;
+							changebanner( i );
+							if( i == 6 ){
+								i=0;
+							}
+							}, 6000);
+						
+						$('.rotatemenu').click( function(){
+							
+							if( alert == true ){
+								waitfor =  $(this).parent().attr('id');
+							}
+							else{
+								clearInterval(interval);
+								changebanner( $(this).parent().attr('id') );
+							}
+							});
+					});
+					
+					function changebanner( i ){
+						
+						if( selected == i ){
+							window.location.href = $("#banner").find('a').attr('href');
+						}
+						else{							
+							alert = true;
+							var left =  $( "#" + i   ).position().left + 70 ;
+							$('img.arrow').animate({
+								left: left
+							      }, 2000 );
+							//$("#banner").html( $( '#banner-preloaded' ).html( ) );
+							$( '#banner-preloaded' ).html( $( "#" + i   ).find('.banner').html() );
+							
+							if( i > selected ){
+								direction = 'right';
+							}else{
+								direction = 'left';
+							}
+							
+							$("#banner").hide("slide", { direction: direction }, 2000, function(){
+								$("#banner").html( $( '#banner-preloaded' ).html( ) ).show();
+								
+								if( waitfor > 0 ){
+									changebanner( waitfor  );
+									waitfor = 0;
+								}
+								
+								alert = false;
+								});
+							selected = i;
+						}
+						
+					}
+				/*]]>*/</script>
+		</div>
+		
+      <div class="span-8 prepend-top">
+         <!-- id: 3219 -->
+         <div tal:content="structure cms:body:867faf38-74f5-41bc-8f0d-dc6710db7234" />
+      </div>
+      <div class="span-8 prepend-top">
+         <!-- id: 3220 -->
+         <div tal:content="structure cms:body:1b247671-d82b-4613-8be1-caacd857414e" />
+      </div>
+      <div class="span-8 last prepend-top">
+         <!-- id: 3221 -->
+         <div tal:content="structure cms:body:e8b28639-07dc-426d-8459-7d02e4a0a23c"/>
+      </div>
+      
+	<div class="span-8 prepend-top">
+         <!-- id: 3222 -->
+         <div tal:content="structure cms:body:80fd6b9c-edb1-4b5b-ac0f-c39471440aa5" />
+      </div>
+      <div class="span-8 prepend-top">
+         <!-- id: 3223 -->
+         <div tal:content="structure cms:body:88ac68c7-c734-426a-97ce-1b4259b81f2e" />
+      </div>
+      <div class="span-8 last prepend-top">
+         <!-- id: 3224 -->
+         <div tal:content="structure cms:body:a26c6d30-c6c6-4883-adf4-4d602faef7b6"/>
+      </div>
+      
+
+      
+      
+   </div>	
+
+	
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>	
+
+<SCRIPT type="text/javascript">
+$(function(){
+   
+   if( $("#alert-enable").text() == 'enable' ){
+      $("#alert").show();  
+   }
+   
+   $('.blogSide').rssfeed("http://blogg.eurofoto.no/feeds/posts/default?alt=rss",{
+      limit:3
+   }
+   );
+   
+   
+});
+
+
+
+</SCRIPT>
+
+<!--
+<script type="text/javascript" src="http://islpronto.islonline.net/live/islpronto/public/chat_info.js?d=japanphoto&filter=Bilder&lang=no&chat_height=500&chat_width=700"></script>
+<script type="text/javascript">
+if(ISLProntoInfo.supporters != 0) {
+ var link1 = document.getElementById('islpronto_link1');
+ link1.href = 'javascript:void(0)';
+ link1.onclick = ISLProntoInfo.onchat;
+ var image1 = document.getElementById('islpronto_image1');
+ image1.src = 'http://d.static.eurofoto.no/cms/images/smabannera_livechat_online.jpg';
+}
+</script>
+-->
+</body>
+</html>

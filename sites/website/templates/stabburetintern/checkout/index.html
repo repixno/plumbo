@@ -1,0 +1,624 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="${static:css/portals/stabburet/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+       <!-- <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />-->
+        <link href="${static:css/portals/stabburet/web/css/redmond/jquery-ui.min.css}" rel="stylesheet" />
+	<div metal:use-macro="../common.html/stylesheet" />
+        <style type="text/css">
+        
+			.left{
+				text-align: left;
+			}
+			.kjopforsiden{
+                position: absolute;
+                top: -5px;
+                left: 20px;
+            }
+			.span2{
+				width: 85px;
+			}
+			ul#products {
+				margin: 1em 0; padding: 0;
+			}		
+			ul.sizes { margin: 0; padding: 0}	
+			ul#products li, ul.sizes li { 
+				list-style-type: none;
+				width: 150px;
+				padding: 0px 0 5px 0;
+				margin: 0;
+				float: left;
+			}
+			ul#products input, input.quantity {
+				width: 1em;
+			}
+	    
+			.button{
+				border: none;
+				background-color: #0094d3;
+				display: inline-block;
+				padding: 5px 10px 6px 10px;
+				color: #fff;
+				text-decoration: none;
+				font-weight: bold;
+				line-height: 1;
+				border-radius: 5px;
+				-moz-border-radius: 5px;
+				-webkit-border-radius: 5px;
+				box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+				-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+				-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+				text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+				border-bottom: 1px solid rgba(0,0,0,0.25);
+				position: relative;
+			}
+			a.button:hover{
+				text-decoration: none !important;
+			}
+			input.quantity{
+				margin-bottom: 0px;
+			}
+	    
+			label{
+				color:#1077a5;
+				font-family: 'Helvetica';
+			    font-size: 1.3em;
+				font-weight: normal;
+			}
+			h4{
+				font-family: 'Populaire';
+			    font-size: 3em;
+				font-weight: normal;
+			}
+			h5{
+				color:#1077a5;
+				font-family: 'Helvetica';
+			    font-size: 1.2em;
+				font-weight: normal;
+			}
+			label{
+				font-weight: normal;
+				cursor: default;
+			}
+			label.notice{
+				font-size: 1.3em;
+			}
+			div.desktoplabel{
+				width: 110px;
+			}
+			label.error{
+				position: relative;
+				top: -8px;
+				left: 12px;
+				font-size: 1em;
+				color: red;
+				font-family: arial;
+				margin: 0px;
+				width: 220px;
+				text-align: left;
+			}
+			[class*="span"] {
+				position: relative;
+			}
+			.hidden{
+				display: none;
+			}
+			
+			@media (max-width: 878px) {
+				.span5{
+					width: 200px;
+				}
+    
+			}
+			.ui-widget-content a {
+				color: blue;
+				text-decoration: underline;
+			}
+        </style>
+	
+	<div metal:use-macro="../common.html/javascript" />
+	<script src="${static:css/portals/stabburet/web/js/checkout.js}"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    </head>
+    
+    <body>
+	<tal:block metal:define-macro="show-image">
+	    <tal:block tal:condition="exists:product/images" tal:repeat="image product/images">
+		 <a href="http://static.eurofoto.no/images/products/thumbs/height/500/${image/url}" class="fancybox" title="${product/ingress}">
+		       <img src="http://static.eurofoto.no/images/products/thumbs/height/100/${image/url}" title="${product/title}" height="100" tal:condition="equal:repeat/image/number,1" />
+	       </a>
+	    </tal:block>
+	 </tal:block>
+	
+	
+        <div class="row text-center hidden-phone header">
+	    <img  src="${static:css/portals/stabburet/web/images/preheader.png}" alt="LAG LOKK MED DITT BILDE"/>
+        </div>
+        <div class="center container">
+            <!-- Main hero unit for a primary marketing message or call to action -->
+            <div style="position: relative">
+            <div class="span12 last left" style="margin-bottom:  20px">
+			
+				<div class="span12">
+					<div class="span6">
+						<div style="text-align: center; margin-top: 60px;">
+							<h4>KOPPEN DIN ER KLAR!</h4>
+							<p style="color: #ef321b; font-size: 1.3em">Du kan bestille tre kopper totalt, disse vil bli<br/>
+							sendt til din selgeradresse 4. august.</p>
+						</div>
+					</div>
+				<div>
+				<img src="/bestill/thumbint/${lokk/thumbid}"/>	
+			    </div>
+			</div>
+			
+			<ul tal:condition="exists:sections/products" id="products" class="hide">
+				<tal:block tal:repeat="product sections/products">
+				    <li tal:condition="equal:product/id,3318" class="gift center ${conditionalmatch:product/options/length,1,one-option,more-options}" id="id${product/id}">
+					<div class="span-3 center" style="height: 7em">
+					    <tal:block metal:use-macro="show-image" />
+					</div>
+					<div class="span2 center" style="height: 4em">
+						<h5>${product/title}</h5> 
+					</div>
+					<tal:block tal:condition="equal:product/options/length,1">
+						<div class="span-4 right">
+							<tal:block tal:condition="exists:cart/items/gifts/${product/option/prodno}">
+							    <tal:block tal:repeat="item cart/items/gifts/${product/option/prodno}">
+								<input type="text" class="quantity"  value="${item/quantity}" name="${product/option/prodno}" />
+							    </tal:block>
+							</tal:block>
+							<tal:block tal:condition="not:exists:cart/items/gifts/${product/option/prodno}">
+							<input type="text" class="quantity"  value="1" name="${product/option/prodno}" />
+							</tal:block><br/>
+							<span class="large price">Kr ${product/option/price}</span>
+						</div>
+					</tal:block>
+					<tal:block tal:condition="gt:product/options/length,1">
+						<div class="span-6 right">
+						    <div>
+							Antall:<span class="product-quantity">0</span><br/>
+							<a href="#open_options_${product/id}" class="open-options" i18n:translate="">Choose sizes</a><br/> 
+							<span class="large price">Kr ${product/option/price}</span>
+						    </div>
+							<div class="hide product-options" id="open_options_${product/id}" title="Choose size" i18n:attributes="title">
+								<table class="sizes">
+									<tal:block tal:repeat="option product/options">
+										<tr id="optionid${option/id}">
+										    <td style="text-align: right; padding: 2px 8px 2px 0;">
+											<label>${option/title}</label>
+										    </td>
+										    <td style="text-align: left; padding: 2px 0 2px 0;">
+										    <input type="text" class="quantity"  id="option${option/id}" value="0" name="${product/option/prodno}" rel="#id${product/id}"/>
+										    <script type="text/javascript">
+											    $('#optionid${option/id}').data({
+												    'id'		:'${product/id}',
+												    'optionid'	:	'${option/id}',
+												    'prodno'	:	'${option/prodno}',
+												    'lokkid'		:'${lokk/id}',
+												    'imageid'		:'${lokk/imageid}'
+											    });
+										    </script>
+										    </td>
+										</tr>
+									</tal:block>
+								</table>
+							</div>
+						</div>
+					</tal:block>
+					<script type="text/javascript">
+					    $('#id${product/id}').data({
+						'id'			:	'${product/id}',
+						'optionid'		:	'${product/option/id}',
+						'prodno'		:	'${product/option/prodno}',
+						'lokkid'		: 	'${lokk/id}',
+						'imageid'		:	'${lokk/imageid}'
+					    });
+					</script>
+				    </li>	
+				</tal:block>
+			</ul>
+		</div>
+                
+            </div>
+        <div style="margin: 15px 0 25px 0 ">
+		<img src="${static:css/portals/stabburet/web/images/blueline.png}" />
+	    </div>
+	    <form method="post" action="/checkout/confirm/" id="contact-and-delivery-info">
+            <div class="span6 text-left">
+		<div class="row" tal:condition="session/loggedin">
+		    <div class="span2">
+			<label for="contact-email" i18n:translate="">E-mail</label>
+		    </div>
+		    <div class="span3">
+			<input id="contact-email" name="cemail" type="text" class="span4 required email" value="${session/username}" 
+			    tal:attributes="disabled conditionalmatch:session/username,disabled,disabled,disabled"/>
+		    </div>
+		</div>
+		<div tal:condition="not:session/loggedin" class="row">
+		    <div class="span2">
+			<label for="contact-email" i18n:translate="">E-mail</label>
+		    </div>
+		    <div class="span3">
+			<input id="contact-email" name="cemail" type="text" class="span4 text required email" value="" />
+		    </div>
+		</div>
+		<div class="hide" id="password-container">
+			<p class="red" i18n:translate="">You are already registered, please provide password.</p>
+			<div class="row">
+			    <div class="span2">
+			        <label for="password" i18n:translate="">Password</label>
+			    </div>
+			    <div class="span3">
+				<input id="password" name="password" type="password" class="span4 password text"  />
+			    </div>
+			</div>
+			<div class="row">
+			    <div id="forgot-password" class="right span-8 last">
+				<a href="/login/forgot-password" class="small" i18n:translate="">Forgot password?</a>
+			    </div>
+			</div>
+			
+		</div>
+		<div class="hide" id="new-user-container">
+		    <p class="" style="color:#0094d3; font-weight: bold">Siden dette er ditt første Leverposteilokk, ber vi deg vennligst velge et passord. <a style="text-decoration: underline" id="rulesbutton" href="#">Les mer her</a></p>
+		    <div class="row">
+			    <div class="span3" style="width: 182px">
+			        <label for="password-new-user" i18n:translate="">Password</label>
+			    </div>
+			    <div class="span2">
+				<input id="password-new-user" name="password-new-user" type="password" class="password text"  />
+			    </div>
+		    </div>
+		    <div class="row">
+			    <div class="span3" style="width: 182px">
+			        <label for="repeat-password" i18n:translate="">Repeat password</label>
+			    </div>
+			    <div class="span2">
+				<input id="repeat-password" name="repeat-password" type="password" class="password text"  />
+			    </div>
+		    </div>
+		</div>
+		<div id="delivery-address">
+		    <div class="row">
+			<div class="span2">
+			    <label for="contact-name" i18n:translate="">Name:</label>
+			</div>
+			<div class="span3">
+			    <input id="contact-name" name="cname" type="text" class="text required name span4" value="${user/fullname}"/>
+			</div>
+		    </div>
+		    <div class="row">
+			<div class="span2">
+			    <label for="contact-address">Selgerlager Addresse:</label>
+			</div>
+			<div class="span3">
+			    <textarea id="contact-address" name="caddress" style="height: 50px;" tal:content="user/address" class="required span4" cols="30" rows="6"/>
+			</div>
+		    </div>
+		    <div class="row">
+			<div class="span2">
+			    <label for="contact-zipcode" i18n:translate="">ZIP code:</label>
+			</div>
+			<div class="span1">
+			    <input id="contact-zipcode" name="czipcode" type="text" class="text required span1" value="${user/zipcode}"/>
+			</div>
+			<div class="span1">
+			    <label for="contact-city" i18n:translate="">City:</label>
+			</div>
+			<div class="span2">
+			    <input id="contact-city" name="ccity" type="text" class="text required span2" value="${user/city}"/>
+			    <input type="hidden" id="contact-country" name="ccountry" value="NO"/>
+			</div>
+		    </div>
+		    <div class="row">
+			<div class="span2">
+			    <label for="phone" >Telefon:</label>
+			</div>
+			<div class="span3">
+			    <input id="phone" name="phone" type="text" class="text required span4" tal:attributes="value user/mobile|default" value=""/>
+			</div> 
+		    </div>
+		</div>
+		
+		<script type="text/javascript">
+				$(document).on( 'blur', '#contact-email',  function() {
+					//console.log( $(this).val() );
+					$.get('/api/1.0/user/registered', {newEmail: $(this).val()  }, function(response) {
+						if (response == 'true') {
+							// removes required from login
+							$('#password-container').hide('fast');
+							$('#password', '#password-container').removeClass('required')
+							$('#checkout-login-button').remove();
+							$('#password-new-user', '#new-user-container').addClass('required');
+							$('#repeat-password', '#new-user-container').addClass('required');
+							$('#eula', '#new-user-container').addClass('required');
+							$('#new-user-container').show('fast', function() {
+							   $( '#password-new-user' ).trigger( 'focus' );
+							});
+							$('#delivery-address').show('fast');
+						}
+						else if(response == '"registered"' ){
+							$('#delivery-address').hide();
+							/*<![CDATA[*/
+							if( $('#checkout-login-button').length == 0){
+							    //$('#password', '#password-container').after('<button class="btn btn-primary" id="checkout-login-button">Login</button>');
+							    $('#password', '#password-container').after('<div class="btn btn-primary" id="checkout-login-button">Login</div>');
+							}
+							/*]]>*/
+							// removes required from the dom when user changes his mind
+							$('#new-user-password', '#new-user-container').removeClass('required');
+							$('#repeat-password', '#new-user-container').removeClass('required');
+							$('#eula', '#new-user-container').removeClass('required');
+
+							$('#new-user-container').hide('fast');
+							$('#password', '#password-container').addClass('required')
+							$('#password-container').show('fast', function() {
+								$('#password').trigger('focus');
+							});
+						}
+					});
+				});
+
+		</script>
+            </div>
+	    <div class="span5">
+			<div class="row text-right" style="position: relative; height:180px;">
+				<div style="position: absolute; bottom: 10px; right: 20px;">
+					<a id="startover" style="color:#ef321b; text-decoration: underline; margin-right: 5px;" class="" href="#">Start på nytt</a> <a  href="#" id="add-to-cart"  style="letter-spacing:2px" class="btn btn-stabburet">Fullfør</a>
+				</div>
+			</div>
+	    </div>
+	    <input type="hidden" id="eula" name="eula" value="true"/>
+	    </form>
+        </div>
+        <div metal:use-macro="../common.html/footer2" />
+	
+	<div id="dialog" title="&nbsp;" style="display: none;">
+	    <img id="image" src=""/>
+		
+	</div>
+	<div id="dialog-confirm" title="Start på nytt?" style="display: none; height:110px">
+			<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Du er i ferd med å slette din kopp og begynne på en ny.<br/>
+			Er du sikker på at du ønsker dette?</p>
+	</div>
+												
+    
+    <script>
+	/*<![CDATA[*/
+	$(document).ready(function() {
+	    var totalskirts = 0;
+		var lokkid = ${lokk/id};
+		
+	    
+	    $('#startover').on( 'click', function(){
+		    $( "#dialog-confirm" ).dialog({
+			resizable: false,
+			height:200,
+			modal: true,
+			buttons: {
+			  "Start på nytt": function() {
+			    window.location =  '/bestill/editor/startover';
+			  },
+			  Cancel: function() {
+			     $( this ).dialog( "close" );
+			  }
+			}
+		    });
+		    
+		    return false;
+		});
+	
+	$('#add-to-cart').on('click', function() {
+		   //$(this).attr('disabled','disabled').before($('<img src="http://static.eurofoto.no/gfx/gui/ajax-loader.gif" />'));		    
+			if( $('#contact-and-delivery-info').valid() ){
+			    $('#products li').each( function(i, item) {
+				
+				/*
+				    if( $('input.quantity', item ).val() > -1 || $(item).hasClass('more-options') ) {
+					if( orderGift( $(item).data('id'), $(item).data('optionid'),  $(item).data('prodno'), $('input.quantity', item).val(), $(item).data('lokkid') ) ) {
+					    addedToCart = true;
+					}	
+				    }
+				*/
+
+				if ( $(item).hasClass('gift') && $(item).hasClass('one-option') ) {
+						    
+				    if( orderGift( $(item).data('id'), $(item).data('optionid'),  $(item).data('prodno'), $('input.quantity', item).val(), $(item).data('lokkid') ) ) {
+					    addedToCart = true;
+				    }
+						    
+				} else if ( $(item).hasClass('gift') && $(item).hasClass('more-options') ) {
+					
+					var optionsContainer = $('a.open-options', item).attr('href');
+					$('tr', optionsContainer).each( function(i, option) {
+						
+						if( $('input', option).val() > -1) {
+							
+							if( orderGift( $(option).data('id'), $(option).data('optionid'), $(option).data('prodno'), $('input.quantity', option).val() ,$(item).data('lokkid') ) ) {
+								addedToCart = true;
+							}
+						}    
+					});	    
+				}
+				
+				
+			    //$('#contact-and-delivery-info').submit();
+			    });
+			}
+			$('#contact-and-delivery-info').submit();
+			//window.location.href = '/checkout/confirm';
+			return false;
+		});
+	
+	    
+	});
+	
+	function orderGift( id, optionid, prodno, quantity, lokkid ) {
+	    var finished = false;
+	    var malid;
+	    var malpageid;
+	    var ratio;
+	    var x = 0;
+	    var y = 0;
+	    var malarray = new Array();
+	    
+	    switch( optionid ){
+		case '3327': //magnet
+		    malid 	= '2695';
+		    malpageid 	= '6171';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '385';
+		    dy		= '385';
+		break;
+		case '3329': //klistremerke
+		    malid 	= '2693';
+		    malpageid 	= '6169';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '439';
+		    dy		= '439';
+		break;
+		case '3325': //nøkkelring
+		    malid 	= '2697';
+		    malpageid 	= '6173';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '384';
+		    dy		= '384';
+		break;
+		case '3323': //matboks
+		    malid 	= '2694';
+		    malpageid 	= '6170';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '443';
+		    dy		= '443';
+		break;
+		case '3321': //drikkeflaske
+		    malid 	= '2699';
+		    malpageid 	= '6175';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '472';
+		    dy		= '472';
+		break;
+		case '3319': //kopp
+		    malid 	= '2698';
+		    malpageid 	= '6174';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '472';
+		    dy		= '472';
+		break;
+		case '3339':  //2-3
+		case '3340':  //4-6
+		case '3341':  //8-10
+		case '3342':  //12-14
+		case '3335':  //tskjorte S
+		case '3336':  //tskjorte M
+		case '3337':  //tskjorte L
+		case '3338':  //tskjorte XL
+		    malid 	= '2702';
+		    malpageid 	= '6178';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '1300';
+		    dy		= '1300';
+		break;
+		case '3348': //musematte
+		    malid 	= '2707';
+		    malpageid 	= '6183';
+		    tmplx	= '0';
+		    tmply	= '0';
+		    dx		= '1004';
+		    dy		= '1004';
+		break;
+	    }
+	    
+	    x = x / ratio;
+	    y = y / ratio;
+	    
+	    var pages = new Array();
+	    pages.push();
+	    pages[0] = new Object();
+	    pages[0].malid = malid;
+	    pages[0].malpageid = malpageid;
+	    pages[0].giftQuantity = quantity;
+	    pages[0].productoptionid = optionid;
+	    pages[0].productid = id;
+	    pages[0].size = "small";
+	    pages[0].lokkid = lokkid;
+	    pages[0].prodno = prodno;
+	    /*pages[0].editor_x = tmplx / ratio;
+	    pages[0].editor_y = tmply / ratio;
+	    pages[0].image = new Object()
+	    pages[0].image.x = (-crop.x1 + x ) * ratio;
+	    pages[0].image.y = (-crop.y1 + y ) * ratio;
+	    pages[0].image.dx = crop.imagewidth * ratio;
+	    pages[0].image.dy = crop.imageheight * ratio;
+	    //pages[0].image.dx = 1068.0619047619048;//$('#image').width() * ratioWidth;
+	    //pages[0].image.dy = 728.4705882352941; //$('#image').height() * ratioHeight;
+	    pages[0].image.bid = imageid;
+	    pages[0].texts = new Array();
+	    pages[0].cliparts = new Array();*/
+	    /*if( quantity > 0 ){
+		console.log( pages );
+	    }*/
+	    
+	    
+	    $.ajax({
+		    type: 'POST',
+		    url: '/bestill/save',
+		    async: false,
+		    data: { 
+			    'pages'	: JSON.stringify( pages )
+		    },
+		    complete: function(msg) {
+			    addedToCart = true;
+			    finished = true;
+		    },
+		    success: function(msg) {
+			    addedToCart = true;
+			    finished = true;
+		    },
+		    error: function(msg) {
+			    alert('error' + msg);
+		    }
+	    });
+	    
+	    return finished;
+	}
+	
+	
+	$('.open-options').click( function() {
+		
+			var id = $(this).attr('href');
+			var item = $(this).parent();
+			var quantity = 0;
+			
+			//$(id).dialog('open');
+			$(id).dialog({
+				'resizable'	:	'false',
+				'width': '250'
+			});
+			return false;
+		});
+	
+	$('input', '.product-options').bind('change', function() {
+			var container = $(this).attr('rel');
+			var totalQuantity = 0;
+			$(this).parent().parent().parent().find('input').each( function(i, item) {
+				totalQuantity = totalQuantity + parseInt( $(item).val() );
+			});
+			$('.product-quantity', container).text( totalQuantity );
+		});	
+	
+	/*]]>*/
+	
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Login</tal:block>
+</head>
+
+
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<div class="span-24 last center">
+	
+		<hr class="space" />
+	
+		<tal:block tal:condition="not:exists:alreadysent">
+			<h2>Takk for din deltagelse</h2>
+			<p class="large"> 
+			
+			</p>
+		</tal:block>
+		
+		<hr class="space" />
+		
+		<tal:block tal:condition="exists:alreadysent">
+			<h2>Du har allerede sendt inn svar</h2>
+			<p>Om dette ikke stemmer kan du <a href="${url:/contact/}">kontake oss</a> </p>
+		</tal:block>
+		
+		<hr class="space" />
+	
+	</div>
+	
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+</body>
+</html>

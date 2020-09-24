@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Template</title>
+<tal:block metal:use-macro="../common.html/css" />
+<script type="text/javascript" src="/js/admin.js"></script>
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+
+		<tal:block metal:use-macro="../common.html/languages" />
+			
+		<div id="content">
+			
+         <h3>
+         	<tal:block i18n:translate="">Default menu list</tal:block>
+         </h3>
+         
+         <div>
+         
+            <h4 i18n:translate="">Products</h4> 
+            
+            <b class="span-8" i18n:translate="">Title</b><b class="span-12 last" i18n:translate="">URL (auto-generated url's are cursive)</b>
+         
+            <tal:block tal:repeat="product products">
+            
+              <div class="span-8"><a href="/content/${product/type}s/${product/id}/">${product/title}&nbsp;</a></div><div class="span-12 last" tal:condition="exists:product/hasdefault"><b>${product/defaultmenuurl}&nbsp;</b></div><i class="span-12 last" tal:condition="not:exists:product/hasdefault">${product/url}&nbsp;</i><br />
+            
+            </tal:block><br />
+            
+         </div>		
+
+		</div>
+		
+		<tal:block metal:use-macro="common.html/content-menu" />
+		<div id="footer" />
+	</div>
+</body>
+</html>

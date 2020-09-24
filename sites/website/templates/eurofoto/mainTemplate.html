@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="common.html/head" />
+</head>
+
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="common.html/top" />
+
+	<!-- use if menu is needed -->
+	<div metal:use-macro="common.html/left-menu" />
+	
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div id="content">
+
+		<!-- put the content here -->	
+   
+	</div>
+
+	<!-- use if menu is needed -->
+	<div metal:use-macro="common.html/right-menu" />
+
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<script src="${static:}js/producteditor/lib/jquery.js"></script>
+	<script src="${static:}js/producteditor/lib/jquery-ui/jquery-ui.js"></script>
+	<script src="${static:}js/producteditor/lib/fabric.min.js"></script>
+	<script src="${static:}js/producteditor/newimage.js"></script>
+	<script src="${static:}js/producteditor/fontloader.js"></script>
+	<script src="${static:}js/producteditor/lib/jquery.minicolors.js"></script>
+    <!--<script src="http://fabricjs.com/lib/fabric.js"></script>-->
+    <script src="http://b.static.eurofoto.no/js/jquery.upload-1.0.2.js?3.103"></script>
+	<script src="${static:}js/producteditor/lib/jquery.imgareaselect/scripts/jquery.imgareaselect.min.js"></script>
+	<!--<script src="${static:}js/producteditor/lib/centering_guidelines.js"></script>
+	<script src="${static:}js/producteditor/lib/aligning_guidelines.js"></script>-->
+	<!--<script src="${static:}js/producteditor/lib/fileupload/jquery.iframe-transport.js"></script>
+	<script src="${static:}js/producteditor/lib/fileupload/jquery.fileupload.js"></script>
+	<script src="${static:}js/producteditor/lib/fileupload/jquery.ui.widget.js"></script>-->
+	
+	<link rel="stylesheet" href="${static:}js/producteditor/lib/jquery-ui/jquery-ui.min.css?${version}" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="${static:}css/bootstrap/css/bootstrap.min.css?${version}" type="text/css" media="screen, projection" />
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="${static:}css/bootstrap/css/bootstrap-theme.min.css"/>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="${static:}css/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="${static:}css/jquery/imageareaselect/imgareaselect-default.css?${version}" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="${static:}js/miniColors/jquery.minicolors.css?${version}" type="text/css" media="screen, projection" />
+
+	
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Damion"/>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Dynalight"/>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Caudex"/>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Comfortaa"/>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Esteban"/>
+	
+    <style type="text/css">
+		
+		
+		body{
+			background: #ccc;
+		}
+        #wrap1, .preview{
+		border: 1px solid #CCC;
+		box-shadow: 1px 2px 7px rgba(0,0,0,0.2);
+		-webkit-box-shadow: 1px 2px 7px rgba(0,0,0,0.2);
+		-moz-box-shadow: 1px 2px 7px rgba(0,0,0,0.2);
+        }
+	.preview, .image, .templatethumb, .clipart, .backgroundfile{cursor: pointer;}
+	button:hover, a.button:hover {
+		color: #3333cc;
+	}
+    #textedit{
+		position: absolute;
+		z-index: 2000;
+		top: 29px;
+		left: 51px;
+		border: 1px solid #CCC;
+		background: #FFF;
+		padding: 10px;
+	}
+	#textedit textarea{
+		width: 180px;
+		height: 70px;
+	}
+	.textalign, .textweight {
+		width: 25px;
+		height: 25px;
+		display: block;
+		float: left;
+	}
+	.textalign {
+		background: url('//d.static.eurofoto.no/gfx/merkelapp/text-align.png') no-repeat;
+	}
+	.textweight{
+		background: url('//b.static.eurofoto.no/cms/images/text-weight.png') no-repeat;
+	}
+	
+	.bar {
+		height: 18px;
+		background: green;
+	}
+	
+	body{
+		background-image: url('')!important;
+		padding: 20px;
+	}
+	
+	.hidden{
+		display: none;
+	}
+        
+	.editorcontainer{
+		
+		
+	}
+	.imagelist img{
+		position: relative;
+		z-index: 100000;
+	}
+	ul {
+		list-style-type: none;
+		padding: 0px;
+		margin: 0px;
+	}
+	ul li{
+		padding-bottom: 5px;
+	}
+	.center{
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: auto;
+		margin-bottom:  auto;
+	}
+	
+	
+	div.loader {
+		opacity:    0.9; 
+		background: #000;
+		color: #fff;
+		width:      100%;
+		height:     100%; 
+		z-index:    10;
+		top:        0; 
+		left:       0; 
+		position:   fixed;
+		text-align:center;
+		vertical-align:middle;
+	}
+	
+	.previewcontainer{
+		position: absolute;
+		top: 100;
+		left : 100;
+		z-index: 9;
+	}
+	
+	#new_text_container{
+		text-align: center;
+		padding: 20px;
+		
+	}
+	
+	.center{
+		text-align: center;
+	}
+	.ui-dialog-titlebar { display:none; }
+	
+	
+	.editormenu li{
+		border-top: 1px solid #a4a5aa;
+		border-bottom: 1px solid #6c6c6c;
+		position: relative;
+		margin: 0;
+		padding: 0;
+	}
+
+	.editormenuheader{
+		color: #000;
+		padding: 2px 20px;
+		cursor:move;
+	}
+	
+	.editormenu li a{
+		display: block;
+		padding: 10px 20px;
+		color: #fff;
+	}
+	
+	#imagemenu{
+		position: absolute;
+		z-index: 2000;
+		top: 29px;
+		left: 251px;
+		border: 1px solid #CCC;
+		border-radius: 0px;
+		padding: 0;
+	}
+	
+	#block {
+		background: #767676;
+		filter:alpha(opacity=80); /* IE */
+		-moz-opacity:0.8; /* Mozilla */
+		opacity: 0.8; /* CSS3 */
+		position: absolute;
+		top: 0; left: 0;
+		height: 100%; width:100%;
+	}
+	
+	#font-list{
+		position: relative;
+	}
+	
+	#font-list span{
+		display: block; 
+		border: solid 1px #ccc;
+		height: 30px;
+		width: 200px;
+		padding: 4px 1px 0px 10px;
+	}
+	
+	#font-list span:after {
+		content: ' ';
+		height: 0;
+		position: absolute;
+		width: 0;
+		border: 8px solid transparent;
+		border-top-color: #333;
+		top: 30%;
+		left: 89%;
+	}
+	
+	.fonter-container{
+		position: absolute;
+		height: 400px;
+		border: solid 1px #ccc;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+	
+	#fonter{
+		list-style-type: none;
+		background: #fff;
+		width: 213px;
+		margin: 0px;
+	}
+	#fonter li{
+		padding: 5px;
+		font-size: 1.1em;
+		cursor:  default;
+	}
+	li.active{
+		background: lightblue;
+	}
+    </style>
+    
+        
+</head>
+<body>
+	<div id="previewcontainer" class="previewcontainer" style="margin-top: 30px">
+		<input type="hidden" id="templateid" value="${templateid}"/>
+		<ul class="">
+			<tal:block tal:repeat="malpage malpages">
+				<li>
+					<a href="#" class="malpage preview-${malpage/malpageid}" id="${malpage/malpageid}"><img alt="${malpage/malpageid}" src="${malpage/thumbnail}"/></a>
+				</li>
+			</tal:block>
+		</ul>
+	</div>
+	<div class="editorcontainer jp-box">
+      	
+		<div style="text-align: right">
+			
+			<!--<button class="ui-state-default" id="zoomout">Zoom Out</button>
+			<button class="ui-state-default" id="zoomin">Zoom Inn</button>
+			<button class="ui-state-default" id="zoomreset">Reset</button>-->
+			<button class="ui-state-default" id="undo">Undo</button>
+			<button class="ui-state-default" id="redo">Redo</button>
+			<!--
+			<button class="ui-state-default" id="delete_image">Delete</button>
+			<button class="ui-state-default" id="load">Load</button>
+			<button class="ui-state-default" id=G"move-front">Flytt fram</button>
+			<button class="ui-state-default" id="movebackward">Flytt bakover</button>-->
+			
+		</div>
+		<div class="span">
+			<div class="col-md-12" style="text-align: center">	
+				<div class="">
+					<div id="wrap1" style="margin-left: auto; margin-right: auto;">
+						<canvas width="630" height="361" id="c1"></canvas>
+					</div>	
+				</div>
+			</div>
+			<div class="col-md-12" style="margin-top: 40px;">
+		
+				<div id="tabs">
+					<ul>
+					  <li><a href="#tabs-1">Bilder</a></li>
+					  <li><a href="#tabs-2">Bakgrunn</a></li>
+					  <li><a href="#tabs-3">Clipart</a></li>
+					  <li><a href="#tabs-text">Text</a></li>
+					  <li><a href="#tabs-pensel">Drawing</a></li>
+					</ul>
+					<div id="tabs-1">
+						<div style="display: none">
+							<button class="ui-state-default" id="new_mage">Nytt bilde</button>
+							<!--<input type="file" name="imageupload" id="imageupload" />-->
+							
+							<input id="fileupload" type="file" name="files[]" data-url="/api/1.0/tedit/upload2/" multiple="true" />
+							<div id="progress">
+								<div class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						
+						<div class="albumlist" style="height: 200px; overflow: scroll; text-align: center">
+						<!--<tal:block tal:repeat="album albums">
+							<a href="#"  class="album" tal:attributes="id album/id" id="">
+								<img tal:attributes="src album/thumbnailurl" height="80" style="margin: 2px" />
+							</a>		
+						</tal:block>-->
+						</div>
+						<!---<span class="btn btn-success fileinput-button">
+							<i class="icon-plus icon-white"></i>
+							<span>Add files...</span>
+							<input type="file" name="files[]" multiple="true" />
+						</span>-->
+						
+						<div id="imagelist"></div>
+						
+						
+			
+					</div>
+					<div id="tabs-2">
+						<div>
+							<div>Trykk å bakgrunn for å velge.</div>
+							<div id="background"></div>
+								<tal:block tal:repeat="background backgrounds">
+									<span class="backgrounds" id="${background/filename}"><img width="50" src="/assets/producteditor/web/backgrounds/thumb/${background/filename}"/></span>
+								</tal:block>
+							</div>
+					</div>
+					<div id="tabs-3">
+						<div>Trykk på motiv for å velge.</div>
+							<div id="clipart">
+								<tal:block tal:repeat="clipart cliparts">
+									<span class="cliparts" id="${clipart/filename}"><img width="50" src="/assets/producteditor/web/clipart/thumb/${clipart/filename}"/></span>
+								</tal:block>
+							</div>
+							
+					</div>
+					<div id="tabs-text" style="padding:0em 0em">
+						
+						<div id="new_text_container">
+							<a href="#" class="btn ui-state-default" id="new_text">Ny text</a>
+						</div>
+						
+						<div id="text-options-container" style="display: none">
+							<form id="text-options">
+								<div style="border: solid 1px #ccc; padding: 0.5em 2em; height: 50px;">
+									
+									<div style="float: left">
+										<button type="button" id="delete_image">Delete</button>
+										<button type="button"  id="move-front">Flytt fram</button>
+										<button type="button"  id="movebackward">Flytt bakover</button>
+									</div>
+									
+									<div style="float: left">
+									
+									
+									<!--<label for="gravity">Tekstjustering:</label>-->
+									
+									
+									<span class="textalign" id="left" style="background-position: -37px -7px;"></span>
+									<span class="textalign" id="center" style="background-position: -7px -37px;"></span>
+									<span class="textalign" id="right" style="background-position: -7px -67px;"></span>
+									<input id="gravity" name="gravity" type="hidden" value="left"/>
+									
+									
+									<span class="textweight" id="normal" style="background-position: -37px -7px;"></span>
+									<span class="textweight" id="bold" style="background-position: -7px -37px;"></span>
+									<span class="textweight" id="italic" style="background-position: -7px -67px;"></span>
+									<input id="textweight" name="textweight" type="hidden" value="normal"/>
+						
+								
+					
+									
+									</div>
+									
+									<div style="float: left; margin-left: 10px;" name="font-list" id="font-list"/>
+									
+									<div style="float: left; margin-left: 10px;">
+										<input class="minicolors" id="colorselect" data-control="saturation" type="text" value="#000000"/>
+										Stroke:
+										<input id="strokecolor" type="color" value="#000000" style="width:70px"/>
+									</div>
+									<div style="float: left">
+										<input type="range" name="strokewidth" min="0" max="5" step="0.5"  value="0" style="width:100px; margin-left: 10px;"/>
+									</div>
+								</div>
+								<div style="padding:1em 2em">
+									<textarea class="textarea" id="text" style="width:400px; height: 60px; margin: 0 5px 0 0; padding: 1px;"></textarea>
+									<a href="#" class="btn ui-state-default" id="addtext" style="display:none">Oppdater text</a>	
+								</div>
+							</form>
+						</div>
+					</div>
+		
+					<div id="tabs-pensel">
+						<button id="drawing-mode" class="btn btn-info">Enter drawing mode</button>
+						<div id="drawing-mode-options" style="width: 200px">
+							<label for="drawing-mode-selector">Mode:</label>
+							<!--<select id="drawing-mode-selector">
+							  <option>Pencil</option>
+							  <option>Circle</option>
+							  <option>Spray</option>
+							  <option>Pattern</option>
+						
+							  <option>hline</option>
+							  <option>vline</option>
+							  <option>square</option>
+							  <option>diamond</option>
+							  <option>texture</option>
+							</select><br />-->
+						
+							<label for="drawing-line-width">Line width:</label>
+							<span class="info">30</span><input type="range" value="30" min="0" max="150" id="drawing-line-width" /><br />
+						
+							<label for="drawing-color">Line color:</label>
+							<input type="color" value="#005E7A" id="drawing-color" /><br />
+						</div>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="span">
+			<div class="col-md-12" style="text-align: right; padding: 20px;">
+				<a id="save" class="btn btn-default" href="#">Save</a>
+			</div>
+			
+			
+		</div>
+   </div>
+	
+   
+   <div class="" style="display: none;" id="imagemenu">
+		<div id="block"></div>	
+		<h5 class="editormenuheader">Edit Image</h5>
+		<ul class="editormenu">
+			<li class=""><a href="#" id="delete_image">Delete</a></li>
+			<li class=""><a href="#" id="crop">Crop</a></li>
+			<li class=""><a href="#" id="move-front">Flytt fram</a></li>
+			<li class=""><a href="#" id="movebackward">Flytt bakover</a></li>
+			<!--<li><button type="button" id="zoominimage">Zoom in</button></li>
+			<li><button type="button" id="zoomoutimage">Zoom out</button></li>
+			<li>
+				<button type="button" id="moveleft">&#8592;</button>
+				<button type="button" id="moveup">&#8593;</button>
+				<button type="button" id="movedown">&#8595;</button>
+				<button type="button" id="moveright">&#8594;</button>
+			</li>-->
+			<li class="">
+				<a href="#" id="addframe">Ramme</a> 
+			</li>
+		</ul>
+	</div>
+   <div style="display: none;" id="imagemenu2">	
+        <button type="button" id="delete_image">Delete</button>
+		<button type="button"  id="crop">Crop</button>
+		<button type="button"  id="move-front">Flytt fram</button>
+		<button type="button"  id="movebackward">Flytt bakover</button>
+		<!--<button type="button" id="zoominimage">Zoom in</button>
+		<button type="button" id="zoomoutimage">Zoom out</button>
+		<button type="button" id="moveleft">&#8592;</button>
+		<button type="button" id="moveup">&#8593;</button>
+		<button type="button" id="movedown">&#8595;</button>
+		<button type="button" id="moveright">&#8594;</button>-->
+   </div>
+   <div class="center"  style="display:none" id="cropwindow"> 
+	<div><img id="cropimage" width="470" src=""/></div>
+	<div class="center" style="width:470px; padding:20px">
+		<button id="closecrop">OK</button>
+	</div>
+   </div>
+    
+   <script type="text/javascript" src="${static:}js/producteditor/mainnew.js" />
+   <script type="text/javascript" src="${static:}js/producteditor/producteditor.js" />
+   <script type="text/javascript" src="${static:}js/producteditor/lib/jquery.loadpage.js" />
+<script type="text/javascript">/*<![CDATA[*/
+		
+    /*]]>*/
+    </script>
+
+</body>
+</html>

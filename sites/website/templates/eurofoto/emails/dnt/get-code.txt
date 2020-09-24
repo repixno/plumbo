@@ -1,0 +1,10 @@
+<tal:block>
+<tal:block >Din Rabatt-kode.</tal:block>
+
+
+
+Sjokkpriskode: <tal:block tal:content="cms:ingress:8f20048a-6564-4647-bb53-7cbfd524c584"></tal:block>
+
+Med vennlig hilsen\n
+Eurofoto i samarbeid med Den Norske Turistforening
+</tal:block>

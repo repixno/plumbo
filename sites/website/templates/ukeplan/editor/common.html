@@ -1,0 +1,306 @@
+<tal:block metal:define-macro="css">
+<link type="text/css" rel="stylesheet" href="${static:gfx/portals/ukeplan/css/imgareaselect-animated.css}?${version}" />
+<STYLE type="text/css">
+      
+      #imagePickerAlbums {
+      	height: 430px;
+      	width: 192px;
+      	overflow: hidden;
+      	overflow-y: scroll;
+      }
+      
+      #imagePickerAlbums li {
+      	height: 2.5em;
+      	border-bottom: 1px solid #ddd;
+      	width: 175px;
+      }
+      #imagePickerAlbums li a{
+      	padding: .5em;
+      	display: block;
+      	text-decoration: none;
+      	font-weight: bold;
+      	color: #111;
+      	font-size: 0.8em;
+      }
+      
+      #imagePickerAlbums li a:hover {
+      	background-color: #eee:
+      }
+      
+      #imagePickerAlbums li a.selected {
+      	background-color: #0068B4 !important;
+      	color: #fff !important;
+      }
+      #imagePickerImages {
+      	height: 430px;
+      	overflow: hidden;
+      	overflow-y: scroll;
+      }
+      #imagePickerImages li {
+      	list-style-type: none;
+      	float: left;
+      	margin: 0 10px 10px 0;
+      }
+      .postbox {
+      	padding: 10px;
+      	background-color: #eee;
+      }
+      select{
+          width: 150px;
+      }
+      .selectlabel{
+          width:60px;
+          padding-top:2px;
+          margin:5px;
+          float:left;
+      }
+      .editorcontainer{
+         position: relative;
+         border: solid 1px;
+         height: 500px;
+         width: 650px;
+         -moz-box-shadow: 3px 3px 4px #CCC;
+         -webkit-box-shadow: 3px 3px 4px #CCC;
+         box-shadow: 3px 3px 4px #CCC;
+         z-index: 10;
+      }
+
+      .imageplaceholder{
+         position: relative;
+         /*background-color:#fff;*/
+         border: solid 1px;
+         float: left;
+         overflow: hidden;
+         margin-left: 2px;
+      }
+      .gridplaceholder{
+         position: absolute;
+         background-color:${ukeplantemplates/1/backgroundcolor};
+         width: 617px;
+         float: left;
+         overflow: hidden;
+         margin-left: 0px;
+         left: 44px; 
+         top: 168px;
+      }
+
+      table.grid{
+         float:left;
+         border-top-width: 0px;
+         border-right-width: 0px;
+         border-bottom-width: 1px;
+         border-left-width: 0px;
+      	border-style: solid;
+      	border-color: gray;
+      	background-color: white;
+      	margin-bottom: 0em;
+      }
+      
+      table.grid td {
+      	border-top-width: 1px;
+         border-right-width: 1px;
+         border-bottom-width: 0px;
+         border-left-width: 1px;
+      	border-style: solid;
+      	border-color: gray;
+      	background-color: ${ukeplantemplates/1/backgroundcolor};
+      	
+      }
+      div.textplaceholder{
+         position: absolute;
+         left:0px;
+         width: 36px;
+         top: 167px;
+      }
+      
+      img.imagetext{
+         position: relative;
+         width:0px;
+         top: 1px;
+         left: -1px;
+         z-index: 200;
+      
+      }
+      div.edittext, div.edittoptext{
+         padding: 5px;
+         position: absolute;
+         background-color: white;
+         top: 1px;
+         left: 1px;
+         z-index: 2210;
+      }
+      div.namescontainer{
+         position: absolute;
+         width:700px;
+         top: 100px;
+         left: 0px;
+         z-index: 200;
+      }
+      div.imagetextplaceholder{
+         position: relative;
+         float:left; 
+      }
+      div.imageandtextplaceholder{
+         position: absolute;
+      }
+      
+      table.dinner td{
+         background-image: url(${static:gfx/portals/ukeplan/clipart/middagsbestikk2.png});
+         background-size:34px 104px;
+         background-repeat: no-repeat;
+         background-position: center;
+      }
+      select#imagefield_height, select#textfield_height{
+         width: 60px;
+      }
+      
+      label.imagelayoutlabel{
+         display: inline-block;
+         width: 77px; 
+         text-align: left;
+      }
+      th, td, caption {
+         padding: 0px 0px 0px 0px;
+         line-height: 0em;
+       }
+      
+      
+      .rotatebutton{
+         background-color:Transparent;
+         width: 27px;
+         height: 26px;
+         border-radius: 12px;
+         -moz-border-radius: 12px;
+         -webkit-border-radius: 12px;
+      }
+      
+      .rotateleft{  
+         background-image: url(${static:gfx/portals/ukeplan/clipart/buttonleft.jpg}); 
+      }
+      .rotateright{  
+         background-image: url(${static:gfx/portals/ukeplan/clipart/buttonright.jpg}); 
+      }
+     </STYLE>
+</tal:block>
+
+
+<tal:block metal:define-macro="scripts">      
+	  <script type="text/javascript" src="${static:gfx/portals/ukeplan/scripts/jquery.imgareaselect.js}?${version}"></script>
+	  <script type="text/javascript" src="${static:gfx/portals/ukeplan/scripts/jquery.progressbar.js}?${version}"></script>
+	  <script type="text/javascript" src="${static:gfx/portals/ukeplan/scripts/ukeplan.min.js}?${version}"></script>
+</tal:block>
+<tal:block metal:define-macro="imagecropbox">
+   <div class="hide center" title="Edit image" i18n:attributes="title" id="imagecropbox">
+      <div class="left" style="margin-bottom: 8px;">
+         <span style="margin: 5px;"><strong><span i18n:translate="">Quality</span>:<a class='qualitytip' href=''>info</a> </strong><span class="progressBar" id="pb1">&nbsp;</span></span>
+         <button class="rotatebutton rotateleft" id="rotateleft" value="-90"></button>
+         <button class="rotatebutton rotateright"id="rotateright" value="90"></button>
+         <button id="blackandwhite" value="bw" i18n:translate="">Black/White</button>
+         <button id="closecropbox" i18n:translate="">Confirm changes</button>
+      </div>
+      <img id="previewimage" src=""  />
+   </div>
+</tal:block>
+
+<tal:block metal:define-macro="column-options">
+	     <label for="columnquantity" i18n:translate="">Number of Columns:</label><br/>
+	     <select name="columnquantity" id="columnquantity">
+	        <option value="1">1 <tal:block i18n:translate="">column</tal:block></option>
+	        <option value="2">2 <tal:block i18n:translate="">columns</tal:block></option>
+	        <option value="3">3 <tal:block i18n:translate="">columns</tal:block></option>
+	        <option value="4" selected="true">4 <tal:block i18n:translate="">columns</tal:block></option>
+	        <option value="5">5 <tal:block i18n:translate="">columns</tal:block></option>
+	        <option value="6">6 <tal:block i18n:translate="">columns</tal:block></option>
+	        <option value="7">7 <tal:block i18n:translate="">columns</tal:block></option>
+	     </select>
+</tal:block>
+
+<tal:block metal:define-macro="image-options">
+   	  <input type="radio" name="imagelayout" value="each" checked="true"/><label i18n:translate="">Photo for each column</label><br />
+	     <input type="radio" name="imagelayout" value="one"/><label i18n:translate="">One big photo</label>	     
+	     <select id="imagefield_height" name="imagefield_height" disabled="true">
+	        <option value="25">25%</option>
+	        <option value="30">30%</option>
+	        <option value="35">35%</option>
+	        <option value="40">40%</option>
+	        <option value="45">45%</option>
+	        <option value="50">50%</option>
+	     </select>
+	     <br/>
+        <input type="radio" name="imagelayout" value="text"/><label class="imagelayoutlabel" i18n:translate="">Text only</label>
+        <select id="textfield_height" name="textfield_height" disabled="true">
+	        <option value="1">0%</option>
+	        <option value="10">10%</option>
+	        <option value="20" selected="true">20%</option>
+	     </select>
+</tal:block>
+
+<tal:block metal:define-macro="color-options">
+	  <tal:block condition="equal:ukeplantemplates/1/backgroundcolor,#000000">
+			<option value="#FFFFFF" style="background-color: #FFFFFF;color: black;" i18n:translate="">Really White</option>
+	  </tal:block>
+      <option value="#812990" style="background-color: #812990;color: white;" i18n:translate="">Stylish Purple</option>
+      <option value="#bed62f" style="background-color: #bed62f;color: black;" i18n:translate="">Lime Green</option>
+	  <tal:block condition="not:equal:ukeplantemplates/1/backgroundcolor,#000000">
+			<option value="#010101" style="background-color: #010101;color: white;" i18n:translate="">Really Black</option>
+	  </tal:block>
+      <option value="#ec008c" style="background-color: #ec008c;color: black;" i18n:translate="">Pure Pink</option>
+      <option value="#25408f" style="background-color: #25408f;color: white;" i18n:translate="">Blues blue</option>
+      <option value="#00aeef" style="background-color: #00aeef;color: black;" i18n:translate="">Typical turquoise</option>
+      <option value="#777777" style="background-color:#777777;color: white;" i18n:translate="">Quite Gray</option>
+      <option value="#ffc60b" style="background-color: #ffc60b;color: black;" i18n:translate="">Impeccably Yellow</option>
+      <option value="#734c40" style="background-color: #734c40;color: white;" i18n:translate="">Only Brown</option>
+      <option value="#ea7839" style="background-color: #ea7839;color: black;" i18n:translate="">Oopssoorange</option>
+      <option value="#d2232a" style="background-color: #d2232a;color: black;" i18n:translate="">Rose Red</option>
+      <option value="#b3a679" style="background-color: #b3a679;color: black;" i18n:translate="">Only Beige</option>
+</tal:block>
+
+<tal:block metal:define-macro="font-options">
+   <label for="namefonts" i18n:translate="">Select Font:</label>
+     <select name="text-font" id="text-font">
+      <tal:block metal:use-macro="font-list" />
+     </select>
+</tal:block>
+
+
+<tal:block metal:define-macro="font-list">
+      <option value="crulz.ttf" i18n:translate="" >Krølle Bølle</option>
+      <option value="FFFTusj.ttf" i18n:translate="">Feite Frode</option>
+      <option value="greyscale.ttf" i18n:translate="">Stramme Susanne</option>
+      <option value="quicksand.otf" i18n:translate="">Magre Margrethe</option>
+      <option value="BRADHITC.TTF" i18n:translate="">Tynne Truls</option>
+      <option value="ITCEDSCR.TTF" i18n:translate="">Elegante Ella</option>
+      <option value="JandaSnickerdoodleSerif.ttf" i18n:translate="">Tøffe Tor</option>
+      <option value="KGStrawberryLimeade.ttf" i18n:translate="">Kjekke Knut</option>
+      <option value="PEIGNOT1.TTF" i18n:translate="">Normale Nora</option>
+      <option value="ThrowMyHandsUpintheAir.ttf" i18n:translate="">Pene Per</option>
+</tal:block>
+
+<tal:block metal:define-macro="addto-cart-options">
+	     <input type="hidden" value="1" name="quantity" id="quantity" />
+	     <input type="hidden" name="project_id"  value="" id="project_id" />
+	     <div id="produksjonsvalg">
+   	     <strong i18n:translate="">Production options</strong><br/>
+   	     <input type="checkbox" name="maskit" id="maskit" value="true"/><label for="maskit" i18n:translate="">I want to use a graphic designer</label>
+   	     <span class="quiet small">(Kr <span id="maskit-price"></span>) </span><a href='' class="maskittip help">Info</a>
+	     </div>
+	     <p class="right">
+	     <br/>
+	        <button class="large" i18n:translate="">Add to cart</button>
+	     </p>
+</tal:block>	 
+
+
+<tal:block metal:define-macro="confirmtip">
+<div id="confirmtip" i18n:attributes="title" title="Confirm the project" class="hide"><dl><dt i18n:translate="">Before going to the next step, make sure:</dt>
+         
+                                                                                 <dd i18n:translate="">-That there are no typos.</dd>
+                                                                                 <dd i18n:translate="">-At the images have the desired composition.</dd>
+                                                                                 <dd i18n:translate="">-You select the desired font and grid.</dd>
+                                                                                 <dd i18n:translate="">-Do you wish that there should be special adaptations must check the box for the use of graphic designer.</dd>
+                                                                           
+                                                                       </dl>
+   </div> 
+
+</tal:block>
+

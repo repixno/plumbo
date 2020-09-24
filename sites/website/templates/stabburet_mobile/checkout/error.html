@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <div metal:use-macro="../common.html/head" />
+        <div metal:use-macro="../common.html/javascript" />
+	
+	<div metal:use-macro="../common.html/stylesheet" />
+
+    </head>
+    
+    <body>
+        <div class="row text-center hidden-phone header">
+	    <img  src="${static:css/portals/stabburet/web/images/preheader.png}" alt="LAG LOKK MED DITT BILDE"/>
+        </div>
+	<div class="container order-prints" style="height: 200px">		
+	<div class="span-24 last">
+		<div class="span-6">
+			
+			<h3 class="negative" i18n:translate="">Something went wrong</h3>
+			
+			<div tal:content="error|default">
+				No error message
+			</div>
+			<br />
+			<a href="/lag-lokk/checkout/bestilling" i18n:translate="">Back to cart</a>
+			
+		</div>
+	</div>
+	</div>
+	
+<div metal:use-macro="../common.html/footer" />
+
+</body>
+</html>

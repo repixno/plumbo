@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="//www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+   <head>
+	  <tal metal:use-macro="../../${templates}/common.html/head" />
+   
+	  <tal:block metal:use-macro="./common.html/scripts" />
+	  <tal:block metal:use-macro="./common.html/css" />
+	  <link rel="stylesheet" href="${static:}js/jqupload/css/jquery.fileupload.css"/>
+	  
+	  <style type="text/css">
+		 
+		 div.editorcontainer::after {
+			content: "";
+			background: url("${static:}images/gifttemplates/thumbs/width/800/${selected/templatefile}");
+			opacity: 1;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			position: absolute;
+			z-index: -1;   
+		 }
+		 
+		 
+		 div.transparent::after{
+			opacity: 0.2 !important;
+		 }
+		 div.black::after{
+			background: url("${static:}images/gifttemplates/thumbs/width/800/${selected/templatefile}?negate=true") !important;
+		 }
+		 div.fadeMe {
+			color: #fff;
+			opacity:    1; 
+			background: #000; 
+			width:      100%;
+			height:     100%; 
+			z-index:    100000;
+			top:        0; 
+			left:       0; 
+			position:   fixed;
+			display: none;
+			text-align: center;
+			vertical-align: middle;
+		 }
+		 
+	  </style>
+   </head>
+
+
+<body>
+   <div class="fadeMe">
+	  <div class="col-md-6">
+		 <h1 class="col-md-8" i18n:translate="">For å bruke editoren må du snu skjermen</h1>
+		
+		 <img src="${static:}gfx/ukeplan/new/flipphone.png"/>
+		  <div i18n:translate="">PS: Vi anbefaler også å lage din tavle på en datamaskin.</div>
+	  </div>
+   </div>
+	<div class="container main" style="height: 1300px">
+    <div metal:use-macro="../../${templates}/common.html/top" />
+	
+	
+	
+	<div style="height: 40px; margin-top: 20px">
+	  	  <button type="button" class="visible-xs btn btn-default" data-toggle="offcanvas" data-target=".sidebar-nav">
+		Vis valg
+	  </button>
+		  
+	  <strong>${selected/product/title}</strong></div>
+	<div class="row row-offcanvas row-offcanvas-left">
+	<div class="col-md-3 sidebar-offcanvas">
+	  <!--<p><a href="#" class="button" id="new_column">Ny kolonne</a></p>
+	  <p><a href="#" class="button" id="remove_column">Slett kolonne</a></p>-->
+	  <div class="row">
+		 <form id="order_ukeplan">
+		 
+		 <div class="col-md-12">
+			<div class="functionbox">
+			   <div class="header" i18n:translate="">Layout:</div>
+			   <tal:block metal:use-macro="./common.html/layout-options2" />
+			   <input type="checkbox" name="notat" value="notat" id="notatoption"/><label for="notatoption" i18n:translate="">Notat felt</label>
+			</div>
+		 </div>
+		 
+		 <!-- text options-->
+		 <div class="imagelayout col-md-12">
+			<div class="functionbox">
+			   <div class="header"><span i18n:translate="">Text</span>/<span i18n:translate="">Grid</span></div>
+			   <div class="body">
+				  <input type="checkbox" name="names" value="names" id="namesoption"/><label for="namesoption" i18n:translate="">Name over each column:</label>
+				  <div class="textchoices prehide">
+					 <label for="color" i18n:translate="">Select Color for text:</label><br/>
+					 <select name="text-color" id="text-color" style="background-color: #812990;color: white;">
+						<tal:block metal:use-macro="./common.html/color-options" />
+					 </select>
+					 <br/>
+					 <tal:block metal:use-macro="./common.html/font-options" />
+					 <hr/>
+				  </div>
+				  
+				  <label for="day-color" i18n:translate="">Select Color for week:</label>
+				  <select name="day-color" id="day-color" style="background-color: #812990;color: white;">
+					   <tal:block metal:use-macro="./common.html/color-options" />
+				  </select>
+			   </div>
+   
+			   <!--gridoptions -->
+				  <div class="body">
+					 <label for="color" i18n:translate="">Choose Color grid:</label>
+					 <select name="color" id="color" style="background-color: #812990;color: white;">
+					   <tal:block metal:use-macro="./common.html/color-options" />
+					 </select>
+					 <input type="hidden" name="day-color-background" id="day-color-background" value="${ukeplantemplates/1/backgroundcolor}" />
+				  </div>
+			   </div>
+		 </div>
+		 
+		 
+		 <!-- cart options -->
+		 <div class="imagelayout col-md-12 col-xs-12">
+			<tal:block metal:use-macro="./common.html/addto-cart-options" />
+		 </div>
+	     
+		 <input type="hidden" value="${selected/product/id}" name="productid" id="productid" />
+	     <input type="hidden" value="${selected/productoptionid}" name="productoptionid" id="productoptionid" />
+	  </form>
+	
+	</div>
+	</div>
+	<div class="col-md-9" >
+   	  <div class="editorbox">
+   	     <div class="editorcontainer" >
+   	        <div class="imageandtextplaceholder"  >
+   	              <div class="imagecontainer">
+   	                 <div class="imageplaceholder center lastholder"></div>
+   	              </div>
+   	           <div class="namescontainer"/>
+   	        </div>
+   	        <div class="textplaceholder">
+
+   	        </div>
+   	        <div class="gridplaceholder">
+   	        <div>
+   	        <TABLE class="grid current-grid" height="500px">
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	        
+   	        
+   	        </TABLE>
+   	        
+   	        </div>
+   	        </div>
+   	     </div>
+   	     
+   	  </div>
+   	
+	</div>
+
+   
+   </div>
+   
+   </div>
+   <tal:block metal:use-macro="./common.html/imagecropbox" />
+   
+   <!--Help files -->
+   <tal:block metal:use-macro="./common.html/helpmodals" />
+   
+   <script type="text/javascript" src="${static:gfx/portals/ukeplan/scripts/jquery.progressbar.js}?${version}"></script>
+   <script type="text/javascript" src="/js/editor.js?${version}"></script>
+   <script src="/js/jqupload/js/vendor/jquery.ui.widget.js"></script>
+   <script src="/js/jqupload/js/jquery.iframe-transport.js"></script>
+   <script src="/js/jqupload/js/jquery.fileupload.js"></script>
+   
+
+<script type="text/javascript">
+   
+   var kake;
+   var notatheight = 0;
+   var notattext = "Husk:"
+   var portal = "${portal}";
+   var selectedcropbox = '';
+   var loader = '<img src="${static:gfx/gui/ajax-loader.gif}" class="loader" />';
+   var imagePickerLoaded = false;
+   var editorcontainer_width = 800;
+   var imagelayout = 'each';
+   var numberofcolumns = 4;
+   var imagefield_each = ${ukeplantemplates/1/imagefield_height};
+   var textimageheight = 20;
+   var clipartcolumn = false;
+   var toptext = "       " +  "<tal:block i18n:translate="">Insert text</tal:block>"  + "       ";
+   var textplaceholder = "<tal:block i18n:translate="">Insert text</tal:block>";
+   var imageholderwidth = 0;
+   var gridholder = 0;
+   var bottommargin = 877;
+   var backgroundcolor = "${ukeplantemplates/1/backgroundcolor}";
+   var templatefile = '${static:}images/gifttemplates/thumbs/width/' + editorcontainer_width + '/${selected/template/pages/0/fullsize_src}';
+   var numberofdays = 7;
+   var rotate = -90;
+   var gridarray = ['<tal:block i18n:translate="">Monday</tal:block>', '<tal:block i18n:translate="">Tuesday</tal:block>', '<tal:block i18n:translate="">Wednesday</tal:block>', '<tal:block i18n:translate="">Thursday</tal:block>', '<tal:block i18n:translate="">Friday</tal:block>', '<tal:block i18n:translate="">Saturday</tal:block>', '<tal:block i18n:translate="">Sunday</tal:block>'];
+   var originalimage = Object();
+   var savedcrop = Object();
+   var velgbilde =  "<tal:block i18n:translate="">Choose image</tal:block>";
+   var oppdater =  "<tal:block i18n:translate="">Update</tal:block>";
+   var skrivnytekst = "<tal:block i18n:translate="">Write new text</tal:block>";
+   
+   var margin = 413;
+   
+   /*<![CDATA[*/
+   if( screen.width < '768' ){
+	  var editorcontainer_width = 600;
+   }
+   
+	  switch ( window.orientation ) {
+		 case 0:	
+			$('.fadeMe').show();
+		 break;	  
+	  }
+   /*]]>*/
+   
+    $(window).on('orientationchange', function(event) {
+        if( orientation != 0 ){
+			$('.fadeMe').hide();
+		}else{
+			$('.fadeMe').show();
+		}
+    });
+   
+   malArray = new Object();
+   malArray.mal_id = ${ukeplantemplates/1/id};
+   malArray.mal_width = ${ukeplantemplates/1/mal_width};
+   malArray.mal_height = ${ukeplantemplates/1/mal_height};
+   malArray.imagefield_height = imagefield_each;
+   //malArray.imagefield_width = ${ukeplantemplates/1/imagefield_width};
+   malArray.imagefield_width = ${ukeplantemplates/1/mal_width} - (  margin * 2 );
+   malArray.imagefield_x = margin;
+   //malArray.imagefield_x = ${ukeplantemplates/1/imagefield_x};
+   //malArray.imagefield_y = ${ukeplantemplates/1/imagefield_y};
+   malArray.imagefield_y = margin;
+   malArray.imagefield_space = ${ukeplantemplates/1/imagefield_space};
+   malArray.prodno = ${selected/productoption/prodno};
+   var ratio = malArray.mal_width / editorcontainer_width;
+   
+   var imagefield_one  = ( ( malArray.mal_height - malArray.imagefield_x - 877 )  * 25) / 100;
+   //var gridheight = parseInt((malArray.mal_height - malArray.imagefield_height - ( malArray.imagefield_x * 2 )) / ratio ) - 40;
+   var gridheight = ( (malArray.mal_height - malArray.imagefield_height - malArray.imagefield_x  - 877 ) / ratio );
+   
+   var middagsbestikk = "${static:gfx/portals/ukeplan/clipart/middagsbestikk2.png}";
+   var acceptbutton = "<tal:block i18n:translate="">I accept</tal:block>";
+   var cancelbutton = "<tal:block i18n:translate="">Cancel</tal:block>";
+   var updatetextbutton = "<tal:block i18n:translate="">Update text</tal:block>";
+   
+   
+   var staticsite = "${static:}";
+   $(document).ready(function() {
+	  $('[data-toggle=offcanvas]').click(function() {
+		$('.row-offcanvas').toggleClass('active');
+	  });
+	});
+    
+</script>
+	
+	
+	<div class="loader"></div>
+	
+</body>
+</html>

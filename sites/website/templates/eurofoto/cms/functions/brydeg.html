@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+	<style type="text/css">
+
+   .page-top {
+      height: 150px;
+      <tal:block tal:condition="exists:menuitem/article/attachments/background">
+         background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+      </tal:block>
+      background-repeat:no-repeat;
+   }
+
+   .brydeg h2 {
+      padding: 5px 0 5px 10px;
+      background: #620 url(http://www.vg.no/nyheter/innenriks/brydeg/css/bry_deg_hspalte_topp.jpg) 0 0 no-repeat;
+      color: white;
+      margin-bottom: 0px;
+      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      font-size: 16px;
+      color: white;
+      text-transform: uppercase;
+      font-weight: bold;
+      text-shadow: 1px 1px 5px black;
+   }
+   
+   .brydegsidebar{
+     padding: 5px 10px 5px 10px;
+     border: 1px solid #AAA;
+   
+   }
+   </style>
+	
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+</head>
+
+
+<body>
+<div class="container">
+
+	<div class="span-24 last">
+		<div metal:use-macro="../../../${templates}/common.html/top" />
+	</div>
+
+	<div class="span-24 last top">
+
+	  <div class="span-7">
+	    <div class="columnContent brydeg likebox">
+      <h2 tal:content="menuitem/article/title"></h2>
+      <div class="brydegsidebar" tal:content="structure menuitem/article/body">
+      </div>
+
+      </div>
+      <div class="columnContent brydeg likebox">
+      <h2>Bry deg på Facebook</h2>
+      <iframe src="http://www.facebook.com/plugins/likebox.php?id=186626671367890&amp;width=270&amp;connections=12&amp;stream=false&amp;header=true&amp;height=287" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:270px; height:287px;" allowtransparency="true"></iframe>
+      </div>
+      <div class="columnContent brydeg vilover">
+         <h2>Vi lover å ikke mobbe</h2>
+         <img src="http://static.vg.no/userPictures/fbusers/mosaic-rightcol.jpg" width="270px"/>
+         <div class="mobbeLofterne">
+         Disse og <span class="rodtTall">29284</span> andre har avlagt mobbeløftet<br/>
+         <a class="lofteLenke" href="http://www.facebook.com/brydeg?v=app_184548981576691">Gjør det du også</a>
+         </div>
+      </div>
+      	  </div>
+      <div class="span-17 last">
+	     <div class="page-top span-17 ">
+
+	  
+	     </div>
+	     <div class="span-17 ">
+               <tal:block>
+         		<tal:block tal:repeat="item items">
+         			<tal:block  tal:condition="equal:item/type,product">
+         				<div class="span-7 colborder append-bottom" tal:condition="not:mod:repeat/item/number,2">
+         					<div class="span-2 productimage">
+         						<tal:block tal:define="global customsize string:70" />
+         						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/one-product-photo-custom-size" />
+         					</div>
+         					<div class="span-5 last productinfo">
+         						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/starOfferPercentFloatRight" />
+         						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/newProductStarFloatRight" />
+         
+         						<h3 tal:content="item/title"></h3>
+         						<p>${item/ingress} <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/more-info-link" />
+         </p>
+         					</div>
+         					<div class="span-5 last prepend-2 functions">
+         						<span class="price"><tal:block i18n:translate="">kr</tal:block> <span id="price" tal:content="formatprice:item/option/price">?</span> pr. stk </span><br />
+         						<div class="links">
+         							<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/buy-product-link" />
+         						</div>
+         					</div>
+         				</div>
+         				<div class="span-8 append-bottom last" tal:condition="mod:repeat/item/number,2">
+         					<div class="span-2 productimage">
+         						<tal:block tal:define="global customsize string:70" />
+         						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/one-product-photo-custom-size" />
+         					</div>
+         					<div class="span-6 last productinfo">
+         						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/starOfferPercentFloatRight" />
+         						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/newProductStarFloatRight" />
+         						<h3 tal:content="item/title"></h3>
+         						<p>${item/ingress} <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/more-info-link" /></p>
+         					</div>
+         					<div class="span-6 last prepend-2 functions">
+         						<span class="price"><tal:block i18n:translate="">kr</tal:block> <span id="price" tal:content="formatprice:item/option/price">?</span> pr. stk </span><br />
+         						<div class="links">
+         							<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/buy-product-link" />
+         						</div>
+         					</div>
+         				</div>
+         				<hr tal:condition="mod:repeat/item/number,2" />
+         			</tal:block>
+         		</tal:block>
+         	</tal:block>
+	  
+	     </div>
+	  
+	  </div>
+	  
+	  
+
+      
+		
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>	
+</div>
+
+</body>
+</html>

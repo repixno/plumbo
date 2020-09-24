@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Forms</title>
+<tal:block metal:use-macro="../common.html/css" />
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		<tal:block metal:use-macro="../common.html/languages" />
+		<div id="content">
+			<div id="box">
+				
+				<h3>Forms</h3>
+				
+				<table width="100%" id="results">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th tal:repeat="field fields">${field}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr tal:repeat="entry entries">
+							<td tal:content="repeat/entry/number"></td>
+							<td tal:repeat="value entry">${value}</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<script type="text/javascript">
+					$(document).ready( function() {
+						$('#results').tablesorter();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+	<div id="footer"></div>
+</body>
+</html>

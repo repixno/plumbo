@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head metal:use-macro="../common.html/head" />
+
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="../common.html/top" />
+
+	<div metal:use-macro="../common.html/left-menu" />
+	
+	<div id="content">
+		<h2>Register</h2>
+		<div class="span-16 last">
+		<form action="/register/" method="post" class="span-16 last">
+			<div class="span-16 last">
+				<div class="span-3">
+					<label for="email" class="span-3 last">E-mail:</label>
+				</div>
+				<div  class="span-7">
+					<input type="text" class="title span-7" name="email" tal:attributes="value email|default" value="" id="email"/>
+				</div>
+				<div class="span-6 last">
+					<p class="feedback"></p>
+				</div>
+			</div>			
+			
+			<div class="span-16 last">
+				<div class="span-3">
+					<label for="pasword" class="span-3 last">Password:</label>
+				</div>
+				<div class="span-7">
+					<input type="password" class="span-7 title" name="password" tal:attributes="value password|default" value="" />
+				</div>
+				<div class="span-6 last">
+					<p class="feedback"></p>
+				</div>					
+			</div>
+			
+			<div class="span-16 last error">
+				<div class="span-3">
+					<label for="pasword" class="span-3">Repeat password:</label>
+				</div>
+				<div class="span-7">
+					<input type="password" class="span-7 title" name="password" tal:attributes="value password|default" value="" />
+				</div>
+				<div class="span-6 last">
+					<p class="feedback">Passorder er ikke likt</p>
+				</div>		
+			</div>
+
+			<div class="span-16 last">
+				<div class="prepend-3 span-1">
+					<input type="checkbox" id="newsletter" class="span-3"/> 
+				</div>
+				<div class="span-6">
+					<label for="newsletter">Yes, I want to receive newsletters</label>
+				</div>
+				<div class="span-6 last">
+					<p  class="feedback"></p>
+				</div>						
+			</div>
+
+			<div class="span-16 last">
+				<div class="prepend-3 span-1">
+					<input type="checkbox" id="eula" class="span-3"/> 
+				</div>
+				<div class="span-6">
+					<label for="rememberme">Yes, I accept the <a href="/eula/">terms and conditions</a></label>
+				</div>
+				<div class="span-6 last">
+					<p class="feedback"></p>
+				</div>						
+			</div>
+			
+			<div class="span-16 last">
+				<button type="submit" value="Login" name="Login" class="button positive">
+				  <img src="http://static.eurofoto.no/css/blueprint/icons/tick.png" alt=""/> Register
+				</button>
+			</div>
+		</form>
+		</div>
+		
+	</div>
+	
+	<div metal:use-macro="../common.html/right-menu" />
+
+	<div metal:use-macro="../common.html/footer" />
+	
+</div>
+
+
+
+</body>
+</html>

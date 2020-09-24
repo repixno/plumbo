@@ -1,0 +1,412 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+	<style type="text/css">
+		/*<![CDATA[ */
+		
+		span.large.price {
+			margin-bottom: 0 !important
+		}
+		
+		input.quantity { padding: .2em .5em; width: 2em;  
+			-moz-border-radius: 4px;
+			-webkit-border-radius: 4px;
+			border-radius: 4px;
+		}
+		
+		a.open-options { margin: 1em; font-size: .9em; }
+		a.open-options:hover { color: blue;}
+		
+		ul#products {
+			margin: 1em 0; padding: 0;
+		}
+		
+		 ul.sizes { margin: 0; padding: 0}
+		
+		ul#products li, ul.sizes li { 
+			list-style-type: none; display: block; clear: both; 
+			height: 30px; border-bottom: 1px solid #efefef; background-color: #fafafa;
+			padding: 15px 0 5px 0;
+			margin: 0;
+		}
+		
+		ul#products li:hover {
+			background-color: #efefef !important;
+		}
+		
+		ul#products > li:nth-child(odd), ul.sizes li > li:nth-child(odd) { background-color: #fefefe}
+		
+		#products li h4, ul.sizes li h4 { float: left; }
+		#products li div.right, ul.sizes li div.right { display: block; float: right }
+		
+		#products li span.price { width: 4em; display: block; float: right;}
+		
+
+		
+		/* ]]> */
+	</style>
+</head>
+
+<body>
+<div metal:use-macro="../../../${templates}/common.html/top" />
+
+<tal:block metal:define-macro="show-image">
+   <tal:block tal:condition="exists:product/images" tal:repeat="image product/images">
+   	<a href="http://static.eurofoto.no/images/products/thumbs/height/500/${image/url}" class="fancybox" title="${product/ingress}">
+	      <img src="http://static.eurofoto.no/images/products/thumbs/square/30/${image/url}" title="${product/title}" height="30" width="30" tal:condition="equal:repeat/image/number,1" />
+      </a>
+   </tal:block>
+</tal:block>
+
+
+
+<tal:block define:section="products, Products" />
+
+
+
+<div class="container">
+	<div class="span-24 last">
+	
+		<tal:block define:section="top, Top" />
+		<form class="reset">
+		<div class="span-11 colborder">
+			<h2 i18n:translate="">Choosen image</h2>
+			<img src="http://static.eurofoto.no/gfx/gui/ajax-loader.gif" id="image-from-api" />
+		</div>
+		<div class="span-12 last">
+			<h2 i18n:translate="">Products</h2>
+			
+			<ul tal:condition="exists:sections/products" id="products">
+				<tal:block tal:repeat="product sections/products">
+
+					<tal:block tal:define="global isprint string:0" />
+					
+					<tal:block tal:condition="equal:product/option/prodno,0419">
+						<tal:block tal:define="global isprint string:1" />
+					</tal:block>
+					<tal:block tal:condition="equal:product/option/prodno,0001">
+						<tal:block tal:define="global isprint string:1" />
+					</tal:block>
+					<tal:block tal:condition="equal:product/option/prodno,0002">
+						<tal:block tal:define="global isprint string:1" />
+					</tal:block>
+					<tal:block tal:condition="equal:product/option/prodno,0003">
+						<tal:block tal:define="global isprint string:1" />
+					</tal:block>	
+					<tal:block tal:condition="equal:product/option/prodno,0004">
+						<tal:block tal:define="global isprint string:1" />
+					</tal:block>
+					<tal:block tal:condition="equal:product/option/prodno,0005">
+						<tal:block tal:define="global isprint string:1" />
+					</tal:block>
+					<tal:block tal:condition="equal:product/option/prodno,0439">
+						<tal:block tal:define="global isprint string:1" />
+					</tal:block>
+
+					<tal:block tal:condition="isprint">
+						<li class="print">
+							<div class="span-1">
+								<tal:block metal:use-macro="show-image" />
+							</div>
+							<div class="span-6">
+								<h4>${product/title}</h4> 
+							</div>
+							<div class="span-4 right">
+								<!-- input tal:condition="equal:product/option/prodno,0439" type="text" class="quantity" value="1" name="${product/option/prodno}" /-->
+								<!-- input tal:condition="not:equal:product/option/prodno,0439" type="text" class="quantity" value="0" name="${product/option/prodno}" /-->
+								<input type="text" class="quantity" value="0" name="${product/option/prodno}" />
+								<span class="large price">Kr ${product/option/price}</span>
+							</div>
+						</li>
+					</tal:block>
+					
+					<tal:block tal:condition="not:isprint">
+						<li tal:condition="equal:product/option/type,goods" class="goods" id="id${product/id}">
+							<div class="span-1">
+								<tal:block metal:use-macro="show-image" />
+							</div>
+							<div class="span-6">
+								<h4>${product/title}</h4> 
+							</div>
+							<div class="span-4 right">
+								<input type="text" class="quantity"  value="0" name="${product/option/prodno}" />
+								<span class="large price">Kr ${product/option/price}</span>
+							</div>
+						</li>
+						
+						<li tal:condition="equal:product/option/type,gift" class="gift ${conditionalmatch:product/options/length,1,one-option,more-options}" id="id${product/id}">
+							<div class="span-1">
+								<tal:block metal:use-macro="show-image" />
+							</div>
+							<div class="span-4">
+								<h4>${product/title}</h4> 
+							</div>
+							<tal:block tal:condition="equal:product/options/length,1">
+								<div class="span-4 right">
+									<input type="text" class="quantity"  value="0" name="${product/option/prodno}" />
+									<span class="large price">Kr ${product/option/price}</span>
+								</div>
+							</tal:block>
+							
+							<tal:block tal:condition="gt:product/options/length,1">
+								<div class="span-6 right">
+									Antall: <span class="product-quantity">0</span>
+									
+									<a href="#open_options_${product/id}" class="open-options" i18n:translate="">Choose sizes</a> 
+									
+									<span class="large price">Kr ${product/option/price}</span>
+									<div class="hide product-options" id="open_options_${product/id}" title="Choose size" i18n:attributes="title">
+										<ul class="sizes">
+											<tal:block tal:repeat="option product/options">
+												<li id="optionid${option/id}">
+													<h4>${option/title}</h4>
+													<div class="right">
+														<input type="text" class="quantity"  value="0" name="${product/option/prodno}" rel="#id${product/id}"/>
+													</div>
+												</li>
+												<script type="text/javascript">
+													$('#optionid${option/id}').data({
+														'id'			:	'${product/id}',
+														'optionid'	:	'${option/id}',
+														'prodno'		:	'${option/prodno}'
+													});
+												</script>
+
+											</tal:block>
+										</ul>
+									</div>
+								</div>
+							</tal:block>
+							<script type="text/javascript">
+								$('#id${product/id}').data({
+									'id'			:	'${product/id}',
+									'optionid'	:	'${product/option/id}',
+									'prodno'		:	'${product/option/prodno}'
+								});
+							</script>
+						</li>
+
+						
+					</tal:block>
+				</tal:block>
+			</ul>
+		</div>
+		<div class="prepend-12 span-12 last right">
+			<button class="large" id="add-to-cart" i18n:translate="">Add to cart</button>
+		</div>
+		</form>
+		<tal:block define:section="bottom, Bottom" />
+		
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>	
+</div>
+
+<script type="text/javascript">
+	//<![CDATA[
+	var image;
+	var addedToCart = false;
+	
+	$(document).ready( function() {
+	
+		$('a.fancybox').fancybox({
+			'titleShow'			:	false,
+			'transitionIn'		:	'elastic',
+			'transitionOut'	:	'elastic'
+		});
+	
+		$('.open-options').click( function() {
+		
+			var id = $(this).attr('href');
+			var item = $(this).parent();
+			var quantity = 0;
+			
+			$(id).dialog('open');
+			$(id).dialog({
+				'resizable'	:	'false'
+			});
+			return false;
+		});
+
+		// Updating quantity when choosing sizes.
+		$('input', '.product-options').bind('change', function() {
+			var container = $(this).attr('rel');
+			var totalQuantity = 0;
+			$(this).parent().parent().parent().find('input').each( function(i, item) {
+				totalQuantity = totalQuantity + parseInt( $(item).val() );
+			});
+			$('.product-quantity', container).text( totalQuantity );
+		});
+	   
+		var response = $.ef( 'album.images.enum', {
+			'albumid': 0,
+			'limit': 1,
+			'sortby': 'time',
+			'sorttype': 1 // descending
+		});
+		
+		if( response ) {
+			$(response.images).each( function( i, item ) {
+				if( i == 0 ) { 
+				   img = new Image();
+				   img.onload = (function(){
+				      $('#image-from-api').attr('src', item.screensize ).width( 40*11-10 );
+				   });
+				   img.src = item.screensize;
+					image = item;
+				}
+			});
+		};
+		
+		$('#add-to-cart').bind('click', function() {
+		   
+		   $(this).attr('disabled','disabled').before($('<img src="http://static.eurofoto.no/gfx/gui/ajax-loader.gif" />'));
+		   
+			$('#products li').each( function(i, item) {
+				if( $('input.quantity', item).val() > 0 || $(item).hasClass('more-options') ) {
+					
+					if( $(item).hasClass('print') ) {
+						
+						var response = $.ef( 'order.image', {
+							'prodno'		: $('input.quantity', item).attr('name'), 
+							'imageid'	: image.id,
+							'quantity'	: $('input.quantity', item).val() // Optional
+						});
+						
+						if( !response.result ) {
+							alert( 'Error: Not added to cart: ' + response.message);
+						}
+						
+					} else if ( $(item).hasClass('gift') && $(item).hasClass('one-option') ) {
+						
+						if( orderGift( $(item).data('id'), $(item).data('optionid'), image.id, $('input.quantity', item).val() ) ) {
+							addedToCart = true;
+						}
+						
+					} else if ( $(item).hasClass('gift') && $(item).hasClass('more-options') ) {
+						
+						var optionsContainer = $('a.open-options', item).attr('href');
+						
+						$('li', optionsContainer).each( function(i, option) {
+							
+							if( $('input', option).val() > 0 ) {
+							
+								if( orderGift( $(option).data('id'), $(option).data('optionid'), image.id, $('input.quantity', option).val() ) ) {
+									addedToCart = true;
+								}
+							}
+							
+						});
+						
+					}
+				}
+			});
+			window.location.href = '/cart/';
+			return false;
+		});
+	});
+	
+	// kopp malid: 178, malpageid:291, prodno: 398, id: 80
+	
+	function orderGift(id, optionid, imageid, quantity ) {
+		var finished = false;
+		var malid;
+		var malpageid;
+		
+		switch( optionid )
+		{
+		case '398': //kopp
+			malid 		=	'178';
+			malpageid 	=	'291';
+		break;
+		case '1340': //konfekt
+			malid 		=	'106';
+			malpageid 	=	'202';
+		break;
+		case '247': //musmatte
+			malid 		=	'14';
+			malpageid 	=	'46';
+		break;
+		default:
+			// nothing?
+		}
+
+		switch( id )
+		{
+		case '52': //sportstrøye
+			malid 		=	'2186';
+			malpageid 	=	'4424';
+		break;
+		case '5': //t-skjorte hvit
+			malid 		=	'20';
+			malpageid 	=	'53';
+		break;
+		case '481': //t-skjorte sort
+			malid 		=	'22';
+			malpageid 	=	'55';
+		break;
+		case '111': //t-skjorte sort
+			malid 		=	'296';
+			malpageid 	=	'461';
+		break;
+		default:
+			// nothing?
+		}
+		
+		var pages = new Array();
+		pages.push();
+		pages[0] = new Object();
+		pages[0].malid = malid;
+		pages[0].malpageid = malpageid;
+		pages[0].giftQuantity = quantity;
+		pages[0].productoptionid = optionid;
+		pages[0].productid = id;
+		pages[0].size = "small";
+		pages[0].image = new Object()
+		pages[0].image.x = '0';
+		pages[0].image.y = '0';
+		pages[0].image.dx = '0';
+		pages[0].image.dy = '0';
+		//pages[0].image.dx = 1068.0619047619048;//$('#image').width() * ratioWidth;
+		//pages[0].image.dy = 728.4705882352941; //$('#image').height() * ratioHeight;
+		pages[0].image.bid = imageid;
+		pages[0].texts = new Array();
+		pages[0].cliparts = new Array();
+		
+		$.ajax({
+			type: 'POST',
+			url: '/create/gift/save',
+			async: false,
+			data: { 
+				'pages'	:	$.toJSON(pages),
+				'web'		:	'1'
+			},
+			complete: function(msg) {
+				addedToCart = true;
+				finished = true;
+			},
+			success: function(msg) {
+				addedToCart = true;
+				finished = true;
+			},
+			error: function(msg) {
+				alert('error' + msg);
+			}
+		});
+		
+		return finished;
+	}
+	
+	//]]>
+</script>
+
+</body>
+</html>

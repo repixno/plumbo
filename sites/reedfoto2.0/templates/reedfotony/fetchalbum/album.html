@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	
+	<style type="text/css">
+		
+		
+		.thumb{
+			    position: absolute;
+				text-align: center;
+				top: 0px;
+				left: 0px;
+		}
+		
+		.thumb113{
+			height: 173px;
+			text-align: center;
+			position: relative;
+		}
+		.thumb113 img{
+			height: 150px;
+			text-align: center;
+			position: relative;
+		}
+		#preview{
+			position:absolute;
+			background: #fff;
+			display:none;
+			color:#000;
+		}
+		#preview img {
+			max-width: 400px;
+		}
+		.klassebilde{
+			height: 140px;
+			border: solid 4px white!important;
+		}
+		.selected, .selectedgruppebilde{
+			border: solid 4px green!important;
+		}
+		
+		
+		.button[data-status="disabled"]{
+			
+			user-select : none;
+			-moz-user-select : none;
+			-webkit-user-select : none;
+			color: gray;
+			cursor: pointer;
+			
+		}
+		
+		.star {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			width: 0;
+			height: 0;
+			border-top: 20px solid green;
+			border-left: 20px solid transparent;
+		}
+	</style>
+
+	<tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" tal:define="global pagetitle">${album/title}</tal:block>
+	<script type="text/javascript" src="${static:js/jquery.lazyload.mini.js}"></script>
+	<script type="text/javascript" src="${static:js/jquery.eurofoto-1.0.js}"></script>
+	
+	<script type="text/javascript">
+		var haveportrett = false;
+	</script>
+	<script type="text/javascript" src="${static:js/dialog.js}"></script>
+
+</head>
+
+
+<body>
+<div metal:use-macro="${templateroot}/${templates}/common.html/top" />
+<div class="container">
+
+	
+	<!--<div tal:define="global menuitem string:albums" metal:use-macro="../common.html/menu" />-->
+	<div id="" class="col-md-12">
+		
+		<a href="/myaccount/album/${album/id}/${album/urlname}" ><h2 class="bottom oneline" tal:content="album/title | default"></h2></a>
+		<p>
+			<strong>Dine bilder er nå lagt til dine konto.<br/>
+			For å bestille produkter, velg et bilde og gå videre.</strong>
+		</p>
+		<tal:block tal:condition="images">
+			<hr style="border-top: 3px dashed #4a94b6; background: none; margin: 10px 5px 20px 0px;" />
+				</tal:block>
+					<div class="imagelist clearfix row" id="images" tal:condition="images">
+						<div class="col-md-12">
+							<div class="col-md-12">
+								<h3>VELG BILDE:</h3>
+							</div>
+							<div class="col-md-12 text-right">
+								<button class="btn btn-success btn-lg" id="next" title="Velg et bilde først" data-status="disabled">Gå videre</button>
+							</div>
+						
+						
+						</div>
+						
+							<div class="col-md-12">
+								<div class="row">
+									<div><h4>Portrettbilde:</h4></div>
+									<tal:block tal:condition="exists:images/portrett" tal:repeat="image images/portrett">
+										<div  class="col-sm-3 col-xs-6 col-md-2  thumb113" >
+											<div class="col-md-12">
+												<a href="#" title="${image/title}" class="thumb" rel="">
+													<img src="" title="${image/title}" tal:attributes="src image/thumbnail; alt image/title; title image/title"  id="image_${image/id}"/>
+												</a>							
+											</div>
+											<script type="text/javascript">$('#image_${image/id}').data('screensize', '${image/screensize}');</script>
+										</div>
+									</tal:block>
+								</div>
+								<div class="row">
+									<div><h4>Klassebilde:</h4></div>
+									<tal:block tal:condition="exists:images/gruppe" tal:repeat="image images/gruppe">
+										<div class="col-sm-3 col-xs-6 col-md-2" >
+											<div class="col-md-12">
+												<a href="#" class="gruppethumb">
+													<img src="" title="${image/title}" tal:attributes="src image/thumbnail; alt image/title; title image/title"  class="klassebilde" id="image_${image/id}"/>							
+												</a>
+											</div>
+											<script type="text/javascript">$('#image_${image/id}').data('screensize', '${image/screensize}');</script>
+										</div>
+									</tal:block>
+								</div>
+							</div>
+							
+					<hr style="border-top: 3px dashed #4a94b6; background: none; margin: 10px 5px 20px 0px;" />
+					
+		</div>
+	</div>
+	
+	<!--<div metal:use-macro="../common.html/right-album-menu" />-->
+</div>
+<div class="hide" id="message" title="" i18n:attributes="title">
+	<p i18n:translate=""></p>
+</div>
+
+<script type="text/javascript">
+	$(document).ready( function() {
+	
+		if( $('a.thumb').size() == 0  ){
+			$('#next').removeAttr('data-status');
+		}
+		
+		$('.thumb img').each( function(){
+				if ( $(this).attr('title').indexOf("retusj") || $(this).attr('title').indexOf("justert")  ) {
+					$(this).parent().append('<div class="star"/>');
+                }
+			});
+		
+ 	
+		$('a.thumb img').imagePreview(15, 15, 'screensize');
+		$('.klassebilde').imagePreview(15, 15, 'screensize');
+		
+		$('a.thumb').on( 'click',  function( event ){
+			event.preventDefault();
+			$('.selected').removeClass('selected');
+			$(this).find('img').addClass("selected");
+			$('#next').removeAttr('data-status');
+			$('#next').attr('title', 'Trykk her for å gå videre');
+			return false;
+			})
+		$('a.gruppethumb').on( 'click',  function( event ){
+			event.preventDefault();
+			$('.selectedgruppebilde').removeClass('selectedgruppebilde');
+			$(this).find('img').addClass("selectedgruppebilde");
+			$('#next').removeAttr('data-status');
+			$('#next').attr('title', 'Trykk her for å gå videre');
+			return false;
+			})
+		
+		$('#next').click( function(){
+			if( $(this).data('status')  == 'disabled'){
+				alert("Du må velge et bilde før du kan gå videre" );
+				return false;
+			}
+			var imageid = $('.selected').attr('id');
+			var gruppeimageid = $('.selectedgruppebilde').attr('id');
+			
+			location.href = "/fetchalbum/order/" +  imageid + "/" + gruppeimageid;
+			
+			return false;
+			
+			
+		});
+
+		if( $('.klassebilde').length == 1 ){
+			$('.klassebilde').addClass('selectedgruppebilde');
+		}
+
+		
+	});
+
+
+</script>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="${templateroot}/${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

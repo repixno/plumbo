@@ -1,0 +1,165 @@
+
+
+<html>
+<head>
+	<style>
+        body{
+            width: 500px;
+			margin-left: 30px;
+       
+            
+        }
+        
+     
+    
+     table{
+		
+		height: 100px;
+		width: 400px;
+	
+		
+	 }
+        
+        td{
+            
+           
+            background: #ece0d0;
+            color: #000000;
+			align: center;
+				
+			
+        }
+		
+		tr{
+			
+			text-align: center;
+		}
+        
+    
+        
+        h3{
+            color: #446986;
+		font-family: inherit;
+			
+            
+        }
+        
+        img{
+            text-align: center;
+        }
+		
+		.ordercomfirm{
+			
+			color: #203545;
+			font-style: italic;
+		}
+		
+		
+		.leveringsinformasjon{
+			
+			font-family: inherit;
+			
+		}
+    </style>
+    
+</head>
+
+<body>
+
+
+    <!--Logo-->
+<img src="https://beta.seniorlappen.no/tmp/logo.png" height="" width="320"alt="Seniorlappen Logo" />
+ <h3>Bekreftet bestilling:</h3>
+<br/>
+
+<div class="epost ordebekreftelse">
+<tal:block tal:content="cms:ingress:024416c7-a665-4a9b-b2fe-6aa78bb44e3d">Order confirmation</tal:block>
+</div>
+<br/>
+
+
+<div class="epost bestilling">
+      <h3>Ordre:</h3>
+
+
+<table>
+    <tr>
+        <td i18n:translate="">  <br/>
+           <br/>
+            Title
+        </td>
+      
+        <td i18n:translate="">  <br/>
+		 <br/>
+            Unitprice
+        </td>
+		
+		
+        <td i18n:translate="">  <br/>
+		 <br/>
+            Quantity
+        </td>
+        <td i18n:translate="">  <br/>
+            Price
+        </td>
+    </tr>
+    <tr tal:repeat="row orderrow">
+        <td tal:content="row/title">  <br/>
+            row
+        </td>
+          <br/>
+        <td tal:content="row/unitprice">  <br/>
+            row
+        </td>
+        <td tal:content="row/quantity">  <br/>
+            row
+        </td>
+        <td tal:content="row/price">  <br/>
+            row
+        </td>
+    </tr>
+</table>
+
+</div>
+
+
+<div class="leveringsinformasjon">
+<h3>Leveringsinformasjon:</h3>
+<br/>   
+<tal:block tal:replace="deliveryinfo/name"/>
+<br/>
+<tal:block i18n:translate="">Delivery Address:</tal:block>
+<br/>
+<tal:block tal:replace="deliveryinfo/address"/>
+<br/>
+<!--
+<tal:block tal:replace="deliveryinfo/address2"/>
+<br/>-->
+<tal:block tal:replace="deliveryinfo/zipcode"/>
+<br/>
+<tal:block tal:replace="deliveryinfo/city"/>
+<br/>
+</div>
+
+
+<h3>Eventuelle kommentarer til ordren:</h3>
+<tal:block i18n:translate="">Comment:</tal:block>
+
+<tal:block tal:replace="comment"/>
+<br/>
+
+<h3>Vennlig helsing:</h3>
+<div class="ordercomfirm">
+<p>
+Seniorlappen<br/>
+(+47) 57 88 35 00<br/>
+
+<a href="mailto:post@seniorlappen.no">post@seniorlappen.no</a><br/>
+http://www.seniorlappen.no<br/>
+</p>
+</div>
+
+
+<!--<tal:block metal:use-macro="../common.html/footer" />-->
+</body>
+</html>

@@ -1,0 +1,13 @@
+<tal:block>
+<tal:block i18n:translate="">Hi</tal:block> <tal:block tal:condition="exists:name" tal:replace="name"></tal:block>
+
+
+<tal:block i18n:translate="">Your order</tal:block> #<tal:block tal:replace="orderid"></tal:block> <tal:block i18n:translate="">has now arrived at</tal:block> <tal:block tal:replace="storename"></tal:block> <tal:block i18n:translate="">and you can pick it up at</tal:block>
+
+
+<tal:block tal:replace="storeaddress"></tal:block>
+</tal:block>
+
+<tal:block i18n:translate="">Regards</tal:block>
+
+<tal:block i18n:translate="">Eurofoto customercenter</tal:block>

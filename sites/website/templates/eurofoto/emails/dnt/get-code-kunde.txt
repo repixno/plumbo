@@ -1,0 +1,17 @@
+Hei!
+
+Takk for din verdikodebestilling for CEWE FOTOBOK.
+Verdikoden gir deg 100 kr avslag på Europas ledende fotobok, og vil bli sendt til deg på følgende adresse:
+${post/name}
+${post/address}
+${post/zipcode}
+ 
+
+Mens du venter på verdikoden, kan du kose deg med utformingen av din CEWE FOTOBOK.
+Last ned programvaren gratis her http://eurofoto.no/produkter/cewe-fotobok/nedlasting
+
+Lykke til med din CEWE FOTOBOK!
+
+
+Med vennlig hilsen
+Eurofoto i samarbeid med Den Norske Turistforening

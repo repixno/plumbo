@@ -1,0 +1,561 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <tal metal:use-macro="../../${templates}/common.html/head" />
+    <style media="all" type="text/css">
+        .price{
+            /*position: absolute;
+            bottom: 10px;
+            right: 0px;*/
+        }
+        .productinfo{
+            position: relative;
+			margin-top: 15px;
+        }
+		
+		.pakketable td{
+			padding: 1px;
+		}
+		.productimage{
+			box-shadow: 3px 3px 1px #999;
+		}
+        
+        * {box-sizing:border-box}
+
+
+    .slideshow-container, .slideshow-container-group {
+        position: relative;
+        width: 100%
+    }
+    .slides-element, .slides-element-group{
+				margin: 5px auto;
+        display: none;
+        /*width: 250px;*/
+    }
+    
+		
+		@media (max-width: 768px) {
+			.table th, .table td {
+					padding: 0 5px;
+			}
+			.modal-footer {
+			   display: block;
+			}
+			.modal-footer .btn{
+				margin-bottom: 5px;
+			}
+		}
+						
+    </style>
+  </head>
+  <body>
+    <tal metal:use-macro="../../${templates}/common.html/header" />
+    
+    <main role="main">
+        <div class="album py-1 bg-light">
+            <div class="container">
+							<!--
+							<div class="form-group row">
+								<label for="staticEmail" class="font-weight-bold col-md-5 col-lg-4 col-form-label">1. Velg portrett eller gruppebilde</label>
+								<div class="col-md-6 col-lg-4">
+														<select class="form-control changeimg">
+															<option value="portrait">Portrett</option>
+															<option value="group">Gruppebilde</option>
+														</select>
+								</div>
+							</div>
+							-->
+							<div class="row">
+								<label for="staticEmail" class="font-weight-bold col-md-5 col-lg-4 col-form-label">Velg bilde</label>
+							
+                <div class="card text-center col-lg-5 col-md-6">
+                    <div class="slideshow-container text-center">
+                        <div class="slides-element slidefade" style="text-align: 100%" tal:repeat="image thumbnails">
+                            <img  data-bid="${image/bid}" data-type="portrait" style="width: 200px; border: solid 2px #ccc" src="${image/thumb}" />
+                        </div>
+												<div class="slides-element slidefade" style="text-align: 100%" tal:repeat="image gruppebilde">
+                            <img  data-bid="${image/bid}" data-type="group" style="width: 300px; border: solid 2px #ccc" src="${image/thumb}" />
+                        </div>
+                        <div class="input-group" style="width:150px; margin: auto">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline prevslide text-primary" type="button">&#10094;</button>
+                            </div>
+                            <input type="text" class="form-control text-center slidecount" value="Bilde 1"  aria-describedby="button-addon4" />
+                            <div class="input-group-append">
+                              <button class="btn btn-outline nextslide text-primary" type="button">&#10095;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+								<!--
+								<div class="card group text-center col-lg-5 col-md-6" style="display: none">
+                    <div class="slideshow-container-group text-center">
+                        <div class="slides-element slidefade" style="text-align: 100%" tal:repeat="image gruppebilde">
+                            <img  data-bid="${image/bid}" style="width: 300px; border: solid 2px #ccc" src="${image/thumb}" />
+                        </div>
+                        <div class="input-group" style="width:150px; margin: auto">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline prevslide text-primary" type="button">&#10094;</button>
+                            </div>
+                            <input type="text" class="form-control text-center slidecount" value="nr1"  aria-describedby="button-addon4" />
+                            <div class="input-group-append">
+                              <button class="btn btn-outline nextslide text-primary" type="button">&#10095;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+								-->
+								</div>
+            </div>
+							
+				</div>
+        
+        <div class="album py-1 bg-light">
+          <div class="container nopadding">
+        <div class="card shopping-cart">
+						<div class="card-header">
+							   Velg produkt
+						</div>
+           
+            
+            <div class="card-body">
+                <tal:block tal:repeat="item products">
+                    <!-- PRODUCT -->
+										<form  class="${item/type}" id="form-${item/option/prodno}">
+											<div class="row">
+													<div class="col-6 col-sm-12 col-md-2 text-center">
+															<img class="img-responsive productimage" src="" data-moduleid="${item/option/prodno}" alt="prewiew" height="80" />
+													</div>
+													<div class="col-6 text-sm-center col-sm-12 text-md-left col-md-6">
+															<h5 class="product-name"><strong  tal:content="item/product/title"></strong></h5>
+															<h6>
+																	<small  tal:content="item/product/ingress"></small>
+																	<h6><strong>kr ${formatprice:item/option/price}</strong></h6>
+															</h6>
+													</div>
+													<div class="py-2 col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+															<div class="col-8 col-sm-4 col-md-6 text-left">
+																	<div class="row">
+																	<label class="col-5 col-sm-12 col-md-12">Antall:</label>
+																	<div class="input-group col-7 col-sm-12 col-md-12" style="max-width: 125px">
+																			<input type="number" step="1" max="99" min="1" value="1" class="qty" />
+																	</div>
+																	</div>
+															</div>
+															<div class="col-4 col-sm-2 col-md-6 text-right">
+																	<button type="button" class="btn btn-success btn-block addtocart" data-id="${item/option/prodno}">
+																		<i class="fas fa-cart-plus"></i>	Velg
+																	</button>
+															</div>
+													</div>
+											</div>
+											<hr />
+										</form>
+                    <!-- END PRODUCT -->
+                    </tal:block>
+                <div class="float-right">
+										<button class="btn btn-success vishandlekurv"><i class="fas fa-shopping-cart"></i> Vis handlekurv</button>
+                    <a href="/order/checkout" class="btn btn-success pull-right">
+                        <i class="fas fa-cash-register"></i> Gå til kassa
+                    </a>
+                </div>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+          </div>
+        </div>
+      </main>
+		
+<!-- Modal: modalCart -->
+<div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Handlekorg</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <!--Body-->
+      <div class="modal-body">
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Bilde</th>
+              <th class="text-nowrap">Produkt</th>
+              <th class="text-nowrap">Antall</th>
+              <th class="text-nowrap">Pris</th>
+              <th class="text-nowrap">Fjern</th>
+            </tr>
+          </thead>
+          <tbody id="cartContent">
+
+           
+          </tbody>
+        </table>
+
+      </div>
+      <!--Footer-->
+      <div class="modal-footer">				
+				<button class="btn btn-danger clear-cart">Tøm handlekorga</button>
+        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Fortsett å handle</button>
+        <button class="btn btn-primary checkout">Gå til kassa</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal: modalCart -->
+</body>
+
+<tal metal:use-macro="../../${templates}/common.html/scripts" />
+<script src="https://hammerjs.github.io/dist/hammer.min.js" ></script>
+<script src="/js/jquery.hammer.js"></script>
+<tal metal:use-macro="../../${templates}/common.html/footer" />
+  
+<script type="text/javascript">
+    var bid = "";
+		var aid = "";
+		var slidestamp = 0;
+		
+    /*<![CDATA[*/
+    $.fn.slidings = function() {
+        
+			
+			var slideindex = 0;
+			var slides = $(this).find( ".slides-element" ).toArray();
+			var slidelength = slides.length;
+				//console.log( $(slides[0]) );
+        $(slides[slideindex]).css( 'display',  'block' ).addClass('activeimage');
+				bid = $(slides[slideindex]).find('img').data('bid');
+        //console.log( slides[slideindex] );
+				
+        $(this).find('.nextslide').on( 'click', function(){
+						$(this).find('.activeimage').removeClass('activeimage');
+            $(slides[slideindex]).css( 'display',  'none' );
+            slideindex++;
+            //bid = 
+            if( slideindex >= slidelength ){
+                slideindex = 0;
+            }
+            $(".slidecount").val( 'Bilde ' + ( slideindex + 1) );
+						$(slides[slideindex]).css( 'display',  'block' ).addClass('activeimage');
+						bid = $(slides[slideindex]).find('img').data('bid');
+						type = $(slides[slideindex]).find('img').data('type');
+						
+						//updateproductiomage( bid );
+						changeimage( type, bid );
+        });
+				
+				$('.slides-element').hammer().on("panleft panright tap press", function(ev) {
+						console.log(ev);
+				});
+				
+				$('.slides-element').hammer().on("swipeleft swiperight", function( ev ){
+					
+					console.log("slidestamp", slidestamp);
+					console.log("ev.timeStamp" , ev.timeStamp);
+					
+					if( slidestamp != ev.timeStamp ){
+						if( ev.type == "swiperight"){
+							$('.prevslide').click();
+						}
+						else{
+							$('.nextslide').click();
+						}
+					}
+					
+					slidestamp = ev.timeStamp;
+					
+				});
+        
+        $(this).find('.prevslide').on( 'click', function(){
+					$(this).find('.activeimage').removeClass('activeimage');
+					
+					$(slides[slideindex]).css( 'display',  'none' );
+          slideindex--;
+
+          if( slideindex < 0 ){
+						slideindex = slidelength - 1;
+          }
+          $(this).parent().parent().find(".slidecount").val( 'Bilde ' + ( slideindex + 1 ) );
+					
+					$(slides[slideindex]).css( 'display',  'block' ).addClass('activeimage');
+					bid = $(slides[slideindex]).find('img').data('bid');
+					type = $(slides[slideindex]).find('img').data('type');
+						
+					//updateproductiomage( bid );
+					changeimage( type, bid );
+        });
+				
+				if( $(this).hasClass('slideshow-container') ){
+					console.log( this );
+					updateproductiomage(bid);
+				}
+    };
+		
+
+		
+		function changeimage( type, bid ){
+			
+			console.log( type );
+			if( type == 'portrait' ){
+				$('.portrait').show();
+				$('.group').hide();
+				
+				//bid = $( ".slideshow-container" ).find('.activeimage img').data('bid');
+				updateproductiomage(bid);
+				
+				
+			}
+			if( type  == 'group' ){
+				$('.portrait').hide();
+				$('.group').show();
+				
+				//bid = $( ".slideshow-container-group" ).find('.activeimage img').data('bid');
+				updateproductiomage(bid);
+				
+			}
+		}
+
+    
+		function updateproductiomage(bid){
+			
+			$('.productimage').each( function(){
+				var moduleid = $(this).data('moduleid');
+				$(this).data('bid', bid);
+				
+				$(this).attr('src', "/fetchalbum/productimage/?portrait=" + bid + "&klassebilde=" + bid + "&module=" + moduleid );
+			})
+			
+		}
+		
+		function updatemodal(e){
+			
+				$(e).find('#cartContent').html('');
+		
+					$.get( '/api/1.0/cart/enum', function(cartdata){
+							console.log(cartdata);							
+							if( cartdata.result == false  ){
+								$(e).find('#cartContent').append("<h2>Handlekorga er tom</h2>")
+							}
+							else{
+								var items = cartdata.items;
+								for (var key in items) {
+										for (var ik in items[key] ) {
+											for (var ip in items[key][ik] ) {
+												$(e).find('#cartContent').append(`<tr class="product">
+														<td>`+ '<img class="centerthumb" src="/order/thumbnail/'+ items[key][ik][ip].attributes.bid + '/' + '${identifiervalue}" />'  +`</td>
+														<td><span class="text-nowrap">` + items[key][ik][ip].product.title + '</span><small class="text-muted d-none d-md-block"><br/>' + items[key][ik][ip].product.ingress + '</small>' + `</td>
+														<td>` + items[key][ik][ip].quantity + `</td>
+														<td>` + items[key][ik][ip].price + `</td>
+														<td><button data-prodno="` + items[key][ik][ip].prodno +  `" data-referenceid="` + items[key][ik][ip].referenceid + `"   class="btn delete-item" style="margin: 15px 0px 15px 10px; padding: 5px; background-color: transparent" ><i class="far fa-trash-alt"></i></bnutton></td>
+													</tr>`);
+												
+											}
+											;
+											
+										}
+								
+								}
+								
+								$(e).find('#cartContent').append(`<tr class="total">
+									<th scope="row">&nbsp;</th>
+									<td>Total</td>
+									<td>&nbsp;</td>
+									<td>` + cartdata.totalprice + `</td>
+									<td></td>
+								</tr>`);
+							
+							}
+						}, 'JSON');
+		}
+	
+	$( function(){
+		
+		$('.checkout').on('click', function(){
+			
+			location.href = "/order/checkout";
+			
+			});
+		
+		$('.changeimg').on( 'change', function(){
+			
+			if( $(this).val() == 'portrait' ){
+				$('.portrait').show();
+				$('.group').hide();
+				
+				bid = $( ".slideshow-container" ).find('.activeimage img').data('bid');
+				updateproductiomage(bid);
+				
+				
+			}
+			if( $(this).val() == 'group' ){
+				$('.portrait').hide();
+				$('.group').show();
+				
+				bid = $( ".slideshow-container-group" ).find('.activeimage img').data('bid');
+				updateproductiomage(bid);
+				
+			}
+		});
+		
+		$('.group').hide();
+        
+		$( ".slideshow-container" ).slidings();
+		//$( ".slideshow-container-group" ).slidings();
+		
+		$('.pakketable').parent().css( { height: "235px" } );
+		$('.pakketable' ).each( function(){
+			var price = 0;
+			$( this ).find( '.normal-price' ).each(function(){
+					price +=   $(this).data('price');	
+				});
+			$(this).find('.veilpris').text( price + ',00'  );
+			
+			});
+		
+		$('#modalCart').on('show.bs.modal', function(e) {
+			
+				updatemodal(e.currentTarget );
+
+					
+			});
+		
+		$('.addtocart').click( function(){
+			var bw = false;
+			
+			var quantity = $(this).parent().parent().find('.qty').val();
+			
+			bw = $(this).parent().find('input[value="bw"]').prop('checked');
+			
+			var prodno = $(this).data('id');
+			
+			var bildeid =  $(this).parent().parent().parent().find('.productimage').data('bid');
+		  var attributes = { bid: bildeid, bw:bw };
+			console.log( attributes );
+			console.log( prodno );
+			console.log( quantity );
+			
+			var sendshit = JSON.stringify(attributes)
+			
+			var item = this;
+			
+			$.ajax({
+				url: '/api/1.0/cart/add',
+				dataType: 'json',
+				type: 'post',
+				data: {
+					prodno: prodno,
+					quantity: quantity,
+					attributes: attributes
+				},
+				success: function(data) {
+					$('#modalCart').modal();
+				}, 
+				error: function(data) {
+					alert('Beklager, noe gikk galt');
+				}
+			});
+			
+		});
+		
+		$(document).on( 'click', '.delete-item', function(){
+
+						var prodno = $(this).data('prodno');
+						var referenceid = $(this).data('referenceid');
+						
+						$.post( "/api/1.0/cart/remove", { prodno: prodno, referenceid: referenceid })
+							.done(function( data ) {
+								
+								var e = $('#modalCart');
+								updatemodal(e);
+								//location.reload();
+								//alert( "Data Loaded: " + data );
+							});
+					});
+		
+		$('.clear-cart').on( 'click', function(){
+			
+			$.get( '/api/1.0/cart/clear', function(){
+					var e = $('#modalCart');
+					updatemodal(e);
+				})
+			
+			})
+		
+		$('.vishandlekurv').on( 'click', function(){
+				$('#modalCart').modal();
+			});
+		
+		$('.addtocart_digital').click( function(){
+			
+			var quantity = $(this).parent().find('.quantity_digital').val();
+			var prodno = $(this).attr('id');
+
+			var attributes = { bid: bid, aid: aid };
+			
+			var sendshit = JSON.stringify(attributes)
+			
+			var item = this;
+			
+			$.ajax({
+				url: '/api/1.0/cart/add',
+				dataType: 'json',
+				type: 'post',
+				data: {
+					prodno: prodno,
+					quantity: quantity,
+					attributes: attributes
+				},
+				success: function(data) {
+					$('#cart-total-price, #total-price').text( formatPrice(data.totalprice) );
+					$('#cart-total-items').text( data.totalitems );
+					$('#shopping-cart').effect('highlight',{}, 'slow');
+					$('.ajax-loader').remove();
+					$(item).parent().parent().css('opacity', 0.4);
+				}, 
+				error: function(data) {
+					pageTracker._trackEvent('Error', 'Add to cart', 'Accessories', prodno);
+					pageTracker._trackPageview();
+					alert('Beklager, noe gikk galt');
+				}
+			});
+		});
+          
+					
+					
+					
+					
+					//$( window ).load(function() {
+						var type = $('.activeimage img').data('type');
+						var bid = $('.activeimage img').data('bid');
+						
+						console.log(bid);
+						
+						changeimage( type, bid );
+						// Run code
+					//});
+					
+		/* show lightbox when clicking a thumbnail */
+				$('a.thumb').click(function(event){
+					event.preventDefault();
+					var content = $('.modal-body');
+					content.empty();
+						var title = $(this).attr("title");
+						$('.modal-title').html(title);        
+						content.html($(this).html());
+						$(".modal-profile").modal({show:true});
+				});
+		
+		});
+    	/*]]>*/
+</script>
+
+
+</html>

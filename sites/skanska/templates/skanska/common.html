@@ -1,0 +1,390 @@
+<tal:block metal:define-macro="javascript">
+	<script src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+	<script>
+		WebFont.load({
+		  custom: {
+		    families: [ 'skanska'],
+		    urls: ['/skanskastatic/fonts.css']
+		  }
+		});
+	</script>
+</tal:block>
+
+<tal:block metal:define-macro="stylesheet">
+		<style type="text/css">
+	    body{
+		background: #ffdb00;
+		-webkit-background-size: 1400px 1750px;
+		background-image: url('/css/web/images/background-pre.jpg');
+		background-repeat: no-repeat;
+		background-position: top;
+		background-attachment: scroll;
+	    }
+	    .canvas-container{
+		margin:0px auto;
+	    }
+	    h4, label{
+		color:#ef321b;
+		font-family: 'skanska';
+		font-size: 2.3em;
+	    }
+	    h3, label{
+		color:#0199d8;
+		font-family: 'skanska';
+		font-size: 2.3em;
+	    }
+	    label{
+		font-weight: normal;
+	    }
+	    div.desktoplabel{
+		width: 110px;
+	    }
+	    
+	    .share span{
+		margin-left: 20px;
+		cursor: pointer;
+	    }
+	    
+	   
+	    .center{
+		text-align: center;
+	    }
+	    .countdown{
+		background-image: url('/css/web/images/countdownback.png');
+		width: 315px;
+		height: 107px;
+		margin:0px auto;
+		vertical-align: middle;
+	    }
+	    .countdown div{
+		
+	    }
+	    .desc { margin: 5px 3px; }
+	    .desc div {
+	      float: left;
+	      font-family: 'skanska';
+	      width: 65px;
+	      margin-right: 32px;
+	      font-size: 17px;
+	      font-weight: bold;
+	      color: #ef321b;
+	   
+	    }	    
+	
+	.kjopforsiden{
+		position: absolute;
+		top: -5px;
+		left: 200px;
+		width: 26%;
+	    }
+	select, input {
+		width: 170px;
+		background-color: #fff;
+		border: 1px solid #0094d3;
+	    }
+	.btn-skanska {
+		color: #ffffff;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+		font-family: 'skanska';
+		background-color: #0078aa;
+		background-image: -moz-linear-gradient(top, #0092cf, #0078aa);
+		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0092cf), to(#0078aa));
+		background-image: -webkit-linear-gradient(top, #0092cf, #0078aa);
+		background-image: -o-linear-gradient(top, #0092cf, #0078aa);
+		background-image: linear-gradient(to bottom, #0092cf, #0078aa);
+		background-repeat: repeat-x;
+		border-color: #0078aa #0078aa #0092cf;
+		border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0092cf', endColorstr='#0078aa', GradientType=0);
+		filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+		padding: 15px 10px 10px 10px;
+		font-size: 2em;
+		-webkit-border-radius: 12px;
+		-moz-border-radius: 12px;
+		border-radius: 12px;
+	}
+	.btn:hover {
+		color: #FFF;
+		background-color: #0078aa;
+	}
+	
+.btn.btn-default{
+	
+	color: #020202;
+	background-image: linear-gradient(to bottom,#fff,#fedd00);
+}
+
+.header{
+        
+       font-family: skanska;
+    font-size: 30px;
+    padding-top: 43px;
+    background-color: #0078c9;
+    padding-bottom: 20px;
+    }
+    .headerfont{
+        color: #ffffff;
+    }
+	
+	
+	.footer2{
+   /* background-image: url('../images/footerbackground2.png');*/
+   background-color: #0078c9;
+   height: 60px;
+    margin-top: 30px;
+}
+
+	</style>
+</tal:block>
+
+<tal:block metal:define-macro="head">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/css/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
+    <link href="/css/web/css/redmond/jquery-ui.css" rel="stylesheet" />
+	<link href="/css/web/css/main.css" rel="stylesheet" media="screen" />
+	<meta name="robots" content="noindex,nofollow"/>
+		
+	
+	<title>Skanska Bildeopplaster</title>
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+
+	
+	
+</tal:block>
+
+<tal:block metal:define-macro="header">
+	
+	<script type="text/javascript">/*<![CDATA[*/
+		var res = screen.width * screen.height;
+		if( res < 786432 ){
+			document.location.href = '/stickers/setmobiledevice';
+		}
+	/*]]>*/</script>
+	<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		  
+			ga('create', 'UA-34542602-2', 'auto');
+		   ga('require', 'displayfeatures');
+			ga('send', 'pageview');
+	</script>
+	<div class="row text-center">
+		
+			
+			<div class="header" ><h3 class="text-center headerfont"> </h3></div>
+			
+		
+	</div>
+	
+	
+</tal:block>
+
+
+
+
+
+
+
+<tal:block metal:define-macro="header_english">
+	
+	<script type="text/javascript">/*<![CDATA[*/
+		var res = screen.width * screen.height;
+		if( res < 786432 ){
+			document.location.href = '/stickers/setmobiledevice';
+		}
+	/*]]>*/</script>
+	<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		  
+			ga('create', 'UA-34542602-2', 'auto');
+		   ga('require', 'displayfeatures');
+			ga('send', 'pageview');
+	</script>
+	<div class="row text-center">
+		
+			
+			<div class="header"><h3 class="text-center headerfont"> SKANSKA - "COME SAFE HOME"</h3></div>
+			
+		
+	</div>
+</tal:block>
+
+
+
+
+<tal:block metal:define-macro="footer2">
+
+	<div class="footer2 text-center">
+			<a href="https://skanska.no" style="color: #ffffff; text-align: center; text-decoration: underline;">Tilbake til skanska.no</a>
+	</div>
+	
+	
+	
+	
+	
+	
+		<!--<div tal:content="structure cms:body:bdfae130-4c73-4c7c-98eb-c0a769bddec2" />-->
+		
+	
+	
+	
+	
+	
+	
+		
+		
+
+	<script>
+		$( function(){
+			
+			$(document).on( 'click', '#rulesbutton', function(){
+					$('#rule').dialog({
+						width: 990,
+						modal: true,
+						title: "Vilkår for bruk",
+						buttons: {
+						Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			
+			$(document).on( 'click' , '.ui-widget-overlay' ,function () {
+				$("#rule").dialog( "close" );
+			});
+			
+			});
+		
+		
+		
+		
+		
+		
+		
+		
+		$( function(){
+			
+			$(document).on( 'click', '#informasjon2button', function(){
+					$('#informasjon2').dialog({
+						width: 990,
+						modal: true,
+						title: "Informasjon2",
+						buttons: {
+						Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			
+			$(document).on( 'click' , '.ui-widget-overlay' ,function () {
+				$("#informasjon2").dialog( "close" );
+			});
+			
+			});
+		
+		
+		
+	
+			
+			
+		
+	</script>
+   
+</tal:block>
+
+
+<tal:block metal:define-macro="footeruk">
+
+	<div class="footer2 text-center">
+			<a href="https://skanska.no" style="color: #ffffff; text-align: center; text-decoration: underline;">Back to skanska.no</a>
+	</div>
+	
+	
+	
+	
+	
+	
+		<!--<div tal:content="structure cms:body:bdfae130-4c73-4c7c-98eb-c0a769bddec2" />-->
+		
+	
+	
+	
+	
+	
+	
+		
+		
+
+	<script>
+		$( function(){
+			
+			$(document).on( 'click', '#rulesbutton', function(){
+					$('#rule').dialog({
+						width: 990,
+						modal: true,
+						title: "Kampanjeregler",
+						buttons: {
+						Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			
+			$(document).on( 'click' , '.ui-widget-overlay' ,function () {
+				$("#rule").dialog( "close" );
+			});
+			
+			});
+		
+		
+		
+		
+		
+		
+		
+		
+		$( function(){
+			
+			$(document).on( 'click', '#informasjon2button', function(){
+					$('#informasjon2').dialog({
+						width: 990,
+						modal: true,
+						title: "Informasjon2",
+						buttons: {
+						Ok: function () {
+							    $(this).dialog("close");
+							}
+						}
+					      });
+					return false;
+				});
+			
+			$(document).on( 'click' , '.ui-widget-overlay' ,function () {
+				$("#informasjon2").dialog( "close" );
+			});
+			
+			});
+		
+		
+		
+	
+			
+			
+		
+	</script>
+   
+</tal:block>

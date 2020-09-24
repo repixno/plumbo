@@ -1,0 +1,10 @@
+<tal:block>
+<tal:block i18n:translate="">
+An album has been shared with you:
+</tal:block>
+   
+<tal:block tal:condition="exists:album" tal:replace="album/title"></tal:block>
+
+<tal:block tal:replace="link"></tal:block>
+
+</tal:block>

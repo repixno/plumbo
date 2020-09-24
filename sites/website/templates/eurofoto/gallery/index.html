@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+</head>
+<body>
+<div class="container">
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	<div class="span-16">
+		<div class="span-4">
+			<h2 i18n:translate="">Public gallery</h2>
+		</div>
+		<!-- pagination -->
+		<div class="pagination span-12 last right prepend-top" tal:condition="exists:pagination">
+			&lt;&lt;  <a href="/gallery/${pagination/first}" tal:condition="pagination/first" i18n:translate="">First</a> 
+			<a href="/gallery/${pagination/prev}" tal:condition="pagination/prev" i18n:translate="">Prev</a> 
+			<span tal:condition="not:pagination/prev" class="quiet" i18n:translate="">Prev</span> 
+			<span><tal:block  i18n:translate="">Page</tal:block> ${pagination/current} <tal:block i18n:translate="">of</tal:block> ${pagination/last}</span> 
+			<a href="/gallery/${pagination/next}" tal:condition="pagination/next" i18n:translate="">Next</a> 
+			<span tal:condition="not:pagination/next" class="quiet" i18n:translate="">Next</span> 
+			<a href="/gallery/${pagination/last}" tal:condition="pagination/last" i18n:translate="">Last</a> &gt;&gt;
+		</div>
+
+		<div class="span-16 last">
+			<ul id="albums">
+				<tal:block tal:repeat="album albums">
+					<li class="albumPreview">
+						<a href="${album/albumurl}" title="${album/title}">
+							<div class="skimmer">	
+								<img src="${album/thumbnailurl}" alt="${album/name}" class="thumb" />
+								<ul class="hide">
+									<tal:block tal:repeat="thumb album/defaultthumbnails">
+										<li>
+											<img src="${thumb/thumbnail}" alt="${thumb/name}" />
+										</li>
+									</tal:block>
+								</ul>
+							</div>
+						</a>
+						<div class="center">
+							<tal:block tal:content="shorten:album/title;20" />
+						</div>
+					</li>
+				</tal:block>
+			</ul>
+		</div>
+	</div>	
+	
+	<div class="span-8 last">
+		<ul>
+			<li>
+				<a class="" tal:attributes="href string:/order-prints/fromalbum/${album/id}" href="order-prints"  i18n:translate="">Order prints</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready( function() {
+		$('.skimmer').skimmer();
+	});
+</script>
+
+</body>
+</html>

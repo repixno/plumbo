@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<tal:block tal:define="global dontShowCart" />
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Thank you!</tal:block>
+</head>
+
+
+<body>
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+	<div class="container">
+		<div class="span-24 last">
+			<div class="center prepend-top append-bottom">
+				<h1 i18n:translate="">Thank you!</h1>
+				<br />
+				<h4 tal:condition="orderid"><tal:block i18n:translate="">Order number:</tal:block> ${orderid}</h4>
+				<br />
+				<p i18n:translate="">
+					An order confirmation has been sent to your email address. If you have any questions or feedback, don't hesitate to contact us!
+				</p>
+			</div>
+		</div>
+	</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<tal:block tal:condition="exists: purchasedcart">
+
+
+
+	<script type="text/javascript">
+	
+	var totalprice = false;
+	
+	if( ${purchasedcart/totalprice} ) {
+	 totalprice = ${purchasedcart/totalprice};
+	}
+	
+
+   var google_conversion_id = 1052069281;
+   var google_conversion_language = "en";
+   var google_conversion_format = "3";
+   var google_conversion_color = "ffffff";
+   var google_conversion_label = "pw2pCP_E_gIQoZvV9QM";
+	if( totalprice ) {
+		var google_conversion_value = totalprice;
+	}
+
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1052069281/?value=0&amp;label=pw2pCP_E_gIQoZvV9QM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+</tal:block>
+
+</body>
+</html>

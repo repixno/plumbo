@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <tal metal:use-macro="../../${templates}/common.html/head" />
+
+  </head>
+  <body>
+    <tal metal:use-macro="../../${templates}/common.html/header" />
+    
+    <main role="main">
+        <section class="jumbotron text-center">
+          <div class="container">
+            <h1 class="jumbotron-heading">Reed Foto AS</h1>
+							
+							<p>
+								
+			
+								<form  action="/order/fetch"  method="post" class="col-md-12 text-center">
+									<div class="form-group col-md-6" style="margin: 15px auto">
+											<label for="kode" class="col-form-label">Koden fra fotograferinga</label>
+											<input name="kode" type="text" class="form-control" id="kode" placeholder="Kode" />
+									</div>
+									      <input type="submit" class="btn btn-primary mb-2">Send</input>
+								</form>
+							</p>
+							
+							<!--<p  class="">Reed Foto består av eit nasjonalt nettverk av svært rutinerte fotografar. I tillegg til den solide rutinen vi har gjennom mange år med fotografering av tusenvis av elevar, er vi og i ferd med å utvikle heilt nye tekniske løysingar for å vidareutvikle dei norske skulefototenestene. Hovedmarknaden vår er Rogaland, Hordaland, Sogn og Fjordane, Møre og Romsdal og Trøndelagfylka, i tillegg til at vi har fotografar stasjonert i Oslo.
+							</p>
+							<p  class="">
+							Vår primære målgruppe er ungdomsskular, folkehøgskular og vidaregåande skular, men vi har også utvikla nye og framtidsretta løysingar retta mot barnehagar og grunnskular. Vår filosofi har vore og vil vere å heile tida knytte til oss det beste mannskapet for at kundane skal få både den beste service og det beste resultatet på dei produkta vi leverer.</p>
+							<p>-->
+						<p>
+              <a href="http://www.reedfoto.no" class="btn btn-primary my-2">Gå til hovedsiden</a>
+              <a href="http://foto.reedfoto.no" class="btn btn-secondary my-2">Gå til etterbestilling siden</a>
+            </p>
+          </div>
+        </section>
+      
+        <div class="album py-5 bg-light">
+          <div class="container">
+      <!--
+            <div class="row">
+                <tal:block tal:repeat="menuitem menucontent:09886f48-6568-4807-b4f3-8b87f47d5b9e,maincontent">
+                    <div class="col-md-4">
+                      <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                          <tal:block tal:content="structure menuitem/body|default" />
+                        </div>
+                      </div>
+                    </div>
+                </tal:block>
+            </div>
+				-->
+          </div>
+        </div>
+      
+      </main>
+    
+    <tal metal:use-macro="../../${templates}/common.html/scripts" />
+    <tal metal:use-macro="../../${templates}/common.html/footer" />
+  </body>
+
+</html>

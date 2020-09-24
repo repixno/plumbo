@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<link rel="alternate" type="application/rss+xml" title="" id="gallery" tal:condition="exists: mediarss" href="${mediarss}" />
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle">${album/title}</tal:block>
+	<script type="text/javascript" src="${static:js/jquery.lazyload.mini.js}"></script>
+	<script type="text/javascript">
+		$(document).ready( function() {
+			$('img', '#images').lazyload({placeholder: '<tal:block tal:content="static:gfx/gui/ajax-loader.gif" />'});
+		});
+	</script>
+	<style type="text/css">
+		#move-images-dialog .albums, #delete-images-dialog .selected-images {height:250px;overflow:scroll;overflow-x:hidden}
+		.albumlist .thumbnail{width:24px;height:24px;overflow:hidden;float:left;margin-right:12px}
+		.albumlist .thumbnail img{border:0;width:30px;outline:none}
+		.oneline {display:inline-block}
+		#content textarea { height: 60px }
+		div.imagecontainer {height: 150px;text-align: center;}
+      #fancybox-left-ico {
+       left: 20px;
+      }
+      #fancybox-right-ico {
+       right: 20px;
+       left: auto;
+      }
+	</style>
+</head>
+
+
+<body>
+<div metal:use-macro="../../../${templates}/common.html/top" />
+<div class="container">
+
+	
+	
+	<div id="">
+
+		<h2 class="bottom oneline">
+			<span class="title quiet album-title" id="${album/id}" tal:content="album/title | default" />
+		</h2>
+		<p class="description quiet top" tal:content="album/descriptionraw|default"></p>
+		
+
+
+		<div class="imagelist " id="images">
+			<tal:block tal:repeat="image images">
+				<tal:block tal:condition="mod:repeat/image/number,5">
+					<div class="imagecontainer thumb span-4 last">
+						<a id="group" href="${image/fullsize}/1000/1000/${image/title}" title="${image/title}" class="thumb" rel="example_group">
+							<img src="" alt="" tal:attributes="src image/thumbnail; alt image/title" class="thumb_110px" />
+						</a>
+					</div>
+				</tal:block>
+				<tal:block tal:condition="not:mod:repeat/image/number,5">
+					<div class="imagecontainer thumb span-4">
+						<a id="group" href="${image/fullsize}/1000/1000/${image/title}" title="${image/title}" class="thumb" rel="example_group">
+							<img src="" alt="" tal:attributes="src image/thumbnail; alt image/title" class="thumb_110px" />
+						</a>
+					</div>
+				</tal:block>
+			</tal:block>
+		</div>
+
+	</div>
+	
+</div>
+
+<div metal:use-macro="../../../${templates}/common.html/footer" />
+
+
+
+<SCRIPT type="text/javascript">
+
+$(document).ready(function() {
+	/* Apply fancybox to multiple items */
+	
+	$("a.thumb").fancybox({
+		'transitionIn'	:	'elastic',
+		'transitionOut'	:	'elastic',
+		'titleShow'       : false,
+		'hideOnOverlayClick' : false
+	});
+	
+});
+
+</SCRIPT>
+</body>
+</html>

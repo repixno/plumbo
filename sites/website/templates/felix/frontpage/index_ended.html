@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//SE"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="se">
+    <head>
+        <tal metal:use-macro="../../${templates}/common.html/head" />
+
+        <link href="/felix/main.css"  rel="stylesheet"/>
+    </head>
+    <body>
+			<div style="position:absolute; z-index: 100; top: 0px; width: 100%; text-align: center;"><img src="/felix/topbg-1.png" /></div>
+
+        
+		<div class="container">
+			<tal metal:use-macro="../../${templates}/common.html/top" />
+			<div class="row hidden-xs header" style="margin-top: 50px">
+			<div class="col-md-12 text-center">
+					<img src="${static:}css/portals/felix/gfx/logo.jpg" alt="FELIX"/>
+					<h1>Säg det med ketchup - gör din egen etikett!</h1>
+			</div>
+			</div>
+			
+			<div class="col-md-12 text-center">
+				<h2>Kampanj startar 01.08.2017</h2>
+			</div>
+		</div>
+		
+
+
+        <script src="${static:js/fabric/dist/fabric.min.js}" />
+        <script src="${static:css/portals/felix/js/editor.js}?version=1.7" />
+        <script src="http://malsup.github.com/jquery.form.js"></script>
+
+       
+    </body>
+</html>

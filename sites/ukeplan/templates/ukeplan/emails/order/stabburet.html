@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+      <script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		  
+			ga('create', 'UA-128574459-2', 'auto');
+		   ga('require', 'displayfeatures');
+			ga('send', 'pageview');
+	</script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <!-- Facebook sharing information tags -->
+        <meta property="og:title" content="Stabburet leverpostei ordrebekreftelse" />
+        
+        <title>Stabburet leverpostei ordrebekreftelse</title>
+		<style type="text/css">
+			body {
+				background: #eee;
+			}
+			
+			.container {
+				text-align: left;
+			}
+			
+			.footer {
+				text-align: left;
+			}
+			
+			.header {
+				text-align: left;
+			}
+			
+			.content {
+				text-align: left;
+				font-family: comic sans ms;
+				color: #014a81;
+			}
+			
+			td {
+				background: #d0eeff;
+				color: #446986;
+				text-align: center;
+				text-transform: uppercase;
+				  padding:9px 25px 9px 33px;
+			}
+			
+        .wrapper{
+			margin-left: 10px;
+		}
+
+		</style>
+	</head>
+    <body>
+    	<center>
+			<div class="container" style="background: #fff;">
+				<div class="content">
+				<div class="header">
+					<img src="https://static.repix.no/cms/images/20180724_topp.jpg" alt="header"/>
+				</div>
+				
+                    <div class="wrapper">
+                        
+					<h3 style="margin-top:0px"><tal:block tal:content="cms:title:3fe7b71e-d895-4ad2-8460-f8bd44b236b6"></tal:block></h3>
+					<p>Ditt ordrenr er <tal:block tal:replace="orderid"/><br/><br/>
+					Ta godt vare på denne e-posten helt til du mottar dine varer.<br/>Ved kontakt med vårt kundesenter vennligst ha ditt ordrenummer klart.
+					</p>
+					<p>I perioder kan det bli inntil 3 ukers leveringstid.
+                    <br/>Ordrer med flere produkt kan bli sendt hver for seg.</p>
+					<p>
+					   <strong><tal:block i18n:translate="">Delivery Address:</tal:block></strong><br/>
+					   <tal:block tal:replace="deliveryinfo/name"/><br/>
+					   <tal:block tal:replace="deliveryinfo/address"/><br/>
+					   <tal:block tal:replace="deliveryinfo/zipcode"/> <tal:block tal:replace="deliveryinfo/city"/>
+					</p>
+                    <p>
+                     <strong><tal:block i18n:translate="">Ordered items:</tal:block></strong><br/>
+  <table>
+	<tr>
+		<td i18n:translate=""> <br/>
+			<br/> Title
+		</td>
+
+		<td i18n:translate=""> <br/>
+			<br/> Unitprice
+		</td>
+
+
+		<td i18n:translate=""> <br/>
+			<br/> Quantity
+		</td>
+		<td i18n:translate=""> <br/> Price
+		</td>
+	</tr>
+	<tr tal:repeat="row orderrow">
+		<td tal:content="row/title"> <br/> row
+		</td>
+		<br/>
+		<td tal:content="row/unitprice"> <br/> row
+		</td>
+		<td tal:content="row/quantity"> <br/> row
+		</td>
+		<td tal:content="row/price"> <br/> row
+		</td>
+	</tr>
+</table>		</p>
+                  
+                    </div>
+					<div tal:content="structure cms:body:3fe7b71e-d895-4ad2-8460-f8bd44b236b6"/>
+
+                    <div>
+                        <a href="https://www.dinmerkelapp.no">
+                           <img src="https://static.repix.no/cms/images/20180724_fargelapper.jpg" alt="Dinmerkelapp" title="Dinmerkelapp"/>
+                        </a>
+                    </div>
+                    <br/>
+                    <div>
+                         <a href="https://www.dinmerkelapp.no/skole">
+                           <img src="https://static.repix.no/cms/images/20180724_andreprodukter.jpg" alt="Fotogaver" title="Fotogaver" />
+                        </a>
+                    </div>
+                    </div>
+				 <br/>
+				
+				<div class="footer">
+                    
+                   
+			<a href="https://www.dinmerkelapp.no">
+			<img  src="https://static.repix.no/cms/images/bunnstabburet_2018.jpg" alt="Footer" />
+			</a>
+		
+				
+				</div>
+				
+					
+			</div>
+        </center>
+    </body>
+</html>

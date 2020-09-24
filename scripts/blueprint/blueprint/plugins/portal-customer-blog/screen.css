@@ -1,0 +1,82 @@
+body {
+	background: #01060a url(dark-grass/background.jpg) repeat-x scroll center top;
+}
+
+
+#footer {
+	background: #01060a url(dark-grass/background-footer.jpg) repeat-x scroll center bottom;
+	color: #fff;
+}
+#footer a {
+	color: #fff;
+	text-decoration: none;
+}
+
+a:hover {
+	border-bottom: 1px dotted #000;
+}
+
+#eurofoto-blog-logo {
+	background: transparent url(dark-grass/eurofoto-blogg.png) no-repeat scroll center top;
+	width: 259px;
+	height: 109px;
+	text-indent: -9999px;
+}
+
+#content {
+	background: rgba(255, 255,255, 0.5);
+	-webkit-box-shadow: 3px 3px 30px #000000;
+	-moz-box-shadow: 3px 3px 30px #000000;
+	box-shadow: 3px 3px 30px #000000;
+	color: #333;
+}
+
+
+#content h2 {
+	background-color: #fff;
+	padding: .5em 1em;
+}
+#content h2 a {
+	text-decoration: none;
+	color: #333;
+}
+
+
+#posts ul {
+	margin: 0;
+}
+
+#posts ul li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+h1 a{
+	font-weight: bold;
+	letter-spacing: -0.1em;
+	font-size: 1.5em;
+	color: #000;
+	color: rgba(255,255,255,0.9);
+}
+.blog-subtitle {
+	color: #fff;
+}
+
+h1 a {
+	text-decoration: none;
+}
+
+#posts .post .functions {
+	padding-top: .3em;
+	font-size: .7em;
+}
+
+a.delete {
+	color: #c00 !important;
+}
+
+.right		{ text-align: right }
+div.right 	{ float: right }
+.left		{ text-align: left }
+div.left	{ float: left }

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Feedback</tal:block>
+</head>
+
+<body>
+
+<div class="container">
+   
+	<div metal:use-macro="../../${templates}/common.html/top" />
+   
+	<div class="prepend-4 append-4 last pagedialog" tal:condition="not:exists:sentToEmail">
+		<div clas="clear clearfix"></div>
+			<h2 i18n:translate="">Contact</h2>
+			<p>Give us feedback on the service privatly</p>
+			<form action="/contact/feedback" method="post">
+				<div>
+					<label for="email" i18n:translate="">E-mail</label><br/>
+					<input type="text" class="title" name="email" id="email" tal:attributes="value session/username|default"/>
+				</div>
+				<div>
+					<label for="message"></label><br/>
+					<textarea name="message" id="message"></textarea>
+				</div>
+				
+				<input type="hidden" name="my_url" />
+				<button type="submit" i18n:translate="">Submit</button>
+			</form>
+		</div>
+	</div>
+<script language="JavaScript">
+$(document).ready( function() {
+   $('#email').focus();
+});
+</script>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

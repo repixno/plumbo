@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Feedback</tal:block>
+</head>
+
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+	<div class="prepend-4 append-4 last pagedialog" tal:condition="not:exists:sentToEmail">
+		<div clas="clear clearfix"></div>
+			<h2 tal:content="cms:title:6a96af58-8619-4142-b4a3-5c0e76a82dec">Takk for din henvendelse</h2>
+			<p tal:content="structure cms:body:6a96af58-8619-4142-b4a3-5c0e76a82dec">Vi har motatt din henvendelse angående designservice, vi kommer tilbake til deg asap!!!</p>
+		</div>
+		
+		<div class="prepend-top">
+			<a href="/" class="btn btn-default" i18n:translate="">Go back</a>
+		</div>
+		
+	</div>
+	
+	
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

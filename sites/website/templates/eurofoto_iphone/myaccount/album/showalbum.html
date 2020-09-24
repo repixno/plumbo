@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<link rel="alternate" type="application/rss+xml" title="" id="gallery" tal:condition="exists: mediarss" href="${mediarss}" />
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle">${album/title}</tal:block>
+	<script type="text/javascript" src="${static:js/jquery.lazyload.mini.js}"></script>
+</head>
+
+
+<body>
+
+<div class="">
+
+	<!-- <div metal:use-macro="../../../${templates}/common.html/top" /> -->
+	<!--<div tal:define="global menuitem string:albums" metal:use-macro="../common.html/menu" />-->
+
+	<div id="">
+		<div>
+			<a class="back" i18n:translate="" href="/myaccount/albums/">Back to album list</a>
+		</div>
+		<h2 class="bottom oneline">
+			<span class="editable title album-title" id="${album/id}" tal:content="album/title | default">
+				<tal:block i18n:translate="" tal:condition="album/owner/yours">No title, click to add</tal:block>
+			</span>
+			<tal:block tal:condition="not:album/owner/yours">
+				<span class="quiet small">
+					(<tal:block tal:content="album/owner/name" />)
+				</span>
+			</tal:block>
+		</h2>
+
+		<tal:block tal:condition="equal:album/id,0">
+			<tal:block tal:condition="gt:album/numimages,0">
+				<!-- inbox -->
+				<div tal:content="structure cms:body:e33bdca7-92be-4398-8996-be1220d59518"></div>
+			</tal:block>
+		</tal:block>
+
+		<tal:block tal:condition="not:equal:album/id,0">
+			<p class="editable description quiet top" id="${album/id}" tal:content="album/descriptionraw|default">
+				<tal:block i18n:translate="">Click to enter a description of this album</tal:block>
+			</p>
+		</tal:block>
+
+		<tal:block tal:condition="album/owner/yours">
+			<div tal:condition="album/shared/link|album/shared/link|album/shared/public|album/shared/groups|friends" class="box">
+				<div class="span-12 append-3 last">
+					<tal:block i18n:translate="">This album is shared.</tal:block>
+					<a href="#sharing-info" id="show-sharing-info" i18n:translate="">Show info</a>
+				</div>
+
+				<br/>
+				<script type="text/javascript">
+					$(document).ready( function() {
+					$('#show-sharing-info').click( function() {
+						$('#sharing-info').slideToggle('fast');
+						return false;
+						});
+					});
+				</script>
+
+				<div class="warning hide" tal:condition="exists:album/shared" id="sharing-info">
+					<div class="right">
+						<a href="/myaccount/album/share/${album/id}" class="button blue" i18n:translate="">Change sharing</a>
+					</div>
+					<!-- shared with link -->
+					<div tal:condition="album/shared/link" style="height: 2em">
+						<p class="bottom">
+								<span i18n:translate="">This album is shared through a link</span>
+								<a href="http://${request/hostname}/shared/album/${album/id}/${album/urlname}/1/${album/publickey}" i18n:translate="">
+									Go to shared album
+								</a>
+								<a href="#" class="negative right" id="disable-share-with-link" i18n:translate="">Stop sharing through link</a>
+						</p>
+						<p class="quiet" tal:condition="album/shared/password" i18n:translate="">And secured with password.</p>
+						<script type="text/javascript">
+							$(document).ready( function() {
+								$('#disable-share-with-link').click( function() {
+
+									$(this).after('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader" />');
+
+									$.post('/api/1.0/album/share/link/disable', {albumid: '${album/id}' }, function(data) {
+										window.location.reload();
+									});
+								return false;
+								});
+							});
+						</script>
+					</div>
+
+					<!-- shared public -->
+					<div tal:condition="album/shared/public" style="height: 2em">
+						<p>
+							<span i18n:translate="">This album is published in our public gallery</span>
+							<a class="negative right" id="disable-public">Remove from gallery</a>
+						</p>
+						<script type="text/javascript">
+						$(document).ready( function() {
+							$('#disable-public').click( function() {
+								$(this).after('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader" />');
+								$.post('/api/1.0/album/share/public/disable', {albumid: albumid}, function(data) {
+									window.location.reload();
+								});
+								return false;
+							});
+						});
+						</script>
+					</div>
+
+					<!-- shared to group -->
+					<div tal:condition="album/shared/groups">
+						<p i18n:translate="">This album is shared with groups</p>
+					</div>
+
+					<!-- sjared to friends -->
+					<div tal:condition="album/shared/friends">
+						<p i18n:translate="">This album is shared with friends</p>
+					</div>
+				</div>
+			</div>
+		</tal:block>
+		<tal:block tal:condition="not:equal:album/id,0">
+		<div id="album-preferences" title="Album preferences" class="hide" tal:condition="album/owner/yours">
+			<form method="post" action="/myaccount/album/settings/save/${album/id}">
+			<div class="span-8">
+				<fieldset>
+					<legend i18n:translate="">Who can buy photos?</legend>
+					<input type="radio" id="everyone-with-access-can-buy" name="purchaseaccess" tal:attributes="checked conditionalmatch:album/owner/preferences/purchase,1,checked" value="1"/>
+					<label class="radio" for="everyone-with-access-can-buy" i18n:translate="">Everyone with access</label><br/>
+					<input type="radio"  id="only-me-can-buy" name="purchaseaccess" tal:attributes="checked conditionalmatch:album/owner/preferences/purchase,0,checked" value="0"/>
+					<label class="radio" for="only-me-can-buy" i18n:translate="">Only me</label><br/>
+				</fieldset>
+			</div>
+			<div class="span-8 last">
+				<fieldset>
+					<legend i18n:translate="">Who can download photos?</legend>
+					<input type="radio" id="everyone-with-access-can-download" name="downloadaccess" tal:attributes="checked conditionalmatch:album/owner/preferences/download,1,checked" value="1" />
+					<label i18n:translate="" for="everyone-with-access-can-download">Everyone with access</label><br/>
+					<input type="radio" id="only-me-can-download" name="downloadaccess" tal:attributes="checked conditionalmatch:album/owner/preferences/download,0,checked"  value="0" />
+					<label i18n:translate="" for="only-me-can-download">Only me</label><br/>
+				</fieldset>
+			</div>
+			<div class="span-8 last">
+				<fieldset>
+					<legend  i18n:translate="">year</legend>
+					<label for="year"  i18n:translate="">Year</label>
+					<input id="year" name="year" type="text span-1" tal:attributes="value album/owner/preferences/year|default"/>
+				</fieldset>
+			</div>
+			</form>
+		</div>
+		</tal:block>
+
+		<div tal:condition="not:images" class="center">
+			<h2 i18n:translate="">This album is empty</h2>
+			<p class="large">
+				<a href="/myaccount/upload/${album/id}" i18n:translate="">Upload some images to this album</a>
+			</p>
+		</div>
+
+
+		<div class="imagelist clearfix" id="images" tal:condition="images">
+			<form action="/order-prints/choose-quantity/" method="post" id="images-form">
+			<ul id="image-list">
+			<tal:block tal:repeat="image images">
+				<tal:block tal:condition="not:mod:repeat/image/number,4">
+					<li class="thumb" id="sortid_${album/id}_${image/id}_${pageoffset}">
+						<a href="" title="${image/title}" class="thumb" rel="" tal:attributes="href image/urls/private">
+							<img title="${image/title}" tal:attributes="src image/thumbnail; alt image/title; title image/title" id="image_${image/id}"/>
+						</a>
+					</li>
+				</tal:block>
+				<tal:block tal:condition="mod:repeat/image/number,4">
+					<li class="thumb last" id="sortid_${album/id}_${image/id}_${pageoffset}">
+						<a href="" title="${image/title}" class="thumb" rel="" tal:attributes="href image/urls/private">
+							<img title="${image/title}" tal:attributes="src image/thumbnail; alt image/title; title image/title" id="image_${image/id}"/>
+						</a>
+					</li>
+				</tal:block>
+			</tal:block>
+			</ul>
+			</form>
+		</div>
+	</div>
+	<!--<div metal:use-macro="../common.html/right-album-menu" />-->
+</div>
+<div class="footer">
+	<div class="container">
+		<!--<div metal:use-macro="../../../${templates}/common.html/footer" />-->
+	</div>
+</div>
+
+</body>
+</html>

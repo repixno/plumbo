@@ -1,0 +1,4 @@
+/* forms.css */
+form label.inputError, form label.inputError {
+	background-image: url(images/arrow_error_left.gif) !important;
+}

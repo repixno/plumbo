@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title"/>
+	<style type="text/css">
+	
+	  ul.cleanlist { padding: 0; margin: 125px 10px 10px 10px; font-size: 10px }
+	  
+	  ul.cleanlist li { list-style-type: none !important; display: block; height: 1.5em; clear: both;}
+	  ul.cleanlist li a.product-title { float: left; margin-top: 5px }
+	  ul.cleanlist li .info { float: right; }
+	  ul.cleanlist a.product-title { font-weight: bold }
+	  ul.cleanlist a.button { padding: 5px !important; margin-top: 2px }
+	  
+	  
+	  div.cards h2 { margin-top: 10px; margin-left: 10px}
+	  div.borderbox { border: 1px solid #dbdbdb}
+	  
+	  
+	  div.card15x15, div.card10x18 { margin: 10px; margin-top: 215px; color :#fff }
+	  div.card15x15 h4, div.card10x18 h4 { font-weight: bold !important; margin-bottom: 2px }
+	  div div.card15x15 { color: #000 }
+	  
+	  div.card10x18 a, div.christmasnew a  { color: #fff; }
+	  div.card10x18 h4 a { font-weight: bold}
+	  div.card15x15 h4 a { color: #000; font-weight: bold}
+	  
+	  /* stupid hack for offer-price */
+	  div span.price br { display: none !important; }
+	  div span.price span.oldprice { display: none !important }
+	  div.christmascards .card10x18 span.newprice { color: #fff !important}
+	  
+	  div.h310 { min-height: 310px }
+     div.h310 ul { padding-top: 150px }
+	  
+     ul.widecleanlist { margin: 0; padding: 0 }
+     ul.widecleanlist li { list-style-type: none; display: block; padding-top: 5px; clear: both; height: 15px; }
+     ul.widecleanlist li a.product-title { display: block; float: left; font-weight: bold; padding-top: 3px}
+     ul.widecleanlist li a.more-info { font-size: 10px }
+     ul.widecleanlist li span.info { display: block; float: right; text-align: right;}
+     
+     .colborder {
+         padding-right: 14px;
+         margin-right: 6px;
+         border-right: 1px solid #EEE;
+      }
+	  
+		.card-top {
+			 height: 208px;
+			 
+			 <tal:block tal:condition="exists:menuitem/article/attachments/background">
+			 background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+			 </tal:block>
+			 
+			 background-repeat:no-repeat;
+		}
+	  
+	</style>
+</head>
+
+<!-- define sections -->
+
+<tal:block define:section="top, Topp (products + article)" /> <!-- bakgrunnsbilde i cms, + artikkel + proukt -->
+<tal:block define:section="priceexample, Price example" /> <!-- bakgrunnsbilde i cms, + artikkel + proukt -->
+
+<tal:block define:section="christmas, Christmas" />
+<tal:block define:section="valentine, Valentine" />
+
+<tal:block define:section="baby, Baptism and birth" />
+<tal:block define:section="birthday, Birthday" />
+<tal:block define:section="invitation, Invitation" />
+<tal:block define:section="takkekort, Takkekort" />
+<tal:block define:section="wedding, Wedding" />
+<tal:block define:section="learning, Learning article" />
+
+<tal:block define:section="folded, Folded cards" />
+<tal:block define:section="collage, Collage cards" />
+<tal:block define:section="postcard, Postcards" />
+<tal:block define:section="6-siders, 6-siders kort" />
+
+<!-- 6 kategorier med 2-3 kort i hver, automatisk? -->
+
+<tal:block define:section="news-info, News and info" /> <!-- bakgrunnsbilde i cms, + artikkel + proukt -->
+
+<body>
+<div metal:use-macro="../../../${templates}/common.html/top" />
+<div class="container">
+	
+	
+	<tal:block metal:define-macro="listfakeproducts">
+		<ul tal:condition="exists:sections/top" class="cleanlist">
+			<tal:block tal:repeat="item sections/top">
+				<tal:block metal:use-macro="card-list-item" />
+			</tal:block>
+		</ul>
+	</tal:block>
+		<tal:block metal:define-macro="card-list-item">
+			<li>
+				<a href="${item/url}" class="hide-link product-title" tal:condition="item/shorttitle" title="${item/title}">${item/shorttitle}</a> 
+				<a href="${item/url}" class="hide-link product-title" tal:condition="not:item/shorttitle">${item/title}</a> 
+				<span class="info">
+					<tal:block metal:use-macro="${templateroot}/fotopix/cms/cms.html/show-price" />
+					<tal:block metal:use-macro="${templateroot}/fotopix/cms/cms.html/buy-product-link" />
+				</span>
+			</li>
+	</tal:block>
+
+	<div class="row">
+		
+    
+    <div class="col-md-10 prepend-top">
+			<div class="col-md-12 card-top top">
+				<div class="content">
+					<h1 class="hide">${menuitem/article/title}</h1>
+					<p tal:content="structure menuitem/article/body|default"></p>
+				</div>
+			</div>
+             <div class="col-md-4">
+               <div class="h310" style="background: #fff url(//static.repix.no/cms/images/Enkle_web.jpg) no-repeat top center">
+              <!-- <div class="h310" style="background: #fff url(http://d.static.repix.no/cms/images/enkle_kort_thumb.png) no-repeat top center">-->
+               <h2 i18n:translate="">Collage cards</h2>
+               <ul tal:condition="exists:sections/collage" class="widecleanlist">
+               <tal:block tal:repeat="item sections/collage">
+                  <tal:block metal:use-macro="${templateroot}/fotopix/cms/cms.html/wide-clean-product-list-as-item" />
+               </tal:block>
+               </ul>
+               </div>
+            </div>
+            
+            <div class="col-md-4">
+               <div class="h310" style="background: #fff url(//static.repix.no/cms/images/Doble_web.jpg) no-repeat top center">
+               <!--<div class="h310" style="background: #fff url(http://a.static.repix.no/cms/images/doble_kort_thumb.png) no-repeat top center">-->
+               <h2 i18n:translate="">Folded cards</h2>
+               <ul tal:condition="exists:sections/folded" class="widecleanlist">
+               <tal:block tal:repeat="item sections/folded">
+                  <tal:block metal:use-macro="${templateroot}/fotopix/cms/cms.html/wide-clean-product-list-as-item" />
+               </tal:block>
+               </ul>
+               </div>
+            </div>
+           <div class="col-md-4">
+               <div class="h310" style="background: #fff url(//static.repix.no/cms/images/Postkort_web.jpg) no-repeat top center">
+               <!--<div class="h310" style="background: #fff url(http://a.static.repix.no/cms/images/postkort_thumb.png) no-repeat top center">-->
+               <h2 i18n:translate="">Postcards</h2>
+               <ul tal:condition="exists:sections/postcard" class="widecleanlist">
+               <tal:block tal:repeat="item sections/postcard">
+                  <tal:block metal:use-macro="${templateroot}/fotopix/cms/cms.html/wide-clean-product-list-as-item" />
+               </tal:block>
+               </ul>
+               </div>
+            </div>
+		   
+		   <div class="col-md-12 prepend-top">
+			<hr/>
+				<div class="col-md-8" style="padding-right: 26px; border-right: 1px solid #EEE;"><img class="img-responsive" src="//static.repix.no/cms/images/thumb6siderskort.png" alt="6-siders fotokort"/></div>
+				<div class="col-md-4 prepend-top">
+					<!--<h2 i18n:translate="">6-siders fotokort</h2>-->
+					<ul tal:condition="exists:sections/6-siders" class="widecleanlist">
+					<tal:block tal:repeat="item sections/6-siders">
+					   <tal:block metal:use-macro="${templateroot}/fotopix/cms/cms.html/wide-clean-product-list-as-item" />
+					</tal:block>
+					</ul>
+				</div>
+				
+		   </div>
+    
+    
+    <div class="col-md-12">
+      <div tal:content="structure cms:body:8dc68e4d-58bd-4fa5-9e98-c9f9308a1a54" />
+    
+    
+    </div>
+    </div>
+    
+	</div>
+	</div>  
+
+
+<SCRIPT type="text/javascript">
+
+
+
+</SCRIPT>
+</body>
+</html>

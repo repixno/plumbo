@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Producteditor</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Productedtor Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		
+		<div class="span-24 last"><h3>Producteditor</h3></div>
+        
+        <h3>Catergories</h3>
+        
+        
+        
+        <form method="post">
+            <label for="title">Title: </label><input type="text" name="title"/><br/>
+            <label for="type">Type: </label><input type="text" name="type"/><br/>
+            <input type="submit"/>
+        </form>
+        
+        
+        <table>
+            <thead>
+                <tr>
+                    <td>Title</td><td>Type</td><td>Visible</td>
+                </tr>
+            </thead>
+            <tr tal:repeat="category categories">
+               <td tal:content="category/title"></td> 
+               <td tal:content="category/type"></td> 
+               <td tal:content="category/visible"></td> 
+            </tr>
+            
+        </table>
+        
+   </div>
+</body>
+</html>

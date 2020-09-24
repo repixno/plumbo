@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+   <meta name="Description" content="${menuitem/article/ingress}"/>
+   <link rel="canonical" href="http://www.eurofoto.no/produkter/forstorrelser/spesialtrykk" />
+	<tal metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title"/>
+	<script type="text/javascript" src="${static:js/flowplayer-3.1.4.min.js}"></script>
+	<script type="text/javascript" src="${static:js/jquery.tools.min.js}"></script>
+	<style type="text/css">
+      .photobook-top {
+        height: 208px;
+        
+        <tal:block tal:condition="exists:menuitem/article/attachments/background">
+        background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+        </tal:block>
+        
+        background-repeat:no-repeat;
+      }
+      .photobook-top p{ font-size: 14px }
+		
+	</style>
+</head>
+<body>
+   <div class="container product-category">
+      <div metal:use-macro="../../../${templates}/common.html/top" />
+      <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/top-navigation" />
+      <div class="span-4">
+         <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/menu-current" />
+      </div>
+   
+      <div class="span-20 last product-category">
+   
+         <div class="span-20 last photobook-top top">
+            <div class="content hide">
+            <h1>${menuitem/article/title}</h1>
+            </div>
+            <!--<a class="blue button extra-large bottom left" href="#quick-start">Kom igang nå!</a>-->
+      </div>
+      <div tal:content="structure menuitem/article/body" />
+      
+      <div class="span-20 last">
+         <div class="span-10 prepend-top">
+            <!-- id: 2352 -->
+            <div tal:content="structure cms:body:bfcc641f-26da-41de-b2f1-28d3969d86ff" />
+         </div>
+         <div class="span-10 last prepend-top">
+            <!-- id: 2353 -->
+            <div tal:content="structure cms:body:9ee1ec6d-2435-4950-97e3-0e54a5b9cdce" />
+         </div>
+      
+      <div>
+         <i>${menuitem/article/ingress}</i>
+      </div>
+      </div>
+      
+      <hr class="space" />
+   </div>
+   </div>
+   
+   
+   
+   <div class="footer">
+      <div class="container">
+         <div metal:use-macro="../../../${templates}/common.html/footer" />
+      </div>	
+   </div>
+   
+   
+      <SCRIPT type="text/javascript">
+      $(document).ready( function() {
+          
+         var os = $.client.os;
+
+         switch(os){
+            case 'Windows':
+                $('a#download').attr('href', 'http://dls.photoprintit.de/download/Data/22185/hps/setup_Eurofoto_Fotoservice.exe');
+            break;
+            case 'Mac':
+                $('a#download').attr('href', 'http://dls.photoprintit.de/download/Data/22185/hps/setup_Eurofoto_Fotoservice.zip');
+            break;
+            case 'Linux':
+                $('a#download').attr('href', 'http://dls.photoprintit.de/download/Data/22185/hps/setup_Eurofoto_Fotoservice.tgz');
+            break;
+         }
+         
+         
+      });
+   
+   </SCRIPT>
+</body>
+</html>

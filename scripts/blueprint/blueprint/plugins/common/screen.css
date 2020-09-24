@@ -1,0 +1,260 @@
+#loader-overlay {
+	position: absolute;
+	background-color: #333;
+	padding: auto auto;
+	margin: 0 !important;
+	z-index: 10000;
+}
+
+#loader-overlay .loadingInfo {
+	text-align: center;
+	margin-top: 300px;
+}
+
+#loader-overlay .loadingInfo * {
+	display: inline;
+	color: #fff;
+}
+
+#mediaclip_container {
+	background: transparent url(/gfx/gui/ajax-loader-big.gif) no-repeat fixed center 200px ;
+}
+
+
+ul.inline li {
+	list-style-type: none;
+	display: inline;
+}
+
+.right { text-align: right}
+.left { text-align: left}
+.center { text-align: center}
+
+a.passive { text-decoration: none; color: #000 !important}
+
+
+
+a.hide-link {
+   font-weight: inherit;
+   text-decoration: inherit;
+   color: inherit;
+}
+
+
+.productlist .product {
+   border-bottom: 1px solid #ccc;
+   margin-top: 0;
+   margin-bottom: 0;
+}
+
+.productlist .product .productinfo,
+.productlist .product .productimage  {
+   margin-top: 1em;
+}
+
+.productlist .more-info {
+   margin-right: 1em;
+}
+
+.productlist .product .price {
+   margin-right: 0;
+}
+
+
+
+.price.oldprice {
+   text-decoration: line-through;
+   color: #666;
+   font-weight: normal !important;
+   font-size: 0.9em !important;
+}
+
+.price.newprice {
+   font-weight: bold;
+   color: #c00;
+   font-size: 1.1em;
+   margin-right: 0 !important;
+}
+
+div.starOfferPercentContainer { position: relative }
+
+div.ribbonsContainer { position: relative }
+div.ribbonsContainer .ribbon { 
+position: absolute; top: -10px; left: -7px; background: transparent url( ribbons/nb_NO.png ) no-repeat top left;
+height: 91px; width: 89px;}
+
+div.ribbonsContainer .ribbon.new.blue { background-position: 0px 0px }
+div.ribbonsContainer .ribbon.new.yellow { background-position: -91px 0px }
+div.ribbonsContainer .ribbon.new.green { background-position: -183px 0px }
+
+div.ribbonsContainer .ribbon.offer.blue { background-position: 1px -90px }
+div.ribbonsContainer .ribbon.offer.yellow { background-position: -90px -90px }
+div.ribbonsContainer .ribbon.offer.green { background-position: -182px -91px }
+
+
+
+div.starOfferPercent { height: 75px; width: 75px; position: absolute; text-indent: -9999px }
+div.starOfferPercent.top { top: 0px; }
+div.starOfferPercent.bottom { bottom: 0px; }
+div.starOfferPercent.left { left: 0px; }
+div.starOfferPercent.right { right: 0px; }
+
+
+div.starOfferPercent.percent5 { background: transparent url(starOfferPercent/5.png) no-repeat top left }
+div.starOfferPercent.percent10 { background: transparent url(starOfferPercent/5.png) no-repeat top left }
+div.starOfferPercent.percent15 { background: transparent url(starOfferPercent/15.png) no-repeat top left }
+div.starOfferPercent.percent20 { background: transparent url(starOfferPercent/20.png) no-repeat top left }
+div.starOfferPercent.percent25 { background: transparent url(starOfferPercent/25.png) no-repeat top left }
+div.starOfferPercent.percent30 { background: transparent url(starOfferPercent/30.png) no-repeat top left }
+div.starOfferPercent.percent35 { background: transparent url(starOfferPercent/35.png) no-repeat top left }
+div.starOfferPercent.percent40 { background: transparent url(starOfferPercent/40.png) no-repeat top left }
+div.starOfferPercent.percent45 { background: transparent url(starOfferPercent/45.png) no-repeat top left }
+div.starOfferPercent.percent50 { background: transparent url(starOfferPercent/50.png) no-repeat top left }
+div.starOfferPercent.percent55 { background: transparent url(starOfferPercent/55.png) no-repeat top left }
+div.starOfferPercent.percent60 { background: transparent url(starOfferPercent/60.png) no-repeat top left }
+div.starOfferPercent.percent65 { background: transparent url(starOfferPercent/65.png) no-repeat top left }
+div.starOfferPercent.percent70 { background: transparent url(starOfferPercent/70.png) no-repeat top left }
+div.starOfferPercent.percent75 { background: transparent url(starOfferPercent/75.png) no-repeat top left }
+div.starOfferPercent.percent80 { background: transparent url(starOfferPercent/80.png) no-repeat top left }
+div.starOfferPercent.percent85 { background: transparent url(starOfferPercent/85.png) no-repeat top left }
+div.starOfferPercent.percent90 { background: transparent url(starOfferPercent/90.png) no-repeat top left }
+div.starOfferPercent.percent95 { background: transparent url(starOfferPercent/95.png) no-repeat top left }
+
+div.starOfferPercent.percent5.left { background: transparent url(starOfferPercent/5left.png) no-repeat top left }
+div.starOfferPercent.percent10.left { background: transparent url(starOfferPercent/10left.png) no-repeat top left }
+div.starOfferPercent.percent15.left { background: transparent url(starOfferPercent/15left.png) no-repeat top left }
+div.starOfferPercent.percent20.left { background: transparent url(starOfferPercent/20left.png) no-repeat top left }
+div.starOfferPercent.percent25.left { background: transparent url(starOfferPercent/25left.png) no-repeat top left }
+div.starOfferPercent.percent30.left { background: transparent url(starOfferPercent/30left.png) no-repeat top left }
+div.starOfferPercent.percent35.left { background: transparent url(starOfferPercent/35left.png) no-repeat top left }
+div.starOfferPercent.percent40.left { background: transparent url(starOfferPercent/40left.png) no-repeat top left }
+div.starOfferPercent.percent45.left { background: transparent url(starOfferPercent/45left.png) no-repeat top left }
+div.starOfferPercent.percent50.left { background: transparent url(starOfferPercent/50left.png) no-repeat top left }
+div.starOfferPercent.percent55.left { background: transparent url(starOfferPercent/55left.png) no-repeat top left }
+div.starOfferPercent.percent60.left { background: transparent url(starOfferPercent/60left.png) no-repeat top left }
+div.starOfferPercent.percent65.left { background: transparent url(starOfferPercent/65left.png) no-repeat top left }
+div.starOfferPercent.percent70.left { background: transparent url(starOfferPercent/70left.png) no-repeat top left }
+div.starOfferPercent.percent75.left { background: transparent url(starOfferPercent/75left.png) no-repeat top left }
+div.starOfferPercent.percent80.left { background: transparent url(starOfferPercent/80left.png) no-repeat top left }
+div.starOfferPercent.percent85.left { background: transparent url(starOfferPercent/85left.png) no-repeat top left }
+div.starOfferPercent.percent90.left { background: transparent url(starOfferPercent/90left.png) no-repeat top left }
+div.starOfferPercent.percent95.left { background: transparent url(starOfferPercent/95left.png) no-repeat top left }
+
+
+div.newProductStarContainer { position: absolute }
+div.newProductStar {    background: transparent url(newProductStar/en.png) no-repeat top left;
+                        height: 75px; width: 75px; position: absolute; text-indent: -9999px; }
+div.newProductStar {  background: transparent url(newProductStar/en.png) no-repeat top left }
+div.newProductStar.nb_NO {  background: transparent url(newProductStar/nb_NO.png) no-repeat top left; left:-100px; top: 40px; }
+div.newProductStar.fi_FI {  background: transparent url(newProductStar/fi_FI.png) no-repeat top left; left:-100px; top: 40px; }
+div.newProductStar.sv_SE {  background: transparent url(newProductStar/sv_SE.png) no-repeat top left; left:-100px; top: 40px; }
+div.newProductStar.da_DK {  background: transparent url(newProductStar/da_DK.png) no-repeat top left; left:-100px; top: 40px; }
+
+
+
+.roundedBox {
+   -webkit-border-radius: 9px;
+   -moz-border-radius: 9px;
+   border-radius: 9px;
+   background: #ededed; /* old browsers */
+   background: -moz-linear-gradient(top, #ededed 0%, #f6f6f6 33%, #ffffff 100%); /* firefox */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ededed), color-stop(33%,#f6f6f6), color-stop(100%,#ffffff)); /* webkit */
+   border: 1px solid #ccc;
+   position: relative;
+}
+
+	
+.wirebox {
+   background-color: rgba( 230,230,230, 0.7);
+   margin-bottom: 1em;
+}
+
+div.product-category div.top {
+   position: relative;
+}
+
+.roundedBox a.button.bottom {
+   position: absolute;
+   bottom: 20px;
+}
+.roundedBox a.button.bottom.right {
+   bottom: 20px;
+   right: 20px;
+}
+.roundedBox a.button.bottom.left {
+   bottom: 20px;
+   left: 20px;
+}
+.roundedBox a.button.top.right {
+   top: 20px;
+   right: 20px;
+}
+.roundedBox a.button.top.left {
+   top: 20px;
+   left: 20px;
+}
+
+.product-category div.top div.content {
+   padding-left: 20px;
+   margin-top: 20px;
+}
+
+#breadcrumbs li.noactive{
+	font-weight: bold; color: #333;
+}
+
+#breadcrumbs li {
+	-webkit-text-shadow: 1px 1px 1px #fff;
+	-moz-text-shadow: 1px 1px 1px #fff;
+	text-shadow: 1px 1px 1px #fff;
+}
+
+#topmenu li.noactive{
+	font-weight: bold; color: #333;
+}
+
+#topmenu li {
+	-webkit-text-shadow: 1px 1px 1px #fff;
+	-moz-text-shadow: 1px 1px 1px #fff;
+	text-shadow: 1px 1px 1px #fff;
+}
+
+input.quantity {
+	width: 3em;
+	padding: 3px;
+}
+
+div.boxlist { }
+div.boxlist ul { 
+	margin: 0;
+	list-style-type: none;
+}
+div.boxlist ul li {
+	display: block;
+	padding: 5px 0;
+	border-bottom: 1px solid #efefef;
+	clear: both;
+}
+
+div.boxlist ul li .product-title { display: block; font-weight: bold; clear: both; float: left;}
+div.boxlist ul li a { }
+div.boxlist ul li span.info { display: block; clear: both; margin-bottom : 5px; }
+div.boxlist ul li span.info span.price { float: none;}
+div.boxlist ul li span.info span.more-info-and-button { float: right; text-align: right; }
+
+ul.step-by-step-new { height: 3em; border: 1px solid #eee; margin: 0; }
+ul.step-by-step-new li { 
+   display: block; float: left; width: 140px /* span-16/5 =  630 / 5 */; 
+   background:url(backgrounds/crumbs.gif) no-repeat right center; 
+   padding: 0.8em 0.9em 0.4em 1em; height: 1.9em; 
+}
+ul.step-by-step-new li.last { background: none; }
+ul.step-by-step-new a { display: block; text-decoration: none; color: #ccc;}
+ul.step-by-step-new .current a { color: #0098DB }
+ul.step-by-step-new strong, 
+ul.step-by-step-new span  { display: block }
+ul.step-by-step-new span { font-size: .8em; color: #ccc; }
+ul.step-by-step-new .current span { color: #333; }
+ul.step-by-step-new .completed a * { color: #000 }
+
+

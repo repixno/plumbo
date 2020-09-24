@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../../${templates}/common.html/head" />
+	
+	<style type="text/css">
+		tbody {overflow: scroll; overflow-x: hidden}
+		table tr:hover,table td:hover { background-color: #efefef !important}
+		tr.category { background-color: #efefef}
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+	<div id="content">
+
+		<div class="span-24 last">
+			<h2 i18n:translate="">You have unsubscribed</h2>
+			<h3 class="quiet" i18n:translate="">We will not send you more newsletters.</h3>
+			<p>
+				<a href="/" i18n:translate="">Go to frontpage</a>
+			</p>
+		</div>
+		
+		
+		
+	</div>
+</div>
+<div class="footer">
+   <div class="container">
+      <div metal:use-macro="../../../${templates}/common.html/footer" />
+   </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+   <head>
+	  <tal metal:use-macro="../../${templates}/common.html/head" />
+   
+	  <tal:block metal:use-macro="./common.html/scripts" />
+	  <tal:block metal:use-macro="./common.html/css" />
+	  <link rel="stylesheet" href="${static:}js/jqupload/css/jquery.fileupload.css"/>
+	  
+	  <style type="text/css">
+		 
+		 div.editorcontainer::after {
+			content: "";
+			background: url("${static:}images/gifttemplates/thumbs/width/800/${selected/template/pages/0/fullsize_src}");
+			opacity: 1;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			position: absolute;
+			z-index: -1;   
+		 }
+		 
+		 
+		 div.transparent::after{
+			opacity: 0.2 !important;
+		 }
+		 div.black::after{
+			background: url("${static:}images/gifttemplates/thumbs/width/800/${selected/template/pages/0/fullsize_src}?negate=true") !important;
+		 }
+		 div.fadeMe {
+			color: #fff;
+			opacity:    1; 
+			background: #000; 
+			width:      100%;
+			height:     100%; 
+			z-index:    100000;
+			top:        0; 
+			left:       0; 
+			position:   fixed;
+			display: none;
+			text-align: center;
+			vertical-align: middle;
+		 }
+         
+         .rightcolumn{
+			display: block;
+            padding: 3px;
+            color: #ccc;
+            font-size: 1.5em;
+         }
+         .husk{
+            padding: 3px;
+            background: #e7e7e9;
+            color: #000;
+         }
+		 .imageplaceholder{
+			position: relative;
+			/*background-color:#fff;*/
+			border: solid 1px;
+			float: none;
+			/*overflow: hidden;*/
+			margin-left: 2px;
+		 }
+		 div.edittoptext{
+		   top: -1px;
+		 }
+		 
+		 table.grid td {
+			border-top-width: 1px;
+			border-right-width: 1px;
+			border-bottom-width: 0px;
+			border-left-width: 1px;
+			border-style: solid;
+			border-color: white;
+			background-color: #e7e7e9;
+			width: 15px;
+		  }
+		  
+		  table.grid {
+			border-bottom-width: 0px;
+		  }
+	  </style>
+   </head>
+
+
+<body>
+   <div class="fadeMe">
+	  <div class="col-md-6">
+		 <h1 class="col-md-8">For å bruke editoren må du snu skjermen</h1>
+		 <img src="${static:}gfx/ukeplan/new/flipphone.png"/>
+	  </div>
+   </div>
+	<div class="container main" style="height: 1300px">
+    <div metal:use-macro="../../${templates}/common.html/top" />
+	
+	
+	
+	<div style="height: 40px; margin-top: 20px">
+	  <button type="button" class="visible-xs btn btn-default" data-toggle="offcanvas" data-target=".sidebar-nav">
+		Vis valg
+	  </button>
+		  
+	  <strong>${selected/product/title}</strong></div>
+	<div class="row row-offcanvas row-offcanvas-left">
+	<div class="col-md-3 sidebar-offcanvas">
+	  <!--<p><a href="#" class="button" id="new_column">Ny kolonne</a></p>
+	  <p><a href="#" class="button" id="remove_column">Slett kolonne</a></p>-->
+	  <div class="row">
+		 <form id="order_ukeplan">
+			<div class="col-md-12">
+			<div class="functionbox">
+			   <div class="header" i18n:translate="">Layout:</div>
+			   <div class="body">
+				  <label for="background" i18n:translate="">Choose background:</label><a href="#" type="button" class="" data-toggle="modal" data-target=".tip">info</a>
+				  <select name="background" id="background">
+					 <option value="white" i18n:translate="">White</option>
+					 <option value="trans" i18n:translate="">Transparent</option>
+					 <option value="black" i18n:translate="">Black</option>
+				  </select>
+				  <label for="day-color" i18n:translate="">Select Color for time:</label>
+				  <select name="day-color" id="day-color" style="background-color: #812990;color: white;">
+					   <tal:block metal:use-macro="./common.html/color-options" />
+				  </select>
+			   </div>
+			</div>
+		 </div>
+	
+		 
+		 <div class="col-md-12">
+			<div class="functionbox prehide">
+			   <div class="header" i18n:translate="">Layout:</div>
+			   	  <div class="body">
+					 <tal:block tal:condition="exists:maleroptions">
+						<label for="background" i18n:translate="">Choose orientation:</label>
+						<select name="orientation">
+						   <tal:block tal:repeat="option maleroptions">
+							  <tal:block  tal:condition="exists:option/default">
+								 <option class="selectedoption" tal:content="option/title" value="${option/purchaseurl}" selected="selected"></option>
+							  </tal:block>
+							  <tal:block  tal:condition="not:exists:option/default">
+								 <option tal:content="option/title" value="${option/purchaseurl}"></option>
+							  </tal:block>
+						   </tal:block>
+						</select><br/>
+					 </tal:block>
+					 <label for="background" i18n:translate="">Choose background:</label><a href="#" type="button" class="" data-toggle="modal" data-target=".tip">info</a>
+					 <select name="background" id="background">
+						<option value="white" i18n:translate="">White</option>
+						<tal:block tal:condition="exists:choosebackground" >
+						   <option value="trans" i18n:translate="">Transparent</option>
+						</tal:block>
+						<option value="black" i18n:translate="">Black</option>
+					 </select><br/>
+			   </div>
+			</div>
+		 </div>
+		 
+		 <!-- text options-->
+		 <div class="imagelayout col-md-12">
+			<div class="functionbox">
+			   <div class="header"><span i18n:translate="">Text</span></div>
+			   <div class="body">
+				  <div class="textchoices">
+					 <label for="color" i18n:translate="">Select Color for text:</label><br/>
+					 <select name="text-color" id="text-color" style="background-color: #812990;color: white;">
+						<tal:block metal:use-macro="./common.html/color-options" />
+					 </select>
+					 <br/>
+					 <tal:block metal:use-macro="./common.html/font-options" />
+				  </div>
+			   </div>
+			   </div>
+		 </div>
+		 
+		 
+		 <!-- cart options -->
+		 <div class="imagelayout col-md-12 col-xs-12">
+			<tal:block metal:use-macro="./common.html/addto-cart-options" />
+		 </div>
+	     
+		 <input type="hidden" value="${selected/product/id}" name="productid" id="productid" />
+	     <input type="hidden" value="${selected/productoptionid}" name="productoptionid" id="productoptionid" />
+	  </form>
+	
+	</div>
+	</div>
+	<div class="col-md-9" >
+   	  <div class="editorbox">
+   	     <div class="editorcontainer">
+            <div class="toptextplaceholder">
+   	              <div class="toptext">
+   	                
+   	              </div>
+   	        </div>
+
+                  <div class="rightcolumn">
+					 <div class="imageplaceholder center lastholder"></div>
+                    <div class="dagenidag">
+                        Dagen i dag:
+                    </div>
+					 <div class="Dato">
+						 Dato:
+					 </div>
+					 <div class="husk">
+						 <div class="husklabel">
+							 Husk!
+						 </div>    
+					 </div>
+                    </div>
+                    
+   	        <div class="textplaceholder">
+
+   	        </div>
+   	        <div class="gridplaceholder">
+   	        <div>
+   	        <TABLE class="grid current-grid" height="500px">
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	           <tr><td>&nbsp;</td></tr>
+   	        </TABLE>
+   	        
+   	        </div>
+   	        </div>
+   	     </div>
+   	     
+   	  </div>
+   	
+	</div>
+
+   
+   </div>
+   
+   </div>
+   <tal:block metal:use-macro="./common.html/imagecropbox" />
+   
+   <!--Help files -->
+   <tal:block metal:use-macro="./common.html/helpmodals" />
+   
+   <script type="text/javascript" src="${static:gfx/portals/ukeplan/scripts/jquery.progressbar.js}?${version}"></script>
+   <script type="text/javascript" src="${static:gfx/portals/ukeplan/scripts/dagplan.js}?${version}"></script>
+   <script src="/fotopix/js/jqupload/js/vendor/jquery.ui.widget.js"></script>
+   <script src="/fotopix/js/jqupload/js/jquery.iframe-transport.js"></script>
+   <script src="/fotopix/js/jqupload/js/jquery.fileupload.js"></script>
+   
+
+<script type="text/javascript">
+   
+    var portal = "${portal}";
+   var selectedcropbox = '';
+   var loader = '<img src="${static:gfx/gui/ajax-loader.gif}" class="loader" />';
+   var imagePickerLoaded = false;
+   var editorcontainer_width = 800;
+   var imagelayout = 'each';
+   var numberofcolumns = 1;
+   var imagefield_each = ${ukeplantemplates/1/imagefield_height};
+   var textimageheight = 20;
+   var clipartcolumn = false;
+   var toptext = '<tal:block i18n:translate="">Min dagplan</tal:block>';
+   var imageholderwidth = 0;
+   var gridholder = 0;
+   var bottommargin = 877;
+   var backgroundcolor = '#FFFFFF';
+   var templatefile = '${selected/template/pages/0/fullsize_src}';
+   var numberofdays = 31;
+   var rotate = 0;
+   var gridarray = [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,1,2,3,4,5];
+   var accepttxt = '<tal:block i18n:translate="">Accept</tal:block>';
+   var canceltxt = '<tal:block i18n:translate="">Cancel</tal:block>';
+   var textplaceholder = '';
+   var originalimage = Object();
+   var staticsite = "${static:}";
+   var textheight = ${ukeplantemplates/1/imagefield_height} / 3;
+   
+   
+   var margin = 413;
+   
+   malArray = new Object();
+   malArray.mal_id = ${ukeplantemplates/1/id};
+   malArray.mal_width = ${ukeplantemplates/1/mal_width};
+   malArray.mal_height = ${ukeplantemplates/1/mal_height};
+   malArray.imagefield_height =  ${ukeplantemplates/1/imagefield_height};
+   malArray.imagefield_width =  ${ukeplantemplates/1/imagefield_width};
+   malArray.imagefield_x = ${ukeplantemplates/1/imagefield_x};
+   malArray.imagefield_y = ${ukeplantemplates/1/imagefield_y};
+   malArray.imagefield_space = ${ukeplantemplates/1/imagefield_space};
+   malArray.prodno = ${selected/productoption/prodno};
+   var ratio = malArray.mal_width / editorcontainer_width;
+   
+   var imagefield_one  = ( ( malArray.mal_height - malArray.imagefield_x - 877 )  * 25) / 100;
+   //var gridheight = parseInt((malArray.mal_height - malArray.imagefield_height - ( malArray.imagefield_x * 2 )) / ratio ) - 40;
+   var gridheight = ( (malArray.mal_height - textheight - textheight - margin - margin  ) / ratio );
+   
+   var middagsbestikk = "${static:gfx/portals/ukeplan/clipart/middagsbestikk2.png}";
+   var acceptbutton = "<tal:block i18n:translate="">I accept</tal:block>";
+   var cancelbutton = "<tal:block i18n:translate="">Cancel</tal:block>";
+   var updatetextbutton = "<tal:block i18n:translate="">Update text</tal:block>";
+   var chooseimagestring = "<tal:block i18n:translate="">Choose Image</tal:block>";
+   
+   
+   $(document).ready(function() {
+	  $('[data-toggle=offcanvas]').click(function() {
+		$('.row-offcanvas').toggleClass('active');
+	  });
+	});
+   
+</script>
+	
+	
+	<div class="loader"></div>
+	
+</body>
+</html>

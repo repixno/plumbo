@@ -1,0 +1,31 @@
+.searchresults ul.facets, ul.search-categories { margin: 1em 0; list-style-type: none }
+.searchresults .facet li, .search-categories li { display: inline; margin: 0;}
+.searchresults .facets a, .search-categories a{ 
+	display: block; 
+	float: left; 
+	padding: .5em 1.5em; 
+	border: 1px solid #ccc; 
+	border-bottom: none; 
+	background-color: #eee; 
+	margin-right: .4em;
+-webkit-border-top-left-radius: 5px;
+-webkit-border-top-right-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright: 5px;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+text-decoration: none;
+color: #666;
+}
+
+.searchresults .facets a, .search-categories a:active, .searchresults .facets a, .search-categories a:focus {
+	outline: none;
+}
+.searchresults .facets a.current, .search-categories a.current { background-color: #fff; margin-bottom: -1px; border: 1px solid #ccc; border-bottom: 1px solid #fff; text-decoration: none; color: #000; font-weight: bold;}
+.searchresults .facets a.current:focus, .search-categories a.current:focus { background-color: #fff}
+.searchresults .facets a:hover,.search-categories a:hover { background-color: #ccc;}
+
+.searchresults .res h4 { margin-bottom: .2em; margin-top: 2em }
+.searchresults .res p { margin-bottom: 0 }
+.searchresults .res>a { text-decoration: none;}
+.searchresults .res>a:hover { text-decoration: underline;}

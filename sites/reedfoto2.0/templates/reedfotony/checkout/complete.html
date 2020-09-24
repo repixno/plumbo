@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<tal:block tal:define="global dontShowCart" />
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Thank you!</tal:block>
+</head>
+
+
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<div class="span-24 last">
+		<div class="center prepend-top append-bottom">
+			<h1 i18n:translate="">Thank you!</h1>
+			<br />
+			<h3 class="quiet" i18n:translate="">Someone is now working hard to get the products to you.</h3>
+			<br />
+			<!--<img src="/checkout/giftcard/7074-8be4-4797-baa0" /><br />-->
+			<h4 tal:condition="orderid"><tal:block i18n:translate="">Order number:</tal:block> ${orderid}</h4>
+			<h4>Husk ordrenr ved henting i butikk, eller kontakt med kundeservice.</h4>
+		   <div tal:condition="exists:freechristmascard">
+                  <img src="${static:gfx/ads/bestillings_reklame2.jpg}"/>
+			</div>
+			<tal:block tal:condition="equal:session/loggedin,1">
+			<div id="giftcard-loader" style="font-size:18px; padding: 3px; margin: auto; width:50%; border:1px solid black; background:beige;" tal:condition="exists:giftcard"><a href="/checkout/giftcard/${orderid}" i18n:translate="">Download your giftcard pdf by clicking here</a></div>
+			</tal:block>
+			<br />
+			<p i18n:translate="">
+				An order confirmation has been sent to your email address. If you have any questions or feedback, don't hesitate to contact us!
+			</p>
+		</div>
+		
+		 <tal:block tal:condition="exists:kelkoo">
+         <img src="http://tbs.tradedoubler.com/report?organization=${kelkoo/org_id}&event=${kelkoo/event}&orderNumber=${kelkoo/orderNumber}&orderValue=${kelkoo/orderValue}&currency=${kelkoo/currency}" />
+       </tal:block>
+	</div>
+</div>
+
+	<script tal:condition="exists:lyrishq" type="text/javascript">
+		window.CT_C_OrderTotal= ${purchasedcart/totalprice};
+	</script>
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<script type="text/javascript">
+try{
+ <tal:block tal:condition="exists: purchasedcart">
+    // Transaction
+  	pageTracker._addTrans(
+      '${orderid}', //id
+      '${templates}'<tal:block tal:condition="session/isadmin"> + ' admin' </tal:block>, //store
+      '${purchasedcart/totalprice}', 
+      '', //tax 
+      '${purchasedcart/deliverytype/price}', //shipping
+      '${purchasedcart/deliveryinfo/city}', // city 
+      '', //province
+      '${purchasedcart/deliveryinfo/country}'
+    );
+ </tal:block>
+<tal:block tal:condition="exists: purchasedcart/deliverytype">
+   // Delivery
+   pageTracker._addItem(
+      '${orderid}', //id
+      '${purchasedcart/deliverytype/artnr}', //id
+      '${purchasedcart/deliverytype/title}', // title
+      'Delivery type', //category
+      '${purchasedcart/deliverytype/price}', // unit price
+      '1' //quantity
+   );
+</tal:block>
+<tal:block tal:condition="exists: purchasedcart/items/productionmethod">
+   // Production method
+   pageTracker._addItem(
+      '${orderid}', //id
+      '${purchasedcart/items/productionmethod/prodno}', //id
+      '${purchasedcart/items/productionmethod/title}', // title
+      'Production method', //category
+      '${purchasedcart/items/productionmethod/unitprice}', // unit price
+      '${purchasedcart/items/productionmethod/quantity}' //quantity
+   );
+</tal:block>
+<tal:block tal:condition="exists: purchasedcart/items/correctionmethod">
+   // Correction method
+   pageTracker._addItem(
+      '${orderid}', 
+      '${purchasedcart/items/correctionmethod/prodno}', //id
+      '${purchasedcart/items/correctionmethod/title}', // title
+      'Correction method', //category
+      '${purchasedcart/items/correctionmethod/price}', // unit price
+      '${purchasedcart/items/correctionmethod/quantity}' //quantity
+   );
+</tal:block>
+<tal:block tal:condition="exists: purchasedcart/items/paperquality">
+   // paper quality
+   pageTracker._addItem(
+      '${orderid}', 
+      '${purchasedcart/items/paperquality/prodno}', //id
+      '${purchasedcart/items/paperquality/title}', // title
+      'Paper quality', //category
+      '${purchasedcart/items/paperquality/unitprice}', // unit price
+      '${purchasedcart/items/paperquality/quantity}' //quantity
+   );
+</tal:block>
+<tal:block tal:condition="exists: purchasedcart/items/goods" tal:repeat="item purchasedcart/items/goods">
+   // Accessories
+   pageTracker._addItem(
+      '${orderid}',
+      '${item/product/id}', 
+      '${item/product/title}',
+      'Accessories',
+      '${item/unitprice}', // unit price
+      '${item/quantity}'
+   );
+</tal:block>
+<tal:block tal:condition="exists: purchasedcart/items/gifts" tal:repeat="gifts purchasedcart/items/gifts">
+	<tal:block tal:repeat="item gifts">
+   // Gifts
+   pageTracker._addItem(
+      '${orderid}', 
+      '${item/product/option/id}', 
+      '${item/product/title}',
+      'Gifts',
+      '${item/unitprice}', // unit price
+      '${item/quantity}'
+   );
+   </tal:block>
+</tal:block>
+<tal:block tal:condition="exists: purchasedcart/items/enlargements" tal:repeat="item purchasedcart/items/enlargements">
+   // Enlargemnet
+   pageTracker._addItem(
+      '${orderid}', 
+      '${item/optionid}', 
+      '${item/product/title}',
+      'Enlargements',
+      '${item/unitprice}', // unit price
+      '${item/quantity}'
+   );
+</tal:block>
+<tal:block tal:condition="exists: purchasedcart/items/prints" tal:repeat="item purchasedcart/items/prints">
+   // Prints
+   pageTracker._addItem(
+      '${orderid}', 
+      '${item/optionid}', 
+      '${item/product/title}',
+      'Prints',
+      '${item/unitprice}', // unit price
+      '${item/quantity}'
+   );
+</tal:block>
+<tal:block tal:condition="exists: purchasedcart/items/mediaclip" tal:repeat="types purchasedcart/items/mediaclip">
+	<tal:block tal:repeat="item types">
+   // Mediaclip
+   pageTracker._addItem(
+      '${orderid}', 
+      '${item/optionid}', 
+      '${item/product/title}',
+      'Mediaclip',
+      '${item/unitprice}', // unit price
+      '${item/quantity}'
+   );
+   </tal:block>
+</tal:block>
+   pageTracker._trackTrans(); //submits transaction to the Analytics servers
+} catch(err) {}
+</script>
+
+
+<!-- Google Code for Kj&oslash;p - generelt Conversion Page -->
+
+
+
+
+<tal:block tal:condition="exists: purchasedcart">
+
+
+
+	<script type="text/javascript">
+	
+	var totalprice = false;
+	
+	if( ${purchasedcart/totalprice} ) {
+	 totalprice = ${purchasedcart/totalprice};
+	}
+	
+
+   var google_conversion_id = 1052069281;
+   var google_conversion_language = "en";
+   var google_conversion_format = "3";
+   var google_conversion_color = "ffffff";
+   var google_conversion_label = "pw2pCP_E_gIQoZvV9QM";
+	if( totalprice ) {
+		var google_conversion_value = totalprice;
+	}
+
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1052069281/?value=0&amp;label=pw2pCP_E_gIQoZvV9QM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+</tal:block>
+
+</body>
+</html>

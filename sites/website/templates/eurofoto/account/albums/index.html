@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="${i18n/country}">
+<head>
+	<tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" />
+	<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/head" />
+</head>
+
+<body id="account-albums">
+
+	<div class="container">
+		<div metal:use-macro="${templateroot}/${templates}/common.html/top" />	
+	</div>
+  
+<div id="account">
+
+	<div class="container">
+		<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/account-menu" />
+	</div>
+	
+   
+	<div class="container account-wrapper canHazMaxWidth" id="show-albums">
+		<div class="account-container">
+			<div class="span-5 last" id="albums-menu">
+				<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/albums-menu" />
+			</div>
+
+			<div id="main-content" class="append-5">
+				<h2 i18n:translate="">Albums</h2>
+<p class="quiet small">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam sit amet elit vitae arcu interdum ullamcorper. Nullam ultrices, nisi quis scelerisque convallis, augue neque tempor enim, et mattis justo nibh eu elit. Quisque ultrices gravida pede. Mauris accumsan vulputate tellus. Phasellus condimentum bibendum dolor. Mauris sed ipsum. Phasellus in diam. Nam sapien ligula, consectetuer id, hendrerit in, cursus sed, leo. Nam tincidunt rhoncus urna. Aliquam id massa ut nibh bibendum imperdiet. Curabitur neque mauris, porta vel, lacinia quis, placerat ultrices, orci.</p>
+				<div id="albums-tools">
+						<label for="album-list-sorting" i18n:translate="">Sorting</label>
+
+						<select id="album-list-sorting">
+
+							<tal:block tal:condition="not:exists:albumsorting">
+							  <option value="year/desc" selected="selected" i18n:translate="">Choose sorting</option>
+							</tal:block>
+
+						
+						   <tal:block tal:condition="not:equal:albumsorting,year/desc">
+							  <option value="year/desc" i18n:translate="">By year</option>
+							</tal:block>
+						   
+							<tal:block tal:condition="equal:albumsorting,year/desc">
+							  <option value="year/desc" i18n:translate="" selected="selected">By year</option>
+							</tal:block>
+							<tal:block tal:condition="not:exists:albumsorting">
+							  <option value="year/desc" i18n:translate="">By year</option>
+							</tal:block>
+
+							<tal:block tal:condition="not:equal:albumsorting,name/asc">
+							     <option value="name/asc" i18n:translate="">Name (ascending)</option>
+							</tal:block>
+							
+							<tal:block tal:condition="equal:albumsorting,name/asc">
+						         <option value="name/asc" selected="selected" i18n:translate="">Name (ascending)</option>
+							</tal:block>
+							
+							<tal:block tal:condition="not:exists:albumsorting">
+						         <option value="name/asc" i18n:translate="">Name (ascending)</option>
+							</tal:block>
+
+							<tal:block tal:condition="not:equal:albumsorting,name/desc">
+							     <option value="name/desc" i18n:translate="">Name (descending)</option>
+							</tal:block>
+
+							<tal:block tal:condition="equal:albumsorting,name/desc">
+							     <option value="name/desc" selected="selected" i18n:translate="">Name (decending)</option>
+							</tal:block>
+							
+							<tal:block tal:condition="not:exists:albumsorting">
+							     <option value="name/desc" i18n:translate="">Name (decending)</option>
+							</tal:block>
+							
+							<tal:block tal:condition="not:equal:albumsorting,created/asc">
+							     <option value="created/asc" i18n:translate="">Date (ascending)</option>
+							</tal:block>
+
+							<tal:block tal:condition="equal:albumsorting,created/asc">
+							     <option value="created/asc" selected="selected" i18n:translate="">Date (ascending)</option>
+							</tal:block>
+							
+							<tal:block tal:condition="not:exists:albumsorting">
+							     <option value="created/asc" i18n:translate="">Date (ascending)</option>
+							</tal:block>
+							
+							<tal:block tal:condition="not:equal:albumsorting,created/desc">
+							     <option value="created/desc" i18n:translate="">Date (descending)</option>
+							</tal:block>
+							
+							<tal:block tal:condition="equal:albumsorting,created/desc">
+							     <option value="created/desc" selected="selected" i18n:translate="">Date (descending)</option>
+							</tal:block>
+							
+							<tal:block tal:condition="not:exists:albumsorting">
+							     <option value="created/desc" i18n:translate="">Date (descending)</option>
+							</tal:block>
+
+							
+						</select>
+						
+						<label for="album-list-appearance" i18n:translate="">View (viewing method)</label>
+						
+						<select id="album-list-appearance" name="album-list-appearance">
+   							<tal:block tal:condition="exists:userpreferences/album-list-appearance">	
+								
+								<option value="thumbnails" i18n:translate="" tal:condition="equal:userpreferences/album-list-appearance,thumbnails" selected="selected">Thumbnails</option>
+								<option value="thumbnails" i18n:translate="" tal:condition="not:equal:userpreferences/album-list-appearance,thumbnails">Thumbnails</option>
+								
+								<option value="list" i18n:translate="" tal:condition="equal:userpreferences/album-list-appearance,list" selected="selected">List</option>
+								<option value="list" i18n:translate="" tal:condition="not:equal:userpreferences/album-list-appearance,list">List</option>
+								
+								<option value="details" i18n:translate="" tal:condition="equal:userpreferences/album-list-appearance,details" selected="selected">Details</option>
+								<option value="details" i18n:translate="" tal:condition="not:equal:userpreferences/album-list-appearance,details">Details</option>
+								
+							</tal:block>
+							
+							<tal:block tal:condition="not:exists:userpreferences/album-list-appearance">
+								<option value="thumbnails" i18n:translate="" selected="selected">Thumbnails</option>
+								<option value="list" i18n:translate="">List</option>
+								<option value="details" i18n:translate="">Details</option>
+							</tal:block> 	
+						</select>
+
+						<label for="album-thumb-size" i18n:translate="">Size</label>
+						<select id="album-thumb-size">
+							<option value="big">Big</option>
+							<option value="medium" selected="selected">Medium</option>
+							<option value="small">Small</option>
+						</select>
+						
+
+
+						<a href="/account/inbox" class="${conditionalmatch:userinboxcount,0,strong}"><span>Inbox</span> ( ${userinboxcount} )</a>  [ <a href="#maps" id="open-maps" class="hide">Maps <span class="quiet">(beta)</span></a>
+
+						<div style="float: right">
+							<a id="select-all-albums" href="#select-all">Select all</a> | <a id="select-none-albums" href="#select-none">Select none</a>
+						</div>
+					</div>
+
+				<div class="account-content-box" tal:condition="not:equal:albumsorting,year/desc">
+					<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/albums" />
+				</div>
+				
+				<tal:block tal:condition="equal:albumsorting,year/desc">
+					 <tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/albums-by-year" />
+				</tal:block>
+			</div>			
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	//<![CDATA[
+	$(document).ready( function() {
+		
+		$('#album-thumb-size').change( function() {
+			$('#main-content ul.albums').removeClass('small').removeClass('medium').removeClass('big').addClass( $(this).val() );
+		});
+
+		$('#show-albums #main-content .albums.thumbnails li').each(function(i, item){
+			var title = $('a', item).attr('title');
+			var id = $(item).attr('rel');
+			$(item).tipTip({
+				content: $('.facts', item),
+				maxWidth: '220px',
+				edgeOffset: -10,
+				defaultPosition: 'top',
+				keepAlive: false,
+				enter: function() {
+					$(item).trigger('mouseleave');
+					$(item).removeAttr('title')
+				},
+				exit: function() {
+					$('a', item).attr('title', title)
+				}
+			}).contextMenu({
+				menu: 'albumContextMenu'
+			}, function(action, element, position) {
+				if ( action == 'open' ) {
+					window.location.href = $('a',element).attr('href');
+				} else if( action == 'edit') {
+					albumPreferences( id, item );
+				} else if( action == 'delete') {
+					deleteAlbumDialog( id, item );
+				} else if ( action == 'share' ) {
+					shareAlbumDialog( id, item );
+				} else if ( action == 'addToCollection' ) {
+					addToCollection( item, false, false ); // addToCollection(albums, images, collection)
+				} else if ( action == 'download' ) {
+					downloadAlbumDialog( id, item )
+				} else if ( action == 'select' ) {
+					$(item).toggleClass('selected')
+				}
+			});
+		});
+	
+		$('#show-albums #main-content .albums a.album').bind('click', function(item) {
+		
+			if( userDblClick ) {
+		
+				if( navigator.userAgent.match(/iPad/i) != null || navigator.userAgent.match(/iPhone/i) != null) {
+					window.location.href = $(this).attr('href');
+				} else {
+					$(this).parent().parent().toggleClass('selected');
+				};
+			} else {
+				window.location.href = $(this).attr('href');
+			}
+			
+			return false;
+			
+		});
+		
+		$('#show-albums #main-content .albums a.album').bind('dblclick', function(item) {
+			if( userDblClick ) {
+				window.location.href = $(this).attr('href') + '#account';
+			} else {
+				alert( enableDoubleClick );
+			}
+		});
+		
+		$('#album-list-sorting').change(function() {
+			document.location = '/account/albums/sort/' + $('#album-list-sorting').val();
+		});
+	});
+	//]]>
+</script>
+
+
+
+<!-- dialogs -->
+<div metal:use-macro="${templateroot}/${templates}/account/dialogs.html/albumListDialogs" />
+
+<!-- context menu(s) -->
+<div metal:use-macro="${templateroot}/${templates}/account/common.html/albumContextMenu" />
+
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="${templateroot}/${templates}/common.html/footer" />
+		<div metal:use-macro="${templateroot}/${templates}/account/common.html/footer" />
+	</div>
+</div>	
+
+</body>
+</html>

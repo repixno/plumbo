@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<!-- Global Analytics REPIX-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		  
+			ga('create', 'UA-136013880-1', 'auto');
+		   ga('require', 'displayfeatures');
+			ga('send', 'pageview');
+	</script>
+
+
+
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+	<link href="${static:}gfx/portals/mediaclip/scripts/jquery.bxslider/jquery.bxslider.css?${version}" rel="stylesheet" />
+	<style media="all" type="text/css">
+		
+
+		.product-top p {
+			font-size: 21px
+		}
+
+	
+
+
+		.artikkler {
+			
+			
+			list-style-type: none;
+		
+		}
+
+.jumbotron img{
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.jumbotron{
+  background-color: #fff;
+}
+     
+	  
+	</style>
+</head>
+
+
+<!-- article -->
+
+<!-- article -->
+<tal:block define:section="produkter, produkter " />
+
+
+
+
+<tal:block metal:define-macro="show-product">
+	
+	
+
+</tal:block>
+
+
+
+
+
+<body>
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+
+	<div id="repixpage-main">
+			
+		<aside id="repixpage-hero" class="js-fullheight">
+    
+		<div class="repixpage-narrow-content">
+
+		
+
+		 <div class="jumbotron jumbotron-fluid">
+ 
+    <h1 class="display-4">Fotokort</h1>
+		<br/>
+    <p class="lead text-center">Lag flotte kort til konfirmasjon, bryllup, dåp, bursdag eller andre anledninger.</p>
+	 <p class="lead text-center">	Velg blant de mange fine designmalene eller designe kortet selv. Enkelt å lage med ubegrensede designvalg. .</p>
+  
+</div>
+		
+
+	<div class="col-md-12">
+			
+						<tal:block tal:repeat="item sections/produkter">
+							
+							<div class="col-md-3 col-xs-10 artikkler text-center margintops ">
+								<div metal:use-macro="../cms.html/product-as-list-item-with-image_mediaclip" />
+							</div>
+						</tal:block>
+		</div>		
+
+	
+
+	</div>
+			</aside>
+	</div>	
+
+
+	
+
+		
+		
+</body>
+
+</html>

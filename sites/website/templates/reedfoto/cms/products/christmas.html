@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<!--<meta name="description" content="${menuitem/article/ingress}" tal:condition="exists:menuitem/article/ingress"/>-->
+	
+	<style type="text/css">
+		.price {
+			font-weight: bold;
+			font-size: 1.4em;
+			padding-right: .5em;
+		}
+
+	
+	  ul.cleanlist { padding: 0; margin: 150px 10px 10px 10px; font-size: 10px }
+	  
+	  ul.cleanlist li { list-style-type: none !important; display: block; height: 1.5em; clear: both;}
+	  ul.cleanlist li a.product-title { float: left; margin-top: 5px }
+	  ul.cleanlist li .info { float: right; }
+	  ul.cleanlist a.product-title { font-weight: bold }
+	  ul.cleanlist a.button { padding: 5px !important; margin-top: 2px }
+	  
+	  
+	  div.cards h2 { margin-top: 10px; margin-left: 10px}
+	  div.borderbox { border: 1px solid #dbdbdb}
+	  
+	  
+	  div.card15x15, div.card10x18 { margin: 10px; margin-top: 215px; color :#fff }
+	  div.card15x15 h4, div.card10x18 h4 { font-weight: bold !important; margin-bottom: 2px }
+	  div div.card15x15 { color: #000 }
+	  
+	  div.card10x18 a, div.christmasnew a  { color: #fff; }
+	  div.card10x18 h4 a { font-weight: bold}
+	  div.card15x15 h4 a { color: #000; font-weight: bold}
+	  
+	  /* stupid hack for offer-price */
+	  div span.price br { display: none !important; }
+	  div span.price span.oldprice { display: none !important }
+	  div.christmascards .card10x18 span.newprice { color: #fff !important}
+	  
+	  .girl_side_xmas {
+         background-image: url(${static:gfx/gui/girl_side_xmas_right.png});
+         margin-left: 727px;
+         width: 200px;
+         height: 300px;
+         margin-bottom: -305px;
+      }
+
+	</style>
+	
+</head>
+
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+	<div class="span-4">
+		<div metal:use-macro="../cms.html/menu-current" />
+	</div>
+	
+	<tal:block define:section="doublecards, Double cards" />
+
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div class="span-20 last">
+		<div metal:use-macro="../cms.html/breadcrumbs" />
+		<h1 class="bottom hide" tal:content="menuitem/title">Product list </h1>
+		
+		<div class="span-20 last">
+			<!-- article 1 -->
+			<div class="span-8">
+				<tal:block tal:repeat="item items">
+					<tal:block tal:condition="equal:item/type,article">
+						<tal:block tal:condition="equal:repeat/item/number,1">
+							<h2 tal:content="item/title">Årets julegave</h2>
+							<tal:block tal:content="structure item/body" />
+						</tal:block>
+					</tal:block>
+				</tal:block>
+			</div>
+			<!-- product 2 -->
+			<div class="span-12 last right">
+				<tal:block tal:repeat="item items">
+					<tal:block tal:condition="equal:item/type,product">
+						<tal:block tal:condition="equal:repeat/item/number,2">
+						
+							<!-- image -->
+							
+							<img src="http://b.static.eurofoto.no/cms/images/undersider_fotobok.jpg" alt="${item/ingres}" />
+						
+							<tal:block tal:condition="not:item/images"><span class="quiet small">No image</span></tal:block>
+							<div class="span-12 last right">
+								<p>
+									<span class="price">
+										<tal:block i18n:translate="">from kr</tal:block> <tal:block tal:content="formatprice:item/option/price" />
+									</span>
+									<a href="${item/url}" class="button red large" i18n:translate="">Make photobook</a>
+								</p>
+							</div>
+						</tal:block>
+					</tal:block>
+				</tal:block>
+			</div>
+		</div>
+		<hr/>
+		<!--CEWE FOTOBOK -->
+		<div tal:condition="not:php:portal == 'SK-001'" class="span-20 last">
+		<a href="/produkter/cewe-fotobok/">
+				 <img src="http://b.static.eurofoto.no/cms/images/undersider_jul_CFB-anledninger.jpg"/>
+      </a>
+		</div>
+		<!--CEWE FOTOBOK -->
+		
+		<div class="span-5 last">
+			&nbsp; <!-- julegrafikk -->
+		</div>
+		<div class="span-20 last" style="height: 420px; background: #fff url(http://a.static.eurofoto.no/cms/images/plakat.jpg) no-repeat top left">
+		   <div class="girl_side_xmas"></div>
+			<div class="prepend-top prepend-1 span-15 append-3 last">
+				<!-- article 3 -->
+				<tal:block tal:repeat="item items">
+					<tal:block tal:condition="equal:item/type,article">
+					<tal:block tal:condition="equal:repeat/item/number,3">
+						<h3 tal:content="item/title">Julekort</h3>
+						<tal:block tal:content="structure item/body" />
+					</tal:block>	
+					</tal:block>
+				</tal:block>
+			</div>
+			<div class="span-6" style="border-right: 1px solid #EEE; padding-right: 20px;">
+				<!-- product 4 -->
+				<tal:block tal:repeat="item items">
+					<tal:block tal:condition="equal:repeat/item/number,4">
+						<tal:block tal:condition="equal:item/type,product">
+						<div class="span-7 last center">
+							<tal:block metal:use-macro="first-image-310px" />
+						</div>
+						<div class="center">
+							<h3 tal:content="item/title">Julekort title</h3>
+							<p class="hide" tal:content="item/ingress"></p>
+						</div>
+						<div class="right">
+							<span class="price">
+								<tal:block i18n:translate="">from kr</tal:block> <tal:block tal:content="formatprice:item/option/price" />
+							</span>
+							<br />
+							<a href="${item/url}" class="button" i18n:translate="">Show product</a>
+							<a href="/create/greetingcard/create/939" class="button red large">Lag julekort</a>
+						</div>
+					</tal:block>
+					</tal:block>
+				</tal:block>
+			</div>
+			
+			<div class="span-6" style="border-right: 1px solid #EEE; padding-right: 20px;">
+				<!-- product 5 -->
+				<tal:block tal:repeat="item items">
+					<tal:block tal:condition="equal:repeat/item/number,5">
+						<tal:block tal:condition="equal:item/type,product">
+						<div class="span-7 last center">
+							<tal:block metal:use-macro="first-image-310px" />
+						</div>
+						<div class="center">
+							<h3 tal:content="item/title">Julekort title</h3>
+							<p class="hide" tal:content="item/ingress"></p>
+						</div>
+						<div class="right">
+							<span class="price">
+								<tal:block i18n:translate="">from kr</tal:block> <tal:block tal:content="formatprice:item/option/price" />
+							</span>
+							<br />
+							<a href="${item/url}" class="button" i18n:translate="">Show product</a>
+							<a href="/create/greetingcard/create/940" class="button red large">Lag julekort</a>
+						</div>
+						</tal:block>
+					</tal:block>
+				</tal:block>
+			</div>
+			<div class="span-6 last">
+				<!-- product 5 -->
+				<tal:block tal:repeat="item items">
+					<tal:block tal:condition="equal:repeat/item/number,6">
+						<tal:block tal:condition="equal:item/type,product">
+						<div class="span-7 last center">
+							<tal:block metal:use-macro="first-image-310px" />
+						</div>
+						<div class="center">
+							<h3 tal:content="item/title">Julekort title</h3>
+							<p class="hide" tal:content="item/ingress"></p>
+						</div>
+						<div class="right">
+							<span class="price">
+								<tal:block i18n:translate="">from kr</tal:block> <tal:block tal:content="formatprice:item/option/price" />
+							</span>
+							<br />
+							<a href="${item/url}" class="button" i18n:translate="">Show product</a>
+							<a href="/create/greetingcard/create/7105" class="button red large">Lag julekort</a>
+						</div>
+						</tal:block>
+					</tal:block>
+				</tal:block>
+			</div>
+		</div>
+		
+		<!--<div class="span-20 last append-bottom" tal:condition="exists:sections/doublecards">
+			<div class="borderbox christmasnew" style="height: 120px; background: #c00 url(${static:cms/images/webpage/produkter/fotokort/doble-julekort.jpg}) no-repeat top left; color: #fff; border: none;">
+			<div class="span-5">
+				<div class="ribbonsContainer">
+					<div class="ribbon yellow new"></div>
+				</div>
+				<h2 style="text-indent: -9999px">Nyhet!</h2>
+			</div>
+			<div class="large span-14">
+				<tal:block tal:repeat="item sections/doublecards">
+					<h3 class="prepend-top bottom">
+						<a href="${item/url}" class="hide-link product-title">${item/title}</a> 
+					</h3>
+					<span class="info">
+						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" />
+						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/more-info-link" />
+						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/buy-product-link" />
+					</span>
+				</tal:block>
+			</div>
+			</div>
+		</div>-->
+
+		<div class="span-20 last">
+		
+			<div class="span-5">
+				<img src="http://b.static.eurofoto.no/cms/images/articles/landingssider/jul/jente-med-pakker.jpg" />
+			</div>
+			<div class="span-15 last">
+			<tal:block tal:repeat="item items">
+				<!-- article 6 -->
+				<div class="span-15 last">
+					<tal:block tal:condition="equal:item/type,article">
+						<tal:block tal:condition="equal:repeat/item/number,6">
+							<h2 tal:content="item/title"></h2>
+							<tal:block tal:content="structure item/body" />
+						</tal:block>
+					</tal:block>
+					<tal:block tal:condition="equal:item/type,product">
+						<!-- christmas gifts -->
+						<tal:block tal:condition="gt:repeat/item/number,6">
+							<div class="span-2 productimage">
+								<tal:block metal:use-macro="first-image" />
+							</div>
+							<div class="span-5">
+								<h3 class="bottom top" tal:content="item/title"></h3>
+								<p tal:content="item/ingress"></p>
+							</div>
+							<div class="span-4 last right">
+								
+								<span class="large">
+									<tal:block i18n:translate="">from kr</tal:block> <tal:block tal:content="formatprice:item/option/price" tal:condition="exists:item/option/price"></tal:block>  
+								</span>
+								<br/>
+								<a href="${item/url}" class="button" i18n:translate="">Show product</a>
+							</div>
+						</tal:block>
+					</tal:block>
+				</div>
+			</tal:block>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>	
+</div>
+
+
+<tal:block metal:define-macro="first-image-310px">
+	<tal:block tal:condition="exists:item/images">
+		<tal:block tal:repeat="image item/images" tal:condition="item/images">
+			<tal:block tal:condition="equal:repeat/image/number,1">
+				<tal:block tal:define="global staticurl" tal:content="static:" />
+				<a href="${item/url}" title="${item/title}">
+					<img src="${staticurl}images/products/thumbs/square/160/${image/url}" 
+						widht="310" height="160" alt="${item/title}" tal:condition="image/url" 
+					/>
+				</a>
+				<img src="${static:gfx/404/not_found_50px.jpg}" 
+					class="left" alt="Product photo missing." tal:condition="not:image/url" 
+					
+				/> 
+			</tal:block>
+		</tal:block>
+	</tal:block>
+	<tal:block tal:condition="not:item/images"><span class="quiet small">No image</span></tal:block>
+</tal:block>
+
+<tal:block metal:define-macro="first-image">
+	<tal:block tal:condition="exists:item/images">
+		<tal:block tal:repeat="image item/images" tal:condition="item/images">
+			<tal:block tal:condition="equal:repeat/image/number,1">
+				<tal:block tal:define="global staticurl" tal:content="static:" />
+				<a href="${item/url}" title="${item/title}">
+					<img src="${staticurl}images/products/thumbs/square/50/${image/url}" 
+						widht="50" height="50" class="left" alt="${item/title}" tal:condition="image/url" 
+					/>
+				</a>
+				<img src="${static:gfx/404/not_found_50px.jpg}" 
+					class="left" alt="Product photo missing." tal:condition="not:image/url" 
+					
+				/> 
+			</tal:block>
+		</tal:block>
+	</tal:block>
+	<tal:block tal:condition="not:item/images"><span class="quiet small">No image</span></tal:block>
+</tal:block>
+
+
+
+</body>
+</html>

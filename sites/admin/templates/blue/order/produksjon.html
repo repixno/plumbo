@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin statistikk</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+
+<style>
+    
+    button{
+        
+        background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0,8em;
+    width: 200px;
+      height: 70px;   
+    }
+    
+    
+    
+    {
+        
+            background: #e8e7fb;
+   /* background: #fff url(backgrounds/eurofoto-top.jpg) scroll repeat-x top;*/
+    padding-top: 40px !important;
+</style>
+</head>
+
+<body>
+  
+    
+    <div class="container">
+        
+          <h2>DIV OMSETNINGSLINKER</h2>
+          
+                        <button style="background-color: #2e8e19; margin-bottom: 25px;" onclick="location.href='http://admin.repix.no/order/portalomsetning';" value="Go to Google" >Portal Omsetining</button>
+         <!--  <button style="background-color: #2e8e19; margin-bottom: 25px;" onclick="location.href='http://admin.eurofoto.no/order/portalomsetning2017';" value="Go to Google" >Portal 2017 Auto admin</button>
+          <button style="background-color: #2e8e19; margin-bottom: 25px;" onclick="location.href='http://admin.eurofoto.no/order/portalomsetning2018';" value="Go to Google" >Portal 2018 Auto admin</button>-->
+          
+  <h2>EUROFOTO ORDRER</h2>
+  
+ <br/>
+ 
+     <!-- <button style="background-color: #ff3939;"  onclick="location.href='/order/smilomsetning';" value="Go to Google" >Smil Portal Omsetning</button>-->
+             <button  style="background-color: #2e8e19; margin-bottom: 25px;" onclick="location.href='http://susanne.repix.no/adm_finnordre.php';" value="Go to Google" >Ordre Søk</button>
+             <button  style="background-color: #2e8e19; margin-bottom: 25px;" onclick="location.href='http://susanne.repix.no/adm_finnkunde.php';" value="Go to Google" >Kunde Søk</button>
+              <button style="background-color: #2e8e19; margin-bottom: 25px;" onclick="location.href='http://susanne.repix.no/adm_create_article.php';" value="Go to Google" >Priser og Priser</button>
+             <!-- <button style="background-color: #2e8e19; margin-bottom: 25px;" onclick="location.href='http://marie.eurofoto.no/ukens-tilbud/';" value="Go to Google" >Ukens Tilbud</button>-->
+           
+           
+           
+           
+              <HR/>  
+  
+              <H2 style="margin-top: 25px;">STORKUNDE SIDER:</H2>
+                 <button  style="background-color: #51a2b0;  margin-bottom: 25px;" onclick="location.href='http://admin2.repix.no/order/utestemme/';" value="Go to Google" >Utestemme</button>
+              <!--    <button style="background-color: #51a2b0;  margin-bottom: 25px;" onclick="location.href='http://admin2.eurofoto.no/order/jporders';" value="Go to Google" >JP Merkelapp</button>-->
+        <button  style="background-color: #51a2b0;  margin-bottom: 25px;" onclick="location.href='http://admin2.repix.no/order/fotono';" value="Go to Google" >Fotono order</button>
+    <button style="background-color: #51a2b0;  margin-bottom: 25px;" onclick="location.href='http://admin2.repix.no/order/lablink';" value="Go to Google" >Lablink</button>
+   <button style="background-color: #51a2b0;  margin-bottom: 25px;" onclick="location.href='http://admin2.repix.no/order/fotono_stats';" value="Go to Google" >Fotono info</button>
+<button style="background-color: #51a2b0;  margin-bottom: 25px;" onclick="location.href='http://admin2.repix.no/order/lablink/find';" value="Go to Google" >Søk Lablink</button>
+  
+    <button  style="background-color: #51a2b0;  margin-bottom: 25px;" onclick="location.href=' http://admin2.repix.no/order/student';" value="Go to Google" >Studentskilt</button>
+  
+ 
+     <HR/>  
+  
+  
+  
+    <H2 style="margin-top: 25px;">MEDIACLIP:</H2>
+                 <button  style="background-color: #95a014; margin-bottom: 25px;" onclick="location.href='http://admin.repix.no/project/version';" value="Go to Google" >Versjon av Mediaclip Prosjekt</button>
+        <HR/>       
+
+
+<H2 style="margin-top: 25px;">UKEPLAN:</H2>
+                 <button  style="background-color: #728bbf; margin-bottom: 25px;" onclick="location.href='http://ukeplanadmin.repix.no/cewe/index.php';" value="Go to Google" >Reg ordrar NO</button>
+                 <button  style="background-color: #728bbf; margin-bottom: 25px;" onclick="location.href='http://cs.photoprintit.com/web/85028023/';" value="Go to Google" >Manuelle ordrar NO</button>
+                 <button  style="background-color: #728bbf; margin-bottom: 25px;" onclick="location.href='http://veckoplanadmin.repix.no/cewe/';" value="Go to Google" >Reg ordrar SE</button>
+                 <button  style="background-color: #728bbf; margin-bottom: 25px;" onclick="location.href='http://cs.photoprintit.com/web/85028457/';" value="Go to Google" >Manuelle ordrar SE</button>
+        <HR/>       
+
+<!--
+<h1 style="margin-top: 25px;">Praktisk info</h1>
+
+ <H2 style="color:blue;">Zetta:</H2>
+    
+       <H5>På Zetta ligg alle produksjonfiler.</H5> 
+      
+<H4>Mapper:</H4>
+
+<h5>Webspool er mappa der org filene til order ligger. Desse mappene er skjelden i bruk</h5>
+
+
+ <H2 style="color:blue;" >Mediaclip:</H2>
+
+<h5>Filer til mediaclip kjem ned på ein server som heiter Clipproducer2 i dag</h5>
+
+<H6>Normalt sett bilr det meste av ordrer som kjem ned på denne serveren kjørt over på zetta.</H6>
+<H5>Produksjonen lager då filer fra mappa på zetta som heiter:</H5> <H5  style="color:blue;">  produksjon/preview_mediaclip</H5>
+<h5>Strukturen vidare er   </h5> <h5 style="color:blue;"> DATO/PRODUKT/ORDRENR/FILEID </h5> 
+
+-->
+
+
+
+
+
+
+<H2 style="margin-top: 25px;">FRIMERKER:</H2>
+<button style="background-color: #ff3939; margin-bottom: 25px;" onclick="location.href='http://admin.repix.no/stamp';" value="Go to Google" >Status Ordre</button>
+<button style="background-color: #ff3939; margin-bottom: 25px;" onclick="location.href='http://admin2.repix.no/order/frimerke';" value="Go to Google" >Frimerke Stats</button>
+<HR/>
+
+<H2 style="margin-top: 25px;">NYTTIGE LINKER:</H2>
+  <button style="background-color: #8f41b5;" onclick="location.href='/order/smil_sendt';" value="Go to Google" >Smilfoto</button>
+ <button style="background-color: #8f41b5; margin-bottom: 25px;" onclick="location.href='http://admin2.repix.no/order/mediaclip/find';" value="Go to Google" >Ordrenr utfra Fileid</button>
+ <button style="background-color: #8f41b5;" onclick="location.href='http://susanne.eurofoto.no/adm_edit_discount_campaigns.php';" value="Go to Google" >Kampanjer</button>
+
+<HR/>
+<H2 style="margin-top: 25px;">STABBURET:</H2>
+
+
+
+<button style="background-color: #deb20a; margin-bottom: 25px; " onclick="location.href='http://adminstabburet.repix.no';" value="Go to Google" >Stabburet Statistikk</button>
+<button style="background-color: #deb20a; margin-bottom: 25px; " onclick="location.href='http://admin.repix.no/order/stabburet_bad_quality/';" value="Go to Google" >Send Epost Kvalitet</button>
+<button style="background-color: #deb20a; margin-bottom: 25px; " onclick="location.href='http://admin.repix.no/order/stabburet_bad_photo/';" value="Go to Google" >Send Epost Innhold</button>
+<button style="background-color: #deb20a; margin-bottom: 25px; " onclick="location.href='http://admin.repix.no/order/stabburet_bad_delivery/';" value="Go to Google" >Send Epost Post</button>
+<button style="background-color: #deb20a; margin-bottom: 25px;" onclick="location.href='http://stabburetbeta.repix.no/lag-lokk';" value="Go to Google" >Lag Stabburet Leverpostei lokk</button>
+<HR/>
+
+
+
+
+<H2 style="margin-top: 25px;">DIVERSE STATISTIKK:</H2>
+
+
+<button style="background-color: #147d4e; margin-top: 25px;" onclick="location.href='http://susanne.repix.no/log_artikkelnr.php';" value="Go to Google" >Artikkel Stats</button>
+<button style="background-color: #147d4e; margin-bottom: 25px;" onclick="location.href='http://admin.repix.no/order/portalstatistikk_produkt';" value="Go to Google" >Portal Stats</button>
+<button style="background-color: #147d4e; margin-bottom: 25px;" onclick="location.href='http://admin.repix.no/order/ukeplan';" value="Go to Google" >Ukeplan</button>
+<button style="background-color: #147d4e; margin-bottom: 25px;" onclick="location.href='http://admin.repix.no/order/merkelapp';" value="Go to Google" >Merkelapp</button>
+<button style="background-color: #147d4e; margin-bottom: 25px;" onclick="location.href='http://admin.repix.no/order/seniorlappen';" value="Go to Google" >Seniorlappen</button>
+<button style="background-color: #147d4e; margin-bottom: 25px;" onclick="location.href='http://admin.repix.no/order/skanska';" value="Go to Google" >Skanska</button>
+<HR/>
+
+
+<H2 style="margin-top: 25px;">DIVERSE:</H2>
+<button style="background-color: #7f075e; margin-bottom: 100px;" onclick="location.href='http://eva-local.eurofoto.no:631/';" value="Go to Google" >Status Printer Cups</button>
+
+
+
+
+<H2 style="margin-top: 15px;">FELIX:</H2>
+<button style="background-color: #403a5a; margin-bottom: 25px;" onclick="location.href='http://admin.repix.no/order/felix_stats';" value="Go to Google" >Felix Ordrer</button>
+<HR/>
+
+
+</div>
+    
+    
+    
+   
+
+
+</body>
+</html>

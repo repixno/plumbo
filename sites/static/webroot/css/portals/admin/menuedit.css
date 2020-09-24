@@ -1,0 +1,15 @@
+.connectedsection {
+
+   border: 1px solid lightgray;
+   -moz-border-radius: 4px;
+   -webkit-border-radius: 4px;
+   margin-bottom: 5px;
+
+}
+.connectedsectiontitle {
+
+   font-weight: bold ! important;
+   border-bottom: 1px solid gray;
+   background-color: #ddd;
+
+}

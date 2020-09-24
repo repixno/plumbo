@@ -1,0 +1,86 @@
+#tooltip { 
+    display: none; 
+    background:transparent url(gfx/black_arrow.png); 
+    font-size:12px; 
+    height:70px; 
+    width:160px; 
+    padding:25px; 
+    color:#fff;     
+    
+    z-index: 50000;
+}
+
+#album-tooltip {
+
+    display: none; 
+    background:transparent url(gfx/black_arrow.png); 
+    font-size:12px; 
+    height:70px; 
+    width:160px; 
+    padding:25px; 
+    color:#fff;     
+
+	
+}
+
+
+/* the overlayed element */ 
+
+.jqueryToolsOverlay.popup { 
+	background-color: #fff;
+	border: 1px solid #666;
+	padding: 30px 10px;
+	color: #666;
+}
+.jqueryToolsOverlay.popup h2 { color: #000 } 
+
+.jqueryToolsOverlay { 
+     
+    /* must be initially hidden */ 
+    display:none; 
+     
+    /* place overlay on top of other elements */ 
+    z-index:10000; 
+     
+    /* styling */ 
+    background-color:#333; 
+     
+    width:675px;     
+    min-height:200px; 
+    border:1px solid #666; 
+     
+    /* CSS3 styling for latest browsers */ 
+    -moz-box-shadow:0 0 90px 5px #000; 
+    -webkit-box-shadow: 0 0 90px #000;     
+} 
+
+.jqueryToolsOverlay.video {
+	background-image: url(gfx/blank.gif);
+}
+
+/* close button positioned on upper right corner */ 
+.jqueryToolsOverlay .close { 
+    background-image:url(gfx/close.png); 
+    position:absolute; 
+    right:-15px; 
+    top:-15px; 
+    cursor:pointer; 
+    height:35px; 
+    width:35px; 
+}
+
+/* styling for elements inside overlay */ 
+.jqueryToolsOverlay .details { 
+    position:absolute; 
+    top:15px; 
+    right:15px; 
+    font-size:11px; 
+    color:#fff; 
+    width:150px; 
+} 
+ 
+.jqueryToolsOverlay .details h3 { 
+    color:#aba; 
+    font-size:15px; 
+    margin:0 0 -10px 0; 
+}

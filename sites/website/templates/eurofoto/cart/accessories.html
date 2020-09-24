@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Something else?</tal:block>
+</head>
+
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+		<div class="span-14">
+			<h3 i18n:translate="">We recommend these products to go with your order.</h3>
+			<div metal:use-macro="../../common/productlisting.html/associatedproducts"></div>
+		</div>
+		
+		<div class="span-8 append-2 last right">
+			<h3 id="total-cost">
+				Kr <span class="total-price" id="total-price" >${formatprice:cart/totalprice}</span>
+			</h3>
+			<a class="button next large call-to-action" href="/cart/" i18n:translate="">Continue to cart</a>
+		</div>
+
+		<div class="span-4 append-8">
+			<a href="" class="button" i18n:translate="">Back</a>
+		</div>
+
+	</div>
+</body>
+</html>

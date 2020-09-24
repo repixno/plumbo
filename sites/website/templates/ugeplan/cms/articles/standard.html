@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title"/>
+	
+	<style type="text/css">
+		.ingress {
+			font-size: 1.1em;
+			color: #333;
+		}
+	</style>
+	<tal:block tal:condition="session/isadmin">
+		<style type="text/css">
+		.cms-article-title:hover, .cms-article-ingress:hover, .cms-article-body:hover {
+			background-color: #eee !important;
+		}
+		</style>
+	</tal:block>
+</head>
+
+
+<body>
+<tal:block metal:use-macro="../../../${templates}/common.html/top" />
+	<div class="container">
+
+	<div class="span-18">
+		
+		<tal:block tal:condition="exists:items" tal:repeat="item items">
+			<h2 tal:content="item/title" class="cms-article-title">Item title</h2>
+			<p class="ingress cms-article-ingress" tal:content="item/ingress"></p>
+			
+			<div><tal:block metal:use-macro="../../common.html/share-button" /></div>
+			
+			<hr />
+			
+			<div class="cms-article-body">
+				<tal:block tal:content="structure item/body" />
+			</div>
+			
+			<tal:block tal:condition="session/isadmin">
+				<script type="text/javascript">
+					$('.cms-article-title, .cms-article-ingress, .cms-article-body').dblclick( function() {
+						window.open('${request/adminroot}content/articles/${item/id}');
+					});
+				</script>
+			</tal:block>
+			
+		</tal:block>
+		
+	</div>
+	<div class="span-6 last">
+
+
+ <div class="fb-like-box" data-href="http://www.facebook.com/Ugeplan.dk" data-width="210"  data-height="482" data-show-faces="true" data-stream="true" data-header="true"/>
+	
+	
+	
+	
+	</div>
+</div>
+<div metal:use-macro="../../../${templates}/common.html/footer" />
+
+<script type="text/javascript">
+	
+
+	
+$(document).ready( function() {
+	$('a.fancybox').fancybox();
+	
+	var portal = '${portal}';
+	
+	if(  portal  == 'BP-001' ){
+		$('.email').text('post@barnehageplan.no').attr( 'href', 'mailto:post@barnehageplan');
+		$('.companyname').text( 'Barnehageplan');
+	}
+	if(  portal  == 'UP-DK' ){
+		$('.email').text('kontakt@ugeplan.dk').attr( 'href', 'mailto:kontakt@ugeplan.dk');
+		$('.companyname').text( 'Ugeplan.dk');
+	}
+	
+	
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/da_DK/all.js#xfbml=1";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	
+	
+});
+</script>
+</body>
+</html>

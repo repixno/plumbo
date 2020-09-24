@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Add accessory-connection - Eurofoto admin</title>
+<tal:block metal:use-macro="../common.html/css" />
+<script type="text/javascript" src="/js/admin.js"></script>
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+
+		<tal:block metal:use-macro="../common.html/languages" />
+			
+		<div id="content" class="span-20">
+			
+			<h3>
+				<tal:block i18n:translate="">Edit Accessory</tal:block>
+			</h3>
+			
+			<form method="post" action="/content/accessories">
+			<fieldset>
+				<legend i18n:translate="">Products</legend>
+				
+				<input type="hidden" name="save[accessoryid]" value="${connection/accessory/id}" />
+
+				<div class="span-8">
+					<label for="product" i18n:translate="">Product to trigger</label>
+					<input id="product" type="text" class="text" value="${connection/product/title}"/>
+					<input type="hidden" name="save[productid]" id="productid-holder" value="${connection/product/id}"/>
+					
+					<input type="checkbox" id="disable-product" /> 
+					<label for="disable-product" i18n:translate="">Show this accessory with all products</label> 
+					<a href="/content/products/${connection/product/id}" class="hide" id="open-current-product" i18n:translate="">Open</a>
+					
+				</div>
+				
+				<div class="span-1" style="padding-top:8px">
+					<span style="font-size: 36px">➜</span>
+				</div>
+				
+				<div class="span-10 last">
+					<label for="accessory" i18n:translate="">Accessory to show</label><br/>
+					<input type="text" name="" id="accessory" class="text" value="${connection/accessory/title}" /> 
+					<a href="/content/products/${connection/product/id}" class="hide" id="open-current-accessory" i18n:translate="">Open</a>
+					<input type="hidden" name="save[accessoryproductid]" id="accessory-holder" value="${connection/accessory/id}"/>
+				</div>
+			</fieldset>
+			<div class="span-14">
+				<fieldset class="quantity">
+				<legend i18n:translate="">Quantity</legend>
+				<div class="span-13 last">
+					<h4 i18n:translate="">Quantity to trigger accessory for this product</h4>
+					<div class="span-2">
+						<label for="quantitymin" i18n:translate="">Minimun</label>:
+						<input id="quantitymin" type="text" value="${connection/minquantity}" name="save[minquantity]" class="text span-2" />
+					</div>
+					<div class="span-8 center prepend-top">
+						<div id="slider-range"></div>
+						<p class="center quiet" i18n:translate="">Drag the slider or type the quantity in manually. Maximum 0 means unlimited.</p>
+					</div>
+					<div class="span-2">
+						<label for="quantitymax" i18n:translate="">Maximum</label>:
+						
+						<input id="quantitymax" type="text" value="${connection/maxquantity}" 
+							name="save[maxquantity]" class="text span-2" tal:condition="connection/maxquantity"/>
+						
+						<input id="quantitymax" type="text" value="50" 
+							name="save[maxquantity]" class="text span-2" tal:condition="not:connection/maxquantity"/>
+						
+					</div>
+					<div class="span-13 last">
+						<h4 class="quiet">
+							<tal:block i18n:translate="">Quantity to suggest to user</tal:block> 
+							<small>(<tal:block i18n:translate="">Coming soon</tal:block>)</small>
+						</h4>
+						<p class="quiet">
+							<input type="checkbox" id="suggest-quantity"/>
+							<label for="suggest-quantity" i18n:translate="">Suggest the same quantity the user added to cart</label>
+							<br/>
+							<label i18n:translate="">Quantity in the accessory if a pack</label> <input type="text" class="span-1" value="1"/> 
+						</p>
+					</div>
+				</div>
+				</fieldset>
+			</div>
+			<div class="prepend-top span-4 last">
+				<button type="submit" class="button large save-connection" i18n:translate="">Save connection</button>
+			</div>
+
+			</form>
+
+   			   
+   			   <script type="text/javascript">
+   			   	$(document).ready( function() {
+   			   	
+   			   		var prevProductId = $('#productid-holder').val();
+   			   		var allProductsText = '<tal:block i18n:translate="">All products</tal:block>';
+   			   		var selectedProduct = '<tal:block tal:content="connection/product/title" />';
+   			   		var selectedProductId = '<tal:block tal:content="connection/product/id" />';
+   			   		
+					var products = [
+					<tal:block tal:repeat="product products">
+					{
+					title: '<tal:block tal:content="removelinebreak:product/title" />', 
+					id: '${product/id}', 
+					ingress: '<tal:block tal:content="removelinebreak:product/ingress" />' 
+					},
+					</tal:block>
+					];
+
+					$('#product, #accessory').autocomplete(products, 		
+					{
+						formatItem: function(row, i, max) {
+							return '<strong>'+ row.title + '</strong>'  + '<p class="top bottom quiet">' + row.ingress + '</p>';
+						},
+						formatMatch: function(row, i, max) {
+							return row.title;
+						},
+						formatResult: function(row) {
+							return row.title;
+						}
+					})
+					
+					$('#product').result(function(event, data, formatted) {
+						selectedProduct = data.title;
+						selectedProductId = data.id;
+						$('#open-current-product').attr('href', '/content/products/'+data.id).show();;
+						$('#productid-holder').val(data.id)
+					});
+					
+					$('#accessory').result(function(event, data, formatted) {
+						$('#open-current-accessory').attr('href', '/content/products/'+data.id).show();;
+						$('#accessory-holder').val(data.id)
+					});
+
+					var minimum = parseInt( $("#quantitymin").val() );
+					var maximum = parseInt( $("#quantitymax").val() );
+					
+					var min = minimum;
+					var max = maximum;
+					
+					//<![CDATA[
+					if (minimum >= 10 ) {
+						min=0;
+					}
+					//]]>
+					max = parseInt(maximum) + 10;
+
+					$("#slider-range").slider({
+						range: true,
+						min: min,
+						max: parseInt(max),
+						values: [minimum, maximum],
+						slide: function(event, ui) {
+							$("#quantitymin").val(ui.values[0]);
+							$("#quantitymax").val(ui.values[1]);
+						}
+					});
+					
+					$('#quantitymin, #quantitymax').blur( function() {
+						//<![CDATA[
+							
+							var quantitymin = parseInt( $('#quantitymin').val() );
+							var quantitymax = parseInt( $('#quantitymax').val() );
+							
+							if( quantitymin <= 10) {
+								min = 0;
+							}
+							max = quantitymax + 10 ;
+							
+							
+						
+						//]]>
+						
+						
+						
+						$("#slider-range").slider('option', 'min', parseInt(min) );
+						$("#slider-range").slider('option', 'max', parseInt(max) );
+						$("#slider-range").slider('option', 'values', [quantitymin, quantitymax]);
+						
+						console.log( 'min: ' + quantitymin + 'max: ' + quantitymax);
+						
+						console.log( $("#slider-range").slider('values') );
+						
+						$("#slider-range").slider('enable');
+						
+					});
+					
+					$('#disable-product').change( function() {
+					
+						if( !$('#product').attr('disabled') ) {
+						
+							$('#product').attr('disabled', 'disabled').css('border-color', '#eee').val(allProductsText);
+							$('#productid-holder').val('0');
+							$('label[for=product]').css('color', '#ccc');
+							
+						} else {
+							$('#product').removeAttr('disabled').css('border-color', '#ccc').val(selectedProduct);
+							$('#productid-holder').val(selectedProductId);
+							$('label[for=product]').css('color', '#000');
+						}
+					});
+				});
+				</script>
+		</div>
+		
+		<tal:block metal:use-macro="common.html/content-menu" />
+		<div id="footer" />
+	</div>
+</body>
+</html>

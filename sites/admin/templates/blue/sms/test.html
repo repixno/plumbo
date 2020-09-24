@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">SMS - Eurofoto Admin</title>
+<tal:block metal:use-macro="../common.html/css" />
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header">
+			<h2>Eurofoto Admin</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		<tal:block metal:use-macro="../common.html/languages" />
+		<div id="content">
+			<div id="box">
+				
+			   <h3>Test SMS</h3>
+				<form action="/sms/send/${smsid}" method="POST" >
+   			   <table width="100%">
+   			   <tal:block tal:condition="exists:smsid">
+   			      <tr>
+                     <th><label i18n:translate="">Id</label></th>
+   			         <td>
+   					    <tal:block tal:content="smsid" />
+   			         </td>
+   			      </tr>
+   			   </tal:block>
+   		      <tr>
+                  <th><label i18n:translate="">Message</label></th>
+   			      <td>
+   					   <tal:block tal:content="smsmessage" i18n:translate=""/>
+   					   <input type="hidden" name="id" id="id" value="${smsid}" />
+   			      </td>
+   			   </tr>
+   			   <tr>
+                  <th colspan="3" height="20"><label></label></th>
+   			   </tr>
+   			   <tr>
+                  <th><label i18n:translate="">Send to number</label></th>
+   			      <td>
+   					   <input type="text" name="tonumber" id="tonumber" value="" />
+   			      </td>
+   			   </tr>
+   			   <tr>
+                  <th colspan="3" height="20"><label></label></th>
+   			   </tr>
+   			   <tr>
+                  <th colspan="3"><b i18n:translate="">Strings below replaces %s in message.</b></th>
+   			   </tr>
+   			   <tal:block tal:repeat="replacement smsreplacements" >
+   			      <tr>
+   			         <td>
+   			            Replacement
+   			         </td>
+   			         <td>
+   			            <input type="text" name="replacement[]" value="" />
+   			         </td>
+   			      </tr>
+   			   </tal:block>
+   			   <tr>
+   			      <td colspan="2">
+                     <input type="submit" value="Send" i18n:attributes="value"/><br />
+   			      </td>
+   			   </tr>
+   			    <tr>
+   			      <td colspan="2">
+   			         <a href="/sms">Main</a>
+   			      </td>
+   			   </tr>
+   			   </table>
+   			</form>
+			   
+				
+			</div>
+		</div>
+	</div>
+	<div id="footer"></div>
+</body>
+</html>

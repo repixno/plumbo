@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="//www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+   <head>
+	  <tal metal:use-macro="../../${templates}/common.html/head" />
+   
+   <tal:block metal:use-macro="./common.html/scripts" />
+     <tal:block metal:use-macro="./common.html/css" />
+	 <link rel="stylesheet" href="${static:}js/jqupload/css/jquery.fileupload.css"/>
+   
+   </head>
+
+
+   <style type="text/css">
+	  
+	  div.editorcontainer::after {
+		 content: "";
+		 background: url("${static:}images/gifttemplates/thumbs/width/800/${selected/templatefile}");
+		 opacity: 1;
+		 top: 0;
+		 left: 0;
+		 bottom: 0;
+		 right: 0;
+		 position: absolute;
+		 z-index: -1;   
+	  }
+	  
+	  
+	  div.transparent::after{
+		 opacity: 0.2 !important;
+	  }
+	  div.black::after{
+		 background: url("${static:}images/gifttemplates/thumbs/width/800/${selected/templatefile}?negate=true") !important;
+	  }
+	  
+	  
+   </style>
+<body>
+
+	<div class="container main" style="height: 1300px">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	<div class="span-24 last "><strong>${selected/product/title}</strong></div>
+   
+   <div class="row">
+   <div class="col-md-3">
+	  <!--<p><a href="#" class="button" id="new_column">Ny kolonne</a></p>
+	  <p><a href="#" class="button" id="remove_column">Slett kolonne</a></p>-->
+	  <div class="row">
+		 <form id="order_ukeplan">
+		 
+		 <div class="col-md-12 col-xs-6">
+			<div class="functionbox">
+			   <div class="header" i18n:translate="">Layout:</div>
+			   <!--Velg bakgrunn -->
+			   <tal:block metal:use-macro="./common.html/layout-options" />
+			</div>
+		 </div>
+		 
+		 <!-- text options-->
+		 <div class="imagelayout col-md-12 col-xs-6">
+			<div class="functionbox">
+			   <div class="header"><span i18n:translate="">Text</span>/<span i18n:translate="">Grid</span></div>
+			   <div class="body">
+				  <input type="checkbox" name="names" value="names" id="namesoption"/><label for="namesoption" i18n:translate="">Name over each column:</label>
+				  <div class="textchoices prehide">
+					 <label for="color" i18n:translate="">Select Color for text:</label><br/>
+					 <select name="text-color" id="text-color" style="background-color: #812990;color: white;">
+						<tal:block metal:use-macro="./common.html/color-options" />
+					 </select>
+					 <br/>
+					 <tal:block metal:use-macro="./common.html/font-options" />
+					 <hr/>
+				  </div>
+				  
+				  <label for="day-color" i18n:translate="">Select Color for dates:</label>
+				  <select name="day-color" id="day-color" style="background-color: #812990;color: white;">
+					   <tal:block metal:use-macro="./common.html/color-options" />
+				  </select>
+			   </div>
+   
+			   <!--gridoptions -->
+				  <div class="body">
+					 <label for="color" i18n:translate="">Choose Color grid:</label>
+					 <select name="color" id="color" style="background-color: #812990;color: white;">
+					   <tal:block metal:use-macro="./common.html/color-options" />
+					 </select>
+			   
+					 
+					 <input type="hidden" name="day-color-background" id="day-color-background" value="${ukeplantemplates/1/backgroundcolor}" />
+				  </div>
+			   </div>
+		 </div>
+		 
+		 
+		 <!-- cart options -->
+		 <div class="imagelayout col-md-12 col-xs-12">
+			<tal:block metal:use-macro="./common.html/addto-cart-options" />
+		 </div>
+	     
+		 <input type="hidden" value="${selected/product/id}" name="productid" id="productid" />
+	     <input type="hidden" value="${selected/productoptionid}" name="productoptionid" id="productoptionid" />
+	  </form>
+	
+	</div>
+	</div>
+
+	
+	<div class="col-md-9" >
+   	  <div class="editorbox">
+   	     <div class="editorcontainer">
+   	        <div class="imageandtextplaceholder">
+   	              <div class="imagecontainer">
+   	                 <div class="imageplaceholder center lastholder"></div>
+   	              </div>
+   	           <div class="namescontainer"/>
+   	        </div>
+   	        <div class="textplaceholder">
+                  
+   	        </div>
+   	        <div class="gridplaceholder">
+   	        <div>
+   	        <TABLE class="grid current-grid" height="500px">
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	              	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	              	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	              	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	           <tr>
+   	              <td>&nbsp;</td>
+   	           </tr>
+   	        
+   	        </TABLE>
+   	        
+   	        </div>
+   	        </div>
+   	     </div>
+   	     
+   	  </div>
+   	
+	</div>
+
+   
+   
+   
+   </div>
+	</div>
+   <tal:block metal:use-macro="./common.html/imagecropbox" />
+   <!--Help files -->
+   <tal:block metal:use-macro="./common.html/helpmodals" />
+   
+   <script type="text/javascript" src="/js/editor.js?${version}"></script>
+   <script src="/js/jqupload/js/vendor/jquery.ui.widget.js"></script>
+   <script src="/js/jqupload/js/jquery.iframe-transport.js"></script>
+   <script src="/js/jqupload/js/jquery.fileupload.js"></script>
+
+<script type="text/javascript">
+    var portal = "${portal}";
+   var selectedcropbox = '';
+   var loader = '<img src="${static:gfx/gui/ajax-loader.gif}" class="loader" />';
+   var imagePickerLoaded = false;
+   var editorcontainer_width = 800;
+   var imagelayout = 'each';
+   var numberofcolumns = 4;
+   var imagefield_each = ${ukeplantemplates/1/imagefield_height};
+   var textimageheight = 20;
+   var clipartcolumn = false;
+   var imageholderwidth = 0;
+   var gridholder = 0;
+   var bottommargin = 877;
+   var backgroundcolor = '#FFFFFF';
+   var templatefile = '${selected/template/pages/0/fullsize_src}';
+   var numberofdays = 31;
+   var rotate = 0;
+   var gridarray = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
+   var accepttxt = '<tal:block i18n:translate="">Accept</tal:block>';
+   var canceltxt = '<tal:block i18n:translate="">Cancel</tal:block>';
+   var textplaceholder = '';
+   var originalimage = Object();
+   var staticsite = "${static:}";
+   var velgbilde =  "<tal:block i18n:translate="">Choose image</tal:block>";
+   var oppdater =  "<tal:block i18n:translate="">Update</tal:block>";
+   var skrivnytekst = "<tal:block i18n:translate="">Write new text</tal:block>";
+   var toptext = "       "+skrivnytekst+"       ";
+   var margin = 413;
+   
+   malArray = new Object();
+   malArray.mal_id = ${ukeplantemplates/1/id};
+   malArray.mal_width = ${ukeplantemplates/1/mal_width};
+   malArray.mal_height = ${ukeplantemplates/1/mal_height};
+   malArray.imagefield_height = imagefield_each;
+   malArray.imagefield_width = ${ukeplantemplates/1/mal_width} - ( margin * 2 );
+   malArray.imagefield_x = margin;
+   malArray.imagefield_y = margin;
+   malArray.imagefield_space = ${ukeplantemplates/1/imagefield_space};
+   malArray.prodno = ${selected/productoption/prodno};
+   var ratio = malArray.mal_width / editorcontainer_width;
+   
+   var imagefield_one  = ( ( malArray.mal_height - malArray.imagefield_x - 877 )  * 25) / 100;
+   //var gridheight = parseInt((malArray.mal_height - malArray.imagefield_height - ( malArray.imagefield_x * 2 )) / ratio ) - 40;
+   var gridheight = ( (malArray.mal_height - malArray.imagefield_height - malArray.imagefield_x  - 877 ) / ratio );
+   
+   var middagsbestikk = "${static:gfx/portals/ukeplan/clipart/middagsbestikk2.png}";
+   var acceptbutton = "<tal:block i18n:translate="">I accept</tal:block>";
+   var cancelbutton = "<tal:block i18n:translate="">Cancel</tal:block>";
+   var updatetextbutton = "<tal:block i18n:translate="">Update text</tal:block>";
+   
+   
+   
+
+     
+</script>
+	
+	
+</body>
+</html>

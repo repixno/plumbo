@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title"/>
+	<style type="text/css">
+	
+	  ul.cleanlist { padding: 0; margin: 125px 10px 10px 10px; font-size: 10px }
+	  
+	  ul.cleanlist li { list-style-type: none !important; display: block; height: 1.5em; clear: both;}
+	  ul.cleanlist li a.product-title { float: left; margin-top: 5px }
+	  ul.cleanlist li .info { float: right; }
+	  ul.cleanlist a.product-title { font-weight: bold }
+	  ul.cleanlist a.button { padding: 5px !important; margin-top: 2px }
+	  
+	  
+	  div.cards h2 { margin-top: 10px; margin-left: 10px}
+	  div.borderbox { border: 1px solid #dbdbdb}
+	  
+	  
+	  div.card15x15, div.card10x18 { margin: 10px; margin-top: 215px; color :#fff }
+	  div.card15x15 h4, div.card10x18 h4 { font-weight: bold !important; margin-bottom: 2px }
+	  div div.card15x15 { color: #000 }
+	  
+	  div.card10x18 a, div.christmasnew a  { color: #fff; }
+	  div.card10x18 h4 a { font-weight: bold}
+	  div.card15x15 h4 a { color: #000; font-weight: bold}
+	  
+	  /* stupid hack for offer-price */
+	  div span.price br { display: none !important; }
+	  div span.price span.oldprice { display: none !important }
+	  div.christmascards .card10x18 span.newprice { color: #fff !important}
+	  
+	  div.h310 { height: 310px }
+     div.h310 ul { padding-top: 150px }
+	  
+     ul.widecleanlist { margin: 0; padding: 0 }
+     ul.widecleanlist li { list-style-type: none; display: block; padding-top: 5px; clear: both; height: 15px; }
+     ul.widecleanlist li a.product-title { display: block; float: left; font-weight: bold; padding-top: 3px}
+     ul.widecleanlist li a.more-info { font-size: 10px }
+     ul.widecleanlist li span.info { display: block; float: right; text-align: right;}
+     
+     .colborder {
+         padding-right: 14px;
+         margin-right: 6px;
+         border-right: 1px solid #EEE;
+      }
+     
+     
+     .rotatormenu{
+         margin-left: 2px;
+         min-width: 60px;
+         overflow: visible;
+         border: none;
+         background-color: #000;
+         display: inline-block;
+         padding: 5px 10px 6px 10px;
+         color: white;
+         text-decoration: none;
+         font-weight: bold;
+         line-height: 1;
+         border-radius: 10px;
+         -moz-border-radius: 10px;
+         -webkit-border-radius: 10px;
+         box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+         -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+         -moz-box-shadow: 0 0px 0px rgba(0,0,0,0);
+         text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+         border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+         position: relative;
+         cursor: pointer;
+         background: #222;
+     }
+     .rotatormenu:hover{
+         background: #383838;
+     }
+	  .selected-button{
+        background-color: #808080;
+	  }
+	  
+	  #playbutton{
+
+	  }
+	  
+	  .playbutton{
+	     background: #000 url("${static:}gfx/icons/playknapp.png") repeat-x;
+	  }
+	  .stopbutton{
+	     background: #000 url("${static:}gfx/icons/stoppknapp.png") repeat-x;
+	  }
+	  
+	</style>
+</head>
+
+<!-- define sections -->
+
+<tal:block define:section="top, Topp (products + article)" /> <!-- bakgrunnsbilde i cms, + artikkel + proukt -->
+<tal:block define:section="priceexample, Price example" /> <!-- bakgrunnsbilde i cms, + artikkel + proukt -->
+
+<tal:block define:section="christmas, Christmas" />
+<tal:block define:section="valentine, Valentine" />
+
+<tal:block define:section="baby, Baptism and birth" />
+<tal:block define:section="birthday, Birthday" />
+<tal:block define:section="invitation, Invitation" />
+<tal:block define:section="takkekort, Takkekort" />
+<tal:block define:section="wedding, Wedding" />
+<tal:block define:section="learning, Learning article" />
+
+<tal:block define:section="folded, Folded cards" />
+<tal:block define:section="collage, Collage cards" />
+<tal:block define:section="postcard, Postcards" />
+<tal:block define:section="6-siders, 6-siders kort" />
+
+<!-- 6 kategorier med 2-3 kort i hver, automatisk? -->
+
+<tal:block define:section="news-info, News and info" /> <!-- bakgrunnsbilde i cms, + artikkel + proukt -->
+
+<body>
+
+<div class="container">
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	<tal:block metal:use-macro="${templateroot}/reedfoto/cms/cms.html/top-navigation" />
+	<div class="span-4">
+		<ul metal:use-macro="${templateroot}/reedfoto/cms/cms.html/menu-current" />
+	</div>
+	
+	<tal:block metal:define-macro="listfakeproducts">
+		<ul tal:condition="exists:sections/top" class="cleanlist">
+			<tal:block tal:repeat="item sections/top">
+				<tal:block metal:use-macro="card-list-item" />
+			</tal:block>
+		</ul>
+	</tal:block>
+	<tal:block metal:define-macro="card-list-item">
+		<li>
+			<a href="${item/url}" class="hide-link product-title" tal:condition="item/shorttitle" title="${item/title}">${item/shorttitle}</a> 
+			<a href="${item/url}" class="hide-link product-title" tal:condition="not:item/shorttitle">${item/title}</a> 
+			<span class="info">
+				<tal:block metal:use-macro="${templateroot}/reedfoto/cms/cms.html/show-price" />
+				<tal:block metal:use-macro="${templateroot}/reedfoto/cms/cms.html/buy-product-link" />
+			</span>
+		</li>
+</tal:block>
+
+	<div class="span-20 cards last product-category">
+		<div class="content" style="position: relative; height: 199px">
+              <tal:block tal:repeat="menuitem menu:664993f2-f835-41c1-a27c-1e70480ee128,1,1">
+                  <div id="${menuitem/identifier}" class="article span-20 last">
+                        <img title="${menuitem/title}" src="${static:}images/menu/${menuitem/image}" />
+                  </div>
+            </tal:block>
+		</div>
+    </div>
+    
+    <div class="span-20 last prepend-top">
+             <div class="span-6 colborder">
+               <div class="h310" style="background: #fff url(http://c.static.eurofoto.no/cms/images/enkle_kort_thumb_2.png) no-repeat top center">
+               <h2 i18n:translate="">Collage cards</h2>
+               <ul tal:condition="exists:sections/collage" class="widecleanlist">
+               <tal:block tal:repeat="item sections/collage">
+                  <tal:block metal:use-macro="${templateroot}/reedfoto/cms/cms.html/wide-clean-product-list-as-item" />
+               </tal:block>
+               </ul>
+               </div>
+            </div>
+            
+            <div class="span-7 colborder">
+               <div class="h310" style="background: #fff url(http://a.static.eurofoto.no/cms/images/doble_kort_thumb_2.png) no-repeat top center">
+               <h2 i18n:translate="">Folded cards</h2>
+               <ul tal:condition="exists:sections/folded" class="widecleanlist">
+               <tal:block tal:repeat="item sections/folded">
+                  <tal:block metal:use-macro="${templateroot}/reedfoto/cms/cms.html/wide-clean-product-list-as-item" />
+               </tal:block>
+               </ul>
+               </div>
+            </div>
+           <div class="span-6 last">
+               <div class="h310" style="background: #fff url(http://c.static.eurofoto.no/cms/images/konfirmasjon_postkort.jpg) no-repeat top center">
+               <h2 i18n:translate="">Postcards</h2>
+               <ul tal:condition="exists:sections/postcard" class="widecleanlist">
+               <tal:block tal:repeat="item sections/postcard">
+                  <tal:block metal:use-macro="${templateroot}/reedfoto/cms/cms.html/wide-clean-product-list-as-item" />
+               </tal:block>
+               </ul>
+               </div>
+            </div>
+		   
+		   <div class="span-20 last prepend-top">
+			<hr/>
+				<div class="span-13" style="padding-right: 26px; border-right: 1px solid #EEE;"><img src="http://d.static.eurofoto.no/cms/images/6siderskort2.jpg" alt="6-siders fotokort"/></div>
+				<div class="span-6 last prepend-top">
+					<!--<h2 i18n:translate="">6-siders fotokort</h2>-->
+					<ul tal:condition="exists:sections/6-siders" class="widecleanlist">
+					<tal:block tal:repeat="item sections/6-siders">
+					   <tal:block metal:use-macro="${templateroot}/reedfoto/cms/cms.html/wide-clean-product-list-as-item" />
+					</tal:block>
+					</ul>
+				</div>
+				
+		   </div>
+    
+    
+    <div class="span-20 last">
+      <div tal:content="structure cms:body:8dc68e4d-58bd-4fa5-9e98-c9f9308a1a54" />
+    
+    
+    </div>
+    </div>
+    
+</div>  
+
+<SCRIPT type="text/javascript" src="${static:}js/jquery.rotator.js"  />
+
+<SCRIPT type="text/javascript">
+
+$(document).ready( function(){
+   
+   $('.content').tilrotate();
+   
+});
+
+
+
+</SCRIPT>
+</body>
+</html>

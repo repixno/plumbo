@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" />
+	
+	<style type="text/css">
+		.ingress {
+			font-size: 1.1em;
+			color: #333;
+		}
+	</style>
+	<tal:block tal:condition="session/isadmin">
+		<style type="text/css">
+		.cms-article-title:hover, .cms-article-ingress:hover, .cms-article-body:hover {
+			background-color: #eee !important;
+		}
+        
+        strong{
+            text-transform: uppercase;
+        }
+		</style>
+	</tal:block>
+</head>
+
+
+<body>
+	<div class="container">
+
+	<tal:block metal:use-macro="../../${templates}/common.html/top" />
+
+	<div class="span-24">
+        
+    <h1>Personvern</h1>
+		<p>
+	Du har blitt sendt til denne nettsiden fordi det blir brukt informasjonskapsler, også kjent som cookies, på <tal:block tal:content="request/hostname">. Dette er en generell info om hva slags informasjonskapsler ${request/hostname} bruker, hvilke opplysninger som blir behandlet, formålet med behandlingen og hvem som behandler opplysningene. Se også generell info om informasjonskapsler nederst på denne siden.</tal:block></p>
+<p>
+	<strong>HVA SLAGS INFORMASJONSKAPSLER SOM BRUKES PÅ ${request/hostname}:</strong><br />
+	Informasjonskapsler på ${request/hostname}, brukes til å samle informasjon anonymt.<br />
+	Informasjonskapslene som eksisterer på ${request/hostname}, brukes til, dersom ikke annet er nevnt, innsamling av brukerstatistikk og språkinnstillinger på siden.</p>
+<p>
+	<strong>INFORMASJONSKAPSLER SOM EKSISTERER PÅ ${request/hostname}:</strong></p>
+<p>
+	<strong>Google Analytics:</strong><br />
+	Et svært vanlig analyseverktøy for å anlysere brukeroppførsel på et nettsted, er Google Analytics. Dette er en gratistjeneste fra Google som gjør det mulig se antall besøkende, sidevisninger, trafikkilder, lengde på besøk, geografisk lokasjon og mye mer. For å lagre informasjon om de besøkende, benytter Google Analytics et javascript, som igjen lager 5 forskjellige informasjonskapsler. Disse informasjonskapslene benyttes til å lagre bevegelsesmønsteret på et nettsted og hver enkelt bevegelse. Disse informasjonskapslene er:</p>
+<p>
+	__utma: Lagres i 2 år fra siste besøk.<br />
+	__utmb: Lagres i 30 min fra siste besøk.<br />
+	__utmc: Lagres til nettleseren lukkes.<br />
+	__utmz: Lagres i 6 måneder fra siste besøk.<br />
+	__utmv: Lagres i 2 år fra siste besøk.<br />
+	_ga: Lagres i 2 år fra siste besøk.</p>
+<p>
+	<br />
+	<strong>Innlogging:</strong><br />
+	Dersom du logger inn på ${request/hostname}, vil en informasjonskapsel bli lagret i din nettleser. Dette for at du skal ha tilgang til den informasjonen du skal mens du er innlogget. Denne informasjonskapselen er individuelt knyttet til deg og det er mulig at din aktivitet kan bli sporet. I såfall er dette egne opplysninger som du får når du oppretter en brukerkonto på ${request/hostname}.</p>
+<p>
+	<strong>HVILKE OPPLYSNINGER SOM BLIR BEHANDLET:</strong><br />
+	På ${request/hostname}, blir opplysningene behandlet etter de metoder som er nevnt over her.</p>
+<p>
+	<strong>FORMÅL MED BEHANDLINGEN:</strong><br />
+	Formålet, med unntak av innlogget brukere, er ikke å identifisere deg som bruker, men å lage en bedre brukeropplevelse for alle brukerene.</p>
+<p>
+	<br />
+	<strong>HVEM SOM BEHANDLER OPPLYSNINGENE:</strong><br />
+	Informasjonskapsler i seg selv, har ingen verdi, da de lagrer kun et tilfeldig identifikasjonsnummer. Det er først når du knytter denne informasjonen opp mot en database, at informasjonen kan behandles. Eiere av ${request/hostname}, bekrefter at denne informasjonen behandles strengt og den kun brukes til det formål som er ment for innsamling av data. Identifikasjon av brukere, gjøres bare i de tilfeller det er strengt nødvendig. Dette kan være eksempelvis i forbindelse med kjøp av varer og tjenester eller andre situasjoner som krever at brukeren må være innlogget.</p>
+<p>
+	<strong>GENERELL INFORMASJON OM INFOKAPSLER / COOKIES:</strong><br />
+	Informasjonskapsler er små filer som lagres av din nettleser på din maskin. Dersom du åpner en annen nettleser på maskinen din, vil ikke de samme informasjonskapslene bli overført dit. En informasjonskapsel inneholder som regel fire parametere:</p>
+<p>
+	<strong>Navn på informasjonskapsel</strong><br />
+	Unik id til informasjonskapsel (denne er knyttet til din nettleser)<br />
+	Hvor lenge informasjonskapselen skal lagres på din maskin<br />
+	Domene som informasjonskapselen gjelder for</p>
+<p>
+	På grunn av siste punktet her, er det svært vanskelig å misbruke en informasjonskapsel. En informasjonskapsel i seg selv har liten verdi før den blir knyttet opp til et database. Derfor vil den ha lav eller ingen verdi dersom noen prøver å flytte den over til et annet domene, fordi man ikke har tilgang til databasen.</p>
+<p>
+	<strong>DU KAN SKRU AV INFORMASJONSKAPSLER:</strong><br />
+	Det er fullt mulig å skru av informasjonskapsler i din nettleser. Men hver da klar over at svært mange nettsider ikke vil fungere. Du vil for eksempel ikke ha mulighet til å handle i nettbutikker, logge deg på sosiale medier som Facebook, Twitter, Google+ osv.</p>
+<p>
+	<strong>LÆR MER:</strong><br />
+	Post- og Teletilsynet er ansvarlig for å håndheve cookieparagrafen.<a href="http://www.npt.no/aktuelt/nyheter/bedre-forbrukervern-p%C3%A5-nettet-fra-1.juli"> Her kan du lese mer om Post- og Teletilsynets uttalelser i forbindelse med ekomloven</a>.<br />
+	Datatilsynet har uttalt selv at de er i mot løsningen om at nettsteder nå må opplyse om bruken av informasjonskapsler. Dette skyldes blant annet fordi det er upraktisk og fordi det er vanskelig å håndtere. <a href="http://datatilsynet.no/Nyheter/2013/Bruk-av-cookies-krev-samtykke/">Du kan lese mer om Datatilsynets egen uttalelse om "cookieparagrafen" som trer i kraft 1. juli 2013.</a></p>
+
+	
+	</div>
+	<div class="span-8 last"></div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>	
+</div>
+<script type="text/javascript">
+$(document).ready( function() {
+	$('a.fancybox').fancybox();
+});
+</script>
+</body>
+</html>

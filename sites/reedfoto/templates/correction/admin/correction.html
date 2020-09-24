@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<div metal:use-macro="../common.html/head" />
+</head>
+<body>
+<div metal:use-macro="../common.html/header" />
+
+<div id="content" class="container">
+
+   <div class="span-15">
+      <div class="span-20">
+         <h1>${correctiondata/title} - <span i18n:translate="correctiondata/state"></span></h1>
+      </div>
+
+      <h2 i18n:translate="">Pages</h2>
+
+      <div id="pagelist">
+      <tal:block tal:condition="exists: pages" tal:repeat="page pages">
+         <h2 tal:attributes="title page/id" tal:content="page/title | default">Title</h2>
+         <!--a href="#" class="delete" i18n:translate="">Delete</a-->
+         <img src="/images/pages/${page/id}/small.jpg" height="90" alt="${page/title}" />
+         <ul>
+            <li tal:condition="exists: page/comments" tal:repeat="comment page/comments">
+               <p tal:condition="exists: comment/comment" tal:content="comment/comment | default">
+               Comment
+               </p>
+               <p tal:condition="exists: comment/filename">
+               <a href="/comments/file/${comment/id}/${comment/filename}" target="_blank">${comment/filename}</a> (${comment/filesizekb}kb)
+               </p>
+               
+            </li>
+         </ul>
+      </tal:block>
+      </div>
+
+      <h2 i18n:translate="">Upload new file</h2>
+
+      <form method="post" action="/admin/upload" enctype="multipart/form-data">
+         <label for="uploadfile" i18n:translate="">File</label>
+         <input type="file" name="uploadfile" id="uploadfile" />
+         <input type="hidden" name="correctionid" value="${correctiondata/id}" />
+         <button type="submit" i18n:translate="">Upload file</button>
+      </form>
+      
+      <br/>
+      <p>
+      <a href="/admin/user/${correctiondata/userid}" i18n:translate="" class="ss_sprite ss_arrow_left">Back</a>
+      </p>
+
+		<script type="text/javascript">
+
+		//<![CDATA[
+
+		$(function() {
+
+			$('#pagelist li .delete').click( function() {
+
+			   var self = $(this);
+			   $.post('/api/admin/page/remove',
+			      {
+				      id: $(this).parent().attr( 'title' )
+				   },
+				   function( data ) {
+
+				      if ( data.result ) {
+
+				         self.parent().remove();
+
+				      }
+
+				   },
+				   'json'
+				);
+				return false;
+
+			});
+
+	   });
+
+		//]]>
+
+		</script>
+
+   </div>
+
+</div>
+
+
+<div metal:use-macro="../common.html/footer" />
+
+</body>
+</html>

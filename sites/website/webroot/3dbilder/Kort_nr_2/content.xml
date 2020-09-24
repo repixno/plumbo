@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence maxHeight="2742" maxWidth="4160" name="a_">
+  <img seq="0" ext="jpg" name="a_0_0">
+    <scales>
+      <scale width="4160" cols="5" tile_width="832" tile_height="914" height="2742" rows="3" value="100.0" name="100.0%"/>
+      <scale width="2080" cols="3" tile_width="694" tile_height="686" height="1371" rows="2" value="50.0" name="50.0%"/>
+      <scale width="1024" cols="1" tile_width="1024" tile_height="674" height="674" rows="1" value="24.6" name="24.6%"/>
+      <scale width="768" cols="1" tile_width="768" tile_height="506" height="506" rows="1" value="18.5" name="18.5%"/>
+      <scale width="512" cols="1" tile_width="512" tile_height="337" height="337" rows="1" value="12.3" name="12.3%"/>
+      <scale width="256" cols="1" tile_width="256" tile_height="168" height="168" rows="1" value="6.2" name="6.2%"/>
+      <scale width="128" cols="1" tile_width="128" tile_height="84" height="84" rows="1" value="3.1" name="3.1%"/>
+    </scales>
+  </img>
+  <img seq="1" ext="jpg" name="a_0_1"/>
+  <img seq="2" ext="jpg" name="a_0_2"/>
+  <img seq="3" ext="jpg" name="a_0_3"/>
+  <img seq="4" ext="jpg" name="a_0_4"/>
+  <img seq="5" ext="jpg" name="a_0_5"/>
+  <img seq="6" ext="jpg" name="a_0_6"/>
+  <img seq="7" ext="jpg" name="a_0_7"/>
+  <img seq="8" ext="jpg" name="a_0_8"/>
+  <img seq="9" ext="jpg" name="a_0_9"/>
+  <img seq="10" ext="jpg" name="a_0_10"/>
+  <img seq="11" ext="jpg" name="a_0_11"/>
+  <img seq="12" ext="jpg" name="a_0_12"/>
+  <img seq="13" ext="jpg" name="a_0_13"/>
+  <img seq="14" ext="jpg" name="a_0_14"/>
+  <img seq="15" ext="jpg" name="a_0_15"/>
+  <img seq="16" ext="jpg" name="a_0_16"/>
+  <img seq="17" ext="jpg" name="a_0_17"/>
+  <img seq="18" ext="jpg" name="a_0_18"/>
+  <img seq="19" ext="jpg" name="a_0_19"/>
+  <img seq="20" ext="jpg" name="a_0_20"/>
+  <img seq="21" ext="jpg" name="a_0_21"/>
+  <img seq="22" ext="jpg" name="a_0_22"/>
+  <img seq="23" ext="jpg" name="a_0_23"/>
+  <img seq="24" ext="jpg" name="a_0_24"/>
+  <img seq="25" ext="jpg" name="a_0_25"/>
+  <img seq="26" ext="jpg" name="a_0_26"/>
+  <img seq="27" ext="jpg" name="a_0_27"/>
+  <img seq="28" ext="jpg" name="a_0_28"/>
+  <img seq="29" ext="jpg" name="a_0_29"/>
+  <img seq="30" ext="jpg" name="a_0_30"/>
+  <img seq="31" ext="jpg" name="a_0_31"/>
+  <img seq="32" ext="jpg" name="a_0_32"/>
+  <img seq="33" ext="jpg" name="a_0_33"/>
+  <img seq="34" ext="jpg" name="a_0_34"/>
+  <description></description>
+</sequence>

@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Login</tal:block>
+</head>
+
+
+<body>
+<div metal:use-macro="../../${templates}/common.html/top" />
+<div class="container">
+
+	
+
+	<div class="prepend-2 span-14 colborder prepend-top">
+
+		<form action="/login/" method="post" id="login">
+			<div>
+				<h2 i18n:translate="">Log in</h2>
+					
+					<div class="span-14 last">
+					
+						<div class="error" tal:condition="exists:error">${errorreason}</div>
+					
+						<div class="span-8">
+							<label for="email" i18n:translate="">Email</label><br />
+							<input type="text" class="title lowercase span-8" name="email" value="${email}"/>
+						</div>
+
+						<div class="span-6 last">
+							&nbsp;
+						</div>
+					</div>
+					
+					<div class="span-14 last">
+						<div class="span-8">
+							<label for="pasword" i18n:translate="">Password</label><br />
+							<input type="password" class="title span-8" name="password" value="${password}" style="margin-bottom:0"/>
+							<p class="small right">
+								<a href="/login/forgot-password/" i18n:translate="">Forgot password?</a>
+							</p>
+						</div>
+						<div class="span-6 last">
+							&nbsp;
+						</div>
+					</div>
+					
+					<div class="span-6">
+						<input type="checkbox" id="autologin" name="autologin" /> 
+						<label for="autologin" i18n:translate="">Remember me next time</label>
+					</div>
+		
+					<div class="span-4 last">
+						<button type="submit" name="Login" class="button blue large">
+							<tal:block i18n:translate="" >Log in</tal:block>
+						</button>
+					</div>
+					
+					<input type="hidden" name="referer" tal:attributes="value referer" />
+			</div>
+		</form>
+	</div>
+	<div class="center span-6 last prepend-top" style="padding-top: 90px">
+		<h3>
+			<tal:block i18n:translate="">Not a user?</tal:block>
+		</h3>
+		<p>
+			<a href="/register/" i18n:translate="" class="button large call-to-action">Register now</a>
+		</p>
+	</div>
+</div>
+
+
+<div metal:use-macro="../../${templates}/common.html/footer" />
+
+
+<script type="text/javascript">
+var pleaseProvideEmail = "<tal:block i18n:translate="">You need to provide your email address, so you can log in.</tal:block>";
+var pleaseProvidePassword = "<tal:block i18n:translate="">Please enter password</tal:block>";
+	$(document).ready(function(){
+		
+		$('form#login').validate({
+			errorClass: "inputError",
+			errorPlacement: function(error, element) {
+			error.appendTo( element.parent("div").next("div") );
+		},
+		rules: {
+			'email': {
+				required: true,
+				email: true
+			},
+			'password': {
+				required: true
+			}
+		},
+		messages: {
+			'email': {
+				required: "<tal:block i18n:translate="">Please enter an email address.</tal:block>",
+				email: "<tal:block i18n:translate="">Please provide a valid email address.</tal:block>"
+			},
+			'newEmail': {
+				required: pleaseProvideEmail,
+				email: "<tal:block i18n:translate="">Please provide a valid email address.</tal:block>"
+			},
+			'password': {
+				required: pleaseProvidePassword
+			}
+		}
+	});
+
+   });
+</script>
+
+<script type="text/javascript" tal:condition="not:exists:error">
+   $('input:first', '#login').focus();
+</script>
+<script type="text/javascript" tal:condition="exists:error">
+   $('input[name=password]', '#login').focus();
+</script>
+
+</body>
+</html>

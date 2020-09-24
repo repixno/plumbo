@@ -1,0 +1,584 @@
+/*!
+ * Start Bootstrap - Modern Business HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Global Styles */
+
+
+
+html,
+body {
+   /* background: #C8F0FC url(http://www.zingerbug.com/Backgrounds/background_images/mini_white_snowflakes_on_light_blue.jpg);
+  */
+   background-color: #e0eff1;
+    height: 100%;
+    /*font-family: quicksandbold;*/
+	font-family: 'Comfortaa', cursive;
+    font-size: 16px;
+    padding-bottom: 40px;
+    color: #333;
+}
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+a {
+    color: #258EC1;
+    text-decoration: none;
+}
+
+
+select{
+	font-size: 16px;
+    font-weight: bold;
+}
+#chat{
+	z-index: 1000;
+	background:transparent url(//static.repix.no/gfx/merkelapp/chat_offline.png) no-repeat scroll -2px 0px;
+	width: 35px;
+	height: 150px;
+	right:110px;
+	position:fixed;
+	right: 0px;
+	top: 200px;
+}
+}
+.row-height {
+  display: table;
+  table-layout: fixed;
+  height: 100%;
+  width: 100%;
+}
+.col-height {
+  display: table-cell;
+  float: none;
+  height: 100%;
+}
+.col-top {
+  vertical-align: top;
+}
+.col-middle {
+  vertical-align: middle;
+}
+.col-bottom {
+  vertical-align: bottom;
+}
+
+.bottom{
+	position: relative;
+	bottom: 5px;
+}
+
+.content, .footer{
+	background: #fff;
+	padding: 0 15px;
+	border-radius: 4px;
+	border: solid 1px #ccc;
+	box-shadow: 0 1px 1px rgba(0,0,0,.05);		
+
+}
+
+.content{
+	margin-top: 90px;
+	min-height: 500px;
+}
+
+.footer{
+	margin-top: 15px;
+	background: #ade3ff;
+}
+.footer a{
+	color: #333;
+}
+.footer ul{
+	list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+.footer li{
+	padding: 0 0 5px 15px;
+}
+
+
+.clipartselect{
+	background-color: #ade3ff;
+	padding: 5px 0 0 10px;
+	border-radius: 4px;
+	margin-bottom: 5px;
+}
+.kassecontainer hr{
+	margin: 0px;
+}
+.productline{
+	padding: 5px 0px 0px 15px;
+}
+.panel-heading{
+	padding: 5px 10px;
+}
+.panel-heading span{
+	font-size: 0.8em;
+}
+.panel-heading h4{
+	font-family: Kalam;
+	font-size: 20px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+.panel-body{
+	padding: 0px;
+}
+.panel-body img{
+	width: 100%;
+	height: auto;
+}
+.panel-footer{
+	padding: 2px 15px;
+	background: #fff;
+}
+.footer{
+    padding: 15px 0;
+}
+.top15{
+    margin-top: 15px;
+}
+
+.form-control{
+	font-size: 14px;
+}
+
+.well {
+	padding: 10px 0px 0px 0px;
+}
+
+.imagecontainer{
+	position: relative;
+}
+.imagecontainer img{
+	bottom: 0;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.cp-popover-container{
+	width: 300px;
+}
+
+
+.form-control{
+	color: #333;
+	border-color: #777;
+	border-radius: 2px;
+}
+.alignment .glyphicon{
+	color: #000;
+}
+
+.loadercontainer{ position: absolute; }
+.loadingInfo{ position: absolute; }
+
+#loader-overlay {position:absolute;background-color:#333;padding:auto auto;margin:0 !important;z-index:10000;}
+.loadingInfo {text-align:center;margin-top:300px; position: absolute;z-index: 1000000 }
+.loadingInfo {color:#fff;}
+
+/*** custom checkboxes ***/
+input[type=radio].with-font,
+input[type=checkbox].with-font {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+    
+input[type=radio].with-font ~ label:before,
+input[type=checkbox].with-font ~ label:before {
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f1db";
+    letter-spacing: 10px;
+    font-size: 1.2em;
+    color: #535353;
+    width: 1.4em;
+}
+
+input[type=radio].with-font:checked ~ label:before,
+input[type=checkbox].with-font:checked ~ label:before  {
+    content: "\f00c";
+    font-size: 1.2em;
+    color: darkgreen;
+    letter-spacing: 5px;
+}
+input[type=checkbox].with-font ~ label:before {        
+    content: "\f096";
+}
+input[type=checkbox].with-font:checked ~ label:before {
+    content: "\f046";        
+    color: darkgreen;
+}
+input[type=radio].with-font:focus ~ label:before,
+input[type=checkbox].with-font:focus ~ label:before,
+input[type=radio].with-font:focus ~ label,
+input[type=checkbox].with-font:focus ~ label
+{                
+    color: green;
+}
+
+/*** custom checkboxes ***/
+
+input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+}
+
+input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
+input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
+
+input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
+input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow space for check mark */
+/* CUSTOM BUTTONS */
+
+.btn{
+	background-color: #ADE3FF;
+}
+.btn:hover{
+	background-color: #d5f3f5;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #2AB7FC;
+    border-color: #ccc;
+}
+.btn-primary:hover {
+  background-color: #00ABFF;
+}
+
+.spinner {
+  width: 60px;
+}
+.spinner input {
+  text-align: right;
+}
+.input-group-btn-vertical {
+  position: relative;
+  white-space: nowrap;
+  width: 1%;
+  vertical-align: middle;
+  display: table-cell;
+}
+.input-group-btn-vertical > .btn {
+  display: block;
+  float: none;
+  width: 100%;
+  max-width: 100%;
+  padding: 8px;
+  margin-left: -1px;
+  position: relative;
+  border-radius: 0;
+}
+.input-group-btn-vertical > .btn:first-child {
+  border-top-right-radius: 4px;
+}
+.input-group-btn-vertical > .btn:last-child {
+  margin-top: -2px;
+  border-bottom-right-radius: 4px;
+}
+.input-group-btn-vertical i{
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    background-color: #2AB7FC;
+}
+.nav>li>a>div{
+	font-size: 14px;
+	color: #333;
+	font-weight: 300;
+}
+
+.navbar-nav a{
+    font-family: Kalam;
+	font-size: 20px;
+}
+
+.navbar-dm{
+    background: #fff;
+    border: solid 1px #ccc;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.icon-bar {
+    background-color: #ccc;
+}
+
+.navbar-brand{
+    padding: 0px;
+}
+.navbar-brand img{
+    height: 50px;
+    margin-left: 2px;
+}
+
+.navbar-toggle {
+    border: 1px solid #ccc;
+}
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+}
+
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper > .container {
+  padding-right: 0;
+  padding-left: 0;
+}
+.navbar-wrapper .navbar {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.navbar-wrapper .navbar .container {
+  width: auto;
+}
+
+
+.nav-tabs{
+    background: #ade3ff;
+    border-radius: 4px;
+    
+}
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+.carousel {
+    height: 50%;
+}
+
+.carousel .item,
+.carousel .item.active,
+.carousel .carousel-inner {
+    height: 100%;
+}
+
+.carousel .fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.marketing h2 {
+  font-weight: normal;
+}
+.marketing .col-lg-4 p {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+
+
+/*shopping cart*/
+
+.deliverymethod{
+	
+	background: #F5F5F5;
+	margin: 5px;
+}
+.selected{
+	border: solid 1px #26AECA;
+	box-shadow: 0px 0px 5px #ccc;
+	background: #fff;
+}
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+
+
+@media (min-width: 1025px) {
+.navbar-wrapper {
+    margin-top: 20px;
+  }
+  .navbar-wrapper .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .navbar-wrapper .navbar {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+  .carousel{
+	    min-height: 320px;
+  }
+}
+
+
+@media (min-width: 768px){
+	.navbar-nav>li>a {
+		text-align: center;
+		padding-bottom: 2px;
+		padding-top: 8px;
+	}
+	
+	.row-md-height {
+		display: table;
+		table-layout: fixed;
+		height: 100%;
+		width: 100%;
+	  }
+	  .col-md-height {
+		display: table-cell;
+		float: none;
+		height: 100%;
+	  }
+	  .col-md-top {
+		vertical-align: top;
+	  }
+	  .col-md-middle {
+		vertical-align: middle;
+	  }
+	  .col-md-bottom {
+		vertical-align: bottom;
+	  }
+	
+}
+
+@media (min-width: 992px) {
+  .featurette-heading {
+    margin-top: 120px;
+  }
+  .kassecontainer{
+	margin: 15px;
+	padding: 5px;
+  }
+}
+
+
+
+
+@media ( max-width: 1025px ){
+    .navbar-wrapper .navbar {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+    .navbar-wrapper .container{
+        width: 100%;
+    }
+    .nav>li>a {
+        position: relative;
+        display: block;
+        padding: 10px 10px;
+    }
+    .content {
+        margin-top: 60px;
+    }
+    .carousel {
+        margin-top: 49px;
+    }
+    
+    
+}
+
+@media (max-width: 815px){
+	.nav>li>a {
+		padding: 10px 5px;
+	}
+}
+
+
+@media (max-width: 768px){
+	.nav>li>a {
+		padding: 5px 10px 0px 10px;
+		text-align: center;
+	}
+	
+	.nav>li{
+		border-bottom: solid 1px #EFEDED;
+	}
+	
+	.nav{
+		border-top: solid 1px #EFEDED;
+	}
+	
+	body{
+		font-size: 14px;
+	}
+	.form-control {
+		font-size: 14px;
+	}
+	
+    .editorcontainer, .maincontainer {
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    
+    .navbar-dm{
+        border: solid 0px #ccc;
+        box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    }
+	.carousel {
+		height: 30%;
+	}
+	
+	.row-height {
+		display: inline;
+	}
+}

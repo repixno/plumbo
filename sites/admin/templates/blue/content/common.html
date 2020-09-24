@@ -1,0 +1,53 @@
+<div id="sidebar" class="span-4 last" metal:define-macro="content-menu">
+
+	<tal:block metal:use-macro="content-menu-inside" />
+	
+</div>
+
+<div metal:define-macro="content-menu-inside">
+	<h3 i18n:translate="">Products</h3>
+	<ul>
+		<li><a href="/content/products/" i18n:translate="" class="ss_sprite ss_cart ">List products</a></li>
+		<li><a href="/content/products/0" i18n:translate="" class="ss_sprite ss_cart_add">New product</a></li>
+		<li><a href="/content/accessories/" i18n:translate="" class="ss_sprite ss_package ">List Accessories</a></li>
+		<li><a href="/content/accessories/0" i18n:translate="" class="ss_sprite ss_package_add">New Accessory</a></li>
+		<li><a href="/content/defaultmenu" i18n:translate="">Default menu list</a></li>
+	</ul>
+	<h3 i18n:translate="">Articles</h3>
+	<ul>
+		<li><a href="/content/articles/" i18n:translate="" class="ss_sprite ss_page">List articles</a></li>
+		<li><a href="/content/articles/0" i18n:translate="" class="ss_sprite ss_page_add">New article</a></li>
+	</ul>
+	
+	<h3 i18n:translate="">Other</h3>
+	<ul>
+		<li><a href="/content/paymenttypes/" i18n:translate="" class="ss_sprite ss_money">Payment methods</a></li>
+		<li><a href="/content/deliverytypes" i18n:translate="" class="ss_sprite ss_lorry">Delivery methods</a></li>
+	</ul>
+	
+	<h3 i18n:translate="">Media</h3>
+	<ul class="ckeditor">
+		<li><a href="http://admin.eurofoto.no/ckfinder/ckfinder.html?type=Images" i18n:translate="" target="_blank" class="ss_sprite ss_folder_image">Images</a></li>
+		<li><a href="/ckfinder/ckfinder.html?type=Flash" i18n:translate="" target="_blank" class="ss_sprite  ss_page_white_flash">Flash</a></li>
+		<li><a href="/ckfinder/ckfinder.html" i18n:translate="" target="_blank" class="ss_sprite ss_folder_page_white">All files</a></li>
+	</ul>
+
+	<!--<script type="text/javascript">
+	
+		$(document).ready( function() {
+		
+			$('ul.ckeditor li a').click( function() {
+			
+				$('#content').empty();
+			
+				var link = $(this).attr('href');
+				$('#content').prepend('<iframe width="100%" height="100%" src="'+link+'"></iframe>')
+			
+				return false;
+			});
+		
+		});
+	
+	</script>-->
+	
+</div>

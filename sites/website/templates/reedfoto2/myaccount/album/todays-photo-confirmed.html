@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle">${image/title}</tal:block>
+	<meta name="title" content="${image/title}" />
+	<meta name="description" content="${image/description}" />
+	<link rel="image_src" href="${request/systemroot}${image/fullsize}&dx=630&dy=400" />
+	<style type="text/css">
+		#comment {
+			width: 500px;
+			height: 5em;
+		}
+	</style>
+</head>
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+	<div tal:define="global menuitem string:albums" metal:use-macro="../common.html/menu" />
+	<div id="content">
+		
+		<tal:block condition="exists: image">
+			<div class="span-8 append-8 last">
+				<a href="${image/urls/privatealbum}"> <tal:block i18n:translate="">Back to album</tal:block></a>
+			</div>
+			
+			<h2 class="large">
+				<tal:block i18n:translate="">Thank you! Your image is now submited to the contest. </tal:block>
+				<span class="quiet" tal:content="image/title | default" />
+			</h2>
+			
+			<div class="span-16 last">
+			
+			</div>
+			
+			<div class="span-16 last imageconatiner center prepend-top">
+				<!-- the image -->
+				<img tal:attributes="src string: ${image/screensize}" alt="${image/name}" class="bigimage" id="image"/>
+			</div>
+			<hr />
+						
+			<div class="span-16 last hide" tal:content="structure cms:body:075c4071-3630-4dc4-85fd-4be3ec76dd85" />
+			
+			
+		</tal:block>
+		
+		<tal:block condition="not: exists: image">
+			<h2 i18n:translate="">No image here</h2>
+			<p i18n:translate="">Sorry, but here is no image.</p>
+			<p><a href="/myaccount" i18n:translate="">Go back to my photo account</a></p>
+		</tal:block>
+		
+	</div>
+	<div class="span-6 last">
+		<!-- todays photo article -->
+		<div ></div>
+	</div>
+</div>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>
+
+
+
+

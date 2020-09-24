@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+
+<head>
+	<meta name="description" content="Få ordren på livet i Barnehagen eller Sfo, barnehageplan.no" />
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+
+	<style type="text/css">
+	.campaign {
+		height: 320px;
+		width: 270px;
+		position: relative;
+	}
+	.campaign a.button {
+		position: absolute;
+		bottom: 5px;
+		right: 5px;
+	}
+	
+	#campaign h3.ui-accordion-header a {
+		font-weight: normal;
+		font-size: 1.3em;
+	}	
+		
+      #presentation {
+         position: relative;
+         height: 305px;
+         background-color: #fefefe;
+         color: #666;
+         overflow: hidden;
+      }
+
+      #presentation p{
+         color: #666;
+         font-weight: bold;
+         overflow: hidden;
+         display: block; 
+         width:400px; 
+         padding-top: 110px; 
+         padding-left: 0px;  
+         font-size: 1.1em
+      }
+		
+		
+      #presentation #presentation-menu ul {
+         margin: 0;
+         padding: 0;
+         position: relative;
+         top: 15px;
+         left: 20px;
+         width: 178px;
+         -webkit-border-radius: 9px;
+         -moz-border-radius: 9px;
+         border-radius: 9px;
+         -webkit-box-shadow: 1px 1px 5px rgba(20,20,20,0.6);
+         -moz-box-shadow: 1px 1px 5px rgba(20,20,20,0.6);
+         box-shadow: 1px 1px 5px rgba(20,20,20,0.6);
+         background-color: #eee;
+         background-color: rgba(240,240,240, 0.5);
+         z-index: 100;
+         background: #eeeeee; /* old browsers */
+         background: -moz-linear-gradient(top, rgba(252,252,252,0.9) 0%, rgba(210,210,210,0.9) 100%); /* firefox */
+         /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(100%,#D2D2D2)); /* webkit */
+         background: -webkit-gradient(
+            linear, 
+            left top, 
+            left bottom, 
+            from(rgba(252,252,252,0.9)), 
+            to(rgba(210,210,210,0.9)) 
+         );
+         
+         padding-bottom: 12px;
+      }
+		
+		#presentation #presentation-menu ul li {
+         list-style-type: none;
+         display: block;
+		}
+		
+		#presentation #presentation-menu ul li a {
+		    background-color: transparent;
+		    text-decoration: none;
+		    font-size: 15px;
+		    color: #383838;
+		    display: block;
+		    padding: 7px 20px 7px 15px;
+		    border-bottom: 1px solid #e8e8e9;
+		    border-top: 1px solid #f5f4f5;
+		    border-top: 1px solid rgba(240,240,240,0.5);
+		    border-bottom: 1px solid rgba(150,150,150,0.3);
+      }
+		
+      #presentation ul li a:hover {
+         background-color: #e4e4e4;
+         color: #000;
+         background: -moz-linear-gradient(top, #EEE 0%, #D2D2D2 100%); /* firefox */
+         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#EEE), color-stop(100%,#D2D2D2)); /* webkit */
+      }
+
+      #presentation #presentation-menu { position: relative }
+      
+      #presentation #presentation-menu div.selected {
+         padding-top: 10px;
+         position: absolute;
+         width: 217px;
+         height: 37px;
+         border: none;
+         left: -7px;
+         background: transparent url(http://a.static.eurofoto.no/cms/images/sliderarrow_barnehageplan.png) no-repeat top left;
+         z-index: 400;
+         top: 0px;
+      }
+      
+      #presentation #presentation-menu ul li.selected { 
+         z-index: 450; 
+         position: relative;
+      }
+      
+      #presentation #presentation-menu ul li.selected a {
+         color: #fff;
+         font-weight: bold;
+         border-color: transparent;
+         z-index: 500; 
+         position: relative;
+         outline: none !important;
+      }
+      #presentation #presentation-menu ul li.selected a:hover {
+         background: none !important;
+         background-color: transparent !important;
+         color: #fff;
+      }
+      
+      #presentation .article {
+         cursor: hand;
+         cursor: pointer;
+         padding-top: 20px;
+         height: 285px;
+         position: absolute;
+         top: 0;
+         left: 0;
+         z-index: 50;
+         /*-webkit-border-radius: 9px;
+         -moz-border-radius: 9px;
+         border-radius: 9px;*/
+      }
+      
+      #presentation .article h2 {
+         font-size: 3.5em;
+      }
+      
+      #presentation .article a.button.bottom { position: absolute; bottom: 20px }
+      #presentation .article a.button.top { position: absolute; top: 20px }
+      #presentation .article a.button.left { left: 20px }
+      #presentation .article a.button.right { right: 20px }
+      
+      .wirebox { margin-bottom: 1em }
+      
+      .FrontpageBox{
+         border: 1px solid #CCC; 
+         height: 230px;
+      }
+      
+      .FrontpageBoxHeader{
+         background-color: #35525d !important;
+         border-bottom: 1px solid #CCC; 
+         padding: 5px 2px 5px 7px;  
+      }
+      .FrontpageBoxHeader h3{
+         font-size: 1.5em;
+         line-height: 1;
+         margin-bottom: 0em;
+         color: #FFF;
+      }
+      .FrontpageBoxContent{
+         padding: 15px;
+      
+      }
+    
+	</style>
+	
+   <!--[if lte IE 8]>
+	<style type="text/css">
+		#presentation ul {
+         display: block;
+         border: 1px solid #ccc;
+         z-index: 6000;
+
+      }
+      #presentation div#presentation-menu {
+         border: none;
+         z-index: 5000;
+         width: 220px;
+      }
+	</style>
+	<![endif]-->
+	
+</head>
+
+
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/nb_NO/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+   <div metal:use-macro="../../${templates}/common.html/top" />
+
+	<div class="container">
+		
+		<div class="span-24 last">
+		   <div class="span-24 last"> 
+         
+            <div id="presentation">
+               <div id="articles">
+                  <tal:block tal:repeat="menuitem menu:840f6da1-ef84-4e5e-a78f-00f5ad663207,1,1">
+                     <tal:block tal:repeat="item menuitem/content" tal:condition="exists:menuitem/content">
+                        <tal:block tal:condition="lte:repeat/menuitem/number,7">
+                           <div id="${menuitem/identifier}" class="article prepend-6 span-18 last current first"
+                              style="background: #fff url(${static:}images/menu/${menuitem/image}) no-repeat top left"
+                              tal:condition="equal:repeat/menuitem/number,1">
+                                 <div tal:content="structure item/body|default"></div>
+                           </div>
+                        </tal:block>
+                        <div id="${menuitem/identifier}" class="article prepend-6 span-18 last"
+                           style="background: #fff url(${static:}images/menu/${menuitem/image}) no-repeat top left"
+                           tal:condition="not:equal:repeat/menuitem/number,1">
+                              <div tal:content="structure item/body|default"></div>
+                        </div>
+                     </tal:block>
+                  </tal:block>
+               </div>
+               <div id="presentation-menu">
+                  
+                     <ul>
+                        <div class="selected"></div>
+                        <tal:block tal:repeat="menuitem menu:840f6da1-ef84-4e5e-a78f-00f5ad663207,1">
+                           <tal:block tal:condition="equal:repeat/menuitem/number,1">
+                              <li tal:condition="lte:repeat/menuitem/number,7" class="selected">
+                                 <a href="#${menuitem/url}" rel="${menuitem/identifier}">${menuitem/title}</a>
+                              </li>
+                           </tal:block>
+                           <tal:block tal:condition="not:equal:repeat/menuitem/number,1">
+                              <li tal:condition="lte:repeat/menuitem/number,7">
+                                 <a href="#${menuitem/url}" rel="${menuitem/identifier}">${menuitem/title}</a>
+                              </li>
+                           </tal:block>
+                        </tal:block>
+                     </ul>
+                  </div>
+               </div>
+
+	<script type="text/javascript">
+	      var t;
+	      var stopped = false;
+	      var prevArticle;
+	      var currentArticle;
+
+               function changeMenuItem() {
+                  if( !stopped) {
+                     if( $('#presentation ul li:last-child').hasClass('selected') ) {
+                        $('#presentation ul li:first a').trigger('click');
+                     } else {
+                        $('#presentation ul li.selected').next().find('a').trigger('click');
+                     }
+                  }
+               }
+	             
+               function startInterval() {
+                  t = setInterval( 'changeMenuItem()', 10000 );
+               }
+               
+               $('.article.first').css('z-index', 55);
+
+		          $(document).ready( function() {
+		             
+                  $('#presentation ul li a').bind('click', function() {
+                     
+                     var item = this;
+                  
+                     if( $(this).parent().hasClass('selected') ) {
+                        stopped = true;
+                        window.location.href = $('#' + $(item).attr('rel') ).find('a').attr('href');
+                     } else {
+                        $('#presentation div.article').not('.current').hide();
+                        var position = $(item).position().top - 4;
+                        $('#presentation div.selected').animate({ top : position }, 1000);
+                        $('#presentation ul li.selected').removeClass('selected');
+                        $(this).parent().addClass('selected'); // ie can't handle animation here
+                        currentArticle = $('#' + $(item).attr('rel') );
+                        $(currentArticle).hide().css('z-index', 60 ).addClass('current');
+                        $(currentArticle).fadeIn(2000);
+                        $(prevArticle).removeClass('current').css('z-index', 55);
+                        prevArticle = currentArticle;
+                     }
+
+                     return false;
+                  });
+                  
+                  $('#presentation .article').click( function() {
+                     window.location.href = $('a.button', this).attr('href');
+                  });
+                  
+                  $('#presentation ul li:first-child a').trigger('click');
+                  
+                  startInterval();
+                  
+                  $('#presentation').mouseenter( function() { 
+                     stopped = true;
+                  }).mouseleave( function() { 
+                     stopped = false;
+                  });
+                  
+               });
+
+
+	    </script>
+		</div>
+		<div class="span-24 last">
+			<div class="span-16 ">
+			<div class="span-16 last prepend-top" style="line-height: 0em;">
+			<!-- id: 3103 -->
+   		        <div tal:content="structure cms:body:ee70c9b1-fbad-4ae7-9565-bb59713984af" />
+   		</div>
+		<div class="span-8 prepend-top">
+                  <!-- id: 2948   3105  -->
+                  <div class="FrontpageBox" style="height: 230px;">
+                  	<div class="FrontpageBoxHeader">
+				<h3><div tal:content="cms:title:3dc4db27-5598-439d-8e4e-2685a1a45eb7" /></h3>
+                  	</div>
+                  	<div tal:content="structure cms:body:3dc4db27-5598-439d-8e4e-2685a1a45eb7" />
+                  </div>
+                     
+               </div>
+               <div class="span-8 last  prepend-top">
+                  <!-- id: 2951 -->
+                  <div class="FrontpageBox" style="height: 230px;">
+                  	<div class="FrontpageBoxHeader">
+                  		<h3><div tal:content="cms:title:5d558b22-0df0-4f84-8630-32ea8869741b" /></h3>
+                  	</div>
+                  	<div tal:content="structure cms:body:5d558b22-0df0-4f84-8630-32ea8869741b" />
+                  </div>
+               </div>
+               <div class="span-16 last prepend-top">
+		 <div tal:content="structure cms:body:671bd73a-756d-4984-bd44-47c0f12e3109" />
+	       </div>
+               <div class="span-4 prepend-top">
+                  <!-- id: 3165 -->
+                  <div tal:content="structure cms:body:10fac69e-84eb-4ac5-b968-cca446fe678d" />
+               </div>
+               <div class="span-4 prepend-top">
+                  <!-- id: 2960 -->
+                  <div tal:content="structure cms:body:e19570c9-19c3-40c0-8065-31cb5a8960e8" />
+               </div>
+               <div class="span-4 prepend-top">
+                  <!-- id: 2961 -->
+                 <!--<div tal:content="structure cms:body:b3c71d7a-c78d-4198-9dda-a398dcee4ceb"/>-->
+				 <div tal:content="structure cms:body:6674839a-8eeb-4cc2-9bdb-f2d6e2fd6da1"/>
+               </div> 
+               <div class="span-4 last prepend-top">
+                  <!-- id: 3202 -->
+                  <div tal:content="structure cms:body:824b64f7-fca6-47bc-a4c8-0917aea7d93d"/>
+               </div> 
+   		    </div>
+		       <div class="span-8 last">
+		    	  <div class="span-8 prepend-top last">
+               <div class="fb-like-box" data-href="http://www.facebook.com/Ukeplan" data-width="310"  data-height="482" data-show-faces="true" data-stream="true" data-header="false">
+               </div>
+               <div class="span-8 prepend-top last" style="position:relative;">
+			<a href="http://www.ukeplan.no">
+				<img src="http://c.static.eurofoto.no/cms/images/ukeplan_ad.jpg"/> 
+			</a>
+               </div>
+		  
+		</div>
+		</div>
+		    
+		</div>
+
+		</div>
+		
+
+      
+      
+   </div>	
+
+
+   <div metal:use-macro="../../${templates}/common.html/footer" />
+
+
+</body>
+</html>

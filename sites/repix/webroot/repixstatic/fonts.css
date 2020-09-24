@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'FairplexWideOT-Med';
+    src: local('☺'), url('/skanskastatic/fonts/FairplexWideOT-Med.woff') format('woff'), url('/skanskastatic/fonts/FairplexWideOT-Med.ttf') format('truetype'), url('/skanskastatic/fonts/FairplexWideOT-Med.svg') format('svg'),url('/skanskastatic/fonts/FairplexWideOT-Med.eot');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+	font-family: 'KidprintMTStd-Bold';
+	src: url('/skanskastatic/fonts/kidprint_1_.eot');
+	src: local('☺'), url('/skanskastatic/fonts/kidprint_1_.woff') format('woff'), url('/skanskastatic/fonts/kidprint_1_.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Populaire';
+	src: url('/skanskastatic/fonts/Populaire.eot');
+	src: local('☺'), url('/skanskastatic/fonts/Populaire.woff') format('woff'), url('/skanskastatic/fonts/Populaire.ttf') format('truetype'), url('/skanskastatic/fonts/Populaire.svg') format('svg');
+	font-weight: bold;
+	font-style: bold;
+}

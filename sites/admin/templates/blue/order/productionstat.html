@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Production stat</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="span-24 last">
+			<h2>Production status</h2>
+			<tal:block metal:use-macro="../common.html/topmenu" />
+		</div>
+		
+		
+		<div class="span-24 last"><h3>Production stat</h3></div>
+		
+		<div>
+		<form action="" method="get">
+		<label for="from">Fra: </label>
+		<input type="text" name="from" id="from" value="${from}"/>
+		<label for="to">Til: </label>
+		<input type="text" name="to" id="to" value="${to}" />
+		<input type="submit" value="Søk" />
+		
+		</form>
+		
+		
+		
+		</div>
+		 <div id="content" class="span-20" style="border: 1px solid #ccc; padding: 20px;">
+		 
+		    <tal:block tal:repeat="order orders">
+		    
+		    <ul>
+		       <li>ORDRENR: <a href="javascript:popitup('http://susanne.eurofoto.no/adm_view_orderform_new.php?ordrenr=${repeat/order/key}' );"> <span tal:content="repeat/order/key"/></a> <span tal:content="order/0/ordertime"></span></li>
+		    
+		    
+		    
+             <ul>
+             
+             	    
+   		    <tal:block tal:repeat="orderdetails order">
+   		    
+   		       <li><b>Station:</b> <span tal:content="orderdetails/descr"/> <b>Status:</b> <a href="javascript:popitup('http://susanne.eurofoto.no/adm_stream_pdf.php?skjemaid=${orderdetails/skjemaid}');"><span tal:content="orderdetails/status"/></a> <span tal:content="orderdetails/statustime"/></li>
+   		    
+   		    </tal:block>
+		    	</ul>    
+		    </ul>
+		    
+		    </tal:block>
+
+
+		
+		</div>
+   </div>
+   
+   
+   <script language="javascript" type="text/javascript">
+   
+   
+
+    $(function() {
+        $( "#from" ).datepicker();
+        $( "#to" ).datepicker();
+    });
+
+   
+      <!--
+      function popitup(url) {
+      	newwindow=window.open(url,'name','height=800,width=750');
+      	if (window.focus) {newwindow.focus()}
+      	return false;
+      }
+      
+      // -->
+   </script>
+</body>
+</html>

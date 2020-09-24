@@ -1,0 +1,396 @@
+<tal:block metal:define-macro="css">
+<link type="text/css" rel="stylesheet" href="${static:gfx/portals/ukeplan/css/imgareaselect-animated.css}?${version}" />
+<link type="text/css" rel="stylesheet" href="/fotono/css/ukeplan/editor.css" />
+ <link href="/fotono/css/ukeplan/ukeplan.css" rel="stylesheet"/>
+ <link rel="shortcut icon" type="image/ico" href="${static:}css/bootstrap/css/themes/gfx/favicon.ico"/>
+ 
+</tal:block>
+
+
+<tal:block metal:define-macro="scripts">
+	
+	  <script src="http://cdnjs.cloudflare.com/ajax/libs/hammer.js/1.0.5/hammer.js"></script>
+	  <script src="${static:}js/cropbox/jquery.cropbox.js"></script>
+	  <script src="${static:css/portals/stabburet/web/js/}jquery.form.min.js"></script>
+	  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.6/jquery.mousewheel.js"></script>
+</tal:block>
+
+
+<tal:block metal:define-macro="helpmodals">
+   <div class="modal fade tip" tabindex="-1" role="dialog" aria-labelledby="Bakgrunn" aria-hidden="true">
+	  <div class="modal-dialog">
+		 <div class="modal-content">
+			   <div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <h4 class="modal-title" id="exampleModalLabel" tal:content="cms:title:ddcbe2e0-b51f-4362-aa43-00b925123824">Info Bakgrunn</h4>
+			   </div>
+			   <div class="modal-body">
+				  <!-- Backgrunn id 2867 -->
+				  <div  title="Background" i18n:attributes="title" tal:content="structure cms:body:ddcbe2e0-b51f-4362-aa43-00b925123824" />
+			   </div>
+		 </div>
+	  </div>
+   </div>
+   <div class="modal fade qualitytip" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal-dialog">
+		 <div class="modal-content">
+			   <div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <h4 class="modal-title" id="exampleModalLabel" tal:content="cms:title:d4e216eb-01ac-4bb3-a3fc-d52114de38f8">Kvalitet på bildet</h4>
+			   </div>
+			   <div class="modal-body">
+				  <!-- qualitytip id 2868-->
+				  <div id="qualitytip" title="Quality" i18n:attributes="title" tal:content="structure cms:body:d4e216eb-01ac-4bb3-a3fc-d52114de38f8" />
+			   </div>
+		 </div>
+	  </div>
+   </div>
+   
+   
+      <div class="modal fade maskittip" tabindex="-1" role="dialog" aria-hidden="true">
+		 <div class="modal-dialog">
+			<div class="modal-content">
+				  <div class="modal-header">
+					 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					 <h4 class="modal-title" id="exampleModalLabel" tal:content="cms:title:6c879a35-475a-4140-9ccd-be9ffe35a6e3">Info Bakgrunn</h4>
+				  </div>
+				  <div class="modal-body">
+						<!-- maskittip id 2873 -->
+						<div id="" title="Design service" tal:content="structure cms:body:6c879a35-475a-4140-9ccd-be9ffe35a6e3" />
+				  </div>
+			</div>
+		 </div>
+	  </div>
+   
+   
+      <div class="modal fade confirmtip" tabindex="-1" role="dialog" aria-hidden="true">
+		 <div class="modal-dialog">
+			<div class="modal-content">
+				  <div class="modal-header">
+					 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					 <h4 class="modal-title" id="exampleModalLabel" i18n:translate="">Confirm</h4>
+				  </div>
+				  <div class="modal-body">
+						<!-- maskittip id 2873 -->
+						<tal:block metal:use-macro="./common.html/confirmtip" />
+				  </div>
+				  <div class="modal-footer">
+					 <button type="button" class="btn btn-default" data-dismiss="modal"><tal:block i18n:translate="">Cancel</tal:block></button>
+					 <button type="button" class="btn btn-primary" id="confirmproject"><tal:block i18n:translate="">Accept</tal:block></button>
+				  </div>
+			</div>
+		 </div>
+	  </div>
+
+	  
+	  <div id="oriantationmodal" class="modal fade">
+		 <div class="modal-dialog">
+		   <div class="modal-content">
+			 <!-- dialog body -->
+			 <div class="modal-body">
+			   <button type="button" class="close" data-dismiss="modal">&times;</button>
+			    <div tal:content="structure cms:body:d7f52a4e-716f-48cc-85fd-86ea0b40d0c8"></div>
+			 </div>
+			 <!-- dialog buttons -->
+			 <div class="modal-footer"><button type="button" class="ok btn btn-primary" i18n:translate="">OK</button><button type="button" class="cancel btn btn-primary" i18n:translate="">Cancel</button></div>
+		   </div>
+		 </div>
+	   </div>
+</tal:block>
+
+<tal:block metal:define-macro="imagecropbox">
+      <div class="modal fade" id="imageselect" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	 <div class="modal-dialog">
+	   <div class="modal-content">
+		 <div class="modal-header">
+		   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		   <h4 class="modal-title" id="myModalLabel" i18n:translate="">Choose image</h4>
+		 </div>
+		 <div class="modal-body">
+			<ul id="myTab" class="nav nav-tabs">
+			   <li class="active">
+				  <a href="#upload" data-toggle="tab" i18n:translate="">
+					 Last opp bilde
+				  </a>
+			   </li>
+			   <li>
+				  <a href="#figurer " data-toggle="tab">
+						Figurer
+				  </a>
+			   </li>
+			   <li><a href="#getimage" id="getimagebutton" data-toggle="tab" i18n:translate="">
+					 Hent bilde fra konto  
+				  </a>
+			   </li>
+			   <li><a href="#info" data-toggle="tab"  tal:content="cms:title:b78320d6-e3c2-4bbd-bd82-9513704b6dc5">
+					 Info
+				  </a>
+			   </li>
+			</ul>
+			<div id="myTabContent" class="tab-content">
+				<div id="info" class="tab-pane fade">
+						<div tal:content="structure cms:body:b78320d6-e3c2-4bbd-bd82-9513704b6dc5"></div>
+				</div>
+				
+				  
+				<div class="tab-pane fade in active" id="upload">
+					<p>
+						  <br/>
+						  <span class="btn btn-success fileinput-button">
+							 <i class="glyphicon glyphicon-plus"></i>
+							 <span i18n:translate="">Choose image</span>
+							 <!-- The file input field used as target for the file upload widget -->
+							 <input id="fileupload" type="file" name="files[]" data-url="/api/1.0/editor/jqupload"/>
+						 </span>
+						 <br/>
+						 <br/>
+						 <!-- The global progress bar -->
+						 <div id="progress" class="progress">
+							 <div class="progress-bar progress-bar-success"></div>
+						 </div>
+						 <!-- The container for the uploaded files -->
+						 <div id="files" class="files"></div>
+					</p>
+				</div>
+			   
+			   
+			   <div class="tab-pane fade in figurer" id="figurer">
+				  <h1>clipart</h1>
+				  <div class="clipartcontainer">
+						<a href="#" class="clipartdiv" id="damegjengen" data-cat="Damegjengen">
+							  <p class="caption-container">
+									<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+									Damegjengen
+							  </p>
+						</a>
+						<a href="#" class="clipartdiv" id="guttegjengen" data-cat="Guttegjengen">
+							  <p class="caption-container">
+									<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+									Guttegjengen
+							  </p>
+						</a>
+						<a href="#" class="clipartdiv" id="jentegjengen" data-cat="Jentegjengen">
+							  <p class="caption-container">
+									<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+									Jentegjengen
+							  </p>
+						</a>
+						<a href="#" class="clipartdiv" id="mannegjengen" data-cat="Mannegjengen">
+							  <p class="caption-container">
+									<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+									Mannegjengen
+							  </p>
+						</a>
+						<a href="#" class="clipartdiv" id="dyregjengen" data-cat="Dyregjengen">
+							  <p class="caption-container">
+									<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+									Dyregjengen
+							  </p>
+						</a>
+				  </div>
+				  
+				  <div class="ClipartPicker" style="display: none">
+						<a href="#" class="tilbake">Tilbake</a>
+						<div class="pickcontainer"></div>
+				  </div>
+			   </div>
+			   <div class="tab-pane fade" id="getimage">
+				  <p>
+						<tal:block tal:condition="session/loggedin">
+							  <strong i18n:translate="">Get previously uploaded image:</strong>
+						</tal:block>
+					 <div class="getimagebox">
+						<a class="center button choose-image" style="font-weight: bold" href="#" i18n:translate="">Get image</a>
+						<div id="imagePicker">
+						   <div class="dropdown">
+						   <button class="btn btn-default dropdown-toggle" type="button" id="useralbums" data-toggle="dropdown" aria-expanded="true">
+								<tal:block i18n:translate="">Choose album</tal:block>
+								<span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu albums" role="menu" aria-labelledby="useralbums">
+							  </ul>
+							</div>
+						   
+						</div>
+						<div>
+						   <ul id="imagePickerImages"></ul>
+						</div>
+					 </div>
+					 <tal:block tal:condition="not:session/loggedin">
+						<div id="loginbox">
+						   <div i18n:translate="">Login and get image from your account</div>
+						
+						   <form id="loginform" onsubmit="return false;">
+							  <input type="text" name="username" placeholder="epost" i18n:attributes="placeholder e-mail"/>
+							  <input type="password" placeholder="password" name="password"></input>
+							  <button id="loginbutton">Login</button>
+						   </form>
+						
+						   <script>
+							  $( function(){
+								 $('.getimagebox').hide();
+								 imagePickerLoaded = true;
+							  })
+						   </script>
+						</div>
+					 </tal:block>			
+				  </p>
+			   </div>
+			   </div>
+			</div>
+		 <div class="modal-footer">
+		   <button type="button" class="btn btn-default" data-dismiss="modal" i18n:translate="">Cancel</button>
+		 </div>
+	   </div>
+	 </div>
+   </div>
+</tal:block>
+
+<tal:block metal:define-macro="column-options">
+	     <label for="columnquantity" i18n:translate="">Antall kolonner:&nbsp &nbsp &nbsp </label>
+	     <select name="columnquantity" id="columnquantity">
+	        <option value="1">1 <tal:block i18n:translate="">column</tal:block></option>
+	        <option value="2">2 <tal:block i18n:translate="">columns</tal:block></option>
+	        <option value="3">3 <tal:block i18n:translate="">columns</tal:block></option>
+	        <option value="4" selected="true">4 <tal:block i18n:translate="">columns</tal:block></option>
+	        <option value="5">5 <tal:block i18n:translate="">columns</tal:block></option>
+	        <option value="6">6 <tal:block i18n:translate="">columns</tal:block></option>
+	        <option value="7">7 <tal:block i18n:translate="">columns</tal:block></option>
+	     </select>
+</tal:block>
+
+<tal:block metal:define-macro="layout-options">
+	  <div class="body">
+			<tal:block tal:condition="exists:maleroptions">
+			   <label for="background" i18n:translate="">Choose orientation:</label><br/>
+			   <select name="orientation">
+				  <tal:block tal:repeat="option maleroptions">
+					 <tal:block  tal:condition="exists:option/default">
+						<option class="selectedoption" tal:content="option/title" value="${option/purchaseurl}" selected="selected"></option>
+					 </tal:block>
+					 <tal:block  tal:condition="not:exists:option/default">
+						<option tal:content="option/title" value="${option/purchaseurl}"></option>
+					 </tal:block>
+				  </tal:block>
+			   </select><br/>
+			</tal:block>
+			<label for="imageframe" i18n:translate="">Velg bilderamme:&nbsp &nbsp</label>
+			<select name="imageframe" id="imageframe">
+			   <option value="on" i18n:translate="" selected="selected">On</option>
+			   <option value="off" i18n:translate="">Off</option>
+			</select><br/>
+			<label for="background" i18n:translate="">Choose background:</label><a href="#" type="button" class="" data-toggle="modal" data-target=".tip">info</a>
+			<select name="background" id="background">
+			   <option value="white" i18n:translate="">White</option>
+			   <tal:block tal:condition="exists:choosebackground" >
+				  <option value="trans" i18n:translate="">Transparent</option>
+			   </tal:block>
+			   <option value="black" i18n:translate="">Black</option>
+			</select><br/>
+			<!-- column options -->
+			<tal:block metal:use-macro="./common.html/column-options" />
+			<hr/>
+			<!-- image options -->
+			<tal:block metal:use-macro="./common.html/image-options" />
+			<input type="checkbox" name="clipart" value="dinner" id="dinneroption"/><label for="dinneroption" i18n:translate="">Dinner Column:</label><br/>
+	  </div>
+</tal:block>
+
+<tal:block metal:define-macro="image-options">
+	    <div>
+			<input type="radio" name="imagelayout"  id="layout1" value="each" checked="true"/><label for="layout1" i18n:translate="">Photo for each column</label>
+		</div>
+	     
+		 <div>
+			<input type="radio" name="imagelayout" value="one" id="layout2"/><label for="layout2" i18n:translate="">Et stort bilde &nbsp &nbsp</label>	     
+			<select id="imagefield_height" name="imagefield_height" disabled="true">
+			   <option value="25">25%</option>
+			   <option value="30">30%</option>
+			   <option value="35">35%</option>
+			   <option value="40">40%</option>
+			   <option value="45">45%</option>
+			   <option value="50">50%</option>
+			</select>
+		 </div>
+		 <div>
+			<input type="radio" name="imagelayout" id="layout3" value="text"/><label for="layout3" class="imagelayoutlabel" i18n:translate="">Bare tekst &nbsp &nbsp &nbsp &nbsp &nbsp</label>
+				  <select id="textfield_height" name="textfield_height" disabled="true">
+				  <option value="1">0%</option>
+				  <option value="10">10%</option>
+				  <option value="20" selected="true">20%</option>
+			</select>
+		 </div>
+
+</tal:block>
+
+<tal:block metal:define-macro="color-options">
+	  <option value="#010101" style="background-color: #010101;color: white;" i18n:translate="" selected="selected">Really Black</option>
+	  <option value="#FFFFFF" style="background-color: #FFFFFF;color: black;" i18n:translate="">Really White</option>
+      <option value="#812990" style="background-color: #812990;color: white;" i18n:translate="">Stylish Purple</option>
+      <option value="#bed62f" style="background-color: #bed62f;color: black;" i18n:translate="">Lime Green</option>
+      <option value="#ec008c" style="background-color: #ec008c;color: black;" i18n:translate="">Pure Pink</option>
+      <option value="#25408f" style="background-color: #25408f;color: white;" i18n:translate="">Blues blue</option>
+      <option value="#00aeef" style="background-color: #00aeef;color: black;" i18n:translate="">Typical turquoise</option>
+      <option value="#777777" style="background-color:#777777;color: white;" i18n:translate="">Quite Gray</option>
+      <option value="#ffc60b" style="background-color: #ffc60b;color: black;" i18n:translate="">Impeccably Yellow</option>
+      <option value="#734c40" style="background-color: #734c40;color: white;" i18n:translate="">Only Brown</option>
+      <option value="#ea7839" style="background-color: #ea7839;color: black;" i18n:translate="">Oopssoorange</option>
+      <option value="#d2232a" style="background-color: #d2232a;color: black;" i18n:translate="">Rose Red</option>
+      <option value="#b3a679" style="background-color: #b3a679;color: black;" i18n:translate="">Only Beige</option>
+</tal:block>
+
+<tal:block metal:define-macro="font-options">
+   <label for="namefonts" i18n:translate="">Select Font:</label><br/>
+     <select name="text-font" id="text-font">
+      <tal:block metal:use-macro="font-list" />
+     </select>
+</tal:block>
+
+
+<tal:block metal:define-macro="font-list">
+	  <option value="greyscale.ttf" i18n:translate="">Stramme Susanne</option>
+      <option value="crulz.ttf" i18n:translate="" >Krølle Bølle</option>
+      <option value="FFFTusj.ttf" i18n:translate="">Feite Frode</option>
+      <option value="quicksand.otf" i18n:translate="">Magre Margrethe</option>
+      <option value="BRADHITC.TTF" i18n:translate="">Tynne Truls</option>
+      <option value="ITCEDSCR.TTF" i18n:translate="">Elegante Ella</option>
+      <option value="JandaSnickerdoodleSerif.ttf" i18n:translate="">Tøffe Tor</option>
+      <option value="KGStrawberryLimeade.ttf" i18n:translate="">Kjekke Knut</option>
+      <option value="PEIGNOT1.TTF" i18n:translate="">Normale Nora</option>
+      <option value="ThrowMyHandsUpintheAir.ttf" i18n:translate="">Pene Per</option>
+</tal:block>
+
+<tal:block metal:define-macro="addto-cart-options">
+	     <input type="hidden" value="1" name="quantity" id="quantity" />
+	     <input type="hidden" name="project_id"  value="" id="project_id" />
+	     <div id="produksjonsvalg" class="functionbox">
+   	     <!--<div class="header" i18n:translate="">Production options</div>-->
+   	     <div class="header">Design service</div>
+		 <div class="body">
+			<input type="checkbox" name="maskit" id="maskit" value="true"/><label for="maskit" i18n:translate="">I want to use a graphic designer</label>
+			<span class="quiet small">(Kr <span id="maskit-price"></span>) </span><a href="#" class="" data-toggle="modal" data-target=".maskittip">info</a>
+			</div>
+			
+		 </div>
+		 <p class="right">
+			   <button class="btn btn-default" i18n:translate="">Add to cart</button>
+	  </p>
+   	     
+</tal:block>	 
+
+
+<tal:block metal:define-macro="confirmtip">
+<div id="confirmtip" i18n:attributes="title" title="Confirm the project" class=""><dl><dt i18n:translate="">Before going to the next step, make sure:</dt>
+         
+                                                                                 <dd i18n:translate="">-That there are no typos.</dd>
+                                                                                 <dd i18n:translate="">-At the images have the desired composition.</dd>
+                                                                                 <dd i18n:translate="">-You select the desired font and grid.</dd>
+                                                                                 <dd i18n:translate="">-Do you wish that there should be special adaptations must check the box for the use of graphic designer.</dd>
+                                                                           
+                                                                       </dl>
+   </div>
+
+
+
+</tal:block>
+

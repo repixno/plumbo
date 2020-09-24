@@ -1,0 +1,718 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle">
+		<tal:block i18n:translate="">Create gift</tal:block> - <tal:block tal:content="selected/product/title" />
+	</tal:block>
+	
+	
+	<link rel="stylesheet" href="${static:css/gift.css}?${version}" type="text/css" media="screen, projection" />
+
+	
+		<style type="text/css">
+
+		.add_text {
+			height: 250px;
+		}
+		.page-index{
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+			text-align: center;
+			margin-bottom: 5px;
+		}
+		.page-index li { display: inline; }
+		
+		.page-index li a{
+			text-decoration: none;
+			padding: .2em 1em;
+			color: #fff;
+			background-color: #036;
+		}
+		
+		.page-index li a:hover{
+			color: #fff;
+			background-color: #369;
+		}
+		
+		.selected-pageselect{
+			background-color: #33abff !important;
+		}
+		#font-list{
+			position: relative;
+		}
+		
+		#font-list span{
+			display: block; 
+			border: solid 1px #ccc;
+			height: 20px;
+			width: 200px;
+			padding: 4px 1px 0px 10px;
+		}
+		
+		#font-list span:after {
+			content: ' ';
+			height: 0;
+			position: absolute;
+			width: 0;
+			border: 4px solid transparent;
+			border-top-color: #333;
+			top: 40%;
+			left: 84%;
+		}
+		
+		.fonter-container{
+			position: absolute;
+			height: 400px;
+			border: solid 1px #ccc;
+			overflow-y: auto;
+			overflow-x: hidden;
+			z-index: 99999;
+		}
+		
+		#fonter{
+			list-style-type: none;
+			background: #fff;
+			width: 213px;
+			margin: 0px;
+		}
+		#fonter li{
+			padding: 5px;
+			font-size: 1.1em;
+			cursor:  default;
+		}
+		li.active{
+			background: lightblue;
+		}
+				
+		.draggable
+		{
+			display: -moz-inline-stack;
+			display: inline-block;
+			vertical-align: top;
+			zoom: 1;
+			cursor: hand; 
+			cursor: pointer;
+		}
+		
+		.resizable
+		{
+			width: 200px;   
+			/*border: 1px solid #bb0000;*/  
+		}
+		.resizable img
+		{
+			width: 100%;   
+		}
+		
+		.ui-resizable-handle 
+		{
+			/*background: #f5dc58;
+			border: 1px solid #FFF;*/
+			width: 50px;
+			height: 50px;
+			
+			z-index: 2;
+		}
+		
+		.textholder .ui-resizable-handle {
+			width: 19px;
+			height: 19px;
+		}
+		
+		.ui-resizable-handle{
+			display: none;
+		}
+		
+		.ui-resizable-se
+		{
+			right: -5px;
+			bottom: -5px;
+		}
+		.resizing{
+			cursor: ne-resize!important;
+		}
+		.ui-resizable-nw{
+			cursor: pointer !important;
+		}
+		div.colorPicker-picker {
+			height: 32px;
+			width: 32px;
+			padding: 0 !important;
+			border: 1px solid #ccc;
+			background: url(${static:}gfx/icons/arrow.gif) no-repeat top right;
+			cursor: pointer;
+			line-height: 16px;
+			font-size:0.75em;
+			font-weight:bold;
+			text-align: center;
+		  }
+		  
+		  div.colorPicker-palette {
+			width: 210px;
+			position: absolute;
+			border: 1px solid #598FEF;
+			background-color: #EFEFEF;
+			padding: 2px;
+			z-index: 9999;
+		  }
+			div.colorPicker_hexWrap {width: 100%; float:left }
+			div.colorPicker_hexWrap label {font-size: 95%; color: #2F2F2F; margin: 5px 2px; width: 25%}
+			div.colorPicker_hexWrap input {margin: 5px 2px; padding: 0; font-size: 95%; border: 1px solid #000; width: 65%; }
+		  
+		  div.colorPicker-swatch {
+			height: 16px;
+			width: 16px;
+			border: 1px solid #000;
+			margin: 2px;
+			float: left;
+			cursor: pointer;
+			line-height: 12px;}
+		.activeText{
+			border: 4px dashed rgb(55, 180, 74);
+		}
+	  </style>
+</head>
+
+<body>
+	
+	<div metal:use-macro="../../common/loader.html/fullscreen" />
+	<div metal:use-macro="../../${templates}/common.html/top" />
+			<div id="seniorpage-main">
+			<aside id="seniorpage-hero" class="js-fullheight">
+	<div class="container create-gift">
+
+	
+	
+	<div class="row" id="gift-editor">
+	
+		<input type="hidden" value="${selected/product/id}" name="productid" id="productid"/>
+		<input type="hidden" value="${selected/productoptionid}" name="productoptionid" id="productoptionid"/>
+		
+			<div class=" col-md-12 page" >
+				
+				<div class="col-md-8" style="min-height: 715px">
+					
+						<div class="functions col-md-7">
+							<div class="col-md-12">
+								<h3 class="bottom" tal:condition="exists:selected/product/title">
+									<tal:block tal:content="selected/product/title" tal:condition="selected/product/title"/>
+								</h3>
+								<div id="ie6-loader-container"></div>
+							</div>
+						</div>
+					
+						<div class="col-md-12">
+							
+							<ul class="page-index">
+								<li><a href="#" id="previndex" >forrige</a></li>
+							<tal:block tal:repeat="page selected/template/pages">
+								<li>
+									<a href="#" index="" tal:attributes="index repeat/page/number" class="select-page" id="template-wrapper-${page/malpageid}" tal:content="repeat/page/number"></a>
+								</li>
+							</tal:block>
+							<li><a href="#" id="nextindex" >neste</a></li>
+							</ul>
+						</div>
+						
+						<div class="col-md-12" id="gift-editor-wrapper">
+							
+							
+							<div class="col-md-12 buttons form-inline text-center" style="margin:10px">
+								<div class="col-md-4">
+									<button id="zoom-in" class="form-control zoom-in zooms" i18n:translate="">Zoom in</button>
+									<button id="zoom-out" class="form-control zoom-out zooms" i18n:translate="">Zoom out</button>
+								</div>
+									
+									<!--<input id="zoom-range"  type="range" class="zoom-range form-control zooms" step="0.005" min="0.01" max="4"  style="width: 300px"/>-->
+									
+									<div class="col-md-5">
+										<div id="zoom-range"></div>
+									</div>
+									
+								<div class="col-md-1">
+									<button id="reset" class="form-control reset zooms">Reset</button>
+								</div>	
+									
+							</div>
+							
+							<tal:block tal:repeat="page selected/template/pages">
+								
+								
+								
+								
+								<div class="row template display-none template-wrapper-${page/malpageid}" id="template-wrapper" style="position: absolute; margin-top: 50px">
+									<input type="hidden" id="initMalpageid" name="malpageid" value="${page/malpageid}" tal:condition="exists:page"/>
+									<input type="hidden" id="initMalid" name="malid" value="${selected/template/id}" tal:condition="exists:page"/>
+									<input type="hidden" id="websize_x" name="malid" value="${page/websize_x}" tal:condition="exists:page"/>
+									<input type="hidden" id="websize_y" name="malid" value="${page/websize_y}" tal:condition="exists:page"/>
+									
+							
+									<div class="helper" id="helper-${page/malpageid}">&nbsp;</div>
+									
+									<tal:block condition="page/fullsize_src">
+										<img id="template" class="highrestemplate" 
+											src="${static:}images/gifttemplates/thumbs/width/${page/websize_x}/${page/fullsize_src}" 
+										/>
+									</tal:block>
+									
+									<tal:block condition="not:page/fullsize_src">
+										<img id="template" class="highrestemplate" 
+											src="${static:}images/gifttemplatesweb/thumbs/blankbox/${page/websize_x}x${page/websize_y}/${selected/template/id}.png" 
+										/>
+									</tal:block>
+							
+	
+							<!-- finds other template if not set -->
+							<tal:block condition="not:page/fullsize_src">
+								<tal:block tal:repeat="gifttemplate collections/gifttemplates">
+									<tal:block tal:condition="equal:repeat/gifttemplate/number,1" tal:repeat="page gifttemplate/pages">
+										<input type="hidden" id="initMalid" name="malid" value="${gifttemplate/id}" tal:condition="exists:gifttemplate"/>
+										<tal:block tal:condition="equal:repeat/page/number,1">
+											<tal:block tal:condition="page/fullsize_src">
+												<img id="template" class="highrestemplate" 
+													src="${static:}images/gifttemplates/thumbs/width/630/${page/fullsize_src}" alt="template"
+												/>
+												<input type="hidden" id="initMalid" name="malid" value="${page/websize_x}" />
+												<input type="hidden" id="initMalid" name="malid" value="${page/websize_y}" />
+												<input type="hidden" id="initMalid" name="malid" value="${gifttemplate/id}" />
+												<input type="hidden" id="initMalpageid" name="malpageid" value="${page/malpageid}" />
+											</tal:block>
+											<tal:block tal:condition="not:page/fullsize_src">
+												<img id="template" 
+													class="highrestemplate" 
+													src="${static:}gfx/404/no_template.png" alt="no template"
+												/>
+											</tal:block>
+										</tal:block>
+									</tal:block>
+								</tal:block>
+							</tal:block>
+							<div id="image-wrapper">
+								<tal:block tal:condition="equal:repeat/page/number,1">
+									<tal:block tal:condition="selected/imageid">
+										<img id="image"	src="/images/stream/image/${selected/image/id}/630/400" alt="?"/>
+										<input type="hidden" id="selected-image" value="${selected/imageid}" />
+									</tal:block>
+									<tal:block tal:condition="not:selected/imageid">
+										<img id="image" class="noimage" alt="no image" src="${static:}gfx/gui/pixblank.gif" />
+										<input type="hidden" id="selected-image" value="0" />
+									</tal:block>
+								</tal:block>
+								<tal:block tal:condition="not:equal:repeat/page/number,1">
+									<img id="image" class="noimage" alt="no image" src="${static:}gfx/gui/pixblank.gif" />
+									<input type="hidden" id="selected-image" value="0" />
+								</tal:block>
+							</div>
+							
+							
+							<!-- store the values -->
+							<input type="hidden" id="original-template-width" class="coordinate" value="${page/fullsize_x}"/>
+							<input type="hidden" id="original-template-height" class="coordinate" value="${page/fullsize_y}"/>
+							<input type="hidden" id="original-pos-x" class="coordinate" value="${page/fullsize_pos_x}"/>
+							<input type="hidden" id="original-pos-y" class="coordinate" value="${page/fullsize_pos_y}"/>
+							<input type="hidden" id="original-pos-dx" class="coordinate" value="${page/fullsize_pos_dx}"/>
+							<input type="hidden" id="original-pos-dy" class="coordinate" value="${page/fullsize_pos_dy}"/>
+							</div>
+						</tal:block>
+							
+						</div>
+						
+						<div class="display-none">
+							<!-- Article about how to do this 04c79f9a-fc81-4276-994c-42328ece2208 -->
+						</div>
+
+				</div>
+				
+				
+
+				
+				<div class="col-md-4">
+					
+					<div id="accordion">
+					
+						<h3 id="accordion-photos"><a href="#" i18n:translate="">Choose photo</a></h3>
+						<div class="functions" style="height:350px">
+						
+							<div class="row span4 text-left" style="margin-left: 0px;">
+								<h4 class="hidden-phone">1: Last opp bilder</h4>
+								<div class="btn btn-primary fileinput-button" style="position: relative">
+									<span>Velg bilde</span>
+									<!-- The file input field used as target for the file upload widget -->
+									<input id="fileupload" type="file" name="files[]"  data-url="/api/1.0/upload/stabburet" accept="image/jpeg"  />
+								</div>
+							</div>
+							<div id="progress" class="progress" style="display: none;">
+								<div class="progress-bar progress-bar-success"></div>
+							</div>
+							<div id="upload-queue" style="padding:5px 0px;">
+								
+							</div>
+							<h4 i18n:translate="">Click on the image you want to use.</h4>
+							<div id="transfer-status" class="display-none small quiet">
+								<p class="right">
+									<a href="#" class="abort negative display-none" id="transfer-stop" i18n:translate="">Cancel upload</a> 
+								</p>
+
+								<span id="uplspeed" style="float: right;">0 KB/s</span>
+								<div id="progressbar-total" style="height: 25px"></div>
+								<div id="upload-queue">
+									<div id="upload-master" style="display:none;">
+										<img style="max-width: 96px;" src="${static:gfx/gui/ajax-loader-big.gif}" alt="" />
+									</div>
+								
+									<div>
+										<div class="progressbar" style="height: 10px"></div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="photos">
+							
+								<tal:block tal:condition="session/loggedin">
+									<label for="select-album" i18n:translate="">Choose album</label>
+									<select id="select-album">
+								      <optgroup label="My albums" tal:condition="gt:albums/length,0" i18n:attributes="label">
+							         <tal:block tal:repeat="album albums">
+								         <option value="${album/id}" tal:condition="exists:album/title">
+									        <tal:block tal:content="shorten:album/title;18" tal:condition="album/title" />
+								         </option>
+							         </tal:block>
+						           </optgroup>
+						           <optgroup label="My Friends Albums" tal:condition="gt:sharedAlbums/length,0" i18n:attributes="label">
+							        <tal:block tal:repeat="sharedalbum sharedAlbums">
+								        <option value="${sharedalbum/id}" tal:condition="exists:sharedalbum/title">
+									       <tal:block tal:content="shorten:sharedalbum/title;18" tal:condition="sharedalbum/title" />
+								        </option>
+							        </tal:block>
+						           </optgroup>
+									</select>
+									<div id="btnUpload"></div>
+								</tal:block>
+								
+								<tal:block tal:condition="not:session/loggedin">
+
+									<div class="prepend-top center append-bottom" style="margin-left: 50px">
+										<div id="btnUpload"></div>
+									</div>
+									<h5 i18n:translate="">Sign in to get photos from your account</h5>
+									<tal:block metal:use-macro="../common.html/quicklogin" />
+								
+								</tal:block>
+								
+								<div id="album-images">
+									
+								</div>
+							</div>
+						</div>
+
+						
+						<tal:block tal:condition="equal:selected/productoption/urlname,brodering">
+							<h3 id="accodrian-brodering"><a href="#choose-brodering">Velg Brodering</a></h3>
+							<div class="functions" id="choose-brodering">
+	
+								<div class="span-6">
+									<label for="nametype">Tekst</label><br/>
+									<input class="namefield" name="name" type="text" id="name" placeholder="Maks 28 tegn" maxlength="28"/>
+								</div>
+								<div class="span-6">
+									<div class="strong">Velg skrifttype</div>
+									<div class="fontpreview">
+										<input type="radio" name="font" value="ar-berkley" id="ar-berkley" checked="checked"/><label for="ar-berkley" id="ar-berkley-label" class="selectedborder">Ar Berkley</label>
+										<input type="radio" name="font" value="billabong" id="billabong" /><label for="billabong" id="billabong-label">Billabong</label>
+										<input type="radio" name="font" value="lucida" id="lucida" /><label for="lucida" id="lucida-label">Lucida</label>
+									</div>
+								</div>
+								<div class="span-6 right prepend-top">
+									<button>Oppdater</button>
+								</div>
+							</div>
+						</tal:block>
+
+						<tal:block tal:condition="not:equal:selected/productoption/urlname,brodering">
+							<!--
+							<h3 id="accordion-choose-template"><a href="#choose-template" i18n:translate="">Choose template</a></h3>
+							<div class="functions" id="choose-template">
+								<div>
+									<tal:block tal:repeat="gifttemplate collections/gifttemplates">
+										<div class="template-thumb">
+											
+											<a tal:attributes="href string:/create/gift/${selected/productid}/${selected/productoptionid}/${gifttemplate/id}/${selected/image/id}">
+												<tal:block tal:repeat="page gifttemplate/pages">
+													<tal:block tal:condition="equal:repeat/page/number,1">
+													
+														<input 
+															type="hidden" class="websize_x" name="malid" value="${page/websize_x}" 
+															tal:condition="exists:page"/>
+														<input 
+															type="hidden" class="websize_y" name="malid" value="${page/websize_y}" 
+															tal:condition="exists:page"
+														/>
+														
+														<tal:block tal:condition="page/fullsize_src">
+															<img 
+																src="${static:}images/gifttemplates/thumbs/squareaspect/50/${page/fullsize_src}" 
+																width="50" height="50"
+																id="malid_${gifttemplate/id}" alt="eurofoto" class="mal"
+															/>
+															<script type="text/javascript">
+																$('#malid_${gifttemplate/id}').data('websize_x', '${page/websize_x}');
+																$('#malid_${gifttemplate/id}').data('websize_y', '${page/websize_y}');
+																$('#malid_${gifttemplate/id}').data('fullsize_pos_x', '${page/fullsize_pos_x}');
+																$('#malid_${gifttemplate/id}').data('fullsize_pos_y', '${page/fullsize_pos_y}');
+																$('#malid_${gifttemplate/id}').data('fullsize_pos_dx', '${page/fullsize_pos_dx}');
+																$('#malid_${gifttemplate/id}').data('fullsize_pos_dy', '${page/fullsize_pos_dy}');
+																$('#malid_${gifttemplate/id}').data('fullsize_x', '${page/fullsize_x}');
+																$('#malid_${gifttemplate/id}').data('fullsize_y', '${page/fullsize_y}');	
+																
+															</script>
+															<input type="hidden" class="malid" name="malid" value="${gifttemplate/id}" />
+															<input type="hidden" class="malpageid" name="malpageid" value="${page/malpageid}" />
+														</tal:block>
+														
+														<tal:block tal:condition="not:page/fullsize_src">
+															<div class="empty-template-thumb">
+															<img 
+																src="${static:}images/gifttemplatesweb/thumbs/blankbox/50x50/${selected/template/id}.png" 
+																width="50" height="50"
+																id="malid_${gifttemplate/id}"
+															/>
+															</div>
+														</tal:block>
+														
+														<input type="hidden" class="malid" name="malid" value="${gifttemplate/id}" />
+														<input type="hidden" class="malpageid" name="malpageid" value="${page/malpageid}" />
+														
+													</tal:block>
+												</tal:block>
+											</a>
+											<a class="highres display-none" href="${static:}images/gifttemplates/thumbs/width/630/${page/fullsize_src}"></a>
+										</div>
+									</tal:block>
+								</div>
+							</div>
+							-->
+							<h3><a href="#" i18n:translate="">Add text</a></h3>
+							<div class="add_text"  style="height:350px">
+							<div class="functions">
+								<div id="text-align">
+									<input checked="checked" type="radio" id="text-align-left" class="text-align left" name="text-align" value="left"/>
+									<label for="text-align-left" i18n:translate="">Left</label>
+		
+									<input type="radio" id="text-align-center" class="text-align center" name="text-align" value="center" />
+									<label for="text-align-center" i18n:translate="">Center</label>
+									
+									<input type="radio" id="text-align-right" class="text-align right" name="text-align" value="right" />
+									<label for="text-align-right" i18n:translate="">Right</label>
+								</div>
+								<div>
+									<div class="col-md-6">
+									<select id="fontselect" name="fontselect" class="form-control">
+										<option value="arial">Arial</option>
+										<option value="ariblk">Arial Black</option>
+										<option value="shelly_script_andante">Andante</option>
+										<option value="itc_clover">Clover</option>
+										<option value="comic">Comic Sans</option>
+										<option value="frabk">Franklin</option>
+										<option value="georgia">Georgia</option>
+										<option value="harrington">Harrington</option>
+										<option value="linotype_feltpen">Linotype</option>
+										<option value="verdana">Verdana</option>
+										<option value="vivaldi">Vivaldi</option>
+										<option value="present">Present</option>
+										<option value="itc_jaft">ITC Jaft</option>
+									</select>
+									</div>
+									<div class="col-md-6" style="position: relative">
+										<input id="new-text-color" class="iColorPicker form-control" value="#000000" type="text" style="width:100px; display: inline"/>
+									</div>
+									
+									<div class="col-md-12 top-15">
+										<label for="new-text" i18n:translate="">Write text here:</label>
+										<!---<input type="text" id="new-text" rows="3" cols="10" class="span-4"></input>-->
+										<TEXTAREA id="new-text" style="height:100px;" class="form-control"></TEXTAREA>
+									</div>
+									
+									
+									
+									
+									
+									<div class="add-text-func top-15 col-md-12">
+										<a class="button blue" id="add-text" i18n:translate="">Add text</a>
+									</div>
+									
+									<div class="update-text-func display-none top-15 col-md-12">
+										<label>Endre størrelse</label>
+										<input class="form-control" type="range" name="text-size" min="0.1" max="5" step="0.01" />
+										<div class="top-15">
+											<button class="btn btn-primary" id="update-text" i18n:translate="">Update text</button>
+											<button class="btn btn-primary" id="delete-text" i18n:translate="">Delete</button>
+										</div>
+										
+									</div>
+									
+								</div>
+							</div>
+							</div>
+							<h3><a href="#" i18n:translate="">Add clipart</a></h3>
+							<div class="functions" style="height:350px">
+			
+								<select id="clipartgroup-selector">
+									<tal:block tal:repeat="clipartgroup collections/clipart">
+										<option tal:condition="clipartgroup/name" tal:content="clipartgroup/name" tal:attributes="value clipartgroup/id"></option>
+									</tal:block>
+								</select>
+								<div id="clipart-selector">
+									<tal:block tal:repeat="clipartgroup collections/clipart">
+										
+										<div id="clipartcollection_id_${clipartgroup/id}" class="clipartcollection" 
+											tal:condition="lte:repeat/clipartgroup/number,1">
+											<h3 tal:content="clipartgroup/name" tal:condition="clipartgroup/name"></h3>
+											<tal:block tal:repeat="item clipartgroup/items">
+												<div class="clipartitem-container" id="clipartitem-container_${item/id}">
+													<img class="clipartitem" alt="${item/id}" 
+														src="${static:}images/clipart/thumbs/width/50/${item/id}.png" id="clipartitem_${item/id}"
+													/>
+													
+												</div>
+											</tal:block>
+										</div>
+	
+										<div id="clipartcollection_id_${clipartgroup/id}" class="clipartcollection display-none" 
+											tal:condition="gt:repeat/clipartgroup/number,1">
+											<h3 tal:content="clipartgroup/name"  tal:condition="clipartgroup/name"></h3>
+											<tal:block tal:repeat="item clipartgroup/items">
+												<div class="clipartitem-container" id="clipartitem-container_${item/id}">
+													<img class="clipartitem" 
+														src="" 
+														title="${static:}images/clipart/thumbs/width/50/${item/id}.png" id="clipartitem_${item/id}"
+													/>
+												</div>
+											</tal:block>
+										</div>
+	
+									</tal:block>
+								</div>
+							</div>
+						</tal:block>
+					</div> <!-- end accordion -->
+					<div class="span-8 last">
+						<div class="box">
+						
+							<h4 i18n:translate="">Choose quantity</h4>
+							
+							<div class="prepend-top append-bottom">
+								<input type="checkbox" name="red-eye" id="red-eye"/>
+								<label for="red-eye">
+									<tal:block i18n:translate="">Please remove red eyes for me.</tal:block>
+									<span class="quiet small">(Kr <span id="redeye-price"></span>)</span>
+								</label>
+							</div>
+							
+							<div class="right">
+								Kr <span class="price" id="gift-price"><tal:block tal:content="formatprice:selected/productoption/prices/0/price"/></span>
+								<label for="gift-quantity"></label>
+								<input type="text" class="quantity" id="gift-quantity" value="1"/>
+								<button class="call-to-action" id="add-gift-to-cart" i18n:translate="">Add to cart</button>
+							</div>
+						</div>
+					</div>
+				</div> <!-- end left side -->
+			
+			</div>
+		
+	</div>
+	<hr class="space clearfix clear"/>
+	</div>
+	</aside>
+</div>
+		
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+<div class="display-none" id="dialog-confirm" title="Det mangler bilder!">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Det mangler bilder på følgende sider (<span id="missing"></span>).<br/>
+							<strong> Det må være bilde på alle sidene før du kan fortsette.</strong></p>
+</div>
+
+<script src="${static:}js/jqupload/js/jquery.iframe-transport.js?${version}"></script>
+<!-- The basic File Upload plugin -->
+<script src="${static:}js/jqupload/js/jquery.fileupload.js?${version}"></script>
+
+<script type="text/javascript">
+var ajaxLoader = '<tal:block tal:content="static:gfx/gui/ajax-loader.gif" />';
+var bigajaxLoader = '<tal:block tal:content="static:gfx/gui/ajax-loader-big.gif" />';
+var bigajaxLoaderGray = '${static:gfx/gui/ajax-loader-gray.gif}';
+var noImagesText = '<tal:block i18n:translate="">No images</tal:block>';
+var deleteText = '<tal:block i18n:translate="">Delete</tal:block>';
+var staticurl = '${static:}';
+var maxHeight = 550;
+var productoptionid = ${selected/productoptionid};
+var websize_x = '${page/websize_x}';
+var websize_y = '${page/websize_y}';
+var zindex = 210;
+var staticsite = "${static:}";
+
+
+
+$( function(){
+	
+	$('#new-text-color').colorPicker();
+	
+	$('input[name="font"]').on( 'change' , function(){
+		var thisvalue = $(this).val()
+		$('.fontpreview label' ).removeClass('selectedborder');
+		$( "#" +  thisvalue + "-label" ).addClass('selectedborder');
+		changebrodering();
+	});
+	
+	$('.namefield').on( 'change' , function(){
+		changebrodering();
+	})
+	
+	$('#borderingpreview').on( 'click', function(){
+		
+		$( "#accordion" ).accordion({ active: 1 });
+		});
+	
+	});
+
+</script>
+
+<!--[if lt IE 7]>
+<script type="text/javascript" src="http://static.repix.no/js/jquery.pngFix.pack.js?1"></script>
+<![endif]-->
+
+
+<script src="${static:js/jquery.colorPicker.min.js}?${version}" type="text/javascript"></script>
+<script src="${static:js/fontloader.js}?${version}" type="text/javascript"></script>
+<script src="${static:js/jquery.panzoom.min.js}?${version}" type="text/javascript"></script>
+<script src="${static:js/create/gift.min.js}?${version}" type="text/javascript"></script>
+<script src="${static:js/multipage-gift-v2.min.js}?${version}" type="text/javascript"></script>
+<script src="${static:}js/uploadhandlers.js?${version}" type="text/javascript"></script>
+<script src="${static:js/jquery.uploadify.v2.0.3.min.js}" type="text/javascript"></script>
+<!-- Google Code for Gavegenerator - steg 2 Conversion Page -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1070265469;
+var google_conversion_language = "no";
+var google_conversion_format = "2";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "WBXuCKXBxAEQ_eir_gM";
+var google_conversion_value = 0;
+//-->
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1070265469/?label=WBXuCKXBxAEQ_eir_gM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+</body>
+</html>

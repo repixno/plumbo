@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+</head>
+
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+	<div metal:use-macro="../../${templates}/common.html/left-menu" />
+	
+	<div class="span-19 last">
+	
+
+			<h2 i18n:translate="">Make enlargments, as easy as it gets!</h2>
+			<div class="span-13">
+
+				<img src="http://static.eurofoto.no/gfx/tests/flowers.jpg" id="cropbox" />
+	
+				<!-- This is the form that our event handler fills 
+				<form onsubmit="return false;">
+					<label>X1 <input type="text" size="4" id="x" name="x" /></label>
+					<label>Y1 <input type="text" size="4" id="y" name="y" /></label>
+					<label>X2 <input type="text" size="4" id="x2" name="x2" /></label>
+					<label>Y2 <input type="text" size="4" id="y2" name="y2" /></label>
+					<label>W <input type="text" size="4" id="w" name="w" /></label>
+					<label>H <input type="text" size="4" id="h" name="h" /></label>
+				</form>
+				-->
+			
+			</div>
+			
+			<div class="span-6 last jcropmenu">
+				<!--<div style="width:100px;height:100px;overflow:hidden;">
+					<img src="http://static.eurofoto.no/gfx/tests/flowers.jpg" id="preview" />
+				</div>-->
+				
+				<form>
+					<fieldset>
+						<legend>Choose orientation:</legend>
+						<input type="radio" id="jCropPortrait" checked="checked" name="orientation"/>
+						<label for="jCropPortrait">Portrait</label>
+						<input type="radio" id="jCropLandscape"  name="orientation"/>
+						<label for="jCropLandscape">Landscape</label>
+					</fieldset>
+					
+					<div id="accordion">
+						
+						<h3><a href="#">Canvas prints</a></h3>
+						<div id="canvas-prints">
+							<button id="anim1">50x70</button>
+							<button id="anim2">70x100</button>
+							<button id="anim3">50x50</button>
+							<button id="anim4">50x100</button>
+							<button id="anim5">100x100</button>
+							<button id="setsel">Set</button>
+						</div>
+
+						<h3><a href="#">Glossy posters</a></h3>
+						<div id="canvas-prints">
+							<button id="anim1">50x70</button>
+							<button id="anim2">70x100</button>
+							<button id="anim3">50x50</button>
+							<button id="anim4">50x100</button>
+							<button id="anim5">100x100</button>
+							<button id="setsel">Set</button>
+						</div>
+
+						<h3><a href="#">Standard enlargements</a></h3>
+						<div id="standard-enlargements">
+							<button id="anim1">50x70</button>
+							<button id="anim2">70x100</button>
+							<button id="anim3">50x50</button>
+							<button id="anim4">50x100</button>
+							<button id="anim5">100x100</button>
+							<button id="setsel">Set</button>
+						</div>
+						
+						<h3><a href="#">Enlargement in frames</a></h3>
+						<div id="enalrgement-in-frames">
+							<button id="anim6">10x13</button>
+							<button id="anim7">10x15</button>
+							<button id="anim8">15x20</button>
+							<button id="anim9">20x25</button>
+							<button id="anim10">25x30</button>
+							<button id="setsel">30x40</button>
+						</div>
+					
+					</div>
+					
+					<br />
+					<p class="right">
+					<span class="price">kr 59,-</span>
+					<button class="large call-to-action">
+						<span class="ss_sprite ss_cart_add" />
+						Add to cart
+					</button>
+					</p>
+				</form>
+			</div>
+			
+   
+	</div>
+
+</div>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+	<!-- jCrop -->
+<script src="http://static.eurofoto.no/js/jquery.Jcrop.min.js"></script>
+
+<script language="Javascript">
+
+	$(window).load(function(){
+		var api = $.Jcrop('#cropbox',{
+			setSelect: [ 100, 100, 200, 200 ],
+			/*onChange: showCoords,
+			onSelect: showCoords,*/
+			addClass: 'jCropEurofoto',
+			bgColor: 'black',
+			bgOpacity: .3,
+			sideHandles: true
+
+		});
+		var i, ac;
+
+		// A handler to kill the action
+		function nothing(e)
+		{
+			e.stopPropagation();
+			e.preventDefault();
+			return false;
+		};
+
+		// Returns event handler for animation callback
+		function anim_handler(ac)
+		{
+			return function(e) {
+				api.animateTo(ac);
+				return nothing(e);
+			};
+		};
+
+		// Setup some coordinates for animation
+		var ac =
+		{
+			anim1: [50,50,450,320],
+			anim2: [74,81,218,228],
+			anim3: [8,8,32,360],
+			anim4: [316,150,470,230],
+			anim5: [80,160,500,190],
+			anim6: [50,50,450,320],
+			anim7: [74,81,218,228],
+			anim8: [8,8,32,360],
+			anim9: [316,150,470,230],
+			anim10: [80,160,500,190]
+		};
+
+		// Attach respective event handlers
+		for(i in ac) jQuery('#'+i).click(anim_handler(ac[i]));
+
+		// Attach another one manually, to demonstrate "set" w/o animation
+		jQuery('#setsel').click(function(e) {
+			api.setSelect( [ 200, 200, 300, 300 ] );
+			return nothing(e);
+		});
+
+	});
+	
+	/*
+	function showCoords(c)
+	{
+		jQuery('#x').val(c.x);
+		jQuery('#y').val(c.y);
+		jQuery('#x2').val(c.x2);
+		jQuery('#y2').val(c.y2);
+		jQuery('#w').val(c.w);
+		jQuery('#h').val(c.h);
+	};*/
+	
+	$(document).ready( function() {
+		$("#accordion").accordion();
+	});
+	
+</script>
+	
+</body>
+</html>

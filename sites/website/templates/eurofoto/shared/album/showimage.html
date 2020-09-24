@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle">${image/title}</tal:block>
+	<meta name="title" content="${image/title}" />
+	<meta name="description" content="${image/description}" />
+	<link rel="image_src" href="${request/systemroot}${image/screensize}" />
+</head>
+<body>
+
+<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+	<div id="content">
+
+		<tal:block condition="exists: image">
+			<h2 class="hide">
+				<tal:block i18n:translate="">Image</tal:block>: <span class="quiet" tal:content="image/name | default">
+				<tal:block i18n:translate="">No image title</tal:block></span>
+			</h2>
+		
+		
+			<div class="span-8 append-8 last">
+				<a href="${image/urls/sharedalbum}"> <tal:block i18n:translate="">Back to album</tal:block></a>
+			</div>
+			
+			<div class="span-8 prepend-top">
+				<h4 style="margin-left: 10px" class="title quiet" tal:content="image/title | default" id="${image/id}">
+					<tal:block i18n:translate="">No image title</tal:block>
+				</h4>
+			</div>
+			
+			<div class="span-8 last right prepend-top right">
+				
+				<a id="previmage" i18n:translate="" tal:condition="exists:previmage" href="${previmage/urls/shared}" 
+					title="${previmage/title}">Previous image</a> | 
+				<span id="currentImage">${imagenumber}</span> <tal:block i18n:translate="">of</tal:block> <span id="totalImages">${imagecount}</span> | 
+				<a id="nextimage" i18n:translate="" tal:condition="exists:nextimage" href="${nextimage/urls/shared}" title="${nextimage/title}">Next image</a>
+				
+				
+				<a href="/images/download/${image/id}" tal:condition="album/access/download" i18n:translate="">Download</a>
+				
+			</div>
+
+			<div class="span-16 last imageconatiner center">
+				<!-- the image -->
+				<img tal:attributes="src string: ${image/fullsize}/630/400" alt="${image/name}" class="bigimage" id="image"/>
+			</div>
+			
+			<div class="span-10 prepend-top">
+				<p class="description"> 
+					<tal:block tal:condition="image/description" tal:content="image/description" />
+				</p>
+				<span class="hide" tal:content="image/aid" id="albumid"></span>
+				<span class="hide" tal:content="image/id" id="imageid"></span>
+			</div>
+			
+		</tal:block>
+		
+		<tal:block condition="not: exists: image">
+			<h2 i18n:translate="">No image here</h2>
+			<p i18n:translate="">Sorry, but here is no image.</p>
+			<p><a href="/myaccount" i18n:translate="">Go back to my photo account</a></p>
+		</tal:block>
+		
+	</div>
+	<!--<div metal:use-macro="../common.html/right-image-menu" />-->
+</div>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+</body>
+</html>

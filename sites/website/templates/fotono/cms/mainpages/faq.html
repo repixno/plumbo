@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+	<tal metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title"/>
+
+	
+	<style type="text/css">
+
+   .page-top {
+      height: 150px;
+      <tal:block tal:condition="exists:menuitem/article/attachments/background">
+         background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+      </tal:block>
+      background-repeat:no-repeat;
+   }
+
+   .helpmenu {
+      font-size:1.1em;
+      font-weight: bold;
+      padding-top: 0.3em;
+      padding-bottom: 0.3em;
+   }
+
+   .cases{
+      position: relative;
+      padding-bottom: 1em;
+   }
+   .catqanda li{
+      color: #555;
+      list-style: none;
+      padding-bottom: 0.6em;
+      padding-left: 0.5em;
+   }
+   .help{
+      position: relative;
+      padding-top: 1.3em;
+      padding-right: 0.5em;
+      padding-bottom: 0.3em;
+      padding-left: 0.5em;
+   }
+   .helptitle{
+      border-radius: 10px;
+      font-size:1.1em;
+      font-weight: normal;
+      background-color: #fff;
+      border-bottom: 1px solid #fff;
+      padding-top: 0.3em;
+      padding-right: 0.5em;
+      padding-bottom: 0.3em;
+      padding-left: 0.5em;
+   }
+   .helptitleSelected{   
+      font-size:1.2em;
+      font-weight: bold;
+      padding-top: 0.3em;
+      padding-right: 0.5em;
+      padding-bottom: 0.3em;
+      padding-left: 0.5em;
+   }
+   .helpcatbox{
+      border-radius: 10px;
+      border: 1px solid #000;
+   
+   }
+
+   </style>
+</head>
+
+<body>
+<tal:block metal:use-macro="../../../${templates}/common.html/top" />
+<div class="container"> 
+
+	<div class="row">
+		
+			<!--<div class="col-md-2 hidden-xs left-menu">
+                <div metal:use-macro="../../../${templates}/common.html/leftmenu" />
+            </div>-->
+			<div class="col-md-12">
+				<div class="col-md-12">
+					<div metal:use-macro="../cms.html/menu-current" />
+				</div>
+				<div class="col-md-12">
+				   <div class="col-md-12 last page-top top">
+					  <div class="content">
+		  
+					  </div>
+				  </div>
+				   
+				   <div class="row help">
+					  <div class="col-md-12 last">
+						 <h3>${menuitem/article/title}</h3>
+						  <p tal:content="structure menuitem/article/body|default"></p>
+					  </div>
+					  <div id="output">
+					  
+					  </div>  
+				   </div>
+				</div>
+			</div>
+		
+		</div>
+	</div>
+
+
+	<div metal:use-macro="../../../${templates}/common.html/footer" />
+
+
+<SCRIPT type="text/javascript">
+$(document).ready(function(){
+      
+     <tal:block tal:condition="php: portal == 'FC-001'">
+          $.get( '/doc/faq.xml', parseXml );
+     </tal:block>
+     <tal:block tal:condition="php: portal != 'FC-001'">
+          $.get( '/images/attachments/${menuitem/article/id}/${menuitem/article/attachments/Xml}', parseXml );
+     </tal:block>
+     
+
+      $(document).on('click', 'div.helpmenu', function() {
+          $('.helpcatbox').removeClass('helpcatbox');
+          $('.catqanda').fadeOut("fast");
+                  
+         if(this.id == 'selected'){
+           $(this).next().slideToggle('slow');
+           this.id = "unselected";
+           $(this).children(':first').removeClass('ui-icon-triangle-1-s').addClass('ui-icon-triangle-1-e');
+         }
+         else{
+           $('.helpmenu').attr('id','unselected');  
+           $('.cases').hide('slow');
+           $('.triangle-cases').removeClass('ui-icon-triangle-1-s').addClass('ui-icon-triangle-1-e');
+           $(this).children(':first').removeClass('ui-icon-triangle-1-e').addClass('ui-icon-triangle-1-s');
+           $(this).next().slideToggle('slow');
+           this.id = "selected";  
+         }
+     }); 
+        
+     $(document).on('click', '.helptitle',  function() {
+
+        if(this.id == 'selected'){
+           this.id = "unselected";
+           $(this).parent('div').removeClass('helpcatbox span-20 last');
+           $(this).children().removeClass('ui-icon-triangle-1-s').addClass('ui-icon-triangle-1-e');
+           $(this).next('div').fadeOut('fast');
+           
+        }
+        else{
+            $('.helptitle').attr('id','unselected'); 
+           $('.triangle-cat').removeClass('ui-icon-triangle-1-s').addClass('ui-icon-triangle-1-e');
+           $('.helpcatbox').removeClass('helpcatbox span-20 last');
+           $(this).parent('div').addClass('helpcatbox span-20 last');
+           $(this).children().removeClass('ui-icon-triangle-1-e').addClass('ui-icon-triangle-1-s');
+           $('.catqanda').fadeOut('slow');
+           $(this).next('div').fadeIn('slow');
+           this.id = "selected"; 
+        }  
+        
+      });
+      
+      if(navigator.platform == 'iPad' || navigator.platform == 'iPhone' || navigator.platform == 'iPod'){
+      $(document).on('touchstart touchend', '.helptitle', function(event) {
+        if (event.type == 'touchstart') {
+          $(this).css("text-decoration", "underline").css("cursor", "pointer").css( 'background-color' , '#eee');
+        } else {
+           $(this).css("text-decoration", "none").css( 'background-color' , '#fff');
+        }
+      }); 
+     $(document).on('touchstart touchend', '.helpmenu', function(event) {
+        if (event.type == 'touchstart') {
+          $(this).children(':first').next().css( "text-decoration" , "underline" ).css( "cursor" , "pointer" );
+          $(this).css( 'background-color' , '#eee');
+        } else {
+          $(this).children(':first').next().css("text-decoration", "none");
+           $(this).css( 'background-color' , '#fff');
+        }
+     });
+     }
+     else{
+      $(document).on('mouseover mouseout','.helptitle',  function(event) {
+        if (event.type == 'mouseover') {
+          $(this).css("text-decoration", "underline").css("cursor", "pointer").css( 'background-color' , '#eee');
+        } else {
+           $(this).css("text-decoration", "none").css( 'background-color' , '#fff');
+        }
+      });
+      
+     $(document).on('mouseover mouseout', '.helpmenu', function(event) {
+        if (event.type == 'mouseover') {
+          $(this).children(':first').next().css( "text-decoration" , "underline" ).css( "cursor" , "pointer" );
+          $(this).css( 'background-color' , '#eee');
+        } else {
+          $(this).children(':first').next().css("text-decoration", "none");
+           $(this).css( 'background-color' , '#fff');
+        }
+     });
+     }
+
+});
+
+function parseXml(xml){
+  
+  
+  //fix some stupid title-issue with HTML parsing
+  //xml = xml.replace( /title/g, 'element' );
+  
+  $(xml).find('category').each(function(){
+      var helpcats = '';
+      
+      $(this).find('title').each(function(){
+      helpcats += 
+       	'<div>' + 
+      	  '<div class="helptitle span-19" id="unselected">' +
+      	     '<div class="ui-icon ui-icon-triangle-1-e triangle-cat span-1"></div>' +
+      	     '<div class="">' + $(this).attr('name') + '</div>' +
+      	  '</div>' +
+      	  '<div class="catqanda span-20 last display-none">' +
+         	  '<ul>' + 
+      	     '<b class="strong">' + $(this).find('question').text() + '</b>' +
+         	  '<li>' + $(this).find('answer').text() + '</li>';
+  
+      	
+      	  $(this).find('link').each(function(){ 
+      	     
+      	    if(!$(this).attr('target')){
+      	       var target = '_parent'
+      	    }
+      	    else{
+      	       var target = $(this).attr('target');
+      	    }
+
+            helpcats += '<li><a href="' + $(this).attr('href') + '" target="' + target + '">' + $(this).text() + '</a></li>';
+        
+         });
+         
+         helpcats += '</ul></div></div>';
+      });
+      
+    $('#output').append(
+      '<div class="helpmenu span-20 last" id="unselected">' +
+      '<div class="ui-icon ui-icon-triangle-1-e triangle-cases span-1"></div>' +
+      '<div class="category span-19 last">' + $(this).attr('name') + '</div>' +
+      '</div>' +
+      '<div class="cases display-none span-20 last">' +
+      helpcats +
+      '</div>'
+    );
+    
+  });
+}
+
+</SCRIPT>
+
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<tal:block metal:define-macro="head">
+	
+	<script>
+		window.location.replace("http://www.felix.se/");
+	</script>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link rel="shortcut icon" href="/felix/favicon.ico"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Felix</title>
+    <!-- Bootstrap core CSS -->
+    <link href="${static:}css/bootstrap/css/bootstrap.css?${version}" rel="stylesheet"/>
+    <link href="/felix/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="${static:}css/portals/felix/template.css?${version}-3" rel="stylesheet"/>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    <script type="text/javascript" src="${static:css/bootstrap/js/bootstrap.js}?${version}"></script>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
+    <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+        <script>
+	    WebFont.load({
+		      custom: {
+                families: ['felix_scriptregular', 'lets_eatregular', 'brandon_printedone' ],
+                urls: ['/felix/fonts/stylesheet.css', '/felix/fonts/letseat/stylesheet.css' , '/felix/fonts/brandon/stylesheet.css'  ],
+		      },
+              active: function(){
+                //console.log("daooasdo")
+                }
+		    });
+		</script>
+</tal:block>
+
+<tal:block metal:define-macro="top">
+
+
+</tal:block>
+
+
+<tal:block metal:define-macro="facebook">
+
+<div class="hidden-xs row" style="position:relative">
+    <div id="fb-root"></div>
+
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/sv_SE/sdk.js#xfbml=1&version=v2.3&appId=455931714459759";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <div class="likefacebook">
+          <div class="fb-like" data-href="https://www.facebook.com/felix" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+      </div>
+
+</div>
+</tal:block>
+
+<tal:block metal:define-macro="footer">
+    <div class="footer" style="width: 95%;">
+			<div class="">
+				I SAMARBETE MED <a href="http://www.japanphoto.se/" target="blank"><img src="/felix/JP-logo.png" alt="Japan Photo" title="Japan Photo"/></a>
+				<a href="http://www.japanphoto.se/" target="blank">www.japanphoto.se</a> | 
+				Varumärket FELIX® ägs av Orkla Foods Sverige AB, Box 4249, 203 13 Malmö. Kontakta oss 020–75 00 10.
+			</div>
+		</div>
+
+</tal:block>

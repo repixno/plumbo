@@ -1,0 +1,379 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+	
+
+	<tal metal:use-macro="common.html/head" />
+	
+	<link rel="stylesheet" href="/js/bootstrap.colorpickersliders.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/css/minilapp.css" type="text/css" media="screen, projection" />-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<style>
+		.pop {
+			height: 53px;
+			width: 107px;
+			background-repeat: no-repeat;
+		}
+
+		.pop2 {
+			height: 53px;
+			width: 107px;
+			background-repeat: no-repeat;
+		}
+
+		.pop3 {
+			height: 53px;
+			width: 107px;
+			background-repeat: no-repeat;
+		}
+
+		.previous {
+			background-color: #ffffff;
+			color: black;
+		}
+
+		.next {
+			background-color: #ffffff;
+			color: white;
+		}
+
+		.round {
+			border-radius: 50%;
+		}
+
+
+		.carousel {
+			text-align: center;
+		}
+
+
+		.carousel-indicators {
+			top: 170px;
+		}
+
+		#bak {
+			background-size: 41px !important;
+			background-repeat: no-repeat !important;
+			background-position-y: 4px !important;
+		}
+
+	</style>
+	
+</head>
+
+
+<body>
+
+
+<div metal:use-macro="../../${templates}/common.html/top" />
+
+
+
+
+
+
+<div class="container editorcontainer">
+<div class="content">	
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Minilapper</h3>
+			<div class="row">
+			
+				<form id="edit">
+					
+						<div class="col-md-4">
+						
+								<div class="previewcontainer text-center">
+										<h3 class="text-center" i18n:translate="">Legg inn navn eller initialer</h3>
+									<label for="line1" class="">
+									
+									</label>
+									
+										<input type="text" class="form-control" style=" text-indent: 27px;" name="line1" id="line1" maxlength="20" placeholder="Tekst på minilapp"/>
+									
+								</div>
+								
+								
+									</div>
+						
+						
+						
+								
+
+                        
+                           <div class="col-md-8">
+							<div class="previewcontainer text-center">
+								<p style="color: #10befc;" ><strong i18n:translate="">Preview:</strong></p>
+							  <div id="sticker">
+								 <!--<img id="preview" class="sticker " src="${static:gfx/merkelapp/template_merkelapp.png}" />-->
+									 <img id="preview" class="sticker " src="/gfx/merkelapp/template_merkelapp_308.png" />
+							  </div>
+						
+							<div class="top15 ">
+								
+								<a id="removeall" class="btn btn-info" href="#">Nullstill</a>
+								<a id="update" class="btn btn-info" href="#">Oppdater</a>
+							</div>
+						</div>
+                        	</div>
+                          
+                   
+                        
+                     
+                        		<div class="col-md-4 margin54 hide">
+							<h5 i18n:translate="">Skrift-type:</h5>
+							<div class="selectdiv">
+								<label for="font-type" >
+								
+							<select class="form-control" name="font-type">
+								<option value="arial">Arial</option>
+								<option value="comicbd">Comic Sans</option>
+								<option value="verdanab">Verdana bold</option>
+							</select>
+							</label>
+						</div>
+							</div>
+						
+						
+						
+					<div class="col-md-8 col-xs-12 margin54">
+							<h5>Tekst Farge</h5>
+							<label for="swatchesonly">
+							<input type="text" name="font-color"  id="swatchesonly" class="usynlig" value="#4d9ebc" />
+							</label>
+						</div>
+						
+							
+					
+                      
+		
+
+             <div class="col-md-6 bs-example form-inline">
+							
+							
+																			<!-- BACKGROUND MERKELAPP -->
+													<div role="tabpanel" class="tab-pane nomargin" id="pop3">	
+															<div class="tab-content tab-pane backgrounds">
+						
+																
+																<div id="myCarousel3" class="carousel slide" data-ride="carousel" data-interval="false">
+																		 
+																			<ol class="carousel-indicators">
+																			<li data-target="#myCarousel3" data-slide-to="0" class="active"></li>
+																			<li data-target="#myCarousel3" data-slide-to="1"></li>
+																		
+																			</ol>
+																																																							<!-- BACKGROUND MERKELAPP -->
+																	
+																			<div class="carousel-inner">
+																						<div class="item active">
+																							        <button class="pop3" id="clip" style="background: url( gfx/merkelapp/backgroundfiles/minikvit.jpg)"  data-bg="Ensfarget-kvit.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/offwhite.jpg)"  data-bg="Ensfarget-offwhite.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/lysbeige.jpg)" data-color="#000000" data-bg="Ensfarget-lysbeige.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget//lysgrå.jpg)" data-bg="Ensfarget-lysgrå.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/grågrønn.jpg)" data-bg="Ensfarget-grågrønn.jpg" data-clipart=""></button>
+																									<br/>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/lysrosa.jpg)" data-bg="Ensfarget-lysrosa.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget//blå.jpg)" data-bg="Ensfarget-blå.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/lysbrun.jpg)" data-bg="Ensfarget-lysbrun.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/sennep.jpg)" data-bg="Ensfarget-sennep.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/mint.jpg)" data-bg="Ensfarget-mint.jpg" data-clipart=""></button>
+																									<br/>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/fersken.jpg)" data-bg="Ensfarget-fersken.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/gul.jpg)" data-bg="Ensfarget-gul.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/himmelblå.jpg)" data-bg="Ensfarget-himmelblå.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/lime.jpg)" data-bg="Ensfarget-lime.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/rosa.jpg)" data-bg="Ensfarget-rosa.jpg" data-clipart=""></button>
+																					
+																						
+																						</div>
+																							<div class="item">
+																								
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/gull.jpg)" data-bg="Ensfarget-gull.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/orange.jpg)" data-bg="Ensfarget-orange.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/brun.jpg)" data-bg="Ensfarget-brun.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/plomme.jpg)" data-bg="Ensfarget-plomme.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/lilla.jpg)" data-bg="Ensfarget-lilla.jpg" data-clipart=""></button>
+																									<br/>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/knasjrosa.jpg)" data-bg="Ensfarget-knasjrosa.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/rød.jpg)" data-bg="Ensfarget-rød.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/gråblå.jpg)" data-bg="Ensfarget-gråblå.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/sjøgrønn.jpg)" data-bg="Ensfarget-sjøgrønn.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/mørkblå.jpg)" data-bg="Ensfarget-mørkblå.jpg" data-clipart=""></button>
+																									<br/>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/grønn.jpg)" data-bg="Ensfarget-grønn.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/kull.jpg)" data-bg="Ensfarget-kull.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/turkis.jpg)" data-bg="Ensfarget-turkis.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/svart.jpg)" data-color="#fffffff" data-bg="Ensfarget-svart.jpg" data-clipart=""></button>
+																									<button class="pop3" id="clip" style="background: url( /gfx/merkelapp/backgroundfiles/Ensfarget/offwhite.jpg)"  data-bg="Ensfarget-offwhite.jpg" data-clipart=""></button>
+																					
+																						
+																							</div>
+
+																			</div>
+																		
+														
+																						<a class="left carousel-control" href="#myCarousel3" data-slide="prev">
+																						  <span class="glyphicon glyphicon-chevron-left"></span>
+																						  <span class="sr-only">Previous</span>
+																						</a>
+																						<a class="right carousel-control" href="#myCarousel3" data-slide="next">
+																						  <span class="glyphicon glyphicon-chevron-right"></span>
+																						  <span class="sr-only">Next</span>
+																						</a>
+																</div>				
+															</div>						
+													</div>
+							
+							
+						  </div>
+			 
+			 
+			 
+			 
+			 	<div class="col-md-5">
+			<tal metal:use-macro="common_minilapp.html/productlist" />
+		<hr class="visible-xs" />
+        
+		</div>
+				
+				
+                                    
+        
+					
+					<hr/>
+                    <hr/>
+			
+					
+				</form>		
+			</div>
+		
+
+				
+              
+		
+		</div>
+		
+			   
+			   
+
+	</div>
+	
+	
+</div>
+</div>
+
+
+
+
+
+
+<div metal:use-macro="../../${templates}/common.html/footer" />
+
+
+
+<SCRIPT type="text/javascript">
+   var clipart = '';
+   var ownimage = '';
+   var treshhold = 100;
+   var imageselection = Object();
+   var projectid = ${projectid};
+   var gravity = 'center'; 
+   var category = 'senior';
+   var backgroundcat = '';
+   var backgroundfile = '';
+   var totalprice = ${cart/totalprice};
+   var staticroot = "/";
+   var type = 'fargelapp';
+   var disabled = true;
+   var alertmessage = 'false';
+   var colormode = 'color';
+</SCRIPT>
+<script type="text/javascript" src="/js/mini.js"></script>
+<script src="${static:}js/jqupload/js/vendor/jquery.ui.widget.js?${version}"></script>
+<script src="${static:}js/jqupload/js/jquery.iframe-transport.js?${version}"></script>
+	<!-- The basic File Upload plugin -->
+<script src="${static:}js/jqupload/js/jquery.fileupload.js?${version}"></script>
+<script type="text/javascript" src="/js/imgareaselect.js"></script>
+<!--<script type="text/javascript" src="/js/dm3_merkelapp.js"></script>-->
+<script src="/js/tinycolor.js"></script>
+<script src="/js/bootstrap.colorpickersliders.js"></script>
+<script type="text/javascript">/*<![CDATA[*/
+
+	
+	
+		$( function(){
+		
+        $("input#swatchesonly").ColorPickerSliders({
+          placement: 'bottom',
+          previewformat: 'hex',
+		  customswatches: false,
+		  flat: true,
+		  swatches:["#000000", "#5c5c69",  "#ffffff", "#0000ff",   "#00ccff", "#315681", "#1a7ae8", "#6699cc", "#330066" ,"#12ff00", "#1a8228", "#c339da",   "#ffc107", "#f44336", "#ff5722", "9c27b0", "#a5793f", "#cad83b", "#28a2bf", "#bf2858"  ],
+		  sliders: false,
+		  onchange: function(container, color) {
+                update();
+            }
+        });
+		
+			updatetotal();
+		$( document ).scroll(function(ret) {
+					if( $(document).width() < 768 ){
+						var offsety = ret.currentTarget.body.scrollTop;
+						if( offsety < 51 ){
+							$('.previewcontainer').css('top', ( 90 - offsety ) + 'px');
+						}
+						else{
+							$('.previewcontainer').css('top', '0px');
+						}
+					
+					}
+				  });
+		
+		$( window ).load(function() {
+			hideloader();
+		  });
+	});
+		
+		
+$('body').on('click', '.div-link a', function() {  
+	$('.single').hide();
+	$('.div-link li').removeClass('active');
+	var openId = $(this).attr('href');
+	$(openId).show();
+	$(this).parent().addClass('active');
+    
+    if ($('#a').is(':hidden')) {
+		$('.back').show();
+	} else {
+		$('.back').hide();
+	};
+    
+    if ($('#c').is(':hidden')) {
+		$('.next').show();
+	} else {
+		$('.next').hide();
+	};
+    
+});
+
+$('.back').click(function(){
+	$('.div-link .active').prev().children('a').click();
+});
+
+$('.next').click(function(){
+    $('.div-link .active').next().children('a').click();
+});
+
+
+	
+/*]]>*/	
+</script>
+
+
+
+
+</body>
+</html>

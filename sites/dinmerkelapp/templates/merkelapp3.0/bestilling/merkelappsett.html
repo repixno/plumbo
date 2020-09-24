@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+	
+
+	<tal metal:use-macro="common.html/head" />
+	
+	<link rel="stylesheet" href="/js/bootstrap.colorpickersliders.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/css/bestilling.css" type="text/css" media="screen, projection" />
+		<link rel="stylesheet" href="/css/merkelappsett.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	
+	<style>
+.form-control {
+  
+    border-color: #ade3ff;
+    border-radius: 2px;
+
+}
+
+
+
+#slide {
+    position: absolute;
+    left: -100px;
+    width: 100px;
+    height: 100px;
+    background: blue;
+    -webkit-animation: slide 0.5s forwards;
+    -webkit-animation-delay: 2s;
+    animation: slide 0.5s forwards;
+    animation-delay: 2s;
+}
+
+@-webkit-keyframes slide {
+    100% { left: 0; }
+}
+
+@keyframes slide {
+    100% { left: 0; }
+}
+
+
+
+	</style>
+	
+</head>
+
+
+<body>
+
+
+<div metal:use-macro="../../${templates}/common.html/top" />
+
+<div class="container editorcontainer">
+<div class="content" style="background: none; position: relative">
+	
+	<div style="background: #fff; opacity: 0.97; width: 100%; height: 100%; position: absolute;left: 0px;top: 0px;"></div>
+	<div class="row">
+		<div class="col-md-12">
+			<form method="post" action="/bestilling/merkelappsett/addtocart">
+			<div class="col-md-6 form-horizontal margintop30">
+							
+								<div class="form-group ">
+									<label for="line1" class="col-sm-3 control-label visible-lg"><span i18n:translate="">Linje</span> 1:</label>
+									<div class="col-sm-9">
+										<input type="text" class="text form-control" name="line1" id="line1" maxlength="18" placeholder="Feks Fornavn"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label visible-lg"><span i18n:translate="">Linje</span> 2:</label>
+									<div class="col-sm-9">
+										<input type="text" class="text form-control" name="line2" maxlength="18" placeholder="Feks Etternavn"/>
+									</div>
+								</div>
+								<div class="form-group">	
+									<label class="col-sm-3 control-label visible-lg"><span i18n:translate="">Linje</span> 3:</label>
+									<div class="col-sm-9">
+										<input type="text"  class="text form-control" name="line3" maxlength="18" placeholder="Feks Telefonnummer"/>
+									</div>
+								</div>
+								<div class="form-check">
+									<div class="col-sm-3">
+										
+									</div>
+									<div class="col-sm-9">
+										<input type="checkbox" class="form-check-input" id="blank" checked="true" />
+										<label class="form-check-label bglabel" for="blank"  >Slå av bakgrunn</label>
+									</div>
+
+								</div>
+						</div>
+					<div class="col-md-5">		
+										<tal metal:use-macro="common_merkelappsett.html/productlist" />
+            	</div>
+				</form>
+		</div>
+			   
+	
+					</div>
+	
+  <div class="row" style="padding-top:2px;">
+   <div class="col-md-10 col-md-offset-1">
+      <div class="carousel carousel-showthreemoveone slide" id="carousel123">
+        <div class="carousel-inner">
+			
+          <div class="item active">
+			<!--
+			  <div class="col-xs-6 col-sm-4 col-md-3"><a href="#" class="template" data-mal="Blomster" data-artnr="6018"><img src=Dette er bilde i rulatoren"/gfx/mix_rotator/mix2ikon.png" class="img-responsive kutopp"/></a></div>
+	--><div class="col-xs-6 col-sm-4 col-md-3"><a href="#" class="template" data-mal="Dyr" data-artnr="6026"><img src="/gfx/mix_rotator/Animal.png" class="img-responsive kutopp"/></a></div>
+            
+          </div>
+		   <div class="item">
+            <div class="col-xs-6 col-sm-4 col-md-3"><a href="#" class="template" data-mal="Transport" data-artnr="6020"><img src="/gfx/mix_rotator/Transport.png" class="img-responsive kutopp"/></a></div>
+          </div>
+		   
+		  
+		      <div class="item">
+            <div class="col-xs-6 col-sm-4 col-md-3"><a href="#" class="template" data-mal="Jente" data-artnr="6022"><img src="/gfx/mix_rotator/Girls.png" class="img-responsive kutopp"/></a></div>
+          </div>
+          <div class="item">
+            <div class="col-xs-6 col-sm-4 col-md-3"><a href="#" class="template" data-mal="Monster" data-artnr="6024"><img src="/gfx/mix_rotator/Monster.png" class="img-responsive kutopp"/></a></div>
+          </div>
+          <div class="item">
+			 <div class="col-xs-6 col-sm-4 col-md-3"><a href="#" class="template" data-mal="BW" data-artnr="6030"><img src="/gfx/mix_rotator/BW.png" class="img-responsive kutopp"/></a></div>
+			 
+            
+          </div>          
+          <div class="item">
+            <div class="col-xs-6 col-sm-4 col-md-3"><a href="#" class="template" data-mal="Gutt" data-artnr="6028"><img src="/gfx/mix_rotator/Boys.png" class="img-responsive kutopp"/></a></div>
+          </div>
+          <div class="item">
+           <div class="col-xs-6 col-sm-4 col-md-3"><a href="#" class="template" data-mal="Blomster" data-artnr="6018"><img src="/gfx/mix_rotator/Flower.png" class="img-responsive kutopp"/></a></div>
+          </div>
+          
+          
+        </div>
+        <a class="left carousel-control" href="#carousel123" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+        <a class="right carousel-control" href="#carousel123" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+
+	
+	
+			<div class="row">
+				
+		<div class="col-md-10 col-md-offset-1">
+			
+			
+				
+            <div class="text-center">	    
+			
+				
+  
+		<div>
+			<img src="/api/1.0/merkelapp/merkelappsett?projectid=test&line1=&line2=&line3=&mal=Dyr" id="preview" style="margin: 0 auto;" class="img-responsive magrinbottom"/>
+		</div>
+		<!-- Åpnes ved valg i karusel?
+		<a href="#"><img src="/gfx/preview1.png" class=""/></a>
+		<a href="#"><img src="/gfx/preview1.png" class=""/></a>
+		<a href="#"><img src="/gfx/preview1.png" class=""/></a>
+		<a href="#"><img src="/gfx/preview1.png" class=""/></a>
+		<a href="#"><img src="/gfx/preview1.png" class=""/></a>
+		<a href="#"><img src="/gfx/preview1.png" class=""/></a>
+		<a href="#"><img src="/gfx/preview1.png" class=""/></a>
+		-->
+
+			 </div>
+			
+			
+			
+			
+			
+        </div>        
+	</div>
+	</div>
+	</div>
+
+
+
+<div class="container">
+
+<div metal:use-macro="../../${templates}/common.html/footer" />
+
+</div>
+<script src="${static:}js/jqupload/js/vendor/jquery.ui.widget.js?${version}"></script>
+<script src="${static:}js/jqupload/js/jquery.iframe-transport.js?${version}"></script>
+	<!-- The basic File Upload plugin -->
+<script src="${static:}js/jqupload/js/jquery.fileupload.js?${version}"></script>
+<script type="text/javascript" src="/js/imgareaselect.js"></script>
+<script type="text/javascript" src="/js/merkelappsett.js"></script>
+
+
+<script src="/js/tinycolor.js"></script>
+<script src="/js/bootstrap.colorpickersliders.js"></script>
+<script type="text/javascript">/*<![CDATA[*/
+
+var mal = 'Dyr';
+var blank = '';
+
+$(function(){
+  $('#carousel123').carousel({ interval: 8000 });
+  
+  $('#blank').on( 'change', function(){
+		var thischecked =  $(this).prop('checked');
+		if( !thischecked ){
+			blank = 'UB';
+			$('.bglabel').text('Slå på bakgrunn');
+		}
+		else{
+			blank = '';
+			$('.bglabel').text('Slå av bakgrunn');
+		}
+	
+		$('.malinput').val( $('.choose_product').val() + blank );
+	
+		update();
+	});
+  
+  
+  $(document).on( 'click', '.template', function(){
+		mal = $(this).data('mal');
+		console.log(  $(this).data('mal') );
+		console.log(  $(this).data('artnr') );
+		$('.choose_product').val( $(this).data('artnr') );
+		$('.malinput').val( $(this).data('artnr') + blank );
+		$('.producttitle').text('MerkelappMix ' + mal );
+		update();
+		return false;
+	})
+  
+  $('.carousel-showthreemoveone .item').each(function(){
+    var itemToClone = $(this);
+
+    for (var i=1;i<3;i++) {
+      itemToClone = itemToClone.next();
+      // wrap around if at end of item collection
+      if (!itemToClone.length) {
+        itemToClone = $(this).siblings(':first');
+      }
+      // grab item, clone, add marker class, add to collection
+      itemToClone.children(':first-child').clone()
+        .addClass("cloneditem-"+(i))
+        .appendTo($(this));
+    }
+  });
+  
+  
+  $('.text').on( 'change', function(){
+	
+	console.log("change");
+	update();
+	
+	});
+
+});
+	
+/*]]>*/	
+</script>
+
+
+</body>
+</html>

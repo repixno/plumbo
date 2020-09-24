@@ -1,0 +1,253 @@
+<!-- HEAD -->
+<head metal:define-macro="head" tal:omit-tag="">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+     <link rel="shortcut icon" type="image/jpg"  href="/fav.png"/>
+    
+    <title> 
+      <tal:block tal:condition="not:exists:pagetitle">Din Merkelapp</tal:block> 
+      <tal:block tal:condition="exists:pagetitle" tal:content="pagetitle" /> 
+    </title>
+    
+    <link href="/css/main.css" rel="stylesheet" />
+        <link href="/css/temp.css" rel="stylesheet" />
+       
+</head>
+
+<!-- Navigation -->
+<header metal:define-macro="top" tal:omit-tag="">
+  
+ <nav class="navbar navbar-expand-md navbar-light flex-column">
+     <div class="container ">
+        <button class="navbar-toggler mb-5" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span> 
+        </button>
+        <h1 class="mb-5"><a href="/">  <img src="/gfx/logo/logo2020.png?text=Logo" style="width: 164px; height: 40px;" alt=""/></a></h1>
+        
+                        <!--Button bare synlig på xs device-->
+<button onclick="location.href = '/cart';" type="button" class="btn btn-default d-block d-sm-none button5 mb-5"><a href="/cart" class= "text-right carttext" >
+<span  id="cart-total-items" class="varer" tal:content="cart/totalitems"></span>
+<tal:block i18n:translate=""></tal:block>
+  <i class="fa fa-shopping-cart fa-1x" style="color:#ffffff"></i></a></button>
+
+       <div class="collapse navbar-collapse flex-column align-items-start ml-lg-2 ml-0" id="navbarCollapse">
+             <div class="offcanvas-header mt-3">
+              <h1 class="text-center"><a href="/">  <img src="/gfx/logo/logo2020.png?text=Logo" style="width: 164px; height: 40px;" alt=""/></a></h1>
+      <button class="btn btn-success btn-close float-right"> &times Lukk </button>
+
+    </div>
+              
+                 <div class="navbar-nav ml-auto ">
+          <div class="ml-auto">
+        <h6 class="d-none d-lg-block d-xl-none">Gratis frakt – Norsk produksjon – 100% fornøyd</h6>
+       
+    </div>
+          
+          
+           <!--Button bare skjult på xs device-->
+          <button onclick="location.href = '/cart';" type="button" class="btn btn-default d-none d-sm-block button5">
+            <a href="/cart" class="text-right carttext">
+              <span id="cart-total-items" class="varer">0</span>
+									varer|
+									kr <span id="cart-total-price">0,00</span>
+                <i class="fa fa-shopping-cart" style="color:#ffffff"></i></a></button>
+            </div>
+                 
+          
+            <ul class="navbar-nav mx-auto">
+            <h6 class="d-block d-sm-none red">PRODUKTER</h6>
+            <li class="nav-item">
+                <a class="nav-link py-0" href="/bestilling/fargelapp">Navnelapp</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link py-0" href="/bestilling/merkelappsett">NavnelappMix</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link py-0" href="/bestilling/strykelapp">Strykelapp</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link py-0" href="/bestilling/stempel">Navnestempel</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link py-0" href="/produkter/tilbehor/merkelapp">Tilbehør</a>
+            </li>
+        </ul>
+        
+        <hr class="redlineseperator d-block d-sm-none"/>
+        <ul class="navbar-nav d-block d-sm-none red">
+               <h6 >MATERIELL</h6>
+            <li class="nav-item">
+                <a class="nav-link" href="/skole-og-barnehage/">Skole og barnehage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sykehjem">Sykehjem</a>
+            </li>
+          
+        </ul>
+        
+         <hr class="redlineseperator d-block d-sm-none"/>
+        <ul class="navbar-nav d-block d-sm-none red">
+        
+                  <h6 class="d-block d-sm-none red">KUNDESENTER</h6>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Kontakt oss</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Spørsmål</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">100 % fornøyd</a>
+            </li>
+            
+            
+         
+        </ul>
+        
+        
+      
+        
+    </div>
+    </div>
+     
+</nav>
+    
+
+  
+
+
+</header>
+
+<body>
+	    <div metal:use-macro="../../../${templates}/common.html/top" />
+	    <div metal:use-macro="../../../${templates}/common.html/header" />
+<div class="container">
+	<div class="content">
+		<div class="row">
+	
+	<div class="col-md-12 text-center">
+		<h5 class="site-logo"><a href="/">Dinmerkelapp</a></h5>
+		
+	</div>
+	
+<div class="col-12">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 text-center">
+                <span class="display-1 d-block">404</span>
+                <div class="mb-4 lead">Siden du leter etter finnes ikke.</div>
+                <a href="/" class="btn btn-danger">Tilbake</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+	
+	<div class="col-md-12 text-center">
+	
+		<img src="https://static.repix.no/gfx/404/dog.jpg" alt="We are sorry" i18n:attributes="alt" />
+	
+	</div>
+	
+	
+	<div class="span-12 append-2 last">
+				
+		<!--<p>Om du opplever flere problem med våre nye nettsider, kan du 
+			<a href="/beta/revert" id="old-site-link-from-error">gå tilbake til våre gamle nettside</a> og prøve der.
+		</p>-->
+		
+		
+			<div class="col-md-12 text-center">
+	
+	
+		<h5>Prøv oppdatere siden ved å trykke F5 <br/>eller oppfrisk knappen under </h5> 
+			
+		<button class="btn btn-success" onclick="goBack()">Tilbake</button>
+		<button type="button" class="btn btn-success text-center" onClick="window.location.reload();">Oppfrisk</button>
+		<br>
+		<!--<p>Om du opplever flere problem med våre nye nettsider, kan du 
+			<a href="/beta/revert" id="old-site-link-from-error">gå tilbake til våre gamle nettside</a> og prøve der.
+		</p>-->
+			<h4 class="top quiet">Kommentar til feilmelding: </h4>
+		<script type="text/javascript">
+			$('#old-site-link-from-error').click( function() {
+				try{
+					pageTracker._trackEvent('Old page', 'Clicked from error');
+					pageTracker._trackPageview();
+				} catch(err) {}
+				document.location.href = $(this).attr('href');
+				return false;
+			});
+		</script>
+		
+		<br/>
+<h3><!-- content /--></h3>
+		<!--<form action="/contact/feedback/" method="post">
+			<label>Melding om feil:</label><br/>
+			<input type="hidden" name="reason" value="error" />
+			<input type="text" name="my_url" class="my-url" value="">
+			<textarea name="usercomment"></textarea>
+			<textarea class="hide" name="content"></textarea>
+			<textarea class="hide" name="trace"></textarea>
+			<textarea class="hide" name="code"></textarea>
+			<input type="hidden" value="defaulterror" name="errortype" />
+			<div class="span-6">
+				<a href="javascript:history.back(-1);">Go back</a>
+			</div>
+			<div class="span-6 last">
+				<button class="blue">Send tilbakemelding</button>
+			</div>
+		</form>-->
+	</div>
+			
+			
+			
+		<script type="text/javascript">
+			$('#old-site-link-from-error').click( function() {
+				try{
+					pageTracker._trackEvent('Old page', 'Clicked from error');
+					pageTracker._trackPageview();
+				} catch(err) {}
+				document.location.href = $(this).attr('href');
+				return false;
+			});
+		</script>
+
+		
+	</div>
+
+	 
+	 
+	<hr class="space"/>
+	
+</div>
+</div>
+	</div>
+
+	<script type="text/javascript">
+	//<![CDATA[
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	//]]>
+	</script>
+	<script type="text/javascript">
+		try{
+		var pageTracker = _gat._getTracker("UA-390524-10");
+			pageTracker._trackEvent('Error', 'Default');
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+	
+	<script>
+function goBack() {
+  window.history.back()
+}
+</script>
+	
+</body>
+</html>
+	
+		
+	
+	

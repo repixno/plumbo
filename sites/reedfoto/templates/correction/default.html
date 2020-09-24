@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<div metal:use-macro="common.html/head" />
+</head>
+<body>
+<div metal:use-macro="common.html/header" />
+<div id="content" class="container prepend-top">
+
+      <tal:block tal:condition="not:session/loggedin">
+
+           <h2 i18n:translate="">Log in to access your account</h2>
+
+         <form method="post" action="/login">
+         
+         	<fieldset class="span-10">
+         	<legend i18n:translate="">Log in</legend>
+            <div class="span-2">
+            	<label for="username" i18n:translate="">Username</label>
+            </div>
+            <div class="span-8 last">
+            	<input type="text" class="text" name="username" id="username" value="" />
+            </div>
+            <div class="span-2">
+            	<label for="password" i18n:translate="">Password</label>
+            </div>
+            <div class="span-8 last">
+            	<input type="password" class="text" name="password" id="password" value="" />
+            </div>
+            <div class="right">
+	            <button type="submit" class="button small" i18n:translate="">Login</button>
+            </div>
+            </fieldset>
+         </form>
+      </tal:block>
+      <tal:block tal:condition="session/loggedin">
+      <p><tal:block i18n:translate="">Logged in as:</tal:block> ${session/fullname}</p>
+      <a href="/corrections/" i18n:translate="">List corrections</a>
+      </tal:block>
+      <tal:block tal:condition="exists:wrongpassword" i18n:translate="">
+      User or password is incorrect.
+      </tal:block>
+
+</div>
+<div metal:use-macro="common.html/footer" /> 
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+   <style type="text/css">
+		body { padding: 0; margin: 0; background: black; }
+		
+		#header {
+         text-align: center;
+         font-size: 16px;
+         display: block;
+         margin: .6em 90px .8em;
+         padding: 0;
+         text-overflow: ellipsis;
+         overflow: hidden;
+         white-space: nowrap;
+         outline: 0!important;
+      }
+		.headerbutton {
+         position: absolute;
+		}
+		
+	  a.button {
+         color:#FFF;
+         text-decoration:none;
+         display:block;
+         width:80px;
+         padding:5px;
+         border:1px solid #DDD;
+         text-align:center;
+         -moz-border-radius:5px;
+         -webkit-border-radius:5px;
+         -o-border-radius:5px;
+         border-radius:5px;
+	  }
+   	a.button:hover {
+   		color:#fff;
+   		border-color:#3278BE;
+   	}
+		
+	</style>
+   <link href="${static:}js/photoswipe/css/style.css" type="text/css" rel="stylesheet" />
+   <link href="${static:}js/photoswipe/css/photoswipe.css" type="text/css" rel="stylesheet" />
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script type="text/javascript" src="${static:}js/photoswipe/lib/simple-inheritance.min.js"></script>
+	<script type="text/javascript" src="${static:}js/photoswipe/code-photoswipe-jQuery-1.0.10.min.js"></script>
+	
+	<SCRIPT type="text/javascript">
+		$(document).ready(function(){
+			
+			$("#Gallery a").photoSwipe({
+				swipeTimeThreshold: 1000,
+				preventHide: false
+			});
+			
+			//Code.PhotoSwipe.Current.show(0);
+		});
+		
+	</SCRIPT>
+</head>
+
+
+<body>
+
+   <div id="Header" class="ps-caption">
+      <div class="headerbutton"><a class="button" href="${album/albumurl}">Tilbake</a></div>
+      ${album/title}
+   </div>
+   <div id="Gallery">
+      <tal:block tal:repeat="image images">
+         <div class="container">
+   			<div class="gallery-item span-3"><a href="${image/fullsize}"><img src="${image/thumbnail}" alt="${image/title}" /></a></div>
+   		</div>
+      </tal:block>
+   </div>
+</body>
+</html>

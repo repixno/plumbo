@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//SE"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="se">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+
+	<link href="/felix/main.css?version=1" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="preload">
+		<img src="http://i.imgur.com/KUJoe.gif" />
+	</div>
+
+	<div style="position:absolute; z-index: 100; top: 0px; width: 100%; text-align: center;"><img style="width:100%; max-width: 1500px" src="/felix/topbg-1.png" /></div>
+
+	<div class="container">
+		<tal metal:use-macro="../../${templates}/common.html/top" />
+		<div class="row hidden-xs header" style="margin-top: 50px">
+			<div class="col-md-12 text-center">
+				<img src="${static:}css/portals/felix/gfx/logo.jpg" alt="FELIX" />
+				<h1>Säg det med ketchup - gör din egen etikett!</h1>
+			</div>
+		</div>
+		<div class="row editor">
+			<div class="col-md-4 col-md-push-7">
+				<div class="row col-md-12 text-center" style="margin:20px 0px">
+					<span class="inspbutton btn" data-toggle="modal" data-target="#myModal">
+                             INSPIRERA MIG!
+                        </span>
+				</div>
+				<div class="row editorcontainer text-center col-md-12" style="margin: 0px">
+					<canvas id="c"></canvas>
+				</div>
+			</div>
+			<div class="col-md-8 col-md-pull-4 functions noselect" style="position: relative">
+				<div class="overlaycontols"></div>
+				<div class="row hideinsp">
+					<div class="col-md-5">Välj storlek på din flaska.</div>
+					<div class="col-md-7">
+						<div style="position: absolute; left: 10px; top: -20px">
+							<input id="05kg" name="size" type="radio" class="with-font" value="05kg" />
+							<label for="05kg" class="choice">0,5 kg</label>
+						</div>
+						<div style="position: absolute; left: 112px; top: -20px">
+							<input id="1kg" name="size" type="radio" class="with-font" value="1kg" checked="checked" />
+							<label for="1kg" class="choice">1 kg</label>
+						</div>
+						<div style="position: absolute; left: 214px; top: -20px">
+							<input id="125kg" name="size" type="radio" class="with-font" value="125kg" />
+							<label for="125kg" class="choice">1,25 kg</label>
+						</div>
+					</div>
+				</div>
+				<div class="row hideinsp">
+					<div class="col-md-5">Välj bakgrundsfärg.</div>
+					<div class="col-md-7 choosetemplate" id="1kg">
+						<div style="position: absolute; left: 1px; top: -20px">
+							<input id="color-yellow" name="color1" type="radio" class="with-font yellow" value="#ffb815" checked="checked" data-src="gul1.png" data-size="1" />
+							<label for="color-yellow" class="choice">Gul</label>
+						</div>
+						<div style="position: absolute; left: 102px; top: -20px">
+							<input id="color-blue" name="color1" type="radio" class="with-font blue" value="#243680" data-src="blaa1.png" data-size="1" />
+							<label for="color-blue" class="choice">Blå</label>
+						</div>
+					</div>
+					<div class="col-md-7 choosetemplate" id="125kg" style="display: none">
+
+						<div style="position: absolute; left: 1px; top: -20px">
+							<input id="color-yellow-125" name="color125" type="radio" class="with-font yellow" value="#ffb815" checked="checked" data-src="gul125.png" data-size="125" />
+							<label for="color-yellow-125" class="choice">Gul</label>
+						</div>
+						<div style="position: absolute; left: 102px; top: -20px">
+							<input id="color-blue-125" name="color125" type="radio" class="with-font blue" value="#55bcca" data-src="bla125.png" data-size="125" />
+							<label for="color-blue-125" class="choice">Blå</label>
+						</div>
+					</div>
+					<div class="col-md-7 choosetemplate" id="05kg" style="display: none">
+
+						<div style="position: absolute; left: 1px; top: -20px">
+							<input id="color-yellow-05" name="color05" type="radio" class="with-font yellow" value="#ffb815" checked="checked" data-src="gul05.png" data-size="05" />
+							<label for="color-yellow-05" class="choice">Gul</label>
+						</div>
+						<div style="position: absolute; left: 102px; top: -20px">
+							<input id="color-blue-05" name="color05" type="radio" class="with-font blue" value="#55bcca" data-src="bla05.png" data-size="05" />
+							<label for="color-blue-05" class="choice">Blå</label>
+						</div>
+					</div>
+				</div>
+				<div class="row hideinsp">
+					<div class="col-md-5">Välj bild eller<br/> ladda upp din egen.</div>
+					<div class="col-md-7 clipcontainer" style="padding-right: 0px; height: 80px">
+						<div class="clipartcollection">
+							<div class="clipart"><img class="clipartimage" id="tomathjarta" src="/felix/clipart/thumb/tomathjarta.png" /></div>
+							<div class="clipart"><img class="clipartimage" id="dobbeltomat" src="/felix/clipart/thumb/dobbeltomat.png" /></div>
+							<div class="clipart"><img class="clipartimage" id="enkeltomat" src="/felix/clipart/thumb/enkeltomat.png" /></div>
+							<div class="clipart"><img class="clipartimage" id="enkeltomat_liten" src="/felix/clipart/thumb/enkeltomat_liten.png" /></div>
+						</div>
+						<div class="row">
+							<div class="uploadcontainer row" style="padding:0px; width: 360px;">
+
+								<div class="clipart" id="uploadcontainer">
+									<button id="velgbilde" class="btn btn-default">Ladda upp bild</button>
+									<form class="upload" action="/api/1.0/upload/felix" method="post" enctype="multipart/form-data">
+										<input style="visibility:hidden;position:absolute;top:0;left:0" id="choosefile" type="file" name="image" accept="image/*" />
+										<input style="visibility:hidden;position:absolute;top:0;left:0" id="lastoppbilde" type="submit" value="Last opp" />
+									</form>
+								</div>
+								<div class="clipart col-md-6">
+									<button class="removeclipart btn btn-default" id="remove">Radera bild</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="progress uploadmessage" style="display: none; ">
+						<p>(Uppladdningen kan ta en liten stund. Avvakta tills bilden syns på etiketten)</p>
+					</div>
+					<div class="progress col-md-7" style="margin-left: 200px; height: 25px; display: none;">
+						<div class="bar"></div>
+						<div class="percent">0%</div>
+					</div>
+				</div>
+				<div class="row hideinsp">
+					<div class="col-md-5">Justera din bild.</div>
+					<div class="col-md-7 functionsbuttons">
+						<button class="btn zoom" id="zooms"><i class="fa fa-search-minus" aria-hidden="true"></i></button>
+						<button class="btn zoom" id="zooml"><i class="fa fa-search-plus" aria-hidden="true"></i></button>
+						<button class="btn move" id="left" style="margin-left: 7px;min-width: 20px"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+						<button class="btn move" id="up" style="min-width: 20px"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+						<button class="btn move" id="down" style="min-width: 20px"><i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+						<button class="btn move" id="right" style="margin-right: 7px; min-width: 20px"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+						<button class="btn rotate" id="rotateright"><i class="fa fa-repeat" aria-hidden="true"></i></button>
+						<button class="btn rotate" id="rotateleft"><i class="fa fa-undo" aria-hidden="true"></i></button>
+					</div>
+				</div>
+				<div class="row hideinsp">
+					<div class="col-md-5">Skriv in din text.</div>
+					<div class="col-md-7">
+						<textarea class="felixtext" name="felixtext" id="felixtext" wrap="off" maxlength="50" rows="4"></textarea><br/><span class="btn btn-default uppdateratext">Uppdatera text</span>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-5">Dela din bild i<br/> sociala medier.</div>
+					<div class="col-md-7">
+						<button class="btn btn-default" id="download">LADDA HEM BILD</button>
+					</div>
+				</div>
+
+				<div class="row showinsp" style="display: none">
+					<div class="col-md-7 text-left col-md-push-5">
+						<button class="btn" id="createown">Skapa egen etikett</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-7 text-left col-md-push-5">
+						<button class="btn btn-large" id="skapa">KLAR!</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<tal metal:use-macro="../../${templates}/common.html/facebook" />
+	</div>
+	<tal metal:use-macro="../../${templates}/common.html/footer" />
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Etikettinspiration!</h4>
+				</div>
+				<div class="modal-body col-md-12">
+					<ul class="insps">
+						<div>Bli inspirerad eller använd våra färdiga etiketter.</div>
+						<section class="insp-05">
+
+						</section>
+						<section class="insp-1">
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELI0076_Felix_ketchup_ekologisk_1kg_mk-1.jpg" data-color="#ffffff" data-size="1"><img src="" data-src="/felix/templates/thumb/FELI0076_Felix_ketchup_ekologisk_1kg_mk-1.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELI0076_Felix_ketchup_ekologisk_1kg_mk-2 kopi.jpg" data-color="#ffffff" data-size="1"><img src="" data-src="/felix/templates/thumb/FELI0076_Felix_ketchup_ekologisk_1kg_mk-2 kopi.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELI0076_Felix_ketchup_ekologisk_1kg_mk-3 kopi.jpg" data-color="#ffffff" data-size="1"><img src="" data-src="/felix/templates/thumb/FELI0076_Felix_ketchup_ekologisk_1kg_mk-3 kopi.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELI0076_Felix_ketchup_ekologisk_1kg_mk-4 kopi.jpg" data-color="#ffffff" data-size="1"><img src="" data-src="/felix/templates/thumb/FELI0076_Felix_ketchup_ekologisk_1kg_mk-4 kopi.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELI0076_Felix_ketchup_ekologisk_1kg_mk-5 kopi.jpg.jpg" data-color="#ffffff" data-size="1"><img src="" data-src="/felix/templates/thumb/FELI0076_Felix_ketchup_ekologisk_1kg_mk-5 kopi.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELI0076_Felix_ketchup_ekologisk_1kg_mk-6 kopi.jpg" data-color="#ffffff" data-size="1"><img src="" data-src="/felix/templates/thumb/FELI0076_Felix_ketchup_ekologisk_1kg_mk-6 kopi.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELI0076_Felix_ketchup_ekologisk_1kg_mk-7 kopi.jpg" data-color="#ffffff" data-size="1"><img src="" data-src="/felix/templates/thumb/FELI0076_Felix_ketchup_ekologisk_1kg_mk-7 kopi.jpg" /></a>
+							</li>
+						</section>
+						<section class="insp-125" style="display: none">
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELP0076_Felix-ketchup_1,25kg_ORIGINAL_SVENSKT_ok-1.jpg" data-color="#ffffff" data-size="125"><img src="" data-src="/felix/templates/thumb/FELP0076_Felix-ketchup_1,25kg_ORIGINAL_SVENSKT_ok-1.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELP0076_Felix-ketchup_1,25kg_ORIGINAL_SVENSKT_ok-2 kopi.jpg" data-color="#ffffff" data-size="125"><img src="" data-src="/felix/templates/thumb/FELP0076_Felix-ketchup_1,25kg_ORIGINAL_SVENSKT_ok-2 kopi.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELP0076_Felix-ketchup_1,25kg_ORIGINAL_SVENSKT_ok-3 kopi.jpg" data-color="#ffffff" data-size="125"><img src="" data-src="/felix/templates/thumb/FELP0076_Felix-ketchup_1,25kg_ORIGINAL_SVENSKT_ok-3 kopi.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELP0076_Felix-ketchup_1,25kg_ORIGINAL_SVENSKT_ok-4 kopi.jpg" data-color="#ffffff" data-size="125"><img src="" data-src="/felix/templates/thumb/FELP0076_Felix-ketchup_1,25kg_ORIGINAL_SVENSKT_ok-4 kopi.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELP0076_Felix-ketchup_1,25kg_ORIGINAL_SVENSKT_ok-5 kopi.jpg" data-color="#ffffff" data-size="125"><img src="" data-src="/felix/templates/thumb/FELP0076_Felix-ketchup_1,25kg_ORIGINAL_SVENSKT_ok-5 kopi.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELP0076_Felix-ketchup_1,25kg_ORIGINAL_SVENSKT_ok-6 kopi.jpg" data-color="#ffffff" data-size="125"><img src="" data-src="/felix/templates/thumb/FELP0076_Felix-ketchup_1,25kg_ORIGINAL_SVENSKT_ok-6 kopi.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELP0076_Felix-ketchup_1,25kg_ORIGINAL_SVENSKT_ok-7 kopi.jpg" data-color="#ffffff" data-size="125"><img src="" data-src="/felix/templates/thumb/FELP0076_Felix-ketchup_1,25kg_ORIGINAL_SVENSKT_ok-7 kopi.jpg" /></a>
+							</li>
+						</section>
+						<section class="insp-05" style="display: none">
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELI0076_Felix_ketchup_ekologisk_500g_mk-1.jpg" data-color="#ffffff" data-size="05"><img src="" data-src="/felix/templates/thumb/FELI0076_Felix_ketchup_ekologisk_500g_mk-1.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELI0076_Felix_ketchup_ekologisk_500g_mk-2.jpg" data-color="#ffffff" data-size="05"><img src="" data-src="/felix/templates/thumb/FELI0076_Felix_ketchup_ekologisk_500g_mk-2.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELI0076_Felix_ketchup_ekologisk_500g_mk-3.jpg" data-color="#ffffff" data-size="05"><img src="" data-src="/felix/templates/thumb/FELI0076_Felix_ketchup_ekologisk_500g_mk-3.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELI0076_Felix_ketchup_ekologisk_500g_mk-4.jpg" data-color="#ffffff" data-size="05"><img src="" data-src="/felix/templates/thumb/FELI0076_Felix_ketchup_ekologisk_500g_mk-4.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELI0076_Felix_ketchup_ekologisk_500g_mk-5.jpg" data-color="#ffffff" data-size="05"><img src="" data-src="/felix/templates/thumb/FELI0076_Felix_ketchup_ekologisk_500g_mk-5.jpg" /></a>
+							</li>
+							<li>
+								<a href="#" data-dismiss="modal" class="insp" data-src="FELI0076_Felix_ketchup_ekologisk_500g_mk-6.jpg" data-color="#ffffff" data-size="05"><img src="" data-src="/felix/templates/thumb/FELI0076_Felix_ketchup_ekologisk_500g_mk-6.jpg" /></a>
+							</li>
+						</section>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="${static:js/fabric/dist/fabric.min.js}" />
+	<script src="${static:css/portals/felix/js/editor.min.js}?version=1.71" />
+	<script src="http://malsup.github.com/jquery.form.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			//var isMobile = true;
+			$('#c').FelixEditor();
+			var felix = $('#c').data('FelixEditor');
+			$('.inspbutton').on('click', function() {
+
+				$('.insp img').each(function() {
+					var src = $(this).data('src');
+
+					//console.log(src);
+
+					$(this).attr('src', src);
+
+				});
+
+			});
+
+			/*$('#felixtext').on('keyup', function(){
+			    numberOfLineBreaks = ($(this).val().match(/\n/g)||[]).length;
+			    console.log( numberOfLineBreaks )
+			    });*/
+
+			$('.clipartimage').on('click', function() {
+				felix.updateImage($(this).attr('id'), 'clipart');
+			});
+			$(document).on('click', '.imagethumb', function() {
+				felix.updateImage($(this).attr('id'), 'userimage');
+			});
+			$('button#velgbilde').on('click', function() {
+				$('#choosefile').click();
+				return false;
+			});
+
+			$('input#choosefile').on('change', function() {
+				$('#lastoppbilde').click();
+				return false;
+			});
+
+
+			//imageuploading
+			var bar = $('.bar');
+			var percent = $('.percent');
+			var status = $('#status');
+			$('form').ajaxForm({
+				dataType: 'json',
+				beforeSend: function() {
+					status.empty();
+					$('.progress').show();
+					var percentVal = '0%';
+					bar.width(percentVal);
+					percent.html(percentVal);
+				},
+				uploadProgress: function(event, position, total, percentComplete) {
+					var percentVal = percentComplete + '%';
+					bar.width(percentVal)
+					percent.html(percentVal);
+				},
+				success: function() {
+					var percentVal = '100%';
+					bar.width(percentVal)
+					percent.html(percentVal);
+				},
+				complete: function(xhr) {
+					//console.log( xhr.responseJSON );
+					var image = '<div class="clipart"><img class="imagethumb" id="' + xhr.responseJSON.image.id + '"src="' + xhr.responseJSON.image.thumbnail + '" style="height: 50px"  /></div>';
+					$('.clipartcollection').append(image);
+					felix.updateImage(xhr.responseJSON.image.id, 'userimage');
+					$('.progress').hide();
+					//$('img#' + xhr.responseJSON.name).css( 'border-color', "#0199d8" );
+				}
+			});
+
+		
+			
+
+
+			$(window).load(function() {
+				felix.addText();
+				felix.setTemplate();
+				setTimeout(function() {
+					felix.canvas.renderAll();
+					$(".preload").fadeOut(2000, function(){ $(this).remove()});
+				}, 150);
+				
+				
+
+			});
+
+		});
+	</script>
+</body>
+
+</html>

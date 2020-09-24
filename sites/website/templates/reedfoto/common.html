@@ -1,0 +1,460 @@
+<!-- HEAD -->
+<head metal:define-macro="head" tal:omit-tag="">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+	<meta tal:condition="exists:google" name="google-site-verification" content="${google/google-site-verification}" /> 
+	<meta name="msvalidate.01" content="F4FE8EE0C6A5F5AF802BFA2C54AB58E7" /> 
+	<tal:block tal:condition="exists:canonical"> 
+		<link tal:condition="canonical" rel="canonical" href="${canonical}" /> 
+	</tal:block> 
+	<tal:block metal:use-macro="blueprint" /> 
+	<title> 
+		<tal:block tal:condition="not:exists:pagetitle">Reed Foto</tal:block> 
+		<tal:block tal:condition="exists:pagetitle" tal:content="pagetitle" /> 
+	</title> 
+	<tal:block tal:condition="exists:item/customjs"> 
+		<tal:block tal:content="structure item/customjs" /> 
+	</tal:block> 
+	<tal:block tal:condition="exists:item/customcss"> 
+		<tal:block tal:content="structure item/customcss" /> 
+	</tal:block>
+</head>
+
+<tal:block metal:define-macro="blueprint">
+	<link rel="stylesheet" href="${static:css/portals/reedfoto/screen.css}?${version}" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="${static:css/portals/reedfoto/print.css}?${version}" type="text/css" media="print" /> 
+	<!--[if lt IE 8]>
+		<link rel="stylesheet" href="http://static.repix.no/css/portals/eurofoto/ie.css?3.05" type="text/css" media="screen, projection" />
+	<![endif]-->
+	<!--[if IE 8]>
+		<link rel="stylesheet" href="http://static.repix.no/css/portals/eurofoto/ie8.css?3.05" type="text/css" media="screen, projection" />
+	<![endif]-->
+
+	<tal:block metal:use-macro="javascript" />
+</tal:block>
+
+<tal:block metal:define-macro="javascript">
+	<script type="text/javascript" src="${static:}js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="${static:js/jquery.eurofoto-1.0.js}"></script> <!-- Eurofoto API 1.0 -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+	<script type="text/javascript" src="${static:js/i18n/ui.datepicker-no.js}"></script>
+	<script type="text/javascript" src="${static:js/flowplayer-3.1.1.min.js}"></script>
+	<script type="text/javascript" src="${static:js/jquery.fancybox-1.3.0.pack.js}"></script>
+	<script type="text/javascript" src="${static:js/eurofoto.min.js}?${version}"></script>
+	<script type="text/javascript" src="${static:js/jquery.client.js}?${version}"></script>
+	<script type="text/javascript" src="${static:js/jquery-ui-1.8.15.custom.min.js}?${version}"></script>
+	
+</tal:block>
+
+
+<!-- top-header -->
+<div metal:define-macro="top" tal:omit-tag="">	
+
+	<tal metal:use-macro="message" />
+
+	<div id="header" class="last">
+
+	<!-- site-title -->
+	<div class="span-4">
+		<h1 class="site-logo"><a href="/" title="Go back to frontpage" i18n:attributes="title">Modelday</a></h1>
+	</div>
+	<div class="span-20 last">
+		<div metal:use-macro="top-small-navigation" />
+		<div metal:use-macro="main-navigation" />
+		<div metal:use-macro="shopping-cart" />
+	</div>
+	</div>
+</div>
+
+<!-- top-small-navigation -->
+<div metal:define-macro="top-small-navigation" id="topsmallnavigation" class="span-19 last">
+	<ul class="clear">
+		<!--<li><a href="/myaccount/upload/?from=topsmall" i18n:translate="">Upload photos</a></li>-->
+		
+		
+		<!--<li><a href="${url:/weekly-offers/}" i18n:translate="">Weekly offers</a></li>-->
+		<!--<li><a href="${url:/about/contact/}" i18n:translate="">Contact</a></li>-->
+		<li><a href="http://www.reedfoto.no" i18n:translate="">www.reedfoto.no</a></li>
+		<li><a href="${url:/support/}" i18n:translate="">Support</a></li>
+		
+		<li><a href="${url:/contact/}" i18n:translate="">Contact</a></li>
+		
+		<!--<li tal:condition="equal:i18n/country,no"><a href="/priser/" i18n:translate="">Prices</a></li>
+		<li tal:condition="not:equal:i18n/country,no"><a href="/prices/" i18n:translate="">Prices</a></li>
+		
+		<li><a href="${url:/sitemap/}" i18n:translate="">Sitemap</a></li>-->
+		
+		<tal:block tal:condition="session/loggedin">
+			<li tal:content="session/username"></li>
+			<li><a href="/logout/" class="last" i18n:translate="">Logout</a></li>
+		</tal:block>
+		
+		<tal:block tal:condition="not:session/loggedin">
+			<li><a href="/register/" i18n:translate="">Register</a></li>
+			<li><a href="/login/" class="last" i18n:translate="">Log in</a></li>
+		</tal:block>
+	</ul>
+</div>
+
+<!-- main-navigation add class "active" to the active anchor-->
+<div metal:define-macro="main-navigation" id="main-navigation">
+	
+	<ul class="clear clearfix">
+		<li class="frontpage">
+			<a href="/frontpage">
+				<tal:block i18n:translate="">Frontpage</tal:block> 
+				<span i18n:translate="">Go back to the front-page</span>
+			</a>
+		</li>
+		<li class="products">
+			<a href="${url:/products/}">
+				<tal:block i18n:translate="">Products</tal:block> 
+				<span i18n:translate="">View products and photo gifts</span>
+			</a>
+			<ul class="mainnavsub" tal:condition="not:exists:nosubmenurendering">
+				<li tal:repeat="menuitem menu:/products/"><!-- 129cdf90-4212-45e4-b7c0-fb32a437b48f -->
+					<a href="${menuitem/url}?from=mainsub">${menuitem/title}</a>
+				</li>
+			</ul>
+		</li>
+		<li class="my-account">
+			<a href="/myaccount/">
+			<tal:block i18n:translate="">My account</tal:block> 
+			<span i18n:translate="">Your photos and settings</span></a>
+		</li>
+		<li class="order-prints last" tal:condition="equal:i18n/country,no">
+			<a href="/fremkalle-bilder/">
+				<tal:block i18n:translate="">Order prints</tal:block> 
+				<span i18n:translate="">Order quick prints</span>
+			</a>
+		</li>
+		<li class="order-prints last" tal:condition="not:equal:i18n/country,no">
+			<a href="/order-prints/">
+				<tal:block i18n:translate="">Order prints</tal:block> 
+				<span i18n:translate="">Order quick prints</span>
+			</a>
+		</li>
+		<li class="order-prints last">
+			<a href="/fetchalbum">
+				<tal:block i18n:translate="">Find pictures</tal:block> 
+				<span i18n:translate="">Hent fotograf bilder</span>
+			</a>
+		</li>
+	</ul>
+	
+	<script type="text/javascript">
+	//<![CDATA[
+		$(document).ready(function() {  
+			// open submenus
+			$("ul.mainnavsub").parent().append("<span class=\"arrow\">&nbsp;</span>"); 
+
+			$("#main-navigation li span.arrow").click(function() { 
+
+				$(this).parent().find("ul.mainnavsub").slideDown('fast').show(); 
+
+				$(this).parent().hover(function() {  
+					}, function(){  
+						$(this).parent().find("ul.mainnavsub").slideUp('slow'); 
+					}
+				);  
+			}).hover(function() {  
+				$(this).addClass("subhover"); 
+			}, function(){  
+					$(this).removeClass("subhover"); 
+				}
+			);
+		});
+	//]]>
+	</script>
+</div>
+
+<div metal:define-macro="shopping-cart">
+	<tal:block tal:condition="exists: cart">
+		<tal:block tal:condition="cart/totalitems">
+		<tal:block tal:condition="not: exists: dontShowCart">
+		<div id="shopping-cart">
+			<p>
+				<strong>
+					<span id="cart-total-items" tal:content="cart/totalitems"></span> <tal:block i18n:translate="">products</tal:block>
+				</strong>, 
+				<strong>kr 
+					<span id="cart-total-price" tal:content="formatprice:cart/totalprice"></span>
+				</strong>
+				<a href="/cart/clear/" id="emptycart">(<tal:block i18n:translate="" tal:omit-tag="">empty cart</tal:block>)</a>
+			</p>
+			<div id="cart-functions">
+				<a href="/checkout/?from=main" id="go-to-checkout" class="button" i18n:translate="">Go to checkout</a>
+				<a href="/cart/?from=main" id="cart-toggle" class="button call-to-action" i18n:translate="">Show cart</a>
+			</div>
+		</div>
+		</tal:block>
+		<div id="shopping-cart-pusher" />
+		</tal:block>
+
+	
+	
+	
+	<tal:block tal:condition="not:cart/totalitems">
+		<div id="shopping-cart" class="hide">
+			<p>
+				<strong>
+					<span id="cart-total-items" ></span> <tal:block i18n:translate="">products</tal:block>
+				</strong>, 
+				<strong>kr 
+					<span id="cart-total-price" ></span>
+				</strong>
+				<a href="/cart/clear/" id="emptycart">(<tal:block i18n:translate="" tal:omit-tag="">empty cart</tal:block>)</a>
+			</p>
+			<div id="cart-functions">
+				<a href="/checkout/?from=main" id="go-to-checkout" class="button" i18n:translate="">Go to checkout</a>
+				<a href="/cart/?from=main" id="cart-toggle" class="button call-to-action" i18n:translate="">Show cart</a>
+			</div>
+		</div>
+
+		<div id="shopping-cart-pusher" />
+		</tal:block>
+		<script type="text/javascript">
+			$('#emptycart').click( function() {
+				 $.ajax({
+					type: "post",
+					dataType: "json",
+					url: "/api/1.0/cart/clear",
+					success: function(){
+						$('#shopping-cart').slideUp('fast');
+						$('#shopping-cart-pusher').slideUp('fast');
+						return false;		
+					},
+					error: function(msg) {
+						location.href = "/cart/clear/"
+					}
+					
+				});
+				return false;
+			});
+			</script>
+		</tal:block>
+	
+</div>
+
+<!-- breadcrumbs -->
+<div metal:define-macro="breadcrumbs" id="breadcrumbs">
+	<ul>
+		<li><a href="" i18n:translate=""></a></li>
+		<li class="active" i18n:translate=""></li>
+	</ul>
+</div>
+
+<!-- LEFT MENU (span-4) -->
+<div metal:define-macro="left-menu" id="leftmenu">
+	<p i18n:translate=""></p>
+</div>
+
+<!-- RIGHT MENU (span-4) -->
+<div metal:define-macro="right-menu" id="rightmenu" class="last">
+	<p i18n:translate=""></p>
+</div>
+
+<!-- RIGHT ALBUM MENU (span-4) -->
+<div metal:define-macro="right-album-menu" id="rightalbummenu" class="last">
+	<ul id="right-album-menu">
+		<li>
+		</li>
+	</ul>
+</div>
+
+<!-- beta message -->
+<tal:block metal:define-macro="message">
+</tal:block>
+
+<!-- FOOTER -->
+<tal:block metal:define-macro="footer">
+	<div id="footer" class="last">
+	  <hr />
+		
+		<div class="append-bottom clearfix clear span-24 last center ">
+		   <p>Reed Foto AS<br />
+		   Tlf. 57 86 83 33 - post@reedfoto.no<br/>
+			Kundeservice Tlf. 57 88 35 00 - post@eurofoto.no
+		   </p>
+			<p><a href="${url:/about/copyright/}">Copyright | © ${request/date/year} Eurofoto/Japan Photo Holding Norge </a></p>
+			
+		</div>
+		
+		<br />
+		<hr/>
+	</div>
+	<tal:block metal:use-macro="get-satisfaction" />
+	<tal:block metal:use-macro="google-analytics" />
+	<tal:block tal:condition="exists:lyrishq">
+	   	<!--
+	   	<script type="text/javascript">
+		document.write('<'
+			+ 'script type="text/javascript" src="'
+			+ document.location.protocol
+			+ '//stats.clicktracks.com/cgi-bin/ctasp-server.cgi?i=${lyrishq}'
+			+ '"><'
+			+ '/script>');
+		</script>-->
+		<script type="text/javascript" src="http://stats.clicktracks.com/cgi-bin/ctasp-server.cgi?i=${lyrishq}"></script>
+		
+   </tal:block>
+	
+	<script type="text/javascript">
+		
+		$( function(){
+			
+			$('img').bind('contextmenu', function(e) {
+				return false;
+			}); 
+			
+			})
+		
+	</script>
+   
+</tal:block>
+
+<!-- quick login -->
+<tal:block metal:define-macro="quicklogin">
+<form action="/login/" method="post"  id="quicklogin">
+	<div>
+		<label for="email" i18n:translate="">E-mail:</label><br/>
+		<input type="text" class="text lowercase" name="email" value="" />
+	</div>	
+	<div>
+		<label for="pasword" i18n:translate="">Password:</label><br/>
+		<input type="password" class="text" name="password" value="" />
+	</div>
+	<div>
+		<input type="checkbox" id="rememberme" /> 
+		<label for="rememberme" i18n:translate="">Remember me next time.</label>
+	</div>	
+	<div class="right prepend-top">
+		<a href="/register/" i18n:translate="">Register</a> &nbsp;
+ 		<button class="" type="submit" i18n:translate="">Log in</button>
+	</div>
+	<input type="hidden" name="referer" value="/${request/execpath}"/>
+</form>
+</tal:block>
+
+<!-- get Satisfaction -->
+<tal:block metal:define-macro="get-satisfaction">
+	<!--
+	<tal:block tal:replace="structure fastpass" tal:condition="exists:fastpass" />
+	<script type="text/javascript" charset="utf-8">
+		var is_ssl = ("https:" == document.location.protocol);
+		var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+		document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript" charset="utf-8">
+		var feedback_widget_options = {};
+		feedback_widget_options.display = "overlay";  
+		feedback_widget_options.company = "eurofoto";
+		feedback_widget_options.placement = "right";
+		feedback_widget_options.color = "#222";
+		feedback_widget_options.style = "idea";
+		var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+	</script>
+	-->
+</tal:block>
+
+<!-- Google Analytics gs.js www.eurofoto.no -->
+<tal:block metal:define-macro="google-analytics">
+
+   
+   
+
+
+   <tal:block tal:condition="exists:google">
+	<script type="text/javascript">
+	//<![CDATA[
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	//]]>
+	</script>
+	<script type="text/javascript">
+		try{
+		var pageTracker = _gat._getTracker("${google/analytics}");
+			<tal:block tal:condition="not:session/loggedin">
+				pageTracker._setVar('unregistered');
+			</tal:block>
+			<tal:block tal:condition="session/loggedin">
+				pageTracker._setVar('member');
+			</tal:block>
+			pageTracker._setDomainName(".eurofoto.no");
+			pageTracker._trackEvent('Performance', 'Execution time', 'xml', Math.round( ${statistics/exectime} * 10 )/10 );
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+	</tal:block>
+</tal:block>
+
+<!-- sharing button -->
+<tal:block metal:define-macro="share-button">
+<!-- ADDTHIS BUTTON BEGIN -->
+<script type="text/javascript">
+var addthis_config = {
+	username: "eurofoto",
+	services_compact: 'facebook, email, twitter, digg, delicious, favorites, friendfeed, google, linkedin, live,  more',
+	services_exclude: 'print',
+	ui_language: "${i18n/country}"
+}
+</script>
+
+<a href="http://www.addthis.com/bookmark.php" 
+    class="addthis_button"
+    style="text-decoration:none;">
+        <img src="http://s7.addthis.com/static/btn/sm-plus.gif" 
+    width="16" height="16" border="0" alt="Share" /> <span i18n:translate="">Share</span></a>
+    
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js"></script>
+<!-- ADDTHIS BUTTON END -->
+</tal:block>
+
+<tal:block metal:define-macro="pagination">
+	
+	<a class="button">First</a>
+	<a class="button">Previous</a>
+	
+	<a href="">1</a><a href="">2</a><a href="">3</a>...<a href="">4</a><a href="" class="current">(5)</a><a href="">6</a><a href="">7</a><a href="">8</a><a href="">9</a><a href="">10</a><a href="">11</a><a href="">12</a>...<a href="">50</a><a href="">51</a><a href="">52</a>
+	
+	<a class="button">Last</a>
+	
+</tal:block>
+
+<div metal:define-macro="associatedproducts">
+	<tal:block tal:repeat="product associatedproducts">
+		<div class="span-14">
+			<div class="span-2 productimage">
+				<tal:block tal:condition="product/images">
+					<tal:block tal:repeat="image product/images">
+						<tal:block tal:condition="equal:repeat/image/number,1">
+							<tal:block tal:define="global staticurl" tal:content="static:" />
+							<a href="${product/urlname}" title="${product/title}">
+								<img src="${staticurl}images/products/thumbs/square/50/${image/url}" 
+								widht="50" height="50" class="left" alt="${product/title}" tal:condition="image/url" />
+							</a>
+							<img src="${static:gfx/404/not_found_50px.jpg}" 
+							class="left" alt="Product photo missing." tal:condition="not:image/url" 
+							style="border: 10px solid #fff; "
+							/> 
+						</tal:block>
+					</tal:block>
+				</tal:block>
+				<tal:block tal:condition="not:product/images"><span class="quiet small">No image</span></tal:block>
+			</div>
+			<div class="span-6">
+				<h4 class="bottom" tal:content="product/title|default"></h4>
+				<p tal:content="product/ingress|default"></p>
+			</div>
+			<div class="span-6 last" tal:condition="product/option/price">
+				<div class="price" tal:content="formatprice:product/option/price"></div>
+				<input class="quantity" value="1" type="text" />
+				
+				<tal:block tal:condition="gt:repeat/options/number,1">
+					more than 1
+				</tal:block>
+				
+				<a class="button add-to-cart" i18n:translate="" ref="${product/option/prodno}">Add to cart</a>
+			</div>
+		</div>
+	</tal:block>
+</div>

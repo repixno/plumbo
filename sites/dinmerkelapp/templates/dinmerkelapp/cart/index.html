@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="no">
+	<head>
+
+<title>Kasse Dinmerkelapp</title>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<tal metal:use-macro="../../${templates}/common.html/head" />
+		<!-- 	<link rel="stylesheet" href="/css/bestilling.css" type="text/css" media="screen, projection" />-->
+		
+		<style>
+			   .nav-link{
+				padding: 0.5rem 0.5rem;
+			   }
+			   .quantity {
+				float: left;
+				margin-right: 15px;
+				background-color: #eee;
+				position: relative;
+				width: 80px;
+				overflow: hidden
+			}
+			
+			.quantity input {
+				margin: 0;
+				text-align: center;
+				width: 15px;
+				height: 15px;
+				padding: 0;
+				float: right;
+				color: #000;
+				font-size: 20px;
+				border: 0;
+				outline: 0;
+				background-color: #F6F6F6
+			}
+			
+			.quantity input.qty {
+				position: relative;
+				border: 0;
+				width: 100%;
+				height: 40px;
+				padding: 10px 25px 10px 10px;
+				text-align: center;
+				font-weight: 400;
+				font-size: 15px;
+				border-radius: 0;
+				background-clip: padding-box
+			}
+			
+			.quantity .minus, .quantity .plus {
+				line-height: 0;
+				background-clip: padding-box;
+				-webkit-border-radius: 0;
+				-moz-border-radius: 0;
+				border-radius: 0;
+				-webkit-background-size: 6px 30px;
+				-moz-background-size: 6px 30px;
+				color: #bbb;
+				font-size: 20px;
+				position: absolute;
+				height: 50%;
+				border: 0;
+				right: 0;
+				padding: 0;
+				width: 25px;
+				z-index: 3
+			}
+			
+			.quantity .minus:hover, .quantity .plus:hover {
+				background-color: #dad8da
+			}
+			
+			.quantity .minus {
+				bottom: 0
+			}
+			
+			.discount{
+				
+				
+				font-weight: bold;
+			}
+			
+		</style>
+	</head>
+	<body>
+        <div metal:use-macro="../../${templates}/common.html/top" />
+		
+	<div class="container">
+		<div class="shopping-cart">
+
+			<tal:block tal:condition="exists: cart/items/">
+				<div class="col-12 text-right">
+					<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+					Handlekurv
+					<a href="/" class="btn btn-outline-success btn-sm pull-right">Handle mer</a>
+					<div class="clearfix"></div>
+				</div>
+			</tal:block>
+
+			<div class="row">
+				<div class="col-12">
+					<div class=" col-6 align-items-end" tal:condition="cart/items">
+						<br />
+						<!-- discount -->
+						<tal:block tal:condition="exists:cart/discount/info">
+							<h6 class="font-weight-bold" i18n:translate="">Aktiv kode:</h6>
+							<h6 class="font-weight-bold" style="color:#CC3817;" tal:content="cart/discount/info/name"></h6>
+							<h6 class="font-weight-bold" tal:content="cart/discount/info/code"></h6>
+						</tal:block>
+
+						<form action="/cart/coupon" class="" method="post">
+							<div class="row align-items-end">
+								<div class="form-group col-6 col-md-6 ">
+									<label for=""></label>
+									<input class="form-control " type="text" id="coupon-code" value="" name="code" />
+								</div>
+								<div class="form-group col-6 col-md-2">
+									<button class="btn btn-success" i18n:translate="">Coupon code</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<hr width="100%" class="d-block d-sm-none" style="width:100%;text-align:left;margin-left:0" />
+				</div>
+			</div>
+
+			<!--Empty cart loads button-->
+			<div class="col-md-12 text-center" tal:condition="not:cart/items">
+				<h2 i18n:translate="">Your cart is empty</h2>
+				<a href="/" class="btn btn-success pull-right">Handle mer</a>
+			</div>
+
+
+
+
+			<!-- PRODUCT MERKELAPP -->
+			<tal:block tal:condition="exists: cart/items/merkelapp">
+				<tal:block tal:repeat="products cart/items/merkelapp">
+					<tal:block tal:repeat="merkelapp products">
+						<div class="row" id="${merkelapp/optionid}">
+							<div class="col-12 col-md-2 text-center">
+								<img class="m-2" style="border: 2px #efeeee solid; border-radius: 15px;" src="/bestilling/thumb/${merkelapp/referenceid}" />
+
+							</div>
+							<div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6 mt-md-4">
+								<h4 class="product-name"><strong>
+										<tal:block tal:condition="exists:merkelapp/product/title" tal:content="merkelapp/product/title">Product</tal:block>
+									</strong></h4>
+							</div>
+							<div class="col-12 col-sm-12 mt-md-4 text-sm-center col-md-4 text-md-right row">
+								<div class="col-4 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+									<h6><strong>
+											<tal:block tal:condition="merkelapp/product/option">
+												<tal:block tal:condition="not:equal:merkelapp/product/option/title,Standard">
+													<span class="quiet">,
+														<tal:block tal:content="merkelapp/currentproductoption/title" /></span>
+												</tal:block>
+											</tal:block>
+											<i class="unitprice" tal:content="formatprice:merkelapp/unitprice">Price</i> <span class="text-muted">kr</span>
+										</strong></h6>
+								</div>
+								<div class="col-4 col-sm-4 col-md-4">
+									<div class="quantity ">
+										<input type="button" value="+" class="plus" />
+										<input type="number" step="1" max="99" min="1" value="${merkelapp/quantity}" data-refrence="${merkelapp/referenceid}" data-prodno="${merkelapp/prodno}" title="Qty" class="qty quantity" size="4" />
+										<input type="button" value="-" class="minus" />
+									</div>
+								</div>
+								<div class="col-4 col-sm-2 col-md-2 text-right">
+									<a class="btn btn-success btn-xs fas fa-trash" href="/cart/remove/${merkelapp/prodno}/${merkelapp/referenceid}" title="Remove" i18n:translate="" name="${merkelapp/prodno}"></a>
+									<input type="hidden" value="${merkelapp/referenceid}" name="referenceid" />
+								</div>
+							</div>
+						</div>
+
+						<hr class="mt-3 mb-0 mt-md-0" />
+					</tal:block>
+				</tal:block>
+			</tal:block>
+			
+			<tal:block tal:condition="exists: cart/discount">
+				<div class="discount row" tal:condition="exists:cart/discount/final" tal:repeat="rebate cart/discount/final">
+						<div class="col-12 text-sm-center col-sm-12 text-md-left col-md-4 mt-md-4">
+						<span class="quiet " tal:content="cart/discount/info/name"></span>
+					<span tal:content="rebate/product/title"></span><br/>
+					</div>
+					<div class="col-12 col-md-4 text-center mt-md-4">
+						<h4 style="color: #cc3817; font-weight: bold;" tal:content="cart/discount/info/code"></h4>
+					</div>
+				
+					<div class="col-12 col-sm-12 mt-md-4 text-sm-center col-md-4 text-md-right row">
+						 <div class="col-4 col-sm-4 col-md-6">
+							-<tal:block tal:content="formatprice:rebate/unitdiscount" /> <span class="text-muted">kr</span></div>
+						<div class="col-4 col-sm-3 col-md-2 ">
+							<span tal:content="rebate/quantity">1</span><br />
+							<!--<a href="#" class="update-price-link" i18n:translate="">Update price</a>-->
+						
+						</div>
+						<div class="col-4 col-sm-2 col-md-4">-<tal:block tal:content="formatprice:rebate/totaldiscount" /></div>
+						</div>
+				</div>
+					<hr/>
+			</tal:block>
+			<!-- END PRODUCT -->
+
+
+
+
+
+			<!--PRODUCT TILBEHØR mediaclip-->
+			<tal:block tal:condition="exists: cart/items/mediaclip">
+						<tal:block tal:repeat="products cart/items/mediaclip">
+							<tal:block tal:repeat="mediaclip products">
+								
+								
+								
+								<p id="${mediaclip/optionid}" class="productline">
+									
+							<img src="/create/thumb/orderthumb/${mediaclip/referenceid}" widht="140" height="70" title="" />
+		
+									
+									
+							
+		
+								<!--Tittel-->
+									<div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6 mt-md-4">
+								<h4 class="product-name"><strong>
+										<tal:block tal:condition="exists:mediaclip/product/title" tal:content="mediaclip/product/title">Product</tal:block>
+									</strong></h4>
+							</div>
+								
+								
+								
+								
+									<h6><strong>
+											<tal:block tal:condition="mediaclip/product/option">
+												<tal:block tal:condition="not:equal:mediaclip/product/option/title,Standard">
+													<span class="quiet">,
+														<tal:block tal:content="mediaclip/currentproductoption/title" /></span>
+												</tal:block>
+											</tal:block>
+											<i class="unitprice" tal:content="formatprice:mediaclip/unitprice">Price</i> <span class="text-muted">kr</span>
+										</strong></h6>
+								
+								
+								
+									
+									
+									<!--Antall-->
+									<div class="col-4 col-sm-4 col-md-4">
+								<div class="quantity">
+									<input type="button" value="+" class="plus" />
+									<input type="number" step="1" max="99" min="1" value="${mediaclip/quantity}" data-refrence="${mediaclip/referenceid}" data-prodno="${mediaclip/prodno}" title="Qty" class="qty quantity" size="4" />
+									<input type="button" value="-" class="minus" />
+								</div>
+							</div>
+									
+									
+								
+		
+								</p>
+								
+				
+								
+								
+								
+					
+							   
+							</tal:block>
+						</tal:block>
+					</tal:block>
+			<!-- END PRODUCT -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<!--PRODUCT TILBEHØR GOODS-->
+			<tal:block tal:condition="exists: cart/items/goods">
+				<tal:block tal:repeat="good cart/items/goods">
+					<div class="row">
+						<div class="col-12 col-md-2 text-center">
+							<tal:block tal:condition="exists:good/product/images">
+								<tal:block tal:repeat="image good/product/images">
+									<tal:block tal:condition="equal:repeat/image/number,1">
+										<img tal:condition="image/url" style="width: 90px; height: auto;" src="/images/products/thumbs/height/220/${image/url}" title="" />
+										<!-- <img class="img-responsive" style="margin: auto" src="http://static.repix.no/images/products/thumbs/square/220/${image/url}" title="${item/title}" tal:condition="equal:repeat/image/number,1"/>
+								-->
+									</tal:block>
+								</tal:block>
+							</tal:block>
+						</div>
+						<div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6 mt-md-4">
+							<h4 class="product-name"><strong>
+									<tal:block tal:condition="exists:good/product/title" tal:content="good/product/title">Product</tal:block>
+								</strong></h4>
+						</div>
+						<div class="col-12 col-sm-12 mt-md-4 text-sm-center col-md-4 text-md-right row">
+							<div class="col-4 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+								<h6><strong>
+										<tal:block tal:condition="good/product/option">
+											<tal:block tal:condition="not:equal:good/product/option/title,Standard">
+												<span class="quiet">,
+													<tal:block tal:content="good/product/title" /></span>
+											</tal:block>
+										</tal:block>
+										<i class="unitprice" tal:content="formatprice:good/unitprice">>Price</i> <span class="text-muted">kr</span>
+									</strong></h6>
+							</div>
+							<div class="col-4 col-sm-4 col-md-4">
+								<div class="quantity">
+									<input type="button" value="+" class="plus" />
+									<input type="number" step="1" max="99" min="1" value="${good/quantity}" data-refrence="${good/referenceid}" data-prodno="${good/prodno}" title="Qty" class="qty quantity" size="4" />
+									<input type="button" value="-" class="minus" />
+								</div>
+							</div>
+							<div class="col-4 col-sm-2 col-md-2 text-right">
+								<a class="btn btn-success btn-xs fas fa-trash" href="/cart/remove/${good/prodno}/${good/referenceid}" title="Remove" i18n:translate="" name="${good/prodno}"></a>
+								<input type="hidden" value="${good/referenceid}" name="referenceid" />
+							</div>
+						</div>
+					</div>
+					<hr class="mt-3 mb-0 mt-md-0" />
+				</tal:block>
+			</tal:block>
+			<!-- END PRODUCT -->
+
+
+			<tal:block tal:condition="exists: cart/items">
+				<div class="row">
+					<div class="col-12">
+						<br />
+						<div class="row text-rightc">
+							<div class="col-12" style="margin: 5px">
+								<!--  Total price: <b >50.00€</b>-->
+								<span class="font-weight-bold ">Total:</span>
+								<span class="total-price font-weight-bold" id="total-price">${formatprice:cart/totalprice} kr</span>
+							</div>
+						</div>
+						
+						
+						
+						
+								<tal:block tal:condition="not:session/loggedin">
+						<div class="row float-center  mt-3">
+							<div class="col-md-12">
+									<!--	<a type="button" class="btn btn-danger font-weight-bold" style="color: #ffffff;" href="/cart/clear/" i18n:translate="">Empty cart</a>
+							<a type="button" class="btn btn-success font-weight-bold" style="color: #ffffff;" href="/loginuser/" i18n:translate="">Til utsjekk</a>
+								-->
+								
+								
+														<a href="/cart/clear/" class="btn btn-danger col-md-3 mb-2 font-weight-bold float-left"i18n:translate="">Empty cart</a>
+								
+								<a href="/loginuser" class="btn btn-success col-md-3 offset-md-1 mb-2 float-right font-weight-bold">Til utsjekk</a>
+								
+								
+								
+								
+							</div>
+							<br/>
+							
+						</div>
+						</tal:block>
+						
+						
+						
+						
+						<tal:block tal:condition="session/loggedin">
+			
+			<div class="row">
+							<div class="col-md-12">
+								<div class="col-md-3">
+									<a type="button" class="btn btn-danger d-none d-sm-block font-weight-bold" style="color: #ffffff;" href="/cart/clear/" i18n:translate="">Empty cart</a>	
+								</div>
+								
+								<div class="col-md-4">							
+								</div>
+								
+								
+							</div>
+						</div>
+			
+			
+			
+			
+			
+			<div class="row float-center  mt-3">
+							<div class="col-md-12">
+								<a href="/kasse/vipps/" class="btn btn-success col-md-3 mb-2 font-weight-bold float-left" style="background:#ff5b24">Betal med Vipps</a>
+								<a href="/kasse" style="color: #ffb3c7;" class="btn btn-info col-md-3 offset-md-1 mb-2 float-center font-weight-bold">Betal med Klarna</a>
+								<a href="/checkout" class="btn btn-dark col-md-3 offset-md-1 mb-2 float-right font-weight-bold">Betal med Repix faktura</a>
+							</div>
+						</div>
+			</tal:block>
+						
+				
+						
+					
+						
+						
+						
+						
+						
+					</div>
+				</div>
+			</tal:block>
+			<br />
+
+			<!--Bare synlig på mobil-->
+			<tal:block tal:condition="exists: cart/items">
+				<div class="row d-block d-sm-none">
+					<p class="text-center font-weight-bold">Handle mer?</p>
+					<div class="col-12 ">
+						<button class=" col-3  btn btn-outline-success btn-sm mr-1 mb-3 " href="/bestilling/fargelapp">Navnelapp</button>
+						<button class="col-4 offset-1 btn btn-outline-success btn-sm mr-1 mb-3 float-center" href="/bestilling/merkelappmix">NavnelappMix</button>
+						<button class=" col-3 btn btn-outline-success btn-sm mr-1 mb-3 float-right" href="/bestilling/stempel">Stempel</button>
+						<button class="col-4 offset-1  btn btn-outline-success btn-sm mb-3 float-center" href="/bestilling/">Strykelapp</button>
+						<button class="col-4  offset-1  btn btn-outline-success btn-sm mb-3 float-center" href="/produkter/tilbehor/merkelapp">Tilbehør</button>
+					</div>
+					<br />
+				</div>
+			</tal:block>
+
+		</div>
+
+
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+
+	<script type="text/javascript">
+	$(document).ready( function() {
+
+	   /*$( '.printedgiftcard' ).click( function() {
+	      $.ef( 'cart.toggleprintgiftcard', {
+	         prodno: $( this ).val()
+	      }, function() {}, 'json' );
+	   });*/
+	   
+		$('.update-price-link').click( function() {
+			location.reload();
+			
+		});
+	   
+	   $('.plus').on('click', function(){
+			var currentvalue = $(this).parent().find('.qty').val();
+			$(this).parent().find('.qty').val( parseInt(  currentvalue ) + 1 );
+			$(this).parent().find('.qty').change();
+		});
+	   
+	   $('.minus').on('click', function(){
+			var currentvalue = $(this).parent().find('.qty').val();
+			if( currentvalue == 1 ) return false;
+			$(this).parent().find('.qty').val( parseInt(  currentvalue ) - 1 );
+			$(this).parent().find('.qty').change();
+		})
+	   
+	   $( '.printedgiftcard' ).change( function() {
+	      
+	        $( '.printedgiftcard' ).each( function() {
+	           $( this ).attr( 'checked', 'true' );
+	           $.ef( 'cart.toggleprintgiftcard', {
+	              prodno: $( this ).val(),
+	              status: 'true'
+	           }, function(response) {}, 'json' );
+	        } );
+	      
+	        $.ef( 'cart.toggleprintgiftcard', {
+	           prodno: $( this ).val(),
+	           status: 'true'
+	        }, function(response) {}, 'json' );
+	   });
+	   
+	   $( '.notprintedgiftcard' ).change( function() {
+	         
+	         $( '.notprintedgiftcard' ).each( function() {
+	           $( this ).attr( 'checked', 'true' );
+	           $.ef( 'cart.toggleprintgiftcard', {
+   	           prodno: $( this ).val(),
+   	           status: 'false'
+   	        }, function(response) {}, 'json' );
+	         } );
+   	      
+	   });
+	   
+	   
+		/*$('td.quantity-editable').append('<a href="#" class="update-price-link" i18n:translate="">Update price</a>');*/
+		
+		$('.update-price-link').click( function() {
+			//$(this).parent().find('input.quantity').trigger('change');
+			$('#cart').attr('action','/checkout/cartupdate' ).submit();
+			return false;
+			
+		});
+		
+		$('input.quantity').on('change', function() {
+			var parent =  $(this).parent().parent().parent().parent();
+			var quantity = $(this).val();
+			var refrence = $(this).data('refrence');
+			var  prodno = $(this).data('prodno');
+			
+			$.post('/api/1.0/cart/set', {
+				prodno: prodno,
+				quantity: quantity,
+				referenceid: refrence
+			}, function(data) {
+				$('#total-price').text( formatPrice(data.message.totalprice) );
+			}, 'json');	
+			
+			
+			/*
+			parent =  $(this).parent().parent().parent().parent();
+			console.log(parent);
+			var quantity = $(this).val();
+			var id = parent.attr('id');
+			var price;
+			var item = this;
+			
+			$(this).parent().next().prepend('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader1"/>');
+			$(this).parent().next().next().prepend('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader2"/>');
+			$('#total-price').before('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader3"/>');
+			
+			$.post('/api/1.0/prices/get', {
+				productoptionid: id,
+				quantity: quantity
+			}, function(data) {
+				console.log(data);
+				console.log( parent.find('.unitprice'));
+				parent.find('.unitprice').text( formatPrice(data.price) );
+				parent.find('.price').text( formatPrice( parseFloat(quantity) * parseFloat(data.price) ) );
+				var totalPrice = 0;
+				
+				$.get('/api/1.0/cart/enum', {}, function(data) {
+					console.log(data);
+					})
+				
+				$('#total-price').text( formatPrice(totalPrice) );
+				
+				$('#loader1, #loader2, #loader3').remove();
+				
+			}, 'json');			
+			*/
+			return false;
+		});
+		
+		$('.removeItem a.remove').click( function() {
+			var item = this;
+			$.post('/api/1.0/cart/remove', {
+				prodno: $(item).attr('name'),
+				reference: $(item).next().attr('value')
+			}, function(msg) {
+				document.location.refresh(false);
+			})
+		});
+		
+	$("a.preview").hover(function(e){
+	 		
+		xOffset = 15;
+		yOffset = 10;
+		this.t = this.title;
+		this.title = "";
+	   $("body").append('<p id="preview"><img src="'+ this.t +'"/></p>');	
+	   $("#preview")
+			.css("top",(e.pageY - xOffset) + "px")
+			.css("left",(e.pageX + yOffset) + "px")
+			.fadeIn("fast");
+    
+	  },
+	  function(){
+		this.title = this.t;	
+		$("#preview").remove();
+      }
+	  );
+	  
+	  $("a.preview").mousemove(function(e){
+		$("#preview")
+			.css("top",(e.pageY - xOffset) + "px")
+			.css("left",(e.pageX + yOffset) + "px");
+	  });
+    	
+		
+		
+		
+	});
+	
+	function formatPrice(num) {
+		
+		console.log(num);
+		
+		num = num.toString();
+		num = num.replace(',','.');	
+		price = parseInt( num * 100 ) / 100;
+		return price.toFixed(2).toString().replace('.', ',');
+	}
+</script>
+
+</body>
+</html>

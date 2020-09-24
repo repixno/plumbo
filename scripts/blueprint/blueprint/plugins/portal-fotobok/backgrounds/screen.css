@@ -1,0 +1,14 @@
+
+
+/*frontpage */
+
+#site-logo {
+	background: #fff url(gfx/logo.jpg) no-repeat top left;
+}
+
+#frontpage-main {
+	background: #0cf url(gfx/frontpage-main.jpg) no-repeat scroll center center;
+	color: #fff;
+}
+
+a.button.white { background-color: #efefef }

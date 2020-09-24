@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Products</tal:block>
+
+	
+	<style type="text/css">
+		.imagecontainer {
+			height: 230px;
+		}
+
+		.infocontainer {
+			height: 100px;
+		}
+
+		.infocontainer div {
+			position: absolute;
+			bottom: 0px;
+			width: 100%
+		}
+
+		.btn-default {
+
+			color: #fff;
+			background-color: #01c95d;
+			border-color: #01c95d;
+			font-family: Yanoneregular;
+			font-size: 21px;
+			letter-spacing: 2px;
+			padding: 6px 14px 6px 14px;
+		}
+
+		.productbody {
+			text-align: center;
+			margin-bottom: 20px;
+
+		}
+
+		.h3 {
+			font-family: Yanone Kaffeesatz Regular;
+			text-transform: uppercase;
+			color: #4d4d4f;
+			font-size: 35px;
+		}
+	</style>
+</head>
+
+
+
+<body>
+
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/top" />
+		<div class="product-main-page ">
+		
+			<!--
+            utkommenter tittel
+            <h2 class="" tal:content="menuitem/title"></h2>-->
+			
+			<!--<div tal:condition="exists: menuitem/article/body" tal:content="structure menuitem/article/body"></div>-->
+			<div class="row">
+			
+   			<tal:block tal:repeat="item menuitems">
+				
+   				<tal:block tal:condition="item/expanded">
+   					<tal:block tal:condition="exists:item/children" tal:repeat="subitem2 item/children">
+   						<div class="col-md-4 append-bottom mainproductbox" >
+                                
+                                
+                                <div class="productbody col-md-12" style="border: solid 1px #ccc; padding-bottom: 10px; padding-top: 10px; min-height: 375px;">
+                                    <div>
+                                        <a href="${subitem2/url}" >
+                                            <img class="img-responsive" src="${static:}images/menu/${subitem2/image}" alt="${subitem2/title}"/>
+                                        </a>
+                                    </div>
+                                    <div class="h3 col-md-12">
+                                        ${subitem2/title}
+                                    </div>
+                                        <a class="btn btn-default center" href="${subitem2/url}" title="${subitem2/title}" i18n:translate="">See more</a>
+    
+                                </div>
+                         </div>
+   					</tal:block>
+   					
+   				</tal:block>
+   			</tal:block>
+			
+			</div>
+			
+		</div>
+		
+	</div>
+			<div metal:use-macro="../../../${templates}/common.html/footer" />
+</body>
+</html>

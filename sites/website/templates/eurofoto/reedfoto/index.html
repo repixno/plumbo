@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Search</tal:block>
+
+	
+	<style type="text/css">
+   
+      #addproject label{
+         width: 6em;
+         float: left;
+         text-align: right;
+         margin-right: 0.5em;
+         display: block;
+         margin-top: 8px;
+      }
+      
+      
+
+   </style>
+</head>
+
+<body>
+	<div class="container">
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<a href="#" id="addprojectbutton" >Nytt prosjekt</a>
+	
+	
+	
+	
+      <div class="hide" id="addproject">
+         <form method="post" action="/reedfoto/addproject" >
+            <fieldset>
+               <legend>Nytt Prosjekt:</legend>
+               <label for="projectname">Prosjektnavn:</label>
+               <input type="text" name="projectname"  /><br/>
+               <label for="projectdate">Dato:</label>
+               <input type="text" name="projectdate" id="datepicker" /><br />
+               <label for="userid">User:</label>
+               <input type="text" name="userid"/><br/>
+               <input type="submit" value="Legg til prosjekt" />
+            </fieldset>
+
+         </form>
+      </div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+
+<SCRIPT type="text/javascript">
+
+$( document ).ready( function(){
+   
+   
+   console.log( 'test ' );
+   $( "#datepicker" ).datepicker();
+   $('#addprojectbutton').click( function(){
+      
+      $('#addproject').dialog();
+      
+      
+      return false;
+      
+      
+   });
+   
+   
+   
+   
+   
+   
+});
+
+
+
+
+
+
+
+
+</SCRIPT>
+
+</body>
+</html>

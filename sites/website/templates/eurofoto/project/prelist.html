@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle">Nordsjørittet</tal:block>
+	
+	
+	<STYLE type="text/css">
+      .ui-menu {
+         list-style: none;
+         padding: 2px;
+         margin: 0;
+         display: block;
+         float: left;
+        }
+      .ui-autocomplete-loading { 
+        background: white url('http://static.eurofoto.no/gfx/gui/ajax-loader.gif') right center no-repeat;
+      }
+
+
+   </STYLE>
+</head>
+
+<body>
+	<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+   <div class="span-24 last">
+      <img src="http://b.static.eurofoto.no/cms/images/nordsjorittet2.jpg" />
+   </div>
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div class="searchresults span-16 prepend-4 append-6 last ui-widget">		
+
+	   <h3>Nordsjørittet 2012</h3>
+		<p>Her vil du få tilgang til bilder fra Nordsjørittet 2012.<br/>Bilder vil være tilgjengelige i løpet av Mandag 11.06.</p>
+		
+		<hr />
+   
+		<div class="span-19 " tal:condition="exists:searchresult/images">
+		<h3 i18n:translate="">Search</h3>
+		<p>Ditt søk gav følgende treff, trykk på bildet for å bestille.<br/>
+		<a href="/project" >Søk på nytt</a>.
+		</p>
+   		<div class="span-4 append-bottom"  tal:repeat="images searchresult/images">
+   
+   		       <a href="/project/OrderImage/${images/securecode}" >
+   		          <img src="${images/image/thumbnail}" />
+   		       </a>
+   		
+   		</div>
+		</div>
+		<p class="hide" tal:condition="not:exists:searchresult/RES" i18n:translate="">
+			Your search yielded no results.
+		</p>
+		
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+
+</body>
+</html>

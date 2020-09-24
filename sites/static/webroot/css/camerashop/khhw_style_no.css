@@ -1,0 +1,3060 @@
+@import url("https://cs.photoprintit.de/web/84000018/styles/main_navigation.css");
+@import url("https://cs.photoprintit.de/web/84000018/styles/basic_styles.css");
+@import url("https://cs.photoprintit.de/web/84000018/styles/sub_navigation.css");
+@import url("https://cs.photoprintit.de/web/84000018/styles/box_layout.css");
+@import url("https://cs.photoprintit.de/web/84000018/styles/content_styles.css");
+@import url("https://cs.photoprintit.de/web/84000018/styles/lightbox_iflow.css");
+@import url("https://cs.photoprintit.de/web/84000018/styles/lightbox_icarousel.css");
+@import url("https://cs.photoprintit.de/web/84000018/styles/lightbox_text_styles.css");
+@import url("https://cs.photoprintit.de/web/84000018/styles/lightbox_with_teaser.css");
+@import url("https://cs.photoprintit.de/web/84000018/styles/teaser_styles.css");
+@import url("https://cs.photoprintit.de/web/84000018/styles/teaser_styles_startpage.css");
+@import url("https://cs.photoprintit.de/web/84000018/styles/teaser_content_styles.css");
+@import url("https://cs.photoprintit.de/web/84000018/styles/lytebox_styles.css");
+@import url("https://cs.photoprintit.de/web/84000018/styles/header_styles.css");
+@import url("https://cs.photoprintit.de/web/84000018/styles/print_styles.css");
+@import url("https://cs.photoprintit.de/web/84000018/styles/navipartner.css");
+@import url("http://d.static.repix.no/css/camerashop/eurofoto.css");
+
+
+#header {
+	position: absolute !important;
+	top:-140px !important;
+	z-index:9999;
+	height: 80px !important;
+}
+
+#header dl iframe {
+    display: inline !important;
+}
+
+#header dl #login_iframe {
+	background: transparent;
+	background-image: none;
+}
+
+
+#main_nav li ul li {
+	position: static !important;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0 !important;
+}
+
+
+/* KH LOGO */
+a#page_logo {
+	display:none !important;
+}
+
+a#logo {
+	background: url("https://japanphotoxxl.no/cops/images/84000018/jp_logo2.png") no-repeat !important;
+	top:24px;
+	left: 2px;
+	width: 225px;
+	height: 45px;
+	position: absolute;
+}
+
+a#logo span {
+	display: none;	
+}
+
+/* JP MAIN NAV */
+ul#main_nav {
+	background: url("https://japanphotoxxl.no/cops/images/84000018/jp_nav_bg.png") no-repeat bottom left !important;
+	text-align: center;
+	height: 35px !important;
+	width: 962px;
+	padding: 0;
+	margin-left: -171px;
+	margin-top:-63px;
+	position: static;
+}
+
+	#main_nav li {
+		position: static;
+		height: auto !important;
+		z-index: auto !important;
+	}
+	
+	#main_nav li#main_nav_item_2 {
+		margin-left:90px;
+	}
+	
+	/* Hides duplicate cart menu item */
+	#main_nav_item_12 {
+		display: none !important;
+	}
+	
+	#main_nav li.active {
+		background: none;
+		border: none !important;
+	}
+	
+	#main_nav li a {
+		background: none;
+		font-size: 12px;
+		font-weight: normal;
+		padding: 9px 9px 6px 9px;
+		text-shadow:#fefc9a 0px 1px 0;
+		letter-spacing: normal !important;
+	}
+	
+	/* #main_nav li a.active {
+		border: none;
+		font-weight: normal;
+		margin: 0;
+		padding: 10px 9px 11px 9px;
+		color: #000000;
+	} */
+	
+	#main_nav li a.active {
+		border: none;
+		color: #fff !important;
+		font-weight: normal;
+		margin: -1px 0 0 0;
+		padding: 11px 9px 11px 9px;
+		text-shadow:#000000 0px -1px 0;
+		background: url("https://japanphotoxxl.no/cops/images/84000018/jp_nav_active.png") repeat-x top;
+	}	
+	
+		/* first sub */
+		#main_nav li ul {
+			background: url("https://japanphotoxxl.no/cops/images/84000018/jp_nav_dropdown_bg.png") top left no-repeat;
+			padding: 15px 0 10px 15px;
+			width: 945px;
+			height: 220px;
+			position: absolute !important;
+			top: -13px !important;
+			left: 1px !important;
+			border: none;
+			margin: 0 0 0 -171px !important;
+			float:left;
+		}
+		
+			#main_nav li ul li {
+				float: left;
+				width: 134px !important;
+				background: url("https://japanphotoxxl.no/cops/images/84000018/jp_dott.png") repeat-y top left;
+			}
+			
+			#main_nav li ul li.sub_menu_item_1,
+			#main_nav li ul li.sub_menu_item_2,
+			#main_nav li ul li.sub_menu_item_3,
+			#main_nav li ul li.sub_menu_item_4,
+			#main_nav li ul li.sub_menu_item_5,
+			#main_nav li ul li.sub_menu_item_6,
+			#main_nav li ul li.sub_menu_item_7,
+			#main_nav li ul li.sub_menu_item_8,
+			#main_nav li ul li.sub_menu_item_9 {
+				height: 115px !important;
+			}
+			
+			#main_nav li ul li.sub_menu_item_7 {
+				width: 110px;
+			}
+			
+			#main_nav li ul li.sub_nav_page_calendar_photopaper {
+				width: 180px !important;
+			}
+			
+			#main_nav li ul li.sub_nav_page_calendars_printed {
+				width: 190px !important;
+			}
+			
+			#main_nav li ul li.sub_nav_page_photobook_reorder {
+				display: none;
+			}
+			
+			#main_nav li ul li.sub_nav_page_prices_office {
+					
+			}
+			
+			#main_nav li ul li a {
+				white-space: normal !important;
+			}
+			
+				#main_nav li ul li a {
+					color: #f8f400;
+					text-shadow: none;
+					font-size:11px;
+					font-weight: bold;
+					padding: 0px;
+					margin:0 0 4px 10px;
+					text-shadow:#000000 0px -1px 0;
+					height: auto !important;
+				}
+	
+				#main_nav li ul li a:hover {
+					color: #f8f400 !important;
+					background: none;
+					padding: 0px;
+					margin:0 0 4px 10px;
+					font-weight: bold;
+				}
+	
+					/* second sub */
+					#main_nav li ul li ul {
+						visibility: visible !important;
+						background: none;
+						display: block;
+						border: none;
+						width:100%;
+						position: static !important;
+						top: auto !important;
+						padding:0px;
+						margin:0 !important;
+					}
+					
+						#main_nav li ul li ul li {
+							padding:0 !important;
+							margin: 0 !important;
+							display: block !important;
+							width:100% !important;
+							border: none;
+							background: none;
+						}
+						
+							#main_nav li ul li ul li a, #main_nav li ul li ul li a:hover {
+								font-weight: normal;
+								color: #fff;
+								padding: 0px !important;
+								margin:0 0 0 9px;
+								text-shadow:#000000 0px -1px 0;
+								line-height: 14px !important;
+								height: auto !important;
+							}
+							
+							#main_nav li ul li ul li a:hover {
+								color: #f8f400;
+								text-shadow:#000000 0px -1px 0;
+							}
+							
+							
+ul.submenu li a {
+	letter-spacing: normal !important;
+}
+
+.cssbox_head h2, .cssbox_head p.h2, .cssbox_head h1.h2 {
+	letter-spacing: normal!important;
+}
+
+.teaser {
+	z-index: 4999 !important;
+	margin-top:50px !important;
+}
+
+div.webhome {
+	z-index:5000 !important;
+	padding-top:0px !important;
+	margin-top:0px !important;
+	min-height: 2100px;
+	top: -20px;
+}
+
+
+/************************************** HW shop adjustments ***********************************/
+h1 a, h2 a, h3 a {
+	color: #14506a;
+}
+
+a:hover {
+	color: #45a2c1 !important; /* hover on all links */
+	text-decoration: none !important;
+}
+
+div.cssboxmiddle, div.cssboxwide, div.boxfooter  {
+	float: left;
+}
+
+div.cssboxmiddle .cssboxmiddle_body {
+	text-align: center;
+	padding: 16px 0 20px 0;
+}
+
+	div.cssboxmiddle .cssboxmiddle_body a.linkcolor {
+		display: inline;
+		margin:0px !important;
+		float: inherit;
+		float: none !important;
+	}
+	
+	div.webhome div .linkcolor {
+		float:left;
+		width:100%;
+	}
+	
+	div.webhome div .linkcolor img {
+		display: inline !important;
+	}
+	
+	div .linkcolor {
+		background-image:none;
+		background-repeat: no-repeat;
+		display:block;
+		height:286px !important;
+		margin-bottom:4px;
+		margin-left:2px;
+	}
+	
+	.flashbanner_frontpage {
+		margin-left:2px;
+		margin-bottom:4px;
+	}
+	
+	#attention_notification {
+		margin-bottom:6px;
+		margin-top:1px !important;
+	}
+
+div.cssboxmiddle { 
+	width: 306px;
+	margin-left:3px;
+	margin-bottom:4px;
+}
+
+div.cssboxmiddle.left {
+	width:306px !important; /* this box needs to be 1px smaller fix */
+	margin-left:2px !important; /* the important 9px margin under, over and on the sides of each box fix */
+	margin-right:1px !important; /* the important 9px margin under, over and on the sides of each box fix */
+}
+
+	div.cssboxmiddle.left .cssbox_head,
+	div.cssboxmiddle.left .cssboxmiddle_body,
+	div.cssboxmiddle.left .headerlinecontainer {
+		background-image: url(https://japanphotoxxl.no/cops/images/hw/storboks.new.306.png) !important;
+	}
+	
+	div.cssboxmiddle .cssbox_head,
+	div.cssboxmiddle .cssboxmiddle_body,
+	div.cssboxmiddle .headerlinecontainer {
+		background-image: url(https://japanphotoxxl.no/cops/images/hw/storboks.new.306.png) !important;
+	}
+	
+	
+	
+/* wide product box */
+div.cssboxwide {
+	margin-left:2px; !important; /* the important 9px margin under, over and on the sides of each box fix */
+	width: 617px !important;
+	margin-bottom:4px;
+}
+
+.cssboxwide .cssbox_head,
+.cssboxwide .headerlinecontainer,
+.cssboxwide .cssbox_body {
+	background-image: url(https://japanphotoxxl.no/cops/images/hw/storboks.new.617.png) !important;
+}
+
+.cssboxwide .cssbox_head h2 {
+	padding: 8px 0 6px 12px !important;
+	text-shadow:#ffffff 0px 1px 0;
+}
+
+.cssboxwide .cssbox_body{
+	margin-bottom:0px !important;
+	padding-bottom:0px !important;
+}
+
+.cssboxwide .cssbox_body .body {
+	padding: 16px 20px 16px 19px;
+	position: relative;
+	float:left;
+}
+
+.cssboxwide .cssbox_body .body .productwrap img#prod_img {
+	float:left;
+	margin-right:17px;
+	margin-bottom:4px;
+}
+
+.cssboxwide .cssbox_body .body .productwrap .productinfo {
+	margin-left:17px; !important;
+	padding-top:8px;
+}
+
+.cssboxwide .cssbox_body .body .productwrap .productinfo h2 a {
+	color: #14506a;
+	font-size: 16px;
+	text-decoration: none !important;
+	font-weight: bold;
+}
+
+	.cssboxwide .cssbox_body .body .productwrap .productinfo h2 img {
+		padding-left:5px !important;
+	}
+
+.cssboxwide .cssbox_body .body .productwrap .productinfo p {
+	 font-size: 12px;
+	 color: #4d4d4d;
+	 line-height: 18px;
+}
+	.cssboxwide .cssbox_body .body div table .inforuta-image {
+		position: absolute;
+		top:171px;
+		left:252px;
+	}
+	.cssboxwide .cssbox_body .body div table .inforuta-desc {
+		position: absolute;
+		top:178px;
+		left:342px;
+	}
+	
+		.cssboxwide .cssbox_body .body div table .inforuta-desc p {
+			color: #4d4d4d;
+		}
+		
+		.cssboxwide .cssbox_body .body div table .inforuta-desc a {
+			color: #14506a;
+		}
+		
+	.cssboxwide .cssbox_body .body div table .footer {
+		float:right;
+		margin: -28px 0 0 0 !important;
+		padding: 0 !important;
+	}
+	
+		.cssboxwide .cssbox_body .body div table .footer span {
+			color: #e31f15;
+			font-weight: bold;
+			font-weight: 16px;
+			line-height: 28px;
+			padding-right:10px;
+		}
+		
+		.cssboxwide .cssbox_body .body div table .footer a.button {
+			margin-right:0px;
+		}
+			
+	
+
+.boxfooter.leftbox, .boxfooter.rightbox {
+	width: 306px !important;
+	height: auto !important;
+}
+
+.boxfooter.leftbox {
+	margin-left:2px !important; /* the important 9px margin under, over and on the sides of each box fix */
+	margin-right: 2px !important; /* the important 9px margin under, over and on the sides of each box fix */
+	margin-bottom: 4px !important; /* the important 9px margin under, over and on the sides of each box fix */
+}
+
+.boxfooter.rightbox {
+	margin-left: 2px !important;
+	margin-right:1px !important;
+	margin-bottom: 4px !important; /* the important 9px margin under, over and on the sides of each box fix */
+}
+
+	.boxfooter .content, 
+	.boxfooter .b {
+		background-image:url(https://japanphotoxxl.no/cops/images/hw/storboks.new.306.flipped.png) !important;
+		width: 306px !important;
+		float:left;
+	}
+	
+	.boxfooter .b {
+		height: 41px;
+	}
+	
+		.boxfooter .content .container { 
+			padding: 23px 23px 0px 24px;
+		}
+		
+			.boxfooter .content .container .wrap {
+				width: 258px !important;
+				height: 194px !important;
+				margin:0 !important;
+			}
+			
+				.boxfooter .content .container .wrap h2 {
+					padding: 0px !important;
+					margin: -3px 0 0 0 !important;
+				}
+				
+					.boxfooter .content .container .wrap h2 a {
+						font-size: 12px;
+					}
+					
+					.boxfooter .content .container .wrap h2 img {
+						margin-left:-4px;
+						vertical-align: middle;
+						padding-bottom:2px;
+					}
+					
+				.boxfooter .content .container .wrap p {
+					color: #4d4d4d;
+					font-size: 11px;
+					line-height: 15px;
+				}
+				
+				.boxfooter .content .container .wrap a {
+					color: #14506a;
+				}
+				
+					.boxfooter .content .container .wrap table a {
+						font-size: 11px !important;
+					}
+				
+				.boxfooter .content .container .wrap table {
+					margin:-10px 0 0 0;
+				}
+				
+				.boxfooter .content .container .wrap table tr {
+					padding:0 !important;
+				}
+				
+				.boxfooter .content .container .wrap table.product {
+					margin: 0px !important;
+				}
+				
+					.boxfooter .content .container .wrap table.product p {
+						vertical-align: top !important;
+						height: 107px;
+						padding-top:2px;
+					}
+					
+					.boxfooter .content .container .wrap table.product img {
+						vertical-align: top !important;
+						margin-top:-20px;
+					}
+					
+					.boxfooter .content .container .wrap table div.inforuta-date {
+						padding: 0 0 0 0 !important;
+					}
+						
+						.boxfooter .content .container .wrap table div.inforuta-date p {
+							line-height: 14px !important;
+							padding-top:4px;
+						}
+						
+		.boxfooter .button {
+			margin: 9px 8px 0 0 !important;
+			float:right;
+		}
+		
+		.boxfooter .footer span {
+			color: #e31f15;
+			font-weight: bold;
+			font-weight: 16px;
+			width: 222px;
+			text-shadow:#ffffff 0px 1px 0;
+		}
+				
+				
+
+/* hw menu */
+.cssbox_head h2 {
+	padding: 8px 0 7px 12px;
+	text-shadow:#ffffff 0px 1px 0;
+	line-height:14px;
+}
+
+.cssbox_head h2 a {
+	font-size:12px;
+	color: #000000;
+}
+
+div.body ul.submenu {
+	margin: -2px 0 -7px 0px !important; /* 17px margin left/right/top -fix */
+	width: 132px
+}
+
+	ul.submenu li {
+		padding: 4px 0 4px 0 !important;
+		width: 132px;
+	}
+	
+	ul.submenu li:last-child  {
+		border-bottom: none !important;
+	}
+	
+		ul.submenu li a {
+			display: block;
+			width: 132px;
+		}
+		
+		div.body ul.submenu li ul {
+			background:#f2f8f8;
+			border-bottom:1px solid #E1E7E7;
+			border-top:1px solid #E1E7E7;
+			list-style-type:none;
+			margin-bottom:-5px;
+			margin-left:0;
+			margin-top:4px;
+			padding:6px 0 7px;
+			width: 132px;
+		}
+
+			div.body ul.submenu li ul li {
+				width: 132px;
+				display: block;
+				border:medium none;
+				margin-left:0;
+				padding-left:0;
+				padding: 1px 0 1px 0 !important;
+			}
+			
+				div.body ul.submenu li ul li a {
+					background-image:none;
+					color:#164F6D;
+					font-size:11px;
+					font-weight:normal;
+					height:auto;
+					list-style-image:none;
+					text-decoration:none;
+				}
+
+.left_column_wrapper,
+.right_column_wrapper { 
+	padding-top:0px !important;
+}
+
+.left_column_wrapper .cssbox,
+.right_column_wrapper .cssbox {
+	margin-bottom:4px !important;
+}
+
+.left_column_wrapper .cssbox_head, .right_column_wrapper .cssbox_head,
+.left_column_wrapper .headerlinecontainer, .right_column_wrapper .headerlinecontainer,
+.left_column_wrapper .cssbox_body, .right_column_wrapper .cssbox_body { 
+	background-image:url(https://japanphotoxxl.no/cops/images/hw/storboks.new.170.png) !important;
+}
+
+.left_column_wrapper .cssbox .cssbox_body .body {
+	padding: 11px 17px 0px 19px !important;
+}
+
+.right_column_wrapper .cssbox .cssbox_body .body {
+	padding: 13px 17px 0px 19px !important;
+}
+
+/* hides the login box (should be placed in top) */
+div.cssbox.right_abs.r2 {
+	display: none;
+}
+
+
+
+div.cssbox.right_abs .body a {
+	color: #14506a;
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+div.cssbox.right_abs .body p {
+	color: #4d4d4d;
+}
+
+div.cssbox.right_abs .body .handlekurv {
+	margin-left:92px;
+	margin-top:-20px;
+}
+
+/* top 5 products */
+div.cssbox.right_abs.r3 .cssbox_body {
+	padding-bottom:14px;
+}
+
+	div.cssbox.right_abs.r3 .cssbox_body .body {
+		padding-top:6px !important;
+		padding-bottom: 0px !important;
+	}
+
+div.top_5_box {
+	padding-top:6px !important;
+	width: 132px !important;
+}
+
+	.top_5_box:last-child {
+		border-bottom: none !important;
+	}
+
+	.top_5_box a {
+		letter-spacing: normal !important;
+		color: #14506a;
+	}
+	
+		.top_5_box div.top_5_left {
+			width: 50px;
+			height: 50px;
+			margin-left:-2px;
+		}
+		
+			.top_5_box .top_5_left .top_5_image {
+				width: 50px;
+				height: 50px;
+				text-align: center;
+				vertical-align: middle;
+			}
+	
+	.top_5_box div.top_5_right {
+		margin-left:4px;
+	}
+		
+		.top_5_box div.top_5_right div.top_5_price {
+			margin-top:3px;
+		}
+		
+			.top_5_box .top_5_right .top_5_price span {
+				color: #e31f15 !important;
+			}
+			
+			
+/* Stores / butikker */
+div.cssbox.right_abs.r4 .cssbox_body .body {
+	padding-top:16px !important;
+	padding-bottom: 0px !important;
+	padding-left: 16px !important;
+	text-align: center;
+}
+
+	div.cssbox.right_abs.r4 .cssbox_body .body a {
+		color: #134e6c;
+	}
+
+	.cssbox_body .body img.butikkbilde { 
+		backround: #fff;
+		padding: 4px;
+		border: 1px solid #e2e2e2;
+		margin-bottom:4px;
+	}
+	
+	
+/* Omtaler */
+div.cssbox.right_abs.r5 .cssbox_body .body {
+	text-align: right;
+	padding-right:19px !important;
+	padding-top:12px !important;
+}
+
+div.price_search_entry {
+	margin-bottom:10px;
+}
+
+div#price_search_prisguide .price_search_grade { padding:0px 0 5px 0; margin-right:-1px; }
+div#price_search_dinpris .price_search_grade { padding:6px 0 3px 0; }
+div#price_search_kelkoo .price_search_grade { padding:2px 0 0px 0; }
+
+div#price_search_kelkoo { margin-bottom: 0px !important; }
+
+
+/* About Japan Photo - had to fetch the .13-class with UTF-8 code chars, - classes starting with numbers ain't a good thing */
+.cssbox.left.abs.\31 3 p {
+	color: #4D4D4D;
+	margin:0px !important;
+	padding:1px 0px 8px 0px !important;
+	line-height: 16px !important;
+}
+
+.cssbox.left.abs.\31 3 ul.sublinks {
+	color: #4D4D4D;
+	margin-top:-3px;
+	margin-bottom:-1px;
+}
+	.cssbox.left.abs.\31 3 ul.sublinks li {
+		color: #14506A;
+		padding: 4px 0 3px 0 !important;
+		margin-left:-10px;
+		list-style-image: none;
+		list-style: none !important;
+	}
+		.cssbox.left.abs.\31 3 ul.sublinks li a {
+			color: #14506A;
+			font-weight: normal;
+			text-decoration: underline;
+			background-image:url(https://japanphotoxxl.no/cops/images/hw/pil-til-hoyre.gif);
+			background-position:0 4px;
+			background-repeat:no-repeat;
+			display:block;
+			line-height:15px;
+			list-style-type:none;
+			margin-right:5px;
+			padding-left:11px;
+			white-space:normal;
+		}
+
+
+/* Main content */
+div.boxnoheader.wide {
+	margin-left: 2px !important;
+	width: 617px !important;
+	padding-bottom: 21px !important;
+}
+
+	.boxnoheader.wide div.content {
+		background: url(https://japanphotoxxl.no/cops/images/hw/storboks.new.617.noheader.png) no-repeat top left !important;
+	}
+
+	.boxnoheader.wide div.b {
+		width: 100% !important;
+		display: block !important;
+		float:left;
+		height:17px;
+		background: url(https://japanphotoxxl.no/cops/images/hw/storboks.new.617.noheader_bottom.png) no-repeat bottom left !important;
+	}
+	
+	.boxnoheader.wide .content div#content {
+		padding:23px 25px 8px 24px;
+	}
+	
+	.boxnoheader.wide .content div.contentwrap {
+		padding:23px 25px 8px 24px;
+	}
+	
+	div.contentwrap2 {
+		padding: 3px 25px 23px 24px;
+	}
+	
+	div.bd {
+		padding: 0px 25px 23px 24px;
+		margin-top:-17px;
+	}
+	
+	#content h1, div.contentwrap h1, div.bd h1 {
+		padding:0px;
+		font-size: 17px;
+		margin:-4px 0 1px -1px;
+	}
+	
+	#content p, div.contentwrap p, div.contentwrap2 p, div.bd p, div.allevents p {
+		font-size:12px;
+		color: #4d4d4d;
+		line-height: 18px;
+		margin:13px 0 0 0;
+	}
+	
+	#content p a,
+	div.contentwrap p a,
+	div.contentwrap2 p a,
+	div.bd p a,
+	div.allevents p a {
+		font-size: 12px;
+		color: #14506a;
+		font-weight: normal;
+		text-decoration: underline;
+	}
+	
+	#content a,  div.contentwrap a, div.contentwrap2 a, div.bd a {
+		color: #14506a;
+	}
+	
+	#content div table tbody tr td  {
+		border-bottom: none;
+		padding-top:6px;
+	}
+	
+	#content div td.image {
+		vertical-align: middle !important;
+	}
+	
+	#content div table tbody tr td table {
+		margin: -10px 0 5px -10px !important;
+		width: 180px;
+		padding: 0 0 0px 0;
+	}
+	
+		#content div table tbody tr td table.ordre {
+			margin: 0 !important;
+			padding: 0;
+			width: auto;
+			margin-bottom: -11px !important;
+		}
+		
+		#content div table tbody tr td table.invoice {
+			padding: 0 !important;
+			margin: 0 !important;
+			width: auto !important;
+		}
+	
+	#content div table tbody tr td table table {
+		border: none;
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+	
+	table td.productlist a.pr_name {
+		color: #14506a;
+		text-decoration: underline;
+	}
+	
+	table td.product span.pr_descript {
+		color: #4d4d4d;
+		line-height: 15px !important;
+		padding-top:0px;
+		float:left;
+		display:block;
+		margin-top:-3px;
+	}
+	
+		table td.products-pricebox div  {
+			margin-top:-6px;
+		}
+		
+		table td.products-pricebox span {
+			font-size:18px;
+			font-weight:bold;
+			color:#E31F15;
+			padding:0 !important;
+			margin:0 !important;
+			display: block;
+			float:left;
+			line-height: 20px;
+		}
+		
+		table td.products-pricebox a {
+			float:right;
+		}
+
+
+/* topsubmenu */
+div#topsubmenu {
+	position: absolute;
+	width: 100%;
+	top:-7px;
+	right: -170px;
+	z-index:5001 !important;
+}
+
+/* Search */
+
+div#topsubmenu form {
+	background: url(https://japanphotoxxl.no/cops/images/hw/submenu_search_bg.png) no-repeat top right;
+	width: 166px;
+	height: 22px;
+	margin-top:16px;
+	margin-left:8px;
+	float:right;
+}
+
+	div#topsubmenu form input {
+		width: 134px !important;
+		margin-left:6px;
+		float:left;
+		margin-top:5px;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 11px;
+		color: #767676;
+		border: none !important;
+		background: none !important;
+		outline: none !important;
+		border-style: none !important;
+	}
+	
+	input[type="search"] {
+		border: none !important;
+	}
+	
+	span#search_results_ajax {
+		white-space: normal !important;
+	}
+	
+	
+	
+/* search widebox */
+span#search_results_ajax div.cssboxwide {
+
+}
+
+div.cssboxwide table#powersearch_table_id {
+	padding:16px 20px 10px 19px !important;
+}
+
+.powersearch_result_table { empty-cells: show; }
+.powersearch_result_table p.powersearch_tableheader { padding-left: 20px; font-weight: bold; padding-top: 3px; font-size: 11px; }
+.powersearch_result_table p.powersearch_tableheader span { color: #666; font-weight: normal !important; padding-left: 5px; font-size: 11px !important; }
+.powersearch_result_table p.powersearch_tableheader span a { cursor: pointer; font-weight: normal; font-size: 11px !important; }
+.powersearch_result_table p.powersearch_tableheader span a:hover { font-size: 11px !important; }
+.powersearch_result_table td.powersearch_result_td {
+    background: transparent url(https://japanphotoxxl.no/cops/images/hw/search_results_header_bg.gif) no-repeat scroll left top;
+    padding: 0 0px 0 6px; height:30px !important;
+}
+.powersearch_result_table .powersearch_icon { float: left; height: 16px; width: 16px; vertical-align: middle; }
+.powersearch_result_table .powersearch_link { float: left; font-weight: normal; color: #14506a; text-decoration: underline; }
+.powersearch_result_table td.powersearch_result_td span a { font-size: 11px !important; }
+.powersearch_result_table td.powersearch_result_td div { padding: 2px 7px 1px 0; margin:0; }
+.powersearch_result_table td.powersearch_result_td div span img { margin: 0px 5px 0px 0px; }
+.powersearch_result_table td.powersearch_result_td p { font-size: 11px !important; }
+.powersearch_result_table td.powersearch_result_td p a { font-size: 11px !important; }
+.powersearch_result_table td.powersearch_result_td p img { margin: 0px 5px 0px 0px; }
+.powersearch_result_table td.powersearch_result_td div.breadcrumbs { text-align: center; }
+.powersearch_result_table td.powersearch_result_td div.breadcrumbs a { cursor: pointer; font-weight: normal !important; font-size: 11px !important; }
+
+.powersearch_result_table p.powersearch_tableheader {
+	margin-top:2px;
+	margin-left:1px;
+	display: block;
+	height: 10px;
+}
+
+a.show_all {
+	margin-left:0px;
+	font-weight: bold !important;
+	color: #14506a;
+}
+
+
+#search_results_ajax .cssbox_body {
+    padding-top: 20px;
+}
+
+/* footer */
+
+#footer {
+	background-color: #333;
+	color: #EEE;
+	height:150px;
+	position: absolute;
+	z-index:-200;
+	width:100%;
+	right:0;
+	margin-top:24px;
+	display: block !important;
+	overflow: hidden;
+	clear: both;
+}
+
+
+#footerJPNO {
+	width: 960px;
+	margin: 0 auto 0 auto;
+}
+
+#footer_company_name {
+	display: none;
+}
+
+#footerDivLeft {
+	float:left;
+}
+
+#footerDivRight {
+	float:right;
+}
+
+#footer_nav {
+	background: #ff9900;
+	width: 962px;
+	margin: 0 auto 0 auto;
+}
+#footer_nav li a, #footer_icons li a {
+	color: #000;
+}
+
+#footer_nav {
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	margin-top: 95px;
+	text-indent: inherit !important;
+}
+	#footer_nav li {
+		border-right: 1px solid #000000 !important;
+		font-size:12px;
+		height:12px;
+		padding: 0;
+		line-height: 5px;
+		list-style-image:none;
+		float:left;
+		margin-right:7px;
+	}
+	
+		#footer_nav li:last-child { 
+			border-right: none !important;
+		}
+	
+		#footer_nav li a {
+			font-size:12px !important;
+			color: #EEE !important;
+			text-decoration: underline;
+			line-height: 11px;
+			padding-right:7px;
+		}
+			
+			#footer_nav li a:hover {
+				color: #FFF !important;
+				text-decoration: none;
+			}
+
+#footer_icons {
+	display: none;
+}
+
+#java_info {
+	display: none !important;
+}
+
+#footerJPNO a {
+	color: #EEE !important;
+}
+
+#footerCompanyName, #footerContactInfo {
+	font-size: 12px;
+	color: #EEE;
+}
+
+#footerContactInfo {
+	margin-top:-1px;
+}
+
+#footerContactInfo a {
+	font-size:12px !important;
+}
+
+#footerContactInfo a:hover {
+	text-decoration: none;
+	color: #45a2c1 !important;
+}
+
+#footerCreditCardHolder {
+	margin-top:58px;
+}
+
+#footerCompanyName {
+	font-weight: bold;
+	line-height:20px;
+	padding-top:38px;
+}
+#footerContactInfo {
+	line-height:20px;
+}
+
+/* listeside tables */
+
+table#productlist {
+	width: 100% !important;
+	margin-top:-7px;
+	margin-bottom:-4px;
+}
+
+	table#productlist.auction_list {
+		margin-top:17px;
+		margin-bottom: 0px;
+	}
+
+#productlist table {
+		border-collapse: collapse;
+}
+
+#productlist thead a {
+		color: #134E6C;
+		text-decoration: none:
+}
+
+#productlist thead a:hover {
+		color: #45A2C1;
+		text-decoration: underline;
+}
+
+#productlist thead {
+		background: #f4f7f6;
+		color: #494949;
+		font-weight: bold;
+}
+
+#productlist thead th {
+		border-bottom: 1px solid #dddddd;
+		height: 32px;
+		text-align: center;
+		font-size: 11px;
+		color: #4d4d4d;
+}
+
+#productlist thead th.first {
+		border-bottom: 1px solid #dddddd;
+		height: 32px;
+		text-align: left;
+		padding-left: 11px;
+}
+
+#productlist thead th.first2 {
+		border-bottom: 1px solid #dddddd;
+		height: 32px;
+		text-align: left;
+		padding-left: 8px;
+		font-size: 15px;
+		font-weight: normal;
+}
+
+#productlist thead th.first2 a {
+		text-decoration: none;
+}
+
+#productlist thead th.first2 h3 {
+		text-decoration: none;
+		font-size: 15px;
+		font-weight: normal;
+		margin: 0;
+		padding: 0;
+}
+
+#productlist tbody td a {
+		color: #134E6C;
+		text-decoration: underline;
+}
+
+#productlist tbody td .rating {
+		display: block;
+		margin-top: 2px;
+}
+
+#productlist tbody td a:hover {
+		color: #45A2C1;
+		text-decoration: none;
+}
+
+#productlist tbody td {
+		padding: 2px 0 2px 0;
+		border-bottom: 1px solid #ededed;
+		font-size: 11px;
+		vertical-align: middle;
+}
+
+#productlist tbody td.compare {
+	padding: 0 9px 0 11px;
+}
+
+#productlist tbody td.picture {
+		padding-right: 0px;
+}
+
+#productlist tbody td.product {
+		width: 230px;
+		font-size:11px;
+		color: #000;
+		padding-left:10px;
+}
+
+	#productlist tbody td.product a {
+			width: 220px;
+			font-size:11px !important;
+	}
+
+#productlist tbody td.product-rating {
+		width: 266px;
+}
+
+#productlist tbody td.stock {
+		color: #339a30;
+		text-align: center;
+		width: 50px;
+}
+
+#productlist tbody td.number {
+		text-align: center;
+}
+
+	#productlist tbody td.number input {
+		border: 1px solid #dddddd;
+		width: 30px;
+		height:17px;
+		text-align: center;
+		font-size:12px;
+		padding-top:2px;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+
+#productlist tbody td.price {
+		font-weight: bold;
+		color: #e31f15;
+		font-size: 12px;
+		text-align: center;
+		width: 77px;
+}
+
+#productlist tbody td.buy {
+		text-align: right;
+
+}
+#productlist tbody td.buy img{
+		width: 50px;
+		height: 19px;
+}
+
+
+#productlist tbody td span {
+		font-size: 11px;
+		color: #000000;
+		font-weight: normal;
+}
+
+#productlist tbody td input {
+		font-size: 12px;
+		padding: 0px;
+		margin: 0px;
+} 
+
+#productlist table img {
+		margin: 0px 0;
+}
+
+#productlist table td:first-child img {
+		display: block;
+}
+
+
+/* compare box, product listing, next page, compare products etc. */
+
+.box-navigation { clear: both; float: left; border-top: 1px solid #EFEFEF; border-bottom: 1px solid #EFEFEF; padding: 5px 0; width: 100%; }
+.box-navigation, .box-navigation a, .box-navigation select { font-size: 11px; }
+.box-navigation select { border: 1px solid #DDDDDD; }
+.box-navigation-compare-results { float: left; margin-right: 5px; }
+.box-navigation-view-type { text-align: left; }
+.box-navigation-page-results { float: right; padding: 1px 0; }
+.box-navigation-page-results-item { display: block; float: left; }
+.box-navigation-product-count { float: none; text-align: right; }
+.box-navigation-products-per-page { float:none; text-align: right; padding: 2px 0; display: none; }
+
+#product_listing a.pageResults { float: left; margin: 0 2px; padding: 0; width: 21px; height: 20px; line-height: 20px; text-align: center; text-shadow: 0 1px 0 #FFFFFF; font-weight: normal; background: url("http://ourproductimages.com/p/script/page_nav_a.png") no-repeat top left; cursor: pointer; }
+#product_listing a.page-selected { font-weight: bold; color: #63AED5; }
+#product_listing a.prev_button, #product_listing a.page-next { padding: 0 5px; width: auto; background: url("http://ourproductimages.com/p/script/page_navigation_next_70x20.png") no-repeat top left; }
+
+
+#comparewrap {
+		width:100%;
+		margin-top: 40px;
+		margin-bottom: 0px;
+}
+
+#comparebox-text {
+		width: 430px;
+		text-align: left;
+		margin-left: 120px;
+		margin-top: -30px;
+}
+
+#comparebox-text p {
+		font-size: 11px;
+		line-height: 1.6em;
+}
+
+#comparebox-text span {
+		color: #000000;
+}
+
+#navigation-top .compare-arrow {
+        float: left;
+		height: 26px;
+		background: url('https://japanphotoxxl.no/cops/images/hw/compare_arrow_top.gif') top left no-repeat;
+		width: 26px;
+		margin-bottom: 0px;
+		margin-left: 9px;
+}
+
+#navigation-bottom .compare-arrow {
+        float: left;
+		height: 26px;
+		background: url('https://japanphotoxxl.no/cops/images/hw/compare_arrow_bottom.gif') bottom left no-repeat;
+		width: 26px;
+		margin-top: 0px;
+		margin-left: 9px;
+}
+
+#compare-column input {
+	background:transparent url(https://japanphotoxxl.no/cops/images/hw/button_medium.gif) no-repeat scroll 0 0;
+	border:0 none;
+	color:#004E6E;
+	cursor:pointer;
+	height:25px;
+	padding-bottom:1px;
+	width:70px;
+	vertical-align: top;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#comparebox-top input:hover,
+#comparebox-bottom input:hover { 
+	color: #45a2c1 !important;
+	background:transparent url(https://japanphotoxxl.no/cops/images/hw/button_medium.gif) no-repeat bottom !important;
+}
+
+#comparebox-bottom input {
+	background:transparent url(https://japanphotoxxl.no/cops/images/hw/button_medium.gif) no-repeat scroll 0 0;
+	border:0 none;
+	color:#004E6E;
+	cursor:pointer;
+	height:25px;
+	line-height: 18px;
+	padding-bottom:1px;
+	width:70px;
+	vertical-align: top;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+table.navigate {
+	margin-top: 7px;
+}
+
+table.navigate tr td {
+	text-align: left;
+	float:left;
+}
+
+table.navigate select {
+	border: 1px solid #dddddd;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+table.navigate span {
+	font-size: 11px !important;
+	float: left;
+	display: block;
+	line-height: 26px; 
+}
+
+table.navigate span.pl_showing {
+	text-align: right;
+	float: right;
+}
+
+table.navigate span.pl_showing a {
+	padding: 0 5px 0 5px;
+	font-weight: normal;
+	font-size: 11px;	
+}
+
+
+
+/* product page  */
+
+#product-wrap {
+		width: 100%;
+		float: left;
+		margin-bottom:15px;
+}
+
+#product-wrap .priceinfo {
+		font-size: 10px;
+		color: #a5a5a5;
+		text-align: right;
+		float: right;
+		margin-bottom: 2px;
+}
+
+#productimgbox {
+		xwidth: 250px;
+		width: 100% !important;
+		text-align: center;
+}
+
+#productimgbox img {
+		margin: 0 auto 0 auto;
+		border: none;
+		xxwidth: auto;
+		padding: 10px 0 5px 0 ;
+
+}
+
+#productimgbox .lang {
+	position:absolute;
+	bottom:0;
+	font-size:8pt;
+}
+
+#productimgbox .productlogo {
+		float: left;
+		text-align: left;
+		font-size: 11px;
+		color: #a5a5a5;
+}
+
+#productimgbox .productmanual {
+		float: left;
+		text-align: left;
+		font-size: 11px;
+		color: #a5a5a5;
+		margin-left: 15px;
+		margin-top: 5px;
+}
+
+#productimgbox .productmanual img {
+		margin-right: 1px;
+}
+
+#productimgbox .imagerow {
+		display: block;
+		text-align: left;
+		xmargin-top: 32px;
+		width: 260px;
+}
+
+#productimgbox .imagerow img {
+		margin-right: 6px;
+
+}
+
+#productbuybox {
+		width: 275px;
+		background: #ffffff;
+		border: 1px solid #e8e8e8;
+		padding: 1px;
+		float: right;
+		text-align:left;
+		xposition: absolute;
+		xtop: 100px;
+		xright: 100px;
+		text-shadow:#fff 0px 1px 0 !important;
+}
+
+#productbuybox .content {
+		background: #f1f4f4 !important;
+		padding: 22px 22px 22px 22px;
+		min-height: inherit !important;
+		width: 231px !important;
+
+}
+
+div#product-wrap div.imagerow {
+	margin-top:-20px;
+}
+
+#productbuybox .content p {
+		font-size: 11px;
+}
+
+#productbuybox.second-productbuybox {
+	background: #fff !important;
+	margin-top:5px !important;
+}
+
+#productbuybox.second-productbuybox table {
+	background: #f1f4f4;
+	padding: 0px 10px 5px 10px;
+}
+
+div.inforuta-date {
+	margin-top:-8px !important;
+	margin:0px;
+}
+
+div.inforuta-image {
+	padding-right:5px;
+}
+
+.inforuta-date span p, .inforuta-date span a  {
+	font-size: 11px !important;
+	line-height: 15px;
+}
+
+#productbuybox .price {
+		color: #e31f15;
+		font-size: 30px;
+		display: block;
+		margin-top:-7px;
+		margin-left:-1px;
+}
+
+#productbuybox .price span {
+		font-size: 12px;
+		color: #4e4e4f;
+}
+
+#productbuybox .number {
+		margin-top: 15px;
+		font-size: 11px;
+		display: block;
+		width:147px;
+}
+
+
+#productbuybox .number input.numberinput {
+	border: 1px solid #dddddd;
+	width: 30px;
+	height:16px;
+	text-align: center;
+	font-size:12px;
+	font-family: Arial, Helvetica, sans-serif;
+	vertical-align: middle;
+	padding-bottom:0px;
+	padding-top:2px !important;
+} 
+
+#productbuybox .number input.number {
+		width: 22px;
+		height: 16px;
+}
+
+input.nbuttonbuy {
+	float:right;
+	Background: transparent url(https://japanphoto.no/includes/languages/japan/norsk/images/buttons/button_buy_now.gif) repeat scroll 0 0 !important;
+}
+
+#productbuybox .number img {
+		margin-bottom: -6px;
+		margin-left: 12px;
+}
+
+#productbuybox .financing {
+		margin-top: 10px;
+		display: block;		
+}
+
+#productbuybox .financing p {
+		line-height: 1.5em;
+		color: #8e8f90;
+}
+
+#productbuybox strong {
+		color:  #4b4b4b;
+}
+
+#productbuybox .stock {
+		display: block;
+		margin-top: 19px;
+		font-size: 11px;
+		color: #4b4b4b;
+}
+
+#productbuybox .stock span {
+		color: #399b38;
+}
+
+#productbuybox .insurance {
+		display: block;
+		margin-top: 19px;
+		font-size: 11px;
+		color: #4b4b4b;
+		line-height: 11px;
+}
+
+#productbuybox .insurance a {
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+#productbuybox .insurance input {
+		margin-right: 3px;
+		vertical-align: middle;
+}
+
+#productcolor {
+		float: right;
+		font-size: 11px;
+		margin-top: 17px;
+		margin-bottom: 22px;
+		color: #4d4d4d;
+}
+
+#productcolor .notavailable {
+		color: #a8a8a8;
+		font-size: 11px;
+}
+
+#productcolor select {
+		margin: 0 0 0 5px;
+		font-size: 11px;
+		width: 150px;
+		height: 20px;
+}
+
+
+
+/* product spesification tab, table, formatting */
+
+
+ul#product-desc-nav {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		width: 574px;
+		height: 29px;
+		background: #eaf0ef;
+		border-bottom: 2px solid #2e637e;
+		margin-top: 50px;
+}
+
+#product-desc-nav li {
+		display: inline;
+		height: 29px;
+}
+
+#product-desc-nav li a {
+		color: #1b4f6d;
+		font-weight: bold;
+		padding: 7px 12px 7px 12px;
+		display: block;
+		font-size: 11px;
+		overflow: hidden;
+		float: left;
+}
+
+#product-desc-nav li a:hover {
+		color: #45A2C1;
+}
+
+#product-desc-nav li a.selected {
+		background: #164f6b;
+		color: #ffffff;
+		text-decoration: none;
+}
+
+
+table#product-specs {
+		width: 574px;
+		margin-top: 20px;
+}
+
+#product-specs td {
+		font-size: 11px;
+		padding: 7px 17px 7px 17px;
+		border-bottom: 1px solid #ffffff;
+}
+
+#product-specs td.cell1 {
+		color: #000000;
+		background: #ebebeb;
+		width: 40%;
+		border-right: 1px solid #ffffff;
+}
+
+#product-specs td.cell2 {
+		color: #4b4b4b;
+		background: #f0f1f2;
+		width: 60%;
+}
+
+
+/* usercomments - product reviews */
+
+div.commentbox-wrap {
+		margin-top: 35px;
+		margin-bottom: 20px;
+		width: 574px;
+
+}
+
+div.commentbox-wrap p {
+		color: #48494a;
+		line-height: 1.6em;
+		font-size: 11px;
+		margin-bottom: 1px;
+}
+
+div.commentbox {
+		background: #ffffff;
+		padding: 1px;
+		border: 1px solid #e8e8e8;
+}
+
+div.commentbox p {
+		background: #f1f4f4;
+		padding: 22px;
+		color: #48494a;
+		line-height: 1.6em;
+		font-size: 11px;
+		margin: 0px;
+}
+
+div.commentbox-rating {
+		background: url('https://japanphotoxxl.no/cops/images/hw/commentbox_rating_bg.gif') repeat-x;
+		height: 18px;
+		margin-top: 4px;
+		width: 574px;
+}
+
+div.commentbox-rating img {
+		float: right;
+}
+
+div#fluff-text {
+		width: 335px;
+		float: left;
+		
+}
+
+#fluff-text h1 {
+		font-size: 18px;
+		color: #000000;
+		font-weight: normal;
+		margin-bottom: 12px;
+		padding-top: 22px;
+		margin-top: 0;
+}
+
+#fluff-text p {
+		margin-bottom: 30px;
+}
+
+#fluff-text span {
+		color: #ed493f;
+		font-size: 30px;
+		margin: 0 3px 0 5px;
+}
+
+#fluff-product {
+		text-align: right;
+}
+
+#fluff-product img {
+		margin-top: 22px;
+}
+
+#fluff-product .imagerow {
+		display: block;
+		text-align: right;
+		margin-top: 5px;
+}
+
+#fluff-product .imagerow img {
+		margin-right: 6px;
+		margin-bottom: 30px;
+}
+
+#fluff-orderbox {
+		background: #ffffff;
+		padding: 2px;
+		border: 1px solid #e8e8e8;
+		margin-top: 18px;
+}
+
+#fluff-orderbox .content {
+		padding: 22px;
+		font-size: 11px;
+		background: #f1f4f4;
+		line-height: 1.6em;
+}
+
+#fluff-orderbox h2 {
+		font-size: 14px;
+		font-weight: bold;
+		color: #000000;
+		margin-top: 0px;
+}
+
+#fluff-orderbox table {
+		margin-top: 30px;
+}
+
+#fluff-orderbox table tr td {
+		font-size: 12px;
+		padding: 0 0 15px 5px;
+}
+
+#fluff-orderbox table tr td.cell1 {
+		font-size: 12px;
+		padding: 0 0 15px 5px;
+		width: 60px;
+}
+
+#fluff-orderbox table tr td.cell2 {
+		font-size: 12px;
+		padding: 0 0 15px 35px;
+}
+
+
+#fluff-orderbox table tr td span {
+		font-size: 11px;
+}
+
+#fluff-orderbox table tr td span.price {
+		color: #ed493f;
+		font-weight: bold;
+		font-size: 12px;
+}
+
+
+div.registerbox {
+		background: #ffffff;
+		padding: 1px;
+		border: 1px solid #e8e8e8;
+}
+
+div.registerbox .content {
+		background: #f1f4f4;
+		padding: 22px 22px 18px 22px;
+		color: #48494a;
+		line-height: 1.6em;
+		font-size: 11px;
+		margin: 0px;
+}
+
+div.registerbox input {
+		margin-bottom: 4px;
+}
+
+div.image-examples {
+		padding: 20px;
+}
+
+div.image-examples img {
+		margin-right: 30px;
+		margin-left: 30px;
+}
+
+div#commentbox_product {
+	margin-top:4px;
+}
+
+div.highlightbox {
+	background:#fff;
+	font-size:11px;
+	line-height:1.6em;
+	padding:1px;
+	border: 1px solid #e8e8e8;
+	margin: 18px 0 16px 0;
+}
+
+.highlightbox p {
+	background: #F1F4F4;
+	padding:17px 22px 18px 22px !important;
+	margin-top:0px !important;
+	
+}
+
+/* 
+#########################
+NPK Tabs style
+#########################
+*/
+
+table#tabpane1, table#tabpane0, table#tabpane2 {
+	z-index:100;
+	position: relative;
+}
+
+.tabpaneInactive{
+	font-family: Verdana, Arial, sans-serif;
+	font-size:10px;
+	text-align:center;
+	background-color:#ebeff0;
+	font-weight:bold;
+	text-decoration: none;
+	height:30px;
+	border-bottom: none;
+	padding-bottom:1px;
+	background-color:#18516e;
+	color:#fff !important;
+	z-index: 300 !important;
+}
+
+.tabpaneInactive td {
+	color:#fff !important;
+}
+
+.tabpaneActive {
+	font-size:11px;
+	border: 1px solid #e8e8e8;
+	font-weight:bold;
+	text-align:center;
+	border-bottom: none;
+	padding-bottom:2px;
+	height:30px;
+	background: #f0f4f5;
+}
+
+.tabpaneActive td {
+	color:#4d4d4d !important;
+}
+.tab{
+	font-family: Verdana, Arial, sans-serif;
+	font-size:10px;
+	background-color:#efefef;
+}
+.navigate
+{
+	font-family: Verdana, Arial, sans-serif;
+	font-size:10px;
+}
+
+.navigate a
+{
+	color: #17506D;
+}
+
+.product_list_top
+{
+	color: #4c4c4c;
+	font-family: Verdana, Arial, sans-serif;
+	font-size:10px;
+}
+
+
+.hl_cssboxtop {
+	background: transparent url(/images/japan/box/box-wide-header.gif) no-repeat; 
+}
+
+.hl_cssboxtop {
+	width: 297px !important; /* intended total box width - padding-right(next) */
+	width: 299px; /* IE Win = width - padding */
+	padding-right: 15px; /* the gap on the right edge of the image (not content padding) */
+	margin-left: -2px;
+	margin-right: -4px;
+	float:right;
+}
+
+.hl_cssboxtop.left {
+	width: 298px !important; /* intended total box width - padding-right(next) */
+	width: 300px; /* IE Win = width - padding */
+	margin-right: 2px;
+}
+
+.comparrisonDesc
+{
+	background-color: #ebebeb;
+	padding: 3px 10px 3px 10px;
+	font-size: 11px;
+}
+
+.comparrisonDesc2
+{
+	background-color: #F0F1F3;
+	padding: 3px 10px 3px 10px;
+	font-size: 11px;
+}
+
+.info_box_border{
+	padding: 1px;
+	border: 1px solid #e8e8e8;
+	width: 100%;
+	margin-top:-16px;
+}
+
+.product_ensurance_box,
+#spec-container {
+	font-size: 11px;
+	color: #4b4b4b;
+	background-color: #f0f4f5;
+	width: 100%;
+	padding: 10px 17px 17px 17px;
+	line-height:14pt;
+	border: none !important;
+	margin:0px;
+}
+
+#spec-container {
+	padding: 24px 17px 11px 16px !important;
+}
+
+#spec-container b {
+	font-size:12px;
+}
+
+#spec-container td.product_specs_right {
+	width: 40% !important;
+}
+
+.product_ensurance_box ul {
+	list-style: none !important;
+	margin-top:10px;
+}
+
+.product_ensurance_box ul li {
+	background: none !important;
+	padding:0 !important;
+	margin-bottom:10px !important;
+	line-height: 16px !important;
+}
+
+.product_ensurance_box td.product {
+	color: #f0f4f5 !important;
+}
+
+.product_ensurance_box td.product a {
+	line-height: 17px !important;
+	font-weight: normal;
+}
+
+.product_ensurance_box td.buy {
+	padding-left:17px !important;
+}
+
+.product_ensurance_box td.price div {
+	color: #e31f15;
+}
+
+.product_ensurance_box #productlist tbody td {
+	border-bottom:0px;
+}
+
+.product_ensurance_box h2 {
+	margin-left:-10px !important;
+}
+
+table.info_box_border .productlist p {
+	margin-bottom:22px !important;
+	margin-top:0px !important;
+}
+
+.npk_box {
+	border: 1px solid #e8e8e8;
+	background-color: #f0f4f5;
+	padding:18px 20px 18px 21px;
+	line-height: 17px;
+	font-size:12px !important;
+}
+
+.npk_box input {
+	border: 1px solid #cccccc;
+	width: 200px;
+	padding: 4px;
+}
+
+.box{
+	padding: 0px;
+	border: 0px solid #e8e8e8;
+	width: 100%;
+	background-color: #f0f4f5;
+	padding-bottom:20px;
+	width:745px;
+	line-height: 15pt;
+}
+
+.shops_box{
+	border: 1px solid #e8e8e8;
+	background-color: #f0f4f5;
+	padding:10px 10px 10px 10px; 
+	line-height: 15pt;
+	width:150px;
+}
+
+input.submit {
+	font-size:11px;
+	background: url(https://japanphotoxxl.no/cops/images/hw/jp_input_bg_large.png) repeat-x top;
+	width: auto !important;
+	border: 1px solid #cccccc;
+	border-top: 1px solid #dddddd;
+	margin-left:0px !important;
+	padding:6px 14px 5px 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-shadow: #fff 0 1px 0;
+	cursor:pointer;
+	vertical-align: middle;
+	color:#004E6E;
+	line-height: 15px;
+	font-weight: bold;
+}
+
+input.submit:hover {
+	background: url(https://japanphotoxxl.no/cops/images/hw/jp_input_bg_large.png) repeat-x bottom;
+	width: auto !important;
+	color: #45a2c1;
+}
+	
+.input_wrapper {
+    background: transparent url(https://japanphotoxxl.no/cops/images/hw/input_large_bg.png) no-repeat 0 0;
+    height:16px;
+    overflow:hidden;
+    padding:4px 8px 6px 6px;
+    width:255px;
+    float:left;
+    position:relative;
+	z-index: 0;
+}
+.input_wrapper input {
+    border:0;
+    background-color:transparent;
+    width: 223px;
+    height:16px;
+    font-size:12px;
+    color:#666666;
+    overflow:hidden;
+}
+
+.get_address_button {
+    background: transparent url(https://japanphotoxxl.no/cops/images/hw/button_large.gif) no-repeat 0 0 !important;
+    border:0 !important;
+    cursor:pointer !important;
+    height:18px !important;
+    padding:7px 0 1px !important;
+    width:148px !important;
+    font-size:9px !important;
+    margin:0 !important;
+    display:block;
+    float:left;
+    text-align:center;
+    color:#004E6E !important;
+}
+.get_address_button:hover {
+    text-decoration:none !important;
+    background-position: 0 -26px !important;
+    border:0 !important;
+    cursor:pointer !important;
+    height:18px !important;
+    padding:7px 0 1px !important;
+    width:148px !important;
+    font-size:9px !important;
+    margin:0 !important;
+    display:block;
+    float:left;
+    text-align:center;
+    color:#004E6E !important;
+}
+
+.create_account label {
+    color:#4C4C4C;
+    display:block;
+    font-size:12px;
+    margin-bottom:1px;
+    margin-top:7px;
+    position: relative;
+}
+
+.create_account { padding-top:10px; }
+
+#TabbedPanels1.create_account ul.TabbedPanelsTabGroup {
+    border-bottom:2px solid #4587A2;
+    height:30px;
+    list-style-image:none;
+    list-style-position:outside;
+    list-style-type:none;
+    margin:17px 0 0 0;
+    padding:0;
+    width:100%;
+		margin-bottom:27px;
+}
+
+#TabbedPanels1.create_account ul.TabbedPanelsTabGroup li {
+    background:#F1F4F5 none repeat scroll 0 0;
+    color:#004E6E;
+    cursor:pointer;
+    display:block;
+    float:left !important;
+    font-size:12px !important;
+    height:22px;
+    line-height:normal;
+    overflow:hidden;
+    padding:8px 0 0;
+    text-align:center;
+    text-decoration:underline;
+    width:284px;
+}
+
+#TabbedPanels1.create_account .TabbedPanelsTabSelected {
+    background:transparent url(https://japanphotoxxl.no/cops/images/hw/ordrenav_li_bg.gif) repeat-x scroll 0 0 !important;
+    color:#FFFFFF !important;
+    font-weight:bold;
+    text-decoration:none !important;
+}
+#TabbedPanels1.create_account ul.TabbedPanelsTabGroup li:hover {
+    color:#45A2C1;
+}
+
+div#container-center div.boxnoheader div.npk_box a.submit, div#container-center div.boxnoheader div.npk_box a.submit:hover {
+	color:#000000;
+	cursor:pointer;
+	font-family:verdana;
+	font-size:10px;
+	font-weight:normal;
+	margin-left:5px;
+	padding-bottom:3px;
+	padding-top:5px;
+	text-decoration:none;
+}
+
+.get_address_button {
+	-moz-background-clip:border !important;
+	-moz-background-inline-policy:continuous !important;
+	-moz-background-origin:padding !important;
+	background:transparent url(https://japanphotoxxl.no/cops/images/hw/button_large.gif) no-repeat scroll 0 0 !important;
+	border:0 none !important;
+	color:#004E6E !important;
+	cursor:pointer !important;
+	display:block;
+	float:left;
+	font-size:9px !important;
+	height:18px !important;
+	margin:0 !important;
+	padding:5px 0 3px !important;
+	text-align:center;
+	width:148px !important;
+}
+
+.get_address_button:hover {
+	background-position:0 -26px !important;
+	border:0 none !important;
+	color:#004E6E !important;
+	cursor:pointer !important;
+	display:block;
+	float:left;
+	font-size:9px !important;
+	height:18px !important;
+	margin:0 !important;
+	padding:5px 0 3px !important;
+	text-align:center;
+	text-decoration:none !important;
+	width:148px !important;
+}
+
+td.productListing-heading {
+	border-bottom:2px solid #164F6C;
+	font-weight:bold;
+	padding-left:4px;
+}
+
+.workDamnit {
+	font-size: 11px;
+	color: #4b4b4b;
+	background-color: #f0f4f5;
+	padding: 10px;
+	width: 540px;
+	line-height: 14pt;
+	margin: 10px;
+	border: 1px solid #eee;
+}
+
+/* productbox listing
+(for the 4 recomended products section at the top of the product listing page) */
+
+#productlistbox-wrap {
+		width: 574px;
+		margin: 30px 0 45px 0 !important;
+		margin: 30px 0 15px 0;
+		float: left;
+}
+
+#productlistbox-wrap p {
+		font-size: 11px;
+		line-height: 1.6em;
+		margin-right: 23px;
+}
+
+#productlistbox-wrap h2 {
+	font-size: 14px;
+		font-weight: bold;
+		color: #000000;
+		margin-top: 15px;
+		margin-bottom: 20px;
+		padding-top: 35px;
+
+
+}
+
+#productlistbox-wrap h2.top {
+	font-size: 14px;
+		font-weight: bold;
+		color: #000000;
+		margin-top: 10px;
+		margin-bottom: 20px;
+		padding-top: 0;
+}
+
+#productlistbox-wrap .image {
+		width: 90px;
+		margin-right: 10px;
+		float: left;
+}
+
+#productlistbox-wrap .text {
+		width: 186px;
+		float: left;
+
+}
+
+#productlistbox-wrap .price {
+		color: #ed493f;
+		font-size: 18px;
+		font-weight: normal;
+		display: block;
+}
+
+#productlistbox-wrap img.buy {
+		margin-left: 10px;
+		margin-bottom: -5px;
+}
+
+#productlistbox-wrap .divider {
+		width: 574px;
+		height: 1px;
+		background: #ededed;
+		float: left;
+		margin: 20px 0 10px 0;
+		overflow: hidden;
+}
+
+div.productlistbox {
+		width: 286px;
+		float: left;
+}
+
+.productlistbox .text {
+	position: inherit !important;
+}
+
+/* Shopping cart */
+table.shopcart input.submit {
+	font-size:10px !important;
+	background: url(https://www.japanphotoxxl.no/cops/images/hw/jp_input_bg.png) repeat-x top;
+	width: 76px !important;
+	border: 1px solid #cccccc;
+	border-top: 1px solid #dddddd;
+	margin-left:0px !important;
+	padding:0px !important;
+	font-weight: normal;
+}
+
+table.shopcart input.submit.checkout {
+	width: 54px !important;
+}
+
+table.shopcart input.submit:hover {
+	background: url(https://www.japanphotoxxl.no/cops/images/hw/jp_input_bg.png) repeat-x bottom !important;
+	padding: 0px !important;
+}
+
+	
+/* login div */
+div.login_div {
+	position:absolute;
+	/* top:-124px; */
+	/* right:-171px; */
+	color: #fff;
+	font-size:13px;
+	background: url(https://www.japanphotoxxl.no/cops/images/hw/login_box_bg.png) repeat-x bottom !important;
+	width:358px;
+	height:27px;
+	text-align: center;
+	padding: 4px 0 0 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+div.login_div a {
+	color: #f8f400;
+	font-size:13px;
+	text-decoration: none !important;
+	font-weight: bold;
+}
+
+
+div.header_content {
+
+}
+
+dl.header_frame {
+	background: none !important;
+	display: block !important;
+	
+}
+
+#header dl #login_iframe {
+	display: block !important;
+	
+	background: none !important;
+	margin-right:32px;
+	margin-top:3px;
+}
+
+iframe {
+	display:block !important;
+	
+}
+
+div#login_div {
+	display: none;
+}
+
+
+	
+/*
+#########################
+	NPK shopping cart
+#########################
+*/
+
+.cart_left {
+	border-bottom: 1px solid #e3e3e3;
+	padding: 5px 0px 5px 0px;
+	font-size: 11px;
+}
+
+.cart_right {
+
+	text-align: right;
+	padding: 12px 0px 12px 0px;
+	border-bottom: 1px solid #e3e3e3;
+}
+
+.cart_top_txt {
+	font-size: 10px;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+	
+#productlist tbody td a {
+		color: #134E6C;
+		text-decoration: underline;
+}
+
+#productlist tbody td .rating {
+		display: block;
+		margin-top: 2px;
+}
+
+#productlist tbody td a:hover {
+		color: #45A2C1;
+		text-decoration: none;
+}
+
+#productlist tbody td {
+		padding: 8px 0 8px 0;
+		border-bottom: 1px solid #ededed;
+		font-size: 11px;
+}
+
+#productlist tbody td.compare {
+}
+
+#productlist tbody td.image {
+		padding-left: 10px;
+}
+
+#productlist tbody td.product {
+		padding-left: 10px;
+		width: 220px;
+}
+
+#productlist tbody td.product-rating {
+		padding-left: 10px;
+		width: 266px;
+}
+
+#productlist tbody td.stock {
+		font-weight: bold;
+		color: #339a30;
+		text-align: center;
+		width: 54px;
+}
+
+#productlist tbody td.number {
+		padding-left: 10px;
+		text-align: center;
+}
+
+#productlist tbody td.price {
+		padding-left: 10px;
+		font-weight: bold;
+		color: #ed493f;
+		font-size: 14px;
+		text-align: center;
+		width: 77px;
+}
+
+#productlist tbody td.buy {
+		padding-left: 10px;
+		text-align: right;
+
+}
+#productlist tbody td.buy img{
+		width: 50px;
+		height: 19px;
+}
+
+#productlist tbody td span {
+		font-size: 11px;
+		color: #000000;
+		font-weight: normal;
+}
+
+#productlist tbody td input {
+		font-size: 12px;
+		padding: 0px;
+		margin: 0px;
+}
+
+#main_nav li ul.hidden {
+	display:none !important;
+}
+
+/* fotosearch */
+#fotosearch {
+	text-align: right;	
+}
+
+	#fotosearch input {
+		background: transparent url(https://japanphotoxxl.no/cops/images/hw/input_medium_bg.gif) no-repeat scroll 0 0;
+		margin-right:3px !important;
+		margin-left:0px !important;
+		margin-top:3px;
+		width:118px !important;
+		height:17px !important;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size:11px;
+		color:#767676;
+		padding: 6px 6px 3px 6px;
+	}
+	
+	#fotosearch input.submit {
+		background:transparent url(https://japanphotoxxl.no/cops/images/hw/jp_input_bg_large.png) repeat-x scroll center top;
+		width: auto !important;
+		height: auto !important;
+		margin: 5px 3px 17px 0 !important;
+		padding:6px 14px 5px; !important;
+		color:#004E6E;
+	}
+	
+		#fotosearch input.submit:hover {
+			background: url(https://japanphotoxxl.no/cops/images/hw/jp_input_bg_large.png) repeat-x bottom;
+			width: auto !important;
+			color: #45a2c1;
+		}
+	
+	#fotosearch p {
+		width:100%;
+		display:block;
+		text-align:left;
+		padding-left:1px;
+		color:#4D4D4D;
+	}
+	
+
+div.input_wrapper {
+	padding:2px 8px 8px 4px; !important;
+	width: 257px !important;
+	z-index:99999;
+	position: relative;
+}
+
+	div.input_wrapper input {
+		font-family: Arial, Helvetica, sans-serif;
+		position: absolute;
+		z-index:99999;
+	}
+	
+/* Magic zoom z-index override */
+div.MagicThumb-container {
+	z-index:99999 !important;
+}
+
+.MagicThumb-image {
+	z-index:99999 !important;
+}
+
+/* Fotokurs - div.allevents */
+div.allevents {
+	padding:23px 23px 8px 22px;
+}
+
+	.allevents h2, .allevents h3 {
+		padding:0px;
+		font-size: 17px;
+		margin:-4px 0 1px 1px;
+	}
+	
+	.allevents h3 {
+		margin-left:0px;	
+	}
+	
+	.allevents p {
+		margin-left:1px !important;
+		margin-right:1px !important;
+	}
+	
+	.allevents a {
+		color: #14506a;	
+	}
+	
+	.allevents table.eventcalendar {
+		margin-bottom:5px;
+		margin-top:22px;
+		width:100% !important;
+		padding:0 !important;
+	}
+	
+		.allevents table.eventcalendar td {
+			text-align:left;
+			padding: 5px 0 0 9px;
+		}
+		
+			.allevents table.eventcalendar td.calendarheader {
+				background:#F4F7F6;
+				border-bottom:1px solid #DDDDDD;
+				height:32px;
+				font-weight: bold;
+				padding: 0 0 0 9px;
+			}
+			
+			.allevents table.eventcalendar td.dates {
+				color: #4D4D4D;	
+			}
+			
+	.allevents div.eventbox {
+		background: #f1f4f4;
+		border: 1px solid #e8e8e8;
+		padding: 22px;
+		margin: 17px 2px 22px 2px;
+	}
+	
+		.allevents .eventbox h3 { 
+			padding:0;
+			margin-top:-3px;
+			margin-bottom:2px;
+			font-size:14px;
+		}
+		
+		.allevents .eventbox p {
+			margin-left:-1px !important;
+		}
+		
+		.allevents .eventbox div {
+			color: #4D4D4D;
+			font-size:12px;
+			line-height:18px;
+		}
+		
+	.allevents form {
+		color: #4D4D4D;
+		font-size:12px;
+		line-height:18px;
+		margin-left:1px;
+		margin-top:13px;
+	}
+		
+		.allevents form div {
+			color: #4D4D4D;
+			font-size:12px;
+			line-height:18px;
+		}
+		
+		.allevents form input {
+			border:1px solid #DDDDDD;
+			font-family:Arial,Helvetica,sans-serif;
+			font-size:12px;
+			height:17px;
+			padding-top:2px;
+			text-align:center;
+			width:30px;
+			margin-top:3px !important;
+			margin-left:2px;
+		}
+		
+		.allevents form input.nbuttonbuy {
+			padding:0;
+			border: none;
+			width: 58px;
+			height: 21px;
+			float: none;
+			margin-top: 0px !important;
+			vertical-align: bottom;
+			margin-left:4px;
+		}
+		
+		.allevents form div.eventtext {
+			margin-bottom:10px;
+		}
+		
+		.allevents form div#event_participants {
+			margin-top:-10px;
+		}
+		
+/* contact us styles */
+.div_spacer {
+	margin-top:40px;
+	margin-bottom:22px;
+}
+
+.div_main.div_spacer {
+	line-height: 38px;
+	margin-top:16px;
+	margin-bottom:-15px;
+	font-size:12px;
+}
+
+	.div_spacer input, .div_spacer textarea  {
+		border:1px solid #CCCCCC;
+		padding:4px;
+		width:200px;
+		margin-top:-10px;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size:12px;
+	}
+	
+	.div_spacer textarea  {
+		width:558px !important;
+		font-size:12px;
+	}
+	
+	
+	
+	.div_spacer select {
+		width:210px;
+		border:1px solid #CCCCCC;
+		margin-right:10px;
+		margin-top:-10px;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+	
+.npk_box.div_main {
+	width: 535px !important;
+	padding: 18px 10px 18px 21px !important;
+	margin-top:8px;
+}
+
+	.npk_box.div_main p {
+		margin-top:-1px !important;	
+		margin-bottom:0px !important;
+		color: #000000 !important;
+	}
+
+
+/* checkout styles */
+
+.npk_box.div_main p input {
+	width: auto !important;
+	margin-right:5px;
+}
+
+.div_main textarea {
+	margin-top:2px;
+	border:1px solid #CCCCCC;
+}
+
+td#payment_netaxept, td#payment_cod, td#payment_bbsnetaxept {
+	padding:0px 0px 0px 0px !important;
+	margin-top:-2px !important;
+}
+
+td#payment_netaxept input, td#payment_cod input, td#payment_bbsnetaxept input  {
+	width: auto !important;
+	margin-right:5px;
+	float:left;
+}
+
+.npk_box.div_main table input[type="submit"] {
+	padding:3px 8px 2px 8px;
+	font-size:11px !important;
+	margin-right:10px;
+}
+
+#productlist tbody td.outdated {
+	padding-left: 15px;
+	text-align: center;
+	font-size: 11px;
+	color: #134E6C;
+}
+
+
+#MB_caption {
+	font: bold 12px Arial !important;
+	margin:0;
+	padding:12px 2em 0 0.75em;
+	text-align:left;
+	text-shadow:0 1px 0 #FFFFFF;
+}
+
+.highlightbox-3col .widecontent-table table.ordre {
+		padding: 0 !important;
+		margin: 0 !important;
+}
+
+/* order history */
+div.kh_style {
+	margin-bottom:-22px;	
+}
+
+div.highlightbox-3col {
+		background: #ffffff;
+		padding: 1px;
+		border: 1px solid #e8e8e8;
+		margin: 0px 0 22px 0px !important;
+		width: 564px;
+}
+
+
+	div.highlightbox-3col .widecontent-table {
+		padding: 16px 21px 16px 21px !important;
+		font-size: 11px;
+		background: #f1f4f4;
+		line-height: 1.6em;
+		width: 522px !important;
+	}
+
+	div.highlightbox-3col .widecontent-table table {
+		padding: 0 !important;
+		margin: 0 !important;
+		width: 522px !important;
+		
+	}
+
+		.highlightbox-3col .widecontent-table table.ordre {
+				width: 298px !important;
+				padding: 0 !important;
+				margin: 0 !important;
+		}
+		
+			.highlightbox-3col .widecontent-table table.ordre td {
+				padding-right: 15px;
+			}
+		
+		div.highlightbox-3col .widecontent-table table td {
+			padding-top: 0px !important;
+			padding-bottom: 6px;
+			color:#4D4D4D !important;
+		}
+		
+		div.highlightbox-3col .widecontent-table table td table.invoice {
+			padding: 0 !important;
+			margin: 0 !important;
+			float:right;
+			position: absolute;
+			right: 50px;
+			
+		}
+
+.highlightbox-3col .widecontent-table table.ordre td {
+	font-size:11px !important;
+}
+
+.highlightbox-3col .widecontent-table table.ordre td strong {
+	color: #000;
+}
+
+.highlightbox-3col .widecontent-table table.ordre.ordreinformasjon td strong {
+	color: #666666;
+}
+
+.highlightbox-3col .widecontent-table table.ordre img {
+	margin-bottom:-3px;
+	margin-left:2px;
+}
+
+.highlightbox-3col .widecontent-table tr td.right {
+	text-align:right !important;
+}
+
+.highlightbox-3col .widecontent-table table.ordreinformasjon tr td a {
+	font-size:12px !important;
+}
+
+.highlightbox-3col .widecontent-table table.ordreinformasjon tr td strong.red {
+	color: #ef4a46;
+}
+
+div.ordresok {
+	float:right;
+	margin: -48px 0 0 0;
+	font-size:11px;
+	color: #666666;
+}
+
+	.ordresok form p {
+		float:left;
+		font-size:11px !important;
+		margin: 4px 8px 0 0 !important;
+	}
+	
+		.ordresok form div.input-medium {
+			width: 130px;
+			height: 26px;
+			float:left;
+			overflow: hidden;
+		}
+		
+			.ordresok form .input-medium input {
+				color: #767676;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size:11px;
+				height:17px !important;
+				margin: 0px 0 0 0 !important;
+				padding:4px 6px 5px 6px;
+				line-height: 16px;
+				width:118px !important;
+				background:url("https://japanphotoxxl.no/cops/images/hw/input_medium_bg.gif") no-repeat scroll 0 0 transparent;
+			}
+
+ul.ordremeny, ul.auksjonsmeny {
+	width:568px;
+	height: 32px;
+	background: #fff url("https://japanphotoxxl.no/cops/images/hw/ordrenav_bg.gif") repeat-x;
+	background-position: right;
+	list-style:none;
+	padding:0;
+	margin: 32px 0 22px 0 !important;
+}
+
+ul.ordremeny li {
+	float: left;
+	height:30px;
+	background: #f1f4f5;
+	margin: 0 1px 2px 0;
+	width:188px;
+	list-style-image: none;
+}
+
+ul.ordremeny li.active {
+	background: url("https://japanphotoxxl.no/cops/images/hw/ordrenav_li_bg.gif") repeat-x;
+	width:189px;
+}
+
+ul.ordremeny li.active a, ul.auksjonsmeny li.active a {
+	color: #fff !important;
+	text-decoration:none !important;
+	font-weight:bold;
+	padding:5px 0 5px 0;
+	height:20px;
+}
+
+ul.ordremeny li a {
+	display:block;
+	height:21px;
+	text-align:center;
+	width:189px;
+	float:left; 
+	font-size:12px !important;
+	padding:4px 0 5px 0;
+	font-weight: normal;
+	line-height: 20px;
+}
+
+ul.ordremeny li a:hover, ul.auksjonsmeny li a:hover {
+	font-size:12px !important;
+}
+
+
+
+/* <a> element BUTTONS */
+a.button-input {
+	font-size: 11px;
+	font-weight: bold;
+	text-shadow: #fff 0 1px 0;
+	text-align:center;
+	padding:5px 10px 6px 10px;
+	height: 16px;
+	display:block;
+	text-decoration: none !important;
+	overflow: hidden;
+	background: url("https://japanphotoxxl.no/cops/images/hw/jp_input_bg_large.png") repeat-x;
+	border-color:#DDDDDD #CCCCCC #CCCCCC;
+	border-right:1px solid #CCCCCC;
+	border-style:solid;
+	border-width:1px;
+}
+
+a.button-input:hover{
+	background-position: 0 -27px !important;
+	color: #004e6e !important;
+	background: url("https://japanphotoxxl.no/cops/images/hw/jp_input_bg_large.png") repeat-x;
+}
+
+a.button-input.faktura {
+	background: url("https://japanphotoxxl.no/cops/images/hw/jp_input_bg_pdf.png") no-repeat;
+	padding-left: 25px;
+	margin-top:5px;
+	margin-right: 10px;
+	font-weight: normal;
+}
+
+a.button-input.angrerettskjema {
+	background: url("https://japanphotoxxl.no/cops/images/hw/jp_input_bg_pdf.png") no-repeat;
+	padding-left: 25px;
+	margin-top:5px;
+	font-weight: normal;
+
+}
+
+a.button-input.ordre {
+	float:right;
+	margin-top:-34px !important;
+	margin-right: 0px !importanT;
+}
+
+
+
+/* full site width cssbox wrapper */
+div.cssboxfull {
+	top: 37px !important;
+	position: absolute;
+	margin-top:0px !important;
+}

@@ -1,0 +1,1125 @@
+/*!
+ * Start Bootstrap - Shop Homepage HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+body {
+    background: #afb1b4  url(https://www.reedfoto.no/wp-content/themes/designagency/designagency/images/bg_body.png) no-repeat center top;
+    /*background-size: 100%;*/
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.container{
+    background: #fff;
+}
+
+ul, ol {
+    list-style-type: none;
+    margin: 13px 0 13px 15px;
+    padding: 0;
+}
+
+#footer div{
+    background: none;
+}
+
+.navbar-wrapper .container, .footer .container {
+    background: none!important;
+}
+.maincontent{
+    min-height: 500px;
+    background: #fff;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 0 0 20px 20px;
+}
+
+
+a{
+   color: #333;
+   /*text-decoration: underline;*/
+}
+
+h4 a, .list-group a, .input-group a{
+    text-decoration: none;
+}
+label{
+    /*font-size: 16px;*/
+}
+
+hr{
+    width: 100%;
+    color: #000;
+    margin: 5px 0px;
+    display: inline-table;
+}
+
+.presentation {
+   position: relative;
+   height: 305px;
+   background-color: #fefefe;
+   border: 1px solid #ccc;
+   overflow: hidden;
+}
+          
+.articles  div{
+   padding: 20px 20px 20px 200px;
+}
+
+.articles h2 {
+  font-family: Yanone Kaffeesatz;
+  font-style: normal;
+  font-weight: 700;
+   font-size: 4em;
+   color: #882f42;
+   margin: 0;
+       letter-spacing: 3px;
+}
+.articles h3{
+  position: relative;
+  bottom: 10px;
+  font-stretch: expanded;
+  font-family: Yanone Kaffeesatz;
+  font-style: normal;
+  font-weight: 300;
+  padding: 0 0 0 25px;
+  font-size: 2.7em;
+  color: #47a8b0;
+  margin: 0;
+  letter-spacing: 2px;
+}
+.articles hr{
+  margin: 0;
+  position: relative;
+  left: 47px;
+  bottom: 5px;
+  width: 505px;
+}
+.articles p{
+  font-family: Yanone Kaffeesatz;
+  font-style: normal;
+  font-weight: 300;
+  padding: 0 0 0 55px;
+  font-size: 1.5em;
+  color: #7e8a8b;
+  margin: 0;
+  width: 337px;
+  letter-spacing: 2px;
+  line-height: 1.2em
+}
+
+.thumbnail{
+    background-color: #F5F5F5;
+    border-radius: 0px;
+}
+
+.display-none{
+    display: none;
+}
+.top-5{
+    margin-top: 5px;
+}
+.top-15, .prepend-top{
+    margin-top: 15px;
+}
+
+.slide-image {
+    width: 100%;
+}
+
+.carousel-holder {
+    margin-bottom: 15px;
+}
+
+.carousel-control,
+.item {
+    border-radius: 0px;
+}
+.frombreim{
+    margin: 5px auto 0 auto;
+}
+
+.caption {
+    position: relative;
+    height: 35px;
+    overflow: hidden;
+}
+.caption .glyphicon {
+    position: absolute;
+    right: 13px;
+    top: 3px;
+    font-size: 1.6em;
+    color: #bf001e;
+    text-decoration: none;
+}
+
+.caption h4 {
+    white-space: nowrap;
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+
+.thumbnail img {
+    width: 100%;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+
+.editarticle{
+    position: absolute;
+    padding: 10px;
+    border-radius: 50px;
+    opacity: 0.8;
+    top: 10px;
+    right: 20px;
+    font-size: 20px;
+    background: #bf001e;
+    color: black;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+.thumbnail .caption {
+    padding: 0 5px;
+    color: #333;
+}
+
+.footer .container {
+    margin-top: 50px;
+}
+
+.nav a{
+    text-decoration: none;
+}
+.navbar-collapse .navbar-nav{
+    color: #bf001e;
+}
+.navbar-header .glyphicon{
+    font-size: 22px;
+}
+
+.navbar {
+    min-height: 5px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    font-size: 14px;
+}
+.navbar-brand {
+    padding: 5px;
+    height: auto;
+}
+
+.navbar-wrapper {
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+}
+
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper > .container {
+  padding-right: 0;
+  padding-left: 0;
+}
+.navbar-wrapper .navbar {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.navbar-nav{
+        float: right;
+}
+.navbar-wrapper .navbar .container {
+  width: auto;
+}
+@media (min-width: 768px){
+    
+    .navbar-nav>li>a {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .navbar-cart{
+        position: absolute;
+        right: 10px;
+        bottom: 2px;
+    }
+    .navbar-inverse{
+        border-radius: 0px;
+    }
+}
+
+
+.navbar-inverse {
+    background-color: #bf001e;
+    border-color: #bf001e;
+    border-radius: 20px 20px 0 0;
+    height: 61px;
+
+    /*box-shadow: 3px 3px 5px #ccc;*/
+}
+.navbar-inverse .navbar-brand {
+  color: #fff;
+}
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+  color: #fff;
+  background-color: transparent;
+}
+.navbar-inverse .navbar-text {
+  color: #fff;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: #fff;
+}
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+  color: #000;
+  background-color: #ffffff;
+}
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+  color: #ffffff;
+  background-color: #eb082c;
+}
+.navbar-inverse .navbar-nav > .disabled > a,
+.navbar-inverse .navbar-nav > .disabled > a:hover,
+.navbar-inverse .navbar-nav > .disabled > a:focus {
+  color: #050505;
+  background-color: transparent;
+}
+.navbar-inverse .navbar-toggle {
+  border-color: #333333;
+}
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+  background-color: #333333;
+}
+.navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #ffffff;
+}
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
+  border-color: #3299dc;
+}
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+  background-color: #eb082c;
+  color: #ffffff;
+}
+.navbar-inverse .navbar-nav > .dropdown > a:hover .caret {
+  border-top-color: #bf001e;
+  border-bottom-color: #bf001e;
+}
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+  border-top-color: #333;
+  border-bottom-color: #333;
+}
+.navbar-inverse .navbar-nav > .open > a .caret,
+.navbar-inverse .navbar-nav > .open > a:hover .caret,
+.navbar-inverse .navbar-nav > .open > a:focus .caret {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+
+ul.dropdown-cart{
+min-width:250px;
+}
+
+ul.dropdown-cart li .item{
+display:block;
+padding:3px 10px;
+margin: 3px 0;
+}
+
+ul.dropdown-cart li .item:hover{
+background-color:#f3f3f3;
+}
+
+ul.dropdown-cart li .item:after{
+visibility: hidden;
+display: block;
+font-size: 0;
+content: " ";
+clear: both;
+height: 0;
+}
+
+ul.dropdown-cart li .item-left{
+float:left;
+}
+
+ul.dropdown-cart li .item-left img,
+ul.dropdown-cart li .item-left span.item-info{
+float:left;
+}
+
+ul.dropdown-cart li .item-left span.item-info{
+margin-left:10px;   
+}
+
+ul.dropdown-cart li .item-left span.item-info span{
+display:block;
+}
+
+ul.dropdown-cart li .item-right{
+float:right;
+}
+ul.dropdown-cart li .item-right button{
+margin-top:14px;
+}
+
+@media (max-width: 767px) {
+
+    .navbar-nav {
+        float: none;
+    }
+    .presentation {
+        font-size: 12px;
+     }
+               
+     .articles  div{
+        padding: 37px 2px 2px 20px;
+     }
+     .articles p{
+       padding: 0 0 0 147px;
+       width: 312px;
+     }
+    
+    .topnav>li {
+        border-bottom: solid 1px #ccc;
+    }
+    body{
+        padding-top: 0px;
+    }
+    .navbar {
+        margin-top: 0px;
+    }
+    .top-5, .top-15 {
+        margin-top: 0px;
+    }
+    
+    .navbar-nav{
+        background: #bf001e;
+    }
+    
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
+    border-color: #bf001e;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    color: #FFF;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #bf001e;
+    background-color: #ffffff;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ffffff;
+    background-color: #eb082c;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #050505;
+    background-color: transparent;
+  }
+}
+.navbar-inverse .navbar-link {
+  color: #ffffff;
+}
+.navbar-inverse .navbar-link:hover {
+  color: #bf001e;
+}
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
+    background-color: #bf001e;
+    border-color: #bf001e;
+}
+
+.navbar-nav a, .left-menu a{
+    font-weight: 600;
+}
+
+.left-menu h4{
+    /*border-top-left-radius: 4px;
+    border-top-right-radius: 4px;*/
+    margin: 0px;
+    padding: 5px;
+    background-color: #eee;
+    color: #000;
+    border-top: solid 1px #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+.left-menu h4 a{
+     color: #000;
+     font-size: 14px;
+}
+
+.left-menu .list-group-item {
+    position: relative;
+    display: block;
+    padding: 5px 10px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    /*border-top: 1px solid #ddd;*/
+}
+.left-menu .list-group-item:first-child {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.list-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+
+.footer{
+    background: #333;
+    color: #eee;
+}
+.footer a{
+    color: #eee;
+    text-decoration: none;
+}
+.footer ul{
+    list-style-type: none;
+}
+h4 .glyphicon{
+    font-size: 16px;
+}
+
+.list-group {
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.form-inline .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+}
+
+
+
+
+@media (min-width: 992px){
+    .footer .col-md-2 {
+        width: 20%;
+    }
+    
+    /*
+  .span-1, .span-2, .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-9, .span-10, .span-11, .span-12,
+  .span-13, .span-14, .span-15, .span-16, .span-17, .span-18, .span-19, .span-20, .span-21, .span-22, .span-23, .span-24 {
+    float: left;
+  }
+  .span-24, .span-23 {
+    width: 100%;
+  }
+  .span-21, .span-22 {
+    width: 91.66666667%;
+  }
+  .span-19, .span-20 {
+    width: 83.33333333%;
+  }
+  .span-17, .span-18{
+    width: 75%;
+  }
+  .span-15, .span-16{
+    width: 66.66666667%;
+  }
+   .span-13, .span-14 {
+    width: 58.33333333%;
+  }
+   .span-11, .span-12 {
+    width: 50%;
+  }
+   .span-9, .span-10{
+    width: 41.66666667%;
+  }
+   .span-7, .span-8{
+    width: 33.33333333%;
+  }
+   .span-5, .span-6{
+    width: 25%;
+  }
+   .span-3, .span-4{
+    width: 16.66666667%;
+  }
+   .span-1, .span-2{
+    width: 8.33333333%;
+  }*/
+
+}
+
+
+
+
+.price.oldprice {
+    text-decoration: line-through;
+    color: #666;
+    font-weight: normal !important;
+    font-size: 0.8em !important;
+}
+.price.newprice {
+    font-weight: bold;
+    color: #c00;
+    margin-right: 0 !important;
+}
+
+.more-info{
+    text-decoration: underline;
+}
+.productbox .more-info{
+    padding-left: 5px;
+    /*position: absolute;
+    left: 15px;
+    top: 30px;*/
+    
+}
+.productbox .row{
+   margin-left: 0px;
+   margin-right: 0px;
+}
+div.starOfferPercentContainer {position:absolute;}
+div.ribbonsContainer {position:relative;}
+div.ribbonsContainer .ribbon {position:absolute;top:-10px;left:-7px;background:transparent url( ribbons/nb_NO.png ) no-repeat top left;height:91px;width:89px;}
+div.ribbonsContainer .ribbon.new.blue {background-position:0px 0px;}
+div.ribbonsContainer .ribbon.new.yellow {background-position:-91px 0px;}
+div.ribbonsContainer .ribbon.new.green {background-position:-183px 0px;}
+div.ribbonsContainer .ribbon.offer.blue {background-position:1px -90px;}
+div.ribbonsContainer .ribbon.offer.yellow {background-position:-90px -90px;}
+div.ribbonsContainer .ribbon.offer.green {background-position:-182px -91px;}
+div.starOfferPercent {height:75px;width:75px;position:absolute;color:#fff; text-align: center}
+div.starOfferPercent.top {top:0px;}
+div.starOfferPercent.bottom {bottom:0px;}
+div.starOfferPercent.left {left:0px;}
+div.starOfferPercent.right {right:0px;}
+div.starOfferPercent.h3{margin: auto}
+
+div.starOfferPercent{background:transparent url(gfx/julehjerte.png) no-repeat top left;}
+/*div.starOfferPercent.percent5 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/5.png) no-repeat top left;}
+div.starOfferPercent.percent10 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/5.png) no-repeat top left;}
+div.starOfferPercent.percent15 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/15.png) no-repeat top left;}
+div.starOfferPercent.percent20 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/20.png) no-repeat top left;}
+div.starOfferPercent.percent25 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/25.png) no-repeat top left;}
+div.starOfferPercent.percent30 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/30.png) no-repeat top left;}
+div.starOfferPercent.percent35 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/35.png) no-repeat top left;}
+div.starOfferPercent.percent40 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/40.png) no-repeat top left;}
+div.starOfferPercent.percent45 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/45.png) no-repeat top left;}
+div.starOfferPercent.percent50 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/50.png) no-repeat top left;}
+div.starOfferPercent.percent55 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/55.png) no-repeat top left;}
+div.starOfferPercent.percent60 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/60.png) no-repeat top left;}
+div.starOfferPercent.percent65 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/65.png) no-repeat top left;}
+div.starOfferPercent.percent70 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/70.png) no-repeat top left;}
+div.starOfferPercent.percent75 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/75.png) no-repeat top left;}
+div.starOfferPercent.percent80 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/80.png) no-repeat top left;}
+div.starOfferPercent.percent85 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/85.png) no-repeat top left;}
+div.starOfferPercent.percent90 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/90.png) no-repeat top left;}
+div.starOfferPercent.percent95 {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/95.png) no-repeat top left;}
+div.starOfferPercent.percent5.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/5left.png) no-repeat top left;}
+div.starOfferPercent.percent10.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/10left.png) no-repeat top left;}
+div.starOfferPercent.percent15.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/15left.png) no-repeat top left;}
+div.starOfferPercent.percent20.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/20left.png) no-repeat top left;}
+div.starOfferPercent.percent25.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/25left.png) no-repeat top left;}
+div.starOfferPercent.percent30.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/30left.png) no-repeat top left;}
+div.starOfferPercent.percent35.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/35left.png) no-repeat top left;}
+div.starOfferPercent.percent40.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/40left.png) no-repeat top left;}
+div.starOfferPercent.percent45.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/45left.png) no-repeat top left;}
+div.starOfferPercent.percent50.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/50left.png) no-repeat top left;}
+div.starOfferPercent.percent55.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/55left.png) no-repeat top left;}
+div.starOfferPercent.percent60.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/60left.png) no-repeat top left;}
+div.starOfferPercent.percent65.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/65left.png) no-repeat top left;}
+div.starOfferPercent.percent70.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/70left.png) no-repeat top left;}
+div.starOfferPercent.percent75.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/75left.png) no-repeat top left;}
+div.starOfferPercent.percent80.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/80left.png) no-repeat top left;}
+div.starOfferPercent.percent85.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/85left.png) no-repeat top left;}
+div.starOfferPercent.percent90.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/90left.png) no-repeat top left;}
+div.starOfferPercent.percent95.left {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/starOfferPercent/95left.png) no-repeat top left;}*/
+div.newProductStarContainer {position:absolute;}
+div.newProductStar {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/newProductStar/en.png) no-repeat top left;height:75px;width:75px;position:absolute;text-indent:-9999px;}
+div.newProductStar {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/newProductStar/en.png) no-repeat top left;}
+div.newProductStar.nb_NO {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/newProductStar/nb_NO.png) no-repeat top left;}
+div.newProductStar.fi_FI {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/newProductStar/fi_FI.png) no-repeat top left;}
+div.newProductStar.sv_SE {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/newProductStar/sv_SE.png) no-repeat top left;}
+div.newProductStar.da_DK {background:transparent url(//static.eurofoto.no/css/portals/eurofoto/newProductStar/da_DK.png) no-repeat top left;}
+
+.btn{
+    padding: 2px 5px;
+}
+
+button, .button {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    text-decoration: none;
+}
+button:hover, .button:hover {
+    text-decoration: none;
+    color:#ECECEC;
+}
+
+.btn-primary{
+    olor: #fff;
+    background-color: #bf001e;
+    border-color: #a40000;
+}
+.btn-primary:hover{
+    color: #000;
+    background-color: #fff;
+    border-color: #a40000;
+}
+.btn-primary:focus,
+.btn-primary.focus {
+  color: #fff;
+  background-color: #bf001e;
+  border-color: #122b40;
+}
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #bf001e;
+  border-color: #204d74;
+}
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.open > .dropdown-toggle.btn-primary:hover,
+.btn-primary:active:focus,
+.btn-primary.active:focus,
+.open > .dropdown-toggle.btn-primary:focus,
+.btn-primary:active.focus,
+.btn-primary.active.focus,
+.open > .dropdown-toggle.btn-primary.focus {
+  color: #fff;
+  background-color: #bf001e;
+  border-color: #122b40;
+}
+
+/*
+.column, .span-1, .span-2, .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-9, .span-10, .span-11, .span-12, .span-13, .span-14, .span-15, .span-16, .span-17, .span-18, .span-19, .span-20, .span-21, .span-22, .span-23, .span-24 {float:left;margin-right:10px;}
+.last {margin-right:0;}
+.span-1 {width:30px;}
+.span-2 {width:70px;}
+.span-3 {width:110px;}
+.span-4 {width:150px;}
+.span-5 {width:190px;}
+.span-6 {width:230px;}
+.span-7 {width:270px;}
+.span-8 {width:310px;}
+.span-9 {width:350px;}
+.span-10 {width:390px;}
+.span-11 {width:430px;}
+.span-12 {width:470px;}
+.span-13 {width:510px;}
+.span-14 {width:550px;}
+.span-15 {width:590px;}
+.span-16 {width:630px;}
+.span-17 {width:670px;}
+.span-18 {width:710px;}
+.span-19 {width:750px;}
+.span-20 {width:790px;}
+.span-21 {width:830px;}
+.span-22 {width:870px;}
+.span-23 {width:910px;}
+.span-24 {width:950px;margin-right:0;}*/
+
+
+/* common */
+#loader-overlay {position:absolute;background-color:#333;padding:auto auto;margin:0 !important;z-index:10000;}
+#loader-overlay .loadingInfo {text-align:center;margin-top:300px;}
+#loader-overlay .loadingInfo * {display:inline;color:#fff;}
+#mediaclip_container {background:transparent url(/gfx/gui/ajax-loader-big.gif) no-repeat fixed center 200px;}
+
+thead tr{
+    background-color: #bf001e; 
+}
+thead th{
+    padding: 5px;
+    font-size: 14px;
+    color: #fff;
+}
+
+/*** custom checkboxes 
+input[type=radio].with-font,
+input[type=checkbox].with-font {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+    
+input[type=radio].with-font ~ label:before,
+input[type=checkbox].with-font ~ label:before {
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f1db";
+    letter-spacing: 10px;
+    font-size: 1.2em;
+    color: #535353;
+    width: 1.4em;
+}
+
+input[type=radio].with-font:checked ~ label:before,
+input[type=checkbox].with-font:checked ~ label:before  {
+    content: "\f00c";
+    font-size: 1.2em;
+    color: darkgreen;
+    letter-spacing: 5px;
+}
+input[type=checkbox].with-font ~ label:before {        
+    content: "\f096";
+}
+input[type=checkbox].with-font:checked ~ label:before {
+    content: "\f046";        
+    color: darkgreen;
+}
+input[type=radio].with-font:focus ~ label:before,
+input[type=checkbox].with-font:focus ~ label:before,
+input[type=radio].with-font:focus ~ label,
+input[type=checkbox].with-font:focus ~ label
+{                
+    color: green;
+}
+***/
+/*** custom checkboxes
+
+input[type=checkbox] { display:none; } 
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+}
+***/
+
+
+
+#fit-in
+{
+    display: inherit;
+}
+
+/*input[type=checkbox] + label:before { content: "\f096"; } 
+input[type=checkbox] + label:before { letter-spacing: 10px; } space between checkbox and label 
+
+input[type=checkbox]:checked + label:before { content: "\f046"; } checked icon 
+input[type=checkbox]:checked + label:before { letter-spacing: 5px; }  allow space for check mark */
+
+.deliverymethod {
+    background: #F5F5F5;
+    margin: 5px;
+}
+.selected {
+    border: solid 1px #26AECA;
+    box-shadow: 0px 0px 5px #ccc;
+    background: #fff;
+}
+
+.productbox{
+    border: solid 1px #eee;
+    position: relative;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    display: block;
+}
+
+.productbox .button{
+    padding: 3px 12px;
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+}
+
+.productline {
+    padding: 5px 0px 5px 15px;
+}
+.kassecontainer .panel-heading {
+    padding: 5px 15px;
+}
+.kassecontainer .panel-body {
+    padding: 0px 15px 15px 15px;
+}
+.right{
+    text-align: right;
+}
+.left{
+    text-align: left;
+}
+
+.cewe-photobooks .roundedBox a.button {
+    position: absolute;
+    bottom: 10px;
+    margin-left: 20px;
+}/*
+.cewe-photobooks .roundedBox a.button.bottom.left{
+    left: 178px;
+}*/
+.roundedBox {-webkit-border-radius:9px;-moz-border-radius:9px;border-radius:9px;background:#ededed;background:-moz-linear-gradient(top, #ededed 0%, #f6f6f6 33%, #ffffff 100%);background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#ededed), color-stop(33%,#f6f6f6), color-stop(100%,#ffffff));border:1px solid #ccc;position:relative;}
+.wirebox {background-color:rgba( 230,230,230, 0.7);margin-bottom:1em;}
+div.product-category div.top {position:relative;}
+/*
+.roundedBox a.button.bottom {position:absolute;bottom:20px;}
+.roundedBox a.button.bottom.right {bottom:20px;right:20px;}
+.roundedBox a.button.bottom.left {bottom:20px;left:20px;}
+.roundedBox a.button.top.right {top:20px;right:20px;}
+.roundedBox a.button.top.left {top:20px;left:20px;}
+
+*/
+/* images */
+ul.imagelist li {list-style-type:none;}
+div.imagecontainer {height:170px;text-align:center;}
+div.imagecontainer.small {width:70px;height:70px;}
+div.imagecontainer a {display:block;}
+div.imagecontainer a.ui-selected img {border-color:red
+;}
+div.imagecontainer a:hover img {outline-color:#0098DB;}
+div.imagecontainer a label {display:block;}
+div.imagecontainer a img {border:3px solid #fff;outline:1px solid #ccc;}
+div.imagecontainer span.name {display:block;margin:0 15px
+;}
+div.imagecontainer .left-top-corner-hover {position:absolute;top:0;left:0;background-color:#333;opacity:.8;-moz-border-radius-bottomright:10px;width:25px;}
+.bigimage {display:inline-block;border:8px solid #fff;box-shadow:1px 2px 15px rgba(0,0,0,0.3);-webkit-box-shadow:1px 2px 15px rgba(0,0,0,0.3);-moz-box-shadow:1px 2px 15px rgba(0,0,0,0.3);}
+img.todays-photo.thumb {border:8px solid #fff;box-shadow:1px 2px 15px rgba(0,0,0,0.3);-webkit-box-shadow:1px 2px 15px rgba(0,0,0,0.3);-moz-box-shadow:1px 2px 15px rgba(0,0,0,0.3);}
+div.imagecontainer.squareThumb {height:75px;width:75px;overflow:hidden;}
+img.thumb_110px {max-height:110px;max-width:110px
+;}
+img.thumb_100px {max-height:100px;max-width:100px
+;}
+img.thumb_90px {max-height:90px;max-width:90px
+;}
+img.thumb_80px {max-height:80px;max-width:80px
+;}
+img.thumb_70px {max-height:70px;max-width:70px
+;}
+img.thumb_60px {max-height:60px;max-width:60px
+;}
+img.thumb_50px {max-height:50px;max-width:50px
+;}
+img.small, img.thumb_50px {max-height:50px;max-width:50px
+;}
+ul.albums {list-style-type:none
+;}
+li.albumPreview {list-style-type:none
+;}
+div.albumcontainer {display:table;float:left
+;}
+div.albumcontainer a {display:table-cell;vertical-align:middle;text-align:center;}
+div.albumcontainer.large {width:160px;height:130px;background:#fff url('/gfx/backgrounds/folder_160px.gif') no-repeat;padding:25px 0 0 5px;}
+div.albumcontainer.large .thumb {max-width:110px;max-height:80px;}
+div.albumcontainer.medium {width:150px;height:90px;background:#fff url('/gfx/backgrounds/folder_135px.gif') no-repeat;padding:25px 0 0 5px;display:table;float:left;}
+div.albumcontainer img.thumb {border:3px solid #fff;outline:1px solid #666;}
+div.albumcontainer.medium .thumb {max-width:65px;max-height:70px;}
+.albumlist {margin:0;padding:0;}
+.albumlist li {padding:10px 0;list-style:none;border-bottom:1px solid #ccc;}
+.albumlist li:hover {background-color:#eee;}
+.albumlist li.selected {background-color:#fcc;}
+.albumlist img {max-height:60px;max-width:80px;border:4px solid #fff;outline:1px solid #ddd;}
+.albumlist dl {font-size:.8em;}
+.albumlist .holder {height:100%;}
+.albumlist div.checkboxholdercontainer {display:table;height:100%;vertical-align:middle;float:left;}
+.albumlist div.checkboxholder {height:100%;display:table-cell;vertical-align:middle;}
+.albumlist .holder {min-height:70px;}
+.albumlist .last .functions {margin-right:10px;}
+.albumlist h3 {margin-bottom:0;}
+.albumlist p.description {font-size:.9em;color:#666;margin:0;padding:0;}
+.albumlist dd {color:#666;margin-left:0;}
+ul#albums {margin:0;list-style-type:none;}
+.albumPreview {width:85px;height:120px;margin:10px 20px 3px 20px;padding:0;float:left;text-align:center;overflow:hidden;font-size:.8em;}
+.order-prints .albumPreview {width:105px;height:150px;margin:10px 5px 3px 5px;}
+.order-prints .albumPreview .skimmer {height:100px;width:100px;}
+.albumPreview a {display:block;}
+.albumPreview.placeholder {background-color:#eee;}
+.albumPreview div.center {font-weight:bold;padding-top:3px;margin-right:50px;width:100%;}
+#albums .albumPreview.sortable {border:3px dashed #ccc;margin:7px 17px 0 17px;}
+.skimmer {background-position:center center;padding:0;margin:1px;border:1px solid #ccc;background-repeat:no-repeat;width:75px;height:75px;display:block;overflow:hidden;box-shadow:1px 1px 5px rgba(0,0,0,0.3);-webkit-box-shadow:1px 1px 5px rgba(0,0,0,0.3);-moz-box-shadow:1px 1px 5px rgba(0,0,0,0.3);border-radius:9px;-moz-border-radius:9px;-webkit-border-radius:9px;cursor:hand;cursor:pointer;}
+.skimmer.selected {margin:0;border:2px solid #0098DB;box-shadow-color:2px 2px 5px rgba(0,152,219,0.7);-webkit-box-shadow:2px 2px 5px rgba(0,152,219,0.7);-moz-box-shadow:2px 2px 5px rgba(0,152,219,0.7);}
+.showimage .exif dt {color:#ccc;}
+.showimage .exif dd {margin-left:0;}
+
+.menu-current li{
+    float: left;
+}
+
+.myaccountmenu{
+    min-height: 15px;
+}
+
+.myaccountmenu .navbar-toggle .icon-bar {
+    background-color: #333;
+}
+
+#myaccount-menu {list-style:none;}
+#myaccount-menu ul {margin:0;list-style:none;padding-left: 0px;}
+#myaccount-menu li:first-child {border-top:1px solid #eee;}
+#myaccount-menu li {list-style:none;text-align:left;font-size:1em;color:#666;border-bottom:1px solid #eee;}
+#myaccount-menu li a {padding:.3em 1em;display:block;text-decoration:none;color:#666;}
+#myaccount-menu a:hover {background-color:#eee;color:#000;}
+#myaccount-menu li.current > a {background-color:#0098DB;color:#fff;font-weight:bold;}
+#myaccount-menu li a:active, #myaccount-menu li a:focus {background-color:#ccc !important;color:#000 !important
+;}
+#myaccount-menu li.current ul {background:transparent
+;}
+#myaccount-menu li.current ul li {margin-left:1em
+;}
+#myaccount-menu li.current ul li a {font-size:.9em
+;}
+#myaccount-menu li.current ul li a:hover {color:#0098DB
+;}
+#myaccount-menu li.current ul li.current > a {color:#0098DB;font-weight:bold;background-color:transparent;}
+#myaccount-menu li.current ul li.current ul {border-left:none
+;}
+#myaccount-menu li.current ul li.current ul li {border:none;margin-left:1em
+;}
+#myaccount-menu li.current ul li.current ul li a {padding:0 !important;}
+#myaccount-menu li.current ul li.current ul li:last-child {border:none
+;}
+#myaccount-menu li.current ul li.current ul li.current > a {color:#0098DB;font-weight:normal;}
+#myaccount-menu li.current ul li.current ul li a {font-size:.9em
+;}
+#myaccount-menu li.current ul li.current ul li a:hover {color:#0098DB
+;}
+ul.lightlist {margin:0;padding:0;}
+ul.lightlist li {padding:.75em 1em .75em 10px;list-style: none}
+ul.lightlist li a {text-decoration:none;}
+ul.lightlist li span.right {float:right;display:block;}
+
+#rightmenu ul {margin:0;padding:0;}
+#rightmenu li {list-style:none;}
+#rightmenu h4 {margin:0;padding:1em 0 0 0;}
+
+.box { padding: 1.5em; margin-bottom: 1.5em; background: #E5ECF9;}
+div.box {background-color:#f6f6f6;border:1px solid #ccc;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;box-shadow:1px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:1px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:1px 1px 2px rgba(0,0,0,0.1);}
+
+
+hr.space {
+    background: #fff;
+    color: #fff;
+    visibility: hidden;
+}
+
+.clear {
+    clear: both;
+}
+
+ul.step-by-step-new {height:40px;border:1px solid #eee;margin:0;}
+ul.step-by-step-new li {display:block;float:left;width:190px;background:url(//static.eurofoto.no/css/portals/eurofoto/backgrounds/crumbs.gif) no-repeat right center;padding:0.8em 0.9em 0.4em 1em;height:38px;}
+ul.step-by-step-new li.last {background:none;}
+ul.step-by-step-new a {display:block;text-decoration:none;color:#ccc;}
+ul.step-by-step-new .current a {color:#0098DB;}
+ul.step-by-step-new strong, ul.step-by-step-new span {display:block;}
+ul.step-by-step-new span {font-size:.8em;color:#ccc;}
+ul.step-by-step-new .current span {color:#333;}
+ul.step-by-step-new .completed a * {color:#000;}
+
+.quiet {
+    color: #666;
+    font-weight: 200;
+}
+
+.negative{
+    color: red;   
+}
+
+.fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 24px;
+    direction: ltr;
+    cursor: pointer;
+}
+
+div.boxlist ul {margin:0;list-style-type:none;}
+div.boxlist ul li {display:block;padding:5px 0;border-bottom:1px solid #efefef;clear:both;}
+div.boxlist ul li .product-title {display:block;font-weight:bold;clear:both;float:left;}
+div.boxlist ul li span.info {display:block;clear:both;margin-bottom:5px;}
+div.boxlist ul li span.info span.price {float:none;}
+div.boxlist ul li span.info span.more-info-and-button {float:right;text-align:right;}
+
+
+.changequantity {
+    width: auto!important;
+}
+
+
+.modal.in .modal-dialog {
+    z-index: 3000;
+}
+
+.productbox {
+    background-color:#ffffff;
+	padding:10px;
+	margin-bottom:10px;
+	-webkit-box-shadow: 0 8px 6px -6px  #999;
+	   -moz-box-shadow: 0 8px 6px -6px  #999;
+	        box-shadow: 0 8px 6px -6px #999;
+}
+
+.producttitle {
+    font-weight:bold;
+	padding:5px 0 5px 0;
+}
+
+.productprice {
+	border-top:1px solid #dadada;
+	padding-top:5px;
+}
+
+.pricetext {
+	font-weight:bold;
+	font-size:1.4em;
+}

@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" >Sjokkpris</tal:block>
+	
+	
+	
+	<style type="text/css">
+
+   body{
+      background-image: url(${static:}gfx/backgrounds/bg_pattern.gif);
+      background-repeat: repeat-x;
+      -webkit-background-size: 5px 2000px;
+   }
+   p{
+   	color: #333;
+   }   
+   .sjokk-main, .email-sjokk{
+      border: 1px solid #FFF;
+      background-color: #fff8d7;
+       border-radius: 5px;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+   }
+   div.sjokk-main{
+      margin-bottom: 50px;
+   }
+   .sjokkpris-top {
+      height: 164px;
+      background-image: url(${static:}images/attachments/${article/id}/${article/attachments/background});
+      background-repeat:no-repeat;
+		}
+	.email-sjokk{
+       padding-right: 10px;
+       padding-left: 15px;
+       padding-top: 20px;
+       padding-bottom: 20px;
+	}
+	.email-sjokk h3{
+	  font-weight: normal;
+     color: #000;
+	}
+	.email-sjokk p{
+	     padding: 4px 0px 7px 0px;
+	     margin: 0 0 0em;
+	}	
+	.tittel{
+	  padding: 20px;
+	}
+   .info{
+      padding-top: 7px;
+      padding-right: 10px;
+      padding-bottom: 13px;
+      padding-left: 10px;
+      height: 40px;
+      background-image: url(${static:}gfx/backgrounds/info_bakgrunn2.png);
+   }
+   .detaljer{
+     background-color: white;  
+   }
+   span#time{
+    color:#fff;
+    font-size: 2em;
+    text-align: center;
+    margin-right: 20px;
+    vertical-align: middle;
+   }
+   div#time span{
+       display:inline;
+       color:#222222;
+       font-size:0.8em;
+   }
+  span.cd-time{
+	font-size: 1em
+
+   }
+  .klokkeikon img{
+      vertical-align: middle;
+  }
+  .emailError{
+      border: 1px solid red;
+      span: 10px;
+      
+  }
+   .jqmWindow {
+       display: none;
+       position: fixed;
+       top: 17%;
+       left: 50%;
+       text-align: center;
+       margin-left: -200px;
+       width: 200px;    
+       padding: 22px;
+   }   
+   .jqmOverlay { background-color: #000; }
+   
+   /* Fixed posistioning emulation for IE6
+        Star selector used to hide definition from browsers other than IE6
+        For valid CSS, use a conditional include instead */
+   * html .jqmWindow {
+        position: absolute;
+        top: expression((document.documentElement.scrollTop || document.body.scrollTop) + Math.round(17 * (document.documentElement.offsetHeight || document.body.clientHeight) / 100) + 'px');
+   }
+   </style>
+	
+	
+</head>
+
+<body>
+
+<div class="container">
+
+	 <div class="span-24 last sjokkpris-top"></div>
+
+	 <div class="main"> 
+      <div class="span-24 last">
+         <div class="span-18 center sjokk-main sjokkpris"  >
+            <div tal:content="structure article/body" />
+         </div>
+         <div class="span-5 last ">
+            <div tal:content="article/ingress"class="span-6 append-bottom last email-sjokk"/>
+         </div>
+         <div class="span-5 last">
+
+            <div class="span-6  append-bottom email-sjokk sendtofriend">
+               <div class="span-4"><h3>Tips en venn!</h3></div>
+               <div class="span-2 last">
+                  <tal:block metal:use-macro="../common.html/share-button" />	
+               </div>
+               <div class="span-6 last">
+               <form action="/sjokkpris/sendcodefriend" method="post" id="sendcode">
+                  <label>Ditt navn:</label>
+                  <br/>
+                  <div>
+                     <input type="text" id="name" name="name"/>
+                  </div>
+                  <label>Din venns epostadresse:</label>
+                  <br/>
+                  <div>
+                     <input type="title text" id="email" name="email[0]"/> <a href="#" class="addemail green button">legg til</a>
+                  </div>
+                  <div>
+                  &nbsp;
+                  </div>
+                  <button type="submit" class="button yellow" href="#">
+                  Send tips
+                  </button>
+            </form>
+            </div>
+            </div>
+     
+         </div>
+			<div class="span-5">
+					<!-- facebook -->					
+					<script type="text/javascript" src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php/${i18n/language}"></script>
+					<script type="text/javascript">FB.init("8c1094029e063c64cf7b6b799c3f76c8");</script>
+					<fb:fan profile_id="68186910325" stream="" connections="8" width="250"></fb:fan>
+			</div>
+	  </div>
+	  </div>
+</div>	          
+         <div class="jqmWindow email-sjokk" id="dialog">
+
+         <!--<a href="#" class="jqmClose">Lukk</a>-->
+         <h3>Send kode!</h3>
+         <hr />
+               
+               <form action="/sjokkpris/sendcode" method="post" id="sendcode">
+                  <label>Din epostadresse:</label>
+                  <br/>
+                  <div>
+                     <input type="title text" id="email" name="email"/>
+                  </div>
+                  <div>
+                  &nbsp;
+                  </div>
+                  <button type="submit" class="button yellow" href="#">
+                  <p>JA TAKK,</p>send ukens SjokkPris kode
+                  </button>
+               </form>
+         </div>
+
+<!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.3.min.js" />-->
+<script type="text/javascript" src="${static:js/jquery.countdown.js}" />
+<script type="text/javascript" src="${static:js/jqModal.js}" />
+<script type="text/javascript" src="${static:js/jquery.validate.min.js}" />
+
+<script type="text/javascript">
+
+/* http://keith-wood.name/countdown.html
+   Norwegian Bokmål translation
+   Written by Kristian Ravnevand */
+(function($) {
+	$.countdown.regional['nb'] = {
+		labels: ['År', 'Måneder', 'Uker', 'Dager', 'Timer', 'Minutter', 'Sekunder'],
+		labels1: ['År', 'Måned', 'Uke', 'Dag', 'Time', 'Minutt', 'Sekund'],
+		compactLabels: ['Å', 'M', 'U', 'D'],
+		whichLabels: null,
+		timeSeparator: ':', isRTL: false};
+	$.countdown.setDefaults($.countdown.regional['nb']);
+})(jQuery);
+
+$(document).ready(function() {
+  
+   var i = 0;
+   $('.addemail').live('click', function(){
+      //console.log( $(this).parent());
+      //$(this).parent().add($(this).parent());
+      i++;
+      $('<input type="title text" id="email" name="email[' + i + ']"/> <a href="#" class="addemail green button">Legg til</a>').appendTo( $(this).parent() );
+      $(this).remove();
+      return false;
+      
+   });
+   
+   
+   $('form#sendcode').validate({
+   	errorClass: "emailError",
+		errorPlacement: function(error, element) {
+     		error.appendTo( element.parent("div").next("div") );
+   		},
+		rules: {
+			email:{
+				required: true,
+				email: true
+			}
+		},
+		messages: {
+			email: {
+				required: '<tal:block i18n:translate="">You need to provide a valid e-mail address to log in.</tal:block>',
+				email: '<tal:block i18n:translate="">Please provide a valid email address.</tal:block>'
+			}
+		}
+   });
+   $('#dialog').jqm();
+   /*Countdown*/
+   var liftoffTime = new Date("${article/shorttitle}")
+   $('#time').countdown({
+         until: liftoffTime, 
+         layout: '{dn} {dl}, {hn} {hl}, {mn} {ml}, {sn} {sl}',
+         onExpiry: function(){
+            //console.log( "avslutta");
+            $('a').remove();
+            $('#time').text( "Kampanjen er avslutta ");
+            $('.sendtofriend').remove();
+         },
+         alwaysExpire: true,
+   
+         });
+});
+</script>
+</body>
+</html>

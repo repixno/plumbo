@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+	<style media="all" type="text/css">
+	
+		div.productinfo p {
+			margin-bottom: 0;
+		}
+		h3{
+      color: #09F;
+      text-decoration: none;
+      }
+	   h4 a{ 
+         color: #09F;
+         text-decoration: none;
+      }
+		span.price { font-size: 16px !important }
+		body .container span.price.oldprice { margin: 0; padding: 0; font-size: 10px !important;}
+		span.price.newprice { margin: 0; padding: 0; font-size: 14px !important;}
+		
+		.functions { position: relative; text-align: left !important;}
+		
+		.functions .links { position: absolute; bottom: 0; right: 0; text-align: right; }
+		
+		div.starOfferPercentContainer {
+		height: 70px;
+		width: 70px;
+		float: right;
+		}
+		
+	  .product-top {
+        height: 160px;
+        
+        <tal:block tal:condition="exists:menuitem/article/attachments/background">
+        background-image: url(${static:}images/attachments/${menuitem/article/id}/${menuitem/article/attachments/background});
+        </tal:block>
+        
+        background-repeat:no-repeat;
+      }
+      .product-top p{ font-size: 14px }
+      
+      /* Follow us */
+      .frontpage_list.linklist.followUs {
+      	border:none;
+      }
+      .frontpage_list.linklist.followUs div.content {
+      	border:none;
+      }
+      .frontpage_list.linklist.followUs h2 {
+      	margin-bottom:8px;
+      }
+      .followUs ul.follow_us {
+      	list-style: none;
+      	margin: 0;
+      	padding: 0;
+      }
+      .followUs ul.follow_us li {
+        float:left;
+        display:block;
+        text-align: center;
+        width:48px;
+      }
+      .followUs ul.follow_us li a.follow-icon {
+        display:block;
+      }
+      .followUs ul.follow_us li a.follow-url {
+        color: #0099ff;
+        font-family:arial, helvetica, sans-serif;
+        font-size:11px;
+        text-decoration:none;
+      }
+      .followUs ul.follow_us li a.follow-url:hover {
+        text-decoration:underline;
+      }
+      /*Knapp*/
+      .linklist .button {
+      	/*position:relative; */
+      	width:250px;
+      	height:48px;
+      	background:transparent url(../../images/kampanje_knapp_normal_wide.png) no-repeat scroll 0 0;
+      	display:inline;
+      	margin-bottom:60px;
+      	margin-top:20px;
+      	float:left;
+      	margin-left:62px;
+      	cursor:pointer;
+      }
+      .buttonH{
+      	cursor:pointer;
+      }
+      
+      
+      a.aButton {
+         text-decoration: none;
+      }
+      
+      .frontpage_list{
+         padding-top: 20px;
+         padding-left:5px;
+      }
+      /*Bli fadder*/
+      .frontpage_list div.preface{
+      	padding-left:10px;
+      	margin-bottom:10px;
+      }
+      
+      span.fadder, span.gi {
+      	display:block;
+      	clear:both;
+      	color:#FFF;
+      	font-weight:bold;
+      	margin:0 auto;
+      	margin-bottom:10px;
+      	font-size:14px;
+      	height:34px;
+      	width:171px;
+      	line-height:34px;
+      	text-align:center;
+      }
+      span.fadder{
+      	background:transparent url(http://www.unicef.no/_public/images/bli_fadder_forside_knapp_normal.png) no-repeat scroll 0 0;
+      }
+      span.gi{
+      	background:transparent url(http://www.unicef.no/_public/images/engangsbelop_forside_knapp_normal.png) no-repeat scroll 0 0;
+      }
+      span.fadder.verd{
+      	background:transparent url(http://www.unicef.no/_public/images/verdemsforelder_forside_knapp_normal.png) no-repeat scroll 0 0;
+      	height:40px;
+      	line-height:17px;
+      	padding-top:6px;
+      }
+      span.fadder.verd.hover{
+      	background:transparent url(http://www.unicef.no/_public/images/verdemsforelder_forside_knapp_mouseover.png) no-repeat scroll 0 0;
+      }
+      span.fadder.hover{
+      	background:transparent url(http://www.unicef.no/_public/images/bli_fadder_forside_knapp_mouseover.png) no-repeat scroll 0 0;
+      }
+      .linklist hr {
+         width: 220px;
+         height: 2px;
+         background-color: #CDCDCD;
+         margin-bottom: 5px;
+      }
+      
+    
+	</style>
+</head>
+
+<tal:block define:section="topbanner, Top banner" /> <!-- article -->
+
+<tal:block metal:define-macro="show-product">
+	<div class="span-2 productimage">
+		<tal:block metaltal:use-macro="${templateroot}/eurofoto/cms/cms.html/starOfferPercent" />
+		<tal:block metaltal:use-macro="${templateroot}/eurofoto/cms/cms.html/newProductStar" />
+		<tal:block tal:define="global customsize string:70" />
+		<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/one-product-photo-custom-size" />
+	</div>
+	<div class="span-8 last productinfo">
+		<h3 tal:content="item/title"></h3>
+		<p tal:content="item/ingress"></p>
+		<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/more-info-link" />
+	</div>
+	<div class="span-8 last prepend-2 functions">
+		<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" />
+		<div class="links">
+			
+			<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/buy-product-link" />
+		</div>
+	</div>
+</tal:block>
+
+<body>
+
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/top" />
+
+         <div class="span-24 last product-top top append-bottom" tal:condition="exists:menuitem/article/attachments/background">
+            <div class="content" tal:condition="exists:menuitem/article/attachments/background"></div>
+         </div>
+
+       <div class="span-24 last" style="border-top: 1px solid #f5f5f5; background-color: white;">
+       
+       
+     
+
+		<div class="span-6" style="background: url(http://a.static.eurofoto.no/gfx/backgrounds/unicef_menu_bg.jpg);">
+         <div class="span-6 last frontpage_list linklist">
+            <h3>UNICEF fadder</h3>
+            <div class="preface">
+               Hjelper ALLE BARN.Overalt. Alltid.
+            </div>
+            <a class="aButton" href="http://www.unicef.no/Hjelp+verdens+barn/Bli+fadder">
+               <span class="fadder buttonH">
+                  Bli UNICEF fadder!
+               </span>
+            </a><hr/>
+            <a class="aButton" href="http://www.unicef.no/Hjelp+verdens+barn/Gi+en+enkeltgave">
+               <span class="gi buttonH">
+                  Gi et engangsbeløp
+               </span>
+            </a>
+            <hr/>
+         </div>
+         <div class="span-6">
+         		<div class="frontpage_list linklist denene">
+            <h4><a href="http://www.denene.no/" rel="external">Èn som bryr seg kan være nok</a></h4>
+            <div>
+               <div class="span-3">En trygg voksen kan skape en positiv forandring i et barns liv. – Du kan være den ene!</div>
+               <div class="span-2 last">
+                  <a href="http://www.denene.no/" rel="external"><img alt="Den ene loggo" src="http://www.unicef.no/_public/images/den_ene.gif?_ts=128bfd29e20" title="Den ene loggo"/></a>
+               </div>
+               </div>
+         </div>
+
+			
+         <div class=" span-6 last frontpage_list linklist followUs">
+            <h3>Følg oss</h3>
+            <div class="content">
+               <ul class="follow_us">
+                  <li>
+                     <a class="follow-icon" href="http://www.facebook.com/pages/UNICEF-Norge/135843375926" rel="external">
+                        <img alt="Facebook" height="32" src="http://www.unicef.no/_public/images/icons/32px_facebook.jpg?_ts=128bfd2e54a" width="32" />
+                     </a>
+                     <a class="follow-url" href="http://www.facebook.com/pages/UNICEF-Norge/135843375926" rel="external">
+                        Facebook
+                    </a>
+                  </li>
+                  <li>
+                     <a class="follow-icon" href="http://twitter.com/UNICEFNorge" rel="external">
+                        <img alt="Twitter" height="32" src="http://www.unicef.no/_public/images/icons/32px_twitter.jpg?_ts=128bfd2e786" width="32" />
+                     </a>
+                     <a class="follow-url" href="http://twitter.com/UNICEFNorge" rel="external">
+                        Twitter
+                    </a>
+                 </li>
+                 <li>
+                     <a class="follow-icon" href="http://www.youtube.com/unicefnorway" rel="external">
+                        <img alt="YouTube" height="32" src="http://www.unicef.no/_public/images/icons/32px_youtube.jpg?_ts=128bfd2e8c2" width="32" />
+                     </a>
+                     <a class="follow-url" href="http://www.youtube.com/unicefnorway" rel="external">
+                        YouTube
+                     </a>
+                  </li>
+                  <li>
+                     <a class="follow-icon" href="http://kjerstiflogstad.wordpress.com/" rel="external">
+                        <img alt="Blogg" height="32" src="http://www.unicef.no/_public/images/icons/32px_blogg.jpg?_ts=128bfd2e412" width="32" />
+                     </a>
+                     <a class="follow-url" href="http://kjerstiflogstad.wordpress.com/" rel="external">
+                        Blogg
+                     </a>
+                  </li>
+               </ul>
+            </div>
+            <p>&nbsp;</p>
+              <!-- <div id="fb-root"></div>
+               <script>(function(d, s, id) {
+                 var js, fjs = d.getElementsByTagName(s)[0];
+                 if (d.getElementById(id)) {return;}
+                 js = d.createElement(s); js.id = id;
+                 js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                 fjs.parentNode.insertBefore(js, fjs);
+               }(document, 'script', 'facebook-jssdk'));</script>
+               
+               <div class="fb-recommendations" data-site="www.unicef.no" data-width="220" data-height="300" data-header="true"></div>
+               -->
+            <div class="span-4">
+               &nbsp;
+            </div>
+         </div>
+         
+         
+         </div>
+
+         </div>
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div id="" class="productlist span-18 last" style="padding-top: 10px;">		
+
+     <div  class="span-18 last" tal:content="structure menuitem/article/body"> Artikkel </div>
+
+		<!-- list for menudepth of 2-->
+		<tal:block tal:repeat="item items">
+			<tal:block  tal:condition="equal:item/type,product">
+				<div class="span-8 colborder append-bottom" tal:condition="not:mod:repeat/item/number,2">
+					<div class="span-2 productimage">
+						<tal:block tal:define="global customsize string:70" />
+						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/one-product-photo-custom-size" />
+					</div>
+					<div class="span-6 last productinfo">
+						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/starOfferPercentFloatRight" />
+						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/newProductStarFloatRight" />
+
+						<h3 tal:content="item/title"></h3>
+						<p>${item/ingress} <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/more-info-link" />
+</p>
+					</div>
+					<div class="span-6 last prepend-2 functions">
+						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" />
+						<div class="links">
+							<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/buy-product-link" />
+						</div>
+					</div>
+				</div>
+				<div class="span-8 append-bottom last" tal:condition="mod:repeat/item/number,2">
+					<div class="span-2 productimage">
+						<tal:block tal:define="global customsize string:70" />
+						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/one-product-photo-custom-size" />
+					</div>
+					<div class="span-6 last productinfo">
+						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/starOfferPercentFloatRight" />
+						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/newProductStarFloatRight" />
+						<h3 tal:content="item/title"></h3>
+						<p>${item/ingress} <tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/more-info-link" /></p>
+					</div>
+					<div class="span-6 last prepend-2 functions">
+						<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/show-price" />
+						<div class="links">
+							<tal:block metal:use-macro="${templateroot}/eurofoto/cms/cms.html/buy-product-link" />
+						</div>
+					</div>
+				</div>
+				<hr tal:condition="mod:repeat/item/number,2" />
+			</tal:block>
+		</tal:block>
+	</div>
+	<!-- use if menu is needed -->
+
+
+   </div>
+  </div>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>	
+</div>
+
+<script type="text/javascript">
+
+$(function(){
+   
+   console.log('test');
+   
+   
+   
+   
+});
+
+
+
+</script>
+
+</body>
+</html>

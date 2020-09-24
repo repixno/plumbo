@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="${i18n/country}">
+<head>
+	<tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" />
+	<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/head" />
+	
+	<!--<script src="${static:js/swfobject.js}" type="text/javascript"></script>-->
+	<script src="${static:}js/uploadhandlers.js?${version}" type="text/javascript"></script>
+	<script src="${static:js/jquery.uploadify.v2.1.0.min.js}" type="text/javascript"></script>
+</head>
+<body id="account-albums">
+	
+<div class="container">
+	<div metal:use-macro="${templateroot}/${templates}/common.html/top" />	
+</div>
+
+
+<div id="account">
+
+	<div class="container">
+		<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/account-menu" />
+	</div>
+
+	<div class="container account-wrapper canHazMaxWidth" id="show-album">
+		<div class="account-container">
+			<div class="account-accordion span-4" id="album-accordion">
+				<tal:block metal:use-macro="${templateroot}/${templates}/account/common.html/album-accordion" />
+			</div>
+	
+		<div id="main-content" class="prepend-4">
+			<div id="albumContainer">
+				<div class="account-content-header">
+					<div>
+						<h3 style="float: left" class="album-title editable" id="album-title">${album/title}</h3>
+					</div>
+				</div>
+				
+				<div id="album-menu" class="account-content-box menu">
+					<div class="top">
+						<div class="smallbuttons span-7">
+							<a class="open-menu" href="#album-functions">
+								Functions <span class="dropdown" />
+							</a>
+							
+							<!-- /account/slideshow/${album/id} -->
+							
+							<a href="#slideshowContainer" title="Show slidehsow of this album" class="slideshow fancybox">
+								<span class="icon" />
+								<tal:block i18n:translate="">Slideshow</tal:block>
+							</a>
+							
+						</div>
+						<div class="buttons span-11 last right">
+							<a class="order-prints-from-current-album" href="#order-prints-from-current-album">Order prints</a>
+							<a class="share-album" href="#share-album" id="share-album">Share</a>
+							<a class="create-photobook-from-album" href="#create-photobook-from-album">Create photo book</a>
+							<a class="create-blog-from-album"  href="#order-prints">Blog</a>
+						</div>
+						
+						<div class="functions span-12 hide" id="album-functions">
+							<div class="span-5 colborder">
+								<div class="album-functions">
+								<ul>
+									<!--<h5 class="selected"><tal:block i18n:translate="">Order prints</tal:block></h5>	-->
+									<li><a href="#" title="" class="print-album"			id="printCurrentAlbum" i18n:translate=""><span class="sprite albums"/>Order this album</a></li>
+								</ul>
+								<hr />
+								<ul>
+									<li><a href="#" title="" class="download-current-album" id="downloadCurrentAlbum" i18n:translate="">Download this album</a></li>
+								</ul>
+								<hr />
+								<ul>
+									<!-- <h5><span class="sprite share"/><tal:block i18n:translate="">Share</tal:block></h5>	 -->
+									<li><a href="#" title="" class="share-current-album"	id="shareCurrentAlbum" i18n:translate="">Share album</a></li>
+									<li><a href="#" title="" class="get-secret-link"		id="getSecretAlbumLink" i18n:translate="">Get secret link</a></li>
+									<li><a href="#" title="" class="insert-album-in-web"	id="insertAlbumInBlog" i18n:translate="">Insert in blog</a></li>
+								</ul>
+								<hr />
+								<ul>
+									<!-- <h5><span class="sprite transfer"/><tal:block i18n:translate="">Transfer images</tal:block></h5>	-->
+									<li><a href="#" title="" class="upload-from-computer" 	id="uploadFromComputere-fromAlbum" i18n:translate="">Upload from computer</a></li>
+									<li><a href="#" title="" class="transfer-with-mail" 	id="transferWithEmail-fromAlbum" i18n:translate="">Transfer with email</a></li>
+									<li><a href="#" title="" class="import-from-othersite" 	id="importFromOtherSite-fromAlbum" i18n:translate="">Import from other site</a></li>
+								</ul>
+								<hr />
+								<ul>
+									<li><a href="#" title="" class="preferences"			id="albumPreferences" i18n:translate="">Preferences</a></li>
+									<li><a href="#" title="" class="delete-current-album negative"	id="deleteCurrentAlbum" i18n:translate="">Delete this album</a></li>
+								</ul>
+								</div>
+							</div>
+							<div class="span-5 last">
+								<h5><span class="sprite create"/><tal:block i18n:translate="">Create project</tal:block></h5>	
+								<ul>
+									<li><a href="#" title="" class="create-photo-book"		id="createPhotoBook-fromAlbum" i18n:translate="">Photo book</a></li>
+									<li><a href="#" title="" class="create-calendar"		id="createCalendar-fromAlbum" i18n:translate="">Calendar</a></li>
+									<li><a href="#" title="" class="create-gift"			id="createGift-fromAlbum" i18n:translate="">Gift</a></li>
+									<li><a href="#" title="" class="create-poster"			id="createPoster-fromAlbum" i18n:translate="">Poster</a></li>
+									<li><a href="#" title="" class="create-collage"			id="createCollage-fromAlbum" i18n:translate="">Collage</a></li>
+								</ul>
+							</div>
+						</div>
+
+						
+					</div>
+					
+					<div class="submenu">
+						<strong i18n:translate="">Select</strong> <a href="#select-all" class="select-all" i18n:translate="">All</a> | <a href="#select-none" class="select-none" i18n:translate="">None</a>
+						<strong i18n:translate="">Sort</strong> 
+						<select id="image-sorting">
+							<option value="date_asc">Date</option>
+							<option value="date_desc">Date desc</option>
+							<option value="time_asc">Time</option>
+							<option value="time_desc">Time desc</option>
+							<option value="title_asc">Title</option>
+							<option value="title_desc">Title desc</option>
+						</select>
+						
+						<strong i18n:translate="">Selected photos</strong>
+						<a i18n:translate="" href="#print-selected-images" class="print-selected-images" id="printSelectedImages" >Order orints</a> | 
+						<a i18n:translate="" href="#move-selected-images" class="move-selected-images">Move</a> | 
+						<a i18n:translate="" href="#delete-selected-images" class="delete-selected-images">Delete</a> | 
+						<a i18n:translate="" href="#rotate-selected-images-clockwise" class="rotate-selected-images-clockwise">Rotate clockwise</a> <span i18n:translate=""> or </span> 
+						<a i18n:translate="" href="#rotate-selected-images-counterclockwise" class="rotate-selected-images-counterclockwise">Rotate Counterclockwise</a>
+						
+						<input type="checkbox" id="show-image-title" /><label>Show image title</label>
+						
+						<div id="slider" class="span-5 image-size-slider"/>
+					</div>
+				</div>
+
+
+				<div class="account-content-box scrollable" id="album-content">
+					<br class="clear clearfix" />
+				</div>
+			</div>
+				
+			
+			<div id="imageContainer" class="hide">
+				<h3 style="float: left" class="album-title editable">${album/title}</h3>
+				<div class="imageBox account-content-box">
+					<img id="bigImage"/>
+				</div>
+			
+				<div class="image-info">
+					<h4 class="title"><a href="#" i18n:translate="">Add title</a></h4>
+					<p class="description"><a href="#" i18n:translate="">Add description</a></p>
+					<div class="exif">
+					
+					 <div class="span-14 last">
+						<dl>
+							<div class="span-4 colborder">
+								<dt i18n:translate="">Date</dt>
+								<dd class="date"></dd>
+								<dt i18n:translate="">Camera model</dt>
+								<dd class="model"></dd>
+
+							</div>
+
+							<div class="span-4 colborder">
+								<dt i18n:translate="">Camera make</dt>
+								<dd class="make"></dd>
+								
+								<h5 i18n:translate="">Size</h5>
+								<p>
+									<strong i18n:translate="">Height</strong> <span class="height"></span>px <strong>Width</strong> <span class="width"></span>px
+								</p>
+								
+							</div>
+
+							<div class="span-4 last">
+								<dt i18n:translate="">Exposure</dt>
+								<dd class="exposuretime"></dd>
+
+								<dt i18n:translate="">Orientation</dt>
+								<dd class="orientation"></dd>
+							</div>
+						</dl>
+					</div>
+						
+<!--						<h5>GPS</h5>
+						latitude, longitude, 
+						<a href="http://maps.google.com/?q=59.9120000000,10.6326666667&spn=0.05,0.05&t=h&om=1&hl=en" class="gps"></a>-->
+					
+					</div>
+				
+				</div>
+			
+			</div>
+			
+		</div>
+		</div>
+	</div>
+
+</div>
+
+
+<!-- dialogs -->
+<div metal:use-macro="${templateroot}/${templates}/account/dialogs.html/albumDialogs" />
+
+
+<!-- context menus -->
+<div metal:use-macro="${templateroot}/${templates}/account/common.html/albumContextMenu" />
+<div metal:use-macro="${templateroot}/${templates}/account/common.html/imageContextMenu" />
+
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="${templateroot}/${templates}/common.html/footer" />
+		<div metal:use-macro="${templateroot}/${templates}/account/common.html/footer" />
+	</div>
+</div>	
+
+<script type="text/javascript">
+	//init
+	$(document).ready( function() {
+		loadMyAlbums('#album-accordion-list');
+		
+	});
+</script>
+</body>
+</html>
+

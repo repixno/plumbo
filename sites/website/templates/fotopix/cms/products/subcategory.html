@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../../${templates}/common.html/head" tal:define="global pagetitle" tal:content="menuitem/title" />
+	<meta name="description" content="${menuitem/article/ingress}" />
+
+<style>
+	
+	h3{
+		font-family: yanoneregular;
+	}
+	
+	h2{
+		font-family: yanoneregular;
+	}
+</style>
+</head>
+
+
+<body>
+<div metal:use-macro="../../../${templates}/common.html/top" />
+<div class="container">
+
+	<div class="row">
+			
+			
+	
+				<div class="col-md-12">
+					
+					
+					<h2><tal:block tal:content="menuitem/title"></tal:block></h2>
+					<p><tal:block tal:content="structure menuitem/article/body"></tal:block></p>
+					
+					
+					
+					<tal:block>
+						<tal:block tal:repeat="item menuitems">	
+							
+							<tal:block tal:condition="item/expanded">
+								<div 
+									tal:condition="exists:item/children" 
+									tal:repeat="subitem1 item/children">
+					
+									<tal:block tal:condition="subitem1/expanded">
+										<tal:block tal:condition="exists:subitem1/children">
+											<tal:block tal:repeat="subitem2 subitem1/children">
+												<tal:block tal:condition="exists:subitem2/children ">
+													<tal:block tal:repeat="subitem3 subitem2/children" tal:condition="subitem2/expanded">
+													
+														<tal:block tal:condition="mod:repeat/subitem3/number,3">
+															
+															
+															
+															<div class="col-md-4">
+																<tal:block tal:define="global staticurl" tal:content="static:" />
+																<a href="${subitem3/url}" title="${subitem3/article/ingress}">
+																	<img src="${staticurl}images/menu/${subitem3/image}" alt="${subitem3/title}" width="190" height="108"/>
+																</a>
+																<h3 tal:content="subitem3/title" class="bottom"></h3>
+																<tal:block tal:condition="exists: subitem3/article">
+																	<p tal:content="subitem3/article/ingress" class="quiet" >ingress</p>
+																</tal:block>
+																<div>
+																	<a href="${subitem3/url}" title="" class="btn btn-default btn-lg" i18n:translate="">Show products</a>
+																</div>
+															</div>
+														</tal:block>
+														
+														
+														
+														<tal:block tal:condition="not:mod:repeat/subitem3/number,3">
+															<div class="col-md-4">
+																<tal:block tal:define="global staticurl" tal:content="static:" />
+																<a href="${subitem3/url}" title="${subitem3/article/ingress}">
+																	<img src="${staticurl}images/menu/${subitem3/image}" alt="${subitem3/title}" width="190" height="108"/>
+																</a>
+																<h3 tal:content="subitem3/title" class="bottom"></h3>
+																<tal:block tal:condition="exists: subitem3/article">
+																	<p tal:content="subitem3/article/ingress" class="quiet">ingress</p>
+																</tal:block>
+																<div>
+																	<a href="${subitem3/url}" title="" class="btn btn-default btn-lg" i18n:translate="">Show products</a>
+																</div>
+															</div>
+														</tal:block>
+													</tal:block>
+												</tal:block>
+											</tal:block>
+										</tal:block>
+									</tal:block>
+								</div>
+							</tal:block>
+						</tal:block>
+					</tal:block>
+					
+				</div>
+			
+	</div>
+</div> <!-- end container -->
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+</body>
+</html>

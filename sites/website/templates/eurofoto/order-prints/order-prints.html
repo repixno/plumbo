@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Order prints</tal:block>
+	<style type="text/css">
+		#prices, .prices {
+			font-size: .8em;
+			border:none;
+			text-align: center
+		}
+		
+		#prices thead th {
+			background: none;
+			color: #ccc;
+			border: none;
+		}
+		#prices tr.category, .prices tr.category { height: 7em; vertical-align: bottom; }
+		#prices tr.category th, .prices tr.category th { margin-top: 2em; vertical-align: bottom; font-size: 1.4em; font-weight: normal !important;}
+		
+		.order-prints-article p {color: #444 }
+		.order-prints-article p.large { line-height: 1.8em}
+		
+		#from-computer {
+			background: #fff url(http://b.static.eurofoto.no/cms/images/articles/Fremkalle%20bilder/datamaskin.jpg) no-repeat scroll left top;
+		}
+		#from-computer h3, #from-computer p, #from-account h3, #from-account p {
+			margin-left: 140px;
+		}
+		#from-account{
+			background: #fff url(http://b.static.eurofoto.no/cms/images/articles/Fremkalle%20bilder/fotokonto.jpg) no-repeat scroll left top;
+		}
+		
+		hr.space.big {
+			height: 3em
+		}
+
+		
+	</style>
+</head>
+
+
+<body>
+	<div class="container order-prints">
+
+	<div metal:use-macro="${templateroot}/${templates}/common.html/top" />
+	
+	<div id="widecontent">
+		
+	
+		<div class="span-24 last append-bottom">
+			<ul class="step-by-step-new">
+				<li class="current">
+					<a title="">
+						<strong tal:content="cms:title:c3e83ff3-1b74-499f-9d2c-578177d4f036">Step 1: Find your photos</strong>
+					</a>
+				</li>
+				<li>
+					<a title="" tal:condition="not:session/loggedin">
+						<strong tal:content="cms:title:0e90d43c-ebf2-4c79-83d5-b3f950bdae0e">Step 2: Transfer photos</strong>
+					</a>
+					<a title="" tal:condition="session/loggedin">
+						<strong tal:content="cms:title:3ccf650d-5437-4e54-9940-b04c0aab2163">Step 2: Choose photos</strong>
+					</a>
+					
+				</li>
+				<li>
+					<a title="">
+						<strong tal:content="cms:title:6b897e85-a541-4a72-8905-e5ecb59b8968">Step 3: Choose quantity</strong>
+					</a>
+				</li>
+				<li class="">
+					<a title="">
+					   <strong tal:content="cms:title:1fe8b6fd-690f-4a9f-b8e0-f45634bbf50d">4: Tilpass bilder</strong>
+					</a>
+				</li>
+				<li class="last">
+					<a title="">
+						<strong tal:content="cms:title:3dfbbdeb-678f-4594-8aab-171ea6d8f6fd">Step 5: Accessories</strong>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="span-23 last box">
+         <h3 tal:content="cms:title:c3e83ff3-1b74-499f-9d2c-578177d4f036">Step 1: Find your photos</h3>
+         <span tal:content="cms:ingress:c3e83ff3-1b74-499f-9d2c-578177d4f036">Choose how to transfer them to us.</span>
+      </div>
+
+		<div class="span-11 colborder prepend-top" id="from-computer">
+				<!-- Transfer photos from my computer -->
+				<h3 tal:content="cms:title:f0536b62-022e-4ddb-abb2-bd1686e5163f"></h3>
+				<p class="quiet" tal:content="cms:ingress:f0536b62-022e-4ddb-abb2-bd1686e5163f"></p>
+				<div class="right">
+					<a href="/order-prints/transfer-photos/"class="button blue" i18n:translate="">Get photos from my computer</a>
+				</div>
+				<div class="hide iOs">
+				<br/>
+         <div class="quiet" id="appinfo"><tal:block i18n:translate="">You need</tal:block> <a href="http://itunes.apple.com/us/app/aurigma-up/id432611633">Arigma Up</a> <tal:block i18n:translate="">to be able to upload images from your iPad/iPhone</tal:block><p/></div>
+         </div>
+				<br class="clear" />
+		</div>
+		
+		<div class="span-12 last prepend-top" id="from-account">
+			<tal:block tal:condition="session/loggedin">
+				<!-- You are logged in, start choosing photos -->
+				<h3 tal:content="cms:title:2f8c493c-1eee-4546-871c-c0df13d8a300"></h3>
+				<p class="quiet" tal:content="cms:ingress:2f8c493c-1eee-4546-871c-c0df13d8a300"></p>
+				<div class="right">
+					<a href="/order-prints/choose-photos/" class="button blue"  i18n:translate="">Choose photos from my account</a>
+				</div>
+				
+			</tal:block>
+			
+			<tal:block tal:condition="not: session/loggedin">
+				<!-- You are NOT logged in, please log in -->
+				<div class="login-order-prints">
+					<h3 i18n:translate="" class="">Get photos from my account</h3>
+					<p class="quiet" tal:content="cms:title:2f8c493c-1eee-4546-871c-c0df13d8a300"></p>
+					<div class="right hideable">
+						<a href="/login/" id="show-login" i18n:translate="" class="button blue">Login</a>
+					</div>
+	
+					<div class="hide" id="hidden-login-box">
+						<form action="/login/" method="post" id="quicklogin">
+							<div>
+								<label for="email" i18n:translate="">E-mail:</label><br/>
+								<input type="text" class="text" name="email" value="" />
+							</div>	
+							<div>
+								<label for="pasword" i18n:translate="">Password:</label><br/>
+								<input type="password" class="text" name="password" value="" />
+							</div>
+							<div>
+								<input type="checkbox" id="rememberme" /> 
+								<label for="rememberme" i18n:translate="">Remember me next time.</label>
+							</div>	
+							<div class="prepend-top">
+						 		<button class="blue" type="submit" i18n:translate="">Log in, and access photos from my account</button>
+							</div>
+							<div class="prepend-top">
+								<tal:block i18n:translate="">Not a user?</tal:block> <a href="/register/" i18n:translate="">Register now</a> 
+							</div>
+							<input type="hidden" name="referer" value="/order-prints/"/>
+						</form>
+					</div>
+					<script type="text/javascript">
+						$(document).ready( function() {
+							$('#show-login').click( function() {
+								$(this).parent().parent().find('.hideable').hide();
+								$('#hidden-login-box').slideDown('fast');
+								return false;
+							})
+						})
+					</script>
+				</div>
+			</tal:block>
+		</div>
+		
+		<hr class="space big" />
+				
+		<div class="span-13 colborder order-prints-article prepend-top">
+			<h2 tal:content="cms:title:6b02f6fe-0f2c-4e2c-a042-12c004f7580f"></h2>
+			<tal:block tal:content="structure cms:body:6b02f6fe-0f2c-4e2c-a042-12c004f7580f" />
+		</div>
+		
+		<div class="span-10 last">
+		
+			<h2 i18n:translate="">Prices</h2>
+		
+			<tal:block metal:use-macro="${templateroot}/eurofoto/order-prints/common.html/price-matrix" />
+			
+			<hr class="space" />
+
+			<div class="span-5 colborder">
+				<h4 i18n:translate="">Correction methods</h4>
+				<table class="prices">
+					<tbody>
+						<tal:block tal:repeat="productionmethod productionmethods">
+							<tr>
+								<th tal:content="productionmethod/title"></th>
+								<tal:block repeat="price productionmethod/prices">
+									<td class="prodno_${productionmethod/prodno}" colspan="6">
+										<span class="price" tal:content="formatprice:price/price"></span>
+										<span class="hide min" tal:content="formatprice:price/min"></span>
+										<span class="hide max" tal:content="formatprice:price/max" tal:condition="exists:price/max"></span>
+									</td>
+								</tal:block>
+							</tr>
+						</tal:block>
+					</tbody>
+				</table>
+			</div>
+			
+			
+			<div class="span-4 last">
+				<h4 i18n:translate="">Correction methods</h4>
+				<table class="prices">
+					<tbody>
+						<tal:block tal:repeat="correctionmethod correctionmethods">
+							<tr>
+								<th tal:content="correctionmethod/title"></th>
+								<tal:block repeat="price correctionmethod/prices">
+									<td class="prodno_${correctionmethod/prodno}" colspan="6">
+										<span class="price" tal:content="formatprice:price/price"></span>
+										<span class="hide min" tal:content="formatprice:price/min"></span>
+										<span class="hide max" tal:content="formatprice:price/max" tal:condition="exists:price/max"></span>
+									</td>
+								</tal:block>
+							</tr>
+						</tal:block>
+					</tbody>
+				</table>
+			</div>
+			<hr class="space" />
+			<!--<div class="box">
+				<h3>Om korreksjonsmetoder</h3>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam sit amet elit vitae arcu interdum ullamcorper. Nullam ultrices, nisi quis scelerisque convallis, augue neque tempor enim, et mattis justo nibh eu elit. Quisque ultrices gravida pede. Mauris accumsan vulputate tellus. Phasellus condimentum bibendum dolor. Mauris sed ipsum. Phasellus in diam. Nam sapien ligula, consectetuer id, hendrerit in, cursus sed, leo. Nam tincidunt rhoncus urna. Aliquam id massa ut nibh bibendum imperdiet. Curabitur neque mauris, porta vel, lacinia quis, placerat ultrices, orci.</p>
+			</div>-->
+		</div>
+		
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="${templateroot}/${templates}/common.html/footer" />
+	</div>
+</div>
+
+
+<SCRIPT type="text/javascript">
+
+$(document).ready( function() {
+   var isiOs = navigator.userAgent.match(/iPad/i) != null ||  navigator.userAgent.match(/iPhone/i) != null ||  navigator.userAgent.match(/iPod/i) != null;
+
+   if(isiOs){
+      $('.iOs').show();
+   }
+   
+});
+
+
+
+
+
+</SCRIPT>
+
+</body>
+</html>

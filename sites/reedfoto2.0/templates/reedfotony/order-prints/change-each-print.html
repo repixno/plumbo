@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+	<!--<script type="text/javascript" src="http://static.repix.no/js/choose-quantity-each.js"></script>-->
+</head>
+
+
+<body>
+	
+	<div metal:use-macro="../../common/loader.html/fullscreen" />
+	<div metal:use-macro="../../${templates}/common.html/top" />
+
+	<div class="container">
+
+	
+
+	<div class="row" id="widecontent">
+		<div class="col-md-12">
+		 			<ul class="step-by-step-new">
+				<li class="completed">
+					<a href="/order-prints/" title="">
+						<strong tal:content="cms:title:c3e83ff3-1b74-499f-9d2c-578177d4f036">Step 1: Find your photos</strong>
+					</a>
+				</li>
+				<li class="completed">
+					<a href="/order-prints/transfer-photos/" title="" tal:condition="not:session/loggedin">
+						<strong tal:content="cms:title:0e90d43c-ebf2-4c79-83d5-b3f950bdae0e">Step 2: Transfer photos</strong>
+					</a>
+					<a href="/order-prints/choose-photos/" title="" tal:condition="session/loggedin">
+						<strong tal:content="cms:title:3ccf650d-5437-4e54-9940-b04c0aab2163">Step 2: Choose photos</strong>
+					</a>
+					
+				</li>
+				<li class="current">
+					<a title="">
+						<strong tal:content="cms:title:6b897e85-a541-4a72-8905-e5ecb59b8968">Step 3: Choose quantity</strong>
+					</a>
+				</li>
+			   <li>
+					<a title="">
+						<strong tal:content="cms:title:1fe8b6fd-690f-4a9f-b8e0-f45634bbf50d">4: Tilpass bilder</strong>
+					</a>
+				</li>
+				<li class="last">
+					<a title="">
+						<strong tal:content="cms:title:3dfbbdeb-678f-4594-8aab-171ea6d8f6fd">Step 5: Accessories</strong>
+					</a>
+				</li>
+			</ul>
+		</div>	
+
+		<div class="col-md-12 top-15">
+		<form action="/order-prints/adjust-print/" method="post" id="change-each-print">
+		
+		<tal:block tal:condition="exists: order/correctionmethod">
+		 <input type="hidden" name="correctionmethod" value="${order/correctionmethod}" /> 
+		</tal:block>
+		<tal:block tal:condition="exists: order/paperquality">
+		 <input type="hidden" name="paperquality" value="${order/paperquality}" /> 
+		</tal:block>
+	   <tal:block tal:condition="exists: order/productionmethod">
+		 <input type="hidden" name="productionmethod" value="${order/productionmethod}" /> 
+		</tal:block>
+		
+         <div class="col-md-12 box"> 
+         <div class="col-md-8">
+			<h3 tal:content="cms:title:5b378ea7-ccea-4831-957a-e1127830516a">Step 3: Choose quantity</h3>
+			<span tal:content="cms:ingress:5b378ea7-ccea-4831-957a-e1127830516a">Choose production method and formats</span>
+         </div>
+ 
+         <div class="col-md-2">
+			   <tal:block i18n:translate="">You have chosen</tal:block> 
+					<span class="loud total-num-images" id="total-num-of-images" tal:content="order/numimages">0</span> 
+				<tal:block i18n:translate="">photos</tal:block>
+					<h4 id="total-price-container right">
+						<tal:block i18n:translate="">Price:</tal:block> kr <span id="total-price">0.00</span>
+					</h4>
+				</div>
+				<div class="col-md-2">
+					<button class="next call-to-action large" type="submit" i18n:translate="">Next step</button>
+				</div>
+
+         </div>
+			
+			<tal:block tal:condition="not: order/numimages">
+				<h3 i18n:translate="">No photos</h3>
+			</tal:block>
+	
+			
+			<div class="col-md-12">
+				
+				<tal:block tal:repeat="image order/imageobjects">
+					<div class="col-md-12 top-15" style="border-top: solid 1px #ccc; padding-top: 15px;">
+						<div class="col-md-2">
+							<img src="${image/thumbnail}" alt="${image/title}" />
+						</div>
+						<div class="col-md-10">
+					    <div class="col-md-12">
+							<div class="col-md-6">
+								<span tal:content="image/title"></span>
+							</div>
+							<div class="col-md-6 right">
+								<a href="#" class="remove-print negative" i18n:translate="">Remove</a>
+							</div>
+					   </div>
+							
+							<div class="col-md-4">
+								<!-- standard prints -->
+								<h5 class="bottom" i18n:translate="">Standard prints</h5>
+								<tal:block tal:repeat="print prints">
+									<div class="prodno_${print/prodno} standard-prints">
+										<div class="form-inline " style="padding-right: 0px;">
+										  <tal:block tal:condition="equal:image/artnr,print/prodno,1">
+											<input type="text" 
+												class="order-print-quantity quantity prodno_${print/prodno}" 
+												name="orderitem[${print/prodno}][${image/id}]" id="prodno_${print/prodno}_image_${image/id}" size="3" value="${image/std_quantity}"
+												title="${print/prodno}"
+											/>
+											</tal:block>
+											<tal:block tal:condition="not:equal:image/artnr,print/prodno,1">
+											<input type="text" 
+												class="order-print-quantity quantity prodno_${print/prodno}" 
+												name="orderitem[${print/prodno}][${image/id}]" id="prodno_${print/prodno}_image_${image/id}" size="3" value="0"
+												title="${print/prodno}"
+											/>
+											</tal:block>
+											<div class="form-group form-inline">
+												<label for="prodno_${print/prodno}_image_${image/id}">
+													<span tal:content="print/title"></span> 
+													<span class="quiet"><br/>kr <span class="price prodno_${print/prodno}" tal:content="print/price">0,99</span> pr. stk</span>
+												</label>
+											</div>
+											
+											
+											<span class="totalPriceOfThisItem hide">0</span>
+										</div>
+									</div>
+								</tal:block>
+							</div>
+							
+							<div class="col-md-8">
+							  <div class="col-md-6">
+								<h5 class="bottom" i18n:translate="">Enlargements</h5>
+								<tal:block tal:repeat="enlargement enlargements">
+									<tal:block tal:condition="lte: repeat/enlargement/number,4">
+										<div class="form-inline top-5 prodno_${enlargement/prodno} enlargements">
+										
+											<input type="text" class="order-print-quantity quantity" size="3" value="${enlargement/quantity}" 
+												name="orderitem[${enlargement/prodno}][${image/id}]" 
+												id="prodno_${enlargement/prodno}_image_${image/id}"
+												title="${enlargement/prodno}"/>
+											<div class="form-group form-inline">
+												<label for="prodno_${enlargement/prodno}_image_${image/id}">
+													<tal:block tal:content="enlargement/title"></tal:block> 
+													<span class="quiet"><br/>kr <span class="price" tal:content="formatprice:enlargement/price"></span> pr. stk</span>
+												</label>
+												<span class="totalPriceOfThisItem hide"></span>
+											</div>
+											
+											
+											
+										</div>
+									</tal:block>
+								</tal:block>
+								</div>
+								<div class="col-md-6">
+								<h5 class="bottom">&nbsp;</h5>
+									<tal:block tal:repeat="enlargement enlargements">	
+										<tal:block tal:condition="gt: repeat/enlargement/number,4">
+											<div class=" form-inline top-5 prodno_${enlargement/prodno} enlargements">
+											
+												<input type="text" class="order-print-quantity quantity" size="3" value="${enlargement/quantity}" 
+													name="orderitem[${enlargement/prodno}][${image/id}]" 
+													id="prodno_${enlargement/prodno}_image_${image/id}"
+													title="${enlargement/prodno}" 
+													 />
+												<div class="form-group form-inline">
+												<label for="prodno_${enlargement/prodno}_image_${image/id}">
+													<tal:block tal:content="enlargement/title"></tal:block> 
+													<span class="quiet"><br/>kr <span class="price" tal:content="formatprice:enlargement/price">9</span> pr. stk</span>
+												</label>
+												
+												<span class="totalPriceOfThisItem hide"></span>
+												</div>
+											</div>
+										</tal:block>
+									</tal:block>
+								</div>
+							</div>
+						</div>
+						<hr />
+					</div>
+				</tal:block>
+				<hr/>
+			</div>
+			
+<!--
+			<div class="span-4 append-20">
+				<a class="button back" i18n:translate="">Back</a>
+			</div>
+-->			
+			<div class="hide">
+				<tal:block metal:use-macro="common.html/price-matrix" />
+			</div>
+			
+		</form>
+	
+		
+			
+		</div>
+	</div>
+</div>
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready( function() {
+	
+		updatePrices();
+		
+		$('#update-prices').click( function() {
+			updatePrices();
+			return false;
+		});
+		
+		$('.remove-print', '#change-each-print').click( function() { 
+			$(this).parent().parent().parent().parent().hide('fast', function() {
+				$(this).remove();
+			});
+			updatePrices();
+			return false;
+		});
+		
+		$('#change-each-print input').bind('change', function() {
+			updatePrices();
+		});
+		
+		
+		// show enlargements
+		$(".showallenlargements", '#change-each-print').click( function() {
+			$(this).parent().prev().slideToggle('slow');
+			//$('.white-borders input').trigger('change');
+			return false;
+		});
+
+		$('#info').scrollTop();
+		
+		$(this).scroll( function() {
+			//console.log( $('#info').scrollTop() );
+		});
+
+	});
+	
+	function updatePrices() {
+	   
+	   //console.log($('#change-each-print').serialize());
+	   
+		$('#total-price').after('<img src="${static:gfx/gui/ajax-loader.gif}" id="loader"/>')
+		$.post('/api/1.0/prices/prints/get/', $('#change-each-print').serialize(), function(data) {
+			$('#total-price').text( data.price );
+			$('#total-price').text( $('#total-price').text().replace('.',',') )
+			$('#total-price-container img.loader').hide('slow');
+			$('#loader').remove();
+		}, 'json');
+	}
+</script>
+</body>
+</html>

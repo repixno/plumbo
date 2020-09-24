@@ -1,0 +1,156 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Velkommen til Reed Foto</title>
+        <style type="text/css">
+        body {margin: 0; padding: 0; min-width: 100%!important;}
+        .content {width: 100%; max-width: 600px;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;background: #ffffff}
+        @media only screen and (min-device-width: 601px) {
+            .content {width: 600px !important;}
+        }
+        .currency{display: none;}
+        .header {padding: 5px;}
+        .col425 {width: 425px!important;}
+        .subhead {font-size: 15px; color: #ffffff; letter-spacing: 10px;}
+        .h1 {font-size: 33px; line-height: 38px; font-weight: bold;}
+        .h1, .h2, .bodycopy {color: #153643; font-family: sans-serif;}
+        .innerpadding {padding: 30px 30px 30px 30px;}
+        .borderbottom {border-bottom: 1px solid #f2eeed;}
+        .h2 {padding: 0 0 15px 0; font-size: 16px; line-height: 28px; font-weight: bold;}
+        .bodycopy {font-size: 16px; line-height: 22px;}
+        .button {text-align: center; font-size: 18px; font-family: sans-serif; font-weight: bold; padding: 0 30px 0 30px;}
+        .button a {color: #ffffff; text-decoration: none;}
+        @media only screen and (min-device-width: 601px) {
+            .content {width: 600px !important;}
+            .col425 {width: 425px!important;}
+            .col380 {width: 380px!important;}
+            .currency{display: inline !important;}
+        }
+        .footer {padding: 20px 30px 15px 30px;}
+        .footercopy {font-family: sans-serif; font-size: 14px; color: #ffffff;}
+        .footercopy a {color: #ffffff; text-decoration: underline;}
+        </style>
+    </head>
+    <body yahoo bgcolor="#f3f3f3">
+
+        <table width="600" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#fff">
+            <tr>
+                <td>
+                    <table class="content" align="center" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td class="header" bgcolor="#bf001e">
+                                <table width="170" align="left" border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td height="20" style="padding: 2px; color: #ffffff; font-size: 22px; font-weight: bold">
+                                            REED FOTO
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="innerpadding borderbottom">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td class="h2">
+                                            Takk for din bestilling på reedfoto.no. Under finner du dine ordredetaljer.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <p>
+                                          <b>Leveringstid:</b><br/>
+                                          Leveringstid på bildepakkar er normalt ca 1-2 veker. Har du bestilt katalog vert denne sendt i eiga forsending. Leveringstid er på ca 4-6 veker avhengig av når katalogen vert godkjent av skulen.</p>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bodycopy">
+                                            <p>
+                                                Adresse:<br/>
+                                                <span tal:replace="deliveryinfo/name"></span><br/>
+                                                <span tal:replace="deliveryinfo/address"></span><br/>
+                                                <span tal:replace="deliveryinfo/zipcode"> </span><span tal:replace="deliveryinfo/city"></span>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="borderbottom">
+                              <table border="0" style="width: 100%; margin-bottom: 25px;">
+                                <tr>
+                                  <td class="innerpadding">
+                                    Ordrenummer: ${orderid}
+                                  </td>
+                                </tr>
+                              </table>
+                              <table border="0" style="width: 100%; margin-bottom: 25px;">
+                                  <tbody>
+                                      <tr style="background-color: #b9babe; text-align: center;">
+                                          <th>Navn</th>
+                                          <th>Pris</th>
+                                          <th>Antall</th>
+                                          <th>Total</th>
+                                      </tr>
+                                      <tr  tal:repeat="row orderrow" style="background-color: #ebecee; text-align: center;">
+                                          <td>${row/title}</td>
+                                          <td style="padding: 0.6em 0.4em; text-align: right;"><span class="currency">kr</span> ${row/unitprice}</td>
+                                          <td style="padding: 0.6em 0.4em; text-align: center;">${row/quantity}</td>
+                                          <td style="padding: 0.6em 0.4em; text-align: right;"><span class="currency">kr</span>  ${row/price}</td>
+                                      </tr>
+                                      <tr style="text-align: right;">
+                                          <td>&nbsp;</td>
+                                          <td colspan="2" style="background-color: #dde2e6;"><strong>Ordretotal:</strong></td>
+                                          <td style="background-color: #dde2e6;"><strong><span class="currency">kr</span>  ${totalprice}</strong></td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                            </td>
+                        </tr>
+                        <tr>
+                      </tr>
+                        <tr>
+                            <td class="footer" bgcolor="#fff">
+                            <table width="160" align="left" border="0" cellpadding="0" cellspacing="0">  
+                                <tr>
+                                  <td class="bodycopy" style="padding: 0 20px 20px 0;">
+                                    Reed Foto AS<br/>
+                                    Hetlebakken 1<br/>
+                                    6827 BREIM
+                                  </td>
+                                </tr>
+                              </table>
+                              <!--[if (gte mso 9)|(IE)]>
+                                <table width="380" align="left" cellpadding="0" cellspacing="0" border="0">
+                                  <tr>
+                                    <td>
+                                    <![endif]-->
+                                    <table class="col380" align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 380px;">  
+                                      <tr>
+                                        <td>
+                                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                              <td class="bodycopy">
+                                                 Tlf: 57 86 83 33<br/>
+                                                  Epost: post@reedfoto.no
+                                              </td>
+                                            </tr>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                    <!--[if (gte mso 9)|(IE)]>
+                                    </td>
+                                  </tr>
+                                </table>
+                              <![endif]-->
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+    </body>
+</html>

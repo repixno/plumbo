@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    
+    <tal metal:use-macro="../../${templates}/common.html/head" />
+	<script src="${static:}css/bootstrap/js/carousel-swipe.js"></script>
+	<style>
+		
+		.margintop10{
+			margin-top: 10px;
+		}
+	</style>
+	
+</head>
+
+<body>
+    <div metal:use-macro="../../${templates}/common.html/top" />
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-2 hidden-xs left-menu">
+                <div metal:use-macro="../../${templates}/common.html/leftmenu" />
+				<div class="hidden-sm top-15">
+					
+				</div>
+            </div>
+
+            <div class="col-md-10">
+
+				
+                <div class="row carousel-holder">
+
+                    <div class="col-md-12">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+
+                            </ol>
+                            <div class="carousel-inner">
+								<tal:block tal:repeat="menuitem menucontent:33f2d94b-ba8b-4e86-82fa-1e4397269f64,carousel">
+									<tal:block tal:content="structure menuitem/body|default" />
+								</tal:block>
+                            </div>
+                          
+                        </div>
+                    </div>
+              
+			  
+			  
+			   <div class="col-md-12 margintop10">
+						<a href="https://www.nettsvar.no/MHCwa3/Default.aspx?Instance=730c47085b3c5b0345067c00&LoginType=0f&QuestionnaireID=085d025c&LayoutID=085d0058&BroadcastID=&CustDomainID=085d0758&CustomerID=0d5d055f015b04&Context=09&ParticipantID=085d035e055a005e05&CheckSum=4c5f005a01"><img class="img-responsive" src="/tmp/20180830_nyhetsbrev.jpg" /></a>
+					 
+					
+                      </div>
+			  
+			  
+					
+					
+					
+					 <div class="col-md-12">
+						<a href="http://dinmerkelapp.no/"><img class="img-responsive" src="/tmp/20180822_din-merkelapp.jpg" /></a>
+					 
+					
+                      </div>
+					
+                </div>
+               <!--
+			   <div class="well" style="padding:9px 0px 0px 0px;">
+						<div class="row">
+							<div class="col-sm-4 text-center">
+								<p><a href="https://www.facebook.com/eurofoto" target="_blank"><img src="/tmp/facebook.png" /> <span> Besøk oss på Facebook</span></a></p>
+							</div>
+							<div class="col-sm-4 text-center">
+								<p><a href="https://instagram.com/eurofotoas/" target="_blank"><img src="/tmp/Instagram-Icon.png" /> <span> Følg oss på Instagram</span></a></p>
+							</div>
+							<div class="col-sm-4 text-center">
+							  <p><a href="https://www.nettsvar.no/MHCwa3/DefaultAn.aspx?Instance=730C47085B3C5B0345067C00&LoginType=0C&QuestionnaireID=085D025A&LayoutID=085D015F&BroadcastID=&CheckSum=4C5C015F01"><img src="/tmp/nyhetsbrev.png" /> <span> Meld deg på nyhetsbrev</span></a> </p>
+							</div>
+						</div>
+					</div>-->
+
+                <div class="row">
+	
+					<tal:block tal:repeat="menuitem menucontent:33f2d94b-ba8b-4e86-82fa-1e4397269f64,maincontent">
+						
+						<!--
+						<div tal:condition="equal:repeat/menuitem/number,2" class="col-sm-4 col-lg-4 col-md-4">
+							<div class="thumbnail" data-id="${menuitem/id}">
+								<iframe src="/frontpage/instagram" style="height: 316px; width: 100%; border: 0px" scrolling="no"></iframe>
+						    </div>
+						</div>
+						-->
+						<div class="col-sm-4 col-lg-4 col-md-4">
+							<div class="thumbnail" data-id="${menuitem/id}">
+								<tal:block tal:content="structure menuitem/body|default" />
+								<tal:block tal:condition="session/isadmin">
+									<a href="#" class="display-none editarticle glyphicon glyphicon-pencil"></a>
+								</tal:block>
+						    </div>
+						</div>
+					</tal:block>
+				</div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <div metal:use-macro="../../${templates}/common.html/footer" />
+    <!-- /.container -->
+
+<tal:block tal:condition="session/isadmin">
+	<script>
+		
+		$( function(){
+			
+			$("#carousel-example-generic").carousel()
+
+			$('.item').first().addClass('active');
+			
+			
+			$('.thumbnail, .top').on( 'mouseover', function(){
+					$(this).find('.editarticle').show();
+				}).on('mouseleave', function(){
+					
+					$(this).find('.editarticle').hide();
+				
+				});
+			
+			$(document).on( 'click', '.editarticle', function(){
+				
+				console.log("wtf");
+				
+				var url = 'http://admin.eurofoto.no/content/articles/' + $(this).parent().data('id');
+				
+				var win = window.open(url, '_blank');
+				win.focus();
+				
+				});
+			
+				return false;
+			
+			});
+		
+	</script>
+</tal:block>
+
+</body>
+
+</html>

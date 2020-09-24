@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="../../${templates}/common.html/head" tal:define="global pagetitle" i18n:translate="">Dashboard</tal:block>
+	
+	<script type="text/javascript" src="${static:js/dialog.js}"></script>
+	
+	<style type="text/css">
+		.dashboard .albumPreview{
+			margin: 0;
+			height: inherit;
+		}
+		
+		.dashboard .albums ul{
+			margin: 0;
+		}
+		
+		.useralbums ul{
+			margin: 0 !important;
+		}
+		
+		.minkonto{
+			font-size: 23px;
+			font-family: yanone;
+			
+			
+			
+		}
+		
+		.quiet{
+			
+		color: #08a751;
+ 
+    text-transform: uppercase;
+		}
+	</style>
+</head>
+
+<body>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("a.fancy").fancybox();
+		});
+	</script>
+<div metal:use-macro="../../${templates}/common.html/top" />
+<div class="container dashboard">
+<div class="content">
+	<div class="row">
+
+	<div class="col-md-3 minkonto" >
+		<div tal:define="global menuitem string:dashboard" metal:use-macro="common.html/menu" />
+	</div>
+	<div class="col-md-9">
+		<div class="col-md-9">
+			<h2 class="yanoneregular">
+				<tal:block i18n:translate="">My photo account</tal:block>:
+				 <small class="quiet"><tal tal:omit-tag=""tal:content="session/fullname" /> (<tal:block tal:content="session/username" />)</small>
+			</h2>
+		</div>
+		<div class="col-md-3">
+			<a href="/myaccount/upload" i18n:translate="" class="button large green" id="transfer_photos">Last opp bilder til Fotokonto</a>
+		</div>
+		
+		
+		<div class="col-md-12" tal:condition="hasoldcart">
+			<div class="box">
+				<h3 tal:content="cms:title:a07d7d31-2dd8-4bde-a8c4-ae372d580249"></h3>
+				<div tal:content="structure cms:body:a07d7d31-2dd8-4bde-a8c4-ae372d580249" />
+				<p>
+					<a href="/order_complete.php" i18n:translate="">Go to cart on old site</a>
+				</p>
+			</div>
+		</div>
+		
+	<div class="col-md-9 colborder" tal:condition="not:albums/length">
+		
+			<h1  class="yanoneregular" tal:content="cms:title:fc8d3c6d-003a-4b3b-8ec9-8e6e67786e72">Welcome to fotono</h1>
+			<div>
+				<tal:block tal:content="structure cms:body:fc8d3c6d-003a-4b3b-8ec9-8e6e67786e72" />
+			</div>
+			<!--<h3 i18n:translate="">What do you want to do now?</h3>
+			<ul>
+				<li><a href="/myaccount/upload" i18n:translate="">Upload photos</a></li>
+						
+				<li><a href="/order-prints/" i18n:translate="">Order prints</a></li>
+				<li><a href="/create/photobook/" i18n:translate="">Make photobook</a></li>
+				<li><a href="${url:/products/}" i18n:translate="">Browse gifts</a></li>
+				<li><a href="/create/calendar/" i18n:translate="">Make calendar</a></li>
+			</ul>-->
+		
+		</div>
+		
+		<div class="col-md-8 colborder useralbums" tal:condition="albums|sharedtome|sharedbyme">
+				
+			<div class="col-md-12" tal:condition="albums">
+				<h3 i18n:translate="">Your newest albums</h3>
+				<ul class="albums">
+					<tal:block tal:repeat="album albums">
+					<li class="albumPreview" tal:condition="album">
+						<div class="skimmer">	
+							<a tal:attributes="href album/albumurl; title album/title">
+								<img tal:attributes="src album/thumbnailurl; alt album/title" class="thumb" src="" tal:condition="album/thumbnailurl"/>
+								<img src="${static:}gfx/404/not_found_70px.jpg"class="thumb" tal:condition="not:album/thumbnailurl" alt="not found"/>
+							</a>
+							<!--
+							<ul class="hide" tal:condition="album/defaultthumbnails">
+								<tal:block tal:repeat="thumb album/defaultthumbnails">
+									<li>
+										<img src="" alt="${thumb/title}" tal:attributes="src thumb/thumbnail"/>
+									</li>
+								</tal:block>
+							</ul>
+							-->
+						</div>
+						<div class="center">
+							<span tal:content="shorten:album/title;15"></span>
+						</div>
+					</li>
+					</tal:block>
+				</ul>
+				<div class="row text-right"><a class="button large green" href="/myaccount/albums/" i18n:translate="">See more</a></div>
+			</div>
+			
+			
+
+			
+		</div>
+		
+		<div class="col-md-4">
+		<div class="hide quiet" id="appinfo"><tal:block i18n:translate="">You need</tal:block> <a href="http://itunes.apple.com/us/app/aurigma-up/id432611633">Arigma Up</a> <tal:block i18n:translate="">to be able to upload images from your iPad/iPhone</tal:block><p/></div>
+
+			<div class="col-md-12">
+
+			
+				
+				<!--
+				<tal:block tal:condition="exists:stats">
+					<h3 class="bottom" i18n:translate="">Statistics</h3>
+					<div>
+						<tal:block i18n:translate="">Number of images</tal:block> <span tal:content="stats/imagequantity"></span>
+					</div>
+					<div>
+						<tal:block i18n:translate="">Orders:</tal:block> <span tal:content="stats/orderquantity"></span>
+					</div>
+				</tal:block>
+				-->
+				
+			</div>
+						
+		<!--
+		SISTE 5 prosjekt
+		<div class="col-md-12 append-bottom prepend-top">
+				<tal:block tal:condition="projects">
+					<h3 i18n:translate="">5 last projects</h3>
+					<ul class="lightlist">
+						<li tal:repeat="project projects">
+							<a href="${project/editurl}"> 
+								<tal:block tal:condition="exists:project/title">
+									<tal:block tal:condition="project/title" tal:content="shorten:project/title;20" />
+									<tal:block tal:condition="not:project/title">
+                              <tal:block tal:condition="exists:project/product/title">
+                                 <tal:block tal:condition="project/product/title" tal:content="shorten:project/product/title;20" /> 
+                                 <tal:block tal:condition="not:project/product/title" i18n:translate="">No title</tal:block> 
+                              </tal:block>
+									</tal:block>
+								</tal:block>
+								<tal:block tal:condition="not:exists:project/title">
+								<tal:block tal:condition="project/product/title" tal:content="shorten:project/product/title;20" /> 
+								</tal:block> 
+							</a>
+							<span class="quiet right" tal:condition="project/date" tal:content="formatdate:project/date,short"></span>
+						</li>
+					</ul>
+					<div class="right">
+						<a href="/myaccount/projects" i18n:translate="">Show all my projects</a>
+					</div>
+				</tal:block>
+			</div>
+
+			<div class="col-md-12 append-bottom">
+				<tal:block tal:condition="orders">
+					<h3 i18n:translate="">Latest orders</h3>
+					<ul class="lightlist">
+						<li tal:repeat="order orders">
+							<a href="/myaccount/orders/info/${order/id}">#${order/number}</a>
+							<span class="quiet right">Kr ${formatprice:order/price}</span>
+						</li>
+					</ul>
+				</tal:block>
+			</div>-->
+			
+		</div>
+	</div>
+	</div>
+	</div>
+</div>
+<div class="display-none" id="message" title="" i18n:attributes="title">
+	<p i18n:translate=""></p>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+	$('.skimmer').skimmer();
+//]]>
+
+$(document).ready( function() {  
+   
+   var isiOs = navigator.userAgent.match(/iPad/i) != null ||  navigator.userAgent.match(/iPhone/i) != null ||  navigator.userAgent.match(/iPod/i) != null;
+
+   if(isiOs){
+     $('#appinfo').show();
+   }
+
+
+	$('.select-on-click').click( function() {
+		$(this).select()
+	});
+	
+});
+
+</script>
+
+
+<tal:block tal:condition="equal:request/execpath,myaccount/welcome/">
+<!-- Google Code for Ny bruker Conversion Page -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1070265469;
+var google_conversion_language = "no";
+var google_conversion_format = "2";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "GvSfCL2-xAEQ_eir_gM";
+var google_conversion_value = 0;
+//-->
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1070265469/?label=GvSfCL2-xAEQ_eir_gM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+</tal:block>
+</body>
+</html>

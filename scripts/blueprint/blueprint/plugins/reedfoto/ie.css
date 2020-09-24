@@ -1,0 +1,2 @@
+/* patch IE7 ss_sprite bug */
+.ss_sprite { display: inline-block; }

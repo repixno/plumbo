@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+	<tal metal:use-macro="../../${templates}/common.html/head" />
+	
+	<script src="${static:js/swfobject.js}" type="text/javascript"></script>
+	<script src="${static:}js/uploadhandlers.js?${version}" type="text/javascript"></script>
+	<script src="${static:js/jquery.uploadify.v2.1.0.min.js}" type="text/javascript"></script>
+
+	<style type="text/css">
+		#transfer-manual { padding: 5em 2em }
+	</style>
+	
+</head>
+<body>
+
+	<div class="container">
+
+	<div metal:use-macro="../../${templates}/common.html/top" />
+	
+	<div id="widecontent">
+		
+ 		<div class="span-13">
+			<h2 i18n:translate="" class="hide">Order prints</h2>
+			<h3 class="quiet" i18n:translate="">Transfer photos from your computer</h3>
+		</div>
+		
+		<div class="span-10 right">
+		<a tal:condition="exists:redirecturl" href="${redirecturl}" id="backToProject" class="button green large right" i18n:translate="">Go back to project</a>
+		<a tal:condition="not:exists:redirecturl" href="${request/referer}" id="backToProject" class="button green large right" i18n:translate="">Go back to project</a>
+		</div>
+		
+		<div class="span-10 right"><!--<tal:block i18n:translate="">Do you have problems uploading?</tal:block> <a href="/create/upload"><tal:block i18n:translate="">Try our alternative uploader</tal:block></a>--></div>	
+		
+		<hr class="space" />	
+		
+		<div class="span-7 append-1">
+
+			<form method="post" action="/flash_upload.php?noerror=1" id="transfer-manual" enctype="multipart/form-data">
+				<input type="file" id="filedata" name="Filedata" onchange="$('#transfer-manual').submit();" />
+				<input type="hidden" id="batchid" name="batchid" value="${batchid}" />
+				<br />
+			</form>
+
+			<div class="span-4">
+				<tal:block tal:define="global strUpload" i18n:translate="">Choose photos</tal:block>
+				<tal:block tal:define="global strJPEGImages" i18n:translate="">JPEG Images</tal:block>
+				
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready( function() {
+	initUpload('${batchid}','${session/sessionid}','${strJPEGImages}','${strUpload}','#next-action' ,'#transfer-status, #total-loader-spinner, #single-transfer-headline', '#show-on-finish', '#go-to-java, #choose-transfer-method-headline');
+});
+//]]>
+</script>
+			</div>
+
+			<div id="btnUpload"></div>
+
+		</div>
+		<div class="span-9 append-1">
+			<div id="transfer-status" class="hide">
+				<div class="span-6">
+					<h3 i18n:translate="">Transfer photos</h3>
+				</div>
+				<div class="span-3 last">
+					<p class="right">
+						<a href="#" class="abort negative hide" id="transfer-stop" i18n:translate="">Abort transfer!</a> 
+					</p>
+					
+				</div>
+	
+				
+				<div class="span-9 last append-bottom">
+					<tal:block i18n:translate="">Total uploaded</tal:block>
+					<div id="progressbar-total" style="height: 10px"></div>
+					<span id="uplimages">0</span> <tal:block i18n:translate="">of</tal:block> <span id="numimages">0</span> <tal:block i18n:translate="">photos</tal:block>
+					<span id="uplspeed" style="float: right;">0 KB/s</span>
+				</div>
+				<hr />
+				<div class="span-9 last">
+					<h6 i18n:translate="">Tips!</h6>
+					<p i18n:translate="">You can name your photos while they are uploading</p>
+				</div>
+					
+				<div id="upload-queue">
+	
+				<div class="span-9 last" id="upload-master" style="display:none;">
+					<div class="span-3">
+						<div class="box" style="padding: 0.5em">
+							<img style="max-width: 96px;" src="${static:gfx/gui/ajax-loader-big.gif}" alt="" />
+						</div>
+						<p class="small success hide">
+							Good quality!
+							</p>
+					</div>
+					<div class="span-6 last">
+						<div>
+							<div class="progressbar" style="height: 10px"></div>
+							<input name="" class="quiet text" style="width: 220px" value="Image title" />
+							<textarea rows="3" cols="10" class="quiet" style="width: 220px; height: 20px" title="Description" i18n:attributes="title" i18n:translate="">Description</textarea>
+						</div>
+					</div>
+				</div>
+			<hr />
+			</div>
+		</div>
+		</div>
+		
+		<div class="span-6 last">
+		
+			<div class="center hide" id="total-loader-spinner">
+				<img src="${static:gfx/gui/ajax-loader-big.gif}" />
+				<div class="prepend-top center">
+					<tal:block i18n:translate="">Loading</tal:block>
+				</div>
+			</div>
+		
+			<div class="hide" id="show-on-finish">
+				<tal:block tal:condition="session/loggedin">
+				<div class="box">
+					<h4 i18n:translate="">Where to put your photos?</h4>
+					<div class="radioLabel selected">
+						<input type="radio" name="album" checked="checked" id="new-album"/><label for="new-album" i18n:translate="">New album:</label>
+						<input type="text" id="new-album-title" value="${request/date/full}" class="text span-4"/>
+					</div>
+					<div class="radioLabel">
+						<input type="radio" name="album" id="existing-album"/><label for="existing-album" i18n:translate="">Existing album:</label><br/>
+						<select id="existing-album-id">
+						<tal:block tal:repeat="album albums">
+							<tal:block tal:condition="exists:album/title">
+								<option value="${album/id}"><tal:block tal:content="shorten:album/title;18" tal:condition="album/title"/></option>
+							</tal:block>
+						</tal:block>
+						</select>
+					</div>
+				</div>
+				</tal:block>
+			
+				<h3 i18n:translate="">Your transfer is finished</h3>
+				<div class="right">
+					<a tal:condition="not:exists:redirecturl" href="${request/referer}" id="next-action" class="back button large next call-to-action" i18n:translate="">Continue</a>
+					<a tal:condition="exists:redirecturl" href="${redirecturl}" id="next-action" class="back button large next call-to-action" i18n:translate="">Continue</a>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+	</div>
+</div>
+
+<script type="text/javascript" tal:condition="session/loggedin">
+
+<tal:block tal:condition="not:exists:redirecturl">
+var redirecturl = '${request/referer}';
+</tal:block>
+
+<tal:block tal:condition="exists:redirecturl">
+var redirecturl = '${redirecturl}';
+</tal:block>
+
+//<![CDATA[
+	$( function() {
+
+		$('.radioLabel').radioLabel();
+
+		$('#next-action').click(function(){
+		
+			// feedback to user if not finsihed
+			if( $("#progressbar-total").progressbar('option', 'value') < 100 ) {
+				alert('not finished yet');
+				return false;
+			}
+	
+			// if an album is selected from the combo-box
+			if( $('#existing-album:checked').length > 0 ) {
+	
+				var albumid = $('#existing-album-id').val();
+				var albumtitle = $('#existing-album-id option:selected').text();
+
+				$(this).addClass( 'disabled' );
+	
+				return uploadSelectAlbum( ${batchid}, albumid, '', function() {
+					//history.go(-1);	
+					top.location = redirecturl;
+				});
+	
+			} else if( $('#new-album:checked') ) {
+	
+				var albumtitle = $('#new-album-title').val();
+				var self = $(this);
+	
+				$.post('/api/1.0/album/create/', {
+					'title': albumtitle
+				}, function(data) {
+	
+					if( data.result ) {
+						var albumid = data.album.id;
+						self.addClass( 'disabled' );
+						
+						return uploadSelectAlbum( ${batchid}, albumid, '', function() {
+							//history.go(-1);	
+							top.location = redirecturl;
+						});
+					} else {
+						alert( 'An error occured when creating your album :( Please try again later!' );
+					}
+				}, 'json');
+			}
+			return false;
+		});
+
+	});
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+	$(function() {
+	
+		/*$('#backToProject').click( function() {
+			history.go(-1);
+			return false;
+		});*/
+	
+		$("#progressbar-total").progressbar({
+			value: 0
+		});
+	});
+//]]>
+</script>
+</body>
+</html>

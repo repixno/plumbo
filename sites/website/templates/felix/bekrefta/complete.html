@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//SE"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="se">
+    <head>
+        <tal metal:use-macro="../../${templates}/common.html/head" />
+
+
+        <style>
+
+			@media all and (max-width: 768px) {
+				h2, h3{
+					font-size: 1.2em;
+				}
+
+				.row {
+					margin-top: 5px;
+				}
+				.container{
+					margin: 0px;
+					padding: 20px;
+
+				}
+			}
+        </style>
+    </head>
+    <body>
+        <div class="hidden-xs" style="position:absolute; z-index: 100; top: 0px; width: 100%; text-align: center;"><img src="/felix/topbg-1.png" /></div>
+        <div class="container">
+            <tal metal:use-macro="../../${templates}/common.html/top" />
+						<div class="row hidden-xs header" style="margin-top: 50px">
+						<div class="col-md-12 text-center">
+								<img src="${static:}css/portals/felix/gfx/logo.jpg" alt="FELIX"/>
+								<h1>TACK FÖR DIN BESTÄLLNING!</h1>
+						</div>
+						</div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+					<h4 tal:condition="orderid"><tal:block i18n:translate="">Order number:</tal:block> ${orderid}</h4>
+                    <br />
+                    <h3>En orderbekräftelse har nu skickast till din e-postadress.<br/>
+						Vi kommer att trycka din ketchupetikett och skicka hem den till dig inom 4 veckor.
+					</h3>
+					<div class="row">
+                        <h3>Dela flaskan</h3>
+							<button class="btn btn-default" id="sharefacebook"><span><img src="${static:}css/portals/felix/gfx/facebook-icon-small.png"/></span>FACEBOOK</button>
+							<button class="btn btn-default" id="download">LADDA NER</button>
+                    </div>
+                    <br />
+					<h3>
+						Med vänliga hälsningar<br/>
+						Felix
+					</h3>
+
+                    <br />
+                    <p >
+                        Ved tekniska frågor, var god kontakta Japan Photo. Tel: 031-619445
+                    </p>
+                </div>
+
+            </div>
+
+
+        </div>
+
+		<tal metal:use-macro="../../${templates}/common.html/footer" />
+
+
+	<script>
+
+		var $idown;
+
+		$( function(){
+
+			$('#sharefacebook').on( 'click', function(){
+				showloader("Vänta, strax kommer du att kunna dela din etikett på Facebook…");
+				shareThumb( 'facebook' );
+				return false;
+			});
+
+			$(document).on( 'click', '#download', function(){
+				showloader("Vänta, strax kommer du att kunna ladda ned din flaska...");
+				var name = "felix";
+				downloadURL("/skapa/download2/${orderid}/felix.jpg");
+			});
+		});
+
+		function shareThumb( media ){
+
+			var u = '${orderid}';
+
+			var sharelink = '';
+			if( media == 'facebook' ){
+				sharelink = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('http://sagdetmedketchup.eurofoto.se/skapa/ShareFacebooknew/');
+			}
+
+
+			var u = 'http://sagdetmedketchup.eurofoto.se/skapa/ShareFacebooknew/' + u;
+
+			onResultPageGenerated( u );
+
+		}
+
+		function showloader(text){
+			$('body').prepend( '<div id="loader-overlay"><div class="loadingInfo"><p><img src="http://a.static.eurofoto.no/gfx/gui/ajax-loader-gray.gif" /></p>\
+									<br/><br/><h3>' + text + '<span id="status"></span></h3></div></div>');
+
+				$('#loader-overlay')
+				.css('opacity', '0.98')
+				.css('margin','0')
+				.css('top', '-20px')
+				.width( $(window).width() )
+							.height( $(document).height() );
+
+			return false;
+        }
+
+		function onResultPageGenerated ( u ){
+				//console.log(u);
+				sharelink = 'https://www.facebook.com/sharer/sharer.php?u=';
+				$.post(
+					'https://graph.facebook.com',
+					{
+						id:u,
+						scrape: true
+					},
+					function(response){
+
+						//$('#btn-fb-share').attr({'href': sharelink + u, 'target': '_top'});
+
+						setTimeout(function() {
+
+							var deviceAgent = navigator.userAgent;
+							// Set var to iOS device name or null
+							var ios = deviceAgent.toLowerCase().match(/(iphone|ipod|ipad)/);
+
+							var newWin = window.open(sharelink + u, "popupWindow", "width=600,height=600,scrollbars=no");
+
+							if(!newWin || newWin.closed || typeof newWin.closed=='undefined')
+							{
+								$('.loadingInfo').find('h3').text('Etiketten är redo att delas.');
+							 	$('.loadingInfo').find('p').html('<a class="btn btn-default shareonfacebook" href="' + sharelink + u + '" target="_blank" >Klicka här för att dela din etikett</a>');
+							}
+							else{
+								hideloader();
+							}
+
+							//if (ios) {
+
+							//}else{
+						//		window.open(sharelink + u, "popupWindow", "width=600,height=600,scrollbars=no");
+						//		hideloader();
+						//	}
+
+						}, 2500);
+					}
+				);
+			}
+
+		function hideloader(){
+			$('#loader-overlay').fadeOut('slow', function() {
+				$(this).remove();
+			});
+		}
+		
+		$(document).on('click', '.shareonfacebook', function(){
+			hideloader();
+			})
+
+		function downloadURL(url) {
+			var deviceAgent = navigator.userAgent;
+			// Set var to iOS device name or null
+			var ios = deviceAgent.toLowerCase().match(/(iphone|ipod|ipad)/);
+
+			if (ios) {
+
+				$('.loadingInfo').find('h3').text('Flaskan är redo att laddas ner, öppna i ett nytt fönster för att ladda ner');
+				$('.loadingInfo').find('p').html('<a class="btn btn-default shareonfacebook" href="' + url + '" target="_blank" >Öppna</a>');
+
+			}
+			else{
+				if ($idown) {
+				  $idown.attr('src',url);
+				} else {
+				  $idown = $('<iframe/>', { id:'idown', src:url }).hide().appendTo('body');
+				}
+				hideloader();
+			}
+		}
+
+
+	</script>
+
+    </body>
+</html>

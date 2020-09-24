@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+    <head>
+        <tal metal:use-macro="../../${templates}/common.html/head" />
+    </head>
+
+<body>
+
+<div class="container">
+<div metal:use-macro="../common.html/top" />
+
+	
+	
+	
+	<div class="span-9 prepend-1">
+	
+		<img src="http://static.repix.no/gfx/404/dog.jpg" />
+	
+	</div>
+	
+	
+	<div class="span-12 append-2 last">
+		<h2>Beklager!</h2>
+		<h4 class="top quiet">Noe galt har hendt. Du kan hjelpe oss å rette feilen ved å forklare ut hendelseforløpet som førte til feilen i tekstboksen under. </h4>
+
+		<form action="/contact/feedback/" method="post">
+			<label>Melding om feil:</label><br/>
+			<input type="hidden" name="reason" value="Mediaclip error" />
+			<textarea name="usercomment"></textarea>
+			<textarea class="hide" name="content"><!-- error_message /--></textarea>
+			<textarea class="hide" name="trace"><!-- trace /--></textarea>
+			<textarea class="hide" name="code"><!-- code /--></textarea>
+			<input type="hidden" value="defaulterror" name="errortype" />
+			<div class="span-6">
+				<a href="javascript:history.back(-1);" i18n:translate="">Back to Project</a>  <a href="/frontpage" i18n:translate="">To frontpage</a>
+			</div>
+			<div class="span-6 last">
+				<button class="blue">Send tilbakemelding</button>
+			</div>
+		</form>
+	</div>
+	<hr class="space"/>
+	<div>
+			<p i18n:translate="">We are sorry, an error occured while processing your request. Here is the error message:</p>
+	</div>
+	<div class="span-24 last">
+			<h3><!-- error_message /--></h3>
+	</div>
+</div>
+
+	<script type="text/javascript">
+	//<![CDATA[
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	//]]>
+	</script>
+	<script type="text/javascript">
+		try{
+		var pageTracker = _gat._getTracker("UA-390524-10");
+			pageTracker._trackEvent('Error', 'Default');
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+
+</body>
+</html>

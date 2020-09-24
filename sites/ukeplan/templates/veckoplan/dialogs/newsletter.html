@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${i18n/country}" lang="${i18n/country}">
+
+    <head>
+        <tal metal:use-macro="../../${templates}/common.html/head" />
+        
+    </head>
+    <body>
+        
+       
+	    <div class="container">
+            
+          <tal:block metal:use-macro="../common.html/top" />
+			
+			<div class="content">
+			
+				   <h1 i18n:translate="">Innmelding Nyhetsbrev</h1>
+			        <h3 i18n:translate="">Info om nyhetsbrevet</h3>
+				
+					<tal:block metal:use-macro="../common.html/newsletter" />	
+			</div>
+			
+	
+		
+			
+
+</div>	
+
+<div>
+</div>
+        
+		
+	<tal:block metal:use-macro="../common.html/footer" />
+  
+    </body>
+
+</html>
+
+
+
+

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="no">
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<tal metal:use-macro="../../${templates}/common.html/head" />
+		<!-- 	<link rel="stylesheet" href="/css/bestilling.css" type="text/css" media="screen, projection" />-->
+		
+		<style>
+			   .nav-link{
+				padding: 0.5rem 0.5rem;
+			   }
+			   .clip, .backgroundfile{
+				cursor: pointer;
+			   }
+			   .simplecolorpicker.icon, .simplecolorpicker span.color {
+					display: inline-block;
+					cursor: pointer;
+					border-radius: 40px;
+					width: 40px;
+					height: 40px;
+				}
+				
+				
+				.backgroundfile{
+					
+					border-radius: 12px;
+				}
+				
+				
+				.previewcontainer{
+					background: #fff;
+					z-index: 100;
+				position :sticky;
+				top: 5px;
+					
+				}
+				
+				.backgroundfile{
+					
+					margin: 15px 15px 15px 15px;
+				}
+				
+				
+				
+				.font1{
+					
+					background-image:url('/gfx/merkelapp/fonter/Verdana.png');
+				}
+				
+				.font2{
+					
+					background-image:url('/gfx/merkelapp/fonter/Comic.png');
+				}
+				
+				
+				.font3{
+					
+					background-image:url('/gfx/merkelapp/fonter/Arial.png');
+				}
+				
+				
+				
+				
+		</style>
+		
+		<link href="/simple-colorpicker/jquery.simplecolorpicker.css" rel="stylesheet"></link>
+		<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet" />
+		
+
+	</head>
+	<body>
+			
+		<div metal:use-macro="../../${templates}/common.html/top" />
+		
+		<div class="container">
+			<form id="edit">
+			<div class="row">
+
+				<div class="col-12">
+					<h5>Fargelapper</h5>
+					<div class="d-none d-md-block p-2">
+						Selvklebende merkelapper til klær og utstyr.Tåler vaskemaskin og oppvaskmaskin
+					</div>
+				</div>
+				<div class="col-md-4 text-center order-md-2 previewcontainer">
+					<img class="img-fluid" id="preview" src="/gfx/merkelapp_308.png" />
+				</div>
+				<!--textinput-->
+				<div class="col-md-4 text-left order-md-3 mb-2">
+					<div class="d-md-none small mb-2">
+						Selvklebende merkelapper til klær og utstyr.Tåler vaskemaskin og oppvaskmaskin
+					</div>
+					<div>140 fargelapper</div>
+					<div class="mb-2 small"><span tal:content="selected/0/productoption/prices/0/price"></span> kr pr sett</div>
+
+					<input type="hidden" id="productquantity" class="form-control input-number productquantity" value="1" />
+					<input type="hidden" id="productoptionid" value="${selected/0/productoptionid}" />
+					<button id="addtocart" class="btn btn-success">Legg i handlekurv</button>
+				</div>
+				<div class="col-md-4 text-center order-sm-1">
+					<div class="form-group ">
+						<div class="col-xs-12">
+							<input type="text" class="form-control lines" name="line1" id="line1" maxlength="17" placeholder="Linje 1" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-12">
+							<input type="text" class="form-control lines" name="line2" maxlength="17" placeholder="Linje 2" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-12">
+							<input type="text" class="form-control lines" name="line3" maxlength="17" placeholder="Linje 3" />
+						</div>
+					</div>
+				</div>
+			</div>
+					
+					<div class="row p-0 p-sm-2">
+						<div class="col-md-12">
+							<ul class="nav nav-tabs navbar-light bg-dark nav-fill justify-content-center" id="editorMainTabs" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link active" id="motiv-tab" data-toggle="tab" href="#motiv-tab-content" role="tab" aria-controls="motiv-tab-conten" aria-selected="true">
+										<i class="fas fa-cat"></i> Motiv
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="background-tab" data-toggle="tab" href="#background-tab-content" role="tab" aria-controls="background-tab-content" aria-selected="false">
+										<i class="fas fa-palette"></i> Bakgrunn
+									</a>
+									
+									
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link" id="text-tab" data-toggle="tab" href="#text-tab-content" role="tab" aria-controls="text-tab-content" aria-selected="false">
+										<i class="fas fa-font"></i> Tekst
+									</a>
+								</li>
+
+
+							</ul>
+							
+							
+						</div>
+						<div class="tab-content mb-4" id="myTabContent">
+							<!--MOTIV-->
+							<div class="tab-pane fade show active" id="motiv-tab-content" role="tabpanel" aria-labelledby="motiv-tab">
+								<div>
+									<!-- CLIPARTS MERKELAPP -->
+									<nav class="navbar navbar-expand-lg navbar-light bg-default text-center">
+										<div class="form-group form-inline mt-3">
+											<label class="mr-2">Clip art: </label>
+											<input id="toggle-clipart" type="checkbox" checked data-toggle="toggle" data-width="90" />
+										</div>
+										<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCatergoryContent" aria-controls="navbarSupportedContent" aria-expanded="false">
+											<i class="fas fa-angle-double-down"></i> Kategori
+										</button>
+										<div class="collapse navbar-collapse" id="navbarCatergoryContent">
+											<ul class="nav cattabs" role="tablist">
+												<li role="presentation" class="active nav-item col-12 col-md-auto p-1"><a class="nav-link" href="#Alle" aria-controls="alle" role="tab" data-toggle="tab">Alle</a></li>
+												<li class="nav-item col-5 col-md-auto p-1" role="presentation"><a class="nav-link" href="#Dyr" aria-controls="dyr" role="tab" data-toggle="tab">Dyr</a></li>
+												<li class="nav-item col-5 col-md-auto p-1" role="presentation"><a class="nav-link" href="#Transport" aria-controls="Transport" role="tab" data-toggle="tab">Transport</a></li>
+												<li class="nav-item col-5 col-md-auto p-1" role="presentation"><a class="nav-link" href="#Monster" aria-controls="Monster" role="tab" data-toggle="tab">Monster</a></li>
+												<li class="nav-item col-5 col-md-auto p-1" role="presentation"><a class="nav-link" href="#Symboler" aria-controls="Symboler" role="tab" data-toggle="tab">Symboler</a></li>
+												<li class="nav-item col-5 col-md-auto p-1" role="presentation"><a class="nav-link" href="#Sommerfugler" aria-controls="Sommerfugler" role="tab" data-toggle="tab">Sommerfugler</a></li>
+												<li class="nav-item col-5 col-md-auto p-1" role="presentation"><a class="nav-link" href="#Smileys" aria-controls="Smileys" role="tab" data-toggle="tab">Smileys</a></li>
+												<li class="nav-item col-5 col-md-auto p-1" role="presentation"><a class="nav-link" href="#Leker" aria-controls="Leker" role="tab" data-toggle="tab">Leker</a></li>
+												<li class="nav-item col-5 col-md-auto p-1" role="presentation"><a class="nav-link" href="#Sport" aria-controls="sport" role="tab" data-toggle="tab">Sport</a></li>
+												<li class="nav-item col-5 col-md-auto p-1" role="presentation"><a class="nav-link" href="#Blomster" aria-controls="blomster" role="tab" data-toggle="tab">Blomster</a></li>
+											</ul>
+										</div>
+									</nav>
+									<!-- KATEGORIER CLIPARTS -->
+									<div class="tab-content text-center">
+										
+										
+										<div role="tabpanel" class="clips tab-pane active" id="Alle"></div>
+											<div role="tabpanel" class="clips tab-pane" id="Dyr"></div>
+										<div role="tabpanel" class="clips tab-pane" id="Transport"></div>
+										<div role="tabpanel" class="clips tab-pane" id="Monster"></div>
+										<div role="tabpanel" class="clips tab-pane" id="Symboler"></div>
+										<div role="tabpanel" class="clips tab-pane" id="Sommerfugler"></div>
+										<div role="tabpanel" class="clips tab-pane" id="Smileys"></div>
+										<div role="tabpanel" class="clips tab-pane" id="Leker"></div>
+										<div role="tabpanel" class="clips tab-pane" id="Sport"></div>
+										<div role="tabpanel" class="clips tab-pane" id="Blomster"></div>
+									</div>
+								</div>
+							</div>
+							
+							
+							<!--BAKGRUNN-->
+							<div class="tab-pane fade" id="background-tab-content" role="tabpanel" aria-labelledby="background-tab">
+								<div>
+									<nav class="navbar navbar-expand-lg navbar-light bg-default text-center">
+									
+										<button class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#navbarCatergoryContent" aria-controls="navbarSupportedContent" aria-expanded="false">
+											<i class="fas fa-angle-double-down"></i> Kategori
+										</button>
+										<div class="collapse navbar-collapse" id="navbarCatergoryContent">
+											<ul class="nav cattabs" role="tablist">
+												<li class="nav-item col-12 col-md-auto p-1" role="presentation"><a class="nav-link" href="#BGalle" aria-controls="alle" role="tab" data-toggle="tab">Alle</a></li>
+												<li class="nav-item col-4 col-md-auto p-1" role="presentation"><a class="nav-link" href="#BGdyr" aria-controls="dyr" role="tab" data-toggle="tab">Dyr</a></li>
+												<li class="nav-item col-4 col-md-auto p-1" role="presentation"><a class="nav-link" href="#BGEnsfarget" aria-controls="BGEnsfarget" role="tab" data-toggle="tab">Ensfarget</a></li>
+												<li class="nav-item col-4 col-md-auto p-1" role="presentation"><a class="nav-link" href="#BGOverganger" aria-controls="BGOverganger" role="tab" data-toggle="tab">Overganger</a></li>
+												<li class="nav-item col-4 col-md-auto p-1" role="presentation"><a class="nav-link" href="#BGmonster" aria-controls="monster" role="tab" data-toggle="tab">Mønster</a></li>
+												<li class="nav-item col-4 col-md-auto p-1" role="presentation"><a class="nav-link" href="#BGTransport" aria-controls="Transport" role="tab" data-toggle="tab">Transport</a></li>
+												<li class="nav-item col-4 col-md-auto p-1" role="presentation"><a class="nav-link" href="#BGsymboler" aria-controls="BGsymboler" role="tab" data-toggle="tab">Symboler</a></li>
+												<li class="nav-item col-4 col-md-auto p-1" role="presentation"><a class="nav-link" href="#BGBlomster" aria-controls="BGBlomster" role="tab" data-toggle="tab">Blomster</a></li>
+											</ul>
+										</div>
+									</nav>
+									<div class="tab-content">
+
+										<div role="tabpanel" class="backgrounds tab-pane active" id="BGalle" data-cat="alle"></div>
+										<div role="tabpanel" class="backgrounds tab-pane" id="BGdyr" data-cat="dyr"></div>
+										<div role="tabpanel" class="backgrounds tab-pane" id="BGOverganger" data-cat="Overganger"></div>
+										<div role="tabpanel" class="backgrounds tab-pane" id="BGTransport" data-cat="Transport"></div>
+										<div role="tabpanel" class="backgrounds tab-pane" id="BGmonster" data-cat="monster"></div>
+										<div role="tabpanel" class="backgrounds tab-pane" id="BGsymboler" data-cat="symboler"></div>
+										<div role="tabpanel" class="backgrounds tab-pane" id="BGEnsfarget" data-cat="Ensfarget"></div>
+										<div role="tabpanel" class="backgrounds tab-pane" id="BGBlomster" data-cat="Blomster"></div>
+									</div>
+								</div>
+							</div>
+
+							<!--TEKST-->
+							<div class="tab-pane fade" id="text-tab-content" role="tabpanel" aria-labelledby="text-tab">
+								<div class="row">
+									<div class="col-12 text-center">
+										<div class="form-group">
+											<label class="col-12 col-sm-auto">Velg farge</label>
+											<select id="font-color" name="font-color">
+												<option value="#000000">Black</option>
+												<option value="#7bd148">Green</option>
+												<option value="#5484ed">Bold blue</option>
+												<option value="#a4bdfc">Blue</option>
+												<option value="#46d6db">Turquoise</option>
+												<option value="#7ae7bf">Light green</option>
+												<option value="#51b749">Bold green</option>
+												<option value="#fbd75b">Yellow</option>
+												<option value="#ffb878">Orange</option>
+												<option value="#ff887c">Red</option>
+												<option value="#dc2127">Bold red</option>
+												<option value="#dbadff">Purple</option>
+												<option value="#e1e1e1">Gray</option>
+											</select>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group form-inline">
+											<label class="col-12" i18n:translate="">Skrift-type:</label>
+										
+											
+											
+											<select name="font-type" class="d-none">
+											
+												<option value="verdanab">VERDANA</option>
+												<option value="arial">ARIAL &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</option>
+												<option value="comicbd">COMIC </option>
+											</select>
+											
+											
+		
+			<div class="col-md- col-sm-3 col-xs-2 p-1" style="width: 30%; height:auto" id="font-Comic"><img class="img-fluid" src="/gfx/merkelapp/fonter/verdana.png" />
+			</div>
+
+			<div class="col-md-3 col-sm-3 col-xs-2 p-1" style="width: 30%; height:auto" id="font-Comic"><img class="img-fluid" src="/gfx/merkelapp/fonter/quicksand.png" />
+			</div>
+		<div class="col-md-3 col-sm-3 col-xs-2 p-1" style="width: 30%; height:auto" id="font-Comic"><img class="img-fluid" src="/gfx/merkelapp/fonter/comic.png" />
+			</div>
+			<div class="col-md-3 col-sm-3 col-xs-2 p-1" style="width: 30%; height:auto" id="font-Comic"><img class="img-fluid" src="/gfx/merkelapp/fonter/berlin.png" />
+			</div>
+	<div class="col-md-3 col-sm-3 col-xs-2 p-1" style="width: 30%; height:auto" id="font-Comic"><img class="img-fluid" src="/gfx/merkelapp/fonter/arvo.png" />
+			</div>
+		<div class="col-md-3 col-sm-3 col-xs-2 p-1" style="width: 30%; height:auto" id="font-Comic"><img class="img-fluid" src="/gfx/merkelapp/fonter/arkitekt.png" />
+			</div>
+		<div class="col-md-3 col-sm-3 col-xs-2 p-1" style="width: 30%; height:auto" id="font-Comic"><img class="img-fluid" src="/gfx/merkelapp/fonter/arial.png" />
+			</div>
+			<div class="col-md-3 col-sm-3 col-xs-2 p-1"style="width: 30%; height:auto" id="font-Comic"><img class="img-fluid" src="/gfx/merkelapp/fonter/algreya.png" />
+			</div>
+		<div class="col-md-3 col-sm-3 col-xs-2 p-1" style="width: 30%; height:auto" id="font-Comic"><img class="img-fluid" src="/gfx/merkelapp/fonter/algreya.png" />
+		
+		</div>
+											
+									
+											
+
+										</div>
+										
+										
+										
+										
+										
+									</div>
+								</div>
+								<div id="text"></div>
+								
+								
+							</div>
+						</div>
+					</div>
+			
+			</form>
+		
+		
+	
+
+		
+
+		</div>
+		
+		
+		
+
+		 
+		 
+		<div metal:use-macro="../../${templates}/common.html/footer" />
+		
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-body">
+				  <div class="row">
+					 <div class="col-md-12 text-center">
+						<h3>Dine varer er lagt i handlekurven.</h3>
+					 </div>
+					 
+					 <div class="col-md-12 text-center">
+							<a href="/" class="reload btn btn-success">Fortsett å handle</a>
+						<a href="/cart" class="btn btn-success">Til handlevogn</a>
+					 </div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/js/merkelapp_new.js"></script>
+		<script type="text/javascript" src="/js/imgareaselect.js"></script>
+		<script src="/simple-colorpicker/jquery.simplecolorpicker.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+		
+		<script type="text/javascript">
+			var clipart = '';
+			var ownimage = '';
+			var treshhold = 60;
+			var imageselection = Object();
+			var projectid = ${projectid};
+			var gravity = 'center'; 
+			var category = 'Dyr';
+			var backgroundcat = '';
+			var backgroundfile = '';
+			var totalprice = ${cart/totalprice};
+			var staticroot = "/";
+			var type = 'fargelapp';
+			var disabled = true;
+			var alertmessage = 'false';
+			var colormode = 'color';
+			var ownimageratio = '1:1';
+			var msie = null;
+			
+			/*<![CDATA[*/
+			$(function(){
+				$('.nav-link').on('click', function(){
+					$('.navbar-collapse').collapse('hide');
+				});
+				
+				$('select[name="font-color"]').simplecolorpicker({
+					picker: true
+				  }).on('change', function() {
+					update();
+					//$(document.body).css('background-color', $('select[name="colorpicker"]').val());
+				  });
+				
+				  $('#toggle-clipart').bootstrapToggle({
+					on: 'På',
+					off: 'Av'
+				  });
+				  
+				  
+				  $('#toggle-background').bootstrapToggle({
+					on: 'På',
+					off: 'Av'
+				  });
+				  
+			});
+			
+			/*]]>*/	
+		</script>
+	</body>
+</html>

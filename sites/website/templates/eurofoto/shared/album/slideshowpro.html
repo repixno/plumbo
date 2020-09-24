@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal metal:use-macro="../../../${templates}/common.html/head" />
+</head>
+
+
+<body>
+
+	<div class="container">
+
+	<div metal:use-macro="../../../${templates}/common.html/top" />
+
+	<!-- if no menu is used use id="widecontent" -->
+	<div id="widecontent">
+	
+		<div class="span-24 last">
+			<div class="span-24 last bottom">
+				<a href="/shared/album/${album/id}/${album/urlname}/1/${album/publickey}" i18n:translate="">Back to album</a>
+				<h2 class="bottom oneline" >
+					<tal:block i18n:translate="">Slideshow</tal:block>: <span class="title album-title" id="${album/id}" tal:content="album/title | default">
+					<tal:block i18n:translate=""></tal:block></span>
+				</h2>
+			</div>
+		
+			<div class="span-16">
+				<p class="description quiet top" id="${album/id}">
+					<tal:block tal:content="structure album/description|default"  tal:condition="album/descriptionraw" />
+				</p>
+		
+				<div id="flashcontent" i18n:translate="">
+					No flash here
+				</div>
+				<input type="hidden" tal:attributes="value album/id" id="aid"/>
+			</div>
+			
+			<div class="span-8 last">
+				<h3>Share this slideshow</h3>
+				
+				<label for="sharelink">Link:</label>
+				<input type="text" value="" class="text" id="share-link"/>
+				
+				<label for="sharelink">Embed:</label>
+				<input type="text" value="" class="text" id="share-embed"/>
+				
+				<script type="text/javascript">
+				$(document).ready( function() {
+					var height = "344";
+					var width = "425";
+					var movie = '${static:flash/slideshowpro.swf}';
+					var paramXMLPath = 'http://${request/hostname}/shared/album/slideshowparameters/${album/id}/${album/urlname}/${album/publickey}';
+					var xmlFilePath = 'http://${request/hostname}/shared/album/rss/${album/id}/${album/urlname}/${album/publickey}';
+					var xmlFileType = 'Media RSS';
+					var initialURL = escape(document.location);
+					var embed = '<object width="'+width+'" height="'+height+'"><param name="movie" value="'+movie+'"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><param name="flashvars" value="paramXMLPath='+paramXMLPath+'"></param><embed src="'+movie+'" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" flashvars="paramXMLPath='+paramXMLPath+'" width="'+width+'" height="'+height+'"></embed></object>';
+					
+					$('#share-link').attr('value', document.location ).focus( function() {$(this).select() }).click( function() {$(this).select() });
+					$('#share-embed').attr('value', embed).focus( function() {$(this).select() }).click( function() {$(this).select() });
+					
+				});
+				</script>
+				
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<div metal:use-macro="../../../${templates}/common.html/footer" />
+	</div>
+</div>
+<script type="text/javascript">
+	// SWFObject embed
+	var flashvars = {
+		paramXMLPath: '/shared/album/slideshowparameters/${album/id}/${album/urlname}/${album/publickey}',
+		initialURL: escape(document.location),
+		xmlFilePath: "/shared/album/rss/${album/id}/${album/urlname}/${album/publickey}",
+		xmlFileType: "Media RSS"
+	}
+	var params = { 
+		bgcolor: "#000000",
+		allowfullscreen: "true",
+		allowScriptAccess: "always"
+	}                
+	var attributes = {}
+	
+	swfobject.embedSWF("${static:flash/slideshowpro.swf}", "flashcontent", "620", "405", "9.0.0", false, flashvars, params, attributes);
+</script>
+
+</body>
+</html>

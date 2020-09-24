@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Template</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+<style>
+    tbody.cewe_rows:nth-child(2n+2) {
+        background: #eee;
+    }
+</style>
+<script type="text/javascript" src="/js/admin.js"></script>
+</head>
+
+<body>
+    
+    	<div id="container" class="container">
+           <div id="header" class="span-24 last">
+                <h2>Eurofoto Admin</h2>
+                <tal:block metal:use-macro="../common.html/topmenu" />
+            </div>
+           
+       
+      		<a href="/content/ceweprice/NO"><img src="http://static.eurofoto.no/gfx/flags/no.png" alt="NO"/></a>
+			<a href="/content/ceweprice/SV"><img src="http://static.eurofoto.no/gfx/flags/se.png" alt="SV"/></a>
+		    
+		   
+           <div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Vis</td>
+                        <td>ID</td>
+                        <td colspan="2">Navn</td>
+                        <td>Pris</td>
+                    </tr>
+                </thead>
+                
+            <tal:block tal:repeat="ceweprice cewepricelist">
+					<TBODY tal:attributes="id ceweprice/id" class="cewe_rows">
+					<tr class="cewproduct">
+                        <td>
+                            <tal:block tal:condition="not:equal:ceweprice/hide,0">
+                                <input class="toggle" type="checkbox" name="cewename-${ceweprice/id}"/>
+                            </tal:block>
+                            <tal:block tal:condition="equal:ceweprice/hide,0">
+                                <input class="toggle" type="checkbox" checked="checked" name="cewename-${ceweprice/id}"/>
+                            </tal:block>
+                            
+                        </td>
+						<td><span class="strong" tal:content="ceweprice/id"></span></td> 
+						<td colspan="2"><span id="cewename-${ceweprice/id}"class="newname"tal:content="ceweprice/name"></span></td> 
+						<td>kr ${formatprice:ceweprice/price}</td>
+					</tr>
+					<tal:block tal:repeat="addon ceweprice/addons">
+						<tr class="ceweaddon">
+							<td><span>&nbsp;</span></td>
+							<td>
+								<tal:block tal:condition="exists:addon/hide">
+									<tal:block tal:condition="not:equal:addon/hide,0">
+										<input class="toggle" type="checkbox" name="ceweaddon-${ceweprice/id}-${addon/id}"/>
+									</tal:block>
+									<tal:block tal:condition="equal:addon/hide,0">
+										<input class="toggle" type="checkbox" checked="checked" name="ceweaddon-${ceweprice/id}-${addon/id}"/>
+									</tal:block>
+								</tal:block>
+								<tal:block tal:condition="not:exists:addon/hide">
+									<input class="toggle" type="checkbox" checked="checked" name="ceweaddon-${ceweprice/id}-${addon/id}"/>
+								</tal:block>
+							</td>
+                            <td><span class="" tal:content="addon/id"></span></td>
+							<td><span class="addon" id="ceweaddon-${ceweprice/id}-${addon/id}" tal:content="addon/name"></span></td>
+							<td>kr ${formatprice:addon/price}</td>		
+						</tr>
+					</tal:block>
+					</TBODY>
+				</tal:block>
+           </table> 
+           </div>
+           
+           
+           
+        </div>
+        
+        
+    <script>
+        
+        
+        $( function(){
+            
+            
+				$('.newname').on( 'click', function(){
+                
+					$(document).find('input[type="text"]').remove();
+					$(document).find('input[type="submit"]').remove();
+					
+					$('#editorbox').each( function(){ $(this).remove() });
+					$('.newname').each( function(){ $(this).show()} )
+					$(this).after( '<input id="'+ $(this).attr('id') +'" type="text" value="'+ $(this).text() +'"/><input id="submitchanges" type="submit"/>' );
+					$(this).hide();
+                });
+				
+				$('.addon').on( 'click', function(){
+                
+					$(document).find('input[type="text"]').remove();
+					$(document).find('input[type="submit"]').remove();
+					
+					$('#editorbox').each( function(){ $(this).remove() });
+					$('.newname').each( function(){ $(this).show()} )
+					$(this).after( '<input id="'+ $(this).attr('id') +'" type="text" value="'+ $(this).text() +'"/><input id="submitchanges" type="submit"/>' );
+					$(this).hide();
+                });
+             
+            
+                $(document).on( 'change', '.toggle' , function(){
+                    var textinput = $(this);
+                    $.post( '/content/ceweprice/toggle/' , {
+                                    'id': textinput.attr('name'),
+                                    'hide' : textinput.is(':checked'),
+									'lang' : "${lang}"
+                                },
+                                function(data){
+                                    //console.log(data);
+                                    });
+                    });
+            
+                    $(document).on( 'click', '#submitchanges' , function(){
+                        var textinput = $(this).parent().find('input[type="text"]');
+                        $.post( '/content/ceweprice/save/' , {
+                                    'id': textinput.attr('id'),
+                                    'text' : textinput.val(),
+									'lang' : "${lang}"
+									},
+                                    function(kake){
+                                        console.log(kake);
+                                        });
+                        $(this).parent().find('span').show().text(textinput.val());
+                        $(this).parent().find('input[type="text"]').remove();
+                        $(this).remove();
+                        //console.log( $(this).parent().find('input[type="text"]').val() );
+                    });
+            
+            });
+        
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!-- HEAD -->
+<head metal:define-macro="head" tal:omit-tag="">
+     <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <title>Reed Foto AS!</title>
+    
+    <link rel="stylesheet" href="/css/theme.css" />
+    <link rel="stylesheet" href="/css/app.css" />
+</head>
+
+<tal:block metal:define-macro="scripts" tal:omit-tag="">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="/js/app.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+
+
+</tal:block>
+
+<tal:block metal:define-macro="header" tal:omit-tag="">
+    <header>
+        <div class="collapse bg-primary" id="navbarHeader">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-md-7 py-4">
+                <h4 class="text-white">Om oss</h4>
+                <p class="text-muted">
+                    <p  class="text-white">Reed Foto består av eit nasjonalt nettverk av svært rutinerte fotografar. I tillegg til den solide rutinen vi har gjennom mange år med fotografering av tusenvis av elevar, er vi og i ferd med å utvikle heilt nye tekniske løysingar for å vidareutvikle dei norske skulefototenestene. Hovedmarknaden vår er Rogaland, Hordaland, Sogn og Fjordane, Møre og Romsdal og Trøndelagfylka, i tillegg til at vi har fotografar stasjonert i Oslo.
+                    </p>
+                    <p  class="text-white">
+                        Vår primære målgruppe er ungdomsskular, folkehøgskular og vidaregåande skular, men vi har også utvikla nye og framtidsretta løysingar retta mot barnehagar og grunnskular. Vår filosofi har vore og vil vere å heile tida knytte til oss det beste mannskapet for at kundane skal få både den beste service og det beste resultatet på dei produkta vi leverer.</p>
+                    </p>
+              </div>
+              <div class="col-sm-4 offset-md-1 py-4">
+                <h4 class="text-white">Kontakt</h4>
+                <ul class="list-unstyled">
+                  <li><a href="http://www.reedfoto.no" class="text-white"><i class="fab fa-internet-explorer"></i> www.reedfoto.no</a></li>
+                  <li><a href="#" class="text-white"><i class="fas fa-phone"></i> 57 86 83 33</a></li>
+                  <li><a href="mailto:post@reedfoto.no" class="text-white"><i class="fas fa-envelope-square"></i> post@reedfoto.no</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="navbar navbar-dark bg-primary shadow-sm">
+          <div class="container d-flex justify-content-between">
+            <a href="/" class="">
+              <img src="/imgs/logo.png" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </div>
+    </header>
+</tal:block>
+<tal:block metal:define-macro="footer" tal:omit-tag="">
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <p class="float-right">
+              <a href="#">.</a>
+            </p>
+            <div class="col-12">
+                <p>Reed Foto AS<br />
+                Tlf. 57 86 83 33 - post@reedfoto.no<br/>
+                </p>
+            </div>
+            <!--
+            <div class="col-12 text-center">
+                <p><a href="${url:/about/copyright/}">Copyright | © ${request/date/year} Reed Foto AS </a></p>
+                <a href="/settings/language/nb_NO"><img src="https://static.repix.no/gfx/flags/no.png" alt="NO" /> Bokmål</a>
+                <a href="/settings/language/nn_NO"><img src="https://static.repix.no/gfx/flags/no.png" alt="NO" /> Nynorsk</a>
+            </div>
+            -->
+        </div>
+    </footer>
+</tal:block>
+

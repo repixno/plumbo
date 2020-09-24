@@ -1,0 +1,307 @@
+@charset "UTF-8";
+/* Shared Header CSS */
+
+.mobil{
+	color:#ff6b11;
+	
+}
+
+.handlekurv{
+	margin-bottom: 10px;
+}
+
+.phonenr{
+	
+	color:#EE7204 ;
+	margin: 8px 0 0 0;
+}
+
+
+body {
+	margin:0;
+	/*padding:50px 0 0 0 ;
+	*/
+	font-family: yanone;
+	color: #000000;
+	
+	}
+.shared-header {
+	background:#F5F5F5/* url(xmas-top.jpg)*/;
+	padding:6px 0 7px;f
+
+	position:relative;
+	float:left;
+	width:100%;
+	font-family:Arial, Helvetica, sans-serif;
+	}
+	
+	
+	.shared-header .container {
+		max-width:1170px;
+		position:relative;
+		margin:0 auto;
+		padding:0 20px;
+		}
+		
+		.shared-header .container .logo {
+			position:relative;
+			float:left;
+			margin-top:3px;
+			}
+			
+			.shared-header .container .logo a {
+			display:block;
+			}
+			
+			.shared-header .container .logo a img {
+					max-height:60px;
+				}
+			
+		.shared-header .container .actions {
+			position:relative;
+			padding-right: 20px;
+			float:right;
+			/*width:436px;*/
+			}
+			
+			.shared-header .container .actions ul,
+			.shared-header .container #shMenu ul {
+				list-style:none;
+				position:relative;
+				float:left;
+				margin:0 0 10px;
+				padding:0;
+				}
+				
+				.shared-header .container .actions ul li,
+				.shared-header .container #shMenu ul li {
+					position:relative;
+					float:left;
+					margin-right:28px;
+					}
+					
+					.shared-header .container .actions ul li:last-child,
+					.shared-header .container #shMenu ul li:last-child {
+						margin-right:0;
+						}
+				
+				.shared-header .container .actions ul li a,
+				.shared-header .container #shMenu ul li a {
+					color:#000000;
+					font-family:Yanone;
+					text-decoration:none;
+					display:block;
+					padding:0 0 0 40px;
+					line-height:35px;
+					font-size:18px;
+					text-transform: uppercase;
+					}
+					
+					.shared-header .container .actions ul li a.chat,
+					.shared-header .container #shMenu ul li a.chat {
+					background:url("../fotono/sh-chat-icon.svg") scroll left center no-repeat transparent;
+					}
+					
+					.shared-header .container .actions ul li a.support,
+					.shared-header .container #shMenu ul li a.support {
+					background:url("../fotono/sh-support-icon.svg") scroll left center no-repeat transparent;
+					}
+					
+					.shared-header .container .actions ul li a.login,
+					.shared-header .container #shMenu ul li a.login {
+					/*background:url("../fotono/sh-login-icon.svg") scroll left center no-repeat transparent;
+					*/
+					}
+					
+					.shared-header .container .actions ul li a.register,
+					.shared-header .container #shMenu ul li a.register {
+					/*background:url("../fotono/sh-register-icon.svg") scroll left center no-repeat transparent;
+					*/
+					}
+
+.shared-header .container .sh-shopcart-container {
+	float:right;
+	clear:right;
+	/*width:436px;*/
+	}
+.shared-header .container .sh-shopcart-container .sh-shopcart {
+	/*background:url("../fotono/sh-cart-icon.svg") scroll left center no-repeat transparent;*/
+	color:#000000;
+					font-family:Yanone;
+					text-decoration:none;
+					display:block;
+					padding:0 0 0 40px;
+					line-height:35px;
+					font-size:18px;
+					text-transform: uppercase;
+	}
+	
+	.shared-header .container .sh-shopcart-container .sh-shopcart>div {
+		color:#333;
+		}
+		
+.shared-header .container .sh-shopcart-container .sh-contact {
+	color:#ff6b11;
+	float:left;
+	font-size:21px;
+	font-family:Arial, Helvetica, sans-serif;
+	line-height:21px;
+	}
+	
+	.shared-header .container .sh-shopcart-container .sh-contact>div {
+		float:left;
+		font-size: 23px;
+		}
+	.shared-header .container .sh-shopcart-container .phone {
+		margin:0 0 0 5px;
+		padding:0 0 0 5px;
+		font-size:10px;
+	/*	line-height:10px;*/
+		border-left:1px solid #333;
+		}
+		
+		.shared-header .container .sh-shopcart-container .sh-contact span span {
+			text-align:right;
+			border:none;
+			padding:0;
+			margin:0 0 0 3px;
+		}
+
+a.shMenu-btn {
+	display:none;
+	}
+
+@media screen and (min-width: 768px) and (max-width: 900px) {
+.shared-header .container .logo {
+    margin: 8px 0 0;
+}
+.shared-header .container .logo a img {
+    max-width: 255px;
+}
+}
+@media screen and (max-width: 767px) {
+
+body {
+    padding-top: 43px;
+}
+.sh-shopcart-container{
+	display: none;
+}
+	
+.shared-header .container .logo {
+    margin: 0 0 10px;
+}
+
+.shared-header .container .logo a img {
+    max-width: 240px;
+}
+
+.shared-header .container .actions {
+    display: none;
+}
+
+.shared-header .container .sh-shopcart-container {
+    float: left;
+    width: 100%;
+}
+
+.shared-header .container .sh-shopcart-container .sh-contact {
+    font-size: 18px;
+}
+
+.shared-header .container .sh-shopcart-container .sh-contact span {
+	display:none;
+}
+
+.shared-header .container .sh-shopcart-container .sh-shopcart {
+	font-size:11px;
+	}
+
+a.shMenu-btn {
+	background:none;
+	display:block;
+	float:right;
+	width:30px;
+	height:30px;
+	margin:0;
+	padding:0;
+	}
+	
+	a.shMenu-btn img {
+		width:30px;
+		}
+#shMenu {
+	width:auto;
+	}
+.shared-header .container #shMenu ul li {
+	margin-bottom:10px;
+	}
+}
+@media screen and (max-width: 380px) {
+.shared-header .container {
+		padding:0 10px;
+		}
+}
+
+
+/* hacks */
+.shared-header .container .sh-shopcart-container .sh-shopcart a {
+	color:#fef200;
+	font-family:Arial, Helvetica, sans-serif;
+	text-decoration:none;
+}
+
+
+
+/* old legacy stuff */
+
+
+#cewe_common_header_container {
+	background:#222;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 0;
+}
+
+.dialogwindow {
+	position: relative;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: transparent;
+	/*
+	border: 1px solid #ccc;
+	-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+	*/
+}
+
+.dialogwindow.spinner {
+	background-image: url('/cewe/images/spiffygif_32x32.gif');
+   background-repeat: no-repeat;
+   background-position: center center;	
+}
+
+.dialogwindow .close-button {
+	position: absolute;
+	top: 2px;
+	right: 5px;
+}
+
+.dialogwindow iframe {
+	width: 100%;
+	height: 100%;
+}
+
+#dialogwindowcontainer {
+	position: absolute;
+	display: block;
+	width: 100%;
+	z-index: 1000;
+	background-color: rgba(0,0,0,0.5);
+}

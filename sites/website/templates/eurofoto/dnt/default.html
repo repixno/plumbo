@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<tal:block metal:use-macro="${templateroot}/${templates}/common.html/head" tal:define="global pagetitle" tal:content="">DNT rabatt-kode</tal:block>
+
+
+	<style type="text/css">
+		.dnt-top {
+         height: 164px;
+         background-image: url(${static:}images/attachments/${article/id}/${article/attachments/background});
+         background-repeat:no-repeat;
+		}
+		.email-kode{
+         border: 1px solid #CCC;
+         background-color: #FFF;
+          border-radius: 5px;
+         -moz-border-radius: 5px;
+         -webkit-border-radius: 5px;
+         box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+         -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+         -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      }
+		
+	   .jqmWindow {
+         display: none;
+          position: fixed;
+          top: 17%;
+          left: 50%;
+          text-align: center;
+          margin-left: -200px;
+          width: 230px;    
+          padding: 22px;
+      }   
+      .jqmOverlay { background-color: #000; }
+   
+      /* Fixed posistioning emulation for IE6
+           Star selector used to hide definition from browsers other than IE6
+           For valid CSS, use a conditional include instead */
+      * html .jqmWindow {
+           position: absolute;
+           top: expression((document.documentElement.scrollTop || document.body.scrollTop) + Math.round(17 * (document.documentElement.offsetHeight || document.body.clientHeight) / 100) + 'px');
+      }
+      
+      table td, table th {
+         border-left: 0px;
+         border-bottom: 0px;
+         padding: 0.1em;
+      }
+      td:first-child{ 
+         text-align: right;
+      }
+      
+      
+     a.dnt-button:hover {
+         background-color: red;
+      }
+      
+      a.dnt-button {
+         background: red url(http://a.static.eurofoto.no/css/portals/eurofoto/backgrounds/button-overlay.png) repeat-x;
+         border: none;
+         background-color: #C00;
+         display: inline-block;
+         padding: 5px 10px 6px 10px;
+         color: white;
+         text-decoration: none;
+         font-weight: bold;
+         font-size: 1.3em;
+         margin-bottom: 1.2em;
+         line-height: 1;
+         border-radius: 5px;
+         -moz-border-radius: 5px;
+         -webkit-border-radius: 5px;
+         box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+         -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+         -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+         text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+         border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+         position: relative;
+         cursor: pointer;
+      }
+
+
+	</style>
+	
+</head>
+<body>
+   <div class="container">
+      	<div metal:use-macro="${templateroot}/${templates}/common.html/top" />
+            
+      	<div class="span-24">
+            <div class="span-24 last dnt-top"></div>
+         </div>
+         
+         <div class="span-24 last prepend-top">
+         
+            <div class="span-6">
+                   
+  					<div class="span-6 last">
+							<!-- facebook -->
+							<h3 tal:content="cms:title:846cee0d-c43b-4bb2-b90f-00e9e60d282c"></h3>							
+							<script type="text/javascript" src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php/${i18n/language}"></script>
+							<script type="text/javascript">FB.init("8c1094029e063c64cf7b6b799c3f76c8");</script>
+							<fb:fan profile_id="193026981970" stream="" connections="9" width="200" height="380"></fb:fan>
+					</div>
+         
+               <div class="span-5 last prepend-top">
+                  <div tal:content="structure cms:body:e5ad406d-2123-4c16-8e50-b75b6c5747d2" />
+               </div>
+            </div>
+         
+            <div class="span-18 last">
+               <div class="span-18 left"  >
+                  <div tal:content="structure article/body" />
+               </div>
+               <div class="span-9" tal:content="structure cms:body:d6af6bbf-e4f6-473c-ab8a-31e73f964d56"/>
+               <div class="span-9 last" tal:content="structure cms:body:736d4758-a85f-425a-868a-9b30aeb72f8c"/>
+            </div>
+
+         </div>
+
+
+   </div>
+   
+   <div class="jqmWindow email-kode" id="dialog">
+      <h3 style="color: #C00">Send kode!</h3>
+      <hr />
+      <form action="/dnt/sendefcode" method="post" id="sendcode">
+         <label>Din epostadresse:</label>
+         <br/>
+         <div>
+            <input type="title text" id="email" name="email"/>
+         </div>
+         <div>
+            Skriv inn din epostadresse og trykk Send Kode, du vil da motta en epost med koden.
+         </div>
+         <button type="submit" class="button" href="#">
+            Send Kode
+         </button>
+      </form>
+   </div>
+   
+   
+   <div tal:condition="exists:cewecodecookie" class="jqmWindow email-kode" style="text-align: left;" id="dialog-cewe">
+         <h3>Viktig!</h3>
+         <p>Du har allerede mottat en rabattkode fra oss på CEWE FOTOBOK via Den Norske Turistforening sin kampanjeside.</p>
+         <p>Tilbudet gjelder kun èn kode pr kunde</p>
+      
+
+
+   </div>
+   
+   <div tal:condition="not:exists:cewecodecookie"class="jqmWindow email-kode" id="dialog-cewe">
+      <h3 style="color: #C00">Bestill Rabattkupong!</h3>
+      <hr />
+      <form action="/dnt/sendcewecode" method="post" id="sendcode">
+         <table>
+            <tr>
+               <td>Epost:</td><td><input type="title text" id="email" name="email"/></td>
+            </tr>
+            <tr>
+               <td>Navn:</td><td><input type="title text" id="name" name="name"/></td>
+            </tr>
+            <tr>
+               <td>Adresse:</td><td><input type="title text" id="address" name="address"/></td>
+            </tr>
+            <tr>
+               <td>Postnr:</td><td><input type="title text" id="zipcode" name="zipcode"/></td>
+            </tr>
+            <tr>
+               <td>Poststed:</td><td><input type="title text" id="city" name="city"/></td>
+            </tr>
+         </table>
+         
+         <div>
+           Fyll ut skjemaet og du vil motta en Rabattkupong i posten om få dager!
+         </div>
+         <button type="submit" class="button" href="#">
+            Send Kode
+         </button>
+      </form>
+   </div>
+   <!--
+   <tal:block condition="exists: sentEmail">
+      <div class="email-kode" id="dialog-sent">
+         <h3 style="color: #C00">Send kode!</h3>
+         <hr />
+         Kode er sendt!
+      </div>
+   </tal:block>
+   -->
+   
+   <div class="footer">
+   	<div class="container">
+   		<div metal:use-macro="../../${templates}/common.html/footer" />
+   	</div>
+   </div>	
+<script type="text/javascript" src="${static:js/jqModal.js}" />
+<SCRIPT type="text/javascript">
+
+$( document ).ready( function(){
+
+   $('#dialog').jqm();
+   $('#dialog').jqmAddTrigger('.openDialog'); 
+   
+   $('#dialog-cewe').jqm();
+   $('#dialog-cewe').jqmAddTrigger('.openDialog-cewe'); 
+   
+   //
+      
+});
+
+</SCRIPT>
+   
+
+   
+
+</body>
+</html>

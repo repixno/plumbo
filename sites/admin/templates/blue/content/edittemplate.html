@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title i18n:translate="">Dashboard - Admin Template</title>
+<tal:block metal:use-macro="../common.html/css" />
+
+<style>
+    #catmenu ul {
+        list-style: none;
+        line-height: 25px;
+        color:#0068b4;
+        border-bottom: 2px solid #FFF;
+        margin: 0;
+    }
+    #catmenu li {
+        display: inline;
+    }
+
+    #catmenu a, #topmenu a:visited {padding:5px 12px 5px 12px;text-decoration:none;}
+    #catmenu .current a, #topmenu .current a:hover, #topmenu .current a:visited {padding:5px 12px 5px 12px;font-weight:bold;}
+
+    
+</style>
+<script type="text/javascript" src="/js/admin.js"></script>
+</head>
+
+<body>
+    
+    	<div id="container" class="container">
+           <div id="header" class="span-24 last">
+                <h2>Eurofoto Admin</h2>
+                <tal:block metal:use-macro="../common.html/topmenu" />
+            </div>
+           
+           
+           <h3>Edit template</h3>
+           
+           <p><a href="/content/cardtemplate/${edittemplate/catid}">Tilbake</a></p>
+           <form method="post">
+                <table>
+                    <tr>
+                        <td>
+                            Articleid
+                        </td>
+                        <td>
+                            <select name="articleid" id="articleid">
+                                <option disabled="true" selected="selected">select articleid</option>
+                                <option value="7237">7237 (Fotokort 10x15cm)</option>
+								<option value="939">939 (Fotokort 10x18 cm) </option>
+                                <option value="940">940 (Fotokort 15x15 cm) </option>
+                                <option value="7136">7136 (Fotokort XXL) </option>
+                                <option value="7105">7105 (Doble fotokort 15x15cm)</option>
+                                <option value="7239">7239 (Postkort 10x15cm)</option>
+                                <option value="7233">7233 (Dobble 10x15cm)</option>
+                                <option value="7234">7234 (Dobble 10x21cm)</option>
+                                <option value="7238">7238 (Fotokort 10x21cm)</option>
+                                <option value="7240">7240 (Postkort 10x21cm)</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Themecategory</td>
+                        <td>
+                            <select name="themecategory" id="themecategory">
+                                
+                            </select>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td>ThemeSubcategory</td>
+                        <td>
+                            <select name="themesub" id="themesub">
+                                
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Template
+                        </td>
+                        <td>
+                            <select name="template" id="template">
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Thumbnail</td>
+                        <td> <img style="height:60px;" src="#" id="thumb"/></td>
+                    </tr>
+                    <tr>
+                        <td>Title</td>
+                        <td><input type="text" name="title" value="${edittemplate/title}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Grouping</td>
+                        <td><input type="text" name="grouping" value="${edittemplate/grouping}"/></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right" colspan="2"><input id="submitbutton" disabled="disabled" type="submit" value="Oppdater"/></td>
+                    </tr>
+                    
+                </table>
+            
+            
+           </form>
+        </div>
+		<div id="footer" />
+        
+        
+        <script>
+        var selectedtheme = '';
+        var articleid = "${edittemplate/articleid}";
+        var template = "${edittemplate/template}";
+        console.log( template );
+        
+        var split = template.split("/");
+        var Themecategory = split[0];
+        var ThemeSubcategory = split[1];
+        var Template = split[2];
+        /*<![CDATA[*/
+        
+        $( function(){
+            
+            $(':input[name=articleid] option').each( function(){
+                if( $(this).val() == articleid ){
+                    $(this).attr("selected", "selected");
+                    $(this).change();
+                }
+            });
+            
+            $(':input[name=themecategory] option').each( function(){
+                console.log( $(this).val() );
+                if( $(this).val() == Themecategory ){
+                    $(this).attr("selected", "selected");
+                    $(this).change();
+                }
+            });
+            
+            $(':input[name=themesub] option').each( function(){
+                if( $(this).val() == ThemeSubcategory ){
+                    $(this).attr("selected", "selected");
+                    $(this).change();
+                }
+            });
+            
+            $(':input[name=template] option').each( function(){
+                if( $(this).val() == Template ){
+                    $(this).attr("selected", "selected");
+                    $(this).change();
+                }
+            });/**/
+			
+			
+			var c = {};
+
+
+            
+        });
+        
+        
+            
+            
+            $('#articleid').on( 'change', function(){
+                    $('#themecategory option').each( function(){
+                        $(this).remove();
+                    });
+                    $.post( "/content/cardtemplate/GetThemecat/" + $('#articleid').val(), function( data ) {
+                        var arr = JSON.parse( data  );
+                        var length = arr.length,
+                        element = null;
+                        for (var i = 0; i < length; i++) {
+                            element = arr[i];
+                            if( Themecategory != null ){
+                                if( arr[i] == Themecategory ){
+                                    $('#themecategory').append($('<option/>', { value : arr[i], selected: "selected" }).text(arr[i]));
+                                }
+                                else{
+                                    $('#themecategory').append($('<option/>', { value : arr[i] }).text(arr[i]));
+                                }
+                            }
+                            else{
+                                $('#themecategory').append($('<option/>', { value : arr[i] }).text(arr[i]));
+                                // Do something with element i.
+                                if( i == 0 ){
+                                    $('#themecategory').change();
+                                }
+                            }
+                        }
+                        
+                        Themecategory = null;
+                        $('#themecategory').change();
+                    });
+                    
+                    $('#submitbutton').removeAttr( 'disabled' );
+                    
+                });
+            
+            $('#themecategory').on( 'change' , function(){
+                
+                $('#themesub option').each( function(){
+                        $(this).remove();
+                    });
+                $.post( "/content/cardtemplate/GetSubCategories/", {themecategory:$('#themecategory').val()} ,function( data ) {
+                    
+                    var arr = JSON.parse( data  );
+                        var length = arr.length,
+                        element = null;
+                        for (var i = 0; i < length; i++) {
+                            element = arr[i];
+                            
+                            // Do something with element i.
+                            
+                            if( ThemeSubcategory != null ){
+                                console.log(ThemeSubcategory); 
+                                if( arr[i] == ThemeSubcategory ){
+                                    $('#themesub').append($('<option/>', { value : arr[i], selected: "selected" }).text(arr[i]));
+                                    $('#themesub').change();
+                                }else{
+                                    $('#themesub').append($('<option/>', { value : arr[i] }).text(arr[i]));
+                                }
+                                
+                            }
+                            else{
+                                $('#themesub').append($('<option/>', { value : arr[i] }).text(arr[i]));
+                                if( i == 0 ){
+                                    $('#themesub').change();
+                                } 
+                            }
+                            
+                        }
+                        ThemeSubcategory = null;
+                    
+                    
+                });
+                
+                
+                });
+            
+            $('#themesub').on( 'change', function(){
+                
+                $('#template option').each( function(){
+                        $(this).remove();
+                    });
+                
+                $.post( "/content/cardtemplate/GetTheme/", {themecategory:$('#themecategory').val(),themesub:$('#themesub').val()} ,function( data ) {
+                    
+                    console.log( JSON.parse( data )  );
+                    var arr = JSON.parse( data  );
+                        var length = arr.length,
+                        element = null;
+                        for (var i = 0; i < length; i++) {
+                            element = arr[i];
+                            console.log( Template  );
+                            if( Template != null ){
+                                console.log( arr[i].theme );
+                                if( Template == arr[i].theme ){
+                                    $('#template').append($('<option/>', { value : arr[i].theme, selected: "selected" }).text(arr[i].theme));
+                                    $("#template").change();
+                                }
+                                else{
+
+                                    $('#template').append($('<option/>', { value : arr[i].theme }).text(arr[i].theme));
+                                }
+                                
+                            }else{
+                                $('#template').append($('<option/>', { value : arr[i].theme }).text(arr[i].theme));
+                                // Do something with element i.
+                                
+                                if( i == 0 ){
+                                    $("#template").change();
+                                }
+                            }
+                        }
+                        
+                        Template = null;
+                });
+                });
+            
+            $("#template").on( 'change', function(){
+                
+                selectedtheme = $('#themecategory').val() + "/" + $('#themesub').val() + "/" + $('#template').val();
+                $('#thumb').attr( 'src' , "http://marge.eurofoto.no/ECommerceBridge/Library/GreetingCard/Themes/" + selectedtheme + "/previews/0.jpg" );
+                
+                
+                });
+            
+            /*]]>*/
+        </script>
+</body>
+</html>
