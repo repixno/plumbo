@@ -37,7 +37,7 @@
                                   ON hk.ordrenr = ho.ordrenr
                                      WHERE ho.to_production IS NOT NULL
 										
-													  AND  ho.uid='1370892'
+													  AND  ho.uid in ('1370892', '969748')
                                
 											
                                   AND ho.tidspunkt BETWEEN ? AND ?
@@ -99,6 +99,7 @@
 				
 				
 				
+    
 			
             
             // $filename = "Kunder_" . $today . ".edi";

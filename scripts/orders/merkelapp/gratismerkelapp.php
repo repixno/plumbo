@@ -30,15 +30,15 @@
     $readymerkelapps =  UserMerkelappOrder::toProduction();
        
        
-  /*  $readymerkelapps = DB::query( "
+    $readymerkelapps = DB::query( "
             SELECT 
                id
             FROM 
                merkelapp_orders 
             WHERE 
-               orderid in (2398387)
+               orderid in (2398132)
          ")->fetchAll( DB::FETCH_ASSOC );
-         */
+         
         
          
       
@@ -146,7 +146,7 @@
                 }
                 
                 $draw = new ImagickDraw();
-                $draw->setFont( '/var/www/eurofoto/data/fonts/' . "verdanab.ttf" );
+                $draw->setFont( '/var/www/repix/data/fonts/' . "verdanab.ttf" );
               
                 $draw->setFontSize( 296 );
                 $draw->setGravity( $textgravity );
@@ -262,14 +262,14 @@
                      $portalid = DB::query( "SELECT kampanje_kode FROM historie_ordre WHERE ordrenr = ?", $orderid )->fetchSingle();
    
                    
-                     
+                     // gratis merkelapp
                      if( $portalid == 'DM-002'){
-                        $imagepath = "/home/produksjon/merkelapp/maler/gratismerkelappmal/g-merkelapp.jpg";
+                        $imagepath = "/home/produksjon/merkelapp/kuttekanter/august.jpg";
                      }
                      
-                     
+                     // merkelapp
                      else{
-                        $imagepath = "/home/produksjon/merkelapp/maler/ef2018.jpg";
+                        $imagepath = "/home/produksjon/merkelapp/kuttekanter/ef2018.jpg";
                      }
                      
                      
@@ -356,7 +356,7 @@
                         //create pdf printfile
                         $outFile = sprintf( "%s/%s-%s_printfile.pdf", $destinationfolder,  $quantity , $id );
                     //    /home/produksjon/merkelapp/maler/gratismerkelappmal/gratis_merkelapp.jpg
-                        $cutFilename =  "/home/produksjon/merkelapp/maler/gratismerkelappmal/august.pdf" ; 
+                        $cutFilename =  "/home/produksjon/merkelapp/kuttekanter/gratislapp_2020.pdf" ; 
                         $pdf = new FPDI( 'P', 'mm', array( 137, 205 ) );
                         $pdf->AddPage();
                         $pdf->Image( $inputFile , 2.5, 2.5, -300 );

@@ -28,18 +28,18 @@
          
       $navnelappmixarray =  [6092 ];
          
-       $readymerkelapps =  UserMerkelappOrder::toProduction();
+      $readymerkelapps =  UserMerkelappOrder::toProduction();
        
-     /*  $readymerkelapps = DB::query( "
+    /*   $readymerkelapps = DB::query( "
             SELECT 
                id
             FROM 
                merkelapp_orders 
             WHERE 
-               orderid in (2395570)
+               orderid in (2404410)
          ")->fetchAll( DB::FETCH_ASSOC );
-         */
          
+         */
          
       
          
@@ -49,6 +49,10 @@
                
                $merkelapps = new DBMerkelappOrder( $merkelapp['id'] );
                Util::Debug( $merkelapps );
+               
+               
+               
+               
                if( !in_array( $merkelapps->articleid, $navnelappmixarray  )) continue;
                
 

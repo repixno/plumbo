@@ -87,7 +87,7 @@ class XmlScript extends Script {
 			rename ( $xmlfile,  "$move1$file" ) ;
                     
                      file_put_contents("$orderfolder1/irisfoto.txt", $orderinfo , FILE_APPEND | LOCK_EX);
-					   file_put_contents("$orderfolderdest2/irisfoto.txt", $orderinfo , FILE_APPEND | LOCK_EX);  
+					   file_put_contents("$orderfolderdest2/iris.txt", $orderinfo , FILE_APPEND | LOCK_EX);  
                     
                 }
                   

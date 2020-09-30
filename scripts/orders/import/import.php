@@ -23,24 +23,27 @@
       private $securecode = "p-dLuxTl30qH-AhKICmehN2DalJsJNGjjAGrzom1DNQ";   
       
       private $clipartpath = '/data/global/clipart';
-      private $fontpath = '/home/httpd/www.eurofoto.no/webside/font' ;
+      private $fontpath = '/home/httpd/www.repix.no/webside/font' ;
       private $originaltemplatespath = '/data/global/maler/orginal';
       
-      private $imgserver = "10.64.1.134"; //eva
+      private $imgserver = "10.64.1.184"; //eva
       
       Public function Main(){
          
          $orders = array();
-         $oldest = '2015-06-20';
+         $oldest = '2020-01-20';
          
-        $orderDownloadQuery = sprintf( "SELECT ordrenr, tidspunkt, source FROM historie_ordre WHERE 
+     $orderDownloadQuery = sprintf( "SELECT ordrenr, tidspunkt, source FROM historie_ordre WHERE 
                                           tidspunkt > '%s' AND 
                                           to_production > '%s' AND
                                           download_began_at IS NULL 
                                           ORDER BY ordrenr LIMIT 1", $oldest, $oldest );
-                                          
+          
+      
+      
+      
                                           //denne her kan du velge å importere spesifikk ordre
-         //$orderDownloadQuery = sprintf( "SELECT ordrenr, tidspunkt, source FROM historie_ordre WHERE ordrenr in ( 2387771)" );
+    //    $orderDownloadQuery = sprintf( "SELECT ordrenr, tidspunkt, source FROM historie_ordre WHERE ordrenr in ( 2402881)" );
                                           
                                           
          //while ( $kake =  DB::query( $orderDownloadQuery )->fetchAll( DB::FETCH_ASSOC )  ) {
@@ -382,8 +385,9 @@
          
          
          Util::Debug($orderid);
-         $fileserver = "remus.eurofoto.no"; 
-         //$fileserver = "monica.eurofoto.no"; 
+         
+        // $fileserver = "remus.eurofoto.no"; 
+          $fileserver = "10.64.1.184";
          if( is_array( $mals ) ){
             foreach( $mals as $mal ){
                
@@ -392,7 +396,14 @@
                      
                      util::Debug("downloading mals");
                      util::Debug($mals);
-                     exec ("/usr/local/bin/rsync --ignore-missing-args -a $fileserver::ordrer/\*/print_download/$date/$orderid /home/produksjon/webspool/$date");
+                   // kommentert ut 29.09.2020  exec ("/usr/local/bin/rsync --ignore-missing-args -a $fileserver::ordrer/\*/print_download/$date/$orderid /home/produksjon/webspool/$date");
+                     
+   
+                     
+                      Util::debug ("/usr/bin/rsync -a --ignore-missing-args 10.64.1.184:/data/bildearkiv/z078/print_download/$date/$orderid /home/produksjon/webspool/$date");
+	 //$up_date = date( 'Y-m-d', strtotime('-1 day') );
+         exec ("/usr/bin/rsync -a --ignore-missing-args 10.64.1.184:/data/bildearkiv/z078/print_download/$date/$orderid /home/produksjon/webspool/$date");
+         
                   }else{
                      $this->produceTemplate( $mal['lopenummer'] );
                   }
@@ -647,7 +658,7 @@
             $targetfilename      = $ordertemplate[filnamn];
             $originalfilename    = "org_$unique.$filetype";
             $templateorderfiles  = '';
-            $oldroot = '/home/httpd/www.eurofoto.no/';
+            $oldroot = '/home/httpd/www.repix.no/';
             
             try {
                

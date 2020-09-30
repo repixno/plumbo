@@ -63,7 +63,7 @@ class LablinkImportScript extends Script {
 					
 					if( $producer['you'] != 'true' ){
 						
-						Util::Debug("NOT YUE");
+						Util::Debug("NOT YOU. DiGOTAL BLDEFIL");
 						
 						continue;
 					}
@@ -71,7 +71,7 @@ class LablinkImportScript extends Script {
 					Util::Debug("YOU");
 					
 					$filefolder = (string)$orderline->files['folder'];
-					$filefolder = str_replace( 'N:\\', '/home/produksjon/', $filefolder );
+					$filefolder = str_replace( 'Z:\\', '/home/produksjon/', $filefolder );
 					$filefolder = str_replace( '\\', '/', $filefolder );
 					$productid = $productkobling[ (string)$orderline->product['uuid'] ];
 					$quantity = (int)$orderline->quantity;
@@ -161,7 +161,7 @@ class LablinkImportScript extends Script {
 										$fitin = (string)$orderline->files->file->adaption;
 										
 										
-										$file = str_replace( 'N:\\', '/home/produksjon/', $file );
+										$file = str_replace( 'Z:\\', '/home/produksjon/', $file );
 										$file = str_replace( '\\', '/', $file );
 										
 										

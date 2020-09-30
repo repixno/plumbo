@@ -3,7 +3,7 @@ model( 'user.projectorder' );
 
    class ProjectOrder extends DBUserProjectOrder {
      
-      public function usedImages(){  
+      public function usedImages(){
 
             $origProjectXML =  $this->xml;
             
@@ -56,6 +56,16 @@ model( 'user.projectorder' );
             }
          
       return  serialize($imageIds);	
+   }
+   
+   static function readyOrders(){
+      
+      
+      return DB::query( "SELECT * FROM mediaclip_orders WHERE processed IS NULL AND order_id IS NOT NULL" )->fetchAll( DB::FETCH_ASSOC );
+      
+      
+      
+      
    }
   
   

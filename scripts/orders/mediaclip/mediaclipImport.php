@@ -35,8 +35,8 @@
         
         Public function Main(){
             
-           $current_orders = ProjectOrder::readyOrders();
-           //$current_orders = DB::query( "SELECT * FROM mediaclip_orders WHERE order_id = 2146488" )->fetchAll( DB::FETCH_ASSOC );
+         $current_orders = ProjectOrder::readyOrders();
+        //   $current_orders = DB::query( "SELECT * FROM mediaclip_orders WHERE order_id in ( 2402585,2402448,2402443,2402881,2403064,2403284,2403053,2402251,2402419 )" )->fetchAll( DB::FETCH_ASSOC );
 				// $current_orders = DB::query( "SELECT * FROM mediaclip_orders WHERE  production_id in (4232057)" )->fetchAll( DB::FETCH_ASSOC );
             
             
@@ -339,6 +339,9 @@
         private function replaceOwnerId( ){
             $replaceId = $this->userid;
 	    $this->projectXml = str_replace( '{userFiles}0/', '{userFiles}'. $replaceId . '/', $this->projectXml );
+       
+       // endra så denn  {userFiles}\235402758.jpg var til denne {userFiles}1363520\235402758.jpg
+         $this->projectXml = str_replace( '{userFiles}/', '{userFiles}'. $replaceId . '/', $this->projectXml );
 	    $origProjectXML = $this->projectXml; 
             
 	 if(strpos($origProjectXML,"collage:photoElement") > 1 || strpos($origProjectXML,"collage:backgroundElement") > 1 || strpos($origProjectXML,"model:photo") > 1){

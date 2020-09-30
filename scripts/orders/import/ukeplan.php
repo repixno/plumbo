@@ -27,9 +27,12 @@
       private $giftTemplate;
       private $portal = '';
       
-      Public function Main(){
+  Public function Main(){
+	  
          $ukeplanorder = UserUkeplanOrder::toProduction();
          $orderid = $ukeplanorder->orderid;
+         
+       //     $id = DB::query( "SELECT id FROM historie_ordre WHERE ordrenr = 1952428")->fetchSingle();
          $id = DB::query( "SELECT id FROM historie_ordre WHERE ordrenr = ?", $ukeplanorder->orderid )->fetchSingle();
          //util::Debug( $ukeplanorder->orderid );
          if( !$id ){
@@ -37,10 +40,16 @@
             exit;
          }
          // up = uke plan, ukeplan
+       
          list($up_date, $up_time) = explode(' ', $ukeplanorder->date);
-         Util::debug ("/usr/local/bin/rsync -a --ignore-missing-args romulus.eurofoto.no:/data/bildearkiv/z078/print_download/$up_date/$orderid /home/produksjon/webspool/$up_date");
+         util::Debug( $id );
+              util::Debug( $up_date );
+             //  util::Debug( $up_time );
+           //     util::Debug( $ukeplanorder );
+              
+         Util::debug ("/usr/bin/rsync -a --ignore-missing-args 10.64.1.184:/data/bildearkiv/z078/print_download/$up_date/$orderid /home/produksjon/webspool/$up_date");
 	 //$up_date = date( 'Y-m-d', strtotime('-1 day') );
-         exec ("/usr/local/bin/rsync -a --ignore-missing-args 10.64.1.184:/data/bildearkiv/z078/print_download/$up_date/$orderid /home/produksjon/webspool/$up_date");
+         exec ("/usr/bin/rsync -a --ignore-missing-args 10.64.1.184:/data/bildearkiv/z078/print_download/$up_date/$orderid /home/produksjon/webspool/$up_date");
          //print_r ("/usr/local/bin/rsync -a --ignore-missing-args romulus.eurofoto.no::ordrer/z078/print_download/$up_date/$orderid /home/produksjon/webspool/$up_date");
          
          $kampanjekode = DB::query( "SELECT kampanje_kode FROM historie_ordre WHERE ordrenr = ?", $ukeplanorder->orderid )->fetchSingle();
@@ -261,8 +270,11 @@
 		if( !file_exists( $this->orderfolder )){
 			mkdir( $this->orderfolder , 0755, true );
 		} 
-               ssh2_scp_recv($connection, '/data/global/maler/orginal/' . $ext . $giftTemplate->fullsize_src , $this->orderfolder . $giftTemplate->fullsize_src );
-               ssh2_exec($connection, 'exit');
+               //ssh2_scp_recv($connection, '/data/global/maler/orginal/' . $ext . $giftTemplate->fullsize_src , $this->orderfolder . $giftTemplate->fullsize_src );
+               //ssh2_exec($connection, 'exit');
+			   
+			   copy( '/data/global/maler/orginal/' . $ext . $giftTemplate->fullsize_src , $this->orderfolder . $giftTemplate->fullsize_src );
+			   
             }
          }catch( Exception $e ){
             Util::Debug($e->getMessage());
@@ -301,7 +313,7 @@
                $imagick = new Imagick();
                $imagick->newImage( (int)$imageFieldWidth, (int)$image['imagefield_height'], $pixel );
 
-               //$clipart->readImage( '/var/www/repix/sites/website/webroot/ukeplan/clipart/middagsbestikk2.png' );
+               //$clipart->readImage( '/var/www/eurofoto/sites/website/webroot/ukeplan/clipart/middagsbestikk2.png' );
 
                //$clipart->scaleImage( (int)$image['width'], (int)$image['height'] -100 , true );
                //$clipart->setImageOpacity(0.3);
@@ -447,18 +459,20 @@
                   $draw = new ImagickDraw();
    
                   if( $color == '#FFFFFF'){
-                     $pixel = new ImagickPixel( black );
+                     $pixel = new ImagickPixel( 'black' );
                   }
                   else if( $template['background'] == 'black'  ){
-                      $pixel = new ImagickPixel( black );
+                      $pixel = new ImagickPixel( 'black' );
                   }else{
-                     $pixel = new ImagickPixel( white );
+                     $pixel = new ImagickPixel( 'white' );
                   }
                   
                   /* New image */
                   $image->newImage( $imageFieldWidth, $height, $pixel );
                   
-                  $image->setImageOpacity(0.5);
+                  //$image->setImageOpacity(0.5);
+				  $image->evaluateImage(Imagick::EVALUATE_MULTIPLY, 0.5, Imagick::CHANNEL_ALPHA);
+
                   
                   $pixel = new ImagickPixel( $color );
                   $draw->setFillColor( $pixel );
@@ -1130,7 +1144,7 @@
                $textgravity = Imagick::GRAVITY_WEST;
             }
 
-            if( empty( $text ) || strpos( $text, 'Sett inn tekst' ) ){
+            if( empty( (string)$text ) || strpos( $text, 'Sett inn tekst' ) ){
                $text = ' ';
             }
             $draw = new ImagickDraw();
@@ -1141,11 +1155,11 @@
        
       	    $canvas = new Imagick();      		
       	    $metrics = $canvas->queryFontMetrics( $draw, $text );
+			Util::debug( (string)$text );
+			Util::debug( $metrics );
    
-   
+			$metrics['textWidth'] = $metrics['textWidth'] > 0 ? $metrics['textWidth']  : 1;
             $canvas->newImage( $metrics['textWidth'], $metrics['textHeight'], $white, "png");
-            
-            
             
       	    $canvas->annotateImage($draw,0,10,0,$text);
       	    $templategeo =  $template->getImageGeometry();

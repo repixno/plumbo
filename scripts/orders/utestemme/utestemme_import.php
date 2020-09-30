@@ -19,10 +19,8 @@
 	  
 	  private $url = array();
 	  
-      
       public $tidspunkt = '';
       public $orderfolder = "/home/produksjon/utestemme/";
-     //public $orderfolder = "/home/toringe/utestemme/";
       
       Public function Main(){
 		 
@@ -55,19 +53,17 @@
 								 
 					 Util::Debug( $order );
 								 
-					 $orderinfo = '';
-					 $orderinfo .= "Ordrenr: " . $order->id . "\n";
-					 $orderinfo .= "Navn: " . $order->shipping_address->name . "\n";
-					 $orderinfo .= "Adresse: " . $order->shipping_address->street . "\n";
-					 $orderinfo .= "Postnummmer: " . $order->shipping_address->zip . "\n";
-					 $orderinfo .= "Epost: " . $order->shipping_address->email . "\n";
-					 	 $orderinfo .= "Mobilnr: " . $order->shipping_address->mobile_phone_number . "\n";
-					 $orderinfo .= "Stad: " . $order->shipping_address->city . "\n";
-					 
-					 $orderinfo .= "\nOrdrelinjer:\n\n";
-				  
-					 $ordertime = date( "Y-m-d" ,  strtotime( $order->date ) );
-					 $orderdatefolder = $this->orderfolder . $ordertime;
+					$orderinfo = '';
+					$orderinfo .= "Ordrenr: " . $order->id . "\n";
+					$orderinfo .= "Navn: " . $order->shipping_address->name . "\n";
+					$orderinfo .= "Adresse: " . $order->shipping_address->street . "\n";
+					$orderinfo .= "Postnummmer: " . $order->shipping_address->zip . "\n";
+					$orderinfo .= "Epost: " . $order->shipping_address->email . "\n";
+					$orderinfo .= "Mobilnr: " . $order->shipping_address->mobile_phone_number . "\n";
+					$orderinfo .= "Stad: " . $order->shipping_address->city . "\n";
+					$orderinfo .= "\nOrdrelinjer:\n\n";
+					$ordertime = date( "Y-m-d" ,  strtotime( $order->date ) );
+					$orderdatefolder = $this->orderfolder . $ordertime;
 		   
 					 if( !file_exists( $orderdatefolder ) ){
 						mkdir( $orderdatefolder );
@@ -83,7 +79,6 @@
 						
 						$pathinfo = pathinfo ( $pictures->url ); 
 						$imageid = explode( '/' , $pathinfo['dirname'] );
-						
 						$orderinfo .= sprintf( "Produkt: %s,  Antall: %s,  Størrelse: %s, Bildeid: %s  \n\n" , $pictures->product , $pictures->quantity, $pictures->size , end( $imageid ) );
 						$productfolder = $orderdateidfolder . "/" . $pictures->type;
 						if( !file_exists( $productfolder ) ){
@@ -113,13 +108,34 @@
 				
 						$prodno = $pictures->product;
 					 
+					 
+					 $numero = $pictures->quantity;
+					$fotocardfix = "{$numero}0";
+					 
+					  Util::Debug( $str );
+					  
+					
 						if( $prodno == 7204 ){
 						  $prodno = 7117;
 						}
 						
+						
+						
+						
+						// Legger til 0 i enden på antall om det er fotokort pakke
+						
+					if ($prodno == 7237) {
+						$prodno = 522;
+					$antall =$fotocardfix;
+					}
+					else {
+					$antall=$numero;
+					}
+
+
 						$articles['prints'][] = array(
 													  'prodno' =>  $prodno,
-													  'quantity' => $pictures->quantity,
+													  'quantity' => $antall,
 													  'file' => $img,
 													  'fitin' => $fitin
 													 );
@@ -127,9 +143,9 @@
 					 
 					 file_put_contents( $orderdateidfolder . "/ordertext.txt" , $orderinfo );
 					 
-					 Util::Debug( '*************************testeeee******************' );
+				//	 Util::Debug( '*************************TESTE******************' );
 					 Util::Debug( $articles );
-					 //die();
+					// die();
 			 
 					 $orderdata = new DBUtestemme();
 					 $orderdata->utestemmeid = $order->id;
@@ -143,7 +159,7 @@
 					 $comment = "Utestemme ordrenr: " . $order->id;
 					 
 					 $data = array(
-					   'userid' => 969748,
+					   'userid' => 1370892,
 					   'fullname' => $order->shipping_address->name,
 					   'address'  => $order->shipping_address->street,
 					   'email' => $order->shipping_address->email,
@@ -154,14 +170,18 @@
 					   'comment' => $comment
 					 );
 					 
+					// die;	 
+					  
 					 $order = new ManualOrder();
 					 $orderid = $order->executeManualOrder( $data );
-					  
-					 $orderdata->eforderid =  $orderid;   
-						 
+					 $orderdata->eforderid =  $orderid;    
 					 $orderdata->save();
 					 
 					 Util::Debug( $data );
+					 
+					 //edi
+					 				 
+					 
 					 die();
 				  }
 			   }

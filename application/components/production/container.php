@@ -257,7 +257,7 @@ class Container {
             }
          }
          
-         //util::Debug( $this->destination );
+         util::Debug( $this->destination );
          
          $fe = fopen( $this->destination . "Proceed.txt","w");
          fwrite($fe,"");
@@ -530,7 +530,15 @@ class Container {
          
          
           if( $image['artikkelnr'] == 2015 &&  ( $uid == 1030157  ) ){
-            $sizename = '2035';
+            $sizename = '2015';
+         }
+         
+          if( $image['artikkelnr'] == 7338 &&  ( $uid == 1030157  ) ){
+            $sizename = '2015';
+         }
+         
+          if( $image['artikkelnr'] == 7294 &&  ( $uid == 1030157  ) ){
+            $sizename = '2015';
          }
          
          
