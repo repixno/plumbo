@@ -104,7 +104,7 @@
                      }
 							
 							elseif( $portalid == 'SL-001' ){
-                        $imagepath = "/home/produksjon/merkelapp/kuttekanter/malseniorlappen2019.jpg";
+                        $imagepath = "/home/produksjon/merkelapp/kuttekanter/seniorlappen.jpg";
                      }
 							
 							

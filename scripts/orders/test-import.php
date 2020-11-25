@@ -31,20 +31,20 @@
       Public function Main(){
          
          $orders = array();
-         $oldest = '2020-09-28';
+         $oldest = '2020-01-20';
          
-    $orderDownloadQuery = sprintf( "SELECT ordrenr, tidspunkt, source FROM historie_ordre WHERE 
+  /* $orderDownloadQuery = sprintf( "SELECT ordrenr, tidspunkt, source FROM historie_ordre WHERE 
                                           tidspunkt > '%s' AND 
                                           to_production > '%s' AND
                                           download_began_at IS NULL 
                                           ORDER BY ordrenr LIMIT 1", $oldest, $oldest );
           
-     
+      */
       
       
-                                          //denne her kan du velge å importere spesifikk ordre
-      //  $orderDownloadQuery = sprintf( "SELECT ordrenr, tidspunkt, source FROM historie_ordre WHERE ordrenr in ( 2404367)" );
-                                          
+               //denne her kan du velge å importere spesifikk ordre
+                  $orderDownloadQuery = sprintf( "SELECT ordrenr, tidspunkt, source FROM historie_ordre WHERE ordrenr in ( 2408216)" );
+               //    $orderDownloadQuery = sprintf( "SELECT ordrenr, tidspunkt, source FROM historie_ordre WHERE ordrenr between  '2407615' and '2407615' ");                             
                                           
          //while ( $kake =  DB::query( $orderDownloadQuery )->fetchAll( DB::FETCH_ASSOC )  ) {
          foreach( DB::query( $orderDownloadQuery )->fetchAll( DB::FETCH_ASSOC ) as $item){
@@ -696,18 +696,11 @@
 		}    
                   //$url = $this->imageserver .  "?path=" . base64_encode($filename) . "&secure=" . $this->securecode;
                 
-                
-               
-                  
-                $img =  $orderdirectory."/autoedit/".$originalfilename;
-                $connection = ssh2_connect($this->imgserver, 22);
-            ssh2_auth_password($connection, 'www', 'Kefir4ever!');
-            
-           ssh2_scp_recv( $connection, '/data/bildearkiv/' . $filename , $img);
-            
-            
-
+                   Util::Debug( $filename );
+ Util::Debug( $img );
                  
+               
+           
                  
                   //file_put_contents( $img, file_get_contents($url) );
                   
@@ -742,7 +735,7 @@
                   
                   
                   $commands[] = sprintf("convert -size %sx%s -units PixelsPerInch -density 240x240 xc:white org.png", $command_dx, $command_dy);
-                  $commands[] = sprintf("composite -geometry -%s-%s %s org.png -profile /home/httpd/www.eurofoto.no/webside/grafikk/sRGB.icm org.png", $command_x, $command_y, $originalfilename);
+                  $commands[] = sprintf("composite -geometry -%s-%s %s org.png -profile /home/httpd/www.repix.no/webside/grafikk/sRGB.icm org.png", $command_x, $command_y, $originalfilename);
                   
                  $printtype = $torder->printtype;
                  
@@ -770,7 +763,7 @@
                            $crop_y = ($each_printsize_y - $framewidth)  *  $y;
                            $commands[] = sprintf("composite -geometry -%s-%s %s orgeach.jpg org%s.tif", $crop_x, $crop_y, $fullimage, $x1.$y);
                            $commands[] = sprintf("convert org%s.tif -bordercolor black -border 1 -quality 97 org%s.jpg", $x1.$y, $x1.$y);
-                           $commands[] = sprintf("composite -geometry +141+141 org%s.jpg canvas.tif -profile /home/httpd/www.eurofoto.no/webside/grafikk/sRGB.icm -units PixelsPerInch -density 240x240 -quality 97 ../%s_%s", $x1.$y, $x1.$y , $targetfilename);
+                           $commands[] = sprintf("composite -geometry +141+141 org%s.jpg canvas.tif -profile /home/httpd/www.repix.no/webside/grafikk/sRGB.icm -units PixelsPerInch -density 240x240 -quality 97 ../%s_%s", $x1.$y, $x1.$y , $targetfilename);
                            
                         }
                      }   
@@ -778,7 +771,7 @@
                   else{
                      $commands[] = sprintf("convert org.png -resize %sx%s -bordercolor black -border 1 -quality 100 org.jpg", $printsize_x, $printsize_y);
                      $commands[] = sprintf("convert -size %sx%s -units PixelsPerInch -density 240x240 -background white -bordercolor black -border 1 -pointsize 16 -gravity South caption:'%s' canvas.tif",$printsize_x + 280, $printsize_y + 280, $this->orderid  );
-                     $commands[] = sprintf("composite -geometry +141+141 org.jpg canvas.tif -profile /home/httpd/www.eurofoto.no/webside/grafikk/sRGB.icm -units PixelsPerInch -density 240x240 -quality 97 ../%s", $targetfilename);
+                     $commands[] = sprintf("composite -geometry +141+141 org.jpg canvas.tif -profile /home/httpd/www.repix.no/webside/grafikk/sRGB.icm -units PixelsPerInch -density 240x240 -quality 97 ../%s", $targetfilename);
                      $commands[] = "rm canvas.tif";
                   }
                   file_put_contents( "$orderdirectory/autoedit/$unique"."_command_list.sh", implode( "\n", $commands ) );                  

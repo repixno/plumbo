@@ -1,8 +1,14 @@
 <?PHP
-
 // error_reporting(E_ALL); ini_set('display_errors', 1);
 chdir(dirname(__FILE__));
 include '../../../bootstrap.php';
+
+require 'vendor/autoload.php';
+use Dompdf\Dompdf;
+
+
+
+// error_reporting(E_ALL); ini_set('display_errors', 1);
 
 config('website.config');
 config('production.ecwid');
@@ -15,8 +21,11 @@ import('website.order.manual.ecwid');
 //$url = 'https://app.ecwid.com/api/v3/20597088/orders?&offset=0&token=secret_MSXhCPqyFZjwSG3UesUeNFCetLA5ypAm';
 // api url som viser ordrer som har status awaiting prosess. Mediaclip tek tak i ordrer som får status "prosessing"
 //	$upateorderurl= 'https://app.ecwid.com/api/v3/20597088/orders?&vendorOrderNumber=$ecwidorder&fulfillmentStatus=PROCESSING&offset=0&token=secret_MSXhCPqyFZjwSG3UesUeNFCetLA5ypAm';
-
+   
 $url = 'https://app.ecwid.com/api/v3/20597088/orders?&fulfillmentStatus=AWAITING_PROCESSING&token=secret_4XjKdG5Fmq8snS1edtxpc8VAD1rs7DPt';
+$invoiceurl='https://app.ecwid.com/api/v3/20597088/orders/?/invoice?token=secret_4XjKdG5Fmq8snS1edtxpc8VAD1rs7DPt';
+
+
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
@@ -45,8 +54,6 @@ foreach ($json_obj['items'] as $item) {
 
     $data = array();
     if (!$query > 0) {
-
-
         echo 'Customer number: ' . $item['customerId'] . " \n ";
         echo 'subtotal: ' . $item['subtotal'] . " \n ";
         echo 'Total orders: ' . $item['total'] . " \n ";
@@ -68,11 +75,9 @@ foreach ($json_obj['items'] as $item) {
     }
 
     $prodno = $productkobling [$item['items'][0]['sku']];
-
-
     $articles['prints'][] = array(
         'prodno' => $prodno,
-					   'quantity' => $item['items'][0]['quantity'],
+		'quantity' => $item['items'][0]['quantity'],
         // 'prodno' =>  $prodno,
         'file' => "nofile",
         'fitin' => "true"
@@ -80,15 +85,13 @@ foreach ($json_obj['items'] as $item) {
     $orderdata = new DBEcwid();
     $orderdata->ecwidid = $item['vendorOrderNumber'];
     $orderdata->downloaded = date('Y-m-d H:i:s');
-
-				//$orderdata->projecttype = $key;
-				//$orderdata->save();
-
+    //$orderdata->projecttype = $key;
+    //$orderdata->save();
     $articles['productionmethod'][] = 352;
     $articles['papertype'][] = 11;
 
     $data = array(
-				//	'userid' =>  $item['customerId'],
+        //	'userid' =>  $item['customerId'],
         'userid' => '1395977',
         'fullname' => $item['billingPerson'] ['name'],
         'address' => $item['billingPerson'] ['street'],
@@ -97,7 +100,7 @@ foreach ($json_obj['items'] as $item) {
         'city' => $item['billingPerson'] ['city'],
         'mobile_phone_number' => $item['billingPerson'] ['phone'],
         'price' => $item['productPrice'],
-								//	'article' => $item['items'] [0]['name'],
+        //	'article' => $item['items'] [0]['name'],
         'startprice' => $item['price'],
         'totalprice' => $item['subtotal'],
         'customerId' => $item['customerId'],
@@ -107,54 +110,69 @@ foreach ($json_obj['items'] as $item) {
 
     //	die;
 
-    //Util::Debug($productkobling);
-    //Util::Debug($data);
-    //echo $data ['customerId'];
     $ecwidcustomerid = $item['customerId'];
     $ecwidordernumber = $item['orderNumber'];
 
-    //echo " \n" . "productkobling:" . $productkobling . "\n";
-    //echo " \n" . "ecwidorder:" . $ecwidordernumber . "\n";
-
-
-
     $storeID = "20597088";
     $myToken = "secret_4XjKdG5Fmq8snS1edtxpc8VAD1rs7DPt";
-
     $senddata = array("fulfillmentStatus" => "PROCESSING", "orderNumber" => "$ecwidordernumber");
 
     $data_string = json_encode($senddata);
     $url = "https://app.ecwid.com/api/v3/" . urlencode($storeID) . "/orders/" . $data['orderNumber'] . "?token=" . $myToken;
+        $invoice = "https://app.ecwid.com/api/v3/" . urlencode($storeID) . "/orders/invoice/" . $data['orderNumber'] . "?token=" . $myToken;
+    // $invoiceurl='https://app.ecwid.com/api/v3/20597088/orders/?/invoice?token=secret_4XjKdG5Fmq8snS1edtxpc8VAD1rs7DPt';
     
-    
-      echo " \n" . "datastring:" . $senddata . "\n";
-       echo " \n" . "url:" . $senddata . "\n";
-      echo " \n" . "datastring:" . $data_string . "\n";
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Content-Length: ' . strlen($data_string)));
+    echo " \n" . "datastring:" . $senddata . "\n";
+    echo " \n" . "url:" . $senddata . "\n";
+    echo " \n" . "datastring:" . $data_string . "\n";
 
-    $response = curl_exec($ch);
-    curl_close($ch);
+    
+    $invoice2 = "https://app.ecwid.com/api/v3/" . urlencode($storeID) . "/orders/" . $item['vendorOrderNumber'] ."/invoice" . "?token=" . $myToken;
+    echo " \n" . "url:" . $invoice2 . "\n";
+    echo " \n" . "ordrenr:" . $item['vendorOrderNumber'] . "\n";
+    
+    $fileName= $data['orderNumber'];
+   // $path = '/home/produksjon/ecwid/'.$item['vendorOrderNumber'].'.pdf';
+   // $file_download = curl_init($invoiceurl);
+
+    //    file_put_contents($path, $invoice2);
+        $html=$invoice2;
+        
+    
+$dompdf = new DOMPDF();
+
+
+$dompdf->load_html($invoice2);
+$dompdf->render();
+
+$output = $dompdf->output();
+file_put_contents("/home/produksjon/ecwid/file.pdf", $output);
+        
+      
+      
+      
+      
+      
+      
+      
+     
+        
+        
+        
+        
+        
+        
+    
+    
 die;
     $order = new ManualOrder();
     $orderid = $order->executeManualOrder($data);
-
     $orderdata->repixid = $orderid;
-
     echo " \n" . "repixid:" . $orderid . "\n";
     //		 Util::Debug( $data );
-
     //Util::Debug($orderdata);
-
     $orderdata->save();
     //Util::Debug($data);
-
-
-
-
     die;
 }
 ?>

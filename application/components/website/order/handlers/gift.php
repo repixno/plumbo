@@ -294,7 +294,7 @@
                   
                   
                   $commands[] = sprintf("convert -size %sx%s -units PixelsPerInch -density 240x240 xc:white org.png", $command_dx, $command_dy);
-                  $commands[] = sprintf("composite -geometry -%s-%s %s org.png -profile /home/httpd/www.eurofoto.no/webside/grafikk/sRGB.icm org.png", $command_x, $command_y, $originalfilename);
+                  $commands[] = sprintf("composite -geometry -%s-%s %s org.png -profile /home/httpd/www.repix.no/webside/grafikk/sRGB.icm org.png", $command_x, $command_y, $originalfilename);
                   
                  $printtype = $torder->printtype;
                  
@@ -322,7 +322,7 @@
                            $crop_y = ($each_printsize_y - $framewidth)  *  $y;
                            $commands[] = sprintf("composite -geometry -%s-%s %s orgeach.jpg org%s.tif", $crop_x, $crop_y, $fullimage, $x1.$y);
                            $commands[] = sprintf("convert org%s.tif -bordercolor black -border 1 -quality 97 org%s.jpg", $x1.$y, $x1.$y);
-                           $commands[] = sprintf("composite -geometry +141+141 org%s.jpg canvas.tif -profile /home/httpd/www.eurofoto.no/webside/grafikk/sRGB.icm -units PixelsPerInch -density 240x240 -quality 97 ../%s_%s", $x1.$y, $x1.$y , $targetfilename);
+                           $commands[] = sprintf("composite -geometry +141+141 org%s.jpg canvas.tif -profile /home/httpd/www.repix.no/webside/grafikk/sRGB.icm -units PixelsPerInch -density 240x240 -quality 97 ../%s_%s", $x1.$y, $x1.$y , $targetfilename);
                            
                         }
                      }   
@@ -330,7 +330,7 @@
                   else{
                      $commands[] = sprintf("convert org.png -resize %sx%s -bordercolor black -border 1 -quality 100 org.jpg", $printsize_x, $printsize_y);
                      $commands[] = sprintf("convert -size %sx%s -units PixelsPerInch -density 240x240 -background white -bordercolor black -border 1 -pointsize 16 -gravity South caption:'%s' canvas.tif",$printsize_x + 280, $printsize_y + 280, $this->orderid  );
-                     $commands[] = sprintf("composite -geometry +141+141 org.jpg canvas.tif -profile /home/httpd/www.eurofoto.no/webside/grafikk/sRGB.icm -units PixelsPerInch -density 240x240 -quality 97 ../%s", $targetfilename);
+                     $commands[] = sprintf("composite -geometry +141+141 org.jpg canvas.tif -profile /home/httpd/www.repix.no/webside/grafikk/sRGB.icm -units PixelsPerInch -density 240x240 -quality 97 ../%s", $targetfilename);
                      $commands[] = "rm canvas.tif";
                   }
 

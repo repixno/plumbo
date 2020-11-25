@@ -5,7 +5,7 @@
  *****************************************************/
    chdir( dirname( __FILE__ ) );
    include '../../../bootstrap.php';
-require_once("/home/httpd/www.eurofoto.no/bin/class.get.files.php");
+require_once("/var/www/repix/scripts/orders/telenor/class.get.files.php");
 
 
 find_files('/home/produksjon/Telenor-C8/', '/done_c8.txt$/', 'mediaclip_createC8');

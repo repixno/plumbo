@@ -690,7 +690,7 @@ class Container {
       $color = new ImagickPixel( 'white' );
       
       $text->setFillColor( $color );
-      $text->setFont('/home/httpd/www.eurofoto.no/webside/font/verdana.ttf');
+      $text->setFont('/home/httpd/www.repix.no/webside/font/verdana.ttf');
       $text->setFontSize( 32 );
       $xyz->annotateImage( $text, 30, 50, 0, sprintf( "%d\n\n%s\n%s\n%d %s", $this->orderid, $name,  $address, $postnr, $city ) );
       $xyz->rotateImage(new ImagickPixel('none'), 180); 

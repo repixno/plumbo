@@ -31,10 +31,11 @@
 	  
          $ukeplanorder = UserUkeplanOrder::toProduction();
          $orderid = $ukeplanorder->orderid;
+         //$orderid = 2407975;
          
-       //     $id = DB::query( "SELECT id FROM historie_ordre WHERE ordrenr = 1952428")->fetchSingle();
+         //   $id = DB::query( "SELECT id FROM historie_ordre WHERE ordrenr = 2410131")->fetchSingle();
          $id = DB::query( "SELECT id FROM historie_ordre WHERE ordrenr = ?", $ukeplanorder->orderid )->fetchSingle();
-         //util::Debug( $ukeplanorder->orderid );
+         util::Debug( $ukeplanorder->orderid );
          if( !$id ){
             echo "Ingen ordre\n";
             exit;
@@ -47,9 +48,9 @@
              //  util::Debug( $up_time );
            //     util::Debug( $ukeplanorder );
               
-         Util::debug ("/usr/bin/rsync -a --ignore-missing-args 10.64.1.184:/data/bildearkiv/z078/print_download/$up_date/$orderid /home/produksjon/webspool/$up_date");
+         Util::debug ("/usr/bin/rsync -a --ignore-missing-args 10.64.1.184:/mnt/data/bildearkiv/z078/print_download/$up_date/$orderid /home/produksjon/webspool/$up_date");
 	 //$up_date = date( 'Y-m-d', strtotime('-1 day') );
-         exec ("/usr/bin/rsync -a --ignore-missing-args 10.64.1.184:/data/bildearkiv/z078/print_download/$up_date/$orderid /home/produksjon/webspool/$up_date");
+         exec ("/usr/bin/rsync -a --ignore-missing-args 10.64.1.184:/mnt/data/bildearkiv/z078/print_download/$up_date/$orderid /home/produksjon/webspool/$up_date");
          //print_r ("/usr/local/bin/rsync -a --ignore-missing-args romulus.eurofoto.no::ordrer/z078/print_download/$up_date/$orderid /home/produksjon/webspool/$up_date");
          
          $kampanjekode = DB::query( "SELECT kampanje_kode FROM historie_ordre WHERE ordrenr = ?", $ukeplanorder->orderid )->fetchSingle();
@@ -264,8 +265,9 @@
          }
          try{
             if( !file_exists( $this->orderfolder . $ext . $giftTemplate->fullsize_src ) ){
-               $connection = ssh2_connect('eva.eurofoto.no', 22);
-               ssh2_auth_password($connection, 'toringe', 'bbc460');
+           //    $connection = ssh2_connect('eva.eurofoto.no', 22);
+                $connection = ssh2_connect('10.64.1.184', 22);
+              // kobla fra  ssh2_auth_password($connection, 'produksjon', 'produkjson');
                Util::Debug( $giftTemplate->fullsize_src );
 		if( !file_exists( $this->orderfolder )){
 			mkdir( $this->orderfolder , 0755, true );

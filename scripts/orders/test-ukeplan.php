@@ -28,17 +28,19 @@
       private $portal = '';
       
   Public function Main(){
+	  
          $ukeplanorder = UserUkeplanOrder::toProduction();
          $orderid = $ukeplanorder->orderid;
          
-       //     $id = DB::query( "SELECT id FROM historie_ordre WHERE ordrenr = 1952428")->fetchSingle();
-         $id = DB::query( "SELECT id FROM historie_ordre WHERE ordrenr = ?", $ukeplanorder->orderid )->fetchSingle();
+            $id = DB::query( "SELECT id FROM historie_ordre WHERE ordrenr = 2407975")->fetchSingle();
+       //  $id = DB::query( "SELECT id FROM historie_ordre WHERE ordrenr = ?", $ukeplanorder->orderid )->fetchSingle();
          //util::Debug( $ukeplanorder->orderid );
          if( !$id ){
             echo "Ingen ordre\n";
             exit;
          }
          // up = uke plan, ukeplan
+       
          list($up_date, $up_time) = explode(' ', $ukeplanorder->date);
          util::Debug( $id );
               util::Debug( $up_date );

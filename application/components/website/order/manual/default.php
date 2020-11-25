@@ -770,7 +770,7 @@
          #util::Debug($fields);
          #die();
          
-         $subject = "Eurofoto ordrebekreftelse, " . $this->orderid;
+         $subject = "Repix ordrebekreftelse, " . $this->orderid;
 
         	MailSend::Simple( $this->user->email, $subject, 'order.confirm', $fields, 'phptal' );
          

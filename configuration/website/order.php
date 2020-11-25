@@ -15,7 +15,7 @@
    Settings::Set( 'paths', 'oldroot', '/home/httpd/www.eurofoto.no/' );
    Settings::Set( 'paths', 'originaltemplates', '/data/global/maler/orginal' );
    Settings::Set( 'paths', 'clipart', '/data/global/clipart' );
-   Settings::Set( 'paths', 'fonts', '/home/httpd/www.eurofoto.no/webside/font' );
+   Settings::Set( 'paths', 'fonts', '/home/httpd/www.repix.no/webside/font' );
    
    // The EF 2.5 refid's
    Settings::Set( 'refid', 'shipping', 127 );

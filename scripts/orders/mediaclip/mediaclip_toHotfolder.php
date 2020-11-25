@@ -104,7 +104,8 @@ function move_mediaclip($filename) {
 }
 
 function get_sql($query){
-	$connection = pg_connect("host=sidsel.eurofoto.no dbname=eurofoto user=www")
+	//$connection = pg_connect("host=sidsel.eurofoto.no dbname=eurofoto user=www")
+  $connection = pg_connect("host=10.2.2.30 dbname=eurofoto user=www")
       or die ("Ups PostGres --> " . pg_last_error($conn)); 
       
 	$result=pg_query($query);

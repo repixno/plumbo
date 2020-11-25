@@ -30,7 +30,7 @@
     $readymerkelapps =  UserMerkelappOrder::toProduction();
        
        
-    $readymerkelapps = DB::query( "
+   /* $readymerkelapps = DB::query( "
             SELECT 
                id
             FROM 
@@ -39,7 +39,7 @@
                orderid in (2398132)
          ")->fetchAll( DB::FETCH_ASSOC );
          
-        
+        */
          
       
          // 2393654 2393589 

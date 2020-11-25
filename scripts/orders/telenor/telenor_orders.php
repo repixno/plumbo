@@ -5,7 +5,7 @@
  *****************************************************/
    chdir( dirname( __FILE__ ) );
    include '../../../bootstrap.php';
-require_once("/home/httpd/www.eurofoto.no/bin/class.get.files.php");
+require_once("/var/www/repix/scripts/orders/telenor/class.get.files.php");
 	
 	//include('/home/adele/barcoderphp/php-barcode.php');
     	include('/var/www/repix/scripts/orders/telenor/barcode.php');  
@@ -159,7 +159,7 @@ $konvolutt = array("01__yng_retrobilder" , "02__yng_retrobilder" , "03__yng_retr
             $text2 = new ImagickDraw();
             $color = new ImagickPixel( 'black' );
             $text2->setFillColor( $color );
-            $text2->setFont('/home/httpd/www.eurofoto.no/webside/font/verdana.ttf');
+            $text2->setFont('/home/httpd/www.repix.no/webside/font/verdana.ttf');
             $text2->setFontSize( 60 );
             $xyz->annotateImage( $text2, 200, 500, 0, sprintf( "%s\n\n\n%s\n\n%s",  " ORDRENR:  $lopenummer", "LØPENUMMER:  $artnr", "ORDREID: $strekkode"  ) );
             $xyz->rotateImage(new ImagickPixel('none'), 180); 
@@ -213,7 +213,7 @@ $konvolutt = array("01__yng_retrobilder" , "02__yng_retrobilder" , "03__yng_retr
             $text2 = new ImagickDraw();
             $color = new ImagickPixel( 'black' );
             $text2->setFillColor( $color );
-            $text2->setFont('/home/httpd/www.eurofoto.no/webside/font/verdana.ttf');
+            $text2->setFont('/home/httpd/www.repix.no/webside/font/verdana.ttf');
             $text2->setFontSize( 60 );
             $xyz->annotateImage( $text2, 200, 500, 0, sprintf( "%s\n\n\n%s\n\n%s",  " ORDRENR:  $lopenummer", "LØPENUMMER:  $artnr", "ORDREID: $strekkode"  ) );
         
@@ -265,7 +265,7 @@ $konvolutt = array("01__yng_retrobilder" , "02__yng_retrobilder" , "03__yng_retr
             $text2 = new ImagickDraw();
             $color = new ImagickPixel( 'black' );
             $text2->setFillColor( $color );
-            $text2->setFont('/home/httpd/www.eurofoto.no/webside/font/verdana.ttf');
+            $text2->setFont('/home/httpd/www.repix.no/webside/font/verdana.ttf');
             $text2->setFontSize( 100 );
             $xyz->annotateImage( $text2, 800, 1200, 0, sprintf( "%s\n\n\n%s\n\n%s",  " ORDRENR:  $lopenummer", "LØPENUMMER:  $artnr", "ORDREID: $strekkode"  ) );
             $xyz->rotateImage(new ImagickPixel('none'), 180); 
@@ -321,13 +321,13 @@ $konvolutt = array("01__yng_retrobilder" , "02__yng_retrobilder" , "03__yng_retr
             $text2 = new ImagickDraw();
             $color = new ImagickPixel( 'black' );
             $text2->setFillColor( $color );
-            $text2->setFont('/home/httpd/www.eurofoto.no/webside/font/verdana.ttf');
+            $text2->setFont('/home/httpd/www.repix.no/webside/font/verdana.ttf');
             $text2->setFontSize( 60 );
             
             $text3 = new ImagickDraw();
             $color2 = new ImagickPixel( 'red' );
             $text3->setFillColor( $color2 );
-            $text3->setFont('/home/httpd/www.eurofoto.no/webside/font/verdana.ttf');
+            $text3->setFont('/home/httpd/www.repix.no/webside/font/verdana.ttf');
             $text3->setFontSize( 80 );
             $xyz->annotateImage( $text2, 380, 600, 0, sprintf( "%s\n\n\n%s\n\n%s",  " ORDRENR:  $lopenummer", "LØPENUMMER:  $artnr", "ORDREID: $strekkode"  ) );
              $xyz->annotateImage( $text3, 380, 775, 0, sprintf( "%s",  " OBS! HUSK KONVOLUTTER"  ) );
